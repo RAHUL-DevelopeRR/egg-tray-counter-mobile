@@ -1,0 +1,10 @@
+Label Studio: http://127.0.0.1:8080
+Review set: stack_face_review
+Label config: C:\Users\dharani\Documents\Codex\2026-08-20\roboflow-plugin-roboflow-roboflow-build-a\outputs\egg-tray-counter\datasets\stack_face_review\label_config.xml
+Tasks to import once: C:\Users\dharani\Documents\Codex\2026-08-20\roboflow-plugin-roboflow-roboflow-build-a\outputs\egg-tray-counter\datasets\stack_face_review\tasks.json
+The launcher does not import tasks automatically, so reruns cannot duplicate them.
+August 21, 2026 - 16:02:44
+Django version 5.1.15, using settings 'label_studio.core.settings.label_studio'
+Starting development server at http://127.0.0.1:8080/
+Quit the server with CTRL-BREAK.
+

@@ -1,0 +1,14 @@
+split,image,ground_truth_annotation_count,prediction_count,signed_error,absolute_error,model_time_ms,mcp_wall_time_ms,width,height,mean_confidence,status,model_ref,confidence,overlap
+test,"WhatsApp Image 2026-07-03 at 11-57-31_jpeg.rf.TvlOHECmSwAI7srFlaQa.jpeg",4,3,-1,1,59.946,18458,1200,1600,0.766978,ok,projec-mutta/2,0.5,0.5
+test,"WhatsApp Image 2026-07-03 at 11-57-20_jpeg.rf.V4VIRRWhPu2ynxwvr2rF.jpeg",11,5,-6,6,52.943,15500,1200,1600,0.700261,ok,projec-mutta/2,0.5,0.5
+test,"WhatsApp Image 2026-07-03 at 12-00-52_jpeg.rf.VgqHMF6ILmU0Im12JpDx.jpeg",16,25,9,9,31.746,14389,582,1280,0.634414,ok,projec-mutta/2,0.5,0.5
+test,"WhatsApp Image 2026-07-03 at 11-58-39_jpeg.rf.VtJwc4mxtGR0Mx4UvxEm.jpeg",19,19,0,0,48.872,15206,1600,1200,0.786853,ok,projec-mutta/2,0.5,0.5
+test,"WhatsApp Image 2026-07-03 at 11-58-00 (2)_jpeg.rf.UXbrvcXgrLv3gShQgLpj.jpeg",28,32,4,4,48.171,15519,1200,1600,0.711647,ok,projec-mutta/2,0.5,0.5
+test,"WhatsApp Image 2026-07-03 at 11-58-59 (1)_jpeg.rf.UyhfeGOwGxqgk4mb9PRK.jpeg",120,122,2,2,56.088,29042,1600,1200,0.773856,ok,projec-mutta/2,0.5,0.5
+valid,"WhatsApp Image 2026-07-03 at 12-00-43_jpeg.rf.TQGT8UVNCTajErLBPZlQ.jpeg",0,44,44,44,88.399,29000,1280,582,0.756086,ok,projec-mutta/2,0.5,0.5
+valid,"WhatsApp Video 2026-07-03 at 12_04_04 PM_mp4-0001_jpg.rf.2DbeNpo4AIBk1k3uH9vc.jpg",1,1,0,0,19.655,5316,478,850,0.979195,ok,projec-mutta/2,0.5,0.5
+valid,"WhatsApp Image 2026-07-03 at 11-58-08 (2)_jpeg.rf.TrlfMmSZj1W7GLgyxw5y.jpeg",70,55,-15,15,101.880,30870,1200,1600,0.636470,ok,projec-mutta/2,0.5,0.5
+valid,"WhatsApp Image 2026-07-03 at 11-57-00_jpeg.rf.TsO1xnKK6NDMi9oTOQ7g.jpeg",79,77,-2,2,56.385,9321,1600,1200,0.786563,ok,projec-mutta/2,0.5,0.5
+valid,"WhatsApp Image 2026-07-03 at 11-56-54_jpeg.rf.HlukUC8zNO5CytsDNk3Z.jpeg",100,87,-13,13,46.410,9308,1200,1600,0.703881,ok,projec-mutta/2,0.5,0.5
+valid,"WhatsApp Image 2026-07-03 at 11-56-55_jpeg.rf.Lkxx5do53XcQPcgOt5HL.jpeg",120,95,-25,25,52.198,8135,1200,1600,0.706548,ok,projec-mutta/2,0.5,0.5
+valid,"WhatsApp Video 2026-07-03 at 12_02_29_mp4-0000_jpg.rf.K2UzQcxqrpzih3hmBce5.jpg",131,64,-67,67,20.264,9330,368,496,0.685214,ok,projec-mutta/2,0.5,0.5

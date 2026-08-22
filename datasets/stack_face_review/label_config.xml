@@ -1,0 +1,7 @@
+<View>
+  <Header value="Heuristic stack-face suggestions — every polygon requires human review"/>
+  <Image name="image" value="$image" zoom="true"/>
+  <PolygonLabels name="label" toName="image" strokeWidth="3" opacity="0.35">
+    <Label value="stack_face" background="#FF4E00"/>
+  </PolygonLabels>
+</View>

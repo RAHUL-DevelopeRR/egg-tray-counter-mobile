@@ -1,0 +1,26 @@
+name: egg_tray_counter
+description: Conservative three-photo egg tray counting client.
+publish_to: none
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.9.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  camera: ^0.12.0+2
+  dio: ^5.11.0
+  image: ^4.9.2
+  shared_preferences: ^2.5.5
+  sqflite: ^2.4.3
+  uuid: ^4.6.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+

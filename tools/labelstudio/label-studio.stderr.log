@@ -1,0 +1,10 @@
+=> Database and media directory: C:\Users\dharani\Documents\Codex\2026-08-20\roboflow-plugin-roboflow-roboflow-build-a\outputs\egg-tray-counter\tools\labelstudio\data
+=> Static URL is set to: /static/
+=> Database and media directory: C:\Users\dharani\Documents\Codex\2026-08-20\roboflow-plugin-roboflow-roboflow-build-a\outputs\egg-tray-counter\tools\labelstudio\data
+=> Static URL is set to: /static/
+Read environment variables from: C:\Users\dharani\Documents\Codex\2026-08-20\roboflow-plugin-roboflow-roboflow-build-a\outputs\egg-tray-counter\tools\labelstudio\data\.env
+get 'SECRET_KEY' casted as '<class 'str'>' with default ''
+C:\Users\dharani\Documents\Codex\2026-08-20\roboflow-plugin-roboflow-roboflow-build-a\outputs\egg-tray-counter\tools\labelstudio\.venv\Lib\site-packages\django\db\backends\utils.py:98: RuntimeWarning: Accessing the database during app initialization is discouraged. To fix this warning, avoid executing queries in AppConfig.ready() or when your app modules are imported.
+  warnings.warn(self.APPS_NOT_READY_WARNING_MSG, category=RuntimeWarning)
+[2026-08-21 15:57:21,481] [django.server::log_message::213] [INFO] "GET /health HTTP/1.1" 200 16
+[2026-08-21 15:57:21,481] [django.server::log_message::213] [INFO] "GET /health HTTP/1.1" 200 16

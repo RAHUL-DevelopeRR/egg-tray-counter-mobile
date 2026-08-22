@@ -1,0 +1,28 @@
+=> Database and media directory: C:\Users\dharani\Documents\Codex\2026-08-20\roboflow-plugin-roboflow-roboflow-build-a\outputs\egg-tray-counter\tools\labelstudio\data
+=> Static URL is set to: /static/
+=> Database and media directory: C:\Users\dharani\Documents\Codex\2026-08-20\roboflow-plugin-roboflow-roboflow-build-a\outputs\egg-tray-counter\tools\labelstudio\data
+=> Static URL is set to: /static/
+Read environment variables from: C:\Users\dharani\Documents\Codex\2026-08-20\roboflow-plugin-roboflow-roboflow-build-a\outputs\egg-tray-counter\tools\labelstudio\data\.env
+get 'SECRET_KEY' casted as '<class 'str'>' with default ''
+C:\Users\dharani\Documents\Codex\2026-08-20\roboflow-plugin-roboflow-roboflow-build-a\outputs\egg-tray-counter\tools\labelstudio\.venv\Lib\site-packages\django\db\backends\utils.py:98: RuntimeWarning: Accessing the database during app initialization is discouraged. To fix this warning, avoid executing queries in AppConfig.ready() or when your app modules are imported.
+  warnings.warn(self.APPS_NOT_READY_WARNING_MSG, category=RuntimeWarning)
+[2026-08-21 16:02:46,706] [django.server::log_message::213] [INFO] "GET /health HTTP/1.1" 200 16
+[2026-08-21 16:02:46,706] [django.server::log_message::213] [INFO] "GET /health HTTP/1.1" 200 16
+[2026-08-21 16:02:46,806] [core.utils.common::custom_exception_handler::97] [ERROR] 2c188676-1418-42f8-bf7e-c410b82f9c24 Authentication credentials were not provided.
+Traceback (most recent call last):
+  File "C:\Users\dharani\Documents\Codex\2026-08-20\roboflow-plugin-roboflow-roboflow-build-a\outputs\egg-tray-counter\tools\labelstudio\.venv\Lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Users\dharani\Documents\Codex\2026-08-20\roboflow-plugin-roboflow-roboflow-build-a\outputs\egg-tray-counter\tools\labelstudio\.venv\Lib\site-packages\sentry_sdk\integrations\django\__init__.py", line 342, in sentry_patched_drf_initial
+    return old_drf_initial(self, request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dharani\Documents\Codex\2026-08-20\roboflow-plugin-roboflow-roboflow-build-a\outputs\egg-tray-counter\tools\labelstudio\.venv\Lib\site-packages\rest_framework\views.py", line 415, in initial
+    self.check_permissions(request)
+  File "C:\Users\dharani\Documents\Codex\2026-08-20\roboflow-plugin-roboflow-roboflow-build-a\outputs\egg-tray-counter\tools\labelstudio\.venv\Lib\site-packages\rest_framework\views.py", line 333, in check_permissions
+    self.permission_denied(
+  File "C:\Users\dharani\Documents\Codex\2026-08-20\roboflow-plugin-roboflow-roboflow-build-a\outputs\egg-tray-counter\tools\labelstudio\.venv\Lib\site-packages\rest_framework\views.py", line 174, in permission_denied
+    raise exceptions.NotAuthenticated()
+rest_framework.exceptions.NotAuthenticated: Authentication credentials were not provided.
+[2026-08-21 16:02:46,835] [django.request::log_response::253] [WARNING] Unauthorized: /data/local-files/
+[2026-08-21 16:02:46,835] [django.request::log_response::253] [WARNING] Unauthorized: /data/local-files/
+[2026-08-21 16:02:46,840] [django.server::log_message::213] [WARNING] "GET /data/local-files/?d=canonical_clean/train/images/015c90fdb6fdfca1f073.jpeg HTTP/1.1" 401 155
+[2026-08-21 16:02:46,840] [django.server::log_message::213] [WARNING] "GET /data/local-files/?d=canonical_clean/train/images/015c90fdb6fdfca1f073.jpeg HTTP/1.1" 401 155

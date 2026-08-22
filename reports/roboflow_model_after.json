@@ -1,0 +1,33 @@
+{
+  "captured_at": "2026-08-21",
+  "dataset_version": 2,
+  "dataset": {
+    "id": "rahuls-workspace-l9ylz/projec-mutta/2",
+    "ready": true,
+    "images": 99,
+    "splits": {"train": 69, "valid": 22, "test": 8}
+  },
+  "nas_attempt": {
+    "status": "not_started",
+    "reason": "nas_not_available_for_plan",
+    "action": "Used the supported rfdetr-medium named-model fallback."
+  },
+  "training": {
+    "training_id": "34b83955e7339d2ebeb6",
+    "status": "finished",
+    "architecture": "rfdetr-medium",
+    "started_at": "2026-08-21T08:05:30.685Z",
+    "ended_at": "2026-08-21T08:29:06.009Z",
+    "model_count": 1,
+    "model_ids": ["rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1"]
+  },
+  "metrics_percent": {
+    "training_record": {"map50": 67.75, "precision": 81.1, "recall": 61.3, "f1": null},
+    "model_record": {"map50": 69.28, "precision": 79.7, "recall": 67.3, "f1": 73.0},
+    "map50_95": null
+  },
+  "direct_serverless_endpoint": "https://serverless.roboflow.com/projec-mutta/2",
+  "hosted_inference_verified": true,
+  "integration_status": "Experimental single-stack backend adapter implemented; runtime key and outbound shell network are not persisted in this environment.",
+  "production_blocker": "The model emits egg_tray boxes, not stack_face regions, and has no independent three-view exact-count evaluation."
+}

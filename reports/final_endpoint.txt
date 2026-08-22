@@ -1,0 +1,16 @@
+STATUS: V2 HOSTED MODEL OPERATIONAL; EXPERIMENTAL BASELINE ONLY
+
+Workspace: rahuls-workspace-l9ylz
+Project: projec-mutta
+Version: 2
+Model: rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1
+Direct endpoint: https://serverless.roboflow.com/projec-mutta/2
+
+Published workflow path: /infer/workflows/rahuls-workspace-l9ylz/projec-mutta
+Published workflow default: projec-mutta/1 (not changed)
+
+FastAPI mobile route when started: http://<backend-host>:8000/v1/scans/count
+Backend integration choice: direct V2 endpoint, not the stale V1 workflow.
+Runtime requirement: set ROBOFLOW_API_KEY server-side and use scripts/run_backend_roboflow_v2.ps1.
+
+Compatibility warning: V2 emits egg_tray boxes. It is not a production stack_face model.

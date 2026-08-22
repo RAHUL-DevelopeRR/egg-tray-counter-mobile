@@ -1,0 +1,5 @@
+Add these keys inside ios/Runner/Info.plist <dict> after Flutter creates the iOS runner:
+
+<key>NSCameraUsageDescription</key>
+<string>Capture three warehouse views to verify egg tray inventory.</string>
+

@@ -1,0 +1,33 @@
+{
+  "captured_at": "2026-08-21T13:52:13+05:30",
+  "status": "blocked_missing_ground_truth",
+  "scope": "Three-photo LEFT / RIGHT / STRAIGHT fused exact tray count",
+  "model_before": "projec-mutta/1",
+  "model_after": "projec-mutta/2",
+  "training_after": {
+    "training_id": "34b83955e7339d2ebeb6",
+    "status": "finished"
+  },
+  "records": [],
+  "metrics": {
+    "sample_count": 0,
+    "exact_count_accuracy": null,
+    "mean_absolute_error": null,
+    "within_one_accuracy": null,
+    "coverage": null
+  },
+  "blocking_reasons": [
+    "No independent per-session ground-truth tray totals were provided for complete LEFT / RIGHT / STRAIGHT captures.",
+    "Hosted V2 object detections are not linked LEFT / RIGHT / STRAIGHT scene predictions.",
+    "Object-detection annotations for egg_tray are not equivalent to ground-truth fused stack counts."
+  ],
+  "required_record_schema": {
+    "session_id": "string",
+    "left_image": "path-or-id",
+    "right_image": "path-or-id",
+    "straight_image": "path-or-id",
+    "ground_truth_total": "non-negative integer",
+    "predicted_total": "non-negative integer",
+    "abstained": "boolean"
+  }
+}

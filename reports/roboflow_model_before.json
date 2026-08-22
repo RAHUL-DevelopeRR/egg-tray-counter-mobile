@@ -1,0 +1,33 @@
+{
+  "captured_at": "2026-08-21T13:52:13+05:30",
+  "source": "Roboflow MCP trainings_list and models_list",
+  "dataset_version": 1,
+  "training": {
+    "training_id": "ce08235dd39d3ff71b65",
+    "status": "finished",
+    "created_at": "2026-07-03T10:00:40.406000Z"
+  },
+  "model": {
+    "model_id": "rahuls-workspace-l9ylz/projec-mutta-1-yolo11n-t1",
+    "inference_model_id": "projec-mutta/1",
+    "architecture": "yolov11n",
+    "task_type": "object-detection",
+    "class_contract": [
+      "egg_tray"
+    ],
+    "created_at": "2026-07-03T12:51:08.246Z",
+    "metrics_percent": {
+      "map50": 12.02,
+      "precision": 59.7,
+      "recall": 12.5,
+      "f1": 20.7,
+      "map50_95": null
+    }
+  },
+  "direct_serverless_endpoint": "https://serverless.roboflow.com/projec-mutta/1",
+  "limitations": [
+    "Roboflow did not expose mAP@50:95 for this model in the queried response.",
+    "These detector metrics do not measure three-view fused exact tray-count accuracy.",
+    "The egg_tray class does not satisfy the backend's stack_face/counting_face detector contract."
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "captured_at": "2026-08-21T13:52:13+05:30",
+  "source": "Roboflow MCP projects_get and versions_get",
+  "workspace": {
+    "slug": "rahuls-workspace-l9ylz",
+    "display_name": "RAHULs Workspace"
+  },
+  "project": {
+    "id": "rahuls-workspace-l9ylz/projec-mutta",
+    "slug": "projec-mutta",
+    "display_name": "PROJEC MUTTA",
+    "type": "object-detection",
+    "public": true,
+    "classes": [
+      "egg_tray"
+    ],
+    "images_reported_by_project": 411,
+    "splits_reported_by_project": {
+      "train": 290,
+      "valid": 82,
+      "test": 39
+    }
+  },
+  "versions": [
+    {
+      "version": 1,
+      "id": "rahuls-workspace-l9ylz/projec-mutta/1",
+      "images": 371,
+      "splits": {
+        "train": 260,
+        "valid": 74,
+        "test": 37
+      },
+      "ready": true,
+      "preprocessing": {
+        "auto-orient": true,
+        "resize": {
+          "width": 640,
+          "height": 640,
+          "format": "Stretch to"
+        }
+      }
+    },
+    {
+      "version": 2,
+      "id": "rahuls-workspace-l9ylz/projec-mutta/2",
+      "images": 99,
+      "splits": {
+        "train": 69,
+        "valid": 22,
+        "test": 8
+      },
+      "ready": true,
+      "preprocessing": {
+        "auto-orient": true,
+        "filter-tags": {
+          "tags": {
+            "clean-manual-auto-reconciled-v2": {
+              "require": true
+            }
+          }
+        },
+        "resize": {
+          "width": 640,
+          "height": 640,
+          "format": "Fit within"
+        }
+      }
+    }
+  ],
+  "notes": [
+    "Version 2 is a frozen, tag-filtered dataset snapshot.",
+    "Project-level totals are recorded verbatim from the API and may differ from a version's frozen split totals.",
+    "The only configured class is egg_tray; this is not the stack_face/counting_face class contract used by the edge-first counting backend."
+  ]
+}
