@@ -1,0 +1,8 @@
+experiment_id,status,dataset_version,architecture,resolution,epochs,augmentation,train_images,val_images,test_images,precision,recall,mAP50,mAP50_95,MAE,mean_relative_error,exact_count_accuracy,latency,notes
+A,completed,projec-mutta/2,rfdetr-medium,640 fit-within,unknown,not recorded,69,22,8,79.7%,67.3%,69.28%,not available,22.9,41.57%,20%,not measured per image,Deployed baseline; product metrics use separate 10-frame evaluation
+B,blocked,reviewed-scene-split-v3,rfdetr-medium,640 fit-within,planned,mild realistic,planned,planned,planned,,,,,,,,,Blocked on human scene grouping and annotation review
+C,blocked,expanded-balanced-v4,rfdetr-medium,640 fit-within,planned,mild realistic,560,120,120,,,,,,,,,Controlled data-quality experiment
+D,blocked,expanded-balanced-v4,rfdetr-nas-parent,architecture search,200,mild realistic,560,120,120,,,,,,,,,NAS previously unavailable for plan; fall back to RF-DETR Large if still unavailable
+E,blocked,expanded-balanced-v4,best candidate,960 or supported maximum,planned,same as C,560,120,120,,,,,,,,,Resolution/tiled inference control; verify duplicate merging
+F,blocked,reviewed-stack-face-v1,stack-face detector plus deterministic periodicity,stack crop native,planned,mild realistic,planned,planned,planned,,,,,,,,,Requires human-approved stack-face polygons and per-stack counts
+G,blocked,expanded-balanced-v4,view classifier plus best counter,224 classifier plus counter,planned,mild realistic,planned,planned,planned,,,,,,,,,Only run if universal balanced model remains view-sensitive

@@ -1,0 +1,1 @@
+scene_id,view,image_id,ground_truth_trays,predicted_trays,signed_error,absolute_error,relative_error,count_accuracy,exact_match,accepted,model_version

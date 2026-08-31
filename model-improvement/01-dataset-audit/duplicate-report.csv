@@ -1,0 +1,10 @@
+image_a,image_b,split_a,split_b,sha256_equal,dhash_distance,cross_split,status,reason
+fbe0d59572aabedc2e11,185176b841d0e5f87c5e,train,train,False,5,False,human_scene_review_required,"perceptual-near-duplicate candidate; dHash is screening evidence, not proof"
+fbe0d59572aabedc2e11,36dccd6307a7fbd801d3,train,valid,False,2,True,confirmed_same_scene_cross_split,visually confirmed same scene; remove duplicate or group into one split before training
+d7c9bd5da8895bca07a0,2b588d2747ad49e43c76,train,test,False,6,True,confirmed_same_scene_cross_split,visually confirmed same scene; remove duplicate or group into one split before training
+3eb351160e913c9a5aab,c5daf74b8fbfc8789dc6,train,train,False,2,False,human_scene_review_required,"perceptual-near-duplicate candidate; dHash is screening evidence, not proof"
+e0dc76ed696457a17808,01297a74fd3883320f92,train,valid,False,3,True,confirmed_same_scene_cross_split,visually confirmed same scene; remove duplicate or group into one split before training
+b15e59818418b79804bb,b4a1466bdb53edebd384,train,train,False,2,False,human_scene_review_required,"perceptual-near-duplicate candidate; dHash is screening evidence, not proof"
+c2a9b50ff52dd7dda148,5aae0b69f91f8bdcbbf7,train,train,False,4,False,human_scene_review_required,"perceptual-near-duplicate candidate; dHash is screening evidence, not proof"
+c2a9b50ff52dd7dda148,392dd4934876e29bf6cd,train,train,False,6,False,human_scene_review_required,"perceptual-near-duplicate candidate; dHash is screening evidence, not proof"
+3505ce64952cae846b38,1a641b92752f95b017d5,train,train,False,3,False,human_scene_review_required,"perceptual-near-duplicate candidate; dHash is screening evidence, not proof"
