@@ -1,0 +1,11 @@
+image,source,ground_truth_trays,ground_truth_eggs,ground_truth_status,scene
+img01,datasets/roboflow_auto_original/test/images/WhatsApp-Image-2026-07-03-at-11-57-19-AM_jpeg.rf.feb2d66882a2a76010cf40c7331b9e23.jpg,60,1800,manual_visual_count,"same 60-tray scene, left/side view; three 20-tray stacks"
+img02,datasets/roboflow_auto_original/test/images/WhatsApp-Image-2026-07-03-at-11-57-20-AM_jpeg.rf.69f0522ac347a7b905f4b480e10e9c9d.jpg,60,1800,manual_visual_count,"same 60-tray scene, right/close view; three 20-tray stacks"
+img03,datasets/roboflow_auto_original/valid/images/WhatsApp-Image-2026-07-03-at-11-57-20-AM-2-_jpeg.rf.7048c50fa506961efb6e18caa5d15b3a.jpg,60,1800,manual_visual_count,"same 60-tray scene, straight view; three 20-tray stacks"
+img04,datasets/roboflow_auto_original/test/images/WhatsApp-Image-2026-07-03-at-11-57-17-AM_jpeg.rf.307d9fb9212e290d06232d7e7230224b.jpg,32,960,manual_visual_count,"two brown stacks, 16 trays each"
+img05,datasets/canonical_clean/test/images/43409f4aee1d3653f129.jpeg,120,3600,manual_visual_count,"large straight green stack wall, six 20-tray stacks"
+img06,datasets/canonical_clean/test/images/a1843591fc331694b11f.jpeg,21,630,manual_visual_count,"medium angled two-stack scene, 10+11 visible trays"
+img07,datasets/canonical_clean/test/images/bb2b695f926199caecaa.jpeg,21,630,manual_visual_count,"medium straight dense scene, 21 visible tray layers"
+img08,datasets/roboflow_auto_original/test/images/WhatsApp-Image-2026-07-03-at-11-56-57-AM_jpeg.rf.89f4bc4ee2c7c1dd04d5a124ecec90b9.jpg,46,1380,manual_visual_count,"large warehouse stack, elevated angle"
+img09,datasets/roboflow_auto_original/test/images/WhatsApp-Image-2026-07-03-at-12-01-00-PM_jpeg.rf.f385e1d876734229d2317d18efa35d5c.jpg,76,2280,manual_visual_count,"large warehouse stack, straight/angled"
+img10,datasets/roboflow_auto_original/test/images/WhatsApp-Video-2026-07-03-at-12_04_04-PM_mp4-0002_jpg.rf.b2f6230e26cd45d499ba1295b93aaa4f.jpg,1,30,manual_visual_count,"single tray, top-down video frame"

@@ -1,0 +1,63 @@
+{
+  "scan_id": "11b796ce-aa6e-4098-aa74-14515f9e2246",
+  "status": "verified",
+  "accepted": true,
+  "physical_stack_count": 1,
+  "total_trays": 1,
+  "eggs_per_tray": 30,
+  "total_eggs": 30,
+  "model": {
+    "provider": "roboflow_serverless",
+    "workspace": "",
+    "project": "projec-mutta",
+    "version": "2",
+    "model_id": "projec-mutta/2"
+  },
+  "processing": {
+    "mode": "cloudflare_roboflow_egg_tray_baseline",
+    "latency_ms": 2511,
+    "model_version": "projec-mutta/2",
+    "timings_ms": {
+      "total": 2511
+    }
+  },
+  "views": {
+    "left": {
+      "quality": 0.9817357659339905,
+      "accepted": true,
+      "blur_score": 0,
+      "exposure_mean": 0,
+      "reason": null
+    },
+    "right": {
+      "quality": 0.38630032539367676,
+      "accepted": true,
+      "blur_score": 0,
+      "exposure_mean": 0,
+      "reason": null
+    },
+    "straight": {
+      "quality": 0,
+      "accepted": false,
+      "blur_score": 0,
+      "exposure_mean": 0,
+      "reason": "No egg trays detected"
+    }
+  },
+  "stacks": [
+    {
+      "physical_stack_id": "single_stack_baseline",
+      "counts": {
+        "left": 1,
+        "right": 1,
+        "straight": 0
+      },
+      "final_count": 1,
+      "confidence": 0.38630032539367676,
+      "accepted": true,
+      "reason": "At least two views agree",
+      "association_confidence": 1
+    }
+  ],
+  "rescan": null
+}

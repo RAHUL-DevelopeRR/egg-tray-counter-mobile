@@ -1,0 +1,5 @@
+source,status,reason
+datasets/canonical_clean/test/images/2b588d2747ad49e43c76.jpeg,ground_truth_uncertain,"multiple partially visible stacks; exact physical tray count cannot be recovered from this angle"
+datasets/canonical_clean/test/images/3eef594bf505b0f40ab1.jpeg,ground_truth_uncertain,"loaded plastic trays and empty paper trays overlap; inclusion boundary is ambiguous"
+datasets/canonical_clean/test/images/78cc2f94596b1e76295e.jpeg,ground_truth_uncertain,"top-down view hides lower layers and mixes loaded and empty trays"
+datasets/canonical_clean/test/images/d3b9c36c583b721a058b.jpg,ground_truth_uncertain,"foreground loose trays and occluded background stacks cannot be counted reliably"

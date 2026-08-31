@@ -1,0 +1,66 @@
+{
+  "scan_id": "9524a059-7a4f-4f6f-a23a-250a94991286",
+  "status": "rescan_required",
+  "accepted": false,
+  "physical_stack_count": null,
+  "total_trays": null,
+  "eggs_per_tray": 30,
+  "total_eggs": null,
+  "model": {
+    "provider": "roboflow_serverless",
+    "workspace": "",
+    "project": "projec-mutta",
+    "version": "2",
+    "model_id": "projec-mutta/2"
+  },
+  "processing": {
+    "mode": "cloudflare_roboflow_egg_tray_baseline",
+    "latency_ms": 3721,
+    "model_version": "projec-mutta/2",
+    "timings_ms": {
+      "total": 3721
+    }
+  },
+  "views": {
+    "left": {
+      "quality": 0.6994430648869482,
+      "accepted": true,
+      "blur_score": 0,
+      "exposure_mean": 0,
+      "reason": null
+    },
+    "right": {
+      "quality": 0.7682866502192712,
+      "accepted": true,
+      "blur_score": 0,
+      "exposure_mean": 0,
+      "reason": null
+    },
+    "straight": {
+      "quality": 0.571950140926573,
+      "accepted": true,
+      "blur_score": 0,
+      "exposure_mean": 0,
+      "reason": null
+    }
+  },
+  "stacks": [
+    {
+      "physical_stack_id": "single_stack_baseline",
+      "counts": {
+        "left": 29,
+        "right": 124,
+        "straight": 9
+      },
+      "final_count": null,
+      "confidence": 0,
+      "accepted": false,
+      "reason": "Views disagree or contain a large count mismatch",
+      "association_confidence": 0
+    }
+  ],
+  "rescan": {
+    "recommended_view": "straight",
+    "reason": "RESCAN REQUIRED: views must agree without a large count mismatch"
+  }
+}

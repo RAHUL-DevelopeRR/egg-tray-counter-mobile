@@ -1,0 +1,11 @@
+image,ground_truth_trays,roboflow_raw,backend_view_count,app_scan_accepted,app_final_count,absolute_error,relative_error_pct,count_accuracy_pct,exact_match,predicted_eggs
+img01,60,9,9,False,,51,85.0,15.0,False,270
+img02,60,12,12,False,,48,80.0,20.0,False,360
+img03,60,93,93,False,,33,55.0,45.0,False,2790
+img04,32,29,29,False,,3,9.38,90.62,False,870
+img05,120,124,124,False,,4,3.33,96.67,False,3720
+img06,21,9,9,False,,12,57.14,42.86,False,270
+img07,21,21,21,False,,0,0.0,100.0,True,630
+img08,46,73,73,False,,27,58.7,41.3,False,2190
+img09,76,25,25,False,,51,67.11,32.89,False,750
+img10,1,1,1,True,,0,0.0,100.0,True,30
