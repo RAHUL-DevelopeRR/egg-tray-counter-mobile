@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.dev.vars
+.wrangler/
+.cloudflare-config/
+worker-configuration.d.ts

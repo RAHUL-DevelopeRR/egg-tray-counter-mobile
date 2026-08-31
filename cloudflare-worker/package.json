@@ -1,0 +1,14 @@
+{
+  "name": "egg-tray-counter-api",
+  "private": true,
+  "scripts": {
+    "build": "tsc --outDir dist --noEmit false",
+    "check": "npm run build && wrangler deploy --dry-run && node --test test/*.test.mjs",
+    "deploy": "npm run build && wrangler deploy",
+    "types": "wrangler types"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2",
+    "wrangler": "^4.32.0"
+  }
+}

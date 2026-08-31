@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [ValidateSet('stack_face_review', 'review')]
+    [ValidateSet('stack_face_review', 'stack_face_review_dense', 'review')]
     [string]$ReviewSet = 'stack_face_review',
     [ValidateRange(1, 65535)]
     [int]$Port = 8080,
@@ -32,7 +32,7 @@ New-Item -ItemType Directory -Force -Path $DataRoot | Out-Null
 
 # stack_face_review tasks reference datasets/canonical_clean; the legacy review
 # tasks reference files relative to datasets/review.
-$LocalFilesRoot = if ($ReviewSet -eq 'stack_face_review') {
+$LocalFilesRoot = if ($ReviewSet -like 'stack_face_review*') {
     $DatasetRoot
 }
 else {
@@ -61,4 +61,3 @@ if ($NoBrowser) {
 }
 
 & $Executable @Arguments
-

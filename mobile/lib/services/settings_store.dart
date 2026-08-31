@@ -2,7 +2,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsStore {
   static const _baseUrlKey = 'backend_base_url';
-  static const defaultBaseUrl = 'http://10.0.2.2:8000';
+  static const defaultBaseUrl =
+      'https://egg-tray-counter-api.rahultech72216.workers.dev';
 
   final SharedPreferencesAsync _preferences = SharedPreferencesAsync();
 
@@ -14,4 +15,3 @@ class SettingsStore {
     await _preferences.setString(_baseUrlKey, normalized);
   }
 }
-

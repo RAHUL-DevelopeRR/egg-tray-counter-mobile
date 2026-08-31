@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "egg-tray-counter-api",
+  "main": "./dist/index.js",
+  "no_bundle": true,
+  "compatibility_date": "2026-08-22",
+  "workers_dev": true,
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "vars": {
+    "MODEL_ID": "projec-mutta/2",
+    "CONFIDENCE": "35",
+    "OVERLAP": "50",
+    "MAX_VIEW_COUNT_RATIO": "1.25",
+    "EGGS_PER_TRAY": "30"
+  }
+}

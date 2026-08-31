@@ -21,3 +21,11 @@ tools/labelstudio/localappdata/
 reports/roboflow_dataset_audit.json
 reports/local_dataset_audit.json
 reports/debug/
+reports/*.log
+*.apk
+*.apk.idsig
+mobile/.android-home/
+mobile/.tool-state/
+mobile/android/.kotlin/
+work/
+datasets/stack_face_review_dense/
