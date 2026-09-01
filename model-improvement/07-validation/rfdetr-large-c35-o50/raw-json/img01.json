@@ -1,0 +1,40 @@
+{
+  "inference_id": "21d05493-d11f-472d-8db4-d413633eace6",
+  "time": 0.03359657101100311,
+  "image": {
+    "width": 640,
+    "height": 640
+  },
+  "predictions": [
+    {
+      "x": 407.5,
+      "y": 307.0,
+      "width": 151.0,
+      "height": 46.0,
+      "confidence": 0.6862043738365173,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "30e306e2-6f1c-44c6-93f0-76ac5dda9000"
+    },
+    {
+      "x": 194.5,
+      "y": 219.5,
+      "width": 147.0,
+      "height": 55.0,
+      "confidence": 0.5307018160820007,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "d85ec40c-dd76-47d3-b146-53567a65481c"
+    },
+    {
+      "x": 334.0,
+      "y": 259.0,
+      "width": 146.0,
+      "height": 58.0,
+      "confidence": 0.4755080044269562,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "1a352371-ae4b-4944-bc58-ebbf44b84ddd"
+    }
+  ]
+}

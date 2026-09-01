@@ -1,0 +1,3 @@
+model_id,scene_id,truth,prediction_left,prediction_straight,prediction_right,prediction_spread,all_views_equal,all_views_exact,three_view_exact_consistency_pct
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1,scene-60-three-stack,60,9,93,12,84,false,false,0
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2,scene-60-three-stack,60,3,88,4,85,false,false,0

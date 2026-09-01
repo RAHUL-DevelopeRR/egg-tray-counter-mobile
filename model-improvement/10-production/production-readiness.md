@@ -1,23 +1,32 @@
 # Production readiness gate
 
-Decision: **NOT PRODUCTION READY**. Keep `projec-mutta/2` as the frozen comparison baseline; do not promote it as an accurate production counter.
+Decision: **NOT PRODUCTION READY — DO NOT DEPLOY RF-DETR Large.** Keep the current Medium endpoint unchanged.
 
-## Blocking evidence
+## Evidence
 
-- Product baseline: exact 2/10, MAE 22.9 trays, mean relative error 41.57%.
-- A true 60-tray scene produced 9, 12, and 93 detections across its three views.
-- V2 contains only 69 train, 22 validation, and 8 test images; scene grouping is undocumented.
-- Canonical data has three visually confirmed same-scene cross-split leaks.
-- 34 canonical boxes extend outside image geometry and all 137 scene/view records still need human review.
-- No independent, untouched 50-scene final acceptance set exists.
+- Medium count benchmark: 2/10 exact, MAE 22.9, mean relative error 41.57%.
+- Large count benchmark: 1/10 exact, MAE 24.0, mean relative error 47.203%.
+- Large dashboard metrics also regressed: mAP@50 68.1%, precision 78.9%, recall 63.4%, F1 70.3%.
+- Three-view spread worsened from 84 to 85; neither model counted all three views correctly.
+- Frozen V2 uses incompatible labeling units, including a dense image with one stack-scale box and dense images with individual-tray boxes.
+- V2 validation and test contain documented views of the same benchmark scene; no defensible untouched final holdout exists.
+
+## Current production settings
+
+| Setting | Value |
+|---|---|
+| Model | RF-DETR Medium / `projec-mutta/2` |
+| Confidence | 35% |
+| Overlap | 50% |
+| Class | `egg_tray` |
+
+These settings are retained only because Large is worse; they are not evidence of production-grade accuracy.
 
 ## Promotion requirements
 
-1. Resolve all cross-split scenes and keep every LEFT/STRAIGHT/RIGHT capture from one scene in one split.
-2. Complete `scene-metadata.csv`, independently verify tray totals, and review all annotation-policy violations.
-3. Train the controlled experiments in `training-experiments.csv`; preserve all run IDs and metrics.
-4. Select a candidate on the scene-grouped internal test, not Roboflow mAP alone.
-5. Run once on 50 unseen scenes × three views and record every prediction in `final-acceptance-results.csv`.
-6. Promote only if exact-count accuracy is at least 90%, MAE at most 1 tray, mean relative error at most 3%, and no count-range/viewpoint slice has a catastrophic miss over 10% relative error.
+1. Correct all mixed-unit annotations and complete scene/view/count metadata.
+2. Freeze a scene-grouped development version and a separate untouched final holdout.
+3. Beat Medium on exact accuracy, MAE, difficult scenes, and three-view spread at identical settings.
+4. Run the selected candidate once on the untouched holdout and list every failure.
 
-If these thresholds prove infeasible after the expanded real dataset, report the measured ceiling and require operator verification instead of hiding uncertainty.
+No further paid run is justified until requirement 1 is complete.

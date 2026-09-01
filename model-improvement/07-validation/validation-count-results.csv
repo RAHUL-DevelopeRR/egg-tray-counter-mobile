@@ -1,0 +1,21 @@
+model_id,architecture,image,scene_id,view,truth,prediction,signed_error,absolute_error,relative_error_pct,count_accuracy_pct,exact_match,confidence,overlap,evaluation_role
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1,RF-DETR Medium,img01,scene-60-three-stack,left,60,9,-51,51,85.00,15.00,false,35,50,validation_benchmark_not_final_holdout
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1,RF-DETR Medium,img02,scene-60-three-stack,right,60,12,-48,48,80.00,20.00,false,35,50,validation_benchmark_not_final_holdout
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1,RF-DETR Medium,img03,scene-60-three-stack,straight,60,93,33,33,55.00,45.00,false,35,50,validation_benchmark_not_final_holdout
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1,RF-DETR Medium,img04,scene-32-brown,straight,32,29,-3,3,9.38,90.62,false,35,50,validation_benchmark_not_final_holdout
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1,RF-DETR Medium,img05,scene-120-wall,straight,120,124,4,4,3.33,96.67,false,35,50,validation_benchmark_not_final_holdout
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1,RF-DETR Medium,img06,scene-21-two-stack,angled,21,9,-12,12,57.14,42.86,false,35,50,validation_benchmark_not_final_holdout
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1,RF-DETR Medium,img07,scene-21-dense,straight,21,21,0,0,0.00,100.00,true,35,50,validation_benchmark_not_final_holdout
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1,RF-DETR Medium,img08,scene-46-warehouse,elevated,46,73,27,27,58.70,41.30,false,35,50,validation_benchmark_not_final_holdout
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1,RF-DETR Medium,img09,scene-76-warehouse,straight-angled,76,25,-51,51,67.11,32.89,false,35,50,validation_benchmark_not_final_holdout
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1,RF-DETR Medium,img10,scene-1-single,top-down,1,1,0,0,0.00,100.00,true,35,50,validation_benchmark_not_final_holdout
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2,RF-DETR Large,img01,scene-60-three-stack,left,60,3,-57,57,95.00,5.00,false,35,50,validation_benchmark_not_final_holdout
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2,RF-DETR Large,img02,scene-60-three-stack,right,60,4,-56,56,93.33,6.67,false,35,50,validation_benchmark_not_final_holdout
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2,RF-DETR Large,img03,scene-60-three-stack,straight,60,88,28,28,46.67,53.33,false,35,50,validation_benchmark_not_final_holdout
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2,RF-DETR Large,img04,scene-32-brown,straight,32,30,-2,2,6.25,93.75,false,35,50,validation_benchmark_not_final_holdout
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2,RF-DETR Large,img05,scene-120-wall,straight,120,122,2,2,1.67,98.33,false,35,50,validation_benchmark_not_final_holdout
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2,RF-DETR Large,img06,scene-21-two-stack,angled,21,4,-17,17,80.95,19.05,false,35,50,validation_benchmark_not_final_holdout
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2,RF-DETR Large,img07,scene-21-dense,straight,21,18,-3,3,14.29,85.71,false,35,50,validation_benchmark_not_final_holdout
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2,RF-DETR Large,img08,scene-46-warehouse,elevated,46,87,41,41,89.13,10.87,false,35,50,validation_benchmark_not_final_holdout
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2,RF-DETR Large,img09,scene-76-warehouse,straight-angled,76,42,-34,34,44.74,55.26,false,35,50,validation_benchmark_not_final_holdout
+rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2,RF-DETR Large,img10,scene-1-single,top-down,1,1,0,0,0.00,100.00,true,35,50,validation_benchmark_not_final_holdout

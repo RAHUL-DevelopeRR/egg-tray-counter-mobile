@@ -1,0 +1,11 @@
+image,truth,prediction,absolute_error,relative_error_pct,count_accuracy_pct,exact_match,confidence,overlap,model
+img01,60,3,57,95.0,5.0,False,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2
+img02,60,4,56,93.33,6.67,False,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2
+img03,60,88,28,46.67,53.33,False,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2
+img04,32,30,2,6.25,93.75,False,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2
+img05,120,122,2,1.67,98.33,False,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2
+img06,21,4,17,80.95,19.05,False,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2
+img07,21,18,3,14.29,85.71,False,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2
+img08,46,87,41,89.13,10.87,False,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2
+img09,76,42,34,44.74,55.26,False,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2
+img10,1,1,0,0.0,100.0,True,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2

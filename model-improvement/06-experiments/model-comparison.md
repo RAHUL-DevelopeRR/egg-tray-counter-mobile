@@ -1,12 +1,29 @@
-# Architecture comparison
+# RF-DETR Medium vs Large
 
-| Approach | Strength | Known risk | Test decision |
-|---|---|---|---|
-| Individual tray detection | Existing labels and deployment path | repetitive/overlapping tiny targets; viewpoint sensitivity | retain as controlled data-quality baseline |
-| Stronger detector / NAS | may improve small-object recall | cannot repair inconsistent labels | run only after cleaned frozen version |
-| Higher resolution / tiling | preserves distant tray boundaries | duplicate detections and latency | compare on same holdout with merge audit |
-| Stack-face + periodicity | uses strong repeated horizontal structure | needs good face rectification and separate adjacent stacks | highest-priority alternative |
-| Direct count regression | directly optimizes count | weak interpretability and likely scene memorization | defer until at least 240 counted scenes exist |
-| View-specific models | targets proven view shift | triples maintenance and data requirement | use only if balanced universal model fails |
+Both models were trained on frozen `projec-mutta/2` and evaluated on the exact same 10-image count benchmark at confidence 35% and overlap 50%.
 
-The existing Python backend already implements stack-face rectification and horizontal periodicity counting. That makes experiment F cheaper and more auditable than adding a new regression network. It is not production evidence yet: the current production Worker bypasses that Python pipeline and the stack-face review queue has zero human-approved tasks.
+| Metric | Medium | Large |
+|---|---:|---:|
+| Model ID | `rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1` | `rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-large-t2` |
+| Training ID | not available | `9fd5202da865a4447708` |
+| mAP@50 | 69.3% | 68.1% |
+| Precision | 79.7% | 78.9% |
+| Recall | 67.3% | 63.4% |
+| F1 | 73.0% | 70.3% |
+| Exact-count accuracy | 20% (2/10) | 10% (1/10) |
+| MAE | 22.9 | 24.0 |
+| Median absolute error | 19.5 | 22.5 |
+| Maximum absolute error | 51 | 57 |
+| Mean relative error | 41.57% | 47.203% |
+| Mean count accuracy | 58.43% | 52.797% |
+| Undercount / overcount frequency | 5 / 3 | 6 / 3 |
+| Three-view exact consistency | 0% | 0% |
+| Three-view prediction spread | 84 | 85 |
+
+Large improved two near-straight examples (`32: 29→30`; `120: 124→122`) and the distant 76-tray frame (`25→42`), but it severely regressed side views (`9→3`, `12→4`), the elevated frame (`73→87`), and the previously exact 21-tray frame (`21→18`).
+
+## Decision
+
+**DO NOT DEPLOY RF-DETR Large.** It fails every promotion gate: lower detection metrics, lower exact accuracy, higher MAE, higher relative error, worse maximum error, and worse three-view spread.
+
+Keep the Medium production endpoint unchanged at confidence 35% and overlap 50%. The next experiment is annotation correction plus scene grouping, not a larger architecture or threshold tuning.

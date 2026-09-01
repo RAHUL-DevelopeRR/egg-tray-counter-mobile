@@ -1,0 +1,2 @@
+status,reason,model_id,scene_id,view,image_id,ground_truth_trays,predicted_trays,absolute_error,exact_match
+NOT_RUN,No untouched scene-grouped final holdout with independently verified ground truth exists.,,,,,,,,
