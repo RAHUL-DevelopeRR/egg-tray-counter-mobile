@@ -3,7 +3,6 @@ from __future__ import annotations
 import asyncio
 import logging
 import time
-from collections import Counter
 from pathlib import Path
 
 import cv2
@@ -69,16 +68,6 @@ class CountingService:
         model_version = self._model_version(results)
         processing_mode = results[0].provider if results else "unknown"
         recommended_view = self._recommended_view(qualities, observations)
-
-        if any(result.output_class == "egg_tray" for result in results):
-            return self._tray_box_baseline_response(
-                scan_id=scan_id,
-                qualities=qualities,
-                results=inference_by_view,
-                model_version=model_version,
-                timings=timings,
-                total_started=total_started,
-            )
 
         association_started = time.perf_counter()
         try:
@@ -151,88 +140,6 @@ class CountingService:
             },
         )
         return response
-
-    def _tray_box_baseline_response(
-        self,
-        *,
-        scan_id: str,
-        qualities: dict[str, ImageQuality],
-        results: dict[str, InferenceResult],
-        model_version: str,
-        timings: dict[str, int],
-        total_started: float,
-    ) -> ScanResponse:
-        """Conservative single-stack bridge for the existing egg_tray detector."""
-        counts = {
-            view: result.detection_count
-            for view, result in results.items()
-            if result.output_class == "egg_tray"
-        }
-        usable = {
-            view: count
-            for view, count in counts.items()
-            if count is not None and count > 0 and qualities[view].accepted
-        }
-        frequencies = Counter(usable.values())
-        agreed = [count for count, frequency in frequencies.items() if frequency >= 2]
-        timings["fusion"] = 0
-        timings["total"] = round((time.perf_counter() - total_started) * 1000)
-        stack = StackResultSchema(
-            physical_stack_id="single_stack_baseline",
-            counts=StackCountsSchema(**counts),
-            final_count=agreed[0] if len(agreed) == 1 else None,
-            confidence=min(
-                [qualities[view].score for view, count in usable.items() if count in agreed],
-                default=0.0,
-            ),
-            accepted=len(agreed) == 1,
-            reason=(
-                "Two or more quality-approved views agree on the egg_tray detection count; "
-                "experimental single-stack baseline only"
-                if len(agreed) == 1
-                else "Egg-tray detections do not agree across two quality-approved views"
-            ),
-            association_confidence=1.0 if len(agreed) == 1 else 0.0,
-        )
-        common = dict(
-            scan_id=scan_id,
-            eggs_per_tray=self.settings.eggs_per_tray,
-            model=self._model_schema("roboflow_cloud_egg_tray_baseline", model_version),
-            processing=ProcessingSchema(
-                mode="roboflow_cloud_egg_tray_baseline",
-                latency_ms=timings["total"],
-                model_version=model_version,
-                timings_ms=timings,
-            ),
-            views=self._view_schemas(qualities),
-            stacks=[stack],
-        )
-        if len(agreed) == 1:
-            total_trays = agreed[0]
-            return ScanResponse(
-                **common,
-                status="verified",
-                accepted=True,
-                physical_stack_count=1,
-                total_trays=total_trays,
-                total_eggs=total_trays * self.settings.eggs_per_tray,
-                rescan=None,
-            )
-        return ScanResponse(
-            **common,
-            status="rescan_required",
-            accepted=False,
-            physical_stack_count=None,
-            total_trays=None,
-            total_eggs=None,
-            rescan=RescanSchema(
-                recommended_view=min(VIEW_NAMES, key=lambda view: qualities[view].score),
-                reason=(
-                    "RESCAN REQUIRED: temporary egg_tray baseline supports exactly one framed "
-                    "physical stack and requires two agreeing views"
-                ),
-            ),
-        )
 
     def _build_observations(
         self,

@@ -107,7 +107,6 @@ class RoboflowInferenceProvider(InferenceProvider):
         scale_y = original_height / response_height
         normalized: list[StackFacePrediction] = []
         unsupported_classes: set[str] = set()
-        tray_confidences: list[float] = []
         raw_predictions = payload["predictions"]
         for raw in raw_predictions:
             if not isinstance(raw, Mapping):
@@ -116,10 +115,8 @@ class RoboflowInferenceProvider(InferenceProvider):
             confidence = float(raw.get("confidence", 0.0))
             if confidence < self.settings.min_segmentation_confidence:
                 continue
-            if class_name not in self.settings.accepted_stack_classes:
-                if self.settings.allow_experimental_tray_box_baseline and class_name == "egg_tray":
-                    tray_confidences.append(confidence)
-                    continue
+            accepted_alias = self.settings.allow_experimental_tray_box_baseline and class_name == "egg_tray"
+            if class_name not in self.settings.accepted_stack_classes and not accepted_alias:
                 unsupported_classes.add(class_name)
                 continue
             polygon = self._polygon(raw, scale_x, scale_y)
@@ -136,9 +133,6 @@ class RoboflowInferenceProvider(InferenceProvider):
             )
         if normalized:
             return normalized, None, None, None
-        if self.settings.allow_experimental_tray_box_baseline and not unsupported_classes:
-            average = sum(tray_confidences) / len(tray_confidences) if tray_confidences else None
-            return [], len(tray_confidences), "egg_tray", average
         if raw_predictions and unsupported_classes:
             classes = ", ".join(sorted(unsupported_classes))
             raise UnsupportedModelOutputError(

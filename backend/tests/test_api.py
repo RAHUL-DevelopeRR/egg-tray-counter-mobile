@@ -6,7 +6,7 @@ import numpy as np
 from fastapi.testclient import TestClient
 
 from app.main import create_app
-from app.providers.base import InferenceProvider, InferenceResult
+from app.providers.base import InferenceProvider, InferenceResult, StackFacePrediction
 from app.providers.mock import MockInferenceProvider
 from tests.conftest import encoded_stack
 
@@ -23,25 +23,26 @@ def triplet() -> dict[str, tuple[str, bytes, str]]:
     }
 
 
-class TrayBoxBaselineProvider(InferenceProvider):
-    def __init__(self, counts: dict[str, int]) -> None:
-        self.counts = counts
-
+class EggTrayFaceProvider(InferenceProvider):
     async def infer(
         self,
         image_bytes: bytes,
         image: np.ndarray,
         metadata: dict[str, object],
     ) -> InferenceResult:
-        view = str(metadata["view"])
+        height, width = image.shape[:2]
         return InferenceResult(
-            predictions=(),
+            predictions=(
+                StackFacePrediction(
+                    polygon=((0, 0), (width - 1, 0), (width - 1, height - 1), (0, height - 1)),
+                    bbox=(0, 0, width - 1, height - 1),
+                    confidence=0.95,
+                    class_name="egg_tray",
+                ),
+            ),
             provider="roboflow_cloud",
-            model_version="projec-mutta/2",
+            model_version="projec-mutta/3",
             latency_ms=1,
-            detection_count=self.counts[view],
-            output_class="egg_tray",
-            average_detection_confidence=0.8,
         )
 
 
@@ -67,25 +68,15 @@ def test_three_view_scan_is_verified_and_idempotent(test_settings) -> None:
         assert second.json() == payload
 
 
-def test_single_stack_tray_box_baseline_accepts_two_agreeing_views(test_settings) -> None:
-    provider = TrayBoxBaselineProvider({"left": 18, "right": 18, "straight": 17})
+def test_egg_tray_alias_runs_rectification_and_layer_counter(test_settings) -> None:
+    provider = EggTrayFaceProvider()
     with TestClient(create_app(test_settings, provider)) as api:
         response = api.post("/v1/scans/count", files=triplet())
     assert response.status_code == 200
     payload = response.json()
     assert payload["status"] == "verified"
     assert payload["total_trays"] == 18
-    assert payload["processing"]["mode"] == "roboflow_cloud_egg_tray_baseline"
-
-
-def test_single_stack_tray_box_baseline_rejects_disagreement(test_settings) -> None:
-    provider = TrayBoxBaselineProvider({"left": 18, "right": 17, "straight": 19})
-    with TestClient(create_app(test_settings, provider)) as api:
-        response = api.post("/v1/scans/count", files=triplet())
-    assert response.status_code == 200
-    payload = response.json()
-    assert payload["status"] == "rescan_required"
-    assert payload["total_trays"] is None
+    assert payload["processing"]["mode"] == "roboflow_cloud"
 
 
 def test_invalid_mime_type(test_settings) -> None:

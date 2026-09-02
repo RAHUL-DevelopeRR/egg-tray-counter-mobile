@@ -71,7 +71,7 @@ async def test_rejects_individual_tray_box_model() -> None:
 
 
 @pytest.mark.asyncio
-async def test_explicit_experimental_baseline_counts_egg_tray_boxes() -> None:
+async def test_egg_tray_alias_produces_stack_face_rois() -> None:
     def handler(_request: httpx.Request) -> httpx.Response:
         return httpx.Response(
             200,
@@ -95,10 +95,10 @@ async def test_explicit_experimental_baseline_counts_egg_tray_boxes() -> None:
     result = await provider.infer(b"image", np.zeros((10, 10, 3), dtype=np.uint8), {})
     await client.aclose()
 
-    assert result.predictions == ()
-    assert result.output_class == "egg_tray"
-    assert result.detection_count == 2
-    assert result.average_detection_confidence == pytest.approx(0.865)
+    assert len(result.predictions) == 2
+    assert all(prediction.class_name == "egg_tray" for prediction in result.predictions)
+    assert result.output_class is None
+    assert result.detection_count is None
 
 
 @pytest.mark.asyncio
