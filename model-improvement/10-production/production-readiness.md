@@ -2,6 +2,8 @@
 
 Decision: **NOT PRODUCTION READY — DO NOT DEPLOY RF-DETR Large.** Keep the current Medium endpoint unchanged.
 
+2026-09-02 correction-run decision: **DO NOT TRAIN / DO NOT DEPLOY.** The all-99-image visual gate found 27 images still requiring manual relabeling, so no corrected V3 or new Medium benchmark exists. The promotion comparison therefore remains current Medium `2/10` exact, MAE `22.9`; candidate metrics are `NOT RUN`.
+
 ## Evidence
 
 - Medium count benchmark: 2/10 exact, MAE 22.9, mean relative error 41.57%.

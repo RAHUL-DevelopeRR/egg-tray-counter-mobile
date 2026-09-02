@@ -29,3 +29,5 @@ mobile/.tool-state/
 mobile/android/.kotlin/
 work/
 datasets/stack_face_review_dense/
+gcm-diagnose.log
+model-improvement/.pytest-tmp/

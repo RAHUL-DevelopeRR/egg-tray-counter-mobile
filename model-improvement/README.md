@@ -7,10 +7,11 @@ Current decision: **NOT PRODUCTION READY**.
 ## Status
 
 - Dataset audit: complete for the exact 99-image frozen V2 export, locally available V1, and `canonical_clean`.
+- Full V2 visual policy gate: failed on 2026-09-02; all 99 images were opened and 27 clearly require manual relabeling. See `01-dataset-audit/v2-visual-policy-audit.md` and `v2-label-policy-review.csv`.
 - Public-source discovery: complete; no external image was downloaded or added.
 - Scene/view metadata: generated as a human-review queue; unknown fields were not guessed.
 - Candidate training: Large run `9fd5202da865a4447708` completed; it regressed from 20% to 10% exact-count accuracy and was rejected.
-- Next training: blocked until the mixed annotation unit is corrected and images are grouped by scene.
+- Next training: blocked until the 27 failed V2 images are manually corrected and all 99 pass full-resolution QA. No corrected version or Medium run was created from known-bad labels.
 - Final acceptance set: not yet collected; it must stay unseen until model selection.
 
 ## Files
@@ -19,6 +20,8 @@ Current decision: **NOT PRODUCTION READY**.
 - `01-dataset-audit/dataset-stats.csv`
 - `01-dataset-audit/duplicate-report.csv`
 - `01-dataset-audit/v2-image-manifest.csv`
+- `01-dataset-audit/v2-label-policy-review.csv`
+- `01-dataset-audit/v2-visual-policy-audit.md`
 - `02-external-data/dataset-sources.csv`
 - `03-clean-dataset/scene-metadata.csv`
 - `04-annotations/annotation-policy.md`
