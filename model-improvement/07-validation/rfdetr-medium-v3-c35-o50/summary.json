@@ -1,0 +1,12 @@
+{
+  "images": 10,
+  "exact_matches": 2,
+  "exact_count_accuracy_pct": 20.0,
+  "mae": 20.7,
+  "median_absolute_error": 19.0,
+  "maximum_absolute_error": 47,
+  "mean_relative_error_pct": 38.157000000000004,
+  "mean_count_accuracy_pct": 61.843,
+  "undercounts": 6,
+  "overcounts": 2
+}

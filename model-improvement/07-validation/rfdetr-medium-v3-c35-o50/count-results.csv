@@ -1,0 +1,11 @@
+image,truth,prediction,absolute_error,relative_error_pct,count_accuracy_pct,exact_match,confidence,overlap,model
+img01,60,26,34,56.67,43.33,False,35,50,rahuls-workspace-l9ylz/projec-mutta-3-rfdetr-medium-t1
+img02,60,13,47,78.33,21.67,False,35,50,rahuls-workspace-l9ylz/projec-mutta-3-rfdetr-medium-t1
+img03,60,91,31,51.67,48.33,False,35,50,rahuls-workspace-l9ylz/projec-mutta-3-rfdetr-medium-t1
+img04,32,29,3,9.38,90.62,False,35,50,rahuls-workspace-l9ylz/projec-mutta-3-rfdetr-medium-t1
+img05,120,120,0,0.0,100.0,True,35,50,rahuls-workspace-l9ylz/projec-mutta-3-rfdetr-medium-t1
+img06,21,14,7,33.33,66.67,False,35,50,rahuls-workspace-l9ylz/projec-mutta-3-rfdetr-medium-t1
+img07,21,19,2,9.52,90.48,False,35,50,rahuls-workspace-l9ylz/projec-mutta-3-rfdetr-medium-t1
+img08,46,85,39,84.78,15.22,False,35,50,rahuls-workspace-l9ylz/projec-mutta-3-rfdetr-medium-t1
+img09,76,32,44,57.89,42.11,False,35,50,rahuls-workspace-l9ylz/projec-mutta-3-rfdetr-medium-t1
+img10,1,1,0,0.0,100.0,True,35,50,rahuls-workspace-l9ylz/projec-mutta-3-rfdetr-medium-t1
