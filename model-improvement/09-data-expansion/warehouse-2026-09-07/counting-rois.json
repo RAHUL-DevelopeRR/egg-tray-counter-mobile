@@ -1,0 +1,9 @@
+{
+  "status": "Development diagnostics only; visible foreground stacks manually counted from full-resolution photos. These are not physical scene totals or an independent post-training test.",
+  "coordinates": "Pixel coordinates in EXIF-oriented original images, clockwise from upper left",
+  "items": [
+    {"id":"wh009","visible_foreground_trays":7,"polygon":[[540,215],[1068,196],[1053,856],[580,830]],"scope":"Only the seven-layer egg-loaded foreground stack; background empty nested stacks excluded from this diagnostic ROI."},
+    {"id":"wh025","visible_foreground_trays":20,"polygon":[[390,73],[798,68],[722,1240],[429,1237]],"scope":"Only the full-height egg-loaded foreground stack. Background excluded."},
+    {"id":"wh069","visible_foreground_trays":20,"polygon":[[219,424],[634,422],[594,1507],[298,1505]],"scope":"Only the full-height egg-loaded foreground stack. Occluded stacks behind it excluded."}
+  ]
+}

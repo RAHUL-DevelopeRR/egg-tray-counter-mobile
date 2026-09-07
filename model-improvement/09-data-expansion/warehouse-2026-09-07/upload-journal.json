@@ -1,0 +1,62 @@
+{
+  "wh018": {
+    "image_id": "6Ku1U0ZTwYh2cyf4c3uY",
+    "annotation_response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"status\":\"completed\",\"image_id\":\"6Ku1U0ZTwYh2cyf4c3uY\",\"annotation_name\":\"wh018.txt\",\"added_to_dataset\":true}"
+        }
+      ],
+      "structuredContent": {
+        "status": "completed",
+        "image_id": "6Ku1U0ZTwYh2cyf4c3uY",
+        "annotation_name": "wh018.txt",
+        "added_to_dataset": true
+      },
+      "isError": false
+    },
+    "annotation_saved": true,
+    "isolated_from_layer_dataset": true
+  },
+  "wh019": {
+    "image_id": "qNED7rC1VusQq20CD6jq",
+    "annotation_response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"status\":\"completed\",\"image_id\":\"qNED7rC1VusQq20CD6jq\",\"annotation_name\":\"wh019.txt\",\"added_to_dataset\":true}"
+        }
+      ],
+      "structuredContent": {
+        "status": "completed",
+        "image_id": "qNED7rC1VusQq20CD6jq",
+        "annotation_name": "wh019.txt",
+        "added_to_dataset": true
+      },
+      "isError": false
+    },
+    "annotation_saved": true,
+    "isolated_from_layer_dataset": true
+  },
+  "wh020": {
+    "image_id": "cZCwzR4wAscdd5rfIWYK",
+    "annotation_response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"status\":\"completed\",\"image_id\":\"cZCwzR4wAscdd5rfIWYK\",\"annotation_name\":\"wh020.txt\",\"added_to_dataset\":true}"
+        }
+      ],
+      "structuredContent": {
+        "status": "completed",
+        "image_id": "cZCwzR4wAscdd5rfIWYK",
+        "annotation_name": "wh020.txt",
+        "added_to_dataset": true
+      },
+      "isError": false
+    },
+    "annotation_saved": true,
+    "isolated_from_layer_dataset": true
+  }
+}

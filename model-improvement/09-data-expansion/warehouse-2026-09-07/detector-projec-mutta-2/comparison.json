@@ -1,0 +1,38 @@
+[
+  {
+    "id": "wh018",
+    "model": "projec-mutta/2",
+    "truth_stack_boxes": 8,
+    "raw_detection_count": 81,
+    "comparable_units": false,
+    "reason": "Legacy egg_tray layer detections are not stack-face detections",
+    "ground_truth_trays": null,
+    "scope": "detector_development_only_not_tray_count_accuracy",
+    "confidence": 35,
+    "overlap": 50
+  },
+  {
+    "id": "wh019",
+    "model": "projec-mutta/2",
+    "truth_stack_boxes": 8,
+    "raw_detection_count": 84,
+    "comparable_units": false,
+    "reason": "Legacy egg_tray layer detections are not stack-face detections",
+    "ground_truth_trays": null,
+    "scope": "detector_development_only_not_tray_count_accuracy",
+    "confidence": 35,
+    "overlap": 50
+  },
+  {
+    "id": "wh020",
+    "model": "projec-mutta/2",
+    "truth_stack_boxes": 8,
+    "raw_detection_count": 74,
+    "comparable_units": false,
+    "reason": "Legacy egg_tray layer detections are not stack-face detections",
+    "ground_truth_trays": null,
+    "scope": "detector_development_only_not_tray_count_accuracy",
+    "confidence": 35,
+    "overlap": 50
+  }
+]

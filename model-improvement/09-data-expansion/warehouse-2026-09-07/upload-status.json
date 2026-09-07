@@ -1,0 +1,26 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"status\":\"completed\",\"progress\":{\"total\":3,\"current\":3},\"result\":{\"uploaded\":3,\"duplicates\":0,\"annotated\":0,\"uploadErrors\":[],\"annotationErrors\":[],\"warnings\":[],\"chunkCount\":1,\"failedChunks\":0}}"
+    }
+  ],
+  "structuredContent": {
+    "status": "completed",
+    "progress": {
+      "total": 3,
+      "current": 3
+    },
+    "result": {
+      "uploaded": 3,
+      "duplicates": 0,
+      "annotated": 0,
+      "uploadErrors": [],
+      "annotationErrors": [],
+      "warnings": [],
+      "chunkCount": 1,
+      "failedChunks": 0
+    }
+  },
+  "isError": false
+}

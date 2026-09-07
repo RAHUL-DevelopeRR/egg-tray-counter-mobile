@@ -6,6 +6,7 @@ Current decision: **NOT PRODUCTION READY**.
 
 ## Status
 
+- New warehouse intake (2026-09-07): 82 files, 74 byte-unique images, eight duplicates. Three images / 24 stack-face boxes saved to Roboflow, isolated from the legacy individual-tray dataset. **Training not started; DO NOT DEPLOY.** New-image diagnostics expose both a target-unit mismatch and layer-counting failures. See [warehouse checkpoint](09-data-expansion/warehouse-2026-09-07/README.md). APK 0.1.1 was rebuilt, but contains no accuracy upgrade.
 - Dataset audit: complete for the exact 99-image frozen V2 export, locally available V1, and `canonical_clean`.
 - Full V2 visual policy gate: failed on 2026-09-02; all 99 images were opened and 27 conflicted assets were identified. Those 27 were removed from `projec-mutta` (retained in the workspace asset library), leaving 72 policy-consistent images. See `01-dataset-audit/v2-visual-policy-audit.md` and `v2-label-policy-review.csv`.
 - Public-source discovery: complete; no external image was downloaded or added.

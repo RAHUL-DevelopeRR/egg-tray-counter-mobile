@@ -1,0 +1,9 @@
+{
+  "files": 82,
+  "unique": 74,
+  "duplicates": 8,
+  "benchmark_candidates": 0,
+  "training_candidates": 0,
+  "method": "SHA256 plus EXIF-normalized 64-bit dHash; Hamming <=8 flags review, not proof of identity. V2 manifest covers V3 subset. Scene review is still required.",
+  "status": "No uploads, splits or ground-truth claims made by intake."
+}

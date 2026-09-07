@@ -1,5 +1,9 @@
 # Annotation policy
 
+## Active warehouse expansion contract (2026-09-07)
+
+The new warehouse labels use `egg_tray` as the active project class for one **physical stack face**. Keep these images isolated with `stack-face-only-20260907`; do not give them the legacy `clean-manual-auto-reconciled-v2` tag. V2/V3 below use individual-tray-layer semantics and cannot be mixed with this subset under one class. A new stack-face version needs its own reviewed, scene-grouped splits. Detector boxes do not establish physical tray totals.
+
 ## Individual tray-layer detector
 
 - Class: `egg_tray` means one physically distinguishable 30-egg tray layer.

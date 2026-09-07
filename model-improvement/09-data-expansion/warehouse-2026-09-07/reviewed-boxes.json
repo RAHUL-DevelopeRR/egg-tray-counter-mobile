@@ -1,0 +1,14 @@
+{
+  "policy": "One box per visible physical stack column, including the dominant visible side and top. No individual egg boxes or aggregate wall boxes. Nested empty pink column is one stack, not a verified tray quantity. Pixel coordinates are in the EXIF-oriented source image.",
+  "reviewer": "assistant visual review of original 1280x960 images, not model predictions",
+  "scene_id": "green-wall-warehouse-september-session",
+  "split": "train",
+  "ground_truth_trays": null,
+  "count_status": "Physical scene counts and empty-tray scope awaiting user; boxes are detector annotations only.",
+  "images": [
+    {"id":"wh018","size":[1280,960],"boxes":[[155,319,366,766],[343,303,478,708],[457,311,592,735],[571,326,713,770],[684,333,842,816],[811,348,981,855],[310,692,469,817],[972,480,1153,839]]},
+    {"id":"wh019","size":[1280,960],"boxes":[[143,319,356,776],[331,304,467,709],[449,311,583,739],[563,325,704,773],[675,332,840,814],[806,345,978,855],[305,695,468,817],[968,477,1152,837]]},
+    {"id":"wh020","size":[1280,960],"boxes":[[164,308,375,753],[350,292,487,696],[466,300,600,725],[581,313,722,757],[693,321,849,801],[820,335,992,845],[316,682,479,803],[974,470,1159,824]]}
+  ],
+  "selection_limit": "Initial fully framed detector subset only. Three near-identical views from one scene add limited independent diversity. Remaining photos are not accepted labels. All green-scene variants must remain in train if later accepted, never validation/test. Do not claim scene-count accuracy from these annotations."
+}
