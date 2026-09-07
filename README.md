@@ -2,7 +2,7 @@
 
 ## Latest checkpoint — 2026-09-07
 
-[Download APK 0.1.1 (release mode, debug signed)](https://media.githubusercontent.com/media/RAHUL-DevelopeRR/egg-tray-counter-mobile/main/egg-tray-counter-0.1.1-release.apk)
+[Download APK 0.1.1 from GitHub Releases](https://github.com/RAHUL-DevelopeRR/egg-tray-counter-mobile/releases/tag/v0.1.1) — sign in to an account with repository access, then open **Assets** and select `egg-tray-counter-0.1.1-release.apk`. The repository is private; unauthenticated media URLs return 404. Release-mode build, debug signed.
 
 **Not production ready.** New warehouse intake: 82 files / 74 unique; three images with 24 stack-face boxes saved in Roboflow and isolated from legacy individual-tray labels. Retraining has not started. The APK still uses the deployed V2 model; its Cloudflare Worker does not run the Python layer counter described below. No accuracy upgrade is claimed. See the [evidence and remaining work](model-improvement/09-data-expansion/warehouse-2026-09-07/README.md).
 
