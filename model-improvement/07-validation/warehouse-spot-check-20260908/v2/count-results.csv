@@ -1,0 +1,3 @@
+image,truth,prediction,absolute_error,relative_error_pct,count_accuracy_pct,exact_match,confidence,overlap,model
+front,100,101,1,1.0,99.0,False,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1
+side,40,42,2,5.0,95.0,False,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1

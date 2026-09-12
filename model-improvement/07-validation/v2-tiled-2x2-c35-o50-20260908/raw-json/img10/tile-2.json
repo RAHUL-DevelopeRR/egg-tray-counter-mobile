@@ -1,0 +1,29 @@
+{
+  "sha256": "94c1bbc1d5792db083beede159d866d7a69995015d365a43979dcc3e58f08924",
+  "crop": [
+    0,
+    284,
+    356,
+    640
+  ],
+  "response": {
+    "inference_id": "938b8abf-0776-4acf-b470-e940b3f32ce3",
+    "time": 0.01603940105997026,
+    "image": {
+      "width": 356,
+      "height": 356
+    },
+    "predictions": [
+      {
+        "x": 265.5,
+        "y": 136.5,
+        "width": 181.0,
+        "height": 195.0,
+        "confidence": 0.9755768775939941,
+        "class": "egg_tray",
+        "class_id": 0,
+        "detection_id": "4666710a-56c3-498f-a0a5-fce65e9a067d"
+      }
+    ]
+  }
+}

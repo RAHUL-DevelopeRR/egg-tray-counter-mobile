@@ -1,0 +1,18 @@
+{
+  "sha256": "224cf76b8de809eaca9502f8b14d6544892a4f674480d50cd4e9640ca63cbae4",
+  "crop": [
+    0,
+    284,
+    356,
+    640
+  ],
+  "response": {
+    "inference_id": "230516eb-c280-4eba-91ee-5c7fcb01bd77",
+    "time": 0.022792219184339046,
+    "image": {
+      "width": 356,
+      "height": 356
+    },
+    "predictions": []
+  }
+}

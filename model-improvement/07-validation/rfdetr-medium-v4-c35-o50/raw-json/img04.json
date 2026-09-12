@@ -1,0 +1,310 @@
+{
+  "inference_id": "9fd19777-888d-48b8-b653-fe3e118ca40b",
+  "time": 0.01961531094275415,
+  "image": {
+    "width": 640,
+    "height": 640
+  },
+  "predictions": [
+    {
+      "x": 520.0,
+      "y": 231.5,
+      "width": 232.0,
+      "height": 33.0,
+      "confidence": 0.8118221163749695,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "faa5a068-0d2d-46f9-9a6c-f302e66cfde5"
+    },
+    {
+      "x": 239.0,
+      "y": 244.5,
+      "width": 264.0,
+      "height": 35.0,
+      "confidence": 0.7976462841033936,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "7109e210-9e82-45d9-9dc8-c199b03251bc"
+    },
+    {
+      "x": 238.5,
+      "y": 207.0,
+      "width": 291.0,
+      "height": 40.0,
+      "confidence": 0.7845510840415955,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "cdbfbceb-08d6-4ba8-8cfd-b97b33be9c8e"
+    },
+    {
+      "x": 522.0,
+      "y": 197.0,
+      "width": 234.0,
+      "height": 36.0,
+      "confidence": 0.7837643623352051,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "6fccbb57-5026-4731-8b6c-6389619b08f3"
+    },
+    {
+      "x": 246.5,
+      "y": 304.5,
+      "width": 243.0,
+      "height": 31.0,
+      "confidence": 0.7715821266174316,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "bd0e0182-b60a-40a9-bf00-69826fc51133"
+    },
+    {
+      "x": 244.0,
+      "y": 274.5,
+      "width": 258.0,
+      "height": 33.0,
+      "confidence": 0.7496710419654846,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "f56f8ed9-d14a-49c4-9e34-d293d76daa93"
+    },
+    {
+      "x": 252.5,
+      "y": 350.0,
+      "width": 221.0,
+      "height": 24.0,
+      "confidence": 0.7350519299507141,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "853c9e78-54c3-4894-8b67-0a60cc0b00ac"
+    },
+    {
+      "x": 509.0,
+      "y": 259.5,
+      "width": 228.0,
+      "height": 29.0,
+      "confidence": 0.7325563430786133,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "cf78f54e-63d9-4144-998f-5f393ab5512f"
+    },
+    {
+      "x": 259.0,
+      "y": 389.0,
+      "width": 204.0,
+      "height": 26.0,
+      "confidence": 0.7242268323898315,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "21d4ad62-9f4e-4ec5-ac22-33942d743232"
+    },
+    {
+      "x": 500.5,
+      "y": 285.0,
+      "width": 211.0,
+      "height": 26.0,
+      "confidence": 0.7188432812690735,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "c4052c69-5120-4a8b-80ef-3507aabd4387"
+    },
+    {
+      "x": 265.5,
+      "y": 452.5,
+      "width": 175.0,
+      "height": 25.0,
+      "confidence": 0.7162359952926636,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "1e8fd867-ce3f-4c7f-baa1-5d7a95c200c9"
+    },
+    {
+      "x": 263.0,
+      "y": 425.0,
+      "width": 190.0,
+      "height": 26.0,
+      "confidence": 0.6943628787994385,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "8edb616d-1bdf-4c99-8af7-5779e4f9f836"
+    },
+    {
+      "x": 481.0,
+      "y": 334.5,
+      "width": 190.0,
+      "height": 23.0,
+      "confidence": 0.6935405731201172,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "03ba6ccc-4dac-4320-85af-18a606d61b6f"
+    },
+    {
+      "x": 277.0,
+      "y": 518.5,
+      "width": 144.0,
+      "height": 29.0,
+      "confidence": 0.6906015872955322,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "0bace0b8-0303-48f6-9a1e-daa0248cafca"
+    },
+    {
+      "x": 268.5,
+      "y": 479.0,
+      "width": 161.0,
+      "height": 24.0,
+      "confidence": 0.6850031614303589,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "5b011647-9968-42a6-9df7-9042b5de6fe8"
+    },
+    {
+      "x": 472.5,
+      "y": 372.0,
+      "width": 183.0,
+      "height": 24.0,
+      "confidence": 0.6787599325180054,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "d3eb5b52-484c-4309-9582-7ff241b020e7"
+    },
+    {
+      "x": 460.5,
+      "y": 404.0,
+      "width": 171.0,
+      "height": 24.0,
+      "confidence": 0.6531362533569336,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "376b77dd-8879-46b7-bacb-33021bb52ff3"
+    },
+    {
+      "x": 271.5,
+      "y": 499.0,
+      "width": 151.0,
+      "height": 24.0,
+      "confidence": 0.6524726152420044,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "a3107ccb-7f94-4647-9c9f-11dae33e333e"
+    },
+    {
+      "x": 250.0,
+      "y": 327.0,
+      "width": 236.0,
+      "height": 26.0,
+      "confidence": 0.6521521806716919,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "08e23fdf-322b-4539-ac93-0b18b4351c9b"
+    },
+    {
+      "x": 444.0,
+      "y": 459.5,
+      "width": 154.0,
+      "height": 25.0,
+      "confidence": 0.627880871295929,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "11a3d456-7f53-4cd3-b82c-d369243078bf"
+    },
+    {
+      "x": 435.0,
+      "y": 482.0,
+      "width": 142.0,
+      "height": 24.0,
+      "confidence": 0.6270058155059814,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "e6e085e2-de41-44bb-ba84-653ab22f0450"
+    },
+    {
+      "x": 452.0,
+      "y": 434.0,
+      "width": 162.0,
+      "height": 24.0,
+      "confidence": 0.6260180473327637,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "2ff76479-d297-4e32-ad23-49e8177d5165"
+    },
+    {
+      "x": 430.5,
+      "y": 499.5,
+      "width": 133.0,
+      "height": 29.0,
+      "confidence": 0.6230928301811218,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "0c4f899c-aac8-4d5f-98f6-987e5a77329f"
+    },
+    {
+      "x": 258.0,
+      "y": 373.5,
+      "width": 208.0,
+      "height": 23.0,
+      "confidence": 0.6220489144325256,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "b387470b-ee8e-43b0-a80b-0f9444e92f8e"
+    },
+    {
+      "x": 495.5,
+      "y": 309.5,
+      "width": 211.0,
+      "height": 25.0,
+      "confidence": 0.5995258688926697,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "6dfc2804-efe1-466a-a54d-c56dd29e1be6"
+    },
+    {
+      "x": 261.0,
+      "y": 406.5,
+      "width": 198.0,
+      "height": 23.0,
+      "confidence": 0.5149800181388855,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "43cebd6f-a72d-4312-8403-46584e22789e"
+    },
+    {
+      "x": 517.5,
+      "y": 141.5,
+      "width": 239.0,
+      "height": 79.0,
+      "confidence": 0.47180846333503723,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "a99ce69e-7e89-4b87-bee9-06e2b9658428"
+    },
+    {
+      "x": 465.0,
+      "y": 389.0,
+      "width": 176.0,
+      "height": 22.0,
+      "confidence": 0.452761709690094,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "f1a7f02b-3070-40c2-8955-2a863d0641ae"
+    },
+    {
+      "x": 264.0,
+      "y": 441.0,
+      "width": 178.0,
+      "height": 22.0,
+      "confidence": 0.44714516401290894,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "8b0776ed-68f9-4886-bf4b-bc562353a5f2"
+    },
+    {
+      "x": 236.0,
+      "y": 132.0,
+      "width": 272.0,
+      "height": 110.0,
+      "confidence": 0.4255419373512268,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "8eff7f1b-cc2c-4ce2-a1fb-f52aa63038b1"
+    }
+  ]
+}

@@ -137,13 +137,11 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          switch (_phase) {
-            _FlowPhase.capture => 'Guided capture',
-            _FlowPhase.processing => 'Verifying count',
-            _FlowPhase.result => 'Scan result',
-          },
-        ),
+        title: Text(switch (_phase) {
+          _FlowPhase.capture => 'Guided capture',
+          _FlowPhase.processing => 'Verifying count',
+          _FlowPhase.result => 'Scan result',
+        }),
         leading: IconButton(
           onPressed: () {
             _client?.cancel();
@@ -204,11 +202,17 @@ class _ProcessingPane extends StatelessWidget {
             children: [
               const Icon(Icons.cloud_off_outlined, size: 64),
               const SizedBox(height: 18),
-              Text('Scan could not be processed', style: Theme.of(context).textTheme.headlineSmall),
+              Text(
+                'Scan could not be processed',
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
               const SizedBox(height: 10),
               Text(error!, textAlign: TextAlign.center),
               const SizedBox(height: 24),
-              FilledButton(onPressed: onRetry, child: const Text('RETRY SAME SCAN')),
+              FilledButton(
+                onPressed: onRetry,
+                child: const Text('RETRY SAME SCAN'),
+              ),
               TextButton(onPressed: onCancel, child: const Text('CANCEL')),
             ],
           ),
@@ -231,13 +235,17 @@ class _ProcessingPane extends StatelessWidget {
             ),
             const SizedBox(height: 28),
             Text(
-              uploaded ? 'Analyzing three views...' : 'Uploading original photos...',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
+              uploaded
+                  ? 'Analyzing three views...'
+                  : 'Uploading original photos...',
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
             ),
             const SizedBox(height: 10),
             Text(
               uploaded
-                  ? 'Finding stack faces, counting layers, and cross-checking agreement.'
+                  ? 'Detecting individual trays and comparing matching cell IDs.'
                   : '${((progress ?? 0) * 100).round()}% uploaded',
               textAlign: TextAlign.center,
             ),
@@ -269,35 +277,55 @@ class _ResultPane extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(20, 22, 20, 32),
       children: [
         Icon(
-          result.accepted ? Icons.verified_outlined : Icons.warning_amber_rounded,
+          result.accepted
+              ? Icons.verified_outlined
+              : Icons.warning_amber_rounded,
           size: 76,
-          color: result.accepted ? const Color(0xFF63E6A5) : const Color(0xFFFFB86B),
+          color: result.accepted
+              ? const Color(0xFF63E6A5)
+              : const Color(0xFFFFB86B),
         ),
         const SizedBox(height: 12),
         Text(
           result.accepted ? 'VERIFIED' : 'COUNT NOT VERIFIED',
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w900),
+          style: Theme.of(
+            context,
+          ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w900),
         ),
         const SizedBox(height: 22),
         if (result.accepted) ...[
-          _MetricRow(label: 'Physical stacks', value: '${result.physicalStackCount}'),
+          _MetricRow(label: 'Verified cells', value: '${result.stacks.length}'),
+          _MetricRow(
+            label: 'Cell IDs',
+            value: result.stacks.map((cell) => cell.id).join(', '),
+          ),
           _MetricRow(label: 'Total trays', value: '${result.totalTrays}'),
           _MetricRow(label: 'Eggs / tray', value: '${result.eggsPerTray}'),
           const Divider(height: 30),
-          Text('TOTAL EGGS', textAlign: TextAlign.center, style: Theme.of(context).textTheme.labelLarge),
+          Text(
+            'TOTAL EGGS',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
           Text(
             '${result.totalEggs}',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.displayMedium?.copyWith(fontWeight: FontWeight.w900),
+            style: Theme.of(
+              context,
+            ).textTheme.displayMedium?.copyWith(fontWeight: FontWeight.w900),
           ),
         ] else ...[
-          Text(result.rescanReason ?? 'The views did not provide enough agreement.', textAlign: TextAlign.center),
+          Text(
+            result.rescanReason ??
+                'The views did not provide enough agreement.',
+            textAlign: TextAlign.center,
+          ),
           const SizedBox(height: 18),
           ...result.views.entries.map(
             (entry) => _MetricRow(
               label: entry.key.toUpperCase(),
-              value: entry.value.accepted ? 'OK' : 'RETAKE',
+              value: entry.value.accepted ? 'CELL AGREES' : 'RECOUNT CELL',
             ),
           ),
           if (result.stacks.isNotEmpty) ...[
@@ -309,7 +337,10 @@ class _ResultPane extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(stack.id, style: const TextStyle(fontWeight: FontWeight.w800)),
+                      Text(
+                        stack.id,
+                        style: const TextStyle(fontWeight: FontWeight.w800),
+                      ),
                       const SizedBox(height: 6),
                       Text(
                         "Left ${stack.counts['left'] ?? '-'}  |  "
@@ -332,7 +363,10 @@ class _ResultPane extends StatelessWidget {
             child: Column(
               children: [
                 _MetricRow(label: 'Model', value: result.modelVersion),
-                _MetricRow(label: 'Processing', value: '${result.latencyMs} ms'),
+                _MetricRow(
+                  label: 'Processing',
+                  value: '${result.latencyMs} ms',
+                ),
               ],
             ),
           ),
@@ -340,11 +374,36 @@ class _ResultPane extends StatelessWidget {
         const SizedBox(height: 24),
         if (result.accepted)
           FilledButton(onPressed: onNewScan, child: const Text('NEW SCAN'))
-        else
+        else ...[
+          FilledButton.tonal(
+            onPressed: () => showDialog<void>(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: const Text('Manual recount'),
+                content: const Text(
+                  'Count the physical trays in each listed cell separately and record the cell ID and count in your inventory log. Do not sum overlapping views or treat these predictions as verified. To retry automation, start a new scan of one entire cell from all three angles.',
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('UNDERSTOOD'),
+                  ),
+                ],
+              ),
+            ),
+            child: const Text('MANUAL RECOUNT'),
+          ),
+          TextButton(
+            onPressed: onNewScan,
+            child: const Text('NEW SAME-CELL SCAN'),
+          ),
           FilledButton(
             onPressed: onRetake,
-            child: Text('RETAKE ${(result.recommendedView ?? 'photo').toUpperCase()}'),
+            child: Text(
+              'RETAKE ${(result.recommendedView ?? 'photo').toUpperCase()}',
+            ),
           ),
+        ],
         TextButton(onPressed: onDone, child: const Text('DONE')),
       ],
     );

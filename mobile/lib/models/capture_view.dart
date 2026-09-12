@@ -11,10 +11,10 @@ extension CaptureViewLabel on CaptureView {
 
   String get instruction => switch (this) {
     CaptureView.left =>
-      'Move approximately 25-35 degrees to the LEFT. Keep all stacks inside the guide.',
+      'Move approximately 25-35 degrees LEFT of the same painted cell. Exclude neighboring cells.',
     CaptureView.right =>
-      'Move approximately 25-35 degrees to the RIGHT. Keep all stacks inside the guide.',
+      'Move approximately 25-35 degrees RIGHT of the same painted cell. Exclude neighboring cells.',
     CaptureView.straight =>
-      'Stand directly in front. Keep the entire scene, stack tops, and stack bottoms visible.',
+      'Stand in front of the same painted cell. Keep all its tray tops and bottoms visible.',
   };
 }

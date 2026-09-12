@@ -14,4 +14,9 @@ class SettingsStore {
     final normalized = value.trim().replaceFirst(RegExp(r'/$'), '');
     await _preferences.setString(_baseUrlKey, normalized);
   }
+
+  // ponytail: small local pilot log; use SQLite before production inventory use.
+  Future<String?> getHeightPilot() => _preferences.getString('height_pilot_v1');
+  Future<void> setHeightPilot(String json) =>
+      _preferences.setString('height_pilot_v1', json);
 }

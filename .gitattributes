@@ -1,2 +1,4 @@
 /egg-tray-counter-debug.apk filter=lfs diff=lfs merge=lfs -text
 /egg-tray-counter-0.1.1-release.apk filter=lfs diff=lfs merge=lfs -text
+/egg-tray-counter-0.2.0-grid-pilot.apk filter=lfs diff=lfs merge=lfs -text
+/egg-tray-counter-0.2.1-grid-pilot.apk filter=lfs diff=lfs merge=lfs -text

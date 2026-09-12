@@ -1,6 +1,19 @@
 # Egg Tray Counter V2
 
-## Latest checkpoint — 2026-09-07
+## Latest checkpoint — 2026-09-12 (APK 0.2.1 / Build 4)
+
+**APK 0.2.1 is built, signature-verified, and emulator-tested:** `egg-tray-counter-0.2.1-grid-pilot.apk` (59.6 MB).
+- **Startup Crash Fix:** Camera enumeration was moved out of application initialization into photo-mode preflight. This resolves the native CameraX crash encountered in 0.2.0 and ensures reliable cold boot.
+- **Verification Completed:** Passed all 14 Flutter unit & contract tests, along with 3 consecutive cold-boot launches on the Android emulator (`reports/apk-runtime-20260912/startup-check.log`).
+- **Offline Grid + Height Pilot:** Fully functional offline manual measurement and recount workflow using painted floor cells and calibrated ruler heights. See the [Grid + Height setup guide](docs/grid-height-pilot.md).
+- **Codex Context & Handover:** Complete architecture handover, AI continuation prompt, and master specifications are preserved in [`docs/codex-context/`](docs/codex-context/CODEX_HANDOVER.md).
+- **Backend Contract:** The updated Cloudflare Worker implements `scan_contract: cell_identity_v1` and multi-cell fusion (`cloudflare-worker/src/index.ts`). Deploy with `npx wrangler deploy` to enable live photo mode.
+
+## Historical checkpoint — 2026-09-11 (APK 0.2.0 / Build 3)
+
+**Local APK 0.2.0 (build 3):** `egg-tray-counter-0.2.0-grid-pilot.apk`. Introduced the offline measurement-assisted Grid + Height Pilot and floor-cell illustration. See [APK 0.2.0 verification evidence](reports/grid-height-pilot-build-20260911.md).
+
+## Historical checkpoint — 2026-09-07
 
 [Download APK 0.1.1 from GitHub Releases](https://github.com/RAHUL-DevelopeRR/egg-tray-counter-mobile/releases/tag/v0.1.1) — sign in to an account with repository access, then open **Assets** and select `egg-tray-counter-0.1.1-release.apk`. The repository is private; unauthenticated media URLs return 404. Release-mode build, debug signed.
 

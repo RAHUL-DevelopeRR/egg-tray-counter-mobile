@@ -1,0 +1,27 @@
+Starting: Intent { cmp=com.dharani.eggtray.egg_tray_counter/.MainActivity }
+Status: ok
+LaunchState: COLD
+Activity: com.dharani.eggtray.egg_tray_counter/.MainActivity
+TotalTime: 7599
+WaitTime: 7647
+Complete
+UI hierchary dumped to: /sdcard/egg-pilot-startup.xml
+PASS: home ready, process 7901 alive, launch 1/3
+Starting: Intent { cmp=com.dharani.eggtray.egg_tray_counter/.MainActivity }
+Status: ok
+LaunchState: COLD
+Activity: com.dharani.eggtray.egg_tray_counter/.MainActivity
+TotalTime: 6086
+WaitTime: 6134
+Complete
+UI hierchary dumped to: /sdcard/egg-pilot-startup.xml
+PASS: home ready, process 7976 alive, launch 2/3
+Starting: Intent { cmp=com.dharani.eggtray.egg_tray_counter/.MainActivity }
+Status: ok
+LaunchState: COLD
+Activity: com.dharani.eggtray.egg_tray_counter/.MainActivity
+TotalTime: 6494
+WaitTime: 6580
+Complete
+UI hierchary dumped to: /sdcard/egg-pilot-startup.xml
+PASS: home ready, process 8048 alive, launch 3/3

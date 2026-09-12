@@ -1,4 +1,3 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 import '../features/home/home_screen.dart';
@@ -7,13 +6,11 @@ import '../services/settings_store.dart';
 
 class EggCounterApp extends StatelessWidget {
   const EggCounterApp({
-    required this.cameras,
     required this.settings,
     required this.history,
     super.key,
   });
 
-  final List<CameraDescription> cameras;
   final SettingsStore settings;
   final HistoryDatabase history;
 
@@ -50,12 +47,7 @@ class EggCounterApp extends StatelessWidget {
           ),
         ),
       ),
-      home: HomeScreen(
-        cameras: cameras,
-        settings: settings,
-        history: history,
-      ),
+      home: HomeScreen(settings: settings, history: history),
     );
   }
 }
-

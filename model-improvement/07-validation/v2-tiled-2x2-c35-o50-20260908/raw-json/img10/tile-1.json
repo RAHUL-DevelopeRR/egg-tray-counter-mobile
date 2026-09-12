@@ -1,0 +1,49 @@
+{
+  "sha256": "404b49a32842695714eab49a3efae3d381ed426fdf8a07e63c5718086e200a1c",
+  "crop": [
+    284,
+    0,
+    640,
+    356
+  ],
+  "response": {
+    "inference_id": "8aef20a7-8736-4243-ab12-12017851d623",
+    "time": 0.029564682859927416,
+    "image": {
+      "width": 356,
+      "height": 356
+    },
+    "predictions": [
+      {
+        "x": 136.5,
+        "y": 339.0,
+        "width": 273.0,
+        "height": 34.0,
+        "confidence": 0.6513549089431763,
+        "class": "egg_tray",
+        "class_id": 0,
+        "detection_id": "25e170c7-30cc-4886-8460-cde2cd6eba58"
+      },
+      {
+        "x": 176.0,
+        "y": 338.0,
+        "width": 352.0,
+        "height": 36.0,
+        "confidence": 0.5078118443489075,
+        "class": "egg_tray",
+        "class_id": 0,
+        "detection_id": "c9ac70a6-659a-44aa-9d6f-62633067386a"
+      },
+      {
+        "x": 159.5,
+        "y": 339.5,
+        "width": 319.0,
+        "height": 33.0,
+        "confidence": 0.4445647597312927,
+        "class": "egg_tray",
+        "class_id": 0,
+        "detection_id": "be8e6eed-51ec-41be-93a9-906edc0307a3"
+      }
+    ]
+  }
+}

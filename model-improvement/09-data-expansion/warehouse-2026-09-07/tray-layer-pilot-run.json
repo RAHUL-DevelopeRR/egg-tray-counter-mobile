@@ -1,0 +1,1608 @@
+{
+  "status": "completed_do_not_deploy",
+  "status_evidence": "Training finished September 7 at 21:56 IST. September 8 unchanged 35/50 benchmark: 1/10 exact and MAE 21.4; strict gate failed. Historical API snapshots below preserve submission-time status.",
+  "date": "2026-09-07",
+  "project": "rahuls-workspace-l9ylz/projec-mutta",
+  "project_public_verified": true,
+  "new_images_uploaded": 3,
+  "new_version_created": true,
+  "version_number": 4,
+  "training_requested": true,
+  "checkpoint_validation_error": "Bare model slug rejected before training. Read-only GET of V3 confirms the prior successful checkpoint is rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1; use that exact workspace-qualified identifier.",
+  "training_preflight": "First call triggered COCO export without starting training. Export subsequently reports ready=true/progress=1 and trainings_list confirms no jobs; retry authorized.",
+  "deploy": false,
+  "prepared_images": 3,
+  "prepared_tray_boxes": 47,
+  "planned_splits": {
+    "train": 54,
+    "valid": 16,
+    "test": 5
+  },
+  "blocker": null,
+  "public_upload_approved": "User explicitly approved public projec-mutta upload on 2026-09-07 after disclosure; labels subsequently approved and saved.",
+  "local_review": "Codex manually drew and visually checked all 47 numbered boxes; not human-certified physical inventory.",
+  "limitations": "Three green-stack crops are an incremental pilot, not completed annotation of the whole 74-unique-image folder. Historical V3 subset and golden benchmark retain their previously documented limitations.",
+  "upload_task_id": "zj9a3OyCpEGAK8Y36Ugj",
+  "upload_status": {
+    "status": "completed",
+    "progress": {
+      "total": 3,
+      "current": 3
+    },
+    "result": {
+      "uploaded": 3,
+      "duplicates": 0,
+      "annotated": 0,
+      "uploadErrors": [],
+      "annotationErrors": [],
+      "warnings": [],
+      "chunkCount": 1,
+      "failedChunks": 0
+    }
+  },
+  "annotations": {
+    "4KT1eZ01Xcjg0CMSDOSE": {
+      "name": "warehouse-layer-pilot-20260907-wh069.jpg",
+      "visible_trays": 20,
+      "response": {
+        "status": "completed",
+        "image_id": "4KT1eZ01Xcjg0CMSDOSE",
+        "annotation_name": "warehouse-layer-pilot-20260907-wh069.txt",
+        "added_to_dataset": true
+      }
+    },
+    "YtkbKhkjlTCzJbfLxzOj": {
+      "name": "warehouse-layer-pilot-20260907-wh025.jpg",
+      "visible_trays": 20,
+      "response": {
+        "status": "completed",
+        "image_id": "YtkbKhkjlTCzJbfLxzOj",
+        "annotation_name": "warehouse-layer-pilot-20260907-wh025.txt",
+        "added_to_dataset": true
+      }
+    },
+    "ntQFBL9qMf6AntNAYM7D": {
+      "name": "warehouse-layer-pilot-20260907-wh009.jpg",
+      "visible_trays": 7,
+      "response": {
+        "status": "completed",
+        "image_id": "ntQFBL9qMf6AntNAYM7D",
+        "annotation_name": "warehouse-layer-pilot-20260907-wh009.txt",
+        "added_to_dataset": true
+      }
+    }
+  },
+  "base_images": [
+    {
+      "id": "chdGqlz9uw946IsOTyDe",
+      "name": "e0f00e2e506f411a0b91.jpg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "oeUDkoa1IcRwrMy3hqja",
+      "name": "4cd1abed9a60a4c45bac.jpg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "AGOt0gPgomcrk0jiaGGO",
+      "name": "74c1c55c022a4b7dd1f6.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "gO0z2rbJrI8gExNAtZTG",
+      "name": "9590ceca8ca176d0d246.jpg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "crHH5WyyuVWft7iCGx17",
+      "name": "d328c4489632a61b2071.jpg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "nsQo4o6sabgpRiaxHvex",
+      "name": "36dccd6307a7fbd801d3.jpg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "iuzGTuEiIZLHV82hLiCZ",
+      "name": "WhatsApp Image 2026-07-03 at 12-00-27 PM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "2S2kHZ9MhqPaxfwsoIEH",
+      "name": "WhatsApp Image 2026-07-03 at 12-01-08 PM (1).jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "J7gz1XKeebpo2jpVMfJ0",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-23 AM (2).jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "7qEuxvfHfV85MBtYfIuk",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-08 AM (2).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "6iitOhsLNueTKToKyqIC",
+      "name": "a0bab6bc320585fa213a.jpg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "bpXERtkdGu0LpvCNwBb4",
+      "name": "WhatsApp Image 2026-07-03 at 12-00-52 PM (1).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "A3QBTnHcSsEj2UTvjdV0",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-00 AM (1).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "bKU2V71JN2gPHSaXYfCx",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-35 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "Hq0VVsSkMpsBYwVB28zw",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-47 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "nFYabdYwQQ6UmGErYAF3",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-23 AM.jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "LzNijXJ8petaUtvgv5fV",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-31 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "xDqwQEWYL5BQb2Cmsoq5",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-22 AM (1).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "nNX2X3n1tJ9eldhR0lDs",
+      "name": "WhatsApp Image 2026-07-03 at 12-00-34 PM (2).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "mwvCCajcg6pW4P5g2SXE",
+      "name": "WhatsApp Image 2026-07-03 at 12-02-55 PM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "KCJZzPDrafDfPRAWM3Vn",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-17 AM (2).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "WvtmBpEL6Kukfo8tCOTK",
+      "name": "6230e5bfdf3c5cd5e6ec.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "T7rfMOJP5yzSvedwcEC8",
+      "name": "WhatsApp Image 2026-07-03 at 12-01-13 PM (1).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "CMSWU63UDoUVwFstBJuk",
+      "name": "f32b812dd65d0c12b803.jpg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "2Xwoyw2oZi90OQefQgkF",
+      "name": "dd102925d9227b62b3cb.jpg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "0ve3VEU0PSzyjMkDEE0K",
+      "name": "WhatsApp Image 2026-07-03 at 11-59-00 AM (3).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "6o13y8js2ib70RY9M9gw",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-32 AM (1).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "4CFh1fhZ5J9jsaYV4xgG",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-00 AM (2).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "aU4G28UhHPrOZT3JWisZ",
+      "name": "a3d560ec5fa32afe89ac.jpg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "6Qz9hyAmwwi8QkdxKHGV",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-17 AM.jpeg",
+      "split": "test",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "nSLryPUQfmEAo5JaNd0T",
+      "name": "WhatsApp Image 2026-07-03 at 11-56-54 AM.jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "vcZgoGkxP8SxjW4zgzbk",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-41 AM (1).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "kOBz2wJl4cVM8ZAXRjtk",
+      "name": "WhatsApp Image 2026-07-03 at 11-59-01 AM (2).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "s9qV6rlO5M0UPUsJ1tuP",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-21 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "WVMCUJnhYsx3y63NOqc8",
+      "name": "98d66ec21cca75d245dd.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "3XfYhg1AxD6EJP1mZNH4",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-20 AM (2).jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "Umk52WTlWRdWuwI7HHNK",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-54 AM (1).jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "PeaR9ILYZeI9XgRJallC",
+      "name": "609a1fa6603c84fd608f.jpg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "9oel7ACbfc9HDHqv9RiB",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-26 AM.jpeg",
+      "split": "test",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "4TFbe0joAruSTSk7No8p",
+      "name": "WhatsApp Image 2026-07-03 at 12-00-52 PM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "Reuic5jXaYDbeQDbrvFK",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-45 AM (1).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "yAWQAkFoxJHFmgLtiSxX",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-52 AM (1).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "USwvUbT1XwUekOrxZLzg",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-09 AM (1).jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "UOhIRrVWowRnzsJ7D3P6",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-58 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "aGUrfYuOxvxNhKbFnoOq",
+      "name": "WhatsApp Image 2026-07-03 at 12-00-54 PM.jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "cAbocHTjPJdWMDP8T6ak",
+      "name": "WhatsApp Image 2026-07-03 at 12-01-08 PM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "IUnm4wLnAz1U8EwKE43n",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-37 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "8cNN72KRGn2OeQnjsdph",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-27 AM.jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "AW2oDr6hSQLIaAu4AOTq",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-37 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "IPCzR28aaPDfapHtoYxU",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-20 AM.jpeg",
+      "split": "test",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "Iyx5olvXsTLlDGtEjnOo",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-00 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "HGKmB21achPYpF817OMe",
+      "name": "WhatsApp Image 2026-07-03 at 11-56-55 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "S2H3DxrWp6py2R1N0UAP",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-01 AM (1).jpeg",
+      "split": "test",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "N7RfhbHnUV1vNWZWv3BQ",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-18 AM (1).jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "AtBrQS9bbAR4TnQncsH9",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-30 AM.jpeg",
+      "split": "test",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "dAr3k1xCQGaMadLkjq09",
+      "name": "32766c4e23b881d53bb7.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "vQBYRskmAjMoiQBwBVST",
+      "name": "3b3ed50fdc6b4236e467.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "bFwjqFHACpaCWGOeI20R",
+      "name": "c1e45bba99bea2933155.jpg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "cwVleoQCrBpKtdJzZxjA",
+      "name": "806329c29d3aee5d41eb.jpg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "53vez9Cq6ky8sVo3xrIA",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-23 AM (1).jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "u20ZbAwMLDd241mwDV35",
+      "name": "WhatsApp Image 2026-07-03 at 12-01-13 PM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "IisBeOGHqAI5HsTRn8dY",
+      "name": "WhatsApp Image 2026-07-03 at 12-00-40 PM (2).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "T7N7rIuIg5CILG9EQNES",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-38 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "esaRQoR3qwp4pIv7O9ha",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-28 AM (1).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "DLYsOyhbInF4JoQ73F1f",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-39 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "AuI5nBqTG9rkEktcjlgr",
+      "name": "e145a7c762d70711c7be.jpg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "G9wChivhf6b7XEnA0zfT",
+      "name": "WhatsApp Image 2026-07-03 at 12-01-09 PM (1).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "phtvEOM7adlE7WtQxZRT",
+      "name": "WhatsApp Image 2026-07-03 at 12-01-15 PM (1).jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "XqZJhdHO8ylAOaU4YSZD",
+      "name": "140927627abaed6bc683.jpg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "rrwMiZQp3KRZNZOxID9A",
+      "name": "WhatsApp Image 2026-07-03 at 12-00-51 PM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "8IAyUmQv5XRcQ5fKxQVi",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-50 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    },
+    {
+      "id": "6Hul10ho4joc8Q4EyNaY",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-59 AM (3).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72"
+      ]
+    }
+  ],
+  "base_tagged_ids": [
+    "chdGqlz9uw946IsOTyDe",
+    "oeUDkoa1IcRwrMy3hqja",
+    "AGOt0gPgomcrk0jiaGGO",
+    "gO0z2rbJrI8gExNAtZTG",
+    "crHH5WyyuVWft7iCGx17",
+    "nsQo4o6sabgpRiaxHvex",
+    "iuzGTuEiIZLHV82hLiCZ",
+    "2S2kHZ9MhqPaxfwsoIEH",
+    "J7gz1XKeebpo2jpVMfJ0",
+    "7qEuxvfHfV85MBtYfIuk",
+    "6iitOhsLNueTKToKyqIC",
+    "bpXERtkdGu0LpvCNwBb4",
+    "A3QBTnHcSsEj2UTvjdV0",
+    "bKU2V71JN2gPHSaXYfCx",
+    "Hq0VVsSkMpsBYwVB28zw",
+    "nFYabdYwQQ6UmGErYAF3",
+    "LzNijXJ8petaUtvgv5fV",
+    "xDqwQEWYL5BQb2Cmsoq5",
+    "nNX2X3n1tJ9eldhR0lDs",
+    "mwvCCajcg6pW4P5g2SXE",
+    "KCJZzPDrafDfPRAWM3Vn",
+    "WvtmBpEL6Kukfo8tCOTK",
+    "T7rfMOJP5yzSvedwcEC8",
+    "CMSWU63UDoUVwFstBJuk",
+    "2Xwoyw2oZi90OQefQgkF",
+    "0ve3VEU0PSzyjMkDEE0K",
+    "6o13y8js2ib70RY9M9gw",
+    "4CFh1fhZ5J9jsaYV4xgG",
+    "aU4G28UhHPrOZT3JWisZ",
+    "6Qz9hyAmwwi8QkdxKHGV",
+    "nSLryPUQfmEAo5JaNd0T",
+    "vcZgoGkxP8SxjW4zgzbk",
+    "kOBz2wJl4cVM8ZAXRjtk",
+    "s9qV6rlO5M0UPUsJ1tuP",
+    "WVMCUJnhYsx3y63NOqc8",
+    "3XfYhg1AxD6EJP1mZNH4",
+    "Umk52WTlWRdWuwI7HHNK",
+    "PeaR9ILYZeI9XgRJallC",
+    "9oel7ACbfc9HDHqv9RiB",
+    "4TFbe0joAruSTSk7No8p",
+    "Reuic5jXaYDbeQDbrvFK",
+    "yAWQAkFoxJHFmgLtiSxX",
+    "USwvUbT1XwUekOrxZLzg",
+    "UOhIRrVWowRnzsJ7D3P6",
+    "aGUrfYuOxvxNhKbFnoOq",
+    "cAbocHTjPJdWMDP8T6ak",
+    "IUnm4wLnAz1U8EwKE43n",
+    "8cNN72KRGn2OeQnjsdph",
+    "AW2oDr6hSQLIaAu4AOTq",
+    "IPCzR28aaPDfapHtoYxU",
+    "Iyx5olvXsTLlDGtEjnOo",
+    "HGKmB21achPYpF817OMe",
+    "S2H3DxrWp6py2R1N0UAP",
+    "N7RfhbHnUV1vNWZWv3BQ",
+    "AtBrQS9bbAR4TnQncsH9",
+    "dAr3k1xCQGaMadLkjq09",
+    "vQBYRskmAjMoiQBwBVST",
+    "bFwjqFHACpaCWGOeI20R",
+    "cwVleoQCrBpKtdJzZxjA",
+    "53vez9Cq6ky8sVo3xrIA",
+    "u20ZbAwMLDd241mwDV35",
+    "IisBeOGHqAI5HsTRn8dY",
+    "T7N7rIuIg5CILG9EQNES",
+    "esaRQoR3qwp4pIv7O9ha",
+    "DLYsOyhbInF4JoQ73F1f",
+    "AuI5nBqTG9rkEktcjlgr",
+    "G9wChivhf6b7XEnA0zfT",
+    "phtvEOM7adlE7WtQxZRT",
+    "XqZJhdHO8ylAOaU4YSZD",
+    "rrwMiZQp3KRZNZOxID9A",
+    "8IAyUmQv5XRcQ5fKxQVi",
+    "6Hul10ho4joc8Q4EyNaY"
+  ],
+  "members": [
+    {
+      "id": "WvtmBpEL6Kukfo8tCOTK",
+      "name": "6230e5bfdf3c5cd5e6ec.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "KCJZzPDrafDfPRAWM3Vn",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-17 AM (2).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "CMSWU63UDoUVwFstBJuk",
+      "name": "f32b812dd65d0c12b803.jpg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "T7rfMOJP5yzSvedwcEC8",
+      "name": "WhatsApp Image 2026-07-03 at 12-01-13 PM (1).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "2Xwoyw2oZi90OQefQgkF",
+      "name": "dd102925d9227b62b3cb.jpg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "0ve3VEU0PSzyjMkDEE0K",
+      "name": "WhatsApp Image 2026-07-03 at 11-59-00 AM (3).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "6o13y8js2ib70RY9M9gw",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-32 AM (1).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "aU4G28UhHPrOZT3JWisZ",
+      "name": "a3d560ec5fa32afe89ac.jpg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "6Qz9hyAmwwi8QkdxKHGV",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-17 AM.jpeg",
+      "split": "test",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "LzNijXJ8petaUtvgv5fV",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-31 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "mwvCCajcg6pW4P5g2SXE",
+      "name": "WhatsApp Image 2026-07-03 at 12-02-55 PM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "vcZgoGkxP8SxjW4zgzbk",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-41 AM (1).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "kOBz2wJl4cVM8ZAXRjtk",
+      "name": "WhatsApp Image 2026-07-03 at 11-59-01 AM (2).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "WVMCUJnhYsx3y63NOqc8",
+      "name": "98d66ec21cca75d245dd.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "s9qV6rlO5M0UPUsJ1tuP",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-21 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "Umk52WTlWRdWuwI7HHNK",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-54 AM (1).jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "nSLryPUQfmEAo5JaNd0T",
+      "name": "WhatsApp Image 2026-07-03 at 11-56-54 AM.jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "3XfYhg1AxD6EJP1mZNH4",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-20 AM (2).jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "PeaR9ILYZeI9XgRJallC",
+      "name": "609a1fa6603c84fd608f.jpg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "9oel7ACbfc9HDHqv9RiB",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-26 AM.jpeg",
+      "split": "test",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "4TFbe0joAruSTSk7No8p",
+      "name": "WhatsApp Image 2026-07-03 at 12-00-52 PM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "4CFh1fhZ5J9jsaYV4xgG",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-00 AM (2).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "Reuic5jXaYDbeQDbrvFK",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-45 AM (1).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "USwvUbT1XwUekOrxZLzg",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-09 AM (1).jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "yAWQAkFoxJHFmgLtiSxX",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-52 AM (1).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "UOhIRrVWowRnzsJ7D3P6",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-58 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "cAbocHTjPJdWMDP8T6ak",
+      "name": "WhatsApp Image 2026-07-03 at 12-01-08 PM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "IUnm4wLnAz1U8EwKE43n",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-37 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "8cNN72KRGn2OeQnjsdph",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-27 AM.jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "AW2oDr6hSQLIaAu4AOTq",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-37 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "Iyx5olvXsTLlDGtEjnOo",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-00 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "HGKmB21achPYpF817OMe",
+      "name": "WhatsApp Image 2026-07-03 at 11-56-55 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "YtkbKhkjlTCzJbfLxzOj",
+      "name": "warehouse-layer-pilot-20260907-wh025.jpg",
+      "split": "train",
+      "tags": [
+        "tray-layer-pilot-20260907",
+        "warehouse-layer-reviewed-20260907"
+      ]
+    },
+    {
+      "id": "ntQFBL9qMf6AntNAYM7D",
+      "name": "warehouse-layer-pilot-20260907-wh009.jpg",
+      "split": "train",
+      "tags": [
+        "tray-layer-pilot-20260907",
+        "warehouse-layer-reviewed-20260907"
+      ]
+    },
+    {
+      "id": "4KT1eZ01Xcjg0CMSDOSE",
+      "name": "warehouse-layer-pilot-20260907-wh069.jpg",
+      "split": "train",
+      "tags": [
+        "tray-layer-pilot-20260907",
+        "warehouse-layer-reviewed-20260907"
+      ]
+    },
+    {
+      "id": "S2H3DxrWp6py2R1N0UAP",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-01 AM (1).jpeg",
+      "split": "test",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "N7RfhbHnUV1vNWZWv3BQ",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-18 AM (1).jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "AtBrQS9bbAR4TnQncsH9",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-30 AM.jpeg",
+      "split": "test",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "dAr3k1xCQGaMadLkjq09",
+      "name": "32766c4e23b881d53bb7.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "vQBYRskmAjMoiQBwBVST",
+      "name": "3b3ed50fdc6b4236e467.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "bFwjqFHACpaCWGOeI20R",
+      "name": "c1e45bba99bea2933155.jpg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "cwVleoQCrBpKtdJzZxjA",
+      "name": "806329c29d3aee5d41eb.jpg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "u20ZbAwMLDd241mwDV35",
+      "name": "WhatsApp Image 2026-07-03 at 12-01-13 PM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "IisBeOGHqAI5HsTRn8dY",
+      "name": "WhatsApp Image 2026-07-03 at 12-00-40 PM (2).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "T7N7rIuIg5CILG9EQNES",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-38 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "esaRQoR3qwp4pIv7O9ha",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-28 AM (1).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "DLYsOyhbInF4JoQ73F1f",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-39 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "AuI5nBqTG9rkEktcjlgr",
+      "name": "e145a7c762d70711c7be.jpg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "IPCzR28aaPDfapHtoYxU",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-20 AM.jpeg",
+      "split": "test",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "G9wChivhf6b7XEnA0zfT",
+      "name": "WhatsApp Image 2026-07-03 at 12-01-09 PM (1).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "2S2kHZ9MhqPaxfwsoIEH",
+      "name": "WhatsApp Image 2026-07-03 at 12-01-08 PM (1).jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "6iitOhsLNueTKToKyqIC",
+      "name": "a0bab6bc320585fa213a.jpg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "7qEuxvfHfV85MBtYfIuk",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-08 AM (2).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "J7gz1XKeebpo2jpVMfJ0",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-23 AM (2).jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "bKU2V71JN2gPHSaXYfCx",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-35 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "A3QBTnHcSsEj2UTvjdV0",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-00 AM (1).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "Hq0VVsSkMpsBYwVB28zw",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-47 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "nFYabdYwQQ6UmGErYAF3",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-23 AM.jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "oeUDkoa1IcRwrMy3hqja",
+      "name": "4cd1abed9a60a4c45bac.jpg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "AGOt0gPgomcrk0jiaGGO",
+      "name": "74c1c55c022a4b7dd1f6.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "gO0z2rbJrI8gExNAtZTG",
+      "name": "9590ceca8ca176d0d246.jpg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "chdGqlz9uw946IsOTyDe",
+      "name": "e0f00e2e506f411a0b91.jpg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "nsQo4o6sabgpRiaxHvex",
+      "name": "36dccd6307a7fbd801d3.jpg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "crHH5WyyuVWft7iCGx17",
+      "name": "d328c4489632a61b2071.jpg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "iuzGTuEiIZLHV82hLiCZ",
+      "name": "WhatsApp Image 2026-07-03 at 12-00-27 PM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "nNX2X3n1tJ9eldhR0lDs",
+      "name": "WhatsApp Image 2026-07-03 at 12-00-34 PM (2).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "xDqwQEWYL5BQb2Cmsoq5",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-22 AM (1).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "bpXERtkdGu0LpvCNwBb4",
+      "name": "WhatsApp Image 2026-07-03 at 12-00-52 PM (1).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "aGUrfYuOxvxNhKbFnoOq",
+      "name": "WhatsApp Image 2026-07-03 at 12-00-54 PM.jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "XqZJhdHO8ylAOaU4YSZD",
+      "name": "140927627abaed6bc683.jpg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "rrwMiZQp3KRZNZOxID9A",
+      "name": "WhatsApp Image 2026-07-03 at 12-00-51 PM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "8IAyUmQv5XRcQ5fKxQVi",
+      "name": "WhatsApp Image 2026-07-03 at 11-57-50 AM.jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "phtvEOM7adlE7WtQxZRT",
+      "name": "WhatsApp Image 2026-07-03 at 12-01-15 PM (1).jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "6Hul10ho4joc8Q4EyNaY",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-59 AM (3).jpeg",
+      "split": "train",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    },
+    {
+      "id": "53vez9Cq6ky8sVo3xrIA",
+      "name": "WhatsApp Image 2026-07-03 at 11-58-23 AM (1).jpeg",
+      "split": "valid",
+      "tags": [
+        "clean-manual-auto-reconciled-v2",
+        "v3-policy-consistent-72",
+        "tray-layer-pilot-20260907"
+      ]
+    }
+  ],
+  "generation_validation_error": "Initial nested filter-tags form rejected. Confirmed project still has versions 1/2/3 only before retrying with API-required boolean tag map.",
+  "generation_requested": true,
+  "generation": {
+    "version_number": "4",
+    "id": "rahuls-workspace-l9ylz/projec-mutta/4",
+    "name": "2026-09-07 3:43pm",
+    "images": 390,
+    "splits": {}
+  },
+  "version_status": {
+    "id": "rahuls-workspace-l9ylz/projec-mutta/4",
+    "name": "2026-09-07 3:43pm",
+    "version": 4,
+    "images": 75,
+    "splits": {
+      "valid": 16,
+      "test": 5,
+      "train": 54
+    },
+    "generating": false,
+    "progress": 1,
+    "ready": true,
+    "created": "1788795785.569",
+    "preprocessing": {
+      "auto-orient": true,
+      "filter-tags": {
+        "tags": {
+          "tray-layer-pilot-20260907": {
+            "require": true
+          }
+        }
+      },
+      "resize": {
+        "width": 640,
+        "height": 640,
+        "format": "Fit within"
+      }
+    },
+    "trainings": []
+  },
+  "trainings": {
+    "result": [
+      {
+        "trainingId": "518b30dcad42a78a5d33",
+        "status": "running",
+        "createdAt": "2026-09-07T15:50:29.265000Z",
+        "modelType": "rfdetr-medium",
+        "modelGroup": null,
+        "modelIds": []
+      }
+    ]
+  },
+  "training": {
+    "trainingId": "518b30dcad42a78a5d33",
+    "status": "running",
+    "project_id": "projec-mutta",
+    "version": 4,
+    "url": "https://app.roboflow.com/rahuls-workspace-l9ylz/projec-mutta/4",
+    "message": "Training has been created. Monitor progress with trainings_get(project_id, version_number, training_id) or at the URL above. Training can take minutes to hours depending on dataset size and model type."
+  }
+}

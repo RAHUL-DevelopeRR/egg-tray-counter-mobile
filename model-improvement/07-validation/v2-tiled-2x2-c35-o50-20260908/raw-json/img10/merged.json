@@ -1,0 +1,45 @@
+{
+  "predictions": [
+    {
+      "x": 362.0,
+      "y": 425.5,
+      "width": 372.0,
+      "height": 203.0,
+      "confidence": 0.9817357659339905,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "da5c370a-3efe-40b3-b793-d6f4143dd0be"
+    },
+    {
+      "x": 265.5,
+      "y": 420.5,
+      "width": 181.0,
+      "height": 195.0,
+      "confidence": 0.9755768775939941,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "4666710a-56c3-498f-a0a5-fce65e9a067d"
+    },
+    {
+      "x": 284.5,
+      "y": 338.5,
+      "width": 143.0,
+      "height": 35.0,
+      "confidence": 0.8494724035263062,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "f9a56c6a-8175-4e20-9f13-fb9daedd2d08"
+    },
+    {
+      "x": 420.5,
+      "y": 339.0,
+      "width": 273.0,
+      "height": 34.0,
+      "confidence": 0.6513549089431763,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "25e170c7-30cc-4886-8460-cde2cd6eba58"
+    }
+  ],
+  "before_merge": 7
+}

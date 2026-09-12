@@ -1,6 +1,6 @@
 # Warehouse intake checkpoint — 2026-09-07
 
-**DO NOT DEPLOY. No new training run or frozen version has been created.**
+**Latest update (2026-09-08): V4 Medium completed; DO NOT DEPLOY.** Unchanged ten-file benchmark: **1/10 exact, MAE 21.4**, failing the strict gate versus V2 (2/10, 22.9). Warehouse spot check: V4 0/2 exact, MAE 2.0 versus V2 0/2, MAE 1.5. See [benchmark evidence](../../07-validation/rfdetr-medium-v4-c35-o50/README.md). The stack-face checkpoint below records the earlier investigation, not the status of this tray-layer run.
 
 ## Completed
 

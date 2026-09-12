@@ -1,0 +1,47 @@
+[
+  {
+    "id": "wh009",
+    "source_sha256": "509b3b6f01e2a6dfef2400582abe7c185f47b3085e45b3c790f09dd07da10b3c",
+    "crop": [
+      532,
+      178,
+      1080,
+      867
+    ],
+    "derived_filename": "warehouse-layer-pilot-20260907-wh009.jpg",
+    "derived_sha256": "3d665f8ec12f46dd693556029eb4a7dd40ac6a7954a5eece4b74254e54db72b9",
+    "visible_layers": 7,
+    "split": "train",
+    "scene_group": "warehouse-green-20260907"
+  },
+  {
+    "id": "wh025",
+    "source_sha256": "a7b9af0cbbd5a5f86846051869ec7806ee29d3e4efabef1e68588633433abda0",
+    "crop": [
+      387,
+      57,
+      806,
+      1252
+    ],
+    "derived_filename": "warehouse-layer-pilot-20260907-wh025.jpg",
+    "derived_sha256": "9b64dfe2f9a8045363c4bcc9b3aff2e1d4a6d6628cdcda61c722c2e61e132a6f",
+    "visible_layers": 20,
+    "split": "train",
+    "scene_group": "warehouse-green-20260907"
+  },
+  {
+    "id": "wh069",
+    "source_sha256": "054d9210f3e95fc0cf26d9f19fe805fb548323ffdeb0c6ca189d58606f97f925",
+    "crop": [
+      211,
+      329,
+      640,
+      1520
+    ],
+    "derived_filename": "warehouse-layer-pilot-20260907-wh069.jpg",
+    "derived_sha256": "863053410a89a07ccb1ceae6d7af224c5ebb366e077780b23cbfbb38e50ccfa1",
+    "visible_layers": 20,
+    "split": "train",
+    "scene_group": "warehouse-green-20260907"
+  }
+]

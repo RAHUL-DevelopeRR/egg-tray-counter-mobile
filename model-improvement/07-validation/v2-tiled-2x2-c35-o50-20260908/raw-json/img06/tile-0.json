@@ -1,0 +1,59 @@
+{
+  "sha256": "7eadef2b33c998787ef5bdc8d048efdefd1b12061db4a4f18f40e6de8a29cbf9",
+  "crop": [
+    0,
+    0,
+    667,
+    889
+  ],
+  "response": {
+    "inference_id": "e7ef06db-459e-4eef-a61e-f22b814d9a7d",
+    "time": 0.03428185707889497,
+    "image": {
+      "width": 667,
+      "height": 889
+    },
+    "predictions": [
+      {
+        "x": 437.5,
+        "y": 503.5,
+        "width": 455.0,
+        "height": 331.0,
+        "confidence": 0.896975576877594,
+        "class": "egg_tray",
+        "class_id": 0,
+        "detection_id": "c26942ef-ceee-4a0f-a527-7068fafd76c2"
+      },
+      {
+        "x": 300.5,
+        "y": 269.0,
+        "width": 591.0,
+        "height": 260.0,
+        "confidence": 0.8164063692092896,
+        "class": "egg_tray",
+        "class_id": 0,
+        "detection_id": "32bb7d90-83ee-4cf2-a6e0-e13f3bd801d1"
+      },
+      {
+        "x": 333.5,
+        "y": 601.0,
+        "width": 667.0,
+        "height": 570.0,
+        "confidence": 0.5048826336860657,
+        "class": "egg_tray",
+        "class_id": 0,
+        "detection_id": "ea9282a1-c8dd-4e77-bbc4-05c0d912673e"
+      },
+      {
+        "x": 291.5,
+        "y": 251.0,
+        "width": 583.0,
+        "height": 270.0,
+        "confidence": 0.4649015963077545,
+        "class": "egg_tray",
+        "class_id": 0,
+        "detection_id": "487d1785-6fec-4a2a-b623-37bc7c147294"
+      }
+    ]
+  }
+}

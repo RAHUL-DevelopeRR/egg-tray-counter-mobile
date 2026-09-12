@@ -1,0 +1,25 @@
+{
+  "annotation_unit": "individual_egg_filled_tray_layer",
+  "class": "egg_tray",
+  "scope_confirmed_by_user": "2026-09-08: Count only egg-filled trays",
+  "status": "in_progress_not_training_ready",
+  "reviewer": "Codex visual annotation; not human-certified physical inventory",
+  "images": [
+    {
+      "id": "wh011",
+      "status": "draft_perspective_bounds_corrected_needs_human_review",
+      "visible_annotation_count": 7,
+      "physical_inventory_ground_truth": null,
+      "notes": "Entire original frame. One seven-layer egg-filled foreground stack. Tightly nested empty background stacks are non-targets. Same green-room scene as prior training crops; never acceptance data.",
+      "boxes": [[122,147,919,379],[141,350,895,530],[153,479,864,670],[163,594,837,784],[174,696,810,890],[184,787,785,986],[199,876,761,1067]]
+    },
+    {
+      "id": "wh012",
+      "status": "draft_perspective_bounds_corrected_needs_human_review",
+      "visible_annotation_count": 7,
+      "physical_inventory_ground_truth": null,
+      "notes": "Entire original frame. Seven egg-filled foreground layers; nested empty background excluded. Same scene as wh011 and prior crops; not independent acceptance data.",
+      "boxes": [[119,159,911,406],[139,369,896,559],[151,490,866,686],[167,610,837,806],[181,716,808,914],[192,806,784,1004],[205,897,766,1080]]
+    }
+  ]
+}

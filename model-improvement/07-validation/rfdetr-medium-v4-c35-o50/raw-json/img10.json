@@ -1,0 +1,20 @@
+{
+  "inference_id": "3fe59308-b743-44f7-be51-6efc60b09da9",
+  "time": 0.013730066129937768,
+  "image": {
+    "width": 640,
+    "height": 640
+  },
+  "predictions": [
+    {
+      "x": 360.5,
+      "y": 427.5,
+      "width": 371.0,
+      "height": 203.0,
+      "confidence": 0.972287654876709,
+      "class": "egg_tray",
+      "class_id": 0,
+      "detection_id": "16a1f94e-297e-4420-9257-71d4508f6aab"
+    }
+  ]
+}

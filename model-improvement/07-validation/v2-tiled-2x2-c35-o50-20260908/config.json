@@ -1,0 +1,106 @@
+{
+  "model": "rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1",
+  "confidence": 35,
+  "overlap": 50,
+  "grid": "2x2",
+  "tile_overlap_ratio": 0.2,
+  "full_image_pass": true,
+  "merge": "OpenCV IoU NMS",
+  "merge_iou": 0.5,
+  "tile_encoding": "lossless PNG",
+  "purpose": "fixed development experiment, not deployment",
+  "inputs": [
+    {
+      "image": "img01",
+      "source": "datasets/roboflow_auto_original/test/images/WhatsApp-Image-2026-07-03-at-11-57-19-AM_jpeg.rf.feb2d66882a2a76010cf40c7331b9e23.jpg",
+      "ground_truth_trays": "60",
+      "ground_truth_eggs": "1800",
+      "ground_truth_status": "manual_visual_count",
+      "scene": "same 60-tray scene, left/side view; three 20-tray stacks",
+      "sha256": "f356d7d8c748ff15a81681c5284c027e02707148aa7764fff639aa5191fc1688"
+    },
+    {
+      "image": "img02",
+      "source": "datasets/roboflow_auto_original/test/images/WhatsApp-Image-2026-07-03-at-11-57-20-AM_jpeg.rf.69f0522ac347a7b905f4b480e10e9c9d.jpg",
+      "ground_truth_trays": "60",
+      "ground_truth_eggs": "1800",
+      "ground_truth_status": "manual_visual_count",
+      "scene": "same 60-tray scene, right/close view; three 20-tray stacks",
+      "sha256": "0ce435c6ceef7871bdfc151a5edf0ab819cdbdede63443c037b38a3c8341533b"
+    },
+    {
+      "image": "img03",
+      "source": "datasets/roboflow_auto_original/valid/images/WhatsApp-Image-2026-07-03-at-11-57-20-AM-2-_jpeg.rf.7048c50fa506961efb6e18caa5d15b3a.jpg",
+      "ground_truth_trays": "60",
+      "ground_truth_eggs": "1800",
+      "ground_truth_status": "manual_visual_count",
+      "scene": "same 60-tray scene, straight view; three 20-tray stacks",
+      "sha256": "5efca2f8a28c2ffdf9cfcad789a272c2147476c5229aaf211c3fa1ea98ed40ca"
+    },
+    {
+      "image": "img04",
+      "source": "datasets/roboflow_auto_original/test/images/WhatsApp-Image-2026-07-03-at-11-57-17-AM_jpeg.rf.307d9fb9212e290d06232d7e7230224b.jpg",
+      "ground_truth_trays": "32",
+      "ground_truth_eggs": "960",
+      "ground_truth_status": "manual_visual_count",
+      "scene": "two brown stacks, 16 trays each",
+      "sha256": "38fac27c726aae28c7d31c177793772d0c3b4932a901bc13402848e21e4ed330"
+    },
+    {
+      "image": "img05",
+      "source": "datasets/canonical_clean/test/images/43409f4aee1d3653f129.jpeg",
+      "ground_truth_trays": "120",
+      "ground_truth_eggs": "3600",
+      "ground_truth_status": "manual_visual_count",
+      "scene": "large straight green stack wall, six 20-tray stacks",
+      "sha256": "43409f4aee1d3653f12960fd6b85f93bf6b06a3a10100760194cf9a45949defc"
+    },
+    {
+      "image": "img06",
+      "source": "datasets/canonical_clean/test/images/a1843591fc331694b11f.jpeg",
+      "ground_truth_trays": "21",
+      "ground_truth_eggs": "630",
+      "ground_truth_status": "manual_visual_count",
+      "scene": "medium angled two-stack scene, 10+11 visible trays",
+      "sha256": "a1843591fc331694b11f7b2f2a81d4705839bb08d27bb589fb82cac81c01fa57"
+    },
+    {
+      "image": "img07",
+      "source": "datasets/canonical_clean/test/images/bb2b695f926199caecaa.jpeg",
+      "ground_truth_trays": "21",
+      "ground_truth_eggs": "630",
+      "ground_truth_status": "manual_visual_count",
+      "scene": "medium straight dense scene, 21 visible tray layers",
+      "sha256": "bb2b695f926199caecaa67e3ca7ba6fabc0073237c14f1dd21c3a1dd24ca3604"
+    },
+    {
+      "image": "img08",
+      "source": "datasets/roboflow_auto_original/test/images/WhatsApp-Image-2026-07-03-at-11-56-57-AM_jpeg.rf.89f4bc4ee2c7c1dd04d5a124ecec90b9.jpg",
+      "ground_truth_trays": "46",
+      "ground_truth_eggs": "1380",
+      "ground_truth_status": "manual_visual_count",
+      "scene": "large warehouse stack, elevated angle",
+      "sha256": "1fbeaaadcf750a9638f00aefc151ad859bf1ddb79f08ec890939d87bced63623"
+    },
+    {
+      "image": "img09",
+      "source": "datasets/roboflow_auto_original/test/images/WhatsApp-Image-2026-07-03-at-12-01-00-PM_jpeg.rf.f385e1d876734229d2317d18efa35d5c.jpg",
+      "ground_truth_trays": "76",
+      "ground_truth_eggs": "2280",
+      "ground_truth_status": "manual_visual_count",
+      "scene": "large warehouse stack, straight/angled",
+      "sha256": "9340c700ce764b2292cf8d6a24837f38a89492413acba72c0c49756b060a31fb"
+    },
+    {
+      "image": "img10",
+      "source": "datasets/roboflow_auto_original/test/images/WhatsApp-Video-2026-07-03-at-12_04_04-PM_mp4-0002_jpg.rf.b2f6230e26cd45d499ba1295b93aaa4f.jpg",
+      "ground_truth_trays": "1",
+      "ground_truth_eggs": "30",
+      "ground_truth_status": "manual_visual_count",
+      "scene": "single tray, top-down video frame",
+      "sha256": "92a92534a06178d3f84b4ed512cc3cc7ab72b4db49fd54e39388aef12e9537b7"
+    }
+  ],
+  "baseline": "model-improvement\\07-validation\\v2-cell-logic-regression-20260908",
+  "opencv_version": "4.12.0"
+}

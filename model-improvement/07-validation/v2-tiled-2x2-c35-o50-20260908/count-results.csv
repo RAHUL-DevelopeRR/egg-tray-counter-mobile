@@ -1,0 +1,11 @@
+image,truth,prediction,absolute_error,relative_error_pct,count_accuracy_pct,exact_match,confidence,overlap,model,baseline_prediction,additional_tile_seconds
+img01,60,25,35,58.33,41.67,False,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1,9,8.782
+img02,60,18,42,70.0,30.0,False,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1,12,2.25
+img03,60,140,80,133.33,0,False,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1,93,3.593
+img04,32,50,18,56.25,43.75,False,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1,29,4.0
+img05,120,167,47,39.17,60.83,False,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1,124,3.875
+img06,21,15,6,28.57,71.43,False,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1,9,4.016
+img07,21,30,9,42.86,57.14,False,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1,21,2.609
+img08,46,172,126,273.91,0,False,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1,73,1.829
+img09,76,172,96,126.32,0,False,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1,25,2.234
+img10,1,4,3,300.0,0,False,35,50,rahuls-workspace-l9ylz/projec-mutta-2-rfdetr-medium-t1,1,3.031

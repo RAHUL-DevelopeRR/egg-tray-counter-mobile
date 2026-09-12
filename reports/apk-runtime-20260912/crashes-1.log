@@ -1,0 +1,22 @@
+--------- beginning of crash
+09-11 20:32:08.932   279   279 F libc    : Unwind request: crash_dump helper failed to exec, or was killed
+09-11 20:33:44.049  2871  2871 E AndroidRuntime: FATAL EXCEPTION: main
+09-11 20:33:44.049  2871  2871 E AndroidRuntime: Process: com.dharani.eggtray.egg_tray_counter, PID: 2871
+09-11 20:33:44.049  2871  2871 E AndroidRuntime: java.lang.IllegalArgumentException: Unsupported value: 'pj0@e02af3b' of type 'pj0'
+09-11 20:33:44.049  2871  2871 E AndroidRuntime: 	at rh.k(r8-map-id-b87327799f0d44bd3dd581da3a67e74115f16e032de994e0e624a191b0272f92:3039)
+09-11 20:33:44.049  2871  2871 E AndroidRuntime: 	at lu0.k(r8-map-id-b87327799f0d44bd3dd581da3a67e74115f16e032de994e0e624a191b0272f92:334)
+09-11 20:33:44.049  2871  2871 E AndroidRuntime: 	at kh.k(r8-map-id-b87327799f0d44bd3dd581da3a67e74115f16e032de994e0e624a191b0272f92:336)
+09-11 20:33:44.049  2871  2871 E AndroidRuntime: 	at rh.k(r8-map-id-b87327799f0d44bd3dd581da3a67e74115f16e032de994e0e624a191b0272f92:3043)
+09-11 20:33:44.049  2871  2871 E AndroidRuntime: 	at lu0.a(r8-map-id-b87327799f0d44bd3dd581da3a67e74115f16e032de994e0e624a191b0272f92:10)
+09-11 20:33:44.049  2871  2871 E AndroidRuntime: 	at pm.w(r8-map-id-b87327799f0d44bd3dd581da3a67e74115f16e032de994e0e624a191b0272f92:17)
+09-11 20:33:44.049  2871  2871 E AndroidRuntime: 	at ah0.d(r8-map-id-b87327799f0d44bd3dd581da3a67e74115f16e032de994e0e624a191b0272f92:179)
+09-11 20:33:44.049  2871  2871 E AndroidRuntime: 	at jo0.b(r8-map-id-b87327799f0d44bd3dd581da3a67e74115f16e032de994e0e624a191b0272f92:15)
+09-11 20:33:44.049  2871  2871 E AndroidRuntime: 	at pu.run(r8-map-id-b87327799f0d44bd3dd581da3a67e74115f16e032de994e0e624a191b0272f92:446)
+09-11 20:33:44.049  2871  2871 E AndroidRuntime: 	at android.os.Handler.handleCallback(Handler.java:995)
+09-11 20:33:44.049  2871  2871 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:103)
+09-11 20:33:44.049  2871  2871 E AndroidRuntime: 	at android.os.Looper.loopOnce(Looper.java:248)
+09-11 20:33:44.049  2871  2871 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:338)
+09-11 20:33:44.049  2871  2871 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:9067)
+09-11 20:33:44.049  2871  2871 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+09-11 20:33:44.049  2871  2871 E AndroidRuntime: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:593)
+09-11 20:33:44.049  2871  2871 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:932)

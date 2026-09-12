@@ -17,6 +17,11 @@ const json = (body: unknown, status = 200) =>
   Response.json(body, { status, headers: { "Cache-Control": "no-store" } });
 
 function fuseCounts(results: Record<string, ViewInference>, maxViewCountRatio = 1.25) {
+  // Detector confidence is not calibrated count confidence: this is only a rejection guard.
+  if (!Number.isFinite(maxViewCountRatio) || maxViewCountRatio < 1 ||
+      Object.values(results).some(({ count, confidence }) =>
+        !Number.isSafeInteger(count) || count <= 0 ||
+        !Number.isFinite(confidence) || confidence < 0.8 || confidence > 1)) return null;
   const positiveCounts = Object.values(results).map(({ count }) => count).filter((count) => count > 0);
   if (positiveCounts.length >= 2) {
     const lowest = Math.min(...positiveCounts);
@@ -29,6 +34,43 @@ function fuseCounts(results: Record<string, ViewInference>, maxViewCountRatio = 
   }
   const agreed = [...frequencies].filter(([, frequency]) => frequency >= 2).map(([count]) => count);
   return agreed.length === 1 ? agreed[0] : null;
+}
+
+function readCellIds(form: FormData): Record<string, string> {
+  return Object.fromEntries(VIEWS.map((view) => {
+    const raw = form.get(`${view}_cell_id`);
+    const id = typeof raw === "string" ? raw.trim().toUpperCase() : "";
+    if (!/^[A-Z0-9][A-Z0-9_-]{0,31}$/.test(id)) {
+      throw new HttpError(422, "cell_identity_required", `Enter the painted cell ID for ${view.toUpperCase()} (1-32 letters, digits, - or _)`);
+    }
+    return [view, id];
+  }));
+}
+
+function fuseCells(results: Record<string, ViewInference>, cellIds: Record<string, string>, maxRatio = 1.25) {
+  const groups = new Map<string, Record<string, ViewInference>>();
+  for (const view of VIEWS) {
+    const id = cellIds[view];
+    if (!id || !results[view]) throw new Error("Missing cell identity or inference");
+    const group = groups.get(id) ?? {};
+    group[view] = results[view];
+    groups.set(id, group);
+  }
+  return [...groups].map(([id, observations]) => {
+    const finalCount = fuseCounts(observations, maxRatio);
+    const accepted = finalCount !== null;
+    return {
+      physical_stack_id: id, // Legacy response field; identity now denotes a painted cell.
+      counts: Object.fromEntries(Object.entries(observations).map(([view, result]) => [view, result.count])),
+      final_count: finalCount,
+      confidence: accepted ? Math.min(...Object.values(observations).map((r) => r.confidence)) : 0,
+      accepted,
+      reason: accepted ? "Same-cell views agree; operator-confirmed cell ID" :
+        Object.keys(observations).length < 2 ? "Manual recount: capture at least two distinct angles of this same cell" :
+        "Manual recount: same-cell views disagree, are empty, or have low detection confidence",
+      association_confidence: null, // Manually entered identity is not measured visual association.
+    };
+  });
 }
 
 function base64(bytes: Uint8Array) {
@@ -93,6 +135,7 @@ async function countScan(request: Request, env: Bindings) {
     throw new HttpError(415, "invalid_content_type", "Expected multipart form data");
   }
   const form = await request.formData();
+  const cellIds = readCellIds(form);
   const rawScanId = String(form.get("scan_id") ?? crypto.randomUUID()).toLowerCase();
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(rawScanId)) {
     throw new HttpError(422, "invalid_scan_id", "scan_id must be a UUID");
@@ -120,55 +163,47 @@ async function countScan(request: Request, env: Bindings) {
   const started = Date.now();
   const results = {} as Record<string, ViewInference>;
   for (const view of VIEWS) results[view] = await infer(files[view] as File, env);
-  const finalCount = fuseCounts(results, Number(env.MAX_VIEW_COUNT_RATIO));
-  const accepted = finalCount !== null;
+  const stacks = fuseCells(results, cellIds, Number(env.MAX_VIEW_COUNT_RATIO));
+  const accepted = stacks.every((stack) => stack.accepted);
+  const finalCount = accepted ? stacks.reduce((sum, stack) => sum + stack.final_count!, 0) : null;
   const latency = Date.now() - started;
   const views = Object.fromEntries(VIEWS.map((view) => [view, {
     quality: results[view].confidence,
-    accepted: results[view].count > 0,
+    accepted: stacks.find((stack) => stack.physical_stack_id === cellIds[view])!.accepted,
     blur_score: 0,
     exposure_mean: 0,
-    reason: results[view].count > 0 ? null : "No egg trays detected",
+    reason: stacks.find((stack) => stack.physical_stack_id === cellIds[view])!.reason,
   }]));
   const counts = Object.fromEntries(VIEWS.map((view) => [view, results[view].count]));
-  const confidence = accepted
-    ? Math.min(...VIEWS.filter((view) => results[view].count === finalCount).map((view) => results[view].confidence))
-    : 0;
   console.log(JSON.stringify({ event: "scan_complete", scan_id: rawScanId, accepted, counts, latency_ms: latency }));
   return json({
     scan_id: rawScanId,
-    status: accepted ? "verified" : "rescan_required",
+    status: accepted ? "verified" : "manual_recount_required",
     accepted,
-    physical_stack_count: accepted ? 1 : null,
+    physical_stack_count: null,
+    physical_cell_count: accepted ? stacks.length : null,
     total_trays: finalCount,
     eggs_per_tray: Number(env.EGGS_PER_TRAY),
     total_eggs: accepted ? finalCount! * Number(env.EGGS_PER_TRAY) : null,
     model: { provider: "roboflow_serverless", workspace: "", project: "projec-mutta", version: "2", model_id: env.MODEL_ID },
-    processing: { mode: "cloudflare_roboflow_egg_tray_baseline", latency_ms: latency, model_version: env.MODEL_ID, timings_ms: { total: latency } },
+    processing: { mode: "cell_identity_v1", latency_ms: latency, model_version: env.MODEL_ID, timings_ms: { total: latency } },
+    cell_ids: cellIds,
     views,
-    stacks: [{
-      physical_stack_id: "single_stack_baseline",
-      counts,
-      final_count: finalCount,
-      confidence,
-      accepted,
-      reason: accepted ? "At least two views agree" : "Views disagree or contain a large count mismatch",
-      association_confidence: accepted ? 1 : 0,
-    }],
+    stacks,
     rescan: accepted ? null : {
-      recommended_view: VIEWS.reduce((a, b) => results[a].count <= results[b].count ? a : b),
-      reason: "RESCAN REQUIRED: views must agree without a large count mismatch",
+      recommended_view: VIEWS.find((view) => !stacks.find((stack) => stack.physical_stack_id === cellIds[view])!.accepted),
+      reason: "MANUAL RECOUNT REQUIRED: inspect each listed cell separately. Do not compare different cell totals.",
     },
   });
 }
 
-export { fuseCounts };
+export { fuseCounts, fuseCells, readCellIds };
 
 export default {
   async fetch(request, env): Promise<Response> {
     const url = new URL(request.url);
     try {
-      if (request.method === "GET" && url.pathname === "/health") return json({ status: "ok" });
+      if (request.method === "GET" && url.pathname === "/health") return json({ status: "ok", scan_contract: "cell_identity_v1" });
       if (request.method === "GET" && url.pathname === "/ready") {
         return json({ status: env.ROBOFLOW_API_KEY ? "ready" : "not_ready", provider: "roboflow_serverless", model_reference: env.MODEL_ID }, env.ROBOFLOW_API_KEY ? 200 : 503);
       }

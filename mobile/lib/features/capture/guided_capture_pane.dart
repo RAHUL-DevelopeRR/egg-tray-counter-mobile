@@ -106,6 +106,8 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
     }
     setState(() => _capturing = true);
     try {
+      final cellId = await _confirmCell();
+      if (cellId == null || !mounted) return;
       final photo = await controller.takePicture();
       final quality = await _quality.inspect(photo.path);
       if (!quality.accepted) {
@@ -126,7 +128,7 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
         );
         return;
       }
-      widget.session.setPath(_view, photo.path);
+      widget.session.setPath(_view, photo.path, cellId: cellId);
       if (widget.session.isComplete) {
         widget.onComplete(widget.session);
         return;
@@ -144,6 +146,62 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
     } finally {
       if (mounted) setState(() => _capturing = false);
     }
+  }
+
+  Future<String?> _confirmCell() async {
+    var input = '';
+    final form = GlobalKey<FormState>();
+    final id = await showDialog<String>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('${_view.name.toUpperCase()}: identify the cell'),
+        content: Form(
+          key: form,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  'Read the painted warehouse/cell ID (e.g. W1-A2). Frame only that entire cell. Reuse an ID only for the same physical trays from another angle. Different cells need separate scans for verification.',
+                ),
+                TextFormField(
+                  onChanged: (value) => input = value,
+                  autofocus: true,
+                  maxLength: 32,
+                  textCapitalization: TextCapitalization.characters,
+                  decoration: const InputDecoration(
+                    labelText: 'Painted cell ID',
+                  ),
+                  validator: (value) {
+                    try {
+                      ScanSession.normalizeCellId(value ?? '');
+                      return null;
+                    } on FormatException catch (error) {
+                      return error.message;
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('CANCEL'),
+          ),
+          FilledButton(
+            onPressed: () {
+              if (form.currentState!.validate()) {
+                Navigator.pop(context, ScanSession.normalizeCellId(input));
+              }
+            },
+            child: const Text('CONFIRM CELL & CAPTURE'),
+          ),
+        ],
+      ),
+    );
+    return id;
   }
 
   @override
@@ -205,7 +263,7 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
                             vertical: 10,
                           ),
                           child: Text(
-                            'Frame one physical stack. Align its base with the lower guide.',
+                            'Frame one entire painted cell only. Keep all its tray tops and bases visible.',
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -296,7 +354,9 @@ class _FrameChecklist extends StatelessWidget {
             value: gate.stackContained,
             onChanged: (value) =>
                 onChanged(gate.copyWith(stackContained: value ?? false)),
-            title: const Text('One stack is completely inside the guide'),
+            title: const Text(
+              'Only one entire painted cell is inside the guide',
+            ),
           ),
           CheckboxListTile(
             dense: true,
@@ -304,7 +364,9 @@ class _FrameChecklist extends StatelessWidget {
             value: gate.topAndBaseVisible,
             onChanged: (value) =>
                 onChanged(gate.copyWith(topAndBaseVisible: value ?? false)),
-            title: const Text('Stack top and base are visible'),
+            title: const Text(
+              'All tray tops and bases in this cell are visible',
+            ),
           ),
           CheckboxListTile(
             dense: true,
