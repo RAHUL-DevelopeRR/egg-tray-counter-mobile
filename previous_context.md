@@ -83,3 +83,12 @@ Publication verified: checkpoint bc0a0e67d947c2a06badc6db5b2e497b64e2fb1b is
 pushed to origin/codex/hybrid-cell-counting; the remote branch SHA was verified
 equal to the local checkpoint. It includes the actual source/tests/reports above.
 This is not a Cloudflare deployment or an APK release upload.
+
+## Later update — successful CLI deployment, 2026-09-14
+
+User-approved OAuth completed and Wrangler deployed the updated Worker:
+0519381f-b99e-4015-8279-cb2c0f99f7f2. Health and live marker-free model inference
+passed; APK 0.2.2 contract compatibility is restored. Read
+reports/cloudflare-deployment-20260914/README.md for evidence. Earlier deployment
+blockers above are superseded. Exact hybrid integration and device validation
+remain unfinished; do not interpret successful deployment as counting accuracy.

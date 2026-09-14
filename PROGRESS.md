@@ -2,6 +2,29 @@
 
 Updated: 2026-09-14. Read this file before modifying the repository.
 
+## Latest deployment checkpoint — 2026-09-14
+
+- User-approved OAuth succeeded; Wrangler deployment access is now verified.
+  Earlier authentication-blocked statements below are historical.
+- Deployed egg-tray-counter-api using Wrangler 4.125.0 deploy --keep-vars.
+  Version 0519381f-b99e-4015-8279-cb2c0f99f7f2, source checkpoint
+  e92babb97ba84400dba81ad71b288f8f304e8e18. URL:
+  https://egg-tray-counter-api.rahultech72216.workers.dev.
+  Existing variables/secrets preserved. Compile/dry-run/all 11 tests passed.
+- Live health advertises model_spatial_v1; readiness identifies projec-mutta/2.
+  No-floor-ID live request returned HTTP 200 with empty echoed cell_ids and
+  valid spatial detections/counts 29/9/12 for separate benchmark scenes.
+  Response contract/model, box validity/count consistency and null inventory
+  totals verified. Evidence: reports/cloudflare-deployment-20260914/.
+- APK 0.2.2's backend-contract mismatch is RESOLVED; no APK rebuild required
+  for this server update. No physical Android-device scan was performed.
+- hybrid_ready remains false. Exact hybrid counting, robust physical-stack
+  matching, occupancy and image-to-hybrid integration remain unfinished. This
+  smoke test is not a same-scene three-view accuracy evaluation.
+- Next: implement those missing vision/integration components, evaluate held-out
+  same-scene captures with checked truth and run device tests. Preserve the
+  known signing-key limitation. Earlier deployment blockers are superseded.
+
 ## Latest artifact checkpoint — 2026-09-14
 
 - After the prior process ended without an APK, resumed the cached release build successfully. Root artifact egg-tray-counter-0.2.2-hybrid.apk is version 0.2.2+5, 59,631,396 bytes, SHA-256 1ae72eb5fefab5ad695603b4cfaeb79d51e32a62c4a2a2224ae8ff042c8a7a4b. Manifest, APK v2 signature and ZIP CRC verified. Full evidence: reports/APK_0.2.2_BUILD.md.

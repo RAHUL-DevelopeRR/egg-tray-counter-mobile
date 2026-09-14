@@ -2,6 +2,13 @@
 
 Updated: 2026-09-14. Read with `PROGRESS.md` before work.
 
+Latest verified status: OAuth succeeded and the updated Worker is DEPLOYED,
+version 0519381f-b99e-4015-8279-cb2c0f99f7f2. Live health and a no-floor-ID
+model_spatial_v1 inference request passed. The APK 0.2.2 backend-contract
+mismatch is resolved. Older authentication/deployment blockers below are
+historical. Exact hybrid counting remains unfinished; hybrid_ready is false.
+See reports/cloudflare-deployment-20260914/README.md and latest PROGRESS.md.
+
 The user requests continued development, not a rewrite. Existing repository:
 `https://github.com/RAHUL-DevelopeRR/egg-tray-counter-mobile`.
 

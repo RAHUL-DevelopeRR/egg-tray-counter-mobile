@@ -48,3 +48,8 @@ image model result, not hybrid accuracy or precision. See
 Need real same-scene LEFT/STRAIGHT/RIGHT images with independently checked totals
 and occupancy labels to evaluate the remaining pipeline. No claim of near-100%
 accuracy is supported.
+
+Deployment update, 2026-09-14: the compatible Worker is now deployed and a live
+request without floor IDs passed. The backend preflight incompatibility above
+is resolved. See cloudflare-deployment-20260914/README.md. The signing-key,
+device-testing and unfinished exact-hybrid limitations still apply.
