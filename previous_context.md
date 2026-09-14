@@ -78,3 +78,8 @@ Cloudflare deployment occurred. APK is ignored locally, not a GitHub release.
 Full plan and reusable prompt: docs/COUNTING_EXECUTION_PLAN.md.
 This checkpoint publishes the actual unfinished source alongside its documents;
 it must not repeat the older handover's mistake of claiming absent local code.
+
+Publication verified: checkpoint bc0a0e67d947c2a06badc6db5b2e497b64e2fb1b is
+pushed to origin/codex/hybrid-cell-counting; the remote branch SHA was verified
+equal to the local checkpoint. It includes the actual source/tests/reports above.
+This is not a Cloudflare deployment or an APK release upload.

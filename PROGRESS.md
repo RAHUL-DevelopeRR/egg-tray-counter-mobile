@@ -176,3 +176,11 @@ what to do next, and to append the progress/previous context and push to GitHub.
 
 Authentication references: https://developers.cloudflare.com/workers/wrangler/commands/general/
 and https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/.
+
+Publication verified: checkpoint bc0a0e67d947c2a06badc6db5b2e497b64e2fb1b
+successfully pushed to origin/codex/hybrid-cell-counting. git ls-remote returned
+the identical SHA and the working tree was clean after that push. All 28 source,
+test, context and report files in the checkpoint are now on GitHub. Staged
+whitespace and targeted credential-pattern checks passed. This is source
+publication only; Cloudflare was not deployed and the APK was not uploaded as
+a release asset. This follow-up documentation records the verified push outcome.
