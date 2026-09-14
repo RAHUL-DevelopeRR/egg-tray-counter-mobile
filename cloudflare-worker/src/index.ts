@@ -1,7 +1,7 @@
 type Bindings = Env & { ROBOFLOW_API_KEY: string };
 
-type Prediction = { class?: string; confidence?: number };
-type ViewInference = { count: number; confidence: number };
+type Prediction = { class?: string; confidence?: number; x?: number; y?: number; width?: number; height?: number };
+type ViewInference = { count: number; confidence: number; detections?: Prediction[] };
 
 const VIEWS = ["left", "right", "straight"] as const;
 const MAX_IMAGE_BYTES = 20 * 1024 * 1024;
@@ -81,7 +81,7 @@ function base64(bytes: Uint8Array) {
   return btoa(binary);
 }
 
-async function infer(file: File, env: Bindings): Promise<ViewInference> {
+async function infer(file: File, env: Bindings, requireSpatial = false): Promise<ViewInference> {
   const url = new URL(`https://serverless.roboflow.com/${env.MODEL_ID}`);
   url.searchParams.set("api_key", env.ROBOFLOW_API_KEY);
   url.searchParams.set("confidence", env.CONFIDENCE);
@@ -96,6 +96,7 @@ async function infer(file: File, env: Bindings): Promise<ViewInference> {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body,
+        signal: AbortSignal.timeout(20000),
       });
       if (!RETRYABLE.has(response.status)) break;
     } catch {
@@ -115,10 +116,16 @@ async function infer(file: File, env: Bindings): Promise<ViewInference> {
     throw new HttpError(502, "invalid_inference_response", "Roboflow returned an invalid response");
   }
   const predictions = payload.predictions.filter(
-    (item) => item.class === "egg_tray" && typeof item.confidence === "number",
+    (item) => item && item.class === "egg_tray" && typeof item.confidence === "number",
   );
+  if (predictions.some((p) => !Number.isFinite(p.confidence) || p.confidence! < 0 || p.confidence! > 1 ||
+      (requireSpatial && (![p.x, p.y, p.width, p.height].every(Number.isFinite) || p.width! <= 0 || p.height! <= 0)))) {
+    throw new HttpError(502, "invalid_inference_response", "Model returned invalid spatial evidence");
+  }
   return {
     count: predictions.length,
+    detections: predictions.map(({class: label, confidence, x, y, width, height}) =>
+      ({class: label, confidence, x, y, width, height})),
     confidence: predictions.length
       ? predictions.reduce((sum, item) => sum + item.confidence!, 0) / predictions.length
       : 0,
@@ -135,7 +142,12 @@ async function countScan(request: Request, env: Bindings) {
     throw new HttpError(415, "invalid_content_type", "Expected multipart form data");
   }
   const form = await request.formData();
-  const cellIds = readCellIds(form);
+  const requestedContract = form.get("scan_contract");
+  if (requestedContract !== null && !["cell_identity_v1", "model_spatial_v1"].includes(String(requestedContract))) {
+    throw new HttpError(422, "unsupported_scan_contract", "Unknown scan contract");
+  }
+  const modelScan = requestedContract === "model_spatial_v1";
+  const cellIds = modelScan ? readOptionalCellIds(form) : readCellIds(form);
   const rawScanId = String(form.get("scan_id") ?? crypto.randomUUID()).toLowerCase();
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(rawScanId)) {
     throw new HttpError(422, "invalid_scan_id", "scan_id must be a UUID");
@@ -162,7 +174,8 @@ async function countScan(request: Request, env: Bindings) {
 
   const started = Date.now();
   const results = {} as Record<string, ViewInference>;
-  for (const view of VIEWS) results[view] = await infer(files[view] as File, env);
+  for (const view of VIEWS) results[view] = await infer(files[view] as File, env, modelScan);
+  if (modelScan) return modelDiagnostics(rawScanId, results, cellIds, env, Date.now() - started);
   const stacks = fuseCells(results, cellIds, Number(env.MAX_VIEW_COUNT_RATIO));
   const accepted = stacks.every((stack) => stack.accepted);
   const finalCount = accepted ? stacks.reduce((sum, stack) => sum + stack.final_count!, 0) : null;
@@ -197,13 +210,47 @@ async function countScan(request: Request, env: Bindings) {
   });
 }
 
-export { fuseCounts, fuseCells, readCellIds };
+function readOptionalCellIds(form: FormData): Record<string, string> {
+  const entries: [string, string][] = [];
+  for (const view of VIEWS) {
+    const raw = form.get(`${view}_cell_id`);
+    if (raw === null || raw === "") continue;
+    if (typeof raw !== "string" || !/^[A-Z0-9][A-Z0-9_-]{0,31}$/.test(raw.trim().toUpperCase())) {
+      throw new HttpError(422, "invalid_cell_id", "Optional cell IDs must use 1-32 letters, digits, - or _");
+    }
+    entries.push([view, raw.trim().toUpperCase()]);
+  }
+  return Object.fromEntries(entries);
+}
+
+function modelDiagnostics(scanId: string, results: Record<string, ViewInference>, cellIds: Record<string, string>, env: Bindings, latency: number) {
+  // Model boxes are useful evidence, but not proof of cross-view identity or egg occupancy.
+  // Do not substitute whole-photo voting for an unfinished spatial hybrid pipeline.
+  const reason = "Model detections are available. Physical stack matching and egg occupancy remain unresolved; these per-photo counts are not a verified inventory total.";
+  return json({
+    scan_id: scanId, status: "rescan_required", accepted: false,
+    physical_stack_count: null, total_trays: null, total_eggs: null,
+    eggs_per_tray: Number(env.EGGS_PER_TRAY), cell_ids: cellIds,
+    model: { provider: "roboflow_serverless", model_id: env.MODEL_ID },
+    processing: { mode: "model_spatial_v1", latency_ms: latency, model_version: env.MODEL_ID, timings_ms: { total: latency } },
+    views: Object.fromEntries(VIEWS.map(view => [view, {
+      quality: 0, accepted: false, reason, detections: results[view].detections,
+      detector_mean_confidence: results[view].confidence,
+    }])),
+    stacks: [{ physical_stack_id: "Per-photo model detections (unmatched)",
+      counts: Object.fromEntries(VIEWS.map(view => [view, results[view].count])),
+      final_count: null, confidence: 0, accepted: false, reason }],
+    rescan: { recommended_view: "straight", reason },
+  });
+}
+
+export { fuseCounts, fuseCells, readCellIds, readOptionalCellIds };
 
 export default {
   async fetch(request, env): Promise<Response> {
     const url = new URL(request.url);
     try {
-      if (request.method === "GET" && url.pathname === "/health") return json({ status: "ok", scan_contract: "cell_identity_v1" });
+      if (request.method === "GET" && url.pathname === "/health") return json({ status: "ok", scan_contract: "cell_identity_v1", scan_contracts: ["cell_identity_v1", "model_spatial_v1"], hybrid_ready: false });
       if (request.method === "GET" && url.pathname === "/ready") {
         return json({ status: env.ROBOFLOW_API_KEY ? "ready" : "not_ready", provider: "roboflow_serverless", model_reference: env.MODEL_ID }, env.ROBOFLOW_API_KEY ? 200 : 503);
       }

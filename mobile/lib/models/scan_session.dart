@@ -29,10 +29,14 @@ class ScanSession {
 
   String? pathFor(CaptureView view) => _paths[view];
 
-  void setPath(CaptureView view, String path, {required String cellId}) {
-    final id = normalizeCellId(cellId);
+  void setPath(CaptureView view, String path, {String cellId = ''}) {
+    final id = cellId.trim().isEmpty ? null : normalizeCellId(cellId);
     _paths[view] = path;
-    _cellIds[view] = id;
+    if (id == null) {
+      _cellIds.remove(view);
+    } else {
+      _cellIds[view] = id;
+    }
   }
 
   void clear(CaptureView view) {
@@ -42,7 +46,7 @@ class ScanSession {
 
   CaptureView? get nextMissing {
     for (final view in CaptureView.values) {
-      if (!_paths.containsKey(view) || !_cellIds.containsKey(view)) return view;
+      if (!_paths.containsKey(view)) return view;
     }
     return null;
   }

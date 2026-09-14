@@ -1354,3 +1354,27 @@ I’ll update `context.md` and `PROGRESS.md`, add a transcript of the conversati
 ## Continuation note
 
 Read `PROGRESS.md` for the authoritative current status. This transcript records promises, plans and historical claims as conversation; they do not establish that the planned implementation, deployment or tests were completed. The current documentation checkpoint excludes unfinished source edits. No credentials are present in this transcript.
+
+## 8. 2026-09-14 — runtime/deployment clarification and checkpoint
+
+### User
+
+why cloudflare deployment is blocked?? Then how does backend works>?? Is it straightly routes to the roboflow>??? What can we do?? Why exact hybrid counting remains unfinished??? Append the progress.md and previous context.md and push to github.
+
+### Assistant clarification (summary, not a verbatim transcript)
+
+Existing Cloudflare runtime is working and forwards images to Roboflow V2.
+Local deployment authorization is missing, so the existing Worker continues
+running but cannot be replaced through the unauthenticated CLI. Browser sign-in
+does not by itself prove successful Wrangler authorization.
+
+The live baseline compares photo counts. The new local optional-marker path
+exposes model evidence but is not an operational exact hybrid. Automatic stack
+identity, occupancy and image-to-hybrid/Python gateway integration remain
+unfinished code work; authentication alone does not solve them. The development
+APK was built and tested, but neither the build nor tests proves count accuracy.
+Fresh V2 returned 29 versus the retained visible manual reference of 32.
+
+Append the findings and next steps, create previous_context.md as requested,
+and publish the actual unfinished source/tests/reports with this checkpoint.
+Earlier documentation-only checkpoint descriptions above remain historical.

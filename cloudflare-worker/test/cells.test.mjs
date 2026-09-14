@@ -8,7 +8,9 @@ const observations = (left, right, straight) => Object.fromEntries(
 
 test('health advertises the cell contract without invoking inference', async () => {
   const health = await (await worker.fetch(new Request('https://local/health'), {})).json();
-  assert.deepEqual(health, { status: 'ok', scan_contract: 'cell_identity_v1' });
+  assert.equal(health.scan_contract, 'cell_identity_v1');
+  assert.ok(health.scan_contracts.includes('model_spatial_v1'));
+  assert.equal(health.hybrid_ready, false);
 });
 
 test('40/40/100 belong to separate cells, never compare or sum them', () => {

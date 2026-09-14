@@ -30,14 +30,12 @@ void main() {
   });
 
   test(
-    'cell ID is validated before binding a photo; no identity is inferred',
+    'optional cell ID is validated when provided; no identity is invented',
     () {
       final session = ScanSession(scanId: 'scan-3');
-      expect(
-        () => session.setPath(CaptureView.left, 'x.jpg', cellId: ''),
-        throwsFormatException,
-      );
-      expect(session.pathFor(CaptureView.left), isNull);
+      session.setPath(CaptureView.left, 'x.jpg');
+      expect(session.pathFor(CaptureView.left), 'x.jpg');
+      expect(session.cellIds, isEmpty);
       session.setPath(CaptureView.left, 'x.jpg', cellId: ' w1-a2 ');
       expect(session.cellIds, {'left': 'W1-A2'});
       expect(() => ScanSession.normalizeCellId('A/B'), throwsFormatException);
@@ -47,4 +45,13 @@ void main() {
       );
     },
   );
+
+  test('three photos are complete without painted floor IDs', () {
+    final session = ScanSession(scanId: 'no-markers')
+      ..setPath(CaptureView.left, 'left.jpg')
+      ..setPath(CaptureView.right, 'right.jpg')
+      ..setPath(CaptureView.straight, 'straight.jpg');
+    expect(session.isComplete, isTrue);
+    expect(session.cellIds, isEmpty);
+  });
 }

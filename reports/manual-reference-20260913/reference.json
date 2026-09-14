@@ -1,0 +1,14 @@
+{
+  "image": "accuracy-evaluation\\test-images\\img04.jpg",
+  "sha256": "38fac27c726aae28c7d31c177793772d0c3b4932a901bc13402848e21e4ed330",
+  "visible_trays": 32,
+  "per_column_visible_trays": [
+    16,
+    16
+  ],
+  "method": "assistant visual recount of existing benchmark photo",
+  "blind": false,
+  "physically_recounted": false,
+  "hidden_inventory_verified": false,
+  "note": "Reference is visible trays; full egg occupancy and out-of-frame stock are not certified."
+}

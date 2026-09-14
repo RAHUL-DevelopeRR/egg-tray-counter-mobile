@@ -154,7 +154,7 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
     final id = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('${_view.name.toUpperCase()}: identify the cell'),
+        title: Text('${_view.name.toUpperCase()}: capture the same stacks'),
         content: Form(
           key: form,
           child: SingleChildScrollView(
@@ -162,7 +162,7 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
-                  'Read the painted warehouse/cell ID (e.g. W1-A2). Frame only that entire cell. Reuse an ID only for the same physical trays from another angle. Different cells need separate scans for verification.',
+                  'Keep the same group of stacks in all three photos. If a painted cell ID is present, enter it. Otherwise leave this blank for model analysis.',
                 ),
                 TextFormField(
                   onChanged: (value) => input = value,
@@ -170,11 +170,12 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
                   maxLength: 32,
                   textCapitalization: TextCapitalization.characters,
                   decoration: const InputDecoration(
-                    labelText: 'Painted cell ID',
+                    labelText: 'Painted cell ID (optional)',
                   ),
                   validator: (value) {
+                    if (value == null || value.trim().isEmpty) return null;
                     try {
-                      ScanSession.normalizeCellId(value ?? '');
+                      ScanSession.normalizeCellId(value);
                       return null;
                     } on FormatException catch (error) {
                       return error.message;
@@ -193,10 +194,15 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
           FilledButton(
             onPressed: () {
               if (form.currentState!.validate()) {
-                Navigator.pop(context, ScanSession.normalizeCellId(input));
+                Navigator.pop(
+                  context,
+                  input.trim().isEmpty
+                      ? ''
+                      : ScanSession.normalizeCellId(input),
+                );
               }
             },
-            child: const Text('CONFIRM CELL & CAPTURE'),
+            child: const Text('CAPTURE'),
           ),
         ],
       ),
@@ -263,7 +269,7 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
                             vertical: 10,
                           ),
                           child: Text(
-                            'Frame one entire painted cell only. Keep all its tray tops and bases visible.',
+                            'Frame the same stacks from each angle. Keep tray tops and bases visible. Floor IDs are optional.',
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -355,7 +361,7 @@ class _FrameChecklist extends StatelessWidget {
             onChanged: (value) =>
                 onChanged(gate.copyWith(stackContained: value ?? false)),
             title: const Text(
-              'Only one entire painted cell is inside the guide',
+              'The same complete group of stacks is inside the guide',
             ),
           ),
           CheckboxListTile(
@@ -364,9 +370,7 @@ class _FrameChecklist extends StatelessWidget {
             value: gate.topAndBaseVisible,
             onChanged: (value) =>
                 onChanged(gate.copyWith(topAndBaseVisible: value ?? false)),
-            title: const Text(
-              'All tray tops and bases in this cell are visible',
-            ),
+            title: const Text('The stack tops and bases are visible'),
           ),
           CheckboxListTile(
             dense: true,
@@ -414,9 +418,8 @@ class _CaptureHeader extends StatelessWidget {
           const SizedBox(height: 18),
           Text(
             view.title,
-            style: Theme.of(
-              context,
-            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900),
+            style: Theme.of(context).textTheme.headlineSmall
+                ?.copyWith(fontWeight: FontWeight.w900),
           ),
           const SizedBox(height: 6),
           Text(view.instruction),

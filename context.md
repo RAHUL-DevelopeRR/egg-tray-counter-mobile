@@ -1,11 +1,19 @@
 # Current development context
 
-Updated: 2026-09-12. Read with `PROGRESS.md` before work.
+Updated: 2026-09-14. Read with `PROGRESS.md` before work.
 
 The user requests continued development, not a rewrite. Existing repository:
 `https://github.com/RAHUL-DevelopeRR/egg-tray-counter-mobile`.
 
-## Latest clarified requirement
+## Latest user requirements — optional markers and measured evaluation
+
+- Floor-cell IDs are OPTIONAL. The user captures LEFT, RIGHT and STRAIGHT; without floor IDs the backend must use model localization, visual stack association and layer evidence. Calibrated markers/height enhance counting when present. Do not block scans solely because IDs are absent.
+- Count physical trays containing eggs, not merely agreement between whole-photo totals. Preserve spatial evidence and avoid duplicate counting across views.
+- The user requested manually counting a selected photograph and remembering it, then comparing RF and hybrid predictions to that reference before building an Android APK. A saved reference is now in reports/manual-reference-20260913/reference.json: 16 + 16 = 32 visible trays, explicitly a non-blind visual recount of an existing benchmark photo, not a physical inventory audit.
+- The user reports Cloudflare and Roboflow authenticated. Browser inventory showed account/workspace URLs, but page control timed out. Do not report the user as unauthenticated; CLI/API access and fresh inference remain unverified.
+- The user requests a solid execution plan and reusable prompt. See docs/COUNTING_EXECUTION_PLAN.md.
+
+## Earlier clarified requirement (apply with optional-marker update above)
 
 The user explicitly clarified that “boxed strips” means **painted floor boxes and wall-height reference marks**, not just horizontal tray edges.
 
@@ -42,6 +50,10 @@ These describe historical state; the clarified requirements above supersede the 
 
 ## Latest conversation and work checkpoint
 
+- 2026-09-14: 0.2.2+5 APK BUILT and verified at egg-tray-counter-0.2.2-hybrid.apk. SHA-256 1ae72eb5fefab5ad695603b4cfaeb79d51e32a62c4a2a2224ae8ff042c8a7a4b. It is an incomplete development build; exact hybrid counting and compatible backend deployment remain unfinished. Its debug signer differs from the old APK, so an in-place upgrade is unavailable without the original key. No device test occurred. See reports/APK_0.2.2_BUILD.md. This supersedes earlier statements that no new APK exists.
+
+- 2026-09-13 continuation: Flutter/Android setup recovered; analysis clean, 16 mobile tests and 44 backend tests passed, Worker compilation/dry-run/11 tests passed. Source version is 0.2.2+5; release build underway, no new APK yet verified. Existing live Worker successfully called Roboflow V2: img04 fresh count 29 versus retained visual reference 32, error 3/9.375%. See reports/manual-reference-20260913/LIVE_EVALUATION.md. This was a per-image check using separate benchmark scenes, not three-view validation. Deployment CLI remains unauthenticated; old live contract does not support changed mobile preflight. Exact hybrid integration remains unfinished.
+
 - Full available user/assistant conversation is preserved in `previous_chat.md`, with the supplied continuation brief included. Read it when the concise context here is insufficient.
 - The user asked whether the existing three-angle Roboflow analysis was enough. The answer was that three views are useful but not independent proof of correctness; the user then explicitly said, “Okay do the hybrid verification.”
 - The user authorized opening Cloudflare and Roboflow sign-in pages. Tabs were opened for the user; authenticated access is not yet confirmed.
@@ -49,4 +61,29 @@ These describe historical state; the clarified requirements above supersede the 
 - Backend/OpenCV and Worker dependency setup succeeded. Hybrid backend/gateway code exists only as untested local edits; see the exact file list and review concerns in `PROGRESS.md`.
 - The chosen draft approach uses surveyed ArUco floor/wall references and camera calibration to recover 3D pose, then analyzes each configured physical column. This is not yet a field-tested implementation of arbitrary painted-line recognition.
 - No mobile integration, live deployment, new benchmark or new APK has been completed. Never describe version 0.2.2 as built or working.
-- Latest request is a documentation checkpoint and GitHub push. The checkpoint includes documentation only; unfinished source remains local.
+- Latest request (2026-09-13) resumes implementation toward exact or near-exact counting of trays containing eggs using one hybrid flow. The earlier documentation-only checkpoint is superseded.
+- Live checkout inspection found the previously described uncommitted hybrid draft absent. New standalone height/fusion policy is in backend/app/vision/hybrid.py with 20 synthetic unittest cases; API/mobile integration and image evidence extraction remain incomplete.
+- The new core distinguishes egg-containing tray count from actual egg count. Trays times 30 is capacity unless every accepted tray is established to contain 30 eggs. Existing UI behavior is not changed by this core.
+- Real surveyed calibration and per-layer occupancy evidence are still needed; the user was asked for the dataset folder path. See docs/hybrid-evidence-contract.md and the current correction at the top of PROGRESS.md.
+
+## 2026-09-14 clarification — runtime, deployment and unfinished counting
+
+The existing live backend works: app -> Cloudflare Worker -> Roboflow V2 ->
+Worker -> app. Deployment is separately blocked because local Wrangler has no
+usable authentication (whoami rechecked), not because Cloudflare inference is
+offline. The prior device codes expired. Existing Worker secrets continue to
+serve existing requests. Do not conflate browser login, CLI authorization and
+runtime Roboflow inference.
+
+The deployed Worker is the old photo-count baseline. Local optional-marker
+model_spatial_v1 code preserves detections but deliberately has no accepted
+inventory total; Python hybrid policy is not connected to live images/API.
+Robust stack matching, occupancy, automatic evidence extraction and the Python
+gateway remain to be implemented. Authentication alone will not fix these.
+The app preflight currently rejects the old deployment's missing contract.
+
+User now explicitly requests appending progress/previous context and pushing
+GitHub. Preserve the source/tests/reports as an unfinished development checkpoint
+on codex/hybrid-cell-counting; do not describe this push as deployment or an APK
+release. Read previous_context.md for a concise resumption snapshot and the
+latest PROGRESS.md append for verification and next steps.

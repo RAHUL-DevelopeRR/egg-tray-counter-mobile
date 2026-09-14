@@ -238,14 +238,13 @@ class _ProcessingPane extends StatelessWidget {
               uploaded
                   ? 'Analyzing three views...'
                   : 'Uploading original photos...',
-              style: Theme.of(
-                context,
-              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
+              style: Theme.of(context).textTheme.titleLarge
+                  ?.copyWith(fontWeight: FontWeight.w800),
             ),
             const SizedBox(height: 10),
             Text(
               uploaded
-                  ? 'Detecting individual trays and comparing matching cell IDs.'
+                  ? 'Analyzing tray evidence from the three photographs.'
                   : '${((progress ?? 0) * 100).round()}% uploaded',
               textAlign: TextAlign.center,
             ),
@@ -289,9 +288,8 @@ class _ResultPane extends StatelessWidget {
         Text(
           result.accepted ? 'VERIFIED' : 'COUNT NOT VERIFIED',
           textAlign: TextAlign.center,
-          style: Theme.of(
-            context,
-          ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w900),
+          style: Theme.of(context).textTheme.headlineMedium
+              ?.copyWith(fontWeight: FontWeight.w900),
         ),
         const SizedBox(height: 22),
         if (result.accepted) ...[
@@ -311,21 +309,20 @@ class _ResultPane extends StatelessWidget {
           Text(
             '${result.totalEggs}',
             textAlign: TextAlign.center,
-            style: Theme.of(
-              context,
-            ).textTheme.displayMedium?.copyWith(fontWeight: FontWeight.w900),
+            style: Theme.of(context).textTheme.displayMedium
+                ?.copyWith(fontWeight: FontWeight.w900),
           ),
         ] else ...[
           Text(
             result.rescanReason ??
-                'The views did not provide enough agreement.',
+                'The photographs did not resolve the physical tray count.',
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 18),
           ...result.views.entries.map(
             (entry) => _MetricRow(
               label: entry.key.toUpperCase(),
-              value: entry.value.accepted ? 'CELL AGREES' : 'RECOUNT CELL',
+              value: entry.value.accepted ? 'VERIFIED' : 'REVIEW EVIDENCE',
             ),
           ),
           if (result.stacks.isNotEmpty) ...[
@@ -381,7 +378,7 @@ class _ResultPane extends StatelessWidget {
               builder: (context) => AlertDialog(
                 title: const Text('Manual recount'),
                 content: const Text(
-                  'Count the physical trays in each listed cell separately and record the cell ID and count in your inventory log. Do not sum overlapping views or treat these predictions as verified. To retry automation, start a new scan of one entire cell from all three angles.',
+                  'Count each physical stack once and record its tray count in your inventory log. Do not sum overlapping photographs. To retry, capture the same complete group of stacks from left, right and straight. Floor IDs are optional.',
                 ),
                 actions: [
                   TextButton(
@@ -393,10 +390,7 @@ class _ResultPane extends StatelessWidget {
             ),
             child: const Text('MANUAL RECOUNT'),
           ),
-          TextButton(
-            onPressed: onNewScan,
-            child: const Text('NEW SAME-CELL SCAN'),
-          ),
+          TextButton(onPressed: onNewScan, child: const Text('NEW SCAN')),
           FilledButton(
             onPressed: onRetake,
             child: Text(

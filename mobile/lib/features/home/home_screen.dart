@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() => _startingScan = true);
     try {
       final url = await widget.settings.getBaseUrl();
-      await ApiClient(url).requireCellIdentity();
+      await ApiClient(url).requireModelScan();
       if (!mounted) return;
       // Keep native camera startup out of the offline pilot and app launch.
       final cameras = await availableCameras();
@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 12),
               const Text(
-                'Photograph the same painted cell from three angles. Different cells are not comparable. Requires a cell-ID compatible backend.',
+                'Photograph the same group of stacks from left, right and straight. Painted floor IDs are optional.',
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 32),

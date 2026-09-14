@@ -32,11 +32,16 @@ class ApiClient {
   static bool supportsCellIdentity(Map<String, dynamic>? data) =>
       data?['status'] == 'ok' && data?['scan_contract'] == 'cell_identity_v1';
 
-  Future<void> requireCellIdentity() async {
+  static bool supportsModelScan(Map<String, dynamic>? data) =>
+      data?['status'] == 'ok' &&
+      data?['scan_contracts'] is List &&
+      (data!['scan_contracts'] as List).contains('model_spatial_v1');
+
+  Future<void> requireModelScan() async {
     final response = await _dio.get<Map<String, dynamic>>('/health');
-    if (!supportsCellIdentity(response.data)) {
+    if (!supportsModelScan(response.data)) {
       throw const FormatException(
-        'Photo verification needs the cell-ID backend update. No images were uploaded. Use the offline Grid + Height Pilot meanwhile.',
+        'The server needs the optional-marker scan update. No images were uploaded. Update the backend and retry.',
       );
     }
   }
@@ -48,13 +53,14 @@ class ApiClient {
     if (!session.isComplete) {
       throw StateError('LEFT, RIGHT, and STRAIGHT are required');
     }
-    await requireCellIdentity();
+    await requireModelScan();
     _cancelToken = CancelToken();
     DioException? lastError;
     for (var attempt = 0; attempt < 2; attempt += 1) {
       try {
         final form = FormData.fromMap({
           'scan_id': session.scanId,
+          'scan_contract': 'model_spatial_v1',
           for (final entry in session.cellIds.entries)
             '${entry.key}_cell_id': entry.value,
           'left': await MultipartFile.fromFile(
@@ -81,15 +87,15 @@ class ApiClient {
         );
         final data = response.data;
         if (data == null) throw const FormatException('Empty API response');
-        // Fail closed with old Workers/FastAPI servers that silently ignore cell IDs.
+        // Reject servers that silently ignore the requested analysis contract.
         if (data['processing'] is! Map ||
-            data['processing']['mode'] != 'cell_identity_v1' ||
+            data['processing']['mode'] != 'model_spatial_v1' ||
             data['cell_ids'] is! Map ||
             session.cellIds.entries.any(
               (entry) => data['cell_ids'][entry.key] != entry.value,
             )) {
           throw const FormatException(
-            'Server does not support this cell identity scan. Manual recount required; update the backend.',
+            'The server returned an incompatible scan result. Update the backend and retry.',
           );
         }
         return ScanResult.fromJson(data);

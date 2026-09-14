@@ -1,8 +1,66 @@
 # Progress
 
-Updated: 2026-09-12. Read this file before modifying the repository.
+Updated: 2026-09-14. Read this file before modifying the repository.
 
-## Completed work
+## Latest artifact checkpoint — 2026-09-14
+
+- After the prior process ended without an APK, resumed the cached release build successfully. Root artifact egg-tray-counter-0.2.2-hybrid.apk is version 0.2.2+5, 59,631,396 bytes, SHA-256 1ae72eb5fefab5ad695603b4cfaeb79d51e32a62c4a2a2224ae8ff042c8a7a4b. Manifest, APK v2 signature and ZIP CRC verified. Full evidence: reports/APK_0.2.2_BUILD.md.
+- This is an incomplete DEVELOPMENT hybrid build. Optional-marker capture/model diagnostics are implemented; automatic physical-stack matching, occupancy evidence and image-to-hybrid integration remain unfinished. No near-100% claim is supported.
+- The debug signing certificate differs from the old 0.2.1 APK. It cannot update that installation in place; preserve existing inventory data and obtain the original signing key for an upgrade. No device install/uninstall was attempted; adb listed no devices.
+- Checks: Flutter analysis clean, 16 mobile tests passed; 44 backend tests passed; Worker tsc/dry-run/11 tests passed; Ruff and whitespace checks passed. These validate code/build behavior, not field counting accuracy.
+- Fresh deployed V2 inference returned 29 versus img04 visual reference 32 (error 3, 9.375%). Instance precision and three-view hybrid accuracy remain unavailable. See reports/manual-reference-20260913/LIVE_EVALUATION.md.
+- Wrangler whoami is still unauthenticated on 2026-09-14. Existing deployment uses the old contract and is incompatible with the new mobile preflight. No new deployment, model promotion, commit or push occurred.
+- Next: obtain original signing key for in-place upgrades, complete CLI authentication and deploy the tested compatible backend, obtain real same-scene three-view photos with checked counts/occupancy, implement and evaluate automatic association/occupancy/hybrid integration, then perform device end-to-end tests. Plan and reusable prompt: docs/COUNTING_EXECUTION_PLAN.md.
+
+## Latest execution checkpoint — optional markers and reference evaluation
+
+### Continuation verification (2026-09-13, supersedes setup blockers below)
+
+- Flutter 3.47.4 / Dart 3.13.3 now run. Android platform 36, build-tools 36.0.0 and NDK 28.2.13676358 are installed under work/toolchains/android-sdk; user authorized SDK license acceptance. Android tools archive SHA-256 verified against vendor: 90ae805d20434428bffcb699c290860f19bb5f66a67e6b330067e3de801fb04a.
+- Mobile pub get succeeded, analysis has no issues after removing one redundant null fallback, and all 16 Flutter tests passed. Source version bumped to 0.2.2+5. Release APK build is running through initial Gradle setup; no artifact verified yet. Gradle 9.3.1 archive hash matches vendor 17f277867f6914d61b1aa02efab1ba7bb439ad652ca485cd8ca6842fccec6e43.
+- All 44 backend tests passed again; Ruff passed the new hybrid core, tests and evaluator. Worker npm run check passed tsc, Wrangler deployment dry-run and all 11 runtime tests. Git diff --check passed with line-ending warnings only.
+- Fresh inference through the existing deployed Worker succeeded (HTTP 200), V2 returned 29 for img04 against reference 32: absolute error 3, relative error 9.375%. This replaces the earlier limitation that only saved RF output was available. See reports/manual-reference-20260913/LIVE_EVALUATION.md and raw JSON. The request used three different benchmark scenes to exercise required upload fields; it is NOT a multi-view accuracy test.
+- Existing live health returns only status ok; ready reports configured V2. Actual inference is now verified through that deployment, but its old baseline contract is incompatible with the changed app. Wrangler whoami remains unauthenticated after the user-approved device flow timed out. No deployment or model promotion occurred.
+- Exact hybrid remains incomplete: automatic physical-stack association and per-layer occupancy evidence are not integrated. The new Worker path provides unresolved model evidence, not a certified count. Asked for a real same-scene three-view folder and checked physical tray total.
+- After midnight 2026-09-14: a second Wrangler device authorization also timed out; do not reuse either expired code. No Android device/emulator is attached (adb devices empty). APK build remains active in Gradle dependency/configuration compilation; the JVM is making progress, but available RAM is under 1 GB. No new APK has been produced or verified.
+
+Build continuation (PowerShell from mobile, after checking for an existing build process): set ANDROID_HOME and ANDROID_SDK_ROOT to the absolute work/toolchains/android-sdk directory; set JAVA_TOOL_OPTIONS to `-Djavax.net.ssl.trustStoreType=Windows-ROOT -Djavax.net.ssl.trustStore=NONE`; run `..\work\toolchains\flutter\bin\flutter.bat build apk --release`. Version is 0.2.2+5 and signing still uses the existing debug key configuration. If a package is produced, verify manifest, signature and SHA-256 before copying/delivering it. The current source is an incomplete development counter, not a near-100% hybrid release.
+
+- Restored backend requirements into work/vision-deps using bundled Python 3.12 and the official PyPI index. All 44 backend tests passed (dependency deprecation and pytest cache-write warnings). The 11 Worker runtime tests passed using Node TypeScript transformation; full tsc/Wrangler checks are still blocked by npm installation failures.
+- Mobile capture now accepts omitted floor IDs; optional IDs remain validated. Mobile API requests model_spatial_v1; Worker accepts that contract without markers, retains spatial model boxes and returns explicitly unresolved diagnostic counts. This is NOT an operational exact-count hybrid. Mobile edits/tests have not yet run under Flutter.
+- Saved manual reference and reproducible evaluation script. Reference: 32 visible trays (16 + 16), non-blind visual recount. Historical RF replay: 29, error -3, absolute error 9.375%. Fresh assisted layer-only experiment: 23, error -9, absolute error 28.125%. Exploratory RF-guided layer candidate: unresolved left face, 14 on right, no total. No operational three-view hybrid accuracy or instance precision/recall result exists. No benchmark labels changed.
+- Created docs/COUNTING_EXECUTION_PLAN.md with ordered work and reusable prompt. Saved a user-requested memory note for the visual reference, including its limitations.
+- User reports service authentication complete; browser tab inventory contains the Cloudflare dashboard and Roboflow workspace. Repeated page-control failures (CDP focus/Page.enable and webview attachment timeouts) prevent live inference/deployment verification. Preserve the sessions; do not ask for private credentials in chat.
+- APK setup underway: Flutter stable source cloned to work/toolchains/flutter but checkout initially failed on Windows long paths. core.longpaths enabled locally; restore is running/needs verification. Android command-line tool download was resumed after a nearly-complete timeout; verify vendor SHA-256 before extraction. No new APK exists.
+- Worker npm ci retries fail with npm exit-handler/network errors, including an escalated retry; inspect latest log and use a supported package manager/runtime. No deployment, model promotion or source push performed.
+
+### Immediate continuation steps
+
+1. Finish/verify Flutter checkout and Android SDK tool hash/extraction, then resolve required JDK/SDK licenses and run Flutter checks/build. Do not label diagnostic-only source as a completed hybrid APK.
+2. Recover browser control or verified Wrangler/API access using existing authenticated sessions; do not deploy diagnostic-only changes as exact counting.
+3. Improve automatic stack-face localization, tray rim counting and cross-view association against development images; handle occupancy explicitly. Keep saved manual truth outside inference inputs.
+4. Re-run frozen and held-out multi-view evaluation; report count errors, rejected coverage, assistance and missing precision labels honestly. Complete image-to-hybrid integration before claiming an exact backend count.
+
+## Current checkout correction — 2026-09-13
+
+- Verified starting HEAD: `a6c4263b9f211068572d6e510847d077a9cdec53`, branch `codex/hybrid-cell-counting`; starting working tree was clean.
+- The older interrupted hybrid source listed below is ABSENT from this checkout. Treat that section as history, not present implementation. No local backend virtualenv or Worker node_modules was found. The installed Python 3.14 and parent virtualenv lack pytest/OpenCV; Flutter is not on PATH.
+- Read AGENTS.md, context.md and the handover/digest/continuation documents, plus the relevant prior conversation. Root previous_context.md and prompt.md are absent; context.md and previous_chat.md supply continuation requirements.
+- Implemented new standalone `backend/app/vision/hybrid.py`: uncertainty-aware measured height candidates, stable column identity, exact evidence agreement, distinct image/pose checks, explicit per-layer egg occupancy, and complete-scope totals. It is NOT connected to API/mobile and does NOT detect image markers or egg occupancy.
+- Added `backend/tests/test_hybrid_core.py`: 20 unittest cases passed using Python 3.14, covering measurement ambiguity, bounds, disagreement, missing columns, empty trays, unknown occupancy, duplicate images/columns and camera pose consistency. Full backend/Worker/Flutter suites have not run in this checkout.
+- Added `docs/hybrid-evidence-contract.md` with required trusted vision inputs and held-out evaluation rules. No new field accuracy result exists.
+- Final core rerun: all 20 tests passed after strict boolean validation. Python syntax checks passed; git diff --check passed for tracked edits (line-ending normalization warnings only). Recomputed historical summary.json metrics: 10 images, 2 exact, MAE 22.9; no inference was rerun.
+- Existing artifacts, model and endpoints are unchanged. No APK build, deployment, live readiness verification, commit or push in this session. Earlier APK hash and live-service checks below remain historical reports.
+
+### Next steps from this checkout
+
+1. Obtain real three-view warehouse photographs with manually verified per-column tray/occupancy counts, surveyed floor/wall references and camera calibration. Asked the user for the folder path; no answer received yet.
+2. Restore a compatible backend test environment and Worker dependencies, then implement and test image-to-evidence geometry, spatial RF association and occupancy adapters against those measurements. Never mark generic egg_tray detections as occupancy proof.
+3. Connect the tested evidence component to an authenticated Python service and Worker gateway, including calibration identity and idempotency, then unify mobile capture/results and manual review.
+4. Evaluate untouched held-out scenes with exact counts, MAE and acceptance/rescan coverage. Calibrate evidence thresholds from development data; do not claim near-100% from unit tests.
+5. Verify service authentication/readiness, run all platform checks, then build/deploy the requested 0.2.2+5 APK and record hash/signature/device evidence. Those delivery goals remain incomplete.
+
+## Completed work (historical checkpoint)
 
 - Inspected repository history and current mobile/Worker counting flow at commit `8073dbe`.
 - Read the user's continued-development handover and existing technical handover.
@@ -70,3 +128,51 @@ Updated: 2026-09-12. Read this file before modifying the repository.
 The user requested preserving the chat and pushing it to GitHub. `previous_chat.md` records the available user/assistant conversation; runtime instructions and raw tool logs are excluded. `context.md` contains the concise continuation context. Only these documentation files and `AGENTS.md` are intended for this checkpoint. Documentation verification and push result are recorded below after execution.
 
 Documentation verification: all four files read successfully; both supplied continuation briefs are preserved in full, transcript placeholders are resolved, and targeted credential-pattern checks found no matches. Git whitespace checks passed. Checkpoint commit `a95a162a7af918a3f393db2099abfdd53db1ca57` was successfully pushed to `origin/codex/hybrid-cell-counting`. Git confirmed creation of the remote branch and tracking configuration. Unfinished hybrid source remains local and uncommitted.
+
+## 2026-09-14 — backend clarification and requested GitHub checkpoint
+
+The user asked why deployment is blocked while inference works, whether the
+backend routes directly to Roboflow, why exact hybrid counting is unfinished,
+what to do next, and to append the progress/previous context and push to GitHub.
+
+- Live checks repeated: /health returns status ok; /ready reports ready and
+  projec-mutta/2. Wrangler whoami again explicitly reports unauthenticated.
+  These are different capabilities: the existing deployed Worker can serve
+  requests using its server-side Roboflow credential even though this machine
+  lacks authorization to replace the Worker. Browser sign-in is not proof that
+  Wrangler completed its own authorization. Previous device flows expired.
+- Verified request path: Android app -> Cloudflare Worker -> Roboflow serverless
+  projec-mutta/2 -> Worker response -> app. The APK does not call Roboflow with a
+  bundled private key. The deployed processing mode observed in the saved live
+  response is cloudflare_roboflow_egg_tray_baseline. It uses whole-photo count
+  agreement/mismatch logic, not the requested physical-stack hybrid.
+- The current Python service has a separate layer-counting path with spatial-order
+  association. The newly added calibrated hybrid core has no API/image adapter
+  and the live Worker does not call it. Automatic robust cross-view identity,
+  per-tray egg occupancy and optional-marker evidence extraction/integration are
+  unfinished implementation work, not merely authentication blockers.
+- The 0.2.2 app expects model_spatial_v1, which the live health response does not
+  advertise. Deploying the current local Worker would restore that contract and
+  expose unresolved model evidence; it would NOT complete exact hybrid counting.
+  APK compilation and 71 passing tests do not prove inventory accuracy.
+- Remedy for deployment: complete Wrangler OAuth on the deploying machine, or
+  configure a narrowly scoped Cloudflare deployment token through a local secret
+  environment/GitHub Actions secret, or connect the repository using Cloudflare
+  Workers Builds. No private token belongs in chat, source or the APK.
+- Remedy for counting: finish the image-to-evidence adapter and Python gateway,
+  robustly associate physical stacks across views, classify visible occupancy,
+  fuse model/layer/calibrated-height evidence with explicit uncertainty, then
+  evaluate held-out same-scene three-view captures with checked per-stack counts.
+  Missing floor IDs must use the model/layer route. Occluded/ambiguous content
+  cannot be certified from photo-count agreement.
+- Retained evidence: fresh V2 29 vs visible manual reference 32 (error 3, 9.375%);
+  assisted layer-only 23; guided hybrid unresolved. No measured hybrid precision
+  or three-view exact-count accuracy exists. Existing references stay frozen.
+- This GitHub checkpoint includes the actual source, tests, plan and reports,
+  explicitly labelled unfinished, to avoid a handover referring to absent code.
+  The APK remains a local ignored artifact, not a GitHub release upload.
+  previous_context.md is newly created because no file with that name existed;
+  existing context.md and previous_chat.md history is preserved.
+
+Authentication references: https://developers.cloudflare.com/workers/wrangler/commands/general/
+and https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/.
