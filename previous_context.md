@@ -1,5 +1,16 @@
 # Previous context — 2026-09-14 checkpoint
 
+## Latest continuation — 2026-09-15 retraining clarification
+
+Read the latest section in docs/100_TRAY_SCENE_PLAN.md before the historical
+entries below. New photos are archived under reports/individual-trays-20260915/:
+14 attachments, six unique files, ten draft foreground observations. No model
+retraining yet. Complete labels and occupancy review, evaluate the unchanged
+model, then train/evaluate a separate candidate on scene-separated data.
+19/19/20/19/19 are assisted band measurements, not tray counts or RF output.
+No truth-based correction, production deployment or APK rebuild is authorized
+by this documentation update.
+
 Created at the user's request. This filename did not previously exist.
 Existing conversation history remains in previous_chat.md; current requirements
 remain in context.md and chronological evidence in PROGRESS.md.
@@ -147,3 +158,19 @@ Next: full-resolution top/bottom-complete captures/raw RF boxes and per-instance
 rim/visibility review; evaluate automatic proposals, physical rim identity and
 endpoint evidence, then independent held-out arrangements. Preserve old frozen
 benchmarks. Continue only locally/candidate route; do not rebuild Android yet.
+
+
+## 2026-09-15 — individual tray photographs received
+
+Archived14 attachments as6 byte-unique photographs under
+reports/individual-trays-20260915/ with hashes and duplicate mapping. Visually
+reviewed: four foreground loaded trays in images1/2, one central loaded tray
+in4/5; image3 blurred; image6 mixed/nested/sparse-content stacks needs review.
+Added10 selected foreground observation boxes as manual drafts, not10 unique
+physical trays. Background annotations incomplete; no training-ready export.
+No inference, retraining, deployment or APK rebuild. New scene totals unknown;
+never transfer the earlier100-tray truth to these captures. Next: review full
+instance/rim labels, confirm small-stack physical counts and egg-vs-shell
+occupancy, run unchanged model and measure matched detection errors.
+Verification: unique source hashes preserved; annotation boxes in image bounds;
+all JSON parsed. This intake changes data/docs only; no runtime tests required.

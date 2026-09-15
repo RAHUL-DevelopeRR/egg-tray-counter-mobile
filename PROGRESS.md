@@ -1,5 +1,31 @@
 # Progress
 
+## GitHub publication checkpoint — 2026-09-15
+
+- User requested committing and pushing all pending changes, including this file
+  and context.md, to origin/codex/hybrid-cell-counting.
+- Included the retraining clarification, architecture/continuation documents,
+  six original photographs, attachment manifest and draft foreground labels.
+- Verified both intake JSON files parse, all attachment and annotation hashes
+  match archived photos, and all draft boxes fit their manifest dimensions.
+  Targeted credential-pattern scan passed. Runtime tests were not rerun because
+  this checkpoint changes documentation and data only.
+- Artifact remains the previously verified 0.2.2+5 development APK; production
+  remains the recorded baseline rollback. No build, training or deployment here.
+- Next: complete instance/occupancy label review, save unchanged-model raw
+  predictions, then evaluate a separate candidate on held-out scenes. Missing
+  reviewed labels and original capture triplet remain development prerequisites.
+
+## Documentation update — retraining clarification, 2026-09-15
+
+Appended the training/validation sequence to docs/100_TRAY_SCENE_PLAN.md and
+updated context, previous context, architecture and conversation summary.
+Recorded six unique photo inputs, incomplete draft labels and the distinction
+between physical tray detection and brightness bands19/19/20/19/19. Training
+has not started; no accuracy, deployment or APK changes claimed. Next: reviewed
+instance/occupancy labels, raw baseline predictions, representative training
+data and held-out evaluation. This update is documentation only.
+
 Updated: 2026-09-15. Read this file before modifying the repository.
 
 Latest research: see `reports/user-100-tray-case-20260915/RESEARCH_20260915.md`
@@ -338,3 +364,19 @@ no Android/Worker source changed. Publication targets codex/hybrid-cell-counting
 Publication verification also checks the staged measurement content against
 the canonical-JSON SHA-256, avoiding Windows/Git line-ending differences.
 All artifact/JSON/link and targeted credential-pattern checks passed.
+
+
+## 2026-09-15 — individual tray photographs received
+
+Archived14 attachments as6 byte-unique photographs under
+reports/individual-trays-20260915/ with hashes and duplicate mapping. Visually
+reviewed: four foreground loaded trays in images1/2, one central loaded tray
+in4/5; image3 blurred; image6 mixed/nested/sparse-content stacks needs review.
+Added10 selected foreground observation boxes as manual drafts, not10 unique
+physical trays. Background annotations incomplete; no training-ready export.
+No inference, retraining, deployment or APK rebuild. New scene totals unknown;
+never transfer the earlier100-tray truth to these captures. Next: review full
+instance/rim labels, confirm small-stack physical counts and egg-vs-shell
+occupancy, run unchanged model and measure matched detection errors.
+Verification: unique source hashes preserved; annotation boxes in image bounds;
+all JSON parsed. This intake changes data/docs only; no runtime tests required.

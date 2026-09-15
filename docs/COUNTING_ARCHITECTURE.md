@@ -1,5 +1,11 @@
 # Counting architecture and ground-truth workflow
 
+Latest training clarification (2026-09-15): see [the phased plan](100_TRAY_SCENE_PLAN.md).
+Physical tray detection, egg occupancy and cross-view deduplication must be
+validated separately. The assisted19/19/20/19/19 brightness bands are supporting
+research evidence, not accepted tray counts. The new individual-tray photos
+have incomplete draft labels; no retraining or model promotion has occurred.
+
 Checkpoint: 2026-09-15. This separates the recorded production baseline from
 the proposed hybrid. No deployment or new APK is part of this checkpoint.
 

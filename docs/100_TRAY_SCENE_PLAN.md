@@ -1,5 +1,48 @@
 # Plan for the user-reported 100-filled-tray scene
 
+## Latest clarification — 2026-09-15: retraining and band results
+
+Retraining can target physical tray detection and observable egg occupancy, but
+no retraining job, new weights or model promotion has occurred in this work.
+The new 14 attachments contain six unique photographs; ten selected foreground
+observations are draft manual boxes, not ten unique trays or exhaustive labels.
+See [photo intake](../reports/individual-trays-20260915/README.md).
+
+The 19/19/20/19/19 results came from local brightness-band analysis with manual
+stack faces, not Roboflow. Bands can follow egg rows rather than physical rims.
+Their sum of 96 is not verified inventory. Each is one below the reported
+physical count, but adding one per column would be truth-specific overfitting.
+Crop endpoints, physical rim identity and occupancy remain unresolved. Retraining
+does not automatically correct this separate image-processing algorithm.
+
+Next steps:
+
+1. Correct foreground labels and annotate every visible tray in training images,
+   or use reviewed crops that exclude unlabelled background trays. Confirm the
+   small-stack counts and egg-versus-shell contents in photo 6. Do not fabricate
+   geometry or visible occupancy for hidden layers.
+2. Run the unchanged model with saved raw predictions/settings, then identify
+   misses, duplicates, merged trays and wrong occupancy using matched labels.
+3. Add varied stack arrangements to the audited existing data. The six related
+   photos supplement development data; they do not establish general accuracy.
+   Split by physical arrangement/session before cropping or augmentation.
+4. Train a separate candidate to locate one physical tray per instance, with
+   occupancy supervision. Egg-containing includes partly filled trays. Shell-only
+   trays must not be mistaken for egg-containing trays. Unknown contents require
+   abstention, not an invented filled/empty label. Add rim/corner supervision if
+   the instance error audit shows box labels cannot resolve adjacent trays.
+5. Measure precision/recall/F1, per-stack and scene exact match, occupancy errors,
+   false acceptance and automatic coverage on untouched arrangements. Correct
+   totals with compensating misses/duplicates do not prove correct detection.
+6. Combine validated tray detections with physical-rim evidence, optional measured
+   height and cross-view identity. Count each resolved egg-containing tray once.
+   A 3D display or painted floor cells cannot reveal hidden contents.
+
+Exact 101 physical / 100 eligible on the known scene is a regression gate, not
+universal accuracy. Additional views or physical verification remain necessary
+when evidence is insufficient. No APK rebuild or production replacement yet.
+Roboflow evaluation reference: https://docs.roboflow.com/train/evaluate-trained-models.
+
 Date: 2026-09-15. Planning only; leave the rolled-back production baseline unchanged.
 
 ## Evidence and target

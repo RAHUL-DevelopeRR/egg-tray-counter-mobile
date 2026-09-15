@@ -1411,3 +1411,12 @@ The user asked to proceed, then to append/push these findings with relevant
 images and architecture. The archive includes source photos and diagnostic
 layer overlays; it explicitly distinguishes user-reported truth, historical
 model output and the assisted layer experiment.
+# 2026-09-15 — retraining discussion summary
+
+User requested appending contextual documents and asked whether retraining can
+detect/classify/count physical trays and what19/19/20/19/19 bands mean. The latest
+plan explains that these are assisted brightness features, not model output;
+retraining has not started. Six unique new photos are useful development inputs
+but need complete labels and occupancy review. Exact counting needs physical
+instance detection, contents evidence, cross-view deduplication and held-out
+validation. No correction to force100/101, deployment or APK rebuild is claimed.

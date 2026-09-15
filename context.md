@@ -1,5 +1,24 @@
 # Current development context
 
+## Latest publication request — 2026-09-15
+
+User authorized pushing all pending repository changes, including PROGRESS.md,
+context.md, supporting documentation and individual-tray photo/annotation data,
+to codex/hybrid-cell-counting. This is a development checkpoint; the existing
+no-APK-rebuild and no-production-replacement requirements remain active.
+
+## Latest clarification — retraining, 2026-09-15
+
+User requested appending context and explaining retraining and the band counts.
+See docs/100_TRAY_SCENE_PLAN.md, latest clarification, for the execution sequence.
+Retraining has not started. Six unique newly supplied photos have incomplete
+draft foreground labels; they supplement development data. Need full visible
+tray labels, shell/egg occupancy review, unchanged-model inference, varied
+arrangements and a scene-separated held-out evaluation before model promotion.
+19/19/20/19/19 are assisted brightness-band candidates, not RF predictions or
+verified physical trays. Do not add one per stack or force the known total.
+Physical and eligible counts remain unresolved. Production and APK stay unchanged.
+
 Updated: 2026-09-15. Read with `PROGRESS.md` before work.
 
 Latest override: local per-stack research only; no APK rebuild or baseline
@@ -168,3 +187,19 @@ Next: full-resolution top/bottom-complete captures/raw RF boxes and per-instance
 rim/visibility review; evaluate automatic proposals, physical rim identity and
 endpoint evidence, then independent held-out arrangements. Preserve old frozen
 benchmarks. Continue only locally/candidate route; do not rebuild Android yet.
+
+
+## 2026-09-15 — individual tray photographs received
+
+Archived14 attachments as6 byte-unique photographs under
+reports/individual-trays-20260915/ with hashes and duplicate mapping. Visually
+reviewed: four foreground loaded trays in images1/2, one central loaded tray
+in4/5; image3 blurred; image6 mixed/nested/sparse-content stacks needs review.
+Added10 selected foreground observation boxes as manual drafts, not10 unique
+physical trays. Background annotations incomplete; no training-ready export.
+No inference, retraining, deployment or APK rebuild. New scene totals unknown;
+never transfer the earlier100-tray truth to these captures. Next: review full
+instance/rim labels, confirm small-stack physical counts and egg-vs-shell
+occupancy, run unchanged model and measure matched detection errors.
+Verification: unique source hashes preserved; annotation boxes in image bounds;
+all JSON parsed. This intake changes data/docs only; no runtime tests required.
