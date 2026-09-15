@@ -1,0 +1,63 @@
+{
+  "truth_source": "user report; not independently recounted",
+  "interpretation": "User confirmed five columns of 20 egg-containing trays, plus one empty on top of middle column",
+  "egg_containing_trays": 100,
+  "empty_trays": 1,
+  "original_triplet_available": false,
+  "per_stack_truth": [
+    {
+      "column_from_left": 1,
+      "egg_containing_trays": 20,
+      "empty_trays": 0
+    },
+    {
+      "column_from_left": 2,
+      "egg_containing_trays": 20,
+      "empty_trays": 0
+    },
+    {
+      "column_from_left": 3,
+      "egg_containing_trays": 20,
+      "empty_trays": 1
+    },
+    {
+      "column_from_left": 4,
+      "egg_containing_trays": 20,
+      "empty_trays": 0
+    },
+    {
+      "column_from_left": 5,
+      "egg_containing_trays": 20,
+      "empty_trays": 0
+    }
+  ],
+  "empty_tray_location": {
+    "column_from_left": 3,
+    "position": "top"
+  },
+  "reported_counts": {
+    "left": 84,
+    "right": 90,
+    "straight": 87
+  },
+  "fresh_inference": false,
+  "detection_precision": null,
+  "detection_recall": null,
+  "assets": [
+    {
+      "file": "result-1.jpg",
+      "sha256": "f40b22ae28935a8ee3c95a5131c7268ca14231c13a0c676315c5698538a8ad97"
+    },
+    {
+      "file": "result-2.jpg",
+      "sha256": "21b7b28fb9603ff9a65596065d3c14b4a8d92ba2fb41c979430bb71a1bf38405"
+    },
+    {
+      "file": "scene-annotated.jpg",
+      "sha256": "77aa8978c07b1e70a24ba83a65edacf12db33a4fc4216c684cc4c29d8af62fc3"
+    }
+  ],
+  "physical_trays": 101,
+  "supplied_folder": "C:/Users/DELL/Downloads/WhatsApp Unknown 2026-09-15 at 11.48.36 AM",
+  "folder_contents": "two result-screen photos and one blue-annotated scene image; not original capture triplet"
+}

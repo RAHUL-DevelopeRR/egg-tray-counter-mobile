@@ -1,0 +1,143 @@
+{
+  "method": "existing layer counter; manual faces on annotated compressed image",
+  "automatic_localization": false,
+  "occupancy_evaluated": false,
+  "eligible_tray_total": null,
+  "columns": [
+    {
+      "column_from_left": 1,
+      "manual_polygon": [
+        [
+          60,
+          77
+        ],
+        [
+          181,
+          78
+        ],
+        [
+          205,
+          476
+        ],
+        [
+          84,
+          479
+        ]
+      ],
+      "layer_candidate": 40,
+      "pitch_px": 20.0,
+      "quality": 0.44772406155712957,
+      "reason": null,
+      "user_reported_physical_trays": 20,
+      "signed_physical_count_error": 20
+    },
+    {
+      "column_from_left": 2,
+      "manual_polygon": [
+        [
+          181,
+          78
+        ],
+        [
+          305,
+          78
+        ],
+        [
+          321,
+          475
+        ],
+        [
+          205,
+          476
+        ]
+      ],
+      "layer_candidate": 10,
+      "pitch_px": 77.0,
+      "quality": 0.8598172565301081,
+      "reason": null,
+      "user_reported_physical_trays": 20,
+      "signed_physical_count_error": -10
+    },
+    {
+      "column_from_left": 3,
+      "manual_polygon": [
+        [
+          305,
+          61
+        ],
+        [
+          430,
+          64
+        ],
+        [
+          438,
+          475
+        ],
+        [
+          321,
+          475
+        ]
+      ],
+      "layer_candidate": 10,
+      "pitch_px": 74.0,
+      "quality": 0.8580578912241732,
+      "reason": null,
+      "user_reported_physical_trays": 21,
+      "signed_physical_count_error": -11
+    },
+    {
+      "column_from_left": 4,
+      "manual_polygon": [
+        [
+          430,
+          76
+        ],
+        [
+          550,
+          77
+        ],
+        [
+          555,
+          475
+        ],
+        [
+          438,
+          475
+        ]
+      ],
+      "layer_candidate": 11,
+      "pitch_px": 76.0,
+      "quality": 0.7749067033510634,
+      "reason": null,
+      "user_reported_physical_trays": 20,
+      "signed_physical_count_error": -9
+    },
+    {
+      "column_from_left": 5,
+      "manual_polygon": [
+        [
+          550,
+          77
+        ],
+        [
+          673,
+          69
+        ],
+        [
+          673,
+          477
+        ],
+        [
+          555,
+          475
+        ]
+      ],
+      "layer_candidate": 11,
+      "pitch_px": 75.0,
+      "quality": 0.7885840537838893,
+      "reason": null,
+      "user_reported_physical_trays": 20,
+      "signed_physical_count_error": -9
+    }
+  ]
+}

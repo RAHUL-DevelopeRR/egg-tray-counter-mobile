@@ -68,15 +68,14 @@ def test_three_view_scan_is_verified_and_idempotent(test_settings) -> None:
         assert second.json() == payload
 
 
-def test_egg_tray_alias_runs_rectification_and_layer_counter(test_settings) -> None:
+def test_egg_tray_alias_cannot_certify_a_stack_count(test_settings) -> None:
     provider = EggTrayFaceProvider()
     with TestClient(create_app(test_settings, provider)) as api:
         response = api.post("/v1/scans/count", files=triplet())
-    assert response.status_code == 200
+    assert response.status_code == 503
     payload = response.json()
-    assert payload["status"] == "verified"
-    assert payload["total_trays"] == 18
-    assert payload["processing"]["mode"] == "roboflow_cloud"
+    assert payload["detail"]["code"] == "unsupported_model_output"
+    assert "complete stack faces" in payload["detail"]["message"]
 
 
 def test_invalid_mime_type(test_settings) -> None:

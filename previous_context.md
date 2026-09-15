@@ -92,3 +92,27 @@ passed; APK 0.2.2 contract compatibility is restored. Read
 reports/cloudflare-deployment-20260914/README.md for evidence. Earlier deployment
 blockers above are superseded. Exact hybrid integration and device validation
 remain unfinished; do not interpret successful deployment as counting accuracy.
+
+## Later update — requested baseline rollback, 2026-09-15
+
+User explicitly requested restoring the older backend without required cell IDs.
+Wrangler rollback succeeded: version 621a5a9c-f486-455f-9a15-0965ca3a710f at
+100% traffic. Health and V2 readiness passed. Fresh upload checks encountered
+TLS resets, so post-rollback inference is unverified. Local source remains newer;
+do not redeploy it accidentally. APK 0.2.2 requires the removed model_spatial_v1
+contract and is incompatible with this baseline. No APK rebuilt in this turn.
+
+
+## Later update — 100-tray evidence and architecture checkpoint, 2026-09-15
+
+User confirmed five columns of 20 egg-containing trays, plus one empty on top
+of the middle column. Supplied folder contains two result photographs and the
+annotated scene, not original captures. Archived source images/hashes, reported
+84/90/87 counts and manual-ROI layer diagnostic 40/10/10/11/11 under
+reports/user-100-tray-case-20260915/. Neither is an exact hybrid result.
+Local service guard rejects individual tray boxes as whole-stack faces;
+44 backend tests passed. No production deployment or APK rebuild occurred.
+
+Read docs/COUNTING_ARCHITECTURE.md for current/proposed pipelines and independent
+truth/scoring, and docs/100_TRAY_SCENE_PLAN.md for next steps and validation gates.
+User requested these records and images be appended and pushed to GitHub.

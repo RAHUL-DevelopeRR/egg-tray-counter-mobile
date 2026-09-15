@@ -1,6 +1,64 @@
 # Progress
 
-Updated: 2026-09-14. Read this file before modifying the repository.
+Updated: 2026-09-15. Read this file before modifying the repository.
+
+## Development resumed — 100-tray case, 2026-09-15
+
+- User authorized proceeding and confirmed five columns of 20 egg-containing
+  trays plus one empty on top of middle column (physical per-column 20/20/21/20/20).
+  Saved attachments with hashes and user-reported truth in
+  reports/user-100-tray-case-20260915/reference.json. This is not independently
+  recounted inventory; keep separate from the earlier 32-tray img04 benchmark.
+- Inspected the user-supplied WhatsApp folder. It contains two screen photos and
+  the blue-annotated scene, not the original LEFT/RIGHT/STRAIGHT captures. Asked
+  for those originals or a fresh triplet; no confirmed triplet yet available.
+- Fixed local CountingService: individual egg_tray boxes cannot enter the
+  whole-stack layer counter even with the experimental provider alias. Updated
+  API regression test verifies typed unsupported_model_output rather than false
+  verification. Production Cloudflare baseline remains unchanged.
+- All 44 backend tests passed using the Python standard OS fallback after this
+  host's WMI query failed (0x8007000e). Initial WMI-disabled retry failed because
+  platform expected an exception, not None; final harness raised OSError from
+  _wmi_query, with no application logic patched. Targeted Ruff checks passed.
+- Added runnable scripts/evaluate_100_tray_layers.py using existing rectification,
+  layer extraction and overlays. Manual face ROIs on the 675x507 supplied image
+  produced 40/10/10/11/11 physical-layer candidates versus 20/20/21/20/20.
+  Column-2 overlay visually skips alternating rows despite quality 0.86. This
+  demonstrates layer-period ambiguity; quality is not calibrated count accuracy.
+  No global factor, truth-based pitch or automatic eligible total applied.
+- Next: original captures/raw detections, diagnose per-tray errors and layer
+  harmonics together, improve stack localization and spacing ambiguity handling,
+  then cross-view identity/occupancy integration. No training, deployment or APK
+  rebuild in this development checkpoint. Full hybrid objective remains incomplete.
+
+## Latest production state — baseline rollback, 2026-09-15
+
+Planning update: user supplied screenshots reporting V2 84/90/87 and a scene
+photo; states 100 trays plus one extra empty. Interpreted as 100 egg-containing
+and 1 empty, user-reported (not independently recounted). Count errors 16/10/13;
+no instance precision can be derived. Saved phased diagnosis, retraining,
+row/column/layer reconstruction, optional marker and held-out validation plan in
+docs/100_TRAY_SCENE_PLAN.md. Original three capture files, raw detections and
+per-stack/empty-tray labels are still needed to identify causes. No model training,
+backend redeployment or APK change made for this planning request. Preserve the
+32-tray img04 benchmark separately; production remains the rolled-back baseline.
+
+- User explicitly requested the older baseline backend without cell IDs.
+  Wrangler deployment history identified the immediately preceding version as
+  621a5a9c-f486-455f-9a15-0965ca3a710f (2026-08-31). Rolled back to that exact
+  version with `wrangler rollback <version> --yes`; CLI confirmed 100% traffic.
+- Replaced version 0519381f-b99e-4015-8279-cb2c0f99f7f2. Local source was not
+  reverted; do not redeploy it unintentionally, since it restores the newer API.
+- Live /health returned status ok and /ready identified Roboflow projec-mutta/2.
+  Evidence: reports/cloudflare-rollback-20260915/. Post-rollback image uploads
+  could not be verified: curl and httpx both hit connection resets during TLS.
+  No successful fresh inference or no-ID upload is claimed for this rollback.
+  The same historical baseline previously passed inference in the saved report.
+- The 0.2.2 APK requires model_spatial_v1 and will reject the restored baseline
+  health response. Rolling back the server does not remove mandatory UI fields
+  from 0.2.1 either. A baseline-compatible APK is required; none rebuilt here.
+- Previous successful optional-marker deployment entries below are historical
+  and superseded by this user-requested rollback. Hybrid work remains preserved.
 
 ## Latest deployment checkpoint — 2026-09-14
 
@@ -207,3 +265,31 @@ test, context and report files in the checkpoint are now on GitHub. Staged
 whitespace and targeted credential-pattern checks passed. This is source
 publication only; Cloudflare was not deployed and the APK was not uploaded as
 a release asset. This follow-up documentation records the verified push outcome.
+
+
+## 2026-09-15 — requested evidence and architecture publication
+
+Appended the ground-truth discussion and linked source images, diagnostic overlays
+and current/proposed architecture in docs/COUNTING_ARCHITECTURE.md and the case
+README. Preserved user-reported 100 filled + 1 empty separately from inference
+and the older 32-tray reference. Ground truth is for labels/scoring, never a
+runtime correction factor. Optional markers aid pose/scale; a 3D display cannot
+recover hidden occupancy by assumption.
+
+This checkpoint includes the pending local stack-face guard/regression test,
+reproducible layer diagnostic and rollback evidence. Earlier verification: 44
+backend tests and targeted Ruff passed; the real layer diagnostic failed with
+40/10/10/11/11 candidates. No new training, APK build or deployment is claimed.
+Current recorded production version remains 621a5a9c-f486-455f-9a15-0965ca3a710f;
+local APK remains 0.2.2+5 and incompatible with that baseline preflight.
+
+Next: obtain original LEFT/RIGHT/STRAIGHT images/raw predictions; label per-tray
+errors, fix localization/layer ambiguity, integrate occupancy and cross-view
+identity, evaluate held-out scenes, then build/test a compatible APK. Publish
+this checkpoint on codex/hybrid-cell-counting after evidence/whitespace checks.
+
+Publication checks: all three supplied image SHA-256 hashes match reference.json;
+case JSON parses and local architecture/report links resolve. Staged whitespace
+and targeted credential-pattern checks passed. Remote branch was fetched and
+matched local HEAD before this checkpoint commit. Prior 44-test result retained;
+documentation/image append does not introduce new runtime changes.

@@ -1378,3 +1378,36 @@ Fresh V2 returned 29 versus the retained visible manual reference of 32.
 Append the findings and next steps, create previous_context.md as requested,
 and publish the actual unfinished source/tests/reports with this checkpoint.
 Earlier documentation-only checkpoint descriptions above remain historical.
+
+
+## 2026-09-15 — subsequent conversation summary (not a verbatim transcript)
+
+The user requested restoring the older no-cell-ID backend. The requested
+Cloudflare rollback succeeded; its evidence and APK compatibility limits are
+in PROGRESS.md and reports/cloudflare-rollback-20260915/.
+
+The user supplied screen photographs showing left 84, right 90 and straight 87
+with count not verified, plus an annotated scene. They confirmed the physical
+reference as five columns with 20 egg-containing trays each and one additional
+empty tray on top of the middle column. The supplied WhatsApp folder contained
+screen photographs and the annotated image, not the original capture triplet.
+
+The discussion clarified that agreement between photos does not establish truth.
+Ground truth must be recorded independently and compared with saved predictions
+and matched tray labels. A known total cannot identify missing instances or
+justify multiplying future predictions by a correction factor. Fix localization,
+layer and occupancy failures, then test unseen arrangements and counts.
+
+Painted cells/fiducials can support footprint identity and calibrated pose;
+vertical measurement needs appropriate calibration/reference. They do not count
+trays or establish hidden egg occupancy. Keep markers optional and use image
+association when absent. A row/column/layer 3D display should represent observed
+filled, empty and unknown layers, without inventing hidden trays. Universal
+100% from arbitrary photographs is not established. See
+[architecture](docs/COUNTING_ARCHITECTURE.md) and
+[phased plan](docs/100_TRAY_SCENE_PLAN.md).
+
+The user asked to proceed, then to append/push these findings with relevant
+images and architecture. The archive includes source photos and diagnostic
+layer overlays; it explicitly distinguishes user-reported truth, historical
+model output and the assisted layer experiment.

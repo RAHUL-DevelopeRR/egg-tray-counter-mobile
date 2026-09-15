@@ -1,6 +1,30 @@
 # Current development context
 
-Updated: 2026-09-14. Read with `PROGRESS.md` before work.
+Updated: 2026-09-15. Read with `PROGRESS.md` before work.
+
+User has now authorized implementing the 100-tray plan. Confirmed truth: five
+columns with 20 egg-containing trays each; one extra empty atop the middle.
+The supplied WhatsApp folder has result screens and an annotated scene, not
+original capture views; originals requested. Local service now rejects treating
+egg_tray detections as stack faces (44 backend tests passed). Assisted existing
+layer counter failed this scene with 40/10/10/11/11 candidates; do not promote it.
+Evidence and truth: reports/user-100-tray-case-20260915/. Continue development
+without replacing the user's rolled-back production baseline during experiments.
+
+CURRENT OVERRIDE: user requested rollback to the original no-cell-ID baseline.
+
+New planning evidence (2026-09-15): user reports a separate scene with 100
+egg-containing trays plus one empty; screenshots show 84/90/87, unverified.
+Treat this as user-reported truth, not the prior 32-tray reference. See
+docs/100_TRAY_SCENE_PLAN.md for model audit/training plus per-stack geometric
+reconstruction and validation plan. No production change authorized by this
+planning question; keep the requested baseline running.
+Wrangler confirmed version 621a5a9c-f486-455f-9a15-0965ca3a710f now receives
+100% traffic. Health/ready passed; fresh photo upload tests hit TLS connection
+resets and are unverified. Local code remains the newer implementation. APK
+0.2.2's model_spatial_v1 preflight is incompatible with this restored baseline;
+no APK changes were requested/performed in the rollback. The September 14
+deployment status below is historical, superseded by this explicit request.
 
 Latest verified status: OAuth succeeded and the updated Worker is DEPLOYED,
 version 0519381f-b99e-4015-8279-cb2c0f99f7f2. Live health and a no-floor-ID
@@ -94,3 +118,17 @@ GitHub. Preserve the source/tests/reports as an unfinished development checkpoin
 on codex/hybrid-cell-counting; do not describe this push as deployment or an APK
 release. Read previous_context.md for a concise resumption snapshot and the
 latest PROGRESS.md append for verification and next steps.
+
+
+## 2026-09-15 — latest ground-truth and architecture decision
+
+User requested appending the discussion, relevant images and architecture and
+pushing GitHub. See docs/COUNTING_ARCHITECTURE.md and
+reports/user-100-tray-case-20260915/README.md for linked diagrams/evidence.
+Keep physical truth separate from model output: five columns of 20 filled plus
+one empty atop column 3 is user-reported inventory. Diagnose instance errors;
+do not force any scan to 100. Markers remain optional. Calibrated geometry helps
+pose/height; 3D displays evidence and cannot reveal hidden occupancy. Near-100%
+requires held-out evaluation and coverage reporting, not one known-image match.
+Original capture triplet is still missing. Preserve the rolled-back baseline
+while developing the candidate hybrid; this publication is not a deployment.
