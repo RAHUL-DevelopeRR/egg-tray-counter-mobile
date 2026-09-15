@@ -1,0 +1,916 @@
+{
+  "image_sha256": "77aa8978c07b1e70a24ba83a65edacf12db33a4fc4216c684cc4c29d8af62fc3",
+  "truth_source": "user-confirmed inventory; geometry and visibility not annotated",
+  "annotation_complete": false,
+  "instances": [
+    {
+      "stack_id": "1",
+      "tray_index": 1,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "1",
+      "tray_index": 2,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "1",
+      "tray_index": 3,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "1",
+      "tray_index": 4,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "1",
+      "tray_index": 5,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "1",
+      "tray_index": 6,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "1",
+      "tray_index": 7,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "1",
+      "tray_index": 8,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "1",
+      "tray_index": 9,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "1",
+      "tray_index": 10,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "1",
+      "tray_index": 11,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "1",
+      "tray_index": 12,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "1",
+      "tray_index": 13,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "1",
+      "tray_index": 14,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "1",
+      "tray_index": 15,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "1",
+      "tray_index": 16,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "1",
+      "tray_index": 17,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "1",
+      "tray_index": 18,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "1",
+      "tray_index": 19,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "1",
+      "tray_index": 20,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "2",
+      "tray_index": 1,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "2",
+      "tray_index": 2,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "2",
+      "tray_index": 3,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "2",
+      "tray_index": 4,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "2",
+      "tray_index": 5,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "2",
+      "tray_index": 6,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "2",
+      "tray_index": 7,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "2",
+      "tray_index": 8,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "2",
+      "tray_index": 9,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "2",
+      "tray_index": 10,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "2",
+      "tray_index": 11,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "2",
+      "tray_index": 12,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "2",
+      "tray_index": 13,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "2",
+      "tray_index": 14,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "2",
+      "tray_index": 15,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "2",
+      "tray_index": 16,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "2",
+      "tray_index": 17,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "2",
+      "tray_index": 18,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "2",
+      "tray_index": 19,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "2",
+      "tray_index": 20,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "3",
+      "tray_index": 1,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "3",
+      "tray_index": 2,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "3",
+      "tray_index": 3,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "3",
+      "tray_index": 4,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "3",
+      "tray_index": 5,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "3",
+      "tray_index": 6,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "3",
+      "tray_index": 7,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "3",
+      "tray_index": 8,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "3",
+      "tray_index": 9,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "3",
+      "tray_index": 10,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "3",
+      "tray_index": 11,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "3",
+      "tray_index": 12,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "3",
+      "tray_index": 13,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "3",
+      "tray_index": 14,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "3",
+      "tray_index": 15,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "3",
+      "tray_index": 16,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "3",
+      "tray_index": 17,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "3",
+      "tray_index": 18,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "3",
+      "tray_index": 19,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "3",
+      "tray_index": 20,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "3",
+      "tray_index": 21,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "empty",
+      "visibility": null
+    },
+    {
+      "stack_id": "4",
+      "tray_index": 1,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "4",
+      "tray_index": 2,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "4",
+      "tray_index": 3,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "4",
+      "tray_index": 4,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "4",
+      "tray_index": 5,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "4",
+      "tray_index": 6,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "4",
+      "tray_index": 7,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "4",
+      "tray_index": 8,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "4",
+      "tray_index": 9,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "4",
+      "tray_index": 10,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "4",
+      "tray_index": 11,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "4",
+      "tray_index": 12,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "4",
+      "tray_index": 13,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "4",
+      "tray_index": 14,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "4",
+      "tray_index": 15,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "4",
+      "tray_index": 16,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "4",
+      "tray_index": 17,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "4",
+      "tray_index": 18,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "4",
+      "tray_index": 19,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "4",
+      "tray_index": 20,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "5",
+      "tray_index": 1,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "5",
+      "tray_index": 2,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "5",
+      "tray_index": 3,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "5",
+      "tray_index": 4,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "5",
+      "tray_index": 5,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "5",
+      "tray_index": 6,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "5",
+      "tray_index": 7,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "5",
+      "tray_index": 8,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "5",
+      "tray_index": 9,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "5",
+      "tray_index": 10,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "5",
+      "tray_index": 11,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "5",
+      "tray_index": 12,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "5",
+      "tray_index": 13,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "5",
+      "tray_index": 14,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "5",
+      "tray_index": 15,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "5",
+      "tray_index": 16,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "5",
+      "tray_index": 17,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "5",
+      "tray_index": 18,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "5",
+      "tray_index": 19,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    },
+    {
+      "stack_id": "5",
+      "tray_index": 20,
+      "index_origin": "bottom",
+      "bbox": null,
+      "polygon": null,
+      "physical_state": "filled",
+      "visibility": null
+    }
+  ]
+}

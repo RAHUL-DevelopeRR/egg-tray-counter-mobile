@@ -50,3 +50,9 @@ verified tray annotations. Column 2 illustrates skipped alternating rows.
 See [architecture](../../docs/COUNTING_ARCHITECTURE.md) and
 [implementation plan](../../docs/100_TRAY_SCENE_PLAN.md). Frozen machine-readable
 records: [reference](reference.json), [layer evaluation](assisted-layer-evaluation.json).
+
+## Later research checkpoint
+
+[2026-09-15 measurement research](RESEARCH_20260915.md) records the multi-pitch
+band candidate, 19/19/20/19/19 assisted outputs, plots, instance-scoring tooling
+and remaining limitations. These are not verified physical or eligible counts.

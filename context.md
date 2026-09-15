@@ -2,6 +2,11 @@
 
 Updated: 2026-09-15. Read with `PROGRESS.md` before work.
 
+Latest override: local per-stack research only; no APK rebuild or baseline
+replacement. See `reports/user-100-tray-case-20260915/RESEARCH_20260915.md`
+and the latest append below for 19/19/20/19/19 assisted band candidates and
+unresolved physical/eligible counts. Earlier results remain historical.
+
 User has now authorized implementing the 100-tray plan. Confirmed truth: five
 columns with 20 egg-containing trays each; one extra empty atop the middle.
 The supplied WhatsApp folder has result screens and an annotated scene, not
@@ -132,3 +137,34 @@ pose/height; 3D displays evidence and cannot reveal hidden occupancy. Near-100%
 requires held-out evaluation and coverage reporting, not one known-image match.
 Original capture triplet is still missing. Preserve the rolled-back baseline
 while developing the candidate hybrid; this publication is not a deployment.
+
+
+## 2026-09-15 — local per-stack research checkpoint
+
+User's pasted engineering task explicitly prohibits APK rebuild and replacing
+production Worker 621a5a9c-f486-455f-9a15-0965ca3a710f. Keep that override active.
+See reports/user-100-tray-case-20260915/RESEARCH_20260915.md for the full report.
+New local stack_measurement candidate ranks signed-edge paired bands across
+p/2,p,2p hypotheses; old serving layer algorithm is preserved pending validation.
+The existing individual-tray-as-stack guard remains intact. No RF training,
+model promotion, production deployment or Android build occurred.
+
+Assisted real-image results: legacy 40/10/10/11/11 -> exploratory bands
+19/19/20/19/19. Band MAE against reported physical per-column truth is 1.0;
+physical and eligible totals remain null. Bands follow brightness/egg structure,
+not yet validated physical tray rims. No +1/global multiplier or truth counts
+enter inference. Exact physical101/eligible100 NOT reached.
+
+Added geometry-only input, pending101-instance truth records with no invented
+geometry, one-to-one bbox-IoU scoring, detection-based stack proposals, native
+rectification and versioned measured-height adapter using existing calibration.
+52 backend tests passed during development; final checks are recorded in the
+report. Source overlays, signal plots, measurements, post-inference scoring and
+failed attempts are archived. Manual ROIs are not automatic localization. Real
+RF boxes, original triplet, reviewed labels, occupancy training examples and
+physical calibration are missing; those measurements cannot be claimed.
+
+Next: full-resolution top/bottom-complete captures/raw RF boxes and per-instance
+rim/visibility review; evaluate automatic proposals, physical rim identity and
+endpoint evidence, then independent held-out arrangements. Preserve old frozen
+benchmarks. Continue only locally/candidate route; do not rebuild Android yet.

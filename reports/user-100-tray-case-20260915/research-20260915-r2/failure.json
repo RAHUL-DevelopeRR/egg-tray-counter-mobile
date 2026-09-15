@@ -1,0 +1,6 @@
+{
+  "stage": "JSON serialization after overlays",
+  "error": "numpy int64 band interval endpoint",
+  "measurements_saved": false,
+  "fix": "convert endpoints to Python int; add JSON serialization regression assertion"
+}

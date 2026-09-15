@@ -2,6 +2,10 @@
 
 Updated: 2026-09-15. Read this file before modifying the repository.
 
+Latest research: see `reports/user-100-tray-case-20260915/RESEARCH_20260915.md`
+and the final append below. Assisted band candidates are 19/19/20/19/19;
+physical/eligible totals unresolved. No APK rebuild or production deployment.
+
 ## Development resumed — 100-tray case, 2026-09-15
 
 - User authorized proceeding and confirmed five columns of 20 egg-containing
@@ -293,3 +297,44 @@ case JSON parses and local architecture/report links resolve. Staged whitespace
 and targeted credential-pattern checks passed. Remote branch was fetched and
 matched local HEAD before this checkpoint commit. Prior 44-test result retained;
 documentation/image append does not introduce new runtime changes.
+
+
+## 2026-09-15 — local per-stack research checkpoint
+
+User's pasted engineering task explicitly prohibits APK rebuild and replacing
+production Worker 621a5a9c-f486-455f-9a15-0965ca3a710f. Keep that override active.
+See reports/user-100-tray-case-20260915/RESEARCH_20260915.md for the full report.
+New local stack_measurement candidate ranks signed-edge paired bands across
+p/2,p,2p hypotheses; old serving layer algorithm is preserved pending validation.
+The existing individual-tray-as-stack guard remains intact. No RF training,
+model promotion, production deployment or Android build occurred.
+
+Assisted real-image results: legacy 40/10/10/11/11 -> exploratory bands
+19/19/20/19/19. Band MAE against reported physical per-column truth is 1.0;
+physical and eligible totals remain null. Bands follow brightness/egg structure,
+not yet validated physical tray rims. No +1/global multiplier or truth counts
+enter inference. Exact physical101/eligible100 NOT reached.
+
+Added geometry-only input, pending101-instance truth records with no invented
+geometry, one-to-one bbox-IoU scoring, detection-based stack proposals, native
+rectification and versioned measured-height adapter using existing calibration.
+52 backend tests passed during development; final checks are recorded in the
+report. Source overlays, signal plots, measurements, post-inference scoring and
+failed attempts are archived. Manual ROIs are not automatic localization. Real
+RF boxes, original triplet, reviewed labels, occupancy training examples and
+physical calibration are missing; those measurements cannot be claimed.
+
+Next: full-resolution top/bottom-complete captures/raw RF boxes and per-instance
+rim/visibility review; evaluate automatic proposals, physical rim identity and
+endpoint evidence, then independent held-out arrangements. Preserve old frozen
+benchmarks. Continue only locally/candidate route; do not rebuild Android yet.
+
+Final checks: 52 backend tests passed after all code fixes; targeted Ruff
+passed. Candidate r3 CLI completed; native/upscaled control retained identical
+19/19/20/19/19 band counts. Source/report plots visually inspected. Source
+image hashes and prediction-to-evaluation SHA-256 verified. APK stays0.2.2+5;
+no Android/Worker source changed. Publication targets codex/hybrid-cell-counting.
+
+Publication verification also checks the staged measurement content against
+the canonical-JSON SHA-256, avoiding Windows/Git line-ending differences.
+All artifact/JSON/link and targeted credential-pattern checks passed.
