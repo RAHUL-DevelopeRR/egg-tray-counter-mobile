@@ -1,0 +1,16 @@
+{
+  "scan_id": "ea3764a8-3d2e-48df-bb92-0a2a495d95cd",
+  "scan_contract": "model_spatial_v1",
+  "transport_views": {
+    "left": "image-14",
+    "right": "image-35",
+    "straight": "image-34"
+  },
+  "model": "projec-mutta/2",
+  "confidence": 35,
+  "overlap": 50,
+  "classes": "egg_tray",
+  "settings_source": "checked-in gateway configuration",
+  "upstream_raw_available": false,
+  "warning": "Transport grouping does not assert common scene or camera view"
+}

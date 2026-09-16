@@ -1,0 +1,842 @@
+{
+  "source": "C:\\Users\\DELL\\Downloads\\MUTAA",
+  "images": [
+    {
+      "id": "image-01",
+      "filename": "IMG_20260916_151149500.jpg.jpeg",
+      "sha256": "79451a5ed91d48d0707aeaabf90c47ca4c1b9ac49ab1acee66fa0796b645e2ce",
+      "bytes": 1690716,
+      "original": "originals/image-01.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        4096,
+        1856
+      ],
+      "exif": {
+        "ImageWidth": "4096",
+        "ImageLength": "1856",
+        "GPSInfo": "982",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "8",
+        "DateTime": "2026:09:16 15:11:49",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-02",
+      "filename": "IMG_20260916_151159267.jpg.jpeg",
+      "sha256": "ed9a1cf8b5c6b00528461874227ef8bbb62860792550616a449a5a7da951ada9",
+      "bytes": 2592441,
+      "original": "originals/image-02.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        4096,
+        1856
+      ],
+      "exif": {
+        "ImageWidth": "4096",
+        "ImageLength": "1856",
+        "GPSInfo": "913",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "8",
+        "DateTime": "2026:09:16 15:11:59",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-03",
+      "filename": "IMG_20260916_151204619.jpg.jpeg",
+      "sha256": "15716d3b401e022ee544340e7c7e3d4e8064e26dbbe40d1042af85d255492cd0",
+      "bytes": 3106524,
+      "original": "originals/image-03.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        4096,
+        1856
+      ],
+      "exif": {
+        "ImageWidth": "4096",
+        "ImageLength": "1856",
+        "GPSInfo": "916",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "8",
+        "DateTime": "2026:09:16 15:12:04",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-04",
+      "filename": "IMG_20260916_151210436.jpg.jpeg",
+      "sha256": "d4c46e40ead8b6797b94d13cb90e6cf656828e566652687d35399f7f3985c7a0",
+      "bytes": 2617522,
+      "original": "originals/image-04.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        4096,
+        1856
+      ],
+      "exif": {
+        "ImageWidth": "4096",
+        "ImageLength": "1856",
+        "GPSInfo": "916",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "1",
+        "DateTime": "2026:09:16 15:12:10",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-05",
+      "filename": "IMG_20260916_151224648.jpg.jpeg",
+      "sha256": "eac132ae350ff9851ab63d453c8646f60e82a8ad39316d1c5e72cd6af52a007f",
+      "bytes": 2055649,
+      "original": "originals/image-05.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        4096,
+        1856
+      ],
+      "exif": {
+        "ImageWidth": "4096",
+        "ImageLength": "1856",
+        "GPSInfo": "991",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "8",
+        "DateTime": "2026:09:16 15:12:24",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-06",
+      "filename": "IMG_20260916_151339474.jpg.jpeg",
+      "sha256": "50336d2a03edaba215505259a980844a500f4dd22f0f0cc231dbd1e8a80d1438",
+      "bytes": 2498606,
+      "original": "originals/image-06.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        4096,
+        1856
+      ],
+      "exif": {
+        "ImageWidth": "4096",
+        "ImageLength": "1856",
+        "GPSInfo": "911",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "8",
+        "DateTime": "2026:09:16 15:13:39",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-07",
+      "filename": "IMG_20260916_151351983.jpg.jpeg",
+      "sha256": "0c593a7210c8ced72b3d5b2c651d5c2c30cb123aeb31a2caa08ecf687b723b5e",
+      "bytes": 2894725,
+      "original": "originals/image-07.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        4096,
+        1856
+      ],
+      "exif": {
+        "ImageWidth": "4096",
+        "ImageLength": "1856",
+        "GPSInfo": "911",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "8",
+        "DateTime": "2026:09:16 15:13:51",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-08",
+      "filename": "IMG_20260916_151353868.jpg.jpeg",
+      "sha256": "81b51f6c69615327c149fbeb4c6f0fbf52f82ce3b70bc59a74f0e267c3c9dab6",
+      "bytes": 2882474,
+      "original": "originals/image-08.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        4096,
+        1856
+      ],
+      "exif": {
+        "ImageWidth": "4096",
+        "ImageLength": "1856",
+        "GPSInfo": "915",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "8",
+        "DateTime": "2026:09:16 15:13:53",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-09",
+      "filename": "IMG_20260916_151409127.jpg.jpeg",
+      "sha256": "bed87b253a679410c0bbf47e069db280c538153289ba5ca693312bbf1a554bea",
+      "bytes": 3252701,
+      "original": "originals/image-09.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        4096,
+        1856
+      ],
+      "exif": {
+        "ImageWidth": "4096",
+        "ImageLength": "1856",
+        "GPSInfo": "918",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "8",
+        "DateTime": "2026:09:16 15:14:09",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-10",
+      "filename": "IMG_20260916_151423979.jpg.jpeg",
+      "sha256": "1cf2277769329aa41e8610053564b82d79dc54a0e13887c837f3ee3bc9499252",
+      "bytes": 5513513,
+      "original": "originals/image-10.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        4096,
+        3072
+      ],
+      "exif": {
+        "ImageWidth": "4096",
+        "ImageLength": "3072",
+        "GPSInfo": "923",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "6",
+        "DateTime": "2026:09:16 15:14:23",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-11",
+      "filename": "IMG_20260916_151430473.jpg.jpeg",
+      "sha256": "4082dfea44ba2b2564511ba7932567168b274a36e563d6cd523f601e4c6bbefc",
+      "bytes": 5119229,
+      "original": "originals/image-11.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        4096,
+        3072
+      ],
+      "exif": {
+        "ImageWidth": "4096",
+        "ImageLength": "3072",
+        "GPSInfo": "922",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "6",
+        "DateTime": "2026:09:16 15:14:30",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-12",
+      "filename": "IMG_20260916_151436402.jpg.jpeg",
+      "sha256": "3e4e8d8d8a58ae7ec08eddbdf1c10cd8f5f2e88576b3b884379b93001f7afead",
+      "bytes": 4633144,
+      "original": "originals/image-12.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        4096,
+        3072
+      ],
+      "exif": {
+        "ImageWidth": "4096",
+        "ImageLength": "3072",
+        "GPSInfo": "918",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "6",
+        "DateTime": "2026:09:16 15:14:36",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-13",
+      "filename": "IMG_20260916_151444583.jpg.jpeg",
+      "sha256": "f076e737644ffd3c71c09721467a3ee9e604f435553c76964376372bd5e1f799",
+      "bytes": 12597763,
+      "original": "originals/image-13.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        8192,
+        6144
+      ],
+      "exif": {
+        "ImageWidth": "8192",
+        "ImageLength": "6144",
+        "GPSInfo": "911",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "6",
+        "DateTime": "2026:09:16 15:14:44",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-14",
+      "filename": "IMG_20260916_151447066.jpg.jpeg",
+      "sha256": "73023308a811a4552a8f34027b4a780217e2e83b397e95eea1b02df8efcf9126",
+      "bytes": 12697812,
+      "original": "originals/image-14.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        8192,
+        6144
+      ],
+      "exif": {
+        "ImageWidth": "8192",
+        "ImageLength": "6144",
+        "GPSInfo": "911",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "6",
+        "DateTime": "2026:09:16 15:14:47",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-15",
+      "filename": "IMG_20260916_151453724.jpg.jpeg",
+      "sha256": "a73f05a1f55dbf1ef15fa2f44dc81d39ddfac79bb01d8e20e1e7b2720fd9eddc",
+      "bytes": 12463870,
+      "original": "originals/image-15.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        8192,
+        6144
+      ],
+      "exif": {
+        "ImageWidth": "8192",
+        "ImageLength": "6144",
+        "GPSInfo": "915",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "6",
+        "DateTime": "2026:09:16 15:14:53",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-16",
+      "filename": "IMG_20260916_151506512.jpg.jpeg",
+      "sha256": "5ec6cbd909e0ba1c10aa408d4eaf9eeba7b87bca218f06a275da747372a134c8",
+      "bytes": 11176313,
+      "original": "originals/image-16.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        8192,
+        6144
+      ],
+      "exif": {
+        "ImageWidth": "8192",
+        "ImageLength": "6144",
+        "GPSInfo": "911",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "8",
+        "DateTime": "2026:09:16 15:15:06",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-17",
+      "filename": "IMG_20260916_151519165.jpg.jpeg",
+      "sha256": "ee60b130d349a7107f5cc2a39deea45999e253a404fb60760b2e41b866a64182",
+      "bytes": 5494852,
+      "original": "originals/image-17.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        4096,
+        3072
+      ],
+      "exif": {
+        "ImageWidth": "4096",
+        "ImageLength": "3072",
+        "GPSInfo": "982",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "6",
+        "DateTime": "2026:09:16 15:15:19",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-18",
+      "filename": "IMG_20260916_151529426.jpg.jpeg",
+      "sha256": "cdd5244ad26a41b357c434029cf3cd442f15bb0828182ae3dc79d9dddf702265",
+      "bytes": 3755426,
+      "original": "originals/image-18.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        4096,
+        3072
+      ],
+      "exif": {
+        "ImageWidth": "4096",
+        "ImageLength": "3072",
+        "GPSInfo": "916",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "1",
+        "DateTime": "2026:09:16 15:15:29",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-19",
+      "filename": "IMG_20260916_151535069.jpg.jpeg",
+      "sha256": "29908d45eecf766620310ce48f517273537ad22584fe3e6f4e7d85381171927a",
+      "bytes": 3818890,
+      "original": "originals/image-19.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        4096,
+        3072
+      ],
+      "exif": {
+        "ImageWidth": "4096",
+        "ImageLength": "3072",
+        "GPSInfo": "916",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "3",
+        "DateTime": "2026:09:16 15:15:35",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-20",
+      "filename": "IMG_20260916_151539277.jpg.jpeg",
+      "sha256": "51c283d8d3f0282c601c8cda51b8b154b92a05cd208150585674d877c03d6327",
+      "bytes": 3347300,
+      "original": "originals/image-20.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        4096,
+        3072
+      ],
+      "exif": {
+        "ImageWidth": "4096",
+        "ImageLength": "3072",
+        "GPSInfo": "992",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "3",
+        "DateTime": "2026:09:16 15:15:39",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-21",
+      "filename": "IMG_20260916_151549592.jpg.jpeg",
+      "sha256": "5419ed15faa1c75b6a276ee02d7dcb1ee3f67b692498cdfc09b833d7664105ef",
+      "bytes": 4907160,
+      "original": "originals/image-21.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        4096,
+        3072
+      ],
+      "exif": {
+        "ImageWidth": "4096",
+        "ImageLength": "3072",
+        "GPSInfo": "918",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "8",
+        "DateTime": "2026:09:16 15:15:49",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-22",
+      "filename": "IMG_20260916_151607006.jpg.jpeg",
+      "sha256": "f6e66de3fe5ee1829162dea39b031ab84c7c81c2a1a047ad4e45f8e22373132c",
+      "bytes": 3877147,
+      "original": "originals/image-22.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        4096,
+        3072
+      ],
+      "exif": {
+        "ImageWidth": "4096",
+        "ImageLength": "3072",
+        "GPSInfo": "911",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "8",
+        "DateTime": "2026:09:16 15:16:07",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-23",
+      "filename": "IMG_20260916_151611188.jpg.jpeg",
+      "sha256": "3596b8dd5479c6de1a3de5807f8e94feb8693083dfb6a1e2c01b34edb4aef0b2",
+      "bytes": 4228234,
+      "original": "originals/image-23.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        4096,
+        3072
+      ],
+      "exif": {
+        "ImageWidth": "4096",
+        "ImageLength": "3072",
+        "GPSInfo": "911",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "8",
+        "DateTime": "2026:09:16 15:16:11",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-24",
+      "filename": "IMG_20260916_151614863.jpg.jpeg",
+      "sha256": "8b42c963fdcdf97d7818aca945e3e3d4d6c7977f7745ce30df119012c3752b5d",
+      "bytes": 4403374,
+      "original": "originals/image-24.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        4096,
+        3072
+      ],
+      "exif": {
+        "ImageWidth": "4096",
+        "ImageLength": "3072",
+        "GPSInfo": "898",
+        "ResolutionUnit": "2",
+        "ExifOffset": "220",
+        "Make": "Nothing",
+        "Model": "Nothing Phone (2)",
+        "Orientation": "8",
+        "DateTime": "2026:09:16 15:16:14",
+        "YCbCrPositioning": "1",
+        "XResolution": "72.0",
+        "YResolution": "72.0"
+      },
+      "decodable": true
+    },
+    {
+      "id": "image-25",
+      "filename": "WhatsApp Image 2026-09-05 at 9.40.56 AM.jpeg",
+      "sha256": "3f1482c6f019cabaefc54a129ddff1f1c338f8435ab047a9936a5844bc24e87c",
+      "bytes": 332463,
+      "original": "originals/image-25.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        1600,
+        1200
+      ],
+      "exif": {},
+      "decodable": true
+    },
+    {
+      "id": "image-26",
+      "filename": "WhatsApp Image 2026-09-05 at 9.40.57 AM.jpeg",
+      "sha256": "c3a2354d9e9eb6715a62de0d4778f0f903a975e4f342f6bcc83f9da6cd91b0c2",
+      "bytes": 300861,
+      "original": "originals/image-26.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        1600,
+        1200
+      ],
+      "exif": {},
+      "decodable": true
+    },
+    {
+      "id": "image-27",
+      "filename": "WhatsApp Image 2026-09-05 at 9.41.00 AM.jpeg",
+      "sha256": "319c26f4f1b8bd77556a456234981c5d26993b0703351dd3fdcb78f0693770ff",
+      "bytes": 279925,
+      "original": "originals/image-27.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "exif": {},
+      "decodable": true
+    },
+    {
+      "id": "image-28",
+      "filename": "WhatsApp Image 2026-09-05 at 9.41.07 AM.jpeg",
+      "sha256": "f243dc3f1d3c895eb4335675311eeaca3063214f19946b5ee3ce20d4c1fc67cf",
+      "bytes": 301629,
+      "original": "originals/image-28.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        1600,
+        1200
+      ],
+      "exif": {},
+      "decodable": true
+    },
+    {
+      "id": "image-29",
+      "filename": "WhatsApp Image 2026-09-05 at 9.41.09 AM.jpeg",
+      "sha256": "8afe63bac62e31fc277f64c4eb26a5ac108b2fc4cdd6fd13b534d0a434bf681b",
+      "bytes": 318114,
+      "original": "originals/image-29.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        1600,
+        1200
+      ],
+      "exif": {},
+      "decodable": true
+    },
+    {
+      "id": "image-30",
+      "filename": "WhatsApp Image 2026-09-05 at 9.46.20 AM.jpeg",
+      "sha256": "7a4e6984fabd0f1e545e4c227f210d1aa115b70e6274ddd76d16dcfb8c00036a",
+      "bytes": 163187,
+      "original": "originals/image-30.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "exif": {},
+      "decodable": true
+    },
+    {
+      "id": "image-31",
+      "filename": "WhatsApp Image 2026-09-05 at 9.46.21 AM (1).jpeg",
+      "sha256": "4d4f06cc5c3890e49798fac4cafbcb465cc69a963b2b0bbc35a23c0005539dbe",
+      "bytes": 167145,
+      "original": "originals/image-31.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        1600,
+        1200
+      ],
+      "exif": {},
+      "decodable": true
+    },
+    {
+      "id": "image-32",
+      "filename": "WhatsApp Image 2026-09-05 at 9.46.21 AM (2).jpeg",
+      "sha256": "cd44e92b7e2a056dc4a493dc63995c3c37b2b170f0000a67ce9c86a63ae3db01",
+      "bytes": 267602,
+      "original": "originals/image-32.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        1600,
+        1200
+      ],
+      "exif": {},
+      "decodable": true
+    },
+    {
+      "id": "image-33",
+      "filename": "WhatsApp Image 2026-09-05 at 9.46.21 AM.jpeg",
+      "sha256": "dcf2ad768ec47072f427ff492ddc64ae8f6fb449bd871976469564a6d5c9c076",
+      "bytes": 177114,
+      "original": "originals/image-33.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "exif": {},
+      "decodable": true
+    },
+    {
+      "id": "image-34",
+      "filename": "WhatsApp Image 2026-09-05 at 9.52.45 AM.jpeg",
+      "sha256": "9978e80e8682764973f651badd6936cf12f645aa3233c86b5cf2442a00b3304f",
+      "bytes": 161871,
+      "original": "originals/image-34.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "exif": {},
+      "decodable": true
+    },
+    {
+      "id": "image-35",
+      "filename": "WhatsApp Image 2026-09-05 at 9.52.46 AM.jpeg",
+      "sha256": "5bc4aa28346c8228bc86c00ede9f6e6fbbf29f661f70e81d5008be9c0c3841ff",
+      "bytes": 161227,
+      "original": "originals/image-35.jpeg",
+      "duplicate_of": null,
+      "physical_ground_truth": null,
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "exif": {},
+      "decodable": true
+    }
+  ]
+}

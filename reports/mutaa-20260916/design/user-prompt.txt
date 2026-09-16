@@ -1,0 +1,718 @@
+Continue the Egg Tray Counter project.
+
+Repository:
+https://github.com/RAHUL-DevelopeRR/egg-tray-counter-mobile
+
+Branch:
+codex/hybrid-cell-counting
+
+CURRENT REMOTE BRANCH HEAD EXPECTED:
+bd8abb4b6ecc8c0fcfaff5e9661b5688e212d558
+
+Do not restart the project.
+
+Read before making changes:
+
+AGENTS.md
+PROGRESS.md
+context.md
+previous_context.md
+docs/COUNTING_ARCHITECTURE.md
+docs/100_TRAY_SCENE_PLAN.md
+docs/COUNTING_EXECUTION_PLAN.md
+reports/user-100-tray-case-20260915/
+reports/individual-trays-20260915/
+
+==================================================
+NEW USER DESIGN
+==================================================
+
+The intended warehouse counting system is now explicitly a structured
+3D reconstruction problem.
+
+Three camera views are complementary projections.
+
+STRAIGHT primarily establishes:
+X = horizontal stack columns.
+
+LEFT / RIGHT primarily establish:
+Y = depth rows.
+
+Per-stack visual / beam / rim / height analysis establishes:
+Z = physical tray layers.
+
+Final inventory is reconstructed in physical X-Y-Z space.
+
+DO NOT treat LEFT / RIGHT / STRAIGHT as three competing totals.
+
+DO NOT sum them.
+
+DO NOT merely compare whether their whole-image counts agree.
+
+==================================================
+IMPORTANT SHARED-ANCHOR RULE
+==================================================
+
+Example:
+
+STRAIGHT shows columns:
+
+1 2 3 4 5
+
+RIGHT side may show:
+
+5 5A 5B 5C
+
+The first visible side stack "5" is the SAME physical boundary / stack
+already observed as straight-view column 5.
+
+It must NOT be counted twice.
+
+Use this common stack / edge as a geometric anchor for reconstruction.
+
+Likewise LEFT can share the opposite boundary with the STRAIGHT plane.
+
+Generalize this into physical cross-view correspondence.
+
+==================================================
+NEW PHOTO DATA
+==================================================
+
+Inspect this local folder:
+
+C:\Users\DELL\Downloads\MUTAA
+
+Do not assume its contents.
+
+FIRST:
+
+1. recursively enumerate every image
+2. compute SHA-256
+3. record filename, dimensions and EXIF if present
+4. detect byte duplicates
+5. generate a contact sheet
+6. visually/group likely same-scene captures
+7. identify candidate LEFT / STRAIGHT / RIGHT views
+8. preserve originals unchanged
+
+Create:
+
+reports/mutaa-20260916/
+
+with:
+
+manifest.json
+README.md
+contact-sheet.jpg
+scene grouping
+raw evidence directories
+
+Never transfer the old 100-tray truth to these images unless the user
+explicitly confirms the same physical arrangement.
+
+==================================================
+CURRENT COUNTING COMPONENTS
+==================================================
+
+PRODUCTION:
+
+The deployed production backend is still the user-requested rolled-back
+baseline.
+
+It primarily performs:
+
+App
+-> Cloudflare Worker
+-> Roboflow projec-mutta/2
+-> per-image detector counts
+
+The local hybrid research is NOT the current production path.
+
+Do not deploy over production during this task.
+
+==================================================
+LEGACY LAYER METHOD
+==================================================
+
+The existing legacy layer_signal.py approach previously produced:
+
+40 / 10 / 10 / 11 / 11
+
+on the known five-stack scene.
+
+This was caused by periodicity / harmonic ambiguity.
+
+Do not use these values as trusted counts.
+
+Do not apply global /2 or *2 corrections.
+
+==================================================
+NEWER BEAM / BAND METHOD
+==================================================
+
+The recent local brightness-band experiment produced:
+
+19 / 19 / 20 / 19 / 19
+
+on manually chosen stack faces.
+
+These are NOT Roboflow detections.
+
+They are not currently part of production.
+
+They are not verified inventory.
+
+The known one-off errors must NOT be corrected by blindly adding +1.
+
+Treat beam/band evidence as a candidate Z-axis measurement.
+
+Search the repository for:
+
+beam
+band
+brightness
+layer_signal
+evaluate_100_tray_layers
+RESEARCH_20260915
+
+Identify exactly which code produced:
+
+40/10/10/11/11
+
+and which code produced:
+
+19/19/20/19/19.
+
+Document this clearly.
+
+==================================================
+PRIMARY DEVELOPMENT GOAL
+==================================================
+
+Build one candidate BACKEND hybrid pipeline:
+
+LEFT + STRAIGHT + RIGHT
+        ↓
+camera / view geometry
+        ↓
+physical X-Y footprint reconstruction
+        ↓
+whole-stack localization
+        ↓
+RF-DETR + beam/band + optional height
+        ↓
+per-stack Z count
+        ↓
+filled / empty / unknown occupancy
+        ↓
+deduplicate physical observations
+        ↓
+3D occupancy evidence grid
+        ↓
+sum unique EGG-CONTAINING trays
+
+Do NOT create three independent user modes.
+
+==================================================
+PART A — RUN UNCHANGED BASELINE ON MUTAA FIRST
+==================================================
+
+Before tuning anything:
+
+Run the unchanged projec-mutta/2 model on all usable MUTAA images.
+
+Save:
+
+raw request parameters
+raw JSON response
+model version
+confidence
+bounding boxes
+class labels
+
+Generate overlays.
+
+Do not use expected totals to tune inference.
+
+Report per-image:
+
+RF raw count
+image quality
+visible stacks
+obvious misses / duplicates / merges
+
+If physical ground truth for a scene is unavailable, state UNKNOWN.
+
+==================================================
+PART B — AUTOMATIC WHOLE-STACK LOCALIZATION
+==================================================
+
+Individual egg_tray boxes are NOT stack faces.
+
+Cluster spatial RF detections to propose whole vertical stack regions.
+
+Use:
+
+tray center alignment
+x-overlap
+tray width consistency
+vertical continuity
+top / bottom evidence
+edge / contour evidence
+
+Produce a stack ROI / polygon for every candidate stack.
+
+Save overlay.
+
+Do not assume five stacks.
+
+==================================================
+PART C — BEAM / BAND Z-AXIS ESTIMATOR
+==================================================
+
+Integrate the beam/band method into the Python backend as a proper
+evidence provider.
+
+Suggested interface:
+
+BeamCountEvidence {
+    stack_id
+    tray_count_candidates
+    selected_count
+    pitch_px
+    band_centers
+    coverage
+    top_visible
+    bottom_visible
+    harmonic_ambiguity
+    quality
+    reason
+}
+
+Do NOT return only one integer.
+
+Preserve competing hypotheses.
+
+For each stack:
+
+rectify perspective
+extract horizontal response
+analyse brightness bands
+analyse Sobel-Y edges
+analyse edge polarity
+analyse autocorrelation
+analyse spectral / FFT pitch if useful
+
+Evaluate:
+
+p / 2
+p
+2p
+
+for likely fundamental pitch.
+
+Reject half/double harmonics.
+
+A physical tray must correspond to ONE layer interval, not every bright
+or dark edge.
+
+==================================================
+PART D — RF + BEAM FUSION
+==================================================
+
+For each whole stack produce independently:
+
+rf_count
+beam_count
+rim_count if separate
+height_count if calibrated
+
+Example:
+
+RF    = 19
+BEAM  = 20
+HEIGHT = 20.0
+
+candidate Z = 20
+
+But do not invent generic weighted averaging.
+
+Keep evidence traceable.
+
+If evidence conflicts materially:
+
+status = unresolved
+recommended_action = targeted recapture
+
+==================================================
+PART E — X AXIS FROM STRAIGHT
+==================================================
+
+The STRAIGHT view establishes horizontal stack structure.
+
+Estimate:
+
+X column count
+column boundaries
+shared corner stacks
+stack bottom line
+stack top
+column spacing
+
+Use camera geometry and RF stack proposals.
+
+Do not use only detector count.
+
+==================================================
+PART F — Y DEPTH FROM LEFT / RIGHT
+==================================================
+
+LEFT and RIGHT determine:
+
+number of depth rows
+side stack boundaries
+rear row presence
+missing depth positions
+depth ordering
+
+Example:
+
+STRAIGHT:
+1 2 3 4 5
+
+RIGHT:
+5 5A 5B 5C
+
+Do not count "5" twice.
+
+Associate it as the common anchor.
+
+Infer Y structure from the additional side observations.
+
+==================================================
+PART G — SOP / OPERATING ENVELOPE
+==================================================
+
+The warehouse can enforce physical constraints.
+
+Create a documented operating profile such as:
+
+- trays stacked approximately vertically
+- stacks aligned to an orthogonal row/column layout
+- no arbitrary center gaps unless represented as an empty grid cell
+- separations remain visible at row / column boundaries
+- required views cover all relevant rows and columns
+- adequate lighting
+- stack top and base visible
+- limited camera-distance / angle range
+- known tray type for calibrated measurements
+
+DO NOT silently assume these conditions.
+
+Detect violations where possible.
+
+Return:
+
+OUT_OF_OPERATING_ENVELOPE
+
+when the scene does not satisfy required constraints.
+
+==================================================
+PART H — 3D OCCUPANCY RECONSTRUCTION
+==================================================
+
+Do not begin with a fancy rendering.
+
+Build the backend data model first.
+
+Example:
+
+SceneGrid:
+
+X columns = 5
+Y rows    = 4
+
+grid[y][x] = {
+    stack_present,
+    physical_layer_count,
+    layers: [
+       {
+          z,
+          occupancy: filled | empty | unknown,
+          source_views,
+          rf_evidence,
+          beam_evidence,
+          height_evidence
+       }
+    ],
+    confidence,
+    unresolved_reason
+}
+
+A 3D UI can later render this structure.
+
+The 3D representation MUST NOT invent hidden stock.
+
+==================================================
+PART I — FILLED TRAYS ONLY
+==================================================
+
+Production inventory requires trays containing eggs only.
+
+Keep two counts:
+
+physical_trays
+eligible_egg_trays
+
+Every physical layer must eventually have:
+
+filled
+empty
+unknown
+
+Do not automatically interpret "physical tray detected" as "egg-filled".
+
+Current RF-DETR may provide useful visual evidence, but evaluate whether
+the current training labels truly distinguish occupancy.
+
+==================================================
+PART J — TRAINING DECISION
+==================================================
+
+DO NOT retrain immediately.
+
+First run MUTAA through unchanged V2 and beam/band analysis.
+
+Use the failure audit to decide whether new supervision is needed.
+
+If retraining is justified, prefer explicit useful labels such as:
+
+filled_tray
+empty_tray
+stack_face
+
+or geometric/keypoint supervision:
+
+stack_top
+stack_bottom
+tray_rim
+stack_corner
+
+Do not create a vague "beam" class unless visual inspection proves it is
+a consistently observable feature.
+
+A deterministic beam/rim estimator in the backend is preferred first.
+
+==================================================
+PART K — OPTIONAL PHYSICAL CALIBRATION
+==================================================
+
+Support but do not require:
+
+camera intrinsics
+lens distortion
+surveyed floor references
+ArUco / AprilTag markers
+known vertical scale
+measured tray stacking pitch
+
+Markers are support evidence.
+
+They should not require manual cell-ID entry.
+
+For fixed warehouse use, calibrated geometry should be preferred where
+available.
+
+==================================================
+PART L — CROSS-VIEW RECONSTRUCTION
+==================================================
+
+Use:
+
+camera pose
+shared anchor stacks
+base positions
+vanishing lines
+marker geometry if available
+stack height
+RF layout
+beam structure
+
+to establish whether two observations belong to:
+
+same physical stack
+
+or:
+
+different depth stack.
+
+Never deduplicate using horizontal index alone.
+
+==================================================
+PART M — MISSING DEPTH
+==================================================
+
+The user's main requirement is to find trays hidden in depth.
+
+Do not solve this by applying a correction factor to STRAIGHT count.
+
+Solve it by reconstructing additional Y positions seen in side views.
+
+If a rear position is never visible and cannot be determined under the
+declared SOP:
+
+return unresolved / recapture.
+
+If the SOP explicitly guarantees complete rectangular occupancy, record
+that assumption in the result:
+
+assumption_used = complete_rectangular_occupancy
+
+Never hide this assumption.
+
+==================================================
+PART N — CANDIDATE ENDPOINT
+==================================================
+
+Do not change production.
+
+Implement locally or behind a separate candidate route such as:
+
+POST /candidate/count-3d
+
+or:
+
+scan_contract = spatial_3d_beam_v1
+
+Response should include:
+
+{
+  "x_columns": ...,
+  "y_rows": ...,
+  "physical_trays": ...,
+  "eligible_egg_trays": ...,
+  "empty_trays": ...,
+  "unknown_trays": ...,
+  "stacks": [...],
+  "view_correspondence": [...],
+  "beam_evidence": [...],
+  "rf_evidence": [...],
+  "assumptions_used": [...],
+  "verified": false/true,
+  "rescan": ...
+}
+
+==================================================
+PART O — TESTS
+==================================================
+
+Add deterministic tests:
+
+1. Straight X=5, side Y=2, each Z=20 -> 200.
+2. Shared straight/right anchor must be counted once.
+3. Missing rear stack -> 180, not 200.
+4. Unequal rear stack height handled correctly.
+5. Duplicate side observation does not increase total.
+6. beam=20 / RF=19 can remain a valid candidate when fusion policy is
+   explicitly validated.
+7. beam half-pitch 40 must not certify 40.
+8. beam double-pitch 10 must not certify 10.
+9. unknown occupancy cannot contribute to eligible count.
+10. empty tray contributes to physical but not eligible total.
+11. hidden unresolved rear row triggers recapture.
+12. out-of-SOP geometry is rejected.
+
+==================================================
+PART P — MUTAA REPORT
+==================================================
+
+For each scene in C:\Users\DELL\Downloads\MUTAA produce:
+
+view classification
+RF raw detections
+whole-stack ROIs
+beam/band estimates
+legacy layer estimates if useful for comparison
+cross-view correspondence
+X estimate
+Y estimate
+per-stack Z estimates
+eligible occupancy result if observable
+final candidate total
+unresolved regions
+
+Save visual overlays.
+
+Do not fabricate ground truth.
+
+Ask the user only for physical truth that cannot be derived from the images.
+
+==================================================
+IMPORTANT ACCURACY LANGUAGE
+==================================================
+
+The user reports approximately 98% real-world performance.
+
+Treat this as a field observation until it is measured on an audited set.
+
+Do not state that the system has verified 98% accuracy unless MUTAA or
+another held-out benchmark establishes it.
+
+==================================================
+TODAY'S SUCCESS TARGET
+==================================================
+
+Today's goal is:
+
+1. identify whether production is currently Roboflow-only
+2. identify exact beam/band implementation
+3. process MUTAA with unchanged V2
+4. process MUTAA with beam/band evidence
+5. construct automatic stack ROIs
+6. prototype X/Y cross-view reconstruction
+7. correctly deduplicate shared edge stacks
+8. expose candidate 3D occupancy data
+9. write tests
+10. report what still prevents a verified exact count
+
+Do NOT spend time rebuilding Android yet.
+
+Do NOT retrain unless the error audit justifies it.
+
+Do NOT deploy over production.
+
+==================================================
+PERSISTENCE
+==================================================
+
+Update:
+
+PROGRESS.md
+context.md
+previous_context.md
+
+Create:
+
+docs/3D_BEAM_COUNTING_ARCHITECTURE.md
+reports/mutaa-20260916/
+
+Record:
+
+branch
+commit
+dataset hashes
+baseline model
+beam method
+old layer method
+X/Y/Z reconstruction status
+tests
+per-scene results
+blockers
+exact next step
+
+Commit and push to:
+
+codex/hybrid-cell-counting
+
+Do not claim APK build, deployment, retraining, or accuracy improvement
+unless verified.

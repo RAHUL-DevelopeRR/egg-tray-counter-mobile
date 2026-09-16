@@ -1,0 +1,66 @@
+{
+  "image_sha256": "51c283d8d3f0282c601c8cda51b8b154b92a05cd208150585674d877c03d6327",
+  "coordinate_frame": "exif_transposed_pixels",
+  "detections": [
+    {
+      "bbox": [
+        262.0,
+        328.0,
+        2790.0,
+        2840.0
+      ],
+      "confidence": 0.9845753908157349,
+      "class": "egg_tray"
+    },
+    {
+      "bbox": [
+        1248.0,
+        3.0,
+        3660.0,
+        382.0
+      ],
+      "confidence": 0.9043130874633789,
+      "class": "egg_tray"
+    },
+    {
+      "bbox": [
+        3197.0,
+        19.0,
+        4095,
+        2800.0
+      ],
+      "confidence": 0.8615382313728333,
+      "class": "egg_tray"
+    },
+    {
+      "bbox": [
+        3211.0,
+        2619.0,
+        4093.0,
+        3069.0
+      ],
+      "confidence": 0.6627964973449707,
+      "class": "egg_tray"
+    },
+    {
+      "bbox": [
+        1308.0,
+        0,
+        3620.0,
+        382.0
+      ],
+      "confidence": 0.38537469506263733,
+      "class": "egg_tray"
+    },
+    {
+      "bbox": [
+        1242.0,
+        0,
+        3602.0,
+        357.0
+      ],
+      "confidence": 0.37250518798828125,
+      "class": "egg_tray"
+    }
+  ]
+}

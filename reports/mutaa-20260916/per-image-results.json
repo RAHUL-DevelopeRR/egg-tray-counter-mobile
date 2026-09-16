@@ -1,0 +1,686 @@
+[
+  {
+    "image_id": "image-01",
+    "rf_count": 15,
+    "quality_accepted": true,
+    "proposed_stacks": 1,
+    "rf_per_stack": [
+      15
+    ],
+    "band_counts": [
+      14
+    ],
+    "unlocalized_detections": 0,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-02",
+    "rf_count": 8,
+    "quality_accepted": true,
+    "proposed_stacks": 1,
+    "rf_per_stack": [
+      4
+    ],
+    "band_counts": [
+      10
+    ],
+    "unlocalized_detections": 4,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-03",
+    "rf_count": 13,
+    "quality_accepted": true,
+    "proposed_stacks": 1,
+    "rf_per_stack": [
+      13
+    ],
+    "band_counts": [
+      12
+    ],
+    "unlocalized_detections": 0,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-04",
+    "rf_count": 34,
+    "quality_accepted": true,
+    "proposed_stacks": 3,
+    "rf_per_stack": [
+      11,
+      11,
+      12
+    ],
+    "band_counts": [
+      8,
+      11,
+      16
+    ],
+    "unlocalized_detections": 0,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-05",
+    "rf_count": 11,
+    "quality_accepted": true,
+    "proposed_stacks": 1,
+    "rf_per_stack": [
+      11
+    ],
+    "band_counts": [
+      9
+    ],
+    "unlocalized_detections": 0,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-06",
+    "rf_count": 38,
+    "quality_accepted": true,
+    "proposed_stacks": 4,
+    "rf_per_stack": [
+      5,
+      13,
+      3,
+      17
+    ],
+    "band_counts": [
+      8,
+      13,
+      10,
+      17
+    ],
+    "unlocalized_detections": 0,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-07",
+    "rf_count": 56,
+    "quality_accepted": true,
+    "proposed_stacks": 5,
+    "rf_per_stack": [
+      9,
+      11,
+      14,
+      11,
+      11
+    ],
+    "band_counts": [
+      16,
+      20,
+      22,
+      19,
+      19
+    ],
+    "unlocalized_detections": 0,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-08",
+    "rf_count": 59,
+    "quality_accepted": true,
+    "proposed_stacks": 4,
+    "rf_per_stack": [
+      13,
+      19,
+      12,
+      13
+    ],
+    "band_counts": [
+      20,
+      22,
+      19,
+      19
+    ],
+    "unlocalized_detections": 2,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-09",
+    "rf_count": 36,
+    "quality_accepted": true,
+    "proposed_stacks": 4,
+    "rf_per_stack": [
+      12,
+      11,
+      5,
+      5
+    ],
+    "band_counts": [
+      20,
+      17,
+      12,
+      13
+    ],
+    "unlocalized_detections": 3,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-10",
+    "rf_count": 12,
+    "quality_accepted": true,
+    "proposed_stacks": 1,
+    "rf_per_stack": [
+      4
+    ],
+    "band_counts": [
+      17
+    ],
+    "unlocalized_detections": 8,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-11",
+    "rf_count": 16,
+    "quality_accepted": true,
+    "proposed_stacks": 2,
+    "rf_per_stack": [
+      9,
+      4
+    ],
+    "band_counts": [
+      26,
+      16
+    ],
+    "unlocalized_detections": 3,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-12",
+    "rf_count": 13,
+    "quality_accepted": true,
+    "proposed_stacks": 2,
+    "rf_per_stack": [
+      5,
+      8
+    ],
+    "band_counts": [
+      11,
+      18
+    ],
+    "unlocalized_detections": 0,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-13",
+    "rf_count": 46,
+    "quality_accepted": false,
+    "proposed_stacks": 5,
+    "rf_per_stack": [
+      6,
+      4,
+      12,
+      11,
+      7
+    ],
+    "band_counts": [
+      6,
+      10,
+      36,
+      19,
+      14
+    ],
+    "unlocalized_detections": 6,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-14",
+    "rf_count": 15,
+    "quality_accepted": false,
+    "proposed_stacks": 0,
+    "rf_per_stack": [],
+    "band_counts": [],
+    "unlocalized_detections": 15,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-15",
+    "rf_count": 22,
+    "quality_accepted": false,
+    "proposed_stacks": 3,
+    "rf_per_stack": [
+      3,
+      7,
+      7
+    ],
+    "band_counts": [
+      9,
+      30,
+      18
+    ],
+    "unlocalized_detections": 5,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-16",
+    "rf_count": 25,
+    "quality_accepted": false,
+    "proposed_stacks": 3,
+    "rf_per_stack": [
+      8,
+      7,
+      5
+    ],
+    "band_counts": [
+      24,
+      12,
+      14
+    ],
+    "unlocalized_detections": 5,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-17",
+    "rf_count": 1,
+    "quality_accepted": true,
+    "proposed_stacks": 0,
+    "rf_per_stack": [],
+    "band_counts": [],
+    "unlocalized_detections": 1,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-18",
+    "rf_count": 25,
+    "quality_accepted": true,
+    "proposed_stacks": 3,
+    "rf_per_stack": [
+      6,
+      8,
+      10
+    ],
+    "band_counts": [
+      12,
+      7,
+      7
+    ],
+    "unlocalized_detections": 1,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-19",
+    "rf_count": 8,
+    "quality_accepted": true,
+    "proposed_stacks": 1,
+    "rf_per_stack": [
+      4
+    ],
+    "band_counts": [
+      3
+    ],
+    "unlocalized_detections": 4,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-20",
+    "rf_count": 6,
+    "quality_accepted": true,
+    "proposed_stacks": 0,
+    "rf_per_stack": [],
+    "band_counts": [],
+    "unlocalized_detections": 6,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-21",
+    "rf_count": 64,
+    "quality_accepted": true,
+    "proposed_stacks": 7,
+    "rf_per_stack": [
+      11,
+      3,
+      13,
+      11,
+      11,
+      5,
+      5
+    ],
+    "band_counts": [
+      7,
+      3,
+      10,
+      10,
+      9,
+      7,
+      4
+    ],
+    "unlocalized_detections": 5,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-22",
+    "rf_count": 3,
+    "quality_accepted": true,
+    "proposed_stacks": 0,
+    "rf_per_stack": [],
+    "band_counts": [],
+    "unlocalized_detections": 3,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-23",
+    "rf_count": 15,
+    "quality_accepted": true,
+    "proposed_stacks": 2,
+    "rf_per_stack": [
+      9,
+      6
+    ],
+    "band_counts": [
+      9,
+      5
+    ],
+    "unlocalized_detections": 0,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-24",
+    "rf_count": 1,
+    "quality_accepted": true,
+    "proposed_stacks": 0,
+    "rf_per_stack": [],
+    "band_counts": [],
+    "unlocalized_detections": 1,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-25",
+    "rf_count": 56,
+    "quality_accepted": true,
+    "proposed_stacks": 10,
+    "rf_per_stack": [
+      8,
+      3,
+      11,
+      7,
+      3,
+      4,
+      7,
+      3,
+      4,
+      3
+    ],
+    "band_counts": [
+      9,
+      3,
+      12,
+      7,
+      10,
+      6,
+      11,
+      4,
+      7,
+      3
+    ],
+    "unlocalized_detections": 3,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-26",
+    "rf_count": 62,
+    "quality_accepted": true,
+    "proposed_stacks": 6,
+    "rf_per_stack": [
+      8,
+      13,
+      11,
+      14,
+      8,
+      7
+    ],
+    "band_counts": [
+      5,
+      6,
+      7,
+      8,
+      5,
+      4
+    ],
+    "unlocalized_detections": 1,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-27",
+    "rf_count": 15,
+    "quality_accepted": true,
+    "proposed_stacks": 3,
+    "rf_per_stack": [
+      5,
+      6,
+      3
+    ],
+    "band_counts": [
+      10,
+      14,
+      8
+    ],
+    "unlocalized_detections": 1,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-28",
+    "rf_count": 57,
+    "quality_accepted": true,
+    "proposed_stacks": 7,
+    "rf_per_stack": [
+      10,
+      13,
+      12,
+      7,
+      5,
+      3,
+      5
+    ],
+    "band_counts": [
+      8,
+      10,
+      12,
+      12,
+      8,
+      3,
+      8
+    ],
+    "unlocalized_detections": 2,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-29",
+    "rf_count": 124,
+    "quality_accepted": true,
+    "proposed_stacks": 14,
+    "rf_per_stack": [
+      6,
+      3,
+      15,
+      16,
+      15,
+      18,
+      16,
+      6,
+      7,
+      4,
+      6,
+      3,
+      4,
+      4
+    ],
+    "band_counts": [
+      11,
+      3,
+      17,
+      17,
+      11,
+      16,
+      15,
+      11,
+      8,
+      8,
+      7,
+      4,
+      7,
+      7
+    ],
+    "unlocalized_detections": 1,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-30",
+    "rf_count": 1,
+    "quality_accepted": true,
+    "proposed_stacks": 0,
+    "rf_per_stack": [],
+    "band_counts": [],
+    "unlocalized_detections": 1,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-31",
+    "rf_count": 1,
+    "quality_accepted": true,
+    "proposed_stacks": 0,
+    "rf_per_stack": [],
+    "band_counts": [],
+    "unlocalized_detections": 1,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-32",
+    "rf_count": 85,
+    "quality_accepted": true,
+    "proposed_stacks": 11,
+    "rf_per_stack": [
+      6,
+      3,
+      11,
+      3,
+      13,
+      15,
+      12,
+      5,
+      6,
+      4,
+      4
+    ],
+    "band_counts": [
+      13,
+      3,
+      10,
+      3,
+      18,
+      12,
+      9,
+      4,
+      5,
+      4,
+      3
+    ],
+    "unlocalized_detections": 3,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-33",
+    "rf_count": 15,
+    "quality_accepted": true,
+    "proposed_stacks": 2,
+    "rf_per_stack": [
+      6,
+      8
+    ],
+    "band_counts": [
+      6,
+      7
+    ],
+    "unlocalized_detections": 1,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-34",
+    "rf_count": 1,
+    "quality_accepted": true,
+    "proposed_stacks": 0,
+    "rf_per_stack": [],
+    "band_counts": [],
+    "unlocalized_detections": 1,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  },
+  {
+    "image_id": "image-35",
+    "rf_count": 3,
+    "quality_accepted": true,
+    "proposed_stacks": 0,
+    "rf_per_stack": [],
+    "band_counts": [],
+    "unlocalized_detections": 3,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "ground_truth": null
+  }
+]

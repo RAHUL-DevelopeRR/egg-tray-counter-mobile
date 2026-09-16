@@ -1,0 +1,16 @@
+{
+  "backend_tests_passed": 62,
+  "worker_tests_passed": 12,
+  "typescript_compile": "passed",
+  "targeted_ruff": "passed",
+  "original_hashes_verified": 35,
+  "fresh_baseline_images": 35,
+  "real_scene_exact_count_accuracy": null,
+  "retraining": false,
+  "deployment": false,
+  "apk_build": false,
+  "known_warnings": [
+    "AnyIO deprecated BlockingPortal alias",
+    "Node module type warning"
+  ]
+}

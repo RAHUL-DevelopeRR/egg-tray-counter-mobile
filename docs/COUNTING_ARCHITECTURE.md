@@ -1,3 +1,13 @@
+> Latest checkpoint (2026-09-16): the active work is the **local MUTAA 3D/band
+> candidate**, documented in `docs/3D_BEAM_COUNTING_ARCHITECTURE.md` and
+> `reports/mutaa-20260916/README.md`. 35 originals have fresh V2 results and
+> automatic band/ROI evidence; real 3D identity and eligible totals remain
+> unresolved. 62 Python tests and 12 Worker tests pass. APK remains 0.2.2+5;
+> latest recorded live Worker is ab67cd59-3f4e-4628-a0fa-d085f56a3fe8.
+> No new deployment, APK or retraining. Earlier deployment/training priorities
+> below are historical and do not override the current research-only scope.
+> Read the latest PROGRESS.md and context.md entries first.
+
 # Counting architecture and ground-truth workflow
 
 Latest training clarification (2026-09-15): see [the phased plan](100_TRAY_SCENE_PLAN.md).

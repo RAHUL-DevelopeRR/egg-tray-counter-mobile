@@ -147,7 +147,8 @@ async function countScan(request: Request, env: Bindings) {
     throw new HttpError(422, "unsupported_scan_contract", "Unknown scan contract");
   }
   const modelScan = requestedContract === "model_spatial_v1";
-  const cellIds = modelScan ? readOptionalCellIds(form) : readCellIds(form);
+  const baselineScan = requestedContract === null && !VIEWS.some(view => form.has(`${view}_cell_id`));
+  const cellIds = modelScan || baselineScan ? readOptionalCellIds(form) : readCellIds(form);
   const rawScanId = String(form.get("scan_id") ?? crypto.randomUUID()).toLowerCase();
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(rawScanId)) {
     throw new HttpError(422, "invalid_scan_id", "scan_id must be a UUID");
@@ -176,6 +177,7 @@ async function countScan(request: Request, env: Bindings) {
   const results = {} as Record<string, ViewInference>;
   for (const view of VIEWS) results[view] = await infer(files[view] as File, env, modelScan);
   if (modelScan) return modelDiagnostics(rawScanId, results, cellIds, env, Date.now() - started);
+  if (baselineScan) return baselineResponse(rawScanId, results, env, Date.now() - started);
   const stacks = fuseCells(results, cellIds, Number(env.MAX_VIEW_COUNT_RATIO));
   const accepted = stacks.every((stack) => stack.accepted);
   const finalCount = accepted ? stacks.reduce((sum, stack) => sum + stack.final_count!, 0) : null;
@@ -206,6 +208,64 @@ async function countScan(request: Request, env: Bindings) {
     rescan: accepted ? null : {
       recommended_view: VIEWS.find((view) => !stacks.find((stack) => stack.physical_stack_id === cellIds[view])!.accepted),
       reason: "MANUAL RECOUNT REQUIRED: inspect each listed cell separately. Do not compare different cell totals.",
+    },
+  });
+}
+
+// Compatibility with the requested August baseline; not the spatial/hybrid path.
+function fuseBaselineCounts(results: Record<string, ViewInference>, maxViewCountRatio = 1.25) {
+  const positiveCounts = Object.values(results).map(({ count }) => count).filter((count) => count > 0);
+  if (positiveCounts.length >= 2) {
+    const lowest = Math.min(...positiveCounts);
+    const highest = Math.max(...positiveCounts);
+    if (highest / lowest > maxViewCountRatio) return null;
+  }
+  const frequencies = new Map<number, number>();
+  for (const { count } of Object.values(results)) {
+    if (count > 0) frequencies.set(count, (frequencies.get(count) ?? 0) + 1);
+  }
+  const agreed = [...frequencies].filter(([, frequency]) => frequency >= 2).map(([count]) => count);
+  return agreed.length === 1 ? agreed[0] : null;
+}
+
+function baselineResponse(scanId: string, results: Record<string, ViewInference>, env: Bindings, latency: number) {
+  const finalCount = fuseBaselineCounts(results, Number(env.MAX_VIEW_COUNT_RATIO));
+  const accepted = finalCount !== null;
+  const views = Object.fromEntries(VIEWS.map((view) => [view, {
+    quality: results[view].confidence,
+    accepted: results[view].count > 0,
+    blur_score: 0,
+    exposure_mean: 0,
+    reason: results[view].count > 0 ? null : "No egg trays detected",
+  }]));
+  const counts = Object.fromEntries(VIEWS.map((view) => [view, results[view].count]));
+  const confidence = accepted
+    ? Math.min(...VIEWS.filter((view) => results[view].count === finalCount).map((view) => results[view].confidence))
+    : 0;
+  console.log(JSON.stringify({ event: "scan_complete", scan_id: scanId, accepted, counts, latency_ms: latency }));
+  return json({
+    scan_id: scanId,
+    status: accepted ? "verified" : "rescan_required",
+    accepted,
+    physical_stack_count: accepted ? 1 : null,
+    total_trays: finalCount,
+    eggs_per_tray: Number(env.EGGS_PER_TRAY),
+    total_eggs: accepted ? finalCount! * Number(env.EGGS_PER_TRAY) : null,
+    model: { provider: "roboflow_serverless", workspace: "", project: "projec-mutta", version: "2", model_id: env.MODEL_ID },
+    processing: { mode: "cloudflare_roboflow_egg_tray_baseline", latency_ms: latency, model_version: env.MODEL_ID, timings_ms: { total: latency } },
+    views,
+    stacks: [{
+      physical_stack_id: "single_stack_baseline",
+      counts,
+      final_count: finalCount,
+      confidence,
+      accepted,
+      reason: accepted ? "At least two views agree" : "Views disagree or contain a large count mismatch",
+      association_confidence: accepted ? 1 : 0,
+    }],
+    rescan: accepted ? null : {
+      recommended_view: VIEWS.reduce((a, b) => results[a].count <= results[b].count ? a : b),
+      reason: "RESCAN REQUIRED: views must agree without a large count mismatch",
     },
   });
 }

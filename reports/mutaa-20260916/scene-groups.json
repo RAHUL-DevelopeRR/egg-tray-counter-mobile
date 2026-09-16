@@ -1,0 +1,227 @@
+[
+  {
+    "scene_id": "single-green",
+    "images": [
+      "image-01",
+      "image-02",
+      "image-03"
+    ],
+    "grouping_status": "tentative_visual_review",
+    "view_classification": "Likely same isolated green stack; front/oblique captures; precise side labels unconfirmed",
+    "physical_ground_truth": null,
+    "x_columns": null,
+    "y_rows": null,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "unresolved": [
+      "physical scene identity",
+      "coverage",
+      "per-stack physical count",
+      "occupancy",
+      "cross-view correspondence"
+    ]
+  },
+  {
+    "scene_id": "low-green",
+    "images": [
+      "image-04",
+      "image-05"
+    ],
+    "grouping_status": "tentative_visual_review",
+    "view_classification": "Likely low green arrangement; straight-like and side-like views",
+    "physical_ground_truth": null,
+    "x_columns": null,
+    "y_rows": null,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "unresolved": [
+      "physical scene identity",
+      "coverage",
+      "per-stack physical count",
+      "occupancy",
+      "cross-view correspondence"
+    ]
+  },
+  {
+    "scene_id": "dense-green",
+    "images": [
+      "image-06",
+      "image-07",
+      "image-08",
+      "image-09",
+      "image-10",
+      "image-11",
+      "image-12",
+      "image-13",
+      "image-14",
+      "image-15",
+      "image-16",
+      "image-21"
+    ],
+    "grouping_status": "tentative_visual_review",
+    "view_classification": "Likely related dense green warehouse area; unequal heights, gaps and partial coverage; unchanged arrangement unconfirmed",
+    "physical_ground_truth": null,
+    "x_columns": null,
+    "y_rows": null,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "unresolved": [
+      "physical scene identity",
+      "coverage",
+      "per-stack physical count",
+      "occupancy",
+      "cross-view correspondence"
+    ]
+  },
+  {
+    "scene_id": "broken-egg",
+    "images": [
+      "image-17"
+    ],
+    "grouping_status": "tentative_visual_review",
+    "view_classification": "Negative-control close-up; visible broken egg/shell on floor, no tray",
+    "physical_ground_truth": null,
+    "x_columns": null,
+    "y_rows": null,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "unresolved": [
+      "physical scene identity",
+      "coverage",
+      "per-stack physical count",
+      "occupancy",
+      "cross-view correspondence"
+    ]
+  },
+  {
+    "scene_id": "partial-green",
+    "images": [
+      "image-18",
+      "image-19",
+      "image-20"
+    ],
+    "grouping_status": "tentative_visual_review",
+    "view_classification": "Partial-fill tray close-ups with background stacks; not whole-inventory views",
+    "physical_ground_truth": null,
+    "x_columns": null,
+    "y_rows": null,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "unresolved": [
+      "physical scene identity",
+      "coverage",
+      "per-stack physical count",
+      "occupancy",
+      "cross-view correspondence"
+    ]
+  },
+  {
+    "scene_id": "empty-green",
+    "images": [
+      "image-22",
+      "image-23",
+      "image-24"
+    ],
+    "grouping_status": "tentative_visual_review",
+    "view_classification": "Nested empty-stack side views and empty single-tray overhead; physical correspondence unconfirmed",
+    "physical_ground_truth": null,
+    "x_columns": null,
+    "y_rows": null,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "unresolved": [
+      "physical scene identity",
+      "coverage",
+      "per-stack physical count",
+      "occupancy",
+      "cross-view correspondence"
+    ]
+  },
+  {
+    "scene_id": "orange-warehouse",
+    "images": [
+      "image-25",
+      "image-26",
+      "image-27",
+      "image-28",
+      "image-29"
+    ],
+    "grouping_status": "tentative_visual_review",
+    "view_classification": "Likely same orange arrangement with front and oblique views; exact sides and interior occupancy unconfirmed",
+    "physical_ground_truth": null,
+    "x_columns": null,
+    "y_rows": null,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "unresolved": [
+      "physical scene identity",
+      "coverage",
+      "per-stack physical count",
+      "occupancy",
+      "cross-view correspondence"
+    ]
+  },
+  {
+    "scene_id": "pulp-closeup",
+    "images": [
+      "image-30",
+      "image-31",
+      "image-33"
+    ],
+    "grouping_status": "tentative_visual_review",
+    "view_classification": "Foreground pulp tray close-ups; likely related but not an audited same-scene triplet",
+    "physical_ground_truth": null,
+    "x_columns": null,
+    "y_rows": null,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "unresolved": [
+      "physical scene identity",
+      "coverage",
+      "per-stack physical count",
+      "occupancy",
+      "cross-view correspondence"
+    ]
+  },
+  {
+    "scene_id": "pulp-warehouse",
+    "images": [
+      "image-32"
+    ],
+    "grouping_status": "tentative_visual_review",
+    "view_classification": "Dense pulp warehouse arrangement; only one view",
+    "physical_ground_truth": null,
+    "x_columns": null,
+    "y_rows": null,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "unresolved": [
+      "physical scene identity",
+      "coverage",
+      "per-stack physical count",
+      "occupancy",
+      "cross-view correspondence"
+    ]
+  },
+  {
+    "scene_id": "orange-closeup",
+    "images": [
+      "image-34",
+      "image-35"
+    ],
+    "grouping_status": "tentative_visual_review",
+    "view_classification": "Foreground orange tray views; cropped background stocks",
+    "physical_ground_truth": null,
+    "x_columns": null,
+    "y_rows": null,
+    "physical_trays": null,
+    "eligible_egg_trays": null,
+    "unresolved": [
+      "physical scene identity",
+      "coverage",
+      "per-stack physical count",
+      "occupancy",
+      "cross-view correspondence"
+    ]
+  }
+]

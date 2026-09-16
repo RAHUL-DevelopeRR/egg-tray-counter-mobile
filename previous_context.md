@@ -174,3 +174,91 @@ instance/rim labels, confirm small-stack physical counts and egg-vs-shell
 occupancy, run unchanged model and measure matched detection errors.
 Verification: unique source hashes preserved; annotation boxes in image bounds;
 all JSON parsed. This intake changes data/docs only; no runtime tests required.
+
+
+## 2026-09-16 — live APK/backend compatibility fix
+
+User reported reachable server but optional-marker FormatException before
+upload and explicitly requested a fix. Confirmed live baseline health lacked
+model_spatial_v1 required by APK0.2.2. Deployed compatibility repair version
+ab67cd59-3f4e-4628-a0fa-d085f56a3fe8 with existing model/settings/secrets retained.
+Modern model_spatial_v1 scans accept no floor IDs and return spatial evidence;
+old no-contract/no-ID requests retain the original baseline route. Explicit
+cell-ID contract still validated. This supersedes the previous production
+rollback state for this user-requested repair, not for experimental hybrid work.
+Compile,12 Worker tests and dry-run passed; live health advertises required
+contract. See reports/backend-compatibility-20260916/ for runtime evidence.
+No retraining or APK rebuild. Exact hybrid remains unfinished; modern total
+stays unresolved. Next: verify a fresh phone scan; continue research separately.
+
+
+## 2026-09-16 — new upload timeout and reported severe undercount
+
+User reports2/2/25 on views each said to contain100 trays; screenshot separately
+shows Dio45-second sendTimeout. Counts are user-reported, not independently
+replayed. Compatibility repair did not solve model accuracy or upload reliability.
+Source inspection: CameraController uses ResolutionPreset.max; ApiClient sends
+original files with45-second send and receive timeouts. Large payload/network
+conditions are plausible causes, not confirmed without phone/file evidence.
+Band algorithm remains local assisted research and is NOT in the deployed Worker.
+
+APK logs are not uploaded to backend. SQLite history stores result summaries,
+not raw images/detection JSON/network traces. Worker observability is enabled,
+but modelDiagnostics currently lacks a scan_complete console event; legacy/cell
+routes emit counts. Thus historical per-view details may be unavailable even if
+request events exist. Do not claim the2/2/25 request was found in logs.
+ADB checked: no connected device. Requested USB debugging connection and scan
+time/ID to capture upload timing, bytes, network errors and actual input photos.
+Need compare returned raw boxes to exact uploaded images before changing model
+thresholds or retraining. No additional APK build or deployment in this diagnosis.
+
+
+## 2026-09-16 — MUTAA local 3D/band candidate checkpoint
+
+User supplied a detailed research prompt and two sketches: complementary X/Y
+views, per-stack Z evidence, shared corner counted once, egg-containing trays
+only, explicit SOP constraints. No deployment, APK rebuild or immediate training
+in this task. Starting branch codex/hybrid-cell-counting, HEAD bd8abb4b6ecc8c0fcfaff5e9661b5688e212d558.
+
+Completed: recursively archived all 35 MUTAA originals with SHA-256, dimensions,
+top-level EXIF and contact sheet (35 unique); preserved prompt/sketches. Fresh
+unchanged projec-mutta/2 inference obtained for all 35 through current gateway,
+confidence35/overlap50/class egg_tray. Saved gateway JSON, request mappings,
+EXIF-oriented boxes, automatic stack polygons, beam hypotheses and 35 overlays.
+Gateway does not expose full raw upstream RF JSON; this remains a limitation.
+First pass hit HTTP503 Worker exceeded resource limits on batches05-12; later
+retries and one-large-image/two-small-companion batches recovered all inputs.
+Original images unchanged. This is not proof of the earlier phone timeout cause.
+
+Implemented local POST /candidate/count-3d for images plus hash-bound saved RF
+boxes (disabled for APP_ENV=production). Reuses existing localization and band
+analysis, preserves RF/band/height disagreement, unknown occupancy and SOP
+violations. SIFT/RANSAC proposes correspondences but never certifies identity.
+Explicit-coordinate grid accounting deduplicates shared physical cells, handles
+known gaps/unequal heights and blocks conflicts/unknown occupancy. Synthetic
+fixtures validate 200/180 totals, shared-anchor dedup and harmonic abstention.
+
+Real findings: image07 RF56, band candidates16/20/22/19/19 from five incomplete
+proposals; image10 RF12 and only one partial ROI despite multiple visible stacks.
+Image17 broken egg/shell falsely classified egg_tray; image24 empty tray also
+uses generic egg_tray label. No accepted cross-view anchor for tentative07/10/11.
+Real X/Y grid, physical totals and eligible totals remain unresolved. No audited
+real-world98% accuracy claim. No MUTAA truth imported from the old100-tray scene.
+
+Verification: 62 Python backend tests passed; targeted Ruff passed; TypeScript
+compiled and12 Worker tests passed (prior compatibility changes included in
+publication). Original/source hashes checked,35 results present. Existing AnyIO
+deprecation and Node module-type warnings only. All current context docs updated.
+
+Artifacts: reports/mutaa-20260916/README.md, RESULTS.md, scene-groups.json,
+per-image-results.json, cross-view-prototype.json, raw/, analysis/, originals/,
+design/. Architecture/SOP: docs/3D_BEAM_COUNTING_ARCHITECTURE.md.
+APK stays0.2.2+5; latest recorded live Worker stays
+ab67cd59-3f4e-4628-a0fa-d085f56a3fe8. No new deployment/retraining/APK.
+
+Blockers/next: user physical totals and scene identity still pending. Review
+stack-face/rim/corner/occupancy annotations; test a separate localized-crop V2
+ablation and audited labels before training. Complete calibrated correspondence
+and per-layer occupancy before claiming an image-to-3D exact count. Instrument
+large multipart/base64 resource use separately; do not deploy as part of research.
+Commit/push requested to codex/hybrid-cell-counting; verify remote ref after push.
