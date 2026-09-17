@@ -12,6 +12,8 @@ test('optional markers do not invent physical identity', () => {
 });
 
 test('model path accepts no markers, retains boxes and never certifies photo agreement', async t => {
+  const logs = [];
+  t.mock.method(console, 'log', line => logs.push(JSON.parse(line)));
   const box = {class: 'egg_tray', confidence: .9, x: 100, y: 120, width: 40, height: 20};
   t.mock.method(globalThis, 'fetch', async () => Response.json({predictions: [box]}));
   const form = new FormData();
@@ -29,4 +31,9 @@ test('model path accepts no markers, retains boxes and never certifies photo agr
   assert.equal(result.total_trays, null);
   assert.equal(result.total_eggs, null);
   assert.deepEqual(result.stacks[0].counts, {left:1, right:1, straight:1});
+  assert.equal(logs.filter(e => e.event === 'view_encoded').length, 3);
+  assert.equal(logs.filter(e => e.event === 'view_inferred').length, 3);
+  assert.equal(logs.find(e => e.event === 'scan_complete').accepted, false);
+  assert.deepEqual(logs.find(e => e.event === 'scan_validated').view_bytes, {left:4, right:4, straight:4});
+  assert.ok(!JSON.stringify(logs).includes('test-only'));
 });

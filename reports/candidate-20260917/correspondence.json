@@ -1,0 +1,12 @@
+{
+  "group": {
+    "image-07": "straight",
+    "image-10": "left",
+    "image-11": "right"
+  },
+  "same_scene_confirmed": false,
+  "ground_truth_status": "GROUND_TRUTH_UNKNOWN",
+  "proposals": [],
+  "accepted_identities": 0,
+  "accuracy": null
+}

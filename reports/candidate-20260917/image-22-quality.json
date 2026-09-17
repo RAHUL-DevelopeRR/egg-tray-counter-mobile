@@ -1,0 +1,10 @@
+{
+  "id": "image-22",
+  "sha256": "f6e66de3fe5ee1829162dea39b031ab84c7c81c2a1a047ad4e45f8e22373132c",
+  "ground_truth_status": "GROUND_TRUTH_UNKNOWN",
+  "view_assignment_confirmed": false,
+  "rf_count": 3,
+  "stacks": [],
+  "quality_scope": "proposed faces only; missed/partial faces remain unassessed",
+  "rf_and_beam_source": "frozen 20260916 audit; no fresh model calls"
+}

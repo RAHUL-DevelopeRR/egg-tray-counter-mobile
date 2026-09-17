@@ -154,3 +154,45 @@ Freeze scenes by arrangement/session for held-out tests. Measure stack/scene
 exact match, count MAE, matched precision/recall, occupancy errors, false
 acceptance and coverage together. The synthetic grid tests establish bookkeeping,
 not camera-based counting accuracy or the recovery of hidden inventory.
+
+## 2026-09-17 candidate revision
+
+Current local revision: `candidate-20260917`, extending checkpoint d5ddcc8.
+See `reports/candidate-20260917/README.md` for measured results and blockers.
+The response now uses `geometry` and `cells`; statuses are lowercase
+`recapture_required` / `out_of_operating_envelope`. The current response model
+cannot emit verified=true or numeric inventory totals. The separate synthetic
+accounting core produces numeric totals only for supplied resolved observations.
+Request and response JSON schemas are archived with this report. The local route
+is `/candidate/count-3d` with three multipart images and JSON `evidence`; it is
+unavailable in production. Hash binding is not authentication of RF predictions.
+
+SOP fields include vertical_stacks, orthogonal_layout, all_positions_observed,
+top_base_visible, stable_arrangement, boundaries_identifiable and
+front_side_separation. False declarations trigger an operating-envelope failure;
+missing declarations remain unverified. Declared visibility can identify an
+occluded proposed stack or a missing rear/shared corner. Declarations are not
+measured geometry. No floor-cell IDs are mandatory.
+
+Each proposed face is rectified for bounded regional diagnostics and divided
+into top/middle/bottom thirds. The profile records tunable pilot thresholds;
+low-light, weak sharpness, contrast and possible image-boundary crops produce
+specific actions. MOTION_BLUR is a compatibility reason code whose cause says
+motion is unconfirmed; weak texture and defocus can also lower sharpness.
+Occlusion is not inferred from darkness. Complete top/base visibility cannot be
+proved merely because a detection envelope stays inside the image.
+
+Correspondence now requires mutual ratio matches, at least 12 RANSAC inliers,
+60% inlier fraction, 20% convex-hull coverage on each proposed face, projected
+face IoU >=0.4 and median reprojection error <=3 resized pixels. These are
+uncalibrated proposal filters, not identity acceptance criteria. Different
+faces of a shared corner still need pose/base evidence; no stack is certified.
+
+Grid cells carry physical_stack_id, observed_in and source-observation provenance
+for each Z occupancy. Explicit gaps differ from unobserved cells. Repeated
+observations of the same X/Y cell do not add inventory; conflicting repeats
+block totals. Fully hidden stock remains unresolved even under a uniform SOP.
+
+Worker changes are local: native encoding, sequential hashing and stage logs.
+Python bands remain outside the Worker. Live WebSockets and warm inference may
+improve feedback latency later; neither establishes geometry or occupancy.

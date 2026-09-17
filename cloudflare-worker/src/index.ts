@@ -1,3 +1,5 @@
+import { Buffer } from "node:buffer";
+
 type Bindings = Env & { ROBOFLOW_API_KEY: string };
 
 type Prediction = { class?: string; confidence?: number; x?: number; y?: number; width?: number; height?: number };
@@ -74,23 +76,26 @@ function fuseCells(results: Record<string, ViewInference>, cellIds: Record<strin
 }
 
 function base64(bytes: Uint8Array) {
-  let binary = "";
-  for (let offset = 0; offset < bytes.length; offset += 0x8000) {
-    binary += String.fromCharCode(...bytes.subarray(offset, offset + 0x8000));
-  }
-  return btoa(binary);
+  return Buffer.from(bytes.buffer, bytes.byteOffset, bytes.byteLength).toString("base64");
 }
 
-async function infer(file: File, env: Bindings, requireSpatial = false): Promise<ViewInference> {
+async function infer(file: File, env: Bindings, requireSpatial = false,
+                     trace: { scan_id: string; view: string } | undefined = undefined): Promise<ViewInference> {
   const url = new URL(`https://serverless.roboflow.com/${env.MODEL_ID}`);
   url.searchParams.set("api_key", env.ROBOFLOW_API_KEY);
   url.searchParams.set("confidence", env.CONFIDENCE);
   url.searchParams.set("overlap", env.OVERLAP);
   url.searchParams.set("classes", "egg_tray");
   url.searchParams.set("format", "json");
+  const encodingStarted = Date.now();
   const body = base64(new Uint8Array(await file.arrayBuffer()));
+  console.log(JSON.stringify({event: "view_encoded", ...trace, image_bytes: file.size,
+    encoded_bytes: body.length, encoding_ms: Date.now() - encodingStarted}));
+  const upstreamStarted = Date.now();
+  let attempts = 0;
   let response: Response | undefined;
   for (let attempt = 0; attempt < 3; attempt++) {
+    attempts++;
     try {
       response = await fetch(url, {
         method: "POST",
@@ -105,7 +110,8 @@ async function infer(file: File, env: Bindings, requireSpatial = false): Promise
     if (attempt < 2) await new Promise((resolve) => setTimeout(resolve, 250 * 2 ** attempt));
   }
   if (!response?.ok) {
-    console.error(JSON.stringify({ event: "roboflow_error", status: response?.status ?? 0 }));
+    console.error(JSON.stringify({ event: "roboflow_error", ...trace,
+      status: response?.status ?? 0, attempts, upstream_ms: Date.now() - upstreamStarted }));
     if (response?.status === 402) {
       throw new HttpError(503, "inference_quota_exhausted", "Roboflow inference credits are unavailable");
     }
@@ -122,6 +128,8 @@ async function infer(file: File, env: Bindings, requireSpatial = false): Promise
       (requireSpatial && (![p.x, p.y, p.width, p.height].every(Number.isFinite) || p.width! <= 0 || p.height! <= 0)))) {
     throw new HttpError(502, "invalid_inference_response", "Model returned invalid spatial evidence");
   }
+  console.log(JSON.stringify({event: "view_inferred", ...trace, attempts,
+    upstream_ms: Date.now() - upstreamStarted, detection_count: predictions.length}));
   return {
     count: predictions.length,
     detections: predictions.map(({class: label, confidence, x, y, width, height}) =>
@@ -138,10 +146,15 @@ async function sha256(file: File) {
 }
 
 async function countScan(request: Request, env: Bindings) {
+  const requestStarted = Date.now();
   if (!request.headers.get("content-type")?.startsWith("multipart/form-data")) {
     throw new HttpError(415, "invalid_content_type", "Expected multipart form data");
   }
+  const declaredLength = Number(request.headers.get("content-length"));
+  console.log(JSON.stringify({event: "scan_received", declared_request_bytes:
+    Number.isSafeInteger(declaredLength) && declaredLength > 0 ? declaredLength : null}));
   const form = await request.formData();
+  const multipartMs = Date.now() - requestStarted;
   const requestedContract = form.get("scan_contract");
   if (requestedContract !== null && !["cell_identity_v1", "model_spatial_v1"].includes(String(requestedContract))) {
     throw new HttpError(422, "unsupported_scan_contract", "Unknown scan contract");
@@ -168,15 +181,28 @@ async function countScan(request: Request, env: Bindings) {
     const png = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a].every((byte, i) => signature[i] === byte);
     if (!jpeg && !png) throw new HttpError(415, "invalid_image_signature", `${view.toUpperCase()} is not a valid JPEG or PNG`);
   }
-  const hashes = await Promise.all(VIEWS.map((view) => sha256(files[view] as File)));
+  console.log(JSON.stringify({event: "scan_validated", scan_id: rawScanId, multipart_ms: multipartMs,
+    view_bytes: Object.fromEntries(VIEWS.map(v => [v, (files[v] as File).size]))}));
+  const hashStarted = Date.now();
+  const hashes: string[] = [];
+  for (const view of VIEWS) hashes.push(await sha256(files[view] as File));
+  console.log(JSON.stringify({event: "views_hashed", scan_id: rawScanId, hashing_ms: Date.now() - hashStarted}));
   if (new Set(hashes).size !== 3) {
     throw new HttpError(422, "duplicate_view", "LEFT, RIGHT, and STRAIGHT must be distinct photographs");
   }
 
   const started = Date.now();
   const results = {} as Record<string, ViewInference>;
-  for (const view of VIEWS) results[view] = await infer(files[view] as File, env, modelScan);
-  if (modelScan) return modelDiagnostics(rawScanId, results, cellIds, env, Date.now() - started);
+  for (const view of VIEWS) results[view] = await infer(files[view] as File, env, modelScan,
+    {scan_id: rawScanId, view});
+  console.log(JSON.stringify({event: "scan_stages_complete", scan_id: rawScanId,
+    multipart_ms: multipartMs, inference_ms: Date.now() - started,
+    total_ms: Date.now() - requestStarted}));
+  if (modelScan) {
+    console.log(JSON.stringify({event: "scan_complete", scan_id: rawScanId, accepted: false,
+      counts: Object.fromEntries(VIEWS.map(v => [v, results[v].count])), latency_ms: Date.now() - started}));
+    return modelDiagnostics(rawScanId, results, cellIds, env, Date.now() - started);
+  }
   if (baselineScan) return baselineResponse(rawScanId, results, env, Date.now() - started);
   const stacks = fuseCells(results, cellIds, Number(env.MAX_VIEW_COUNT_RATIO));
   const accepted = stacks.every((stack) => stack.accepted);
@@ -304,7 +330,7 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
   });
 }
 
-export { fuseCounts, fuseCells, readCellIds, readOptionalCellIds };
+export { base64, fuseCounts, fuseCells, readCellIds, readOptionalCellIds };
 
 export default {
   async fetch(request, env): Promise<Response> {
@@ -318,7 +344,7 @@ export default {
       return json({ detail: { code: "not_found", message: "Route not found" } }, 404);
     } catch (error) {
       if (error instanceof HttpError) return json({ detail: { code: error.code, message: error.message } }, error.status);
-      console.error(JSON.stringify({ event: "request_failed", message: error instanceof Error ? error.message : "unknown" }));
+      console.error(JSON.stringify({ event: "request_failed", error_type: "unexpected_error" }));
       return json({ detail: { code: "internal_error", message: "Scan could not be processed" } }, 500);
     }
   },

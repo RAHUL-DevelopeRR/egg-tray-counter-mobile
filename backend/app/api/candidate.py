@@ -6,7 +6,6 @@ research input, so this route never asserts trusted inventory certification.
 
 import hashlib
 import io
-import json
 from typing import Annotated
 
 import numpy as np
@@ -15,12 +14,13 @@ from PIL import Image, ImageOps
 from starlette.concurrency import run_in_threadpool
 
 from app.api.routes import _read_upload
+from app.schemas.candidate import CandidateEvidence, CandidateResponse
 from app.vision.spatial_3d import candidate_scene
 
 router = APIRouter()
 
 
-@router.post("/candidate/count-3d")
+@router.post("/candidate/count-3d", response_model=CandidateResponse)
 async def count_3d(
     request: Request,
     left: Annotated[UploadFile, File()],
@@ -31,9 +31,7 @@ async def count_3d(
     if request.app.state.settings.app_env == "production":
         raise HTTPException(404, "Local research route only")
     try:
-        data = json.loads(evidence)
-        if set(data) - {"views", "sop"} or set(data["views"]) != {"left", "right", "straight"}:
-            raise ValueError("Three hash-bound view records required")
+        data = CandidateEvidence.model_validate_json(evidence).model_dump(by_alias=True)
         images, detections, hashes = {}, {}, set()
         for view, upload in (("left", left), ("right", right), ("straight", straight)):
             content = await _read_upload(upload, request.app.state.settings.max_upload_bytes, view)
@@ -51,7 +49,8 @@ async def count_3d(
             detections[view] = record["detections"]
             if not isinstance(detections[view], list) or len(detections[view]) > 2000:
                 raise ValueError("Detection list exceeds candidate budget")
-        result = await run_in_threadpool(candidate_scene, images, detections, data.get("sop"))
+        visibility = {v: r["visibility"] for v, r in data["views"].items()}
+        result = await run_in_threadpool(candidate_scene, images, detections, data["sop"], visibility)
         result["evidence_source"] = "client_supplied_hash_bound_predictions_not_independently_authenticated"
         return result
     except (ValueError, KeyError, TypeError, OSError) as exc:

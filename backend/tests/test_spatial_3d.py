@@ -30,17 +30,24 @@ def test_rectangle_and_shared_anchor():
     items.append({**items[4], "id": "duplicate-side-5"})
     assert grid(items)["eligible_egg_trays"] == 200
     assert len(grid(items)["scene_grid"]) == 10
+    items[7]["view"] = "left"
+    items.append({**items[7], "id": "rear-right", "view": "right"})
+    result = grid(items)
+    assert result["eligible_egg_trays"] == 200
+    rear = next(c for c in result["scene_grid"] if (c["x"], c["y"]) == (2, 1))
+    assert rear["observed_in"] == ["left", "right"]
+    assert len(rear["layers"][0]["source_observations"]) == 2
 
 
 def test_missing_and_unequal_rear():
     items = observations()
-    items.pop()
-    assert grid(items, absent_cells=((4, 1),))["eligible_egg_trays"] == 180
+    items.pop(7)
+    assert grid(items, absent_cells=((2, 1),))["eligible_egg_trays"] == 180
     assert grid(items)["eligible_egg_trays"] is None
     assert grid(items)["rescan"]
     items = observations()
-    items[-1]["layers"] = ["filled"] * 13
-    assert grid(items)["eligible_egg_trays"] == 193
+    items[7]["layers"] = ["filled"] * 15
+    assert grid(items)["eligible_egg_trays"] == 195
 
 
 def test_unknown_and_empty():
@@ -72,6 +79,12 @@ def test_conflicting_anchor_and_bad_geometry():
     items[0]["geometry_evidence"] = ""
     with pytest.raises(ValueError):
         grid(items)
+    items = observations()
+    items[1]["id"] = items[0]["id"]
+    with pytest.raises(ValueError):
+        grid(items)
+    with pytest.raises(ValueError):
+        grid([], absent_cells=((False, 1),))
 
 
 def test_out_of_sop():
@@ -79,9 +92,12 @@ def test_out_of_sop():
 
     images = {v: np.full((480, 480, 3), 128, np.uint8) for v in ("left", "right", "straight")}
     result = candidate_scene(images, {v: [] for v in images}, {"orthogonal_layout": False})
-    assert result["status"] == "OUT_OF_OPERATING_ENVELOPE"
+    assert result["status"] == "out_of_operating_envelope"
     assert result["eligible_egg_trays"] is None
     assert not result["verified"]
+    codes = {r["code"] for r in result["rescan"]["recommendations"]}
+    assert {"SOP_VIOLATION", "REAR_ROW_NOT_VISIBLE", "SHARED_CORNER_MISSING"} <= codes
+    assert result["geometry"]["y_rows"] is None
 
 
 def test_image_stack_beam_integration():
@@ -126,8 +142,81 @@ def test_candidate_route_hashes_and_no_false_certification():
     response = client.post("/candidate/count-3d", files=files, data={"evidence": json.dumps(evidence)})
     assert response.status_code == 200
     assert response.json()["verified"] is False
+    assert response.json()["contract_revision"] == "candidate-20260917"
+    evidence["expected_total"] = 100
+    assert (
+        client.post("/candidate/count-3d", files=files, data={"evidence": json.dumps(evidence)}).status_code
+        == 422
+    )
+    del evidence["expected_total"]
+    evidence["sop"] = {"vertical_stacks": "true"}
+    assert (
+        client.post("/candidate/count-3d", files=files, data={"evidence": json.dumps(evidence)}).status_code
+        == 422
+    )
+    del evidence["sop"]
+    from dataclasses import replace
+
+    client.app.state.settings = replace(client.app.state.settings, app_env="production")
+    assert (
+        client.post("/candidate/count-3d", files=files, data={"evidence": json.dumps(evidence)}).status_code
+        == 404
+    )
+    client.app.state.settings = replace(client.app.state.settings, app_env="development")
     evidence["views"]["left"]["image_sha256"] = "wrong"
     assert (
         client.post("/candidate/count-3d", files=files, data={"evidence": json.dumps(evidence)}).status_code
         == 422
     )
+
+
+def test_regional_darkness_crop_and_sharpness():
+    import numpy as np
+
+    from app.vision.regional_quality import regional_stack_quality
+
+    image = np.full((600, 600, 3), 180, np.uint8)
+    image[380:550, 100:301] = 10
+    stack = {"stack_id": "right:candidate_4", "polygon": [[100, 50], [300, 50], [300, 549], [100, 549]]}
+    result = regional_stack_quality(image, stack, "right")
+    assert image.mean() > 150
+    assert result["regions"]["bottom"]["low_light"]
+    assert not result["regions"]["top"]["low_light"]
+    bottom = [r for r in result["recommendations"] if r["region"] == "bottom"]
+    assert [r["code"] for r in bottom] == ["BOTTOM_DARK"]
+    assert bottom[0]["stack"] == "right:candidate_4"
+    assert "RIGHT" in bottom[0]["action"]
+    assert result["regions"]["bottom"]["occlusion"] is None
+    stack["polygon"] = [[100, 0], [300, 0], [300, 599], [100, 599]]
+    codes = {r["code"] for r in regional_stack_quality(image, stack, "right")["recommendations"]}
+    assert {"TOP_CROPPED", "BASE_CROPPED", "MOTION_BLUR"} <= codes
+
+
+def test_geometric_support_rejects_cluster_and_wrong_face():
+    import numpy as np
+
+    from app.vision.spatial_3d import geometric_support
+
+    quad = np.array([[0, 0], [100, 0], [100, 200], [0, 200]], np.float32)
+    points = np.array([[10, 20], [90, 20], [90, 180], [10, 180]], np.float32)
+    assert geometric_support(points, points, np.eye(3), quad, quad)["supported"]
+    assert not geometric_support(points / 10, points / 10, np.eye(3), quad, quad)["supported"]
+    assert not geometric_support(points, points, np.eye(3), quad, quad + 300)["supported"]
+
+
+def test_declared_occlusion_and_unknown_occupancy():
+    from conftest import synthetic_stack
+
+    image = synthetic_stack(18)
+    detections = [{"bbox": [10, y - 5, 460, y + 5], "confidence": 0.9} for y in range(40, 681, 38)]
+    result = candidate_scene(
+        {v: image for v in ("left", "straight", "right")},
+        {"left": [], "straight": [], "right": detections},
+        visibility={"right": {"occluded_stack_ids": ["right:candidate_1"], "rear_rows_visible": False}},
+    )
+    guidance = result["rescan"]["recommendations"]
+    assert any(
+        r["code"] == "STACK_OCCLUDED" and r["evidence_source"] == "operator_declared" for r in guidance
+    )
+    assert any(r["code"] == "OCCUPANCY_UNCLEAR" for r in guidance)
+    assert result["eligible_egg_trays"] is None

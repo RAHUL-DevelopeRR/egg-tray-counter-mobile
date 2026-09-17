@@ -1,0 +1,241 @@
+{
+  "$defs": {
+    "DetectionEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "bbox": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Bbox",
+          "type": "array"
+        },
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "class": {
+          "const": "egg_tray",
+          "default": "egg_tray",
+          "title": "Class",
+          "type": "string"
+        }
+      },
+      "required": [
+        "bbox",
+        "confidence"
+      ],
+      "title": "DetectionEvidence",
+      "type": "object"
+    },
+    "SOPProfile": {
+      "additionalProperties": false,
+      "properties": {
+        "profile_id": {
+          "const": "orthogonal_stacks_v1",
+          "default": "orthogonal_stacks_v1",
+          "title": "Profile Id",
+          "type": "string"
+        },
+        "vertical_stacks": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Vertical Stacks"
+        },
+        "orthogonal_layout": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Orthogonal Layout"
+        },
+        "all_positions_observed": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "All Positions Observed"
+        },
+        "top_base_visible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Top Base Visible"
+        },
+        "stable_arrangement": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stable Arrangement"
+        },
+        "boundaries_identifiable": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Boundaries Identifiable"
+        },
+        "front_side_separation": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Front Side Separation"
+        }
+      },
+      "title": "SOPProfile",
+      "type": "object"
+    },
+    "ViewEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "image_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Image Sha256",
+          "type": "string"
+        },
+        "coordinate_frame": {
+          "const": "exif_transposed_pixels",
+          "title": "Coordinate Frame",
+          "type": "string"
+        },
+        "detections": {
+          "items": {
+            "$ref": "#/$defs/DetectionEvidence"
+          },
+          "maxItems": 2000,
+          "title": "Detections",
+          "type": "array"
+        },
+        "visibility": {
+          "$ref": "#/$defs/VisibilityEvidence"
+        }
+      },
+      "required": [
+        "image_sha256",
+        "coordinate_frame",
+        "detections"
+      ],
+      "title": "ViewEvidence",
+      "type": "object"
+    },
+    "VisibilityEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "shared_corner_visible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shared Corner Visible"
+        },
+        "rear_rows_visible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rear Rows Visible"
+        },
+        "occluded_stack_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 200,
+          "title": "Occluded Stack Ids",
+          "type": "array"
+        }
+      },
+      "title": "VisibilityEvidence",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "views": {
+      "additionalProperties": {
+        "$ref": "#/$defs/ViewEvidence"
+      },
+      "propertyNames": {
+        "enum": [
+          "left",
+          "straight",
+          "right"
+        ]
+      },
+      "title": "Views",
+      "type": "object"
+    },
+    "sop": {
+      "$ref": "#/$defs/SOPProfile"
+    }
+  },
+  "required": [
+    "views"
+  ],
+  "title": "CandidateEvidence",
+  "type": "object"
+}

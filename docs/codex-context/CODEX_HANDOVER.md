@@ -1,3 +1,14 @@
+> Latest checkpoint (2026-09-17): local candidate revision `candidate-20260917`.
+> Read `reports/candidate-20260917/README.md` and the latest PROGRESS/context entries.
+> Regional quality, structured recapture, strict schemas, shared-stack provenance
+> and stronger provisional matching implemented. Synthetic 200/180/195 pass;
+> 65 backend tests and 13 Worker tests passed, plus focused final checks.
+> 35 archived images replayed, 106 proposed faces, no new RF calls or physical truth.
+> Real correspondence/occupancy remain unresolved. Worker encoding/logging changes
+> are local only. No deployment, training or APK rebuild; APK stays 0.2.2+5.
+> Next: confirm a same-scene triplet and independent per-stack truth, then calibrate
+> geometry/occupancy/quality acceptance before hosted integration and Android work.
+
 > Latest checkpoint (2026-09-16): the active work is the **local MUTAA 3D/band
 > candidate**, documented in `docs/3D_BEAM_COUNTING_ARCHITECTURE.md` and
 > `reports/mutaa-20260916/README.md`. 35 originals have fresh V2 results and

@@ -10,7 +10,9 @@ import cv2
 import numpy as np
 
 from app.config import Settings
+from app.schemas.candidate import CandidateResponse, SOPProfile, VisibilityEvidence
 from app.vision.quality import evaluate_quality
+from app.vision.regional_quality import recommendation, regional_stack_quality
 from app.vision.stack_measurement import analyze_rims, localize_stacks, rectify_native
 
 
@@ -70,6 +72,7 @@ def analyze_view(image: np.ndarray, detections: list[dict], view: str) -> dict:
             stack["beam"] = {"selected_count": None, "reason": str(exc)}
             stack["fusion"] = {"physical_layer_count": None, "status": "unresolved"}
         stack["occupancy"] = "unknown"
+        stack["regional_quality"] = regional_stack_quality(image, stack, view)
     return {
         "view": view,
         "rf_count": len(detections),
@@ -92,7 +95,31 @@ def _features(image: np.ndarray, stack: dict):
         cv2.cvtColor(small, cv2.COLOR_BGR2GRAY), mask
     )
     points = np.asarray([k.pt for k in keypoints], np.float32).reshape(-1, 2)
-    return points, descriptors
+    return points, descriptors, np.asarray(stack["polygon"], np.float32) * scale
+
+
+def geometric_support(a, b, matrix, source_quad, target_quad):
+    """Reject concentrated matches and implausible face projections; not calibrated identity."""
+    coverages = [
+        float(abs(cv2.contourArea(cv2.convexHull(points))) / max(abs(cv2.contourArea(quad)), 1))
+        for points, quad in ((a, source_quad), (b, target_quad))
+    ]
+    projected = cv2.perspectiveTransform(source_quad.reshape(1, -1, 2), matrix)[0]
+    if not np.isfinite(projected).all() or not cv2.isContourConvex(projected):
+        return {"supported": False, "reason": "invalid_face_projection"}
+    area = abs(cv2.contourArea(projected))
+    intersection, _ = cv2.intersectConvexConvex(projected, target_quad)
+    iou = float(intersection / max(area + abs(cv2.contourArea(target_quad)) - intersection, 1))
+    error = float(np.median(np.linalg.norm(cv2.perspectiveTransform(a[None], matrix)[0] - b, axis=1)))
+    # ponytail: pilot geometric gates, calibrate against labeled same/different stack pairs before acceptance.
+    return {
+        "supported": min(coverages) >= 0.2 and iou >= 0.4 and error <= 3,
+        "source_coverage": coverages[0],
+        "target_coverage": coverages[1],
+        "projected_face_iou": iou,
+        "median_reprojection_error_px": error,
+        "thresholds_validated": False,
+    }
 
 
 def propose_correspondence(images: dict, views: dict) -> list[dict]:
@@ -105,19 +132,26 @@ def propose_correspondence(images: dict, views: dict) -> list[dict]:
     candidates = []
     for side in ("left", "right"):
         for front in views.get("straight", {}).get("stacks", []):
-            pa, da = features[front["stack_id"]]
+            pa, da, qa = features[front["stack_id"]]
             if da is None or len(da) < 12:
                 continue
             for back in views.get(side, {}).get("stacks", []):
-                pb, db = features[back["stack_id"]]
+                pb, db, qb = features[back["stack_id"]]
                 if db is None or len(db) < 12:
                     continue
                 pairs = cv2.BFMatcher().knnMatch(da, db, k=2)
                 good = [
                     a for pair in pairs if len(pair) == 2 for a, b in [pair] if a.distance < 0.65 * b.distance
                 ]
-                # One train feature cannot be counted as many independent matches.
-                good = list({m.trainIdx: m for m in sorted(good, key=lambda m: -m.distance)}.values())
+                reverse = cv2.BFMatcher().knnMatch(db, da, k=2)
+                mutual = {
+                    (m.queryIdx, m.trainIdx)
+                    for pair in reverse
+                    if len(pair) == 2
+                    for m, n in [pair]
+                    if m.distance < 0.65 * n.distance
+                }
+                good = [m for m in good if (m.trainIdx, m.queryIdx) in mutual]
                 if len(good) < 12:
                     continue
                 a = np.asarray([pa[m.queryIdx] for m in good])
@@ -130,11 +164,15 @@ def propose_correspondence(images: dict, views: dict) -> list[dict]:
                 ratio = float(inliers.mean())
                 if ratio < 0.6:
                     continue
+                geometry = geometric_support(a[inliers], b[inliers], matrix, qa, qb)
+                if not geometry["supported"]:
+                    continue
                 candidates.append(
                     {
                         "source": front["stack_id"],
                         "target": back["stack_id"],
-                        "method": "SIFT ratio + planar RANSAC",
+                        "method": "mutual SIFT ratio + planar RANSAC + face coverage/projection",
+                        "geometry": geometry,
                         "inliers": int(mask.sum()),
                         "inlier_fraction": ratio,
                         "status": "provisional",
@@ -145,41 +183,152 @@ def propose_correspondence(images: dict, views: dict) -> list[dict]:
     return candidates
 
 
-def candidate_scene(images: dict, detections: dict, sop: dict | None = None) -> dict:
+def candidate_scene(
+    images: dict, detections: dict, sop: dict | None = None, visibility: dict | None = None
+) -> dict:
     if set(images) != {"left", "right", "straight"} or set(detections) != set(images):
         raise ValueError("LEFT, RIGHT and STRAIGHT evidence required")
-    sop = sop or {}
-    required = ("vertical_stacks", "orthogonal_layout", "all_positions_observed", "top_base_visible")
+    sop = SOPProfile.model_validate(sop or {}).model_dump()
+    visibility = visibility or {}
+    if set(visibility) - set(images):
+        raise ValueError("Unknown visibility view")
+    visibility = {v: VisibilityEvidence.model_validate(visibility.get(v, {})).model_dump() for v in images}
+    required = (
+        "vertical_stacks",
+        "orthogonal_layout",
+        "all_positions_observed",
+        "top_base_visible",
+        "stable_arrangement",
+        "boundaries_identifiable",
+        "front_side_separation",
+    )
     violations = [k for k in required if sop.get(k) is False]
     unknown = [k for k in required if sop.get(k) is not True]
     views = {v: analyze_view(images[v], detections[v], v) for v in images}
     violations += [v + ":image_quality" for v, data in views.items() if not data["quality"]["accepted"]]
     matches = propose_correspondence(images, views)
     stacks = [s for data in views.values() for s in data["stacks"]]
-    return {
-        "scan_contract": "spatial_3d_beam_v1",
-        "status": "OUT_OF_OPERATING_ENVELOPE" if violations else "unresolved",
-        "verified": False,
-        "x_columns": None,
-        "y_rows": None,
-        "physical_trays": None,
-        "eligible_egg_trays": None,
-        "empty_trays": None,
-        "unknown_trays": None,
-        "views": views,
-        "stacks": stacks,
-        "view_correspondence": matches,
-        "beam_evidence": [s["beam"] for s in stacks],
-        "rf_evidence": detections,
-        "scene_grid": [],
-        "assumptions_used": [],
-        "sop_violations": violations,
-        "sop_unverified": unknown,
-        "rescan": {
-            "reason": "Resolve shared stack identity, unseen depth, tray endpoints and egg occupancy",
-            "action": "Capture overlapping corner faces, all rows and stack tops/bases",
-        },
-    }
+    guidance = [r for s in stacks for r in s["regional_quality"]["recommendations"]]
+    for v, data in views.items():
+        visible = visibility[v]
+        ids = {s["stack_id"] for s in data["stacks"]}
+        if set(visible["occluded_stack_ids"]) - ids:
+            raise ValueError("Occlusion metadata refers to an unknown stack")
+        for stack_id in visible["occluded_stack_ids"]:
+            guidance.append(
+                recommendation(
+                    "STACK_OCCLUDED",
+                    v,
+                    stack_id,
+                    "whole_stack",
+                    "declared_occlusion",
+                    f"Move to reveal {stack_id} and retake {v.upper()}.",
+                    "operator_declared",
+                )
+            )
+        if not data["quality"]["accepted"]:
+            guidance.append(
+                recommendation(
+                    "IMAGE_QUALITY",
+                    v,
+                    None,
+                    "whole_view",
+                    data["quality"]["reason"] or "low_quality_score",
+                    f"Improve lighting/focus and retake {v.upper()}.",
+                )
+            )
+        if not data["stacks"] or data["unlocalized_detections"]:
+            guidance.append(
+                recommendation(
+                    "STACK_LOCALIZATION_INCOMPLETE",
+                    v,
+                    None,
+                    "whole_view",
+                    "unresolved_stack_faces",
+                    f"Capture complete stack faces and closer overlapping views for {v.upper()}.",
+                    "unresolved_evidence",
+                )
+            )
+        if v != "straight":
+            guidance.append(
+                recommendation(
+                    "SHARED_CORNER_MISSING",
+                    v,
+                    None,
+                    "shared_corner",
+                    "declared_missing_corner"
+                    if visible["shared_corner_visible"] is False
+                    else "shared_identity_unconfirmed",
+                    f"Keep the corner stack visible in both STRAIGHT and {v.upper()} and include its base.",
+                    "operator_declared"
+                    if visible["shared_corner_visible"] is False
+                    else "unresolved_evidence",
+                )
+            )
+            if visible["rear_rows_visible"] is not True or sop["all_positions_observed"] is not True:
+                guidance.append(
+                    recommendation(
+                        "REAR_ROW_NOT_VISIBLE",
+                        v,
+                        None,
+                        "rear_rows",
+                        "declared_hidden_rear"
+                        if visible["rear_rows_visible"] is False
+                        else "rear_coverage_unconfirmed",
+                        f"Capture rear positions from {v.upper()}; add a rear view if still hidden.",
+                        "operator_declared"
+                        if visible["rear_rows_visible"] is False
+                        else "unresolved_evidence",
+                    )
+                )
+        for s in data["stacks"]:
+            guidance.append(
+                recommendation(
+                    "OCCUPANCY_UNCLEAR",
+                    v,
+                    s["stack_id"],
+                    "layers",
+                    "generic_tray_class_not_egg_occupancy",
+                    f"Show egg contents in {s['stack_id']}; physically check fully hidden layers.",
+                    "unresolved_evidence",
+                )
+            )
+    for name in required:
+        if sop[name] is False:
+            guidance.append(
+                recommendation(
+                    "SOP_VIOLATION",
+                    "straight",
+                    None,
+                    "scene",
+                    name,
+                    f"Correct or explicitly document the {name} condition before recounting.",
+                    "operator_declared",
+                )
+            )
+    return CandidateResponse.model_validate(
+        {
+            "scan_contract": "spatial_3d_beam_v1",
+            "status": "out_of_operating_envelope" if violations else "recapture_required",
+            "verified": False,
+            "physical_trays": None,
+            "eligible_egg_trays": None,
+            "empty_trays": None,
+            "unknown_trays": None,
+            "views": views,
+            "stacks": stacks,
+            "view_correspondence": matches,
+            "beam_evidence": [s["beam"] for s in stacks],
+            "rf_evidence": detections,
+            "assumptions_used": [],
+            "sop_violations": violations,
+            "sop_unverified": unknown,
+            "rescan": {
+                "reason": "Resolve shared stack identity, unseen depth, tray endpoints and egg occupancy",
+                "recommendations": guidance,
+            },
+        }
+    ).model_dump()
 
 
 def assemble_grid(
@@ -202,7 +351,7 @@ def assemble_grid(
         or not (1 <= x_columns <= 100 and 1 <= y_rows <= 100)
     ):
         raise ValueError("Bounded positive grid dimensions required")
-    cells, correspondence, unresolved = {}, [], []
+    cells, correspondence, unresolved, sources, identities = {}, [], [], {}, {}
     for observation in observations:
         x, y = observation["x"], observation["y"]
         if type(x) is not int or type(y) is not int or not (0 <= x < x_columns and 0 <= y < y_rows):
@@ -210,9 +359,26 @@ def assemble_grid(
         if not observation.get("geometry_evidence"):
             raise ValueError("Physical correspondence evidence required")
         layers = observation["layers"]
-        if any(s not in {"filled", "empty", "unknown"} for s in layers):
+        if (
+            not isinstance(layers, list)
+            or not 1 <= len(layers) <= 1000
+            or any(s not in {"filled", "empty", "unknown"} for s in layers)
+        ):
             raise ValueError("Invalid occupancy")
         key = (x, y)
+        observation_id = observation["id"]
+        if not isinstance(observation_id, str) or not observation_id.strip():
+            raise ValueError("Observation identity required")
+        if observation_id in identities and identities[observation_id] != key:
+            raise ValueError("An observation cannot identify two physical cells")
+        identities[observation_id] = key
+        sources.setdefault(key, []).append(
+            {
+                "observation_id": observation_id,
+                "view": observation.get("view"),
+                "geometry_evidence": observation["geometry_evidence"],
+            }
+        )
         correspondence.append(
             {
                 "observation_id": observation["id"],
@@ -225,7 +391,12 @@ def assemble_grid(
         elif cells[key] != layers:
             unresolved.append({"cell": [x, y], "reason": "Conflicting repeated layer evidence"})
     absent = set(map(tuple, absent_cells))
-    if any(len(p) != 2 or not (0 <= p[0] < x_columns and 0 <= p[1] < y_rows) for p in absent):
+    if any(
+        len(p) != 2
+        or any(type(v) is not int for v in p)
+        or not (0 <= p[0] < x_columns and 0 <= p[1] < y_rows)
+        for p in absent
+    ):
         raise ValueError("Absent cell outside grid")
     if absent.intersection(cells):
         raise ValueError("Cell cannot be both absent and present")
@@ -254,8 +425,18 @@ def assemble_grid(
                 "x": x,
                 "y": y,
                 "stack_present": True,
+                "physical_stack_id": f"cell:{x}:{y}",
+                "observed_in": sorted({s["view"] for s in sources[(x, y)] if s["view"] is not None}),
+                "evidence": sources[(x, y)],
                 "physical_layer_count": len(layers),
-                "layers": [{"z": z, "occupancy": state} for z, state in enumerate(layers)],
+                "layers": [
+                    {
+                        "z": z,
+                        "occupancy": state,
+                        "source_observations": sorted({s["observation_id"] for s in sources[(x, y)]}),
+                    }
+                    for z, state in enumerate(layers)
+                ],
             }
             for (x, y), layers in sorted(cells.items())
         ],

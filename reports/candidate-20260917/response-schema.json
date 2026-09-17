@@ -1,0 +1,307 @@
+{
+  "$defs": {
+    "Geometry": {
+      "additionalProperties": false,
+      "properties": {
+        "x_columns": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "X Columns"
+        },
+        "y_rows": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Y Rows"
+        },
+        "status": {
+          "const": "unresolved",
+          "default": "unresolved",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "title": "Geometry",
+      "type": "object"
+    },
+    "Recommendation": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "enum": [
+            "BOTTOM_DARK",
+            "REGION_DARK",
+            "TOP_CROPPED",
+            "BASE_CROPPED",
+            "MOTION_BLUR",
+            "STACK_OCCLUDED",
+            "SHARED_CORNER_MISSING",
+            "REAR_ROW_NOT_VISIBLE",
+            "OCCUPANCY_UNCLEAR",
+            "RIM_CONTRAST_LOW",
+            "STACK_LOCALIZATION_INCOMPLETE",
+            "SOP_VIOLATION",
+            "IMAGE_QUALITY"
+          ],
+          "title": "Code",
+          "type": "string"
+        },
+        "view": {
+          "enum": [
+            "left",
+            "straight",
+            "right"
+          ],
+          "title": "View",
+          "type": "string"
+        },
+        "stack": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Stack"
+        },
+        "region": {
+          "title": "Region",
+          "type": "string"
+        },
+        "cause": {
+          "title": "Cause",
+          "type": "string"
+        },
+        "action": {
+          "title": "Action",
+          "type": "string"
+        },
+        "evidence_source": {
+          "enum": [
+            "measured_image",
+            "operator_declared",
+            "unresolved_evidence"
+          ],
+          "title": "Evidence Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "view",
+        "stack",
+        "region",
+        "cause",
+        "action",
+        "evidence_source"
+      ],
+      "title": "Recommendation",
+      "type": "object"
+    },
+    "Rescan": {
+      "additionalProperties": false,
+      "properties": {
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "recommendations": {
+          "items": {
+            "$ref": "#/$defs/Recommendation"
+          },
+          "title": "Recommendations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "reason",
+        "recommendations"
+      ],
+      "title": "Rescan",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "scan_contract": {
+      "const": "spatial_3d_beam_v1",
+      "default": "spatial_3d_beam_v1",
+      "title": "Scan Contract",
+      "type": "string"
+    },
+    "contract_revision": {
+      "const": "candidate-20260917",
+      "default": "candidate-20260917",
+      "title": "Contract Revision",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "recapture_required",
+        "out_of_operating_envelope"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "verified": {
+      "const": false,
+      "default": false,
+      "title": "Verified",
+      "type": "boolean"
+    },
+    "ground_truth_status": {
+      "const": "GROUND_TRUTH_UNKNOWN",
+      "default": "GROUND_TRUTH_UNKNOWN",
+      "title": "Ground Truth Status",
+      "type": "string"
+    },
+    "evidence_source": {
+      "default": "client_supplied_hash_bound_predictions_not_independently_authenticated",
+      "title": "Evidence Source",
+      "type": "string"
+    },
+    "geometry": {
+      "$ref": "#/$defs/Geometry"
+    },
+    "cells": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Cells",
+      "type": "array"
+    },
+    "physical_trays": {
+      "default": null,
+      "title": "Physical Trays",
+      "type": "null"
+    },
+    "eligible_egg_trays": {
+      "default": null,
+      "title": "Eligible Egg Trays",
+      "type": "null"
+    },
+    "empty_trays": {
+      "default": null,
+      "title": "Empty Trays",
+      "type": "null"
+    },
+    "unknown_trays": {
+      "default": null,
+      "title": "Unknown Trays",
+      "type": "null"
+    },
+    "views": {
+      "additionalProperties": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "propertyNames": {
+        "enum": [
+          "left",
+          "straight",
+          "right"
+        ]
+      },
+      "title": "Views",
+      "type": "object"
+    },
+    "stacks": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Stacks",
+      "type": "array"
+    },
+    "view_correspondence": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "View Correspondence",
+      "type": "array"
+    },
+    "beam_evidence": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Beam Evidence",
+      "type": "array"
+    },
+    "rf_evidence": {
+      "additionalProperties": {
+        "items": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "propertyNames": {
+        "enum": [
+          "left",
+          "straight",
+          "right"
+        ]
+      },
+      "title": "Rf Evidence",
+      "type": "object"
+    },
+    "assumptions_used": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Assumptions Used",
+      "type": "array"
+    },
+    "sop_violations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Sop Violations",
+      "type": "array"
+    },
+    "sop_unverified": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Sop Unverified",
+      "type": "array"
+    },
+    "rescan": {
+      "$ref": "#/$defs/Rescan"
+    }
+  },
+  "required": [
+    "status",
+    "views",
+    "stacks",
+    "view_correspondence",
+    "beam_evidence",
+    "rf_evidence",
+    "assumptions_used",
+    "sop_violations",
+    "sop_unverified",
+    "rescan"
+  ],
+  "title": "CandidateResponse",
+  "type": "object"
+}

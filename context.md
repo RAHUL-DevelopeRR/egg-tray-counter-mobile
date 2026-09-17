@@ -319,3 +319,53 @@ ablation and audited labels before training. Complete calibrated correspondence
 and per-layer occupancy before claiming an image-to-3D exact count. Instrument
 large multipart/base64 resource use separately; do not deploy as part of research.
 Commit/push requested to codex/hybrid-cell-counting; verify remote ref after push.
+
+## 2026-09-17 — regional quality and physical-grid candidate milestone
+
+Continued from d5ddcc8 on codex/hybrid-cell-counting. Added source/view/layer
+provenance to the existing X/Y/Z accounting core, stronger provisional mutual
+SIFT + RANSAC + face-coverage/projected-overlap filtering, regional top/middle/
+bottom diagnostics, explicit SOP/visibility declarations and structured targeted
+recapture recommendations. Local candidate contract revision candidate-20260917
+uses geometry/cells and lowercase statuses, rejects expected truth inputs and
+string boolean flags, and cannot claim verified inventory. This is a local
+research contract change, not a deployed mobile contract migration.
+
+Verification: 65 backend tests passed; after final SOP/production-guard additions,
+all 13 spatial candidate tests passed again. All 13 Worker tests, TypeScript,
+targeted Ruff and Wrangler deploy --dry-run passed. Synthetic accounting gives
+200/180/195, counts shared front/right and rear left/right stacks once, separates
+201 physical from 200 eligible with an empty tray, and withholds totals for
+unknown occupancy or unobserved rear positions. Harmonic and regional darkness
+checks pass. These are synthetic correctness results, not camera accuracy.
+
+Replayed 35 archived MUTAA originals with matching SHA-256 hashes: regional
+analysis on 106 historical proposed faces; one bottom-dark warning (image05),
+one possible top crop and eight possible base crops. Missing/incomplete ROIs
+remain unassessed; unflagged regions are not certified. Thresholds are pilot
+heuristics. Zero new RF calls, no training. Tentative 07/10/11 group still has
+zero supported correspondence proposals; same-scene grouping and physical
+truth remain unknown. See reports/candidate-20260917/README.md and JSON artifacts.
+
+Worker source now uses native Buffer base64 (compile-time Node types added),
+sequential hashing and existing sequential inference, with safe byte-size/stage
+logs. Local 12,597,763-byte encoding benchmark: identical output in three runs;
+median old 2295 ms versus native 10.93 ms. This does not measure Worker peak RAM
+or prove a production resource-limit fix; multipart remains buffered. npm install
+reported three high advisories in the dependency tree; no blanket dependency
+upgrade was attempted in this counting milestone.
+
+APK stays 0.2.2+5. No deployment, APK rebuild or model change. Latest recorded
+Worker version stays ab67cd59-3f4e-4628-a0fa-d085f56a3fe8 (historical, not refreshed).
+OpenCV stays local. No hosted Python service or WebSocket integration was added.
+
+Blockers and exact next steps:
+1. Confirm one unchanged LEFT/STRAIGHT/RIGHT triplet and independent per-X/Y
+   physical/filled/empty counts, including gaps. User confirmation remains pending.
+2. Freeze truth separately; annotate complete faces/endpoints, shared corners and
+   occupancy. Do not inherit old100-tray truth or correct predictions toward it.
+3. Calibrate quality and identity gates on labeled examples; run crop-RF ablation
+   before deciding on retraining. Validate per-layer occupancy and unseen coverage.
+4. Only then integrate hosted Python with Cloudflare, run resource/load validation,
+   and implement guided Android capture against the stabilized production contract.
+5. Publish this checkpoint and verify the remote branch matches local HEAD.
