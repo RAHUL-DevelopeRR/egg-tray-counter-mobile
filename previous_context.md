@@ -384,3 +384,17 @@ Next: implement requested production solver/certifier/service/mobile work; obtai
 an unchanged triplet and independent per-cell truth for valid 3D regression.
 Prepare hosting only when a target is available. Do not replace unobservable
 geometry/occupancy with a known-total correction or forced verification.
+
+## 2026-09-18 — device check and future-plan pointer
+
+At the user's request, ADB was restarted and checked after the phone was said
+to be connected. adb devices -l still returned no device or emulator, so no
+phone logs or live scan evidence exists for this checkpoint. The working tree
+had no implementation patch from the interrupted live-capture subtasks.
+
+Continue from docs/COUNTING_EXECUTION_PLAN.md, section “Live capture pilot and
+device gate”. First obtain an authorized ADB serial and reproduce one scan;
+then inspect exact files, timing and backend response. Implement and test local
+lighting/sharpness/orientation feedback and bounded preview sampling only after
+that evidence. This project still cannot claim exact hybrid counting or a
+production APK from model outputs alone.

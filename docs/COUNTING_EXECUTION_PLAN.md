@@ -67,6 +67,31 @@ Worker path currently provides model boxes and diagnostic per-photo counts; it
 does not claim spatial matching or a verified hybrid total. Automatic image-to-
 hybrid integration, live inference evaluation and a new APK remain incomplete.
 
+## Live capture pilot and device gate
+
+The first device check is transport, not computer vision. Run adb devices -l
+until the phone appears as device (not unauthorized or absent), record the
+installed package/version, and collect one reproducible scan's app log with
+the three exact uploaded files and request/response timing. If no serial
+appears, do not infer anything about camera quality or backend behavior.
+
+The pilot capture flow should provide immediate local feedback for frame
+brightness, clipping, blur, orientation tilt and obvious frame-edge clipping.
+It should pause capture when a hard quality gate fails and explain the repair.
+Phone yaw is only guidance for LEFT/STRAIGHT/RIGHT; it is not a calibrated
+camera pose or proof that a hidden stack is visible. A small, rate-limited JPEG
+preview may ask the existing model for detection boxes near the image edge, but
+the response must remain verified=false and must not certify coverage, occupancy
+or a tray total. Keep preview requests bounded and preserve the existing no-ID
+baseline contract.
+
+After the pilot, evaluate the quality gates on labeled warehouse examples,
+integrate only the checks that reduce rejected/incorrect scans, and build a
+debug-signed staging APK. A production count still requires calibrated or
+otherwise validated cross-view identity, per-layer filled/empty evidence and a
+held-out same-scene evaluation with independent physical truth. A live camera
+warning improves evidence collection; it cannot manufacture ground truth.
+
 ## Reusable execution prompt
 
 Continue this repository; read AGENTS.md, PROGRESS.md, context.md and this plan.

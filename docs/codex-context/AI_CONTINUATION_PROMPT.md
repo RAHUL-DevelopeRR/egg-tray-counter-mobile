@@ -19,6 +19,18 @@
 > below are historical and do not override the current research-only scope.
 > Read the latest PROGRESS.md and context.md entries first.
 
+# Current handover — 2026-09-18
+
+Read AGENTS.md, PROGRESS.md, context.md, previous_context.md and the
+live-capture section of docs/COUNTING_EXECUTION_PLAN.md before changing code.
+The latest committed source is the diagnostic candidate at 563fe15; there is
+no tracked live lighting/orientation/preview patch from the interrupted
+subtasks. ADB was restarted after the user reported a connected phone, but
+adb devices -l returned no serial, so no device scan or APK-log analysis is
+verified. Reconnect and authorize the phone first. Preserve the no-ID baseline
+route, do not claim exact hybrid totals, and publish tests plus exact device
+evidence before calling a staging APK or deployment complete.
+
 # AI Continuation Prompt: Egg Tray Counter
 
 Copy and paste the block below into any AI agent (Antigravity, Cursor, Claude Code, ChatGPT, or OpenAI Codex when limits reset) to resume this project seamlessly:

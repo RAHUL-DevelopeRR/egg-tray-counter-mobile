@@ -403,3 +403,19 @@ Next: implement requested production solver/certifier/service/mobile work; obtai
 an unchanged triplet and independent per-cell truth for valid 3D regression.
 Prepare hosting only when a target is available. Do not replace unobservable
 geometry/occupancy with a known-total correction or forced verification.
+
+## 2026-09-18 — current device and publication state
+
+The phone was reported as connected, but restarting ADB and running adb devices
+-l returned an empty device list. Treat device capture, APK logs, camera
+quality, upload timing and live inference as unverified until an authorized
+serial is visible. No agent patch for live lighting/orientation measurement or
+the preview endpoint is present in the tracked checkout.
+
+The next implementation reference is the “Live capture pilot and device gate”
+section in docs/COUNTING_EXECUTION_PLAN.md: enumerate an authorized device,
+capture one reproducible scan with logs, validate the three uploaded files and
+server response, then add local quality/orientation gates and bounded preview
+sampling. These gates may reject unusable evidence; they cannot prove hidden
+trays or egg occupancy. Preserve the old no-ID route and keep verified totals
+disabled until same-scene, independently counted validation data exists.

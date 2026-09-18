@@ -638,3 +638,30 @@ Next: implement requested production solver/certifier/service/mobile work; obtai
 an unchanged triplet and independent per-cell truth for valid 3D regression.
 Prepare hosting only when a target is available. Do not replace unobservable
 geometry/occupancy with a known-total correction or forced verification.
+
+## 2026-09-18 — device enumeration and publication checkpoint
+
+The user reported that the Android phone was connected and requested analysis.
+Restarted the repository Android Debug Bridge daemon and ran `adb devices -l`;
+the result contained no device or emulator serial. Therefore no APK log,
+camera frame, upload timing, or live scan was analyzed in this checkpoint. A
+connected USB cable alone is not evidence that ADB authorization or the device
+transport is ready.
+
+The two live-capture subtasks were interrupted before producing a tracked patch.
+No live lighting/orientation code or preview endpoint was added or deployed
+here. The latest implemented source remains the diagnostic candidate recorded
+above; the 0.2.2+5 APK and Worker version
+`ab67cd59-3f4e-4628-a0fa-d085f56a3fe8` remain historical artifacts, not a new
+release. This documentation checkpoint does not claim retraining, exact 3D
+reconstruction, or production readiness.
+
+Future execution reference: `docs/COUNTING_EXECUTION_PLAN.md`, section “Live
+capture pilot and device gate”. Reconnect the phone until `adb devices` shows
+an authorized serial, reproduce one scan while collecting app-side logs, then
+compare the exact uploaded files with the Worker response. Only after that
+evidence should local lighting/sharpness/orientation gates and the small preview
+contract be integrated, tested and built as a clearly labelled staging APK.
+Keep the existing no-ID baseline route compatible and require an unchanged
+three-view scene plus independently recorded per-stack occupancy truth before
+enabling any accepted inventory total.
