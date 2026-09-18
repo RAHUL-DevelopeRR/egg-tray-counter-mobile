@@ -1,0 +1,196 @@
+{
+  "status": "unresolved",
+  "x_columns": null,
+  "y_rows": null,
+  "cells": [],
+  "front_column_candidates": 3,
+  "observations": [
+    {
+      "id": "left:candidate_1",
+      "view": "left",
+      "physical_cell": null,
+      "polygon_pixels": [
+        [
+          427.0480801191427,
+          2240.0
+        ],
+        [
+          1105.6938356607886,
+          2240.0
+        ],
+        [
+          983.8715136733506,
+          3025.0
+        ],
+        [
+          495.18555826552415,
+          3025.0
+        ]
+      ],
+      "z_candidates": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "exploratory_z": 10,
+      "resolved_z": null,
+      "occupancy": "unknown"
+    },
+    {
+      "id": "right:candidate_1",
+      "view": "right",
+      "physical_cell": null,
+      "polygon_pixels": [
+        [
+          433.9632340667655,
+          1130.0
+        ],
+        [
+          1418.705778363714,
+          1130.0
+        ],
+        [
+          1242.1314090397032,
+          3379.0
+        ],
+        [
+          379.26196967809045,
+          3379.0
+        ]
+      ],
+      "z_candidates": [
+        4,
+        5,
+        6,
+        7,
+        12,
+        13,
+        14
+      ],
+      "exploratory_z": 14,
+      "resolved_z": null,
+      "occupancy": "unknown"
+    },
+    {
+      "id": "straight:candidate_1",
+      "view": "straight",
+      "physical_cell": null,
+      "polygon_pixels": [
+        [
+          721.876603422089,
+          466.0
+        ],
+        [
+          1523.640678043094,
+          466.0
+        ],
+        [
+          1472.8221925443363,
+          1781.0
+        ],
+        [
+          793.1557886999587,
+          1781.0
+        ]
+      ],
+      "z_candidates": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        12,
+        13,
+        14
+      ],
+      "exploratory_z": 8,
+      "resolved_z": null,
+      "occupancy": "unknown"
+    },
+    {
+      "id": "straight:candidate_2",
+      "view": "straight",
+      "physical_cell": null,
+      "polygon_pixels": [
+        [
+          1543.3954748866051,
+          352.0
+        ],
+        [
+          2218.1423777860296,
+          352.0
+        ],
+        [
+          2154.525344068623,
+          1688.0
+        ],
+        [
+          1562.5357780365996,
+          1688.0
+        ]
+      ],
+      "z_candidates": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        15
+      ],
+      "exploratory_z": 11,
+      "resolved_z": null,
+      "occupancy": "unknown"
+    },
+    {
+      "id": "straight:candidate_3",
+      "view": "straight",
+      "physical_cell": null,
+      "polygon_pixels": [
+        [
+          2277.499698060618,
+          393.0
+        ],
+        [
+          2848.2814879154816,
+          393.0
+        ],
+        [
+          2704.743482551474,
+          1627.0
+        ],
+        [
+          2189.6865712227186,
+          1627.0
+        ]
+      ],
+      "z_candidates": [
+        5,
+        8,
+        9,
+        11,
+        13,
+        14,
+        15,
+        16
+      ],
+      "exploratory_z": 16,
+      "resolved_z": null,
+      "occupancy": "unknown"
+    }
+  ],
+  "correspondences": [],
+  "eligible_egg_trays": null,
+  "verified": false,
+  "note": "No common world coordinates established; observation count is not physical stack count."
+}

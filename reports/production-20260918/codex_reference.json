@@ -1,0 +1,22 @@
+{
+  "created_before_backend_comparison": true,
+  "reference_type": "development visual estimate, not physical truth",
+  "same_arrangement_confirmed": false,
+  "x_columns": null,
+  "y_rows": null,
+  "cells": [],
+  "physical_trays_estimate": null,
+  "eligible_trays_estimate": null,
+  "per_photo_observations": {
+    "right": {"apparent_main_stacks": 1, "visible_eligible_estimate": 14, "count_certainty": "tentative", "top_contains_eggs": true},
+    "left": {"apparent_main_stacks": 1, "visible_eligible_range": [12, 14], "count_certainty": "uncertain", "top_contains_eggs": true},
+    "straight": {"apparent_front_columns": 3, "apparent_visible_depth_rows": 1, "visible_eligible_per_column_estimate": [10, 10, 10], "possible_empty_top_trays_per_column": [1, 1, 1], "count_certainty": "tentative; cap contents not fully visible"}
+  },
+  "uncertain_regions": ["left lower overlapping rims", "unseen contents of top caps in straight", "hidden rear positions", "unrelated partial stock at left photo edge"],
+  "evidence_notes": [
+    "Right/left show one main stack at solid masonry walls. Straight shows three stacks next to poultry cages.",
+    "Cannot establish shared corners or a common unchanged footprint across these photographs.",
+    "No common total is defensible. Do not add per-photo estimates.",
+    "No model or band output for this submitted triplet was read before freezing this reference. No count is to be passed into inference."
+  ]
+}

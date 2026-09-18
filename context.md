@@ -369,3 +369,37 @@ Blockers and exact next steps:
 4. Only then integrate hosted Python with Cloudflare, run resource/load validation,
    and implement guided Android capture against the stabilized production contract.
 5. Publish this checkpoint and verify the remote branch matches local HEAD.
+
+## 2026-09-18 — production scope accepted; assigned-view demo executed
+
+User's new production-architecture prompt supersedes the prior research-only
+restriction. Requested next work: SceneSolver, deterministic SceneCertifier,
+containerized Python, Cloudflare object/session integration and guided Android;
+production promotion/APK still require the explicit live/device/truth gates.
+User confirms no Python container host is available yet.
+
+Immediate user-directed demonstration completed using supplied RIGHT, LEFT,
+STRAIGHT files, despite user confirming they are separate arrangements/count
+references. Exact originals/hashes and a pre-run tentative visual reference saved
+in reports/production-20260918. Hashes match MUTAA image01/image02/image04; this
+is not an unseen blind benchmark. No physical truth supplied.
+
+Fresh unchanged projec-mutta/2 gateway request passed: RIGHT15 LEFT8 STRAIGHT34.
+Local FastAPI candidate request passed: faces1/1/3; band candidates RIGHT14,
+LEFT10, STRAIGHT8/11/16. Gateway15.17s plus local10.24s. No supported shared-stack
+correspondence. X/Y, physical/eligible totals unresolved; verified=false and
+recapture_required. No manual reference or expected totals fed into inference.
+This is an attempted reconstruction, not a successfully reconstructed 3D scene.
+The always-abstaining candidate cannot validate a production certifier. It also
+did not establish an automatic unrelated-scene classification.
+
+Saved gateway/candidate inputs and outputs, reconstruction.json, comparison.json,
+demo-summary.json and report. Reproducible runner scripts/run_triplet_demo.py;
+Ruff passed and live/local requests returned200 with result invariants checked.
+No production logic changed; full automated suites were not rerun for this
+report/runner-only change. No deployment, training or APK build. APK0.2.2+5.
+
+Next: implement requested production solver/certifier/service/mobile work; obtain
+an unchanged triplet and independent per-cell truth for valid 3D regression.
+Prepare hosting only when a target is available. Do not replace unobservable
+geometry/occupancy with a known-total correction or forced verification.

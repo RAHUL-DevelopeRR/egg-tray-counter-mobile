@@ -1,0 +1,11 @@
+{
+  "scan_id": "57f69dc9-154f-4d13-aec8-910df1a5567c",
+  "scan_contract": "model_spatial_v1",
+  "view_assignment": {
+    "right": "input/right.jpg",
+    "left": "input/left.jpg",
+    "straight": "input/straight.jpg"
+  },
+  "input_bytes": 6900679,
+  "purpose": "user-requested assigned-view demonstration; stable scene not asserted"
+}

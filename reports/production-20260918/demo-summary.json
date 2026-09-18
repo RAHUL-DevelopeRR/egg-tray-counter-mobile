@@ -1,0 +1,48 @@
+{
+  "status": "recapture_required",
+  "verified": false,
+  "geometry": {
+    "x_columns": null,
+    "y_rows": null,
+    "status": "unresolved"
+  },
+  "eligible_egg_trays": null,
+  "local_analysis_seconds": 10.235000000000127,
+  "view_correspondence": [],
+  "views": {
+    "left": {
+      "rf_count": 8,
+      "proposed_faces": 1,
+      "beam_candidates": [
+        10
+      ],
+      "per_stack_rf": [
+        4
+      ]
+    },
+    "right": {
+      "rf_count": 15,
+      "proposed_faces": 1,
+      "beam_candidates": [
+        14
+      ],
+      "per_stack_rf": [
+        15
+      ]
+    },
+    "straight": {
+      "rf_count": 34,
+      "proposed_faces": 3,
+      "beam_candidates": [
+        8,
+        11,
+        16
+      ],
+      "per_stack_rf": [
+        11,
+        11,
+        12
+      ]
+    }
+  }
+}

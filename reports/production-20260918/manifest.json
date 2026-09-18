@@ -1,0 +1,24 @@
+{
+  "images": [
+    {
+      "bytes": 1690716,
+      "sha256": "79451a5ed91d48d0707aeaabf90c47ca4c1b9ac49ab1acee66fa0796b645e2ce",
+      "view": "right",
+      "file": "input/right.jpg"
+    },
+    {
+      "bytes": 2592441,
+      "sha256": "ed9a1cf8b5c6b00528461874227ef8bbb62860792550616a449a5a7da951ada9",
+      "view": "left",
+      "file": "input/left.jpg"
+    },
+    {
+      "bytes": 2617522,
+      "sha256": "d4c46e40ead8b6797b94d13cb90e6cf656828e566652687d35399f7f3985c7a0",
+      "view": "straight",
+      "file": "input/straight.jpg"
+    }
+  ],
+  "view_assignment": "user supplied right, left, straight",
+  "same_arrangement_confirmed": false
+}
