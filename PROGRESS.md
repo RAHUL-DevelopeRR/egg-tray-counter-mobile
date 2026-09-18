@@ -665,3 +665,17 @@ contract be integrated, tested and built as a clearly labelled staging APK.
 Keep the existing no-ID baseline route compatible and require an unchanged
 three-view scene plus independently recorded per-stack occupancy truth before
 enabling any accepted inventory total.
+
+## 2026-09-18 — tools and MCP inventory
+
+Added tools.md from the configured C:\Users\DELL\Downloads\config.toml.
+It lists the configured MCP servers and enabled plugins, their local/runtime
+prerequisites, whether account or device authentication is required, and the
+smallest tool set needed for this repository. Credential values were not copied.
+The configured APIFY_TOKEN is explicitly redacted in the document; no runtime
+code, model, Worker deployment or APK changed.
+
+Verification: reviewed the config sections for MCP servers/plugins and ran
+git diff --check. This is documentation only; service authentication and
+device availability remain runtime facts that require separate health/ADB
+checks.

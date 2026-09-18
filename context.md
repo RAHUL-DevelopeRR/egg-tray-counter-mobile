@@ -419,3 +419,12 @@ server response, then add local quality/orientation gates and bounded preview
 sampling. These gates may reject unusable evidence; they cannot prove hidden
 trays or egg occupancy. Preserve the old no-ID route and keep verified totals
 disabled until same-scene, independently counted validation data exists.
+
+## 2026-09-18 — tools inventory reference
+
+tools.md now documents the MCP servers/plugins configured in the external
+config.toml, their prerequisites and auth requirements. It deliberately omits
+token values and separates project-required tools (Flutter/Android/ADB,
+server-side Roboflow and Cloudflare when deploying) from optional integrations.
+The file is a configuration inventory, not proof that any remote MCP is
+currently authenticated.
