@@ -1,25 +1,35 @@
 import 'package:flutter/material.dart';
 
 import '../../models/capture_view.dart';
+import '../../services/frame_preflight.dart';
 
+/// Framing guide whose colour is the live preflight verdict, so the operator
+/// sees the same judgement as the text banner without reading it.
+///
+/// The guide rectangle below is the bounding box the analyser measures: left
+/// and right views are trapezoids inset by 10% on one edge, and the analyser
+/// treats them as their bounding rectangle. That is deliberate, and it is why
+/// angled views rely on the ANGLE hint rather than on a hard geometry test.
 class CameraGuideOverlay extends StatelessWidget {
   const CameraGuideOverlay({
     required this.view,
-    required this.ready,
+    required this.severity,
     super.key,
   });
 
   final CaptureView view;
-  final bool ready;
+  final PreflightSeverity severity;
 
   @override
   Widget build(BuildContext context) {
+    final color = switch (severity) {
+      PreflightSeverity.blocking => Colors.redAccent,
+      PreflightSeverity.advisory => Colors.amberAccent,
+      PreflightSeverity.pass => Colors.greenAccent,
+    };
     return IgnorePointer(
       child: CustomPaint(
-        painter: _GuidePainter(
-          view,
-          ready ? Colors.greenAccent : Colors.redAccent,
-        ),
+        painter: _GuidePainter(view, color),
         child: const SizedBox.expand(),
       ),
     );

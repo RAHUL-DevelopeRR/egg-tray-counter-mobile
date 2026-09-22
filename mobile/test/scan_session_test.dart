@@ -3,6 +3,16 @@ import 'package:egg_tray_counter/models/scan_session.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  test('replacement and clearing never reuse previous capture evidence', () {
+    final session = ScanSession(scanId: 'evidence')
+      ..setPath(CaptureView.left, 'first.jpg', evidence: '{"capture":1}');
+    expect(session.constraintEvidence['left'], '{"capture":1}');
+    session.setPath(CaptureView.left, 'second.jpg');
+    expect(session.constraintEvidence, isEmpty);
+    session.setPath(CaptureView.left, 'third.jpg', evidence: '{"capture":3}');
+    session.clear(CaptureView.left);
+    expect(session.constraintEvidence, isEmpty);
+  });
   test('capture state advances LEFT, RIGHT, STRAIGHT', () {
     final session = ScanSession(scanId: 'scan-1');
     expect(session.nextMissing, CaptureView.left);

@@ -63,6 +63,10 @@ class ApiClient {
           'scan_contract': 'model_spatial_v1',
           for (final entry in session.cellIds.entries)
             '${entry.key}_cell_id': entry.value,
+          // Constraint evidence is additive: deployments that predate it ignore
+          // the extra fields, so uploads stay compatible either way.
+          for (final entry in session.constraintEvidence.entries)
+            '${entry.key}_constraint_evidence': entry.value,
           'left': await MultipartFile.fromFile(
             session.pathFor(CaptureView.left)!,
             filename: 'left.jpg',

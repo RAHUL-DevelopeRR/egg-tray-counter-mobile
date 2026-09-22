@@ -428,3 +428,61 @@ token values and separates project-required tools (Flutter/Android/ADB,
 server-side Roboflow and Cloudflare when deploying) from optional integrations.
 The file is a configuration inventory, not proof that any remote MCP is
 currently authenticated.
+
+## 2026-09-18 — live constraint gate landed in the app source
+
+The checkout now contains the capture gate, not just a plan for it:
+`mobile/lib/services/frame_evidence.dart` (measurement), `frame_preflight.dart`
+(judgement and thresholds), `live_frame_preflight.dart` (camera YUV plane plus
+accelerometer, still decoding), and the reworked capture pane that shows the
+reason and the fix on the viewfinder, locks capture while blocked, persists a
+level reference, verifies the written still, and attaches the evidence report to
+the upload. `flutter analyze` is clean and 54 tests pass, including a harness
+over the ten labelled evaluation frames: 0/10 pass the app guide and 2/10 pass a
+full-frame guide, which is why the old 2/10-exact baseline describes captures
+the app would now refuse.
+
+Android toolchain paths: ANDROID_HOME/ANDROID_SDK_ROOT =
+<repo>/work/toolchains/android-sdk, ADB =
+work/toolchains/android-sdk/platform-tools/adb.exe (serial f76d5e20, Redmi Note
+9 Pro), Java needs
+JAVA_TOOL_OPTIONS=-Djavax.net.ssl.trustStoreType=Windows-ROOT -Djavax.net.ssl.trustStore=NONE.
+The 0.3.0+6 release APK built and installed; the live banner is still unverified
+because the phone is locked with a pattern, so ADB cannot read or drive its UI.
+Still true and unchanged: no exactness claim, no accepted inventory total, no
+hidden-layer or egg-occupancy detection, and no Worker deployment from this
+machine until `wrangler login` is run.
+
+## 2026-09-22 — live capture review and BlueStacks verification
+
+Completed the existing capture pilot with orientation-aware Y-plane sampling,
+independent sensor/frame timing, stale-frame rejection, still-image verification,
+per-capture evidence replacement, and serialized camera lifecycle cleanup.
+Image-edge framing checks are advisory: background edges cannot establish that
+all trays are visible. Phone tilt is measured; left/right viewpoint is guidance,
+not calibrated camera pose or 3D reconstruction.
+
+Verification: full Flutter suite 59 passed; flutter analyze reported no issues.
+The subsequent BlueStacks layout fix also passed both lifecycle widget tests.
+The evaluation-photo replay passes quality checks on 10/10 frames; historical
+count MAE remains 22.9. This supersedes the earlier interpretation that rejecting
+those photos by edge heuristics demonstrated a useful accuracy improvement.
+Fresh gateway smoke returned LEFT 8, RIGHT 15, STRAIGHT 34, accepted=false,
+total_trays=null. The unrelated demo scenes cannot validate inventory accuracy.
+No Worker deployment, model retraining or Python service deployment occurred.
+
+Built 0.3.1+7 and installed on the phone before the user disconnected it.
+Phone remained locked, so its live capture UI was not verified. At user request,
+enabled BlueStacks ADB and started Pie64 (127.0.0.1:5555). APK installation and
+launch succeeded; home showed SERVER REACHABLE. Live preview reported tilt 90
+degrees and locked capture. Home/reopen succeeded. Emulator screenshot exposed
+an overlapping guidance panel; moved it outside the preview to a full-width
+scroll panel. Final artifact and screenshot verification: see
+reports/live-capture-20260922/README.md.
+
+Next: validate warnings using a real phone and controlled dim/bright/blur/tilt
+conditions; collect unchanged LEFT/RIGHT/STRAIGHT scenes with independent filled
+and empty counts per stack. Calibrate quality thresholds using those captures.
+Only then evaluate count error and false acceptance. Stack visibility, true
+viewpoint calibration and hidden occupancy remain unimplemented/unverified;
+no exact-count or 100-percent accuracy claim is supported.

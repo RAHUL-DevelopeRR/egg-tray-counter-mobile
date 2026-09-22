@@ -156,6 +156,7 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
           cameras: widget.cameras,
           session: _session,
           initialView: _captureView,
+          settings: widget.settings,
           onComplete: _process,
         ),
         _FlowPhase.processing => _ProcessingPane(
@@ -238,8 +239,9 @@ class _ProcessingPane extends StatelessWidget {
               uploaded
                   ? 'Analyzing three views...'
                   : 'Uploading original photos...',
-              style: Theme.of(context).textTheme.titleLarge
-                  ?.copyWith(fontWeight: FontWeight.w800),
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
             ),
             const SizedBox(height: 10),
             Text(
@@ -288,8 +290,9 @@ class _ResultPane extends StatelessWidget {
         Text(
           result.accepted ? 'VERIFIED' : 'COUNT NOT VERIFIED',
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headlineMedium
-              ?.copyWith(fontWeight: FontWeight.w900),
+          style: Theme.of(
+            context,
+          ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w900),
         ),
         const SizedBox(height: 22),
         if (result.accepted) ...[
@@ -309,8 +312,9 @@ class _ResultPane extends StatelessWidget {
           Text(
             '${result.totalEggs}',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.displayMedium
-                ?.copyWith(fontWeight: FontWeight.w900),
+            style: Theme.of(
+              context,
+            ).textTheme.displayMedium?.copyWith(fontWeight: FontWeight.w900),
           ),
         ] else ...[
           Text(

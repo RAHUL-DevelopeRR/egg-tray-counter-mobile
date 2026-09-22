@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:egg_tray_counter/app/egg_counter_app.dart';
+import 'package:egg_tray_counter/services/frame_preflight.dart';
 import 'package:egg_tray_counter/services/history_database.dart';
 import 'package:egg_tray_counter/services/settings_store.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,6 +13,12 @@ class _UnavailableHistory extends HistoryDatabase {
 }
 
 class _BlankSettings implements SettingsStore {
+  @override
+  Future<PoseCalibration> getPoseCalibration() async => PoseCalibration.none;
+  @override
+  Future<void> setPoseCalibration(PoseCalibration calibration) async {}
+  @override
+  Future<void> clearPoseCalibration() async {}
   @override
   Future<String?> getHeightPilot() async => null;
   @override

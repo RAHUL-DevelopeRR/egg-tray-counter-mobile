@@ -679,3 +679,76 @@ Verification: reviewed the config sections for MCP servers/plugins and ran
 git diff --check. This is documentation only; service authentication and
 device availability remain runtime facts that require separate health/ADB
 checks.
+
+## 2026-09-18 — live capture constraint gate (local, deterministic)
+
+Implemented the local capture gate the execution plan calls for, as three
+layers with one responsibility each: `frame_evidence.dart` (measurement:
+luma plane, guide geometry, 13 metrics, preview-to-still guide mapping),
+`frame_preflight.dart` (judgement: pass/advisory/blocking checks, thresholds,
+audit record), `live_frame_preflight.dart` (live loop: camera YUV plane plus
+accelerometer, JPEG still decoding, raw-axis to device-pose conversion). The
+capture pane shows the measured value, the limit and the repair action on the
+viewfinder, turns the guide outline amber/red/green, locks the capture button
+while any check blocks, stores a level reference in SettingsStore, re-runs every
+check on the still that was actually written, and attaches the report to the
+upload as `<view>_constraint_evidence` (additive field; the deployed Worker
+ignores it and stays compatible). No count is produced, accepted or changed by
+this code.
+
+Verification: `flutter analyze` clean; `flutter test` 54 passing (16 before),
+including synthetic-frame measurement, every blocking path, pose conversion,
+JPEG decoding, the guide mapping, and a real-photo harness. The harness found a
+real defect (guide reaching the image bottom read one row past the plane) which
+is fixed and covered. Harness result over the ten labelled evaluation frames:
+0/10 accepted under the app guide, 2/10 under a full-frame guide, i.e. the
+frames behind the old 2/10-exact, MAE 22.9 baseline are evidence this gate
+refuses on framing alone.
+
+Staging APK: version 0.3.0+6, SHA-256
+c8f2787146cc28568609b2a1d2a05a8d9a7a693627ca7f58e99090484b8e74e4, debug-key
+signed as before, installed with `adb install -r` on the connected Redmi Note 9
+Pro (Success, app launches, no crash in logcat). The live banner itself is not
+yet verified on hardware: the phone is locked with a pattern, so no UI state can
+be read or driven over ADB. Report: `reports/live-constraints-20260918.md`.
+
+Authentication facts checked this session: `gh auth status` authenticated as
+RAHUL-DevelopeRR; `wrangler whoami` not authenticated, so no Worker deploy is
+possible from here; the deployed Worker answers `/health` 200 and `/ready` 200
+with `provider: roboflow_serverless`, `model_reference: projec-mutta/2`, so the
+Roboflow key is configured server-side. MCP OAuth cannot be completed from a
+shell and nothing in this work depended on it.
+
+## 2026-09-22 — live capture review and BlueStacks verification
+
+Completed the existing capture pilot with orientation-aware Y-plane sampling,
+independent sensor/frame timing, stale-frame rejection, still-image verification,
+per-capture evidence replacement, and serialized camera lifecycle cleanup.
+Image-edge framing checks are advisory: background edges cannot establish that
+all trays are visible. Phone tilt is measured; left/right viewpoint is guidance,
+not calibrated camera pose or 3D reconstruction.
+
+Verification: full Flutter suite 59 passed; flutter analyze reported no issues.
+The subsequent BlueStacks layout fix also passed both lifecycle widget tests.
+The evaluation-photo replay passes quality checks on 10/10 frames; historical
+count MAE remains 22.9. This supersedes the earlier interpretation that rejecting
+those photos by edge heuristics demonstrated a useful accuracy improvement.
+Fresh gateway smoke returned LEFT 8, RIGHT 15, STRAIGHT 34, accepted=false,
+total_trays=null. The unrelated demo scenes cannot validate inventory accuracy.
+No Worker deployment, model retraining or Python service deployment occurred.
+
+Built 0.3.1+7 and installed on the phone before the user disconnected it.
+Phone remained locked, so its live capture UI was not verified. At user request,
+enabled BlueStacks ADB and started Pie64 (127.0.0.1:5555). APK installation and
+launch succeeded; home showed SERVER REACHABLE. Live preview reported tilt 90
+degrees and locked capture. Home/reopen succeeded. Emulator screenshot exposed
+an overlapping guidance panel; moved it outside the preview to a full-width
+scroll panel. Final artifact and screenshot verification: see
+reports/live-capture-20260922/README.md.
+
+Next: validate warnings using a real phone and controlled dim/bright/blur/tilt
+conditions; collect unchanged LEFT/RIGHT/STRAIGHT scenes with independent filled
+and empty counts per stack. Calibrate quality thresholds using those captures.
+Only then evaluate count error and false acceptance. Stack visibility, true
+viewpoint calibration and hidden occupancy remain unimplemented/unverified;
+no exact-count or 100-percent accuracy claim is supported.
