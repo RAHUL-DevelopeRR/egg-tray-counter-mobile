@@ -1,0 +1,34 @@
+{
+  "provenance": "assistant manual visual recount, not physical inventory",
+  "scene_group": "warehouse-20260923-pair",
+  "split": "train",
+  "eligible_for_independent_accuracy_test": false,
+  "images": [
+    {
+      "file_name": "manual-20260924-1.jpg",
+      "sha256": "bd2ba34e77d6cda94ed982d678590d9a5a0bde5a9b684dbaec0591ffa6ca0970",
+      "visible_egg_trays": 99,
+      "per_stack": [
+        20,
+        20,
+        20,
+        20,
+        19
+      ],
+      "physical_total": null,
+      "hidden_occupancy": "unknown",
+      "boxes_are_approximate": true
+    },
+    {
+      "file_name": "manual-20260924-2.jpg",
+      "sha256": "fb5bd22bfe8d1b3da1714ad9f1ef9f90330d562d6bd499bb6005446886506e66",
+      "visible_egg_trays": 19,
+      "per_stack": [
+        19
+      ],
+      "physical_total": null,
+      "hidden_occupancy": "unknown",
+      "boxes_are_approximate": true
+    }
+  ]
+}

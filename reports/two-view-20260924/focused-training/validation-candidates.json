@@ -1,0 +1,37 @@
+{
+  "candidates": [
+    {
+      "path": "accuracy-evaluation/test-images/img04.jpg",
+      "sha256": "38fac27c726aae28c7d31c177793772d0c3b4932a901bc13402848e21e4ed330",
+      "visual_reference": 32,
+      "physical_count": null,
+      "source_scene_separation": "different-looking photo; near-duplicate source also exists in historical Roboflow TRAIN",
+      "canonical_exact_hash_matches": [],
+      "independent_test_verified": false,
+      "reason": "reports/dataset_reconciliation.csv records a near-duplicate in historical Roboflow TRAIN; retain only as a diagnostic reference. Visual reference32 is not physically user-confirmed."
+    },
+    {
+      "path": "accuracy-evaluation/test-images/img05.jpeg",
+      "sha256": "43409f4aee1d3653f12960fd6b85f93bf6b06a3a10100760194cf9a45949defc",
+      "visual_reference": 120,
+      "physical_count": null,
+      "historical_v2_prediction": 124,
+      "source_scene_separation": "different six-stack wall; near-duplicate source also exists in historical Roboflow TRAIN",
+      "canonical_exact_hash_matches": [
+        {
+          "id": "43409f4aee1d3653f129",
+          "split": "test"
+        }
+      ],
+      "independent_test_verified": false,
+      "reason": "reports/dataset_reconciliation.csv records a near-duplicate in historical Roboflow TRAIN; saved 120-box visual reference and prior V2=124 are not independent post-training evidence or physical ground truth."
+    }
+  ],
+  "excluded_same_scene": [
+    "img01.jpg",
+    "img02.jpg",
+    "img03.jpg",
+    "img06.jpeg"
+  ],
+  "rule": "Do not move training examples to test. Both candidates are diagnostic-only because a near-duplicate is recorded in historical TRAIN; acquire and physically recount a new warehouse scene before reserving a test set."
+}

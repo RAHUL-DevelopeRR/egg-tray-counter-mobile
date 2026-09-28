@@ -1,6 +1,6 @@
 import { Buffer } from "node:buffer";
 
-type Bindings = Env & { ROBOFLOW_API_KEY: string };
+type Bindings = Env & { ROBOFLOW_API_KEY: string; SCAN_ARCHIVE?: R2Bucket };
 
 type Prediction = { class?: string; confidence?: number; x?: number; y?: number; width?: number; height?: number };
 type ViewInference = { count: number; confidence: number; detections?: Prediction[] };
@@ -191,6 +191,18 @@ async function countScan(request: Request, env: Bindings) {
     throw new HttpError(422, "duplicate_view", "LEFT, RIGHT, and STRAIGHT must be distinct photographs");
   }
 
+  // Private, content-addressed originals survive failed inference and retries.
+  // No public download route: operators retrieve using authenticated R2 access.
+  if (env.SCAN_ARCHIVE) {
+    for (const [index, view] of VIEWS.entries()) {
+      const file = files[view] as File;
+      await env.SCAN_ARCHIVE.put(`scans/${rawScanId}/${view}/${hashes[index]}`, file.stream(), {
+        httpMetadata: { contentType: file.type },
+        customMetadata: { scan_id: rawScanId, view, sha256: hashes[index], received_at: new Date().toISOString() },
+      });
+    }
+    console.log(JSON.stringify({ event: "scan_archived", scan_id: rawScanId }));
+  }
   const started = Date.now();
   const results = {} as Record<string, ViewInference>;
   for (const view of VIEWS) results[view] = await infer(files[view] as File, env, modelScan,

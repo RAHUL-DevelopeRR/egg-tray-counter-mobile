@@ -1,5 +1,16 @@
 # Previous context — 2026-09-14 checkpoint
 
+## 2026-09-23 continuation
+
+Read docs/WAREHOUSE_3D_ACCEPTANCE_PLAN.md and current PROGRESS.md first.
+The user's attached synthetic-augmentation proposal is now reflected in that
+plan, including separate synthetic training and real reconstruction phases.
+Production still routes APK -> Cloudflare -> Roboflow projec-mutta/2; fresh
+health says hybrid_ready=false. Python bands remain local candidate evidence.
+Torch on/off and unsupported-hardware handling added for 0.3.2+8. Three camera
+lifecycle/torch tests passed. Do not present uniform-interior extrapolation as
+physically verified stock or calculate eggs as 30 per partially filled tray.
+
 ## Latest continuation — 2026-09-15 retraining clarification
 
 Read the latest section in docs/100_TRAY_SCENE_PLAN.md before the historical
@@ -398,3 +409,21 @@ then inspect exact files, timing and backend response. Implement and test local
 lighting/sharpness/orientation feedback and bounded preview sampling only after
 that evidence. This project still cannot claim exact hybrid counting or a
 production APK from model outputs alone.
+# 2026-09-23: upload option and photo recovery
+
+User requested gallery/file upload alongside realtime capture and retrieval of
+prior phone uploads. Added three labelled photo slots, quality checks, original
+preservation and the existing backend results flow in 0.3.3+9. Worker has no
+photo archive/retrieval endpoint. Connected Redmi yielded two gallery result-screen
+photos only; original scan inputs remain unrecovered and private cache inaccessible.
+Do not treat uploaded angles as live-verified or local demo inputs as recovered
+phone scans. See latest PROGRESS.md for build verification and next steps.
+# Latest 2026-09-23: private R2 archive deployed for NEW scans. Worker version
+# 4c1480e6-0136-4514-8640-b67b02eb98ac; downloaded original hash verified.
+# Python service not hosted (no account / paid-host decision pending).
+# New four-photo audit: RF 76/87/19/19; bands unresolved, no 3D total.
+# Read PROGRESS.md and docs/VISION_HOSTING.md before older notes below.
+<!-- 2026-09-24: manual visual reference 99 wide / 19 side; fresh V2 76/19.
+118 correction boxes applied in Roboflow to existing TRAIN records, duplicate
+upload handled. No training launched: curated filter editor paid-plan locked.
+Full checkpoint: reports/two-view-20260924/manual-corrections/README.md. -->

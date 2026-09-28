@@ -5,6 +5,9 @@
   "no_bundle": true,
   "compatibility_date": "2026-08-22",
   "workers_dev": true,
+  "r2_buckets": [
+    { "binding": "SCAN_ARCHIVE", "bucket_name": "egg-tray-scan-archive" }
+  ],
   "observability": {
     "enabled": true,
     "head_sampling_rate": 1

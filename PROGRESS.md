@@ -1,5 +1,202 @@
 # Progress
 
+## 2026-09-24 — focused layer-label audit and training supplement
+
+Prepared five rectified faces with99 manually reviewed visible-layer boxes,
+numbered review-board.jpg, per-row detection-centre audit and import ZIP under
+reports/two-view-20260924/focused-training. New script prepare_focused_training.py
+checks bounds, count totals and contiguous non-overlapping intervals. Ruler review
+corrected draft boundaries; final regeneration passes, including UTF-8 BOM CSV.
+User authorized choosing any existing photos. Cloud UI verified all five crops
+contain 20/20/20/20/19 saved labels, all TRAIN; source count395 (was390), split
+currently283/76/36. Audit of the saved candidate records found neither img04
+(visual32, old V2=29) nor img05 (visual120, old V2=124) safe as an independent
+post-training test: reports/dataset_reconciliation.csv records a near-duplicate
+of each in historical Roboflow TRAIN. These historical labels are visual
+references, not user-confirmed physical counts. Candidate metadata and README
+corrected; frozen files were not changed. V5 not generated and training not
+started: wizard still carries a required tag filter, and its 283/76/36 split is
+not verified for scene separation. No plan upgraded or credits spent.
+The candidate JSON parses and documentation `git diff --check` passes.
+Next: reserve a newly photographed, physically counted warehouse scene before
+training, confirm scene-grouped splits, then train and compare counts by stack.
+ProductionV2/APK0.3.3+9 unchanged; Python host not deployed.
+
+
+## 2026-09-24 — completed stack crop diagnostic
+
+12 fresh V2 inferences / four HTTP 200 diagnostic requests: full-wide 76, side19;
+manual face crops 13/14/17/14/15 (centre-filtered), perspective-corrected faces
+19/22/20/22/17. Manual reference20/20/20/20/19. Corrected total100 is NOT exact:
+absolute per-stack errors sum7; one of five counts matches. Bands12/11/19/19/10.
+Automatic localization still splits five stacks into eight regions. Higher
+confidence post-filtering worsens totals; lower threshold unavailable via Worker.
+Saved reproducible scripts/evaluate_stack_crops.py, raw responses, overlays,
+results and targeted training configuration in reports/two-view-20260924/crop-experiment.
+Offline replay/checks pass; git diff --check passes. OpenCV warp required one thread.
+No retraining/deployment/APK rebuild: productionV2, APK0.3.3+9; Python unhosted.
+Next: review per-tray label extents, assemble curated scene-separated training
+snapshot, validate automatic face localization and evaluate on independent counts.
+Paid tag editor blocks that UI operation, not all training or local experiments.
+
+
+## 2026-09-24 — manual recount, fresh backend check and Roboflow corrections
+
+Manual visible references: wide 99 (20/20/20/20/19), side 19. Numbered evidence,
+118 approximate front-face COCO boxes and comparison saved under
+reports/two-view-20260924/manual-corrections. Hash/bounds/count checks pass.
+Fresh HTTP 200 request 77824bf2-c4d7-4c08-9714-7018f1c6d67f: V2 counts 76/19;
+wide error 23 (23.23%), side zero. Not precision/recall or physical 3D truth.
+Roboflow identified originals as duplicates and applied annotations to existing
+records ClMOF3wMZhPg4OJENlvT / KCJZzPDrafDfPRAWM3Vn. UI verifies 99/19 labels,
+both TRAIN. Added manual-correction-20260924 tags. Frozen versions preserved.
+Draft V5 name entered, but version not generated and training NOT started:
+curated tag-filter editing is paid-plan-only; NAS also locked. No upgrade bought.
+Do not broaden to all 390 images unchecked; historical audit flags label overlap.
+Next: resolve Roboflow plan access or GPU/Colab route, assemble curated snapshot
+including corrections, verify split/source inclusion, train and evaluate held-out
+scenes. APK remains 0.3.3+9, production model V2, Python service still unhosted.
+
+
+## 2026-09-24 — actual two-photo reconstruction experiment
+
+Preserved supplied pair and hashes in reports/two-view-20260924. Identical to
+previous images 1/4; historical model counts 76/19 reused as history only.
+User confirms 19 for the side example, not a full-scene ground truth.
+Added reproducible scripts/reconstruct_pair.py using installed OpenCV/NumPy.
+Strict mutual SIFT: 2 matches; relaxed 0.75: 8 candidates/7 fundamental inliers;
+0.85: 52 candidates/11 fundamental inliers. No accepted physical association,
+camera pose, point cloud or total. Synthetic triangulation self-check passes;
+real pair does not reach pose stage. Saved matches.jpg and result.json.
+Next: unchanged-scene continuous corner sweep, complete top/base, per-stack
+physical reference; rerun geometric matching before counting fusion.
+No APK rebuild or deployment; APK remains 0.3.3+9, Python service unhosted.
+
+
+## 2026-09-23 — private R2 deployment and four-photo measurements
+
+User confirmed no Oracle/Google account. Existing Cloudflare R2 access works;
+created private egg-tray-scan-archive and deployed archive-before-inference
+Worker version 4c1480e6-0136-4514-8640-b67b02eb98ac. No paid plan enabled.
+13 Worker tests pass including stored bytes/key metadata. An initial placement
+test caught the archive block after the model-path return; moved it before
+inference, reran checks and redeployed. Supersedes intermediate 6986844a version.
+Live upload + authenticated R2 download SHA-256 match proves preservation.
+New scans are archived; old photos are not recovered. In-app download UI is
+not yet implemented; operator-only R2 retrieval is documented in VISION_HOSTING.
+
+Four supplied photos retained in reports/warehouse-20260923. Fresh RF counts
+76/87/19/19. Automatic localization fragments five wide-view fronts into 8/7
+regions; bands are inconsistent and cannot be summed. Side bands 16/18; image
+4 top clipped. No accepted correspondence, calibrated 3D, verified total or
+accuracy claim. Ground truth/unchanged scene still unconfirmed by user.
+
+Prepared authenticated diagnostic Python hosting entrypoint and Dockerfile.vision;
+14 targeted Python tests pass. No Docker runtime available to build-test it.
+Not hosted: account creation or explicit paid Cloudflare choice is outstanding.
+Next: resolve host choice, deploy/test container, add private Worker-to-service
+integration, fix face localization, then authenticated per-scan app retrieval.
+APK stays 0.3.3+9; production hybrid_ready remains false. No commit/push performed.
+
+## 2026-09-23 — server-side photo recovery and hosting clarification
+
+User clarified recovery must target previously submitted inference images, not
+the phone gallery. No gallery search performed in this investigation. Live
+Worker /health again reports hybrid_ready=false. Request code forwards images
+to serverless.roboflow.com/projec-mutta/2 without an archive write. Recent scans
+in Android store metadata only, with no original image path or download URL.
+Python /candidate/count-3d remains local and disconnected from production.
+
+Authenticated Roboflow workspace inspection: Asset Library contains 1,440
+images; newest visible assets include warehouse-layer-pilot-20260907 samples
+tagged as training/review data. No Redmi scan provenance was established.
+Vision Events lists Line Crossing Counts with 0 events / no events received.
+No original phone inference images recovered; these checks do not establish
+whether Roboflow maintains any provider-internal retention accessible to support.
+
+Recommended next implementation: private durable photo archive indexed by scan
+ID/view with authenticated retrieval from recent scans, then hosted Python band
+and multi-view service. Oracle Always Free ARM VM is a free CPU pilot candidate
+(availability/ARM dependencies must be checked); Cloud Run is a managed fallback
+with billing and usage-dependent charges. Neither was provisioned. Hosting the
+current candidate does not itself validate exact inventory or hidden occupancy.
+
+## 2026-09-23 — existing-photo upload
+
+Added UPLOAD PHOTOS alongside live THREE-PHOTO SCAN. Native file selection has
+explicit LEFT/RIGHT/STRAIGHT slots and previews, preserves user originals, checks
+file size/type/resolution/blur/exposure, normalizes owned copies to JPEG off the
+UI isolate, and requires confirmation of unchanged stock before submission.
+It reuses the existing API/results/retry flow without initializing a camera.
+Uploaded evidence explicitly reports no verified pose or live checks. Live
+capture and torch remain available. Version advanced to 0.3.3+9.
+
+Full Flutter test suite passed (62 tests); final Flutter analysis is clean.
+Expanded upload submission/cleanup checks also pass (2 targeted tests).
+Release APK built successfully (518.5 seconds); apksigner verification passed.
+Artifact: egg-tray-counter-0.3.3-photo-upload-staging.apk. SHA-256:
+8f20ef7a4f7c1b1a583321a1c13f6eae4ac014153d64a32f048579dce1854913.
+ADB install -r succeeded on Redmi Note 9 Pro, preserving existing app data;
+dumpsys confirms 0.3.3/build 9. Device UI verifies both home capture options and
+the three labelled upload slots with confirmation and disabled submit state.
+Native picker completion/full server submission remain unverified: phone entered
+an active call, so device interaction stopped. No improved counting accuracy is implied.
+Production band/3D service is still disconnected; unverified totals stay null.
+
+Photo recovery investigation: Worker source/config has no image storage binding
+or retrieval endpoint. Request logs contain metadata, not an image archive.
+Android history stores result metadata only; the scan flow cleans cached photos
+on accepted results, replacement, new scans and exit. After the user connected
+the Redmi Note 9 Pro and ADB was restarted, the phone became accessible. It has
+0.3.1/build 7 installed. Its external app directory is empty; run-as refuses
+private storage access because the release package is not debuggable.
+Recovered two gallery photographs of the old 84/90/87 result screen into the
+ignored work/phone-photo-recovery-20260923 folder (IMG_20260915_114750.jpg and
+IMG_20260915_114751.jpg). These are NOT the uploaded tray input images. No input
+triplet recovered. Roboflow-side retention has not been established. Unrelated
+local gallery copies inspected during recovery were removed; phone originals
+were not changed.
+
+Next: exercise Android native picker and a full upload after the phone is free.
+Original scan inputs need user-selected surviving photos or a new scan.
+No commit/push or backend deployment was performed in this checkpoint.
+
+
+## 2026-09-23 — torch and warehouse-counting requirements
+
+Added native camera torch on/off control, disabled concurrent capture/toggle,
+discarded pre-toggle frame measurements, and reported unsupported torch hardware
+with an external-lighting recovery action. Version 0.3.2+8. All three targeted
+camera lifecycle/torch widget tests pass. Targeted Dart analysis is clean after
+fixing two style findings from full Flutter analysis. Release build succeeded
+(829.4 seconds); apksigner verification passed and aapt confirmed 0.3.2/build 8.
+Artifact: egg-tray-counter-0.3.2-torch-staging.apk, 60,221,864 bytes, SHA-256
+63b1ac85ca7a49906a32f8310feac22316da81d2009a0a0eb259fabb09e7db11.
+Uses the existing debug signing key for staging. No authorized device/emulator
+was listed by ADB this session; physical torch behavior remains unverified.
+These changes and this APK have not been pushed in this checkpoint.
+
+Fresh deployed /health and /ready requests confirm hybrid_ready=false and
+projec-mutta/2. The APK still submits model_spatial_v1 to the same Cloudflare
+gateway. Python band analysis remains local at /candidate/count-3d and is
+explicitly disabled in production; the Worker does not forward to it. No
+retraining, 3D generator, hosted Python integration or new deployment is claimed.
+
+Added docs/WAREHOUSE_3D_ACCEPTANCE_PLAN.md to capture the user's proposal and
+implementation order. It specifies measured real tray geometry, partial/empty
+occupancy, per-block identity, calibrated pose/scale, harmonic-aware bands,
+corner deduplication and explicit unknown/interior extrapolation status. Current
+camera direction guidance is not calibrated pose. Unknown occupancy prevents a
+verified warehouse total even when exterior geometry and lighting are good.
+
+Cloudflare documentation was checked: 128 MB isolate memory; Free CPU 10 ms;
+Paid default 30 s and configurable up to 5 min. Account plan/current invocation
+outcome remain unverified. Multipart/base64 buffering is a resource risk, not
+proof of whether previous failures were exceededCpu or exceededMemory. The
+mobile 45-second timeout is separate. Next: real-device torch validation, measured
+tray geometry and same-scene physical reference triplets, then authenticated
+hosting and evaluation of the existing Python candidate before production fusion.
+
 Latest deployment (2026-09-16): ab67cd59-3f4e-4628-a0fa-d085f56a3fe8 fixes the
 installed APK preflight mismatch while preserving the old no-ID baseline path.
 12 Worker tests passed. See the final append and backend compatibility report.

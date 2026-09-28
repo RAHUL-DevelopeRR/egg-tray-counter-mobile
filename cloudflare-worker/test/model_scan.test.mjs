@@ -15,19 +15,29 @@ test('model path accepts no markers, retains boxes and never certifies photo agr
   const logs = [];
   t.mock.method(console, 'log', line => logs.push(JSON.parse(line)));
   const box = {class: 'egg_tray', confidence: .9, x: 100, y: 120, width: 40, height: 20};
+  const archived = [];
   t.mock.method(globalThis, 'fetch', async () => Response.json({predictions: [box]}));
   const form = new FormData();
   form.set('scan_contract', 'model_spatial_v1');
   ['left', 'right', 'straight'].forEach((view, i) => form.set(view,
     new File([new Uint8Array([255, 216, 255, i])], `${view}.jpg`, {type:'image/jpeg'})));
   const response = await worker.fetch(new Request('https://local/v1/scans/count', {method:'POST', body:form}),
-    {MODEL_ID:'projec-mutta/2', CONFIDENCE:'35', OVERLAP:'50', EGGS_PER_TRAY:'30', ROBOFLOW_API_KEY:'test-only'});
+    {MODEL_ID:'projec-mutta/2', CONFIDENCE:'35', OVERLAP:'50', EGGS_PER_TRAY:'30', ROBOFLOW_API_KEY:'test-only',
+      SCAN_ARCHIVE: {put: async (key, stream, options) => {
+        archived.push({key, bytes: new Uint8Array(await new Response(stream).arrayBuffer()), options});
+      }}});
   assert.equal(response.status, 200);
   const result = await response.json();
   assert.equal(result.processing.mode, 'model_spatial_v1');
   assert.deepEqual(result.cell_ids, {});
   assert.deepEqual(result.views.left.detections, [box]);
   assert.equal(result.accepted, false);
+  assert.equal(archived.length, 3);
+  for (const [i, object] of archived.entries()) {
+    assert.deepEqual([...object.bytes], [255, 216, 255, i]);
+    assert.match(object.key, /^scans\/[0-9a-f-]+\/(left|right|straight)\/[0-9a-f]{64}$/);
+    assert.equal(object.options.httpMetadata.contentType, 'image/jpeg');
+  }
   assert.equal(result.total_trays, null);
   assert.equal(result.total_eggs, null);
   assert.deepEqual(result.stacks[0].counts, {left:1, right:1, straight:1});

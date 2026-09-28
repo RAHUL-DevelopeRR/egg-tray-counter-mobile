@@ -1,0 +1,48 @@
+{
+  "physical_total": null,
+  "ground_truth": null,
+  "calibration": null,
+  "stable_scene_confirmed": false,
+  "view_slots_are_diagnostic_only": true,
+  "image_4_top_cropped": "human_visual_observation",
+  "correspondence": [],
+  "images": {
+    "1": {
+      "model_count": 76,
+      "bands": [
+        6,
+        4,
+        11,
+        11,
+        21,
+        null,
+        24,
+        5
+      ]
+    },
+    "2": {
+      "model_count": 87,
+      "bands": [
+        10,
+        10,
+        10,
+        11,
+        4,
+        22,
+        5
+      ]
+    },
+    "3": {
+      "model_count": 19,
+      "bands": [
+        16
+      ]
+    },
+    "4": {
+      "model_count": 19,
+      "bands": [
+        18
+      ]
+    }
+  }
+}

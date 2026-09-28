@@ -12,6 +12,14 @@ import 'package:flutter_test/flutter_test.dart';
 
 class _Camera extends CameraPlatform {
   int creates = 0;
+  final flashModes = <FlashMode>[];
+  bool rejectTorch = false;
+  @override
+  Future<void> setFlashMode(int cameraId, FlashMode mode) async {
+    if (rejectTorch) throw PlatformException(code: 'torch_unavailable');
+    flashModes.add(mode);
+  }
+
   final disposed = <int>[];
   Completer<void>? initialization;
   final errors = StreamController<CameraErrorEvent>.broadcast();
@@ -165,4 +173,33 @@ void main() {
     expect(camera.disposed, [1]);
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets(
+    'torch toggles and unavailable hardware reports recovery advice',
+    (tester) async {
+      await show(tester);
+      await drainCamera(tester);
+      for (final label in ['TURN TORCH ON', 'TURN TORCH OFF']) {
+        await tester.tap(find.text(label));
+        await tester.runAsync(() async {
+          await Future<void>.delayed(const Duration(milliseconds: 20));
+        });
+        await drainCamera(tester);
+      }
+      expect(camera.flashModes, [FlashMode.torch, FlashMode.off]);
+      camera.rejectTorch = true;
+      await tester.tap(find.text('TURN TORCH ON'));
+      await drainCamera(tester);
+      expect(
+        find.text('Torch is unavailable. Add even lighting around the stacks.'),
+        findsOneWidget,
+      );
+      expect(find.text('TURN TORCH ON'), findsOneWidget);
+      await tester.pumpWidget(const SizedBox());
+      await tester.runAsync(() async {
+        await Future<void>.delayed(const Duration(milliseconds: 20));
+      });
+      await drainCamera(tester);
+    },
+  );
 }

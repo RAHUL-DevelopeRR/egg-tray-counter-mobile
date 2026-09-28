@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Future<void> _startScan() async {
+  Future<void> _startScan({bool uploadPhotos = false}) async {
     if (_startingScan) return;
     setState(() => _startingScan = true);
     try {
@@ -48,7 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
       await ApiClient(url).requireModelScan();
       if (!mounted) return;
       // Keep native camera startup out of the offline pilot and app launch.
-      final cameras = await availableCameras();
+      final cameras = uploadPhotos
+          ? <CameraDescription>[]
+          : await availableCameras();
       if (!mounted) return;
       await Navigator.of(context).push<void>(
         MaterialPageRoute(
@@ -56,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
             cameras: cameras,
             settings: widget.settings,
             history: widget.history,
+            uploadPhotos: uploadPhotos,
           ),
         ),
       );
@@ -143,6 +146,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: _startingScan ? null : _startScan,
                 icon: const Icon(Icons.camera_alt_outlined),
                 label: const Text('THREE-PHOTO SCAN'),
+              ),
+              const SizedBox(height: 12),
+              OutlinedButton.icon(
+                onPressed: _startingScan
+                    ? null
+                    : () => _startScan(uploadPhotos: true),
+                icon: const Icon(Icons.photo_library_outlined),
+                label: const Text('UPLOAD PHOTOS'),
               ),
               const SizedBox(height: 12),
               const Text(

@@ -42,6 +42,7 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
   CameraController? _controller;
   late CaptureView _view;
   bool _capturing = false;
+  bool _torchChanging = false;
   String? _cameraError;
   CaptureFrameGate _frameGate = const CaptureFrameGate();
   PreflightReport _report = PreflightReport.waiting;
@@ -210,7 +211,37 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
       _report.metrics != null &&
       _report.measurable;
 
-  bool get _captureAllowed => !_capturing && _liveReady;
+  bool get _captureAllowed => !_capturing && !_torchChanging && _liveReady;
+
+  Future<void> _toggleTorch() async {
+    final controller = _controller;
+    if (controller == null ||
+        !controller.value.isInitialized ||
+        !_cameraActive ||
+        _capturing ||
+        _torchChanging) {
+      return;
+    }
+    setState(() => _torchChanging = true);
+    try {
+      await controller.setFlashMode(
+        controller.value.flashMode == FlashMode.torch
+            ? FlashMode.off
+            : FlashMode.torch,
+      );
+      // Discard pre-lighting measurements before permitting another capture.
+      if (mounted && _cameraActive && identical(controller, _controller)) {
+        await _live.stopCamera();
+        await _live.restartCamera();
+      }
+    } on CameraException {
+      if (mounted) {
+        _message('Torch is unavailable. Add even lighting around the stacks.');
+      }
+    } finally {
+      if (mounted) setState(() => _torchChanging = false);
+    }
+  }
 
   Future<void> _capture() async {
     final controller = _controller;
@@ -458,6 +489,21 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
     return Column(
       children: [
         _CaptureHeader(view: _view, session: widget.session),
+        TextButton.icon(
+          onPressed: prepared && _cameraActive && !_capturing && !_torchChanging
+              ? _toggleTorch
+              : null,
+          icon: Icon(
+            controller?.value.flashMode == FlashMode.torch
+                ? Icons.flashlight_off
+                : Icons.flashlight_on,
+          ),
+          label: Text(
+            controller?.value.flashMode == FlashMode.torch
+                ? 'TURN TORCH OFF'
+                : 'TURN TORCH ON',
+          ),
+        ),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),

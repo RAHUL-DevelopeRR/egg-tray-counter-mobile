@@ -1,4 +1,9 @@
-> Latest checkpoint (2026-09-17): local candidate revision `candidate-20260917`.
+> Start with docs/WAREHOUSE_3D_ACCEPTANCE_PLAN.md and latest PROGRESS.md.
+> The 2026-09-23 task requests synthetic training, bands, calibrated 3D identity,
+> occupancy and warehouse coverage. These are not all implemented or deployed.
+> Preserve unknown totals and distinguish extrapolated from observed stock.
+
+> Historical checkpoint (2026-09-17): local candidate revision `candidate-20260917`.
 > Read `reports/candidate-20260917/README.md` and the latest PROGRESS/context entries.
 > Regional quality, structured recapture, strict schemas, shared-stack provenance
 > and stronger provisional matching implemented. Synthetic 200/180/195 pass;
@@ -50,3 +55,12 @@ https://github.com/RAHUL-DevelopeRR/egg-tray-counter-mobile.git
 2. Once deployed, verify that the mobile app photo mode can communicate with the updated live endpoint.
 3. Advance the dataset expansion pipeline in model-improvement/09-data-expansion/ for warehouse stack-face retraining.
 ```
+# Latest handoff: 2026-09-23 photo uploads
+
+Read latest PROGRESS.md first. 0.3.3+9 adds native JPEG/PNG selection for LEFT,
+RIGHT and STRAIGHT alongside live camera/torch. Same backend, no verified upload
+pose, no new counting accuracy claim. Test native picker/upload on Android.
+Prior scan input images were not recovered: Worker does not archive images;
+connected Redmi private cache is inaccessible. Two gallery photos of old result
+screens were copied into ignored work/phone-photo-recovery-20260923; they are
+not original tray inputs. User must select surviving originals or capture anew.

@@ -1,4 +1,65 @@
-> Latest checkpoint (2026-09-16): the active work is the **local MUTAA 3D/band
+> Latest focused preparation (2026-09-24): five rectified faces/99 visible-layer
+> labels prepared locally and uploaded to Roboflow as TRAIN only; dataset395.
+> All five cloud label totals verified at20/20/20/20/19. No training/new model
+> yet. img04/img05 are diagnostic only: both have historical TRAIN near-duplicates
+> and visual references are not user-confirmed physical counts. No current photo
+> is certified as an independent warehouse test.
+> See reports/two-view-20260924/focused-training/README.md and validation-candidates.json.
+>
+> Latest crop diagnostic (2026-09-24): fresh wide76/side19; manual corrected-face
+> inference19/22/20/22/17 versus visual reference20/20/20/20/19. Sum100 masks
+> per-stack errors (absolute sum7). Automatic localization gives8 regions for5
+> stacks. Cropping/rectification helps this known photo but is not an automatic
+> exact count or 3D solution. Report and next training configuration:
+> reports/two-view-20260924/crop-experiment/README.md. No new model deployed.
+> Paid tag-filter editing is blocked; all training is not proven unavailable.
+>
+> Latest recount/retraining checkpoint (2026-09-24): assistant manual visible
+> reference 99 wide (20/20/20/20/19), 19 side; fresh backend V2 returns 76/19.
+> 118 approximate correction boxes applied to existing Roboflow records; UI
+> confirms 99/19 labels and both TRAIN. These are not held-out test examples.
+> Training NOT started: curated tag-filter editor requires paid plan. V5 draft
+> only; no generated version, subscription change, new model or deployment.
+> See reports/two-view-20260924/manual-corrections/README.md for IDs/next steps.
+>
+> Latest experiment (2026-09-24): supplied wide/side pair tested for two-view
+> reconstruction. Strict mutual SIFT found 2 matches; relaxed matching had
+> 11/52 fundamental inliers. No accepted 3D count or point cloud. See
+> reports/two-view-20260924/README.md. User-confirmed side reference is 19;
+> wide-scene physical total and unchanged arrangement remain unconfirmed.
+> Next input: continuous corner sweep showing full top/base and fixed stock.
+>
+> Latest deployment: private R2 scan archive is LIVE for new valid scans,
+> Worker 4c1480e6-0136-4514-8640-b67b02eb98ac. Download hash verified.
+> Operator retrieval only; old scans not recovered; APK retrieval UI pending.
+> Python diagnostic host prepared/tested, not deployed: user has no cloud account
+> and has not chosen paid Cloudflare. Four-photo RF counts 76/87/19/19; bands and
+> matching unresolved. See reports/warehouse-20260923 and docs/VISION_HOSTING.md.
+>
+> Historical server-side clarification (2026-09-23): user wants prior inference inputs,
+> not gallery photos. Recent scans have metadata only; no Worker image archive.
+> Roboflow library has dataset assets, but no recovered Redmi scan provenance;
+> visible Vision Events use case has zero events. Python 3D/band service remains
+> local, not deployed. Durable scan-photo storage/retrieval is still required.
+>
+> Latest addition (2026-09-23): version 0.3.3+9 adds native photo uploads with
+> LEFT/RIGHT/STRAIGHT slots alongside live camera capture. Both use the existing
+> backend. APK built, signature verified and installed on Redmi; upload screen
+> checked. Full picker/submission device test paused because phone was on a call.
+> Uploads have no verified camera pose and do not establish ground truth.
+> Previous phone images cannot be fetched from this Worker's metadata-only logs;
+> no image archive/retrieval route exists. Connected Redmi recovery found two
+> gallery photos of the old result screen, not tray inputs. Private app cache
+> access is blocked by Android release-package protections; external cache empty.
+>
+> Current direction (2026-09-23): warehouse-wide physical egg-containing tray
+> counts with block identity, calibrated multi-view fusion, band evidence and
+> occupancy classification. Read docs/WAREHOUSE_3D_ACCEPTANCE_PLAN.md first.
+> APK 0.3.2+8 adds torch control; this is not deployment of hybrid counting.
+> Fresh Worker health reports hybrid_ready=false and Roboflow projec-mutta/2.
+> Local candidate band analysis is not connected to the deployed Worker.
+
+> Historical checkpoint (2026-09-16): the active work is the **local MUTAA 3D/band
 > candidate**, documented in `docs/3D_BEAM_COUNTING_ARCHITECTURE.md` and
 > `reports/mutaa-20260916/README.md`. 35 originals have fresh V2 results and
 > automatic band/ROI evidence; real 3D identity and eligible totals remain
@@ -36,6 +97,19 @@ verified physical trays. Do not add one per stack or force the known total.
 Physical and eligible counts remain unresolved. Production and APK stay unchanged.
 
 Updated: 2026-09-15. Read with `PROGRESS.md` before work.
+
+Latest focused training audit (2026-09-24): five rectified faces were uploaded
+to Roboflow, UI-verified at 20/20/20/20/19 labels and assigned TRAIN. No new
+version or training run exists. Do not present img04/img05 as an independent
+post-training test: dataset_reconciliation.csv shows each has a near-duplicate
+in historical TRAIN (img04 visual32/V2=29; img05 visual120/V2=124). Both counts
+are saved visual references, not physically user-confirmed truth. The current
+wizard shows395 source images and283/76/36 splits with a required tag filter;
+scene-grouping and focused-image inclusion in the generated version remain
+unverified. Keep these candidates diagnostic-only. Next valid step is to capture
+and physically recount a new scene, reserve it before training, audit grouped
+splits, then train/evaluate per stack. See
+`reports/two-view-20260924/focused-training/README.md`.
 
 Latest override: local per-stack research only; no APK rebuild or baseline
 replacement. See `reports/user-100-tray-case-20260915/RESEARCH_20260915.md`

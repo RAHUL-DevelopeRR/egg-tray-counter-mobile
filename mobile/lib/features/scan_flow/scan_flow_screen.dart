@@ -13,6 +13,7 @@ import '../../services/api_client.dart';
 import '../../services/history_database.dart';
 import '../../services/settings_store.dart';
 import '../capture/guided_capture_pane.dart';
+import '../capture/photo_upload_pane.dart';
 
 enum _FlowPhase { capture, processing, result }
 
@@ -21,12 +22,14 @@ class ScanFlowScreen extends StatefulWidget {
     required this.cameras,
     required this.settings,
     required this.history,
+    this.uploadPhotos = false,
     super.key,
   });
 
   final List<CameraDescription> cameras;
   final SettingsStore settings;
   final HistoryDatabase history;
+  final bool uploadPhotos;
 
   @override
   State<ScanFlowScreen> createState() => _ScanFlowScreenState();
@@ -138,7 +141,8 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(switch (_phase) {
-          _FlowPhase.capture => 'Guided capture',
+          _FlowPhase.capture =>
+            widget.uploadPhotos ? 'Upload photos' : 'Guided capture',
           _FlowPhase.processing => 'Verifying count',
           _FlowPhase.result => 'Scan result',
         }),
@@ -151,14 +155,23 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
         ),
       ),
       body: switch (_phase) {
-        _FlowPhase.capture => GuidedCapturePane(
-          key: ValueKey('${_session.scanId}-${_captureView?.name ?? 'next'}'),
-          cameras: widget.cameras,
-          session: _session,
-          initialView: _captureView,
-          settings: widget.settings,
-          onComplete: _process,
-        ),
+        _FlowPhase.capture =>
+          widget.uploadPhotos
+              ? PhotoUploadPane(
+                  key: ValueKey(_session.scanId),
+                  session: _session,
+                  onComplete: _process,
+                )
+              : GuidedCapturePane(
+                  key: ValueKey(
+                    '${_session.scanId}-${_captureView?.name ?? 'next'}',
+                  ),
+                  cameras: widget.cameras,
+                  session: _session,
+                  initialView: _captureView,
+                  settings: widget.settings,
+                  onComplete: _process,
+                ),
         _FlowPhase.processing => _ProcessingPane(
           progress: _uploadProgress,
           error: _error,

@@ -1,7 +1,7 @@
 name: egg_tray_counter
 description: Conservative three-photo egg tray counting client.
 publish_to: none
-version: 0.3.1+7
+version: 0.3.3+9
 
 environment:
   sdk: ">=3.9.0 <4.0.0"
@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
   camera: ^0.12.0+2
   dio: ^5.11.0
+  file_selector: ^1.1.0
   image: ^4.9.2
   sensors_plus: ^7.0.0
   shared_preferences: ^2.5.5
