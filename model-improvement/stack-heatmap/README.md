@@ -1,5 +1,15 @@
 # STACK-HEATMAP-HYBRID-V1
 
+Follow-up: ../../reports/stack-heatmap-followup-20260928/README.md contains the
+expanded reviewed subset and four measured CPU comparisons. `expand_reviewed.py`
+creates/checks a separate frozen release, preserving V1. Trainer now supports
+`--backbone-mode frozen|last-block` (defaultfrozen; BN statistics fixed), and
+`--checkpoint-criterion bce|count` (defaultbce). Count ranks development checkpoints
+by exact stacks, MAE, position errors, BCE; it never certifies inventory. Default
+architecture remains the baseline described below. Actual QA curves and fixed
+training-target sigma are documented separately. No production model change.
+
+
 Research baseline, not an exact warehouse counter. See
 `reports/stack-heatmap-20260928/README.md` for measured results and failures.
 

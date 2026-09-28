@@ -1,5 +1,15 @@
 # Physical tray counting: execution plan
 
+2026-09-28 follow-up: use ../reports/stack-heatmap-followup-20260928/README.md
+for the current measured state and ordered next steps. Reviewed11faces152centers,
+2groups; corrected915paths495contents. Four local CPU arms completed; best exact
+result3/11 MAE5.091 (count-selected frozen backbone), lowestMAE4.818 at2/11exact
+(last-block/count). No exact whole group, no certification or deployment.
+The prior checkpoint below is preserved history. Focus next on reviewed scene
+coverage, semantic/pitch normalization, localization and actual occupancy labels;
+complete V5 eligible control before cost-approved AWS and physical acceptance.
+
+
 2026-09-28 development checkpoint: the small heatmap/rim/sequence path now runs,
 but grouped validation fails0/7exact MAE12.142857. See
 ../reports/stack-heatmap-20260928/README.md for actual evidence and next actions,

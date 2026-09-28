@@ -1,5 +1,14 @@
 # Model improvement workspace
 
+2026-09-28 follow-up implemented and measured: see
+../reports/stack-heatmap-followup-20260928/README.md. Eleven reviewed faces152
+visible-layer references; frozen-vs-last-block and BCE-vs-count checkpoint
+comparisons actually ran on local CPU, grouped development only. Count selection
+helps (3/11exactMAE5.091), but failures/position errors prohibit promotion.
+V5 control still lacks eligible full-frame labels/validation. Previous snapshots
+stay frozen; next data/geometry/localizer/occupancy steps are explicit in the report.
+
+
 This workspace preserves the deployed `projec-mutta/2` Medium baseline and gates every future model on independent count metrics. RF-DETR Large and the policy-consistent V3 Medium candidate were evaluated and rejected; no replacement was promoted.
 
 Current decision: **NOT PRODUCTION READY**.

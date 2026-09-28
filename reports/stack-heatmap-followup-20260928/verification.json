@@ -1,0 +1,237 @@
+{
+  "backend_pytest": {
+    "passed": 77,
+    "failed": 0
+  },
+  "training_checks": "passed_gradients_BN_checkpoints_criterion_manifest_rejections",
+  "dataset_check": "passed_11_faces_152_peaks_2_groups",
+  "warmed_route": "passed_real_frozen_count_fold0_checkpoint_auth_hash_homography_bands_null_inventory",
+  "independent_crop_regeneration": "four_crops_byte_exact_parent_groups_retained",
+  "provenance_check": "8_run_code_checkpoint_manifest_group_checks_passed",
+  "production_promoted": false,
+  "APK_rebuilt": false,
+  "cloud_resources_created": false,
+  "V5_trained": false,
+  "artifact_files": [
+    {
+      "path": "reports/stack-heatmap-followup-20260928/code-versions/6588dc057d3fa0c842388e929f6fdfb44326506f57418900ccce599c34ada4f5.py",
+      "sha256": "6588dc057d3fa0c842388e929f6fdfb44326506f57418900ccce599c34ada4f5"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/code-versions/83d4bd779516b27db8c094688888722028f713dc204bd6f94717a72cf90b4ca5.py",
+      "sha256": "83d4bd779516b27db8c094688888722028f713dc204bd6f94717a72cf90b4ca5"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/comparison.json",
+      "sha256": "25a6779ffb7aa88470f864de2fed20e9bfeed33710c89d4afe2bb26e5703e567"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/duplicate-lineage.json",
+      "sha256": "75cda0ae823960fada474b4305a01d3f969982e52aca7c8f6c3e2298c79458df"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/faces/green-foreground-7.jpg",
+      "sha256": "3b67564b23d16e30792b09b52ffe5bc85acdf5c8e01db8f136801fd8fab79da6"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/faces/orange-foreground-10.jpg",
+      "sha256": "b043cd4b56c2382bb3fee0157238160a889f9bb39ffd9aca6b9dc837f430f6c4"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/faces/scene2-foreground-5.jpg",
+      "sha256": "8d5ba33827e498770ab4a639e764ac625ca23ebde41eb12f261403785a49eb52"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/faces/scene2-right-5.jpg",
+      "sha256": "30d17df85f8be76f77921f6e1c88af084b4395a47c84baf168b52fd6a2574945"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/faces.json",
+      "sha256": "90bd670db5bdb3ae2fcdfb77673999a35e20a3b5771a03cd71f401e6115eb754"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/frozen-manifest.json",
+      "sha256": "941fa1f8f2ef189622e263f63be8587fc04483de7eb5a0472c36cd02a686637f"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/inventory.json",
+      "sha256": "af2da04a7598c3d9f3f713d593b795332244bb8b21925fc3456de3a8dc8b4ced"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/out-of-scope-additions.json",
+      "sha256": "f12dd6ce1c6d5f70095870a5d05bcbfc8f1eef79e19a1b34df6e4a17d9f8eab6"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/review-qa.jpg",
+      "sha256": "772047dbd68db84642d29d09401fa2889799be54d497864e2f489c35e7f706bb"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/reviewed-additions.json",
+      "sha256": "923c79955eac8c4dd80a50a785649da1b0feccad199268799e44715b3ccadecc"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/summary.json",
+      "sha256": "e386ea65cabeb1d0eed2725ee9ebac830b3ae524469f7609d4dc553485681c4b"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/focused-1.npy",
+      "sha256": "5acad8437a01ca57d2550ad3b8b5c8ea78fabdf5d57025e5488602cd0dfb039f"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/focused-2.npy",
+      "sha256": "cbb84d69c0e7c1ce4b88db45106427297a9e4ec609bdcfdac72e65f6516edbf8"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/focused-3.npy",
+      "sha256": "ed17213e0fb26db2eddcc23e553c80a389e9cbd210bc8e0415564e66db881c5a"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/focused-4.npy",
+      "sha256": "e361c6ad505a12b1ce782988a00abcb98e0333c1e70ebc70bad42c06e33c9071"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/focused-5.npy",
+      "sha256": "8d3c54c6fac49b18fe16076856c86d80760d657958b3e6f2a4eff0a7d86bf306"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/green-foreground-7.npy",
+      "sha256": "07fe92215598e295d2903d90f20118f989c240baeb1f086d302797d149d0146a"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/orange-foreground-10.npy",
+      "sha256": "d7d4ce88aaeaf66e5bf1aacd0fe9de6663ea14f3025e42d2bf44ab1a6ff6b82d"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/scene2-centre-7.npy",
+      "sha256": "e3b8d6e8965491a8d41676852a9bc025d90c540c1a5f06bb88d00de85527f3cc"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/scene2-foreground-5.npy",
+      "sha256": "70bbfc27b7c0c5a2e5d5e7e6e537913d5603c60b54d23b158eee8a61b56db6cd"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/scene2-right-5.npy",
+      "sha256": "471d21df9b6224efdc67c4f7966361d890f8dd0c833a8f2bee594c656b847f60"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/side-19.npy",
+      "sha256": "b7371e91818d52c19ee9f790915af99f5e790364e834ade019bd2fc946def06d"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/frozen-bce/fold-0/comparison.json",
+      "sha256": "51a42b5848d2537b2b75e5e21fcf07ba67d3af6b9d519a0f0e380e5967e50494"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/frozen-bce/fold-0/prediction-qa.jpg",
+      "sha256": "2fbde8867f56088160efe3a6353e70ddce90e063b66603f7cc83fb8c54fd6dfd"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/frozen-bce/fold-0/run.json",
+      "sha256": "c6aedc48740b40672a42f8633426fda425218a78fa8bc0d6ea61287f0dd9b258"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/frozen-bce/fold-1/comparison.json",
+      "sha256": "6ba7c5a51dc2400093b40c664547c7cde7715e20e0a73690dc6af1b6dc4a6bc2"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/frozen-bce/fold-1/prediction-qa.jpg",
+      "sha256": "89d56ad923ff53e304ad5aa76ea2a5875a77dc07704f0b0e82c78ea4310b1aae"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/frozen-bce/fold-1/run.json",
+      "sha256": "69c518526a7a5a8dd23fb1426923048a416b35c0c635701709e50d61d17a21e0"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/frozen-bce/summary.json",
+      "sha256": "082ec6315d7bc6cd144bd219a98b74fd5f1bffac213bf4f4bad102eb4fcce719"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/frozen-count/fold-0/comparison.json",
+      "sha256": "62f83b157f7d75cc34194de535e3721161285d82a8a5d2b1ee6cec1935f85c55"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/frozen-count/fold-0/prediction-qa.jpg",
+      "sha256": "e8ff0053be1f37c938aed1c7e5c40657f541c0cc7b72fb789357621ce4c4262f"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/frozen-count/fold-0/run.json",
+      "sha256": "594503f49f3aa6006ea73750030b214d8f074be976aad2007ddca21a9f8c7314"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/frozen-count/fold-1/comparison.json",
+      "sha256": "31d7cf830c1f262f93a2bc8f3b6e69156f9cee2d131df7ab777bced7dacb8ca4"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/frozen-count/fold-1/prediction-qa.jpg",
+      "sha256": "56f63277a36ac23adf72a73063066c1aed87703341e868dc722031de645ea22d"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/frozen-count/fold-1/run.json",
+      "sha256": "5aeea06bee4a6ec3b1625979cac425724a6e2d3ededb22a8c5bd7123b9c72f25"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/frozen-count/summary.json",
+      "sha256": "a049c5dd808fe5bf9ee711edf3facc1a8c1c59f15caa14f77e7eaff7bbb883fa"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/lastblock-bce/fold-0/comparison.json",
+      "sha256": "819cc2d55a86b721c774ff0b89324eebadd5e9e8716fdc29a1c14a7c64e63a7a"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/lastblock-bce/fold-0/prediction-qa.jpg",
+      "sha256": "bec66723d2613bebbeb6dff7723adb1c0f0c640a58bf05202dcb95957ef86c63"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/lastblock-bce/fold-0/run.json",
+      "sha256": "37af14fe5386e802bb013652a5e88ca9ea84faf73c73059aca2ee9e400ce6233"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/lastblock-bce/fold-1/comparison.json",
+      "sha256": "4c08678f6d3bdf852f2294737967a0bdee7b5014ab3c0d0e6a8bfc6ea8ed5911"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/lastblock-bce/fold-1/prediction-qa.jpg",
+      "sha256": "79a6008b48449888e9d108e871501f441dbcd5c5e2102b352a3162445156093f"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/lastblock-bce/fold-1/run.json",
+      "sha256": "1a9c3d6b9315e27ad0520684c960f66e0f74828545edf87cb86de3f92ededfb6"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/lastblock-bce/summary.json",
+      "sha256": "725187a5e10afd093e740bb6b4441ebe705d794f38b700b1d62ea137ccf12965"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/lastblock-count/fold-0/comparison.json",
+      "sha256": "0b4329733302e9d0176506e5d6531ca1e9a1fce781a9cdb8815175c2a5a5f868"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/lastblock-count/fold-0/prediction-qa.jpg",
+      "sha256": "2c09482a8df334589d6e80e9655dd1acb889ea09249a127dc2cedf19f5b4363b"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/lastblock-count/fold-0/run.json",
+      "sha256": "aeac37a48c6f913768c3318cee3eb0ec7742c0cea048a1d934609527250e2969"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/lastblock-count/fold-1/comparison.json",
+      "sha256": "5e1fce402feae6c5c8fa2c3a522a34bad74b5f9aaafe70aab8c94331662a0df0"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/lastblock-count/fold-1/prediction-qa.jpg",
+      "sha256": "08f8277140543b6ba2eba5ed7438e80649f31ee4e016f1d8a78ea015eb1a4618"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/lastblock-count/fold-1/run.json",
+      "sha256": "b34c5f30b2c358e01cc5fb9387e16666a702fe0c1389f7d586adbe9053e88581"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/lastblock-count/summary.json",
+      "sha256": "5244e7689e4ab0ce0cd9d5484aca4a0e95e7ab49efb5b368f33a6fa2a771d7b8"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/README.md",
+      "sha256": "5d81dbb221920aed1769285b26be69246219032579be459c10001299541cd5f9"
+    }
+  ]
+}

@@ -1,5 +1,14 @@
 # Controlled training plan
 
+2026-09-28 follow-up result: four actual controlled CPU arms completed on the
+new frozen11face/152center subset, keeping2whole leakagegroups. Frozen/count
+3/11exactMAE5.091; last-block/count2/11MAE4.818; BCEarms1/11MAE13 and0/11MAE13.818.
+Checkpoint selection is now an explicit experiment factor; no threshold tuning.
+See ../../reports/stack-heatmap-followup-20260928/README.md for per-stack errors,
+code/checkpoint hashes, next pitch/semantic experiments and unresolved gates.
+These are development validation, not independent acceptance or filled inventory.
+
+
 2026-09-28 active milestone: V5-CLEAN-CONTROL and STACK-HEATMAP-HYBRID-V1.
 Use [stack experiment](../stack-heatmap/README.md). Existing reviewed data may
 support grouped development training before new physical acceptance collection.

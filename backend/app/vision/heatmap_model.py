@@ -7,17 +7,21 @@ from torchvision.models import MobileNet_V3_Small_Weights, mobilenet_v3_small
 
 
 class StackHeatmap(nn.Module):
-    def __init__(self, pretrained=True):
+    def __init__(self, pretrained=True, backbone_mode="frozen"):
         super().__init__()
+        if backbone_mode not in ("frozen", "last-block"):
+            raise ValueError("backbone_mode must be frozen or last-block")
         weights = MobileNet_V3_Small_Weights.DEFAULT if pretrained else None
         # Stride eight retains several feature samples between adjacent layers.
         self.backbone = mobilenet_v3_small(weights=weights).features[:4]
         self.backbone.requires_grad_(False)
+        if backbone_mode == "last-block":
+            self.backbone[-1].requires_grad_(True)
         self.head = nn.Sequential(nn.Conv1d(24, 32, 3, padding=1), nn.ReLU(), nn.Conv1d(32, 1, 1))
 
     def train(self, mode=True):
         super().train(mode)
-        self.backbone.eval()  # Frozen batch-normalization statistics on tiny datasets.
+        self.backbone.eval()  # Keep BN statistics frozen even when the last block learns.
         return self
 
     def forward(self, image):

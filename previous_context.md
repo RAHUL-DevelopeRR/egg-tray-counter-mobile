@@ -1,5 +1,22 @@
 # Previous context — 2026-09-14 checkpoint
 
+## 2026-09-28 follow-up checkpoint
+
+Continue from reports/stack-heatmap-followup-20260928/README.md and current
+PROGRESS/context. Starting HEAD f6164c20ba876f0e9326eb2a4b75e25849a2298f verified
+remote. New frozen release11faces152centers,2retainedgroups, corrected915paths/
+495contents (36unrelated resume screenshots excluded;4derived crops added).
+Four actual grouped CPU arms: frozen/BCE1/11 MAE13; lastblock/BCE0/11 MAE13.818;
+frozen/count3/11 MAE5.091; lastblock/count2/11 MAE4.818. Never report training fit,
+validation checkpoint selection or correct scalar sums as physical inventory.
+Optional last-block and count-criterion CLI implemented/tested.77backend tests,
+new frozen-source/crop/152peak checks and actual warmed route probe pass.
+Old benchmarks/release preserved, V5control remainsineligible/untrained, noAPK/
+production/cloud change. Exact next steps in report: recover full-frame exports,
+review more varied faces and whole-scene lineage, audit pitch/center normalization,
+localizer/occupancy, eligibleV5, then explicitlycost-approvedAWS/physicalacceptance.
+
+
 ## 2026-09-28 continuation — supersedes earlier training blockers
 
 Read the latest PROGRESS.md/context.md and reports/stack-heatmap-20260928/README.md.

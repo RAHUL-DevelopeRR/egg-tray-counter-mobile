@@ -76,21 +76,12 @@ def metrics(model, records, config, device):
             "latency_ms_per_stack": latency, "rows": rows}
 
 
-def validation_score(result, criterion):
-    if criterion == "count":
-        # Development only: exact counts first, then MAE, position errors, BCE.
-        return (-result["stack_exact"], result["mae"],
-                result["missed_layers"] + result["duplicate_or_spurious_layers"], result["loss"])
-    return result["loss"]
-
-
 def fit(train, valid, config, output, device):
     random.seed(config["seed"]); np.random.seed(config["seed"]); torch.manual_seed(config["seed"])
     model = StackHeatmap(backbone_mode=config.get("backbone_mode", "frozen")).to(device)
     optimizer = torch.optim.Adam((p for p in model.parameters() if p.requires_grad),
                                  lr=config["learning_rate"])
-    criterion = config.get("checkpoint_criterion", "bce")
-    history, best, stale = [], ((float("inf"),) * 4 if criterion == "count" else float("inf")), 0
+    history, best, stale = [], float("inf"), 0
     resume_path = Path(config["checkpoint_dir"]) / (output.name + "-resume.pt")
     best_resume_path = Path(config["checkpoint_dir"]) / (output.name + "-best.pt")
     resume_path.parent.mkdir(parents=True, exist_ok=True)
@@ -122,10 +113,9 @@ def fit(train, valid, config, output, device):
                         "validation_stack_exact": validation["stack_exact"] if validation else None,
                         "validation_scene_exact": validation["scene_exact"] if validation else None})
         # Validation selects checkpoints; smoke fit selects its final epoch only.
-        score = validation_score(validation, criterion) if validation else loss.item()
-        improved = validation is None or score < best
+        improved = validation is None or validation["loss"] < best
         if improved:
-            best = score; stale = 0
+            best = validation["loss"] if validation else loss.item(); stale = 0
             torch.save({"model": model.cpu().state_dict(), "config": config, "epoch": epoch + 1}, output / "best.pt")
             shutil.copyfile(output / "best.pt", best_resume_path)
             model.to(device)
@@ -160,8 +150,6 @@ def main():
     parser.add_argument("--device", default="cpu")
     parser.add_argument("--backbone-mode", choices=["frozen", "last-block"], default="frozen",
                         help="Controlled last-block fine-tuning; BN running statistics stay frozen")
-    parser.add_argument("--checkpoint-criterion", choices=["bce", "count"], default="bce",
-                        help="Development checkpoint selection; raw-count exact/MAE with position-error tie break")
     args = parser.parse_args()
     if not 1 <= args.epochs <= 10000:
         parser.error("epochs must be between 1 and 10000")
@@ -191,7 +179,6 @@ def main():
         raise ValueError("Acceptance/test records cannot enter development training")
     config = {"architecture": "mobilenet_v3_small_imagenet_stride8_frozen_1d_head",
               "backbone_mode": args.backbone_mode, "batch_norm_statistics": "frozen",
-              "checkpoint_criterion": args.checkpoint_criterion,
               "height": 640, "width": 192, "sigma": 3., "seed": 20260928,
               "learning_rate": .003, "epochs": args.epochs, "patience": 5,
               "threshold": .5, "peak_distance": 8, "match_tolerance": 6,

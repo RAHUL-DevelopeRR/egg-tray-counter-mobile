@@ -1,0 +1,92 @@
+{
+  "files": [
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/duplicate-lineage.json",
+      "sha256": "75cda0ae823960fada474b4305a01d3f969982e52aca7c8f6c3e2298c79458df"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/faces/green-foreground-7.jpg",
+      "sha256": "3b67564b23d16e30792b09b52ffe5bc85acdf5c8e01db8f136801fd8fab79da6"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/faces/orange-foreground-10.jpg",
+      "sha256": "b043cd4b56c2382bb3fee0157238160a889f9bb39ffd9aca6b9dc837f430f6c4"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/faces/scene2-foreground-5.jpg",
+      "sha256": "8d5ba33827e498770ab4a639e764ac625ca23ebde41eb12f261403785a49eb52"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/faces/scene2-right-5.jpg",
+      "sha256": "30d17df85f8be76f77921f6e1c88af084b4395a47c84baf168b52fd6a2574945"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/faces.json",
+      "sha256": "90bd670db5bdb3ae2fcdfb77673999a35e20a3b5771a03cd71f401e6115eb754"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/inventory.json",
+      "sha256": "af2da04a7598c3d9f3f713d593b795332244bb8b21925fc3456de3a8dc8b4ced"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/out-of-scope-additions.json",
+      "sha256": "f12dd6ce1c6d5f70095870a5d05bcbfc8f1eef79e19a1b34df6e4a17d9f8eab6"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/review-qa.jpg",
+      "sha256": "772047dbd68db84642d29d09401fa2889799be54d497864e2f489c35e7f706bb"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/reviewed-additions.json",
+      "sha256": "923c79955eac8c4dd80a50a785649da1b0feccad199268799e44715b3ccadecc"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/summary.json",
+      "sha256": "e386ea65cabeb1d0eed2725ee9ebac830b3ae524469f7609d4dc553485681c4b"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/focused-1.npy",
+      "sha256": "5acad8437a01ca57d2550ad3b8b5c8ea78fabdf5d57025e5488602cd0dfb039f"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/focused-2.npy",
+      "sha256": "cbb84d69c0e7c1ce4b88db45106427297a9e4ec609bdcfdac72e65f6516edbf8"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/focused-3.npy",
+      "sha256": "ed17213e0fb26db2eddcc23e553c80a389e9cbd210bc8e0415564e66db881c5a"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/focused-4.npy",
+      "sha256": "e361c6ad505a12b1ce782988a00abcb98e0333c1e70ebc70bad42c06e33c9071"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/focused-5.npy",
+      "sha256": "8d3c54c6fac49b18fe16076856c86d80760d657958b3e6f2a4eff0a7d86bf306"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/green-foreground-7.npy",
+      "sha256": "07fe92215598e295d2903d90f20118f989c240baeb1f086d302797d149d0146a"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/orange-foreground-10.npy",
+      "sha256": "d7d4ce88aaeaf66e5bf1aacd0fe9de6663ea14f3025e42d2bf44ab1a6ff6b82d"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/scene2-centre-7.npy",
+      "sha256": "e3b8d6e8965491a8d41676852a9bc025d90c540c1a5f06bb88d00de85527f3cc"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/scene2-foreground-5.npy",
+      "sha256": "70bbfc27b7c0c5a2e5d5e7e6e537913d5603c60b54d23b158eee8a61b56db6cd"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/scene2-right-5.npy",
+      "sha256": "471d21df9b6224efdc67c4f7966361d890f8dd0c833a8f2bee594c656b847f60"
+    },
+    {
+      "path": "reports/stack-heatmap-followup-20260928/dataset/targets/side-19.npy",
+      "sha256": "b7371e91818d52c19ee9f790915af99f5e790364e834ade019bd2fc946def06d"
+    }
+  ]
+}

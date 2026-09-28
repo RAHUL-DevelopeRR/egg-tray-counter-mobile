@@ -1,5 +1,47 @@
 # Progress
 
+## 2026-09-28 — reviewed-data follow-up and checkpoint-selection diagnosis
+
+Continued from verified local/remote f6164c20ba876f0e9326eb2a4b75e25849a2298f,
+clean initial tree. Created a separate frozen follow-up release; original
+benchmarks and seven-face release preserved. Four full-source crop reviews add
+5/5/7/10 visible layer centers: eleven faces152 targets, two retained conservative
+leakage groups. Corrected broad inventory scope:36 unrelated resume screenshots
+excluded; current release915 paths495 contents127 near links (includes4new crops).
+No extra scene identity or occupancy truth invented; these are visual layer
+references, not physically certified egg-filled inventory. V2 export paths checked
+for queued full-frame labels are missing; V5 control remains incomplete/untrained.
+
+Ran four actual CPU group-held-out arms on identical data/settings:
+frozen/BCE1/11 exact MAE13.000; last-block/BCE0/11 MAE13.818;
+frozen/count3/11 MAE5.091; last-block/count2/11 MAE4.818. All0/2 groups exact.
+BCE-selected checkpoints suppress peaks; added optional count-based checkpoint
+ranking to compare exact/MAE/position errors without changing threshold. Last-block
+mode thaws only existing final feature block, keeps BN running stats frozen and
+old inference checkpoint loading compatible. Frozen/count still114 missed+70
+spurious positions at6px tolerance; no candidate is production-ready. All band/
+sequence variants remain unresolved/null inventory. Records and exact runner
+source hashes saved; weights stay in ignored work/heatmap-followup-* directories.
+
+Verification:77 backend tests pass; dataset hash/152peak checks pass; training
+checks cover gradients/BN, checkpoint compatibility, criterion ranking and input
+rejection (crop tampering, source-group leakage, nonfinite points, unreviewed and
+acceptance records). New real checkpoint passed authenticated warmed backend
+hash/homography/band/null-inventory probe. Independent agent regenerated4crops
+byte-for-byte and confirmed old7annotations/group inheritance unchanged. No APK,
+production model, Cloudflare update or AWS resource created. Local CPU torch2.6
+and torchvision0.21 remain the runtime; no new cloud auth was required.
+
+Artifacts: reports/stack-heatmap-followup-20260928/{README.md,comparison.json,
+dataset/,frozen-bce/,lastblock-bce/,frozen-count/,lastblock-count/,code-versions/}.
+Exact next steps: recover queued source/label bytes by SHA and review whole frames;
+add varied reviewed faces and adjudicated independent whole-scene groups; audit
+center/top/base semantics and test physical-pitch-preserving normalization; train/
+evaluate stack localizer separately and collect real occupancy labels; complete
+eligible V5 control. Then approved AWS execution and untouched physical acceptance
+with cross-view identity. See report for reproduction and limitations.
+
+
 ## 2026-09-28 — controlled heatmap development and failed grouped validation
 
 Verified local HEAD and remote codex/hybrid-cell-counting both started at

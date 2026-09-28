@@ -1,4 +1,21 @@
 > Current milestone (2026-09-28): user requested V5 clean control plus a small
+
+Current follow-up (2026-09-28): reports/stack-heatmap-followup-20260928/README.md
+supersedes the earlier dataset/metric snapshot below. Eleven reviewed faces152
+visible-layer targets across2retained conservative groups;915 image paths495
+contents127near links after excluding36unrelated resume screenshots and adding4
+crops. Old frozen947-path inventory remains historical and was not all egg imagery.
+Four actual development arms: frozen/BCE1/11 MAE13; thawed/BCE0/11 MAE13.818;
+frozen/count3/11 MAE5.091; thawed/count2/11 MAE4.818; all0/2groups exact.
+Count checkpoint selection reduces suppression but location errors remain large;
+results are validation-selected development evidence, not independent acceptance.
+Optional last-block training preserves architecture/inference loading and BN stats.
+All occupancy remainsunknown and inventorynull/unverified. V5full-frame control
+stillineligible, sources/labels missing for queued exports, productionV2unchanged.
+Current priority: semantic center/pitch audit, varied reviewed whole-scene groups,
+separate localizer/occupancy supervision, eligible control; then cost-approved AWS
+and untouched physical warehouse acceptance. No APK/cloud deployment this session.
+
 > stack heatmap/rim/sequence experiment, leakage-safe development and AWS setup.
 > A new physical holdout is a production gate; it must not block development.
 > User now has AWS account; no billable resources without explicit approval.

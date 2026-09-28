@@ -1,5 +1,12 @@
 # Tools and MCP inventory
 
+2026-09-28 follow-up runtime: the same local CPU Python/PyTorch environment ran
+four grouped comparisons and all verification checks without provider credentials.
+No new MCP entries, cloud authentication or billable provider actions were needed.
+Current reproduction and local checkpoint paths are recorded in
+reports/stack-heatmap-followup-20260928/README.md and its run metadata.
+
+
 This inventory is derived from the configured config.toml at
 C:\Users\DELL\Downloads\config.toml. It records names, purpose,
 prerequisites and authentication requirements without copying credentials.

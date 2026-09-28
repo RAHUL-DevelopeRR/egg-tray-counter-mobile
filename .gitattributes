@@ -4,3 +4,4 @@
 /egg-tray-counter-0.2.1-grid-pilot.apk filter=lfs diff=lfs merge=lfs -text
 # Frozen content hashes must survive checkout on Windows and Linux.
 /reports/stack-heatmap-20260928/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/reports/stack-heatmap-followup-20260928/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
