@@ -1,0 +1,3233 @@
+{
+  "scope": "development_validation",
+  "model_sha256": "0119797ad85763bea4b160a6377a0aab33e4009a79a0e788ad3820bd77ee3478",
+  "matrix": {
+    "V2_full_frame_archived": {
+      "visible_total": 76,
+      "reference_total": 99,
+      "signed_error": -23,
+      "per_stack_metrics": null,
+      "scope": "archived diagnostic",
+      "verified": false
+    },
+    "V5_clean_full_frame": {
+      "status": "not_trained",
+      "reason": "No eligible reviewed grouped validation/control snapshot"
+    },
+    "V2_manual_rectified_archived": {
+      "counts": [
+        19,
+        22,
+        20,
+        22,
+        17
+      ],
+      "references": [
+        20,
+        20,
+        20,
+        20,
+        19
+      ],
+      "stack_exact": 1,
+      "stacks": 5,
+      "scene_exact": false,
+      "mae": 1.4,
+      "signed_error": 0.2,
+      "missed_layers": null,
+      "duplicate_layers": null,
+      "false_accepted_count": 0,
+      "rejection_rate": 1.0,
+      "accepted_scan_accuracy": null,
+      "latency_ms": null,
+      "verified": false
+    },
+    "bands_archived": {
+      "counts": [
+        12,
+        11,
+        19,
+        19,
+        10
+      ],
+      "references": [
+        20,
+        20,
+        20,
+        20,
+        19
+      ],
+      "stack_exact": 0,
+      "stacks": 5,
+      "scene_exact": false,
+      "mae": 5.6,
+      "signed_error": -5.6,
+      "missed_layers": null,
+      "duplicate_layers": null,
+      "false_accepted_count": 0,
+      "rejection_rate": 1.0,
+      "accepted_scan_accuracy": null,
+      "latency_ms": null,
+      "verified": false
+    },
+    "heatmap_raw_peaks": null,
+    "heatmap_only": {
+      "selected_counts": [
+        null
+      ],
+      "resolved": 0,
+      "stacks": 1,
+      "false_accepted_count": 0,
+      "rejection_rate": 1.0,
+      "accepted_scan_accuracy": null,
+      "mae": null,
+      "reason": "No independently assessed quality/top/base/occupancy/grid",
+      "verified": false
+    },
+    "heatmap_bands": {
+      "selected_counts": [
+        null
+      ],
+      "resolved": 0,
+      "stacks": 1,
+      "false_accepted_count": 0,
+      "rejection_rate": 1.0,
+      "accepted_scan_accuracy": null,
+      "mae": null,
+      "reason": "No independently assessed quality/top/base/occupancy/grid",
+      "verified": false
+    },
+    "heatmap_bands_rf": {
+      "selected_counts": [
+        null
+      ],
+      "resolved": 0,
+      "stacks": 1,
+      "false_accepted_count": 0,
+      "rejection_rate": 1.0,
+      "accepted_scan_accuracy": null,
+      "mae": null,
+      "reason": "No independently assessed quality/top/base/occupancy/grid",
+      "verified": false
+    }
+  },
+  "replay": [
+    {
+      "id": "scene2-centre-7",
+      "reference": 7,
+      "raw_heatmap_count": 15,
+      "band_best": {
+        "pitch_px": 20,
+        "feature": "bright",
+        "count": 6,
+        "centres": [
+          25,
+          42,
+          56,
+          73,
+          86,
+          102
+        ],
+        "intervals": [
+          [
+            23,
+            28
+          ],
+          [
+            39,
+            48
+          ],
+          [
+            54,
+            59
+          ],
+          [
+            69,
+            78
+          ],
+          [
+            84,
+            88
+          ],
+          [
+            99,
+            107
+          ]
+        ],
+        "support": 0.77,
+        "coverage": 1.0,
+        "explained_bands": 1.0,
+        "regularity": 0.77,
+        "edge_pair_fraction": 1.0,
+        "autocorrelation": -0.04599383691002828,
+        "edge_autocorrelation": 0.2986525527598422,
+        "rf_alignment": null,
+        "prominence_mean": 37.55262766767715,
+        "selection": "exploratory_best"
+      },
+      "outputs": {
+        "heatmap_only": {
+          "schema_version": "heatmap_sequence_v1",
+          "status": "unresolved",
+          "selected_count": null,
+          "ordered_layer_candidates": [],
+          "heatmap_peaks": [
+            {
+              "y_px": 20,
+              "probability": 0.5212151408195496
+            },
+            {
+              "y_px": 76,
+              "probability": 0.5131126642227173
+            },
+            {
+              "y_px": 91,
+              "probability": 0.5216472148895264
+            },
+            {
+              "y_px": 148,
+              "probability": 0.5259844660758972
+            },
+            {
+              "y_px": 236,
+              "probability": 0.5218068957328796
+            },
+            {
+              "y_px": 259,
+              "probability": 0.5222660899162292
+            },
+            {
+              "y_px": 323,
+              "probability": 0.5207988023757935
+            },
+            {
+              "y_px": 371,
+              "probability": 0.5073497891426086
+            },
+            {
+              "y_px": 404,
+              "probability": 0.5194104313850403
+            },
+            {
+              "y_px": 427,
+              "probability": 0.5262190103530884
+            },
+            {
+              "y_px": 476,
+              "probability": 0.5175487399101257
+            },
+            {
+              "y_px": 491,
+              "probability": 0.5150298476219177
+            },
+            {
+              "y_px": 531,
+              "probability": 0.5031936168670654
+            },
+            {
+              "y_px": 564,
+              "probability": 0.5223634243011475
+            },
+            {
+              "y_px": 579,
+              "probability": 0.521584689617157
+            }
+          ],
+          "alternatives": [
+            {
+              "pitch_px": 36.5,
+              "source": "heatmap_spacing",
+              "band_feature": null,
+              "band_count": null,
+              "nominal_span_count": 18,
+              "band_support": 0,
+              "sequence_count": 16,
+              "observed_count": 6,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 3,
+                  "y_px": 91.0,
+                  "probability": 0.5216472148895264,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 7,
+                  "y_px": 236.0,
+                  "probability": 0.5218068957328796,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 12,
+                  "y_px": 427.0,
+                  "probability": 0.5262190103530884,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 15,
+                  "y_px": 531.0,
+                  "probability": 0.5031936168670654,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 16,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                579,
+                491,
+                76
+              ],
+              "unexplained_peaks": [
+                148,
+                259,
+                323,
+                371,
+                404,
+                476
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            }
+          ],
+          "reasons": [
+            "quality_unknown_or_insufficient",
+            "top_or_base_layer_centre_unresolved",
+            "pitch_or_sequence_unresolved"
+          ],
+          "quality": {},
+          "band_centres": [],
+          "rf_centres": [],
+          "endpoints": {},
+          "occupancy": "unknown",
+          "verified": false,
+          "eligible_inventory_count": null
+        },
+        "heatmap_bands": {
+          "schema_version": "heatmap_sequence_v1",
+          "status": "unresolved",
+          "selected_count": null,
+          "ordered_layer_candidates": [],
+          "heatmap_peaks": [
+            {
+              "y_px": 20,
+              "probability": 0.5212151408195496
+            },
+            {
+              "y_px": 76,
+              "probability": 0.5131126642227173
+            },
+            {
+              "y_px": 91,
+              "probability": 0.5216472148895264
+            },
+            {
+              "y_px": 148,
+              "probability": 0.5259844660758972
+            },
+            {
+              "y_px": 236,
+              "probability": 0.5218068957328796
+            },
+            {
+              "y_px": 259,
+              "probability": 0.5222660899162292
+            },
+            {
+              "y_px": 323,
+              "probability": 0.5207988023757935
+            },
+            {
+              "y_px": 371,
+              "probability": 0.5073497891426086
+            },
+            {
+              "y_px": 404,
+              "probability": 0.5194104313850403
+            },
+            {
+              "y_px": 427,
+              "probability": 0.5262190103530884
+            },
+            {
+              "y_px": 476,
+              "probability": 0.5175487399101257
+            },
+            {
+              "y_px": 491,
+              "probability": 0.5150298476219177
+            },
+            {
+              "y_px": 531,
+              "probability": 0.5031936168670654
+            },
+            {
+              "y_px": 564,
+              "probability": 0.5223634243011475
+            },
+            {
+              "y_px": 579,
+              "probability": 0.521584689617157
+            }
+          ],
+          "alternatives": [
+            {
+              "pitch_px": 110.17241379310346,
+              "source": "bands",
+              "band_feature": "bright",
+              "band_count": 6,
+              "nominal_span_count": 6,
+              "band_support": 0.77,
+              "sequence_count": 6,
+              "observed_count": 5,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 3,
+                  "y_px": 259.0,
+                  "probability": 0.5222660899162292,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 4,
+                  "y_px": 323.0,
+                  "probability": 0.5207988023757935,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 6,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                579,
+                404,
+                476,
+                76,
+                371,
+                531
+              ],
+              "unexplained_peaks": [
+                91,
+                427,
+                491
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 88.13793103448276,
+              "source": "bands",
+              "band_feature": "bright",
+              "band_count": 6,
+              "nominal_span_count": 7,
+              "band_support": 0.7487179487179487,
+              "sequence_count": 7,
+              "observed_count": 5,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 91.0,
+                  "probability": 0.5216472148895264,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 5,
+                  "y_px": 371.0,
+                  "probability": 0.5073497891426086,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 6,
+                  "y_px": 476.0,
+                  "probability": 0.5175487399101257,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 7,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                579,
+                404,
+                491,
+                76,
+                531
+              ],
+              "unexplained_peaks": [
+                148,
+                259,
+                323,
+                427
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 121.1896551724138,
+              "source": "bands",
+              "band_feature": "bright",
+              "band_count": 6,
+              "nominal_span_count": 5,
+              "band_support": 0.7,
+              "sequence_count": 5,
+              "observed_count": 4,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 3,
+                  "y_px": 259.0,
+                  "probability": 0.5222660899162292,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 5,
+                  "y_px": 491.0,
+                  "probability": 0.5150298476219177,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                91,
+                579,
+                404,
+                476,
+                76,
+                371,
+                531
+              ],
+              "unexplained_peaks": [
+                323,
+                427,
+                564
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "endpoint_span_conflicts_with_pitch",
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 82.62931034482759,
+              "source": "bands",
+              "band_feature": "bright",
+              "band_count": 6,
+              "nominal_span_count": 8,
+              "band_support": 0.6871794871794872,
+              "sequence_count": 8,
+              "observed_count": 5,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 91.0,
+                  "probability": 0.5216472148895264,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 4,
+                  "y_px": 259.0,
+                  "probability": 0.5222660899162292,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 5,
+                  "y_px": 371.0,
+                  "probability": 0.5073497891426086,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 6,
+                  "y_px": 427.0,
+                  "probability": 0.5262190103530884,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                579,
+                404,
+                491,
+                76,
+                531
+              ],
+              "unexplained_peaks": [
+                148,
+                323,
+                476,
+                564
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "endpoint_span_conflicts_with_pitch",
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 165.25862068965517,
+              "source": "bands",
+              "band_feature": "bright",
+              "band_count": 4,
+              "nominal_span_count": 4,
+              "band_support": 0.5555555555555555,
+              "sequence_count": 4,
+              "observed_count": 2,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                91,
+                579,
+                323,
+                404,
+                476,
+                491,
+                76,
+                371,
+                531
+              ],
+              "unexplained_peaks": [
+                259,
+                427,
+                564
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "endpoint_span_conflicts_with_pitch",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 88.13793103448276,
+              "source": "bands",
+              "band_feature": "dark",
+              "band_count": 6,
+              "nominal_span_count": 7,
+              "band_support": 0.5435897435897435,
+              "sequence_count": 7,
+              "observed_count": 5,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 91.0,
+                  "probability": 0.5216472148895264,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 5,
+                  "y_px": 371.0,
+                  "probability": 0.5073497891426086,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 6,
+                  "y_px": 476.0,
+                  "probability": 0.5175487399101257,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 7,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                579,
+                404,
+                491,
+                76,
+                531
+              ],
+              "unexplained_peaks": [
+                148,
+                259,
+                323,
+                427
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 82.62931034482759,
+              "source": "bands",
+              "band_feature": "dark",
+              "band_count": 6,
+              "nominal_span_count": 8,
+              "band_support": 0.5025641025641026,
+              "sequence_count": 8,
+              "observed_count": 5,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 91.0,
+                  "probability": 0.5216472148895264,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 4,
+                  "y_px": 259.0,
+                  "probability": 0.5222660899162292,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 5,
+                  "y_px": 371.0,
+                  "probability": 0.5073497891426086,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 6,
+                  "y_px": 427.0,
+                  "probability": 0.5262190103530884,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                579,
+                404,
+                491,
+                76,
+                531
+              ],
+              "unexplained_peaks": [
+                148,
+                323,
+                476,
+                564
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "endpoint_span_conflicts_with_pitch",
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 165.25862068965517,
+              "source": "bands",
+              "band_feature": "dark",
+              "band_count": 3,
+              "nominal_span_count": 4,
+              "band_support": 0.38461538461538464,
+              "sequence_count": 4,
+              "observed_count": 2,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                91,
+                579,
+                323,
+                404,
+                476,
+                491,
+                76,
+                371,
+                531
+              ],
+              "unexplained_peaks": [
+                259,
+                427,
+                564
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "endpoint_span_conflicts_with_pitch",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 176.27586206896552,
+              "source": "bands",
+              "band_feature": "bright",
+              "band_count": 3,
+              "nominal_span_count": 4,
+              "band_support": 0.3846153846153846,
+              "sequence_count": 4,
+              "observed_count": 2,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 4,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                91,
+                579,
+                323,
+                404,
+                476,
+                491,
+                76,
+                371,
+                531
+              ],
+              "unexplained_peaks": [
+                148,
+                259,
+                427
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 176.27586206896552,
+              "source": "bands",
+              "band_feature": "dark",
+              "band_count": 3,
+              "nominal_span_count": 4,
+              "band_support": 0.3846153846153846,
+              "sequence_count": 4,
+              "observed_count": 2,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 4,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                91,
+                579,
+                323,
+                404,
+                476,
+                491,
+                76,
+                371,
+                531
+              ],
+              "unexplained_peaks": [
+                148,
+                259,
+                427
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 60.5948275862069,
+              "source": "bands",
+              "band_feature": "bright",
+              "band_count": 6,
+              "nominal_span_count": 11,
+              "band_support": 0.3384615384615384,
+              "sequence_count": 10,
+              "observed_count": 7,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 91.0,
+                  "probability": 0.5216472148895264,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 3,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 5,
+                  "y_px": 259.0,
+                  "probability": 0.5222660899162292,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 6,
+                  "y_px": 323.0,
+                  "probability": 0.5207988023757935,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 7,
+                  "y_px": 371.0,
+                  "probability": 0.5073497891426086,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 10,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                579,
+                404,
+                491,
+                76
+              ],
+              "unexplained_peaks": [
+                427,
+                476,
+                531
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 60.5948275862069,
+              "source": "bands",
+              "band_feature": "dark",
+              "band_count": 6,
+              "nominal_span_count": 11,
+              "band_support": 0.3384615384615384,
+              "sequence_count": 10,
+              "observed_count": 7,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 91.0,
+                  "probability": 0.5216472148895264,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 3,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 5,
+                  "y_px": 259.0,
+                  "probability": 0.5222660899162292,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 6,
+                  "y_px": 323.0,
+                  "probability": 0.5207988023757935,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 7,
+                  "y_px": 371.0,
+                  "probability": 0.5073497891426086,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 10,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                579,
+                404,
+                491,
+                76
+              ],
+              "unexplained_peaks": [
+                427,
+                476,
+                531
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 55.08620689655173,
+              "source": "bands",
+              "band_feature": "dark",
+              "band_count": 6,
+              "nominal_span_count": 12,
+              "band_support": 0.2769230769230769,
+              "sequence_count": 11,
+              "observed_count": 2,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 11,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                579,
+                404,
+                491,
+                76
+              ],
+              "unexplained_peaks": [
+                91,
+                148,
+                259,
+                323,
+                371,
+                427,
+                476,
+                531
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 55.08620689655173,
+              "source": "bands",
+              "band_feature": "bright",
+              "band_count": 6,
+              "nominal_span_count": 12,
+              "band_support": 0.23589743589743592,
+              "sequence_count": 11,
+              "observed_count": 2,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 11,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                579,
+                404,
+                491,
+                76
+              ],
+              "unexplained_peaks": [
+                91,
+                148,
+                259,
+                323,
+                371,
+                427,
+                476,
+                531
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 110.17241379310346,
+              "source": "bands",
+              "band_feature": "dark",
+              "band_count": 4,
+              "nominal_span_count": 6,
+              "band_support": 0.23551756885090216,
+              "sequence_count": 6,
+              "observed_count": 5,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 3,
+                  "y_px": 259.0,
+                  "probability": 0.5222660899162292,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 4,
+                  "y_px": 323.0,
+                  "probability": 0.5207988023757935,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 6,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                579,
+                404,
+                476,
+                76,
+                371,
+                531
+              ],
+              "unexplained_peaks": [
+                91,
+                427,
+                491
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 121.1896551724138,
+              "source": "bands",
+              "band_feature": "dark",
+              "band_count": 3,
+              "nominal_span_count": 5,
+              "band_support": 0.17948717948717952,
+              "sequence_count": 5,
+              "observed_count": 4,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 3,
+                  "y_px": 259.0,
+                  "probability": 0.5222660899162292,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 5,
+                  "y_px": 491.0,
+                  "probability": 0.5150298476219177,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                91,
+                579,
+                404,
+                476,
+                76,
+                371,
+                531
+              ],
+              "unexplained_peaks": [
+                323,
+                427,
+                564
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "endpoint_span_conflicts_with_pitch",
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 44.06896551724138,
+              "source": "bands",
+              "band_feature": "dark",
+              "band_count": 6,
+              "nominal_span_count": 15,
+              "band_support": 0.0923076923076923,
+              "sequence_count": 13,
+              "observed_count": 6,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 4,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 6,
+                  "y_px": 236.0,
+                  "probability": 0.5218068957328796,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 8,
+                  "y_px": 323.0,
+                  "probability": 0.5207988023757935,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 9,
+                  "y_px": 371.0,
+                  "probability": 0.5073497891426086,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 10,
+                  "y_px": 427.0,
+                  "probability": 0.5262190103530884,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                579,
+                491,
+                76
+              ],
+              "unexplained_peaks": [
+                91,
+                259,
+                404,
+                476,
+                531,
+                564
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "endpoint_span_conflicts_with_pitch",
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 44.06896551724138,
+              "source": "bands",
+              "band_feature": "bright",
+              "band_count": 6,
+              "nominal_span_count": 15,
+              "band_support": 0.03076923076923075,
+              "sequence_count": 13,
+              "observed_count": 6,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 4,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 6,
+                  "y_px": 236.0,
+                  "probability": 0.5218068957328796,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 8,
+                  "y_px": 323.0,
+                  "probability": 0.5207988023757935,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 9,
+                  "y_px": 371.0,
+                  "probability": 0.5073497891426086,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 10,
+                  "y_px": 427.0,
+                  "probability": 0.5262190103530884,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                579,
+                491,
+                76
+              ],
+              "unexplained_peaks": [
+                91,
+                259,
+                404,
+                476,
+                531,
+                564
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "endpoint_span_conflicts_with_pitch",
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 33.05172413793103,
+              "source": "bands",
+              "band_feature": "bright",
+              "band_count": 6,
+              "nominal_span_count": 19,
+              "band_support": 0.0,
+              "sequence_count": 17,
+              "observed_count": 6,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 3,
+                  "y_px": 91.0,
+                  "probability": 0.5216472148895264,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 5,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 8,
+                  "y_px": 259.0,
+                  "probability": 0.5222660899162292,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 10,
+                  "y_px": 323.0,
+                  "probability": 0.5207988023757935,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 15,
+                  "y_px": 476.0,
+                  "probability": 0.5175487399101257,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                579,
+                491,
+                76
+              ],
+              "unexplained_peaks": [
+                236,
+                371,
+                404,
+                427,
+                531,
+                564
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "endpoint_span_conflicts_with_pitch",
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 33.05172413793103,
+              "source": "bands",
+              "band_feature": "dark",
+              "band_count": 6,
+              "nominal_span_count": 19,
+              "band_support": 0.0,
+              "sequence_count": 17,
+              "observed_count": 6,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 3,
+                  "y_px": 91.0,
+                  "probability": 0.5216472148895264,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 5,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 8,
+                  "y_px": 259.0,
+                  "probability": 0.5222660899162292,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 10,
+                  "y_px": 323.0,
+                  "probability": 0.5207988023757935,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 15,
+                  "y_px": 476.0,
+                  "probability": 0.5175487399101257,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                579,
+                491,
+                76
+              ],
+              "unexplained_peaks": [
+                236,
+                371,
+                404,
+                427,
+                531,
+                564
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "endpoint_span_conflicts_with_pitch",
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 36.5,
+              "source": "heatmap_spacing",
+              "band_feature": null,
+              "band_count": null,
+              "nominal_span_count": 18,
+              "band_support": 0,
+              "sequence_count": 16,
+              "observed_count": 6,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 3,
+                  "y_px": 91.0,
+                  "probability": 0.5216472148895264,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 7,
+                  "y_px": 236.0,
+                  "probability": 0.5218068957328796,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 12,
+                  "y_px": 427.0,
+                  "probability": 0.5262190103530884,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 15,
+                  "y_px": 531.0,
+                  "probability": 0.5031936168670654,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 16,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                579,
+                491,
+                76
+              ],
+              "unexplained_peaks": [
+                148,
+                259,
+                323,
+                371,
+                404,
+                476
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            }
+          ],
+          "reasons": [
+            "quality_unknown_or_insufficient",
+            "top_or_base_layer_centre_unresolved",
+            "pitch_or_sequence_unresolved"
+          ],
+          "quality": {},
+          "band_centres": [],
+          "rf_centres": [],
+          "endpoints": {},
+          "occupancy": "unknown",
+          "verified": false,
+          "eligible_inventory_count": null
+        },
+        "heatmap_bands_rf": {
+          "schema_version": "heatmap_sequence_v1",
+          "status": "unresolved",
+          "selected_count": null,
+          "ordered_layer_candidates": [],
+          "heatmap_peaks": [
+            {
+              "y_px": 20,
+              "probability": 0.5212151408195496
+            },
+            {
+              "y_px": 76,
+              "probability": 0.5131126642227173
+            },
+            {
+              "y_px": 91,
+              "probability": 0.5216472148895264
+            },
+            {
+              "y_px": 148,
+              "probability": 0.5259844660758972
+            },
+            {
+              "y_px": 236,
+              "probability": 0.5218068957328796
+            },
+            {
+              "y_px": 259,
+              "probability": 0.5222660899162292
+            },
+            {
+              "y_px": 323,
+              "probability": 0.5207988023757935
+            },
+            {
+              "y_px": 371,
+              "probability": 0.5073497891426086
+            },
+            {
+              "y_px": 404,
+              "probability": 0.5194104313850403
+            },
+            {
+              "y_px": 427,
+              "probability": 0.5262190103530884
+            },
+            {
+              "y_px": 476,
+              "probability": 0.5175487399101257
+            },
+            {
+              "y_px": 491,
+              "probability": 0.5150298476219177
+            },
+            {
+              "y_px": 531,
+              "probability": 0.5031936168670654
+            },
+            {
+              "y_px": 564,
+              "probability": 0.5223634243011475
+            },
+            {
+              "y_px": 579,
+              "probability": 0.521584689617157
+            }
+          ],
+          "alternatives": [
+            {
+              "pitch_px": 110.17241379310346,
+              "source": "bands",
+              "band_feature": "bright",
+              "band_count": 6,
+              "nominal_span_count": 6,
+              "band_support": 0.77,
+              "sequence_count": 6,
+              "observed_count": 5,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 3,
+                  "y_px": 259.0,
+                  "probability": 0.5222660899162292,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 4,
+                  "y_px": 323.0,
+                  "probability": 0.5207988023757935,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 6,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                579,
+                404,
+                476,
+                76,
+                371,
+                531
+              ],
+              "unexplained_peaks": [
+                91,
+                427,
+                491
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 88.13793103448276,
+              "source": "bands",
+              "band_feature": "bright",
+              "band_count": 6,
+              "nominal_span_count": 7,
+              "band_support": 0.7487179487179487,
+              "sequence_count": 7,
+              "observed_count": 5,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 91.0,
+                  "probability": 0.5216472148895264,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 5,
+                  "y_px": 371.0,
+                  "probability": 0.5073497891426086,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 6,
+                  "y_px": 476.0,
+                  "probability": 0.5175487399101257,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 7,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                579,
+                404,
+                491,
+                76,
+                531
+              ],
+              "unexplained_peaks": [
+                148,
+                259,
+                323,
+                427
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 121.1896551724138,
+              "source": "bands",
+              "band_feature": "bright",
+              "band_count": 6,
+              "nominal_span_count": 5,
+              "band_support": 0.7,
+              "sequence_count": 5,
+              "observed_count": 4,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 3,
+                  "y_px": 259.0,
+                  "probability": 0.5222660899162292,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 5,
+                  "y_px": 491.0,
+                  "probability": 0.5150298476219177,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                91,
+                579,
+                404,
+                476,
+                76,
+                371,
+                531
+              ],
+              "unexplained_peaks": [
+                323,
+                427,
+                564
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "endpoint_span_conflicts_with_pitch",
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 82.62931034482759,
+              "source": "bands",
+              "band_feature": "bright",
+              "band_count": 6,
+              "nominal_span_count": 8,
+              "band_support": 0.6871794871794872,
+              "sequence_count": 8,
+              "observed_count": 5,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 91.0,
+                  "probability": 0.5216472148895264,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 4,
+                  "y_px": 259.0,
+                  "probability": 0.5222660899162292,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 5,
+                  "y_px": 371.0,
+                  "probability": 0.5073497891426086,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 6,
+                  "y_px": 427.0,
+                  "probability": 0.5262190103530884,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                579,
+                404,
+                491,
+                76,
+                531
+              ],
+              "unexplained_peaks": [
+                148,
+                323,
+                476,
+                564
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "endpoint_span_conflicts_with_pitch",
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 165.25862068965517,
+              "source": "bands",
+              "band_feature": "bright",
+              "band_count": 4,
+              "nominal_span_count": 4,
+              "band_support": 0.5555555555555555,
+              "sequence_count": 4,
+              "observed_count": 2,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                91,
+                579,
+                323,
+                404,
+                476,
+                491,
+                76,
+                371,
+                531
+              ],
+              "unexplained_peaks": [
+                259,
+                427,
+                564
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "endpoint_span_conflicts_with_pitch",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 88.13793103448276,
+              "source": "bands",
+              "band_feature": "dark",
+              "band_count": 6,
+              "nominal_span_count": 7,
+              "band_support": 0.5435897435897435,
+              "sequence_count": 7,
+              "observed_count": 5,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 91.0,
+                  "probability": 0.5216472148895264,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 5,
+                  "y_px": 371.0,
+                  "probability": 0.5073497891426086,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 6,
+                  "y_px": 476.0,
+                  "probability": 0.5175487399101257,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 7,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                579,
+                404,
+                491,
+                76,
+                531
+              ],
+              "unexplained_peaks": [
+                148,
+                259,
+                323,
+                427
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 82.62931034482759,
+              "source": "bands",
+              "band_feature": "dark",
+              "band_count": 6,
+              "nominal_span_count": 8,
+              "band_support": 0.5025641025641026,
+              "sequence_count": 8,
+              "observed_count": 5,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 91.0,
+                  "probability": 0.5216472148895264,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 4,
+                  "y_px": 259.0,
+                  "probability": 0.5222660899162292,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 5,
+                  "y_px": 371.0,
+                  "probability": 0.5073497891426086,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 6,
+                  "y_px": 427.0,
+                  "probability": 0.5262190103530884,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                579,
+                404,
+                491,
+                76,
+                531
+              ],
+              "unexplained_peaks": [
+                148,
+                323,
+                476,
+                564
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "endpoint_span_conflicts_with_pitch",
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 165.25862068965517,
+              "source": "bands",
+              "band_feature": "dark",
+              "band_count": 3,
+              "nominal_span_count": 4,
+              "band_support": 0.38461538461538464,
+              "sequence_count": 4,
+              "observed_count": 2,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                91,
+                579,
+                323,
+                404,
+                476,
+                491,
+                76,
+                371,
+                531
+              ],
+              "unexplained_peaks": [
+                259,
+                427,
+                564
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "endpoint_span_conflicts_with_pitch",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 176.27586206896552,
+              "source": "bands",
+              "band_feature": "bright",
+              "band_count": 3,
+              "nominal_span_count": 4,
+              "band_support": 0.3846153846153846,
+              "sequence_count": 4,
+              "observed_count": 2,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 4,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                91,
+                579,
+                323,
+                404,
+                476,
+                491,
+                76,
+                371,
+                531
+              ],
+              "unexplained_peaks": [
+                148,
+                259,
+                427
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 176.27586206896552,
+              "source": "bands",
+              "band_feature": "dark",
+              "band_count": 3,
+              "nominal_span_count": 4,
+              "band_support": 0.3846153846153846,
+              "sequence_count": 4,
+              "observed_count": 2,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 4,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                91,
+                579,
+                323,
+                404,
+                476,
+                491,
+                76,
+                371,
+                531
+              ],
+              "unexplained_peaks": [
+                148,
+                259,
+                427
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 60.5948275862069,
+              "source": "bands",
+              "band_feature": "bright",
+              "band_count": 6,
+              "nominal_span_count": 11,
+              "band_support": 0.3384615384615384,
+              "sequence_count": 10,
+              "observed_count": 7,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 91.0,
+                  "probability": 0.5216472148895264,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 3,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 5,
+                  "y_px": 259.0,
+                  "probability": 0.5222660899162292,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 6,
+                  "y_px": 323.0,
+                  "probability": 0.5207988023757935,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 7,
+                  "y_px": 371.0,
+                  "probability": 0.5073497891426086,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 10,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                579,
+                404,
+                491,
+                76
+              ],
+              "unexplained_peaks": [
+                427,
+                476,
+                531
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 60.5948275862069,
+              "source": "bands",
+              "band_feature": "dark",
+              "band_count": 6,
+              "nominal_span_count": 11,
+              "band_support": 0.3384615384615384,
+              "sequence_count": 10,
+              "observed_count": 7,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 91.0,
+                  "probability": 0.5216472148895264,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 3,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 5,
+                  "y_px": 259.0,
+                  "probability": 0.5222660899162292,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 6,
+                  "y_px": 323.0,
+                  "probability": 0.5207988023757935,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 7,
+                  "y_px": 371.0,
+                  "probability": 0.5073497891426086,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 10,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                579,
+                404,
+                491,
+                76
+              ],
+              "unexplained_peaks": [
+                427,
+                476,
+                531
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 55.08620689655173,
+              "source": "bands",
+              "band_feature": "dark",
+              "band_count": 6,
+              "nominal_span_count": 12,
+              "band_support": 0.2769230769230769,
+              "sequence_count": 11,
+              "observed_count": 2,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 11,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                579,
+                404,
+                491,
+                76
+              ],
+              "unexplained_peaks": [
+                91,
+                148,
+                259,
+                323,
+                371,
+                427,
+                476,
+                531
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 55.08620689655173,
+              "source": "bands",
+              "band_feature": "bright",
+              "band_count": 6,
+              "nominal_span_count": 12,
+              "band_support": 0.23589743589743592,
+              "sequence_count": 11,
+              "observed_count": 2,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 11,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                579,
+                404,
+                491,
+                76
+              ],
+              "unexplained_peaks": [
+                91,
+                148,
+                259,
+                323,
+                371,
+                427,
+                476,
+                531
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 110.17241379310346,
+              "source": "bands",
+              "band_feature": "dark",
+              "band_count": 4,
+              "nominal_span_count": 6,
+              "band_support": 0.23551756885090216,
+              "sequence_count": 6,
+              "observed_count": 5,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 3,
+                  "y_px": 259.0,
+                  "probability": 0.5222660899162292,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 4,
+                  "y_px": 323.0,
+                  "probability": 0.5207988023757935,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 6,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                579,
+                404,
+                476,
+                76,
+                371,
+                531
+              ],
+              "unexplained_peaks": [
+                91,
+                427,
+                491
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 121.1896551724138,
+              "source": "bands",
+              "band_feature": "dark",
+              "band_count": 3,
+              "nominal_span_count": 5,
+              "band_support": 0.17948717948717952,
+              "sequence_count": 5,
+              "observed_count": 4,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 2,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 3,
+                  "y_px": 259.0,
+                  "probability": 0.5222660899162292,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 5,
+                  "y_px": 491.0,
+                  "probability": 0.5150298476219177,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                236,
+                91,
+                579,
+                404,
+                476,
+                76,
+                371,
+                531
+              ],
+              "unexplained_peaks": [
+                323,
+                427,
+                564
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "endpoint_span_conflicts_with_pitch",
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 44.06896551724138,
+              "source": "bands",
+              "band_feature": "dark",
+              "band_count": 6,
+              "nominal_span_count": 15,
+              "band_support": 0.0923076923076923,
+              "sequence_count": 13,
+              "observed_count": 6,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 4,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 6,
+                  "y_px": 236.0,
+                  "probability": 0.5218068957328796,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 8,
+                  "y_px": 323.0,
+                  "probability": 0.5207988023757935,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 9,
+                  "y_px": 371.0,
+                  "probability": 0.5073497891426086,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 10,
+                  "y_px": 427.0,
+                  "probability": 0.5262190103530884,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                579,
+                491,
+                76
+              ],
+              "unexplained_peaks": [
+                91,
+                259,
+                404,
+                476,
+                531,
+                564
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "endpoint_span_conflicts_with_pitch",
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 44.06896551724138,
+              "source": "bands",
+              "band_feature": "bright",
+              "band_count": 6,
+              "nominal_span_count": 15,
+              "band_support": 0.03076923076923075,
+              "sequence_count": 13,
+              "observed_count": 6,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 4,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 6,
+                  "y_px": 236.0,
+                  "probability": 0.5218068957328796,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 8,
+                  "y_px": 323.0,
+                  "probability": 0.5207988023757935,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 9,
+                  "y_px": 371.0,
+                  "probability": 0.5073497891426086,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 10,
+                  "y_px": 427.0,
+                  "probability": 0.5262190103530884,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                579,
+                491,
+                76
+              ],
+              "unexplained_peaks": [
+                91,
+                259,
+                404,
+                476,
+                531,
+                564
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "endpoint_span_conflicts_with_pitch",
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 33.05172413793103,
+              "source": "bands",
+              "band_feature": "bright",
+              "band_count": 6,
+              "nominal_span_count": 19,
+              "band_support": 0.0,
+              "sequence_count": 17,
+              "observed_count": 6,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 3,
+                  "y_px": 91.0,
+                  "probability": 0.5216472148895264,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 5,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 8,
+                  "y_px": 259.0,
+                  "probability": 0.5222660899162292,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 10,
+                  "y_px": 323.0,
+                  "probability": 0.5207988023757935,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 15,
+                  "y_px": 476.0,
+                  "probability": 0.5175487399101257,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                579,
+                491,
+                76
+              ],
+              "unexplained_peaks": [
+                236,
+                371,
+                404,
+                427,
+                531,
+                564
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "endpoint_span_conflicts_with_pitch",
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 33.05172413793103,
+              "source": "bands",
+              "band_feature": "dark",
+              "band_count": 6,
+              "nominal_span_count": 19,
+              "band_support": 0.0,
+              "sequence_count": 17,
+              "observed_count": 6,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 3,
+                  "y_px": 91.0,
+                  "probability": 0.5216472148895264,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 5,
+                  "y_px": 148.0,
+                  "probability": 0.5259844660758972,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 8,
+                  "y_px": 259.0,
+                  "probability": 0.5222660899162292,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 10,
+                  "y_px": 323.0,
+                  "probability": 0.5207988023757935,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 15,
+                  "y_px": 476.0,
+                  "probability": 0.5175487399101257,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                579,
+                491,
+                76
+              ],
+              "unexplained_peaks": [
+                236,
+                371,
+                404,
+                427,
+                531,
+                564
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "endpoint_span_conflicts_with_pitch",
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            },
+            {
+              "pitch_px": 36.5,
+              "source": "heatmap_spacing",
+              "band_feature": null,
+              "band_count": null,
+              "nominal_span_count": 18,
+              "band_support": 0,
+              "sequence_count": 16,
+              "observed_count": 6,
+              "ordered_layer_candidates": [
+                {
+                  "position_index": 1,
+                  "y_px": 20.0,
+                  "probability": 0.5212151408195496,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 3,
+                  "y_px": 91.0,
+                  "probability": 0.5216472148895264,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 7,
+                  "y_px": 236.0,
+                  "probability": 0.5218068957328796,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 12,
+                  "y_px": 427.0,
+                  "probability": 0.5262190103530884,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 15,
+                  "y_px": 531.0,
+                  "probability": 0.5031936168670654,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                },
+                {
+                  "position_index": 16,
+                  "y_px": 564.0,
+                  "probability": 0.5223634243011475,
+                  "source": "heatmap",
+                  "occupancy": "unknown"
+                }
+              ],
+              "suppressed_peaks": [
+                579,
+                491,
+                76
+              ],
+              "unexplained_peaks": [
+                148,
+                259,
+                323,
+                371,
+                404,
+                476
+              ],
+              "rf_alignment": null,
+              "compatible": false,
+              "reasons": [
+                "irregular_layer_spacing",
+                "missing_position_without_independent_support",
+                "unexplained_heatmap_peaks"
+              ]
+            }
+          ],
+          "reasons": [
+            "quality_unknown_or_insufficient",
+            "top_or_base_layer_centre_unresolved",
+            "pitch_or_sequence_unresolved"
+          ],
+          "quality": {},
+          "band_centres": [],
+          "rf_centres": [],
+          "endpoints": {},
+          "occupancy": "unknown",
+          "verified": false,
+          "eligible_inventory_count": null
+        }
+      },
+      "bands_solver_latency_ms": 54.09739999959129
+    }
+  ]
+}

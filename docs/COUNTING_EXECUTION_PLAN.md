@@ -1,5 +1,12 @@
 # Physical tray counting: execution plan
 
+2026-09-28 development checkpoint: the small heatmap/rim/sequence path now runs,
+but grouped validation fails0/7exact MAE12.142857. See
+../reports/stack-heatmap-20260928/README.md for actual evidence and next actions,
+and ../model-improvement/stack-heatmap/aws/README.md for prepared AWS execution.
+Develop on existing reviewed scenes; new physical truth is a production gate.
+No candidate replaces V2, no cloud resource/production APK was deployed.
+
 ## Target and current limits
 
 Count the physical trays containing eggs in the captured scene using LEFT,

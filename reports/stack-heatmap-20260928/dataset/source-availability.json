@@ -1,0 +1,2228 @@
+[
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-01 (1)_jpeg.rf.zfgb9sOl0mnr43kwwiq3.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-02_jpeg.rf.iDwMoXHipeFP0XIO0k3Y.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-05_jpeg.rf.mA0MoR3CdrGRxjr4gNAE.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-09 (1)_jpeg.rf.kIbm1ucsw1tEPHAe06LH.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-10_jpeg.rf.zcyr7dezW2QA2amfwZ3n.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-16_jpeg.rf.kUCiyTYUG3iZOE6kjeKe.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-17 (2)_jpeg.rf.iECh2xLEgym5rdfgKB4O.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-17_jpeg.rf.yYtOeoLmvxh5siz5Ais8.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-18 (1)_jpeg.rf.imm0Utj2EkHrCQx9LTi9.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-20 (2)_jpeg.rf.hoHdazht0bBTWPLfo3xW.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-21_jpeg.rf.YzTVEp2fx5wHPUlqtJOP.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-23_jpeg.rf.aXsZvizvpaHA3lXZhdzI.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-28 (1)_jpeg.rf.lHslkDaniHt1xdUvBrDa.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-32 (1)_jpeg.rf.WrQ9NyPDXfdcULwrot06.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-35_jpeg.rf.dZ19MdRs17pqrKdXfjKQ.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-37_jpeg.rf.zl0DuRCnNhHSp2JE9Ngk.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-38_jpeg.rf.mg7n388FM8Qtoy37zzCV.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-41 (1)_jpeg.rf.bqQmiLwiU9rRE4ASLHpW.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-43 (1)_jpeg.rf.v8worUAsjqjwEzKgQPJ4.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-45 (1)_jpeg.rf.dUDxM4QAxM6mbLHwTfx6.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-47_jpeg.rf.pczcgbY2U0RPwoPB5NTp.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-50_jpeg.rf.ZsD7tvyanU7Um2nBNfHy.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-52 (1)_jpeg.rf.zjHY9UWh7NFxLvQd5l3q.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-54 (1)_jpeg.rf.lRomeWVbCLWf5QeTIRUk.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-57-58_jpeg.rf.goyvsn08dNk3vuBnEzim.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-58-00 (1)_jpeg.rf.i7jHVthRhRO3wIU1brHY.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-58-22 (1)_jpeg.rf.zRdwVbLeO5LlSvAodekW.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-58-23 (1)_jpeg.rf.mF965rRrsAZfYSmGL2vS.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-58-23 (2)_jpeg.rf.cBYjLVCYZ5VrNJs7POKJ.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-58-26_jpeg.rf.Xpu9dABNWBUaya7zSQCw.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-58-27_jpeg.rf.i0h9YhupsHIvla9qVeVG.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-58-30_jpeg.rf.bQ5usKxiPk8i9QBEbeDe.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-58-37_jpeg.rf.qTnJrZblLDtg13jYiTYR.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-58-42 (2)_jpeg.rf.fpksSWM5bIXMbtawrKSc.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-58-43_jpeg.rf.pm7vjAnBB6x99hCtg7Iz.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-58-45 (1)_jpeg.rf.ZfqC6bVh4j1jBhCzoZMk.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-58-45_jpeg.rf.jKrIpdjKuxwt2CALS23L.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-58-55_jpeg.rf.h5uieAcUcy5jod4AtLU9.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-58-56 (1)_jpeg.rf.XFedYt5A5YeqDdlnXiOq.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-59-00_jpeg.rf.ZrfO9eMndilpMQ5RgPq5.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 11-59-01_jpeg.rf.dIFdPgh6mPjb3Fjk807o.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 12-00-27_jpeg.rf.yNc8LYCiO65RaRsqxJwp.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 12-00-34_jpeg.rf.kVzEh07yC95P7qEpWQ9w.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 12-00-40_jpeg.rf.ov87GDTsWSOLwfyhS0RW.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 12-00-51_jpeg.rf.qyrSkiqXfQ0akef4ODjm.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 12-00-52 (1)_jpeg.rf.u1npBl7FFoa9DIxKMXc2.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 12-00-54_jpeg.rf.sdeXG0SQPtHb3Z93RFgo.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 12-01-08 (1)_jpeg.rf.vI8scr3Ioyy8dnnHulz3.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 12-01-08_jpeg.rf.qcRgWfGIU2A0BxKuIKOv.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 12-01-09 (1)_jpeg.rf.yezCkKXSBobsltVtqid5.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 12-01-13 (1)_jpeg.rf.xIPY6A9HgPy0gl960zyF.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 12-01-13_jpeg.rf.YIoqLZuwYOmJtOJqkQ1n.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 12-01-15 (1)_jpeg.rf.gJXHC6H8p9mwwHek4i8g.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 12-02-55 PM_jpeg.rf.XsGZJN9BTPdAAeo2uLdw.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Image 2026-07-03 at 12-03-16 PM (2)_jpeg.rf.dQiR4eUlJUF9esyu0vyY.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Video 2026-07-03 at 12_02_29 PM_mp4-0001_jpg.rf.tC0UJEvNmBuazE0kWwiu.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\train\\images\\WhatsApp Video 2026-07-03 at 12_04_04 PM_mp4-0002_jpg.rf.WksZoRcjnlafdYqHDXur.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\valid\\images\\WhatsApp Image 2026-07-03 at 11-56-54_jpeg.rf.HlukUC8zNO5CytsDNk3Z.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\valid\\images\\WhatsApp Image 2026-07-03 at 11-56-55_jpeg.rf.Lkxx5do53XcQPcgOt5HL.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\valid\\images\\WhatsApp Image 2026-07-03 at 11-57-00_jpeg.rf.TsO1xnKK6NDMi9oTOQ7g.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\valid\\images\\WhatsApp Image 2026-07-03 at 11-58-08 (2)_jpeg.rf.TrlfMmSZj1W7GLgyxw5y.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\valid\\images\\WhatsApp Image 2026-07-03 at 12-00-43_jpeg.rf.TQGT8UVNCTajErLBPZlQ.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\valid\\images\\WhatsApp Video 2026-07-03 at 12_02_29_mp4-0000_jpg.rf.K2UzQcxqrpzih3hmBce5.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\valid\\images\\WhatsApp Video 2026-07-03 at 12_04_04 PM_mp4-0001_jpg.rf.2DbeNpo4AIBk1k3uH9vc.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\test\\images\\WhatsApp Image 2026-07-03 at 11-57-20_jpeg.rf.V4VIRRWhPu2ynxwvr2rF.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\test\\images\\WhatsApp Image 2026-07-03 at 11-57-31_jpeg.rf.TvlOHECmSwAI7srFlaQa.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\test\\images\\WhatsApp Image 2026-07-03 at 11-58-00 (2)_jpeg.rf.UXbrvcXgrLv3gShQgLpj.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\test\\images\\WhatsApp Image 2026-07-03 at 11-58-39_jpeg.rf.VtJwc4mxtGR0Mx4UvxEm.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\test\\images\\WhatsApp Image 2026-07-03 at 11-58-59 (1)_jpeg.rf.UyhfeGOwGxqgk4mb9PRK.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Egg-Tray-Counter.yolov8 (1)\\test\\images\\WhatsApp Image 2026-07-03 at 12-00-52_jpeg.rf.VgqHMF6ILmU0Im12JpDx.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-11-58-24-AM_jpeg.rf.e1b1ba31d5399bdbcd26bcb062e44cf9.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-11-58-59-AM-1-_jpeg.rf.12cfe94b5e077540a13ff4ef2b6b3695.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-11-58-59-AM_jpeg.rf.bc78b0f13cd9642423acf1380407f31c.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-11-59-00-AM-2-_jpeg.rf.8faa5a7e964200a1a0201b7a5ffd0182.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-11-59-00-AM_jpeg.rf.6e8971eb11a534478fbecc255b9469b2.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-11-59-01-AM_jpeg.rf.17a992dc9f69a7536fb69c8b9bdb66a5.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-11-59-02-AM_jpeg.rf.05c2d1b77c14b712f0d3ff31d25a2a4c.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-11-59-03-AM-1-_jpeg.rf.3111476f032840353faee63433ef3724.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-11-59-03-AM_jpeg.rf.cd3a91e6a75a64a3055c4585924ee228.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-11-59-04-AM_jpeg.rf.bfcf5ffe7656837e821e4508298bbea0.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-11-59-09-AM-1-_jpeg.rf.6d0f1a7b09693bcc889e211bf979ad59.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-00-24-PM-1-_jpeg.rf.ec01d0c6007e05e229426d0c261b150c.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-00-29-PM_jpeg.rf.9818070901574e0092d6cafa0e37ce6a.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-00-40-PM-1-_jpeg.rf.d1dde0eeb4efecac33cbf2daf04c937e.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-00-40-PM_jpeg.rf.ab3a7546ec75c99c71ebaf0d5fdd182d.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-00-43-PM_jpeg.rf.e2af0266bdaac40b51e56e46e2da679d.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-00-45-PM_jpeg.rf.4d7aa956bc0ac985c916dc816b038206.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-00-46-PM_jpeg.rf.d24a7c79dc319e5535ba27f8e38070fa.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-00-48-PM_jpeg.rf.d0fc076a235f4f656c10688b25e407a1.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-00-49-PM_jpeg.rf.fcb4c696e7f3f0cbab61d262fbbe55d1.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-00-50-PM_jpeg.rf.b73595eb08778df8982d5f219e9f9ea8.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-01-01-PM_jpeg.rf.42f81c941eaf9e9993bcca62a848b48d.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-01-03-PM_jpeg.rf.d20a19c3dc902c2f4ef1644db8fb50b7.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-01-05-PM-1-_jpeg.rf.f646cd1d16927879abd22ce86e4cb618.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-01-05-PM-2-_jpeg.rf.4cdc74e3890310b75588aa2eafda1fb1.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-01-06-PM_jpeg.rf.50f66abd859f787489b2861c35fdb268.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-01-07-PM-1-_jpeg.rf.00f0973e45e9781515f70538c70cf9d3.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-01-07-PM_jpeg.rf.4c2aabc4398bbe7043db83680de3dbc7.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-01-10-PM_jpeg.rf.cdf4d22829dcb30c71c20e76681ca199.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-01-15-PM_jpeg.rf.52ba0c34ffacd7ce475972dda0b66e6e.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-02-46-PM_jpeg.rf.54a1a686323b8ff972f5120e2206a619.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-02-47-PM_jpeg.rf.ec68dc1a276d6cec66d5ecb6613a0a6e.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-02-48-PM-1-_jpeg.rf.f9d56ab5c89c2790fa92c3e1c33e6fd2.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-02-48-PM_jpeg.rf.c4716ce68d67769d9fbd3d0d7c78225b.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-02-53-PM-1-_jpeg.rf.e7a8607611d17d6ffd7e8c81e7fbc372.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-03-05-PM_jpeg.rf.01a930ef0cf0e2acb88ce749e17db70c.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-03-11-PM-2-_jpeg.rf.84ae3f036cc8aa2b239004fe0a5571cb.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-03-13-PM-2-_jpeg.rf.9cb75bee8b485014d9a2931c8e326530.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-03-15-PM-2-_jpeg.rf.c4c365de891fb413a8824916dbb4353e.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-04-10-PM_jpeg.rf.4295d23cbf7cf3a0d78e2a970eaf84fc.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-04-12-PM_jpeg.rf.52ad12c56defe438c686dfe8d8a28b1f.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-04-17-PM_jpeg.rf.618e6db8c74092d5edbde5709140c4fb.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Image-2026-07-03-at-12-04-25-PM_jpeg.rf.d5d5a6db58142313153f80fbac5b8cb5.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Video-2026-07-03-at-12_02_14-PM_mp4-0000_jpg.rf.c024a34e8cda352ef9751a7c99807f6b.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Video-2026-07-03-at-12_04_04-PM_mp4-0020_jpg.rf.c0bc10f235cb33bd3630bf1b0f60b512.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Video-2026-07-03-at-12_04_04-PM_mp4-0023_jpg.rf.a1f063ea3002613fcd986cb29cbed594.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Video-2026-07-03-at-12_04_04-PM_mp4-0025_jpg.rf.8a65cc44ebac8da669f29ac739b10053.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Video-2026-07-03-at-12_04_04-PM_mp4-0029_jpg.rf.7e9ec22b6ef9c3f0b260f01a180c94ce.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\train\\images\\WhatsApp-Video-2026-07-03-at-12_04_04-PM_mp4-0031_jpg.rf.d4747b990c05030f8de522443635d56d.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\valid\\images\\WhatsApp-Image-2026-07-03-at-11-58-22-AM_jpeg.rf.62436941ab432aea295d52e47884d82a.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\valid\\images\\WhatsApp-Image-2026-07-03-at-11-58-23-AM_jpeg.rf.e9169b684373a49f03a0e570650009fa.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\valid\\images\\WhatsApp-Image-2026-07-03-at-11-59-01-AM-1-_jpeg.rf.47baf47ca6cefb47063669354d52a7ca.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\valid\\images\\WhatsApp-Image-2026-07-03-at-11-59-09-AM_jpeg.rf.065c58edae30d0fe118bc2809cc7dd17.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\valid\\images\\WhatsApp-Image-2026-07-03-at-12-00-35-PM-1-_jpeg.rf.3f40af2ef32cd568c7dc905de5e9207c.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\valid\\images\\WhatsApp-Image-2026-07-03-at-12-01-02-PM-2-_jpeg.rf.c0c7ff8b59c8c866ddcb679e61698fc8.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\valid\\images\\WhatsApp-Image-2026-07-03-at-12-01-02-PM_jpeg.rf.60c82754a7a965381be390e4bc1f36a6.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\valid\\images\\WhatsApp-Image-2026-07-03-at-12-01-04-PM_jpeg.rf.12c5641153dd7d6be3fc4664b6cb4c8a.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\valid\\images\\WhatsApp-Image-2026-07-03-at-12-01-14-PM_jpeg.rf.5a4e89ee02db80b0030802e92b8132ef.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\valid\\images\\WhatsApp-Image-2026-07-03-at-12-02-46-PM-1-_jpeg.rf.e909ab617375c14f9b6467db1d175e5d.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\valid\\images\\WhatsApp-Video-2026-07-03-at-12_04_04-PM_mp4-0003_jpg.rf.2d589860d506e3e016a0dd0a9f545e2e.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\valid\\images\\WhatsApp-Video-2026-07-03-at-12_04_04-PM_mp4-0024_jpg.rf.79daad203d59fb05b30dcab38876bdcf.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\valid\\images\\WhatsApp-Video-2026-07-03-at-12_04_04-PM_mp4-0028_jpg.rf.19acc094107ba750a2cbf613bce8115c.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\test\\images\\WhatsApp-Image-2026-07-03-at-12-00-57-PM_jpeg.rf.2a4e486fe4e2c2043c0eda481c9fccec.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\test\\images\\WhatsApp-Image-2026-07-03-at-12-00-58-PM_jpeg.rf.35ce8168ddb6c352332b273f5f9861df.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\test\\images\\WhatsApp-Image-2026-07-03-at-12-01-19-PM-1-_jpeg.rf.63d1d74c24eebc1c9d82c7912dfca1f7.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\test\\images\\WhatsApp-Image-2026-07-03-at-12-02-52-PM_jpeg.rf.02fa0f80934dc62c3969c3a202b4c817.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "datasets/canonical_clean/manifest.csv",
+    "recorded_source": "C:\\Users\\dharani\\Documents\\Codex\\2026-08-20\\roboflow-plugin-roboflow-roboflow-build-a\\outputs\\egg-tray-counter\\datasets\\roboflow_auto_original\\test\\images\\WhatsApp-Video-2026-07-03-at-12_04_04-PM_mp4-0030_jpg.rf.71d657cea3dfb29712e8a82ac4fabb88.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.36.47 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.36.47 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.38.15 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.39.37 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.01 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.02 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.03 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.31 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.31 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.33 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.33 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.34 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.35 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.36 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.38 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.38 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.39 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.40 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.40 AM (2).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.40 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.41 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.41 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.42 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.43 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.43 AM (2).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.43 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.44 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.45 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.45 AM (2).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.45 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.46 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.46 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.47 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.47 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.48 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.48 AM (2).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.48 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.49 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.49 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.50 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.50 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.51 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.51 AM (2).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.51 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.52 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.52 AM (2).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.52 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.53 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.53 AM (2).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.53 AM (3).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.53 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.54 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.54 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.55 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.55 AM (2).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.55 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.56 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.56 AM (2).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.56 AM (3).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.56 AM (4).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.56 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.57 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.57 AM (2).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.57 AM (3).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.57 AM (4).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.57 AM (5).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.57 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.58 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.58 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.59 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.59 AM (2).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.40.59 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.41.00 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.41.04 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.41.04 AM (2).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.41.04 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.41.05 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.41.05 AM (2).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.41.05 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.41.06 AM (1).jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": false,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.41.06 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/09-data-expansion/warehouse-2026-09-07/intake.csv",
+    "recorded_source": "C:\\Users\\dharani\\Downloads\\Photos\\WhatsApp Image 2026-09-07 at 9.41.07 AM.jpeg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": true,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/806329c29d3aee5d41eb_jpg.rf.0f8b0077e60ddb3733796e560af313a9.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/9590ceca8ca176d0d246_jpg.rf.13c0f797a046fd5c4bea5a1d8ec4191a.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-12-01-09-PM-1-_jpeg.rf.017f9c737b9772257cc3759b29db235a.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/c1e45bba99bea2933155_jpg.rf.db609a060acab52c9682a61df8deb874.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/dd102925d9227b62b3cb_jpg.rf.6246c42c55660a80e97b3d071cc2befa.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/e145a7c762d70711c7be_jpg.rf.74d494242a3acc83d2579be9d307ac51.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/4cd1abed9a60a4c45bac_jpg.rf.d4305b8fda86ad8fbfc32e6faa879c42.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/609a1fa6603c84fd608f_jpg.rf.377bc342d0c4d4eb062fbb64e2dc9623.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/WhatsApp-Image-2026-07-03-at-11-57-05-AM_jpeg.rf.bd6ada60f52f975040028028bb6784b7.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/140927627abaed6bc683_jpg.rf.87777a54aeebb87e349e011147c650cf.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-57-47-AM_jpeg.rf.0322dfead7eae87aacfd568df093e15f.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/a3d560ec5fa32afe89ac_jpg.rf.e42b8972d416f2f3d43282eae01d3b54.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/0ed3cb7f3aa5427610af_jpg.rf.ffe412dceea1720a8e55ac13f28be2f1.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/74c1c55c022a4b7dd1f6_jpeg.rf.3dba54472a88cfb452b5e6797fee0a98.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/f32b812dd65d0c12b803_jpg.rf.deb8e3d5304c0e583d049f75f252824f.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/3b3ed50fdc6b4236e467_jpeg.rf.080d395aa3fef0f912243a73d0887528.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-57-52-AM-1-_jpeg.rf.fb749cebf393750e0f8bf7a0d108affe.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/cf562ce0f6a3d606204a_jpg.rf.67622074828e336eaa4a6ac19985aeb1.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/dc2db98845872b41b4b9_jpg.rf.7d7891a467f9d34d5162571d01623fd8.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/fc31b5da0c395f550cde_jpg.rf.ff5a8a733d19a1ce84db57467d29003f.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/7c8a50fe5901742805a6_jpg.rf.cefa4fbf47632ca81dc5a1fc00ac4a74.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/2721453227aa78d464f0_jpg.rf.3156acf0d44079f39f1c33db9ca08ae8.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/WhatsApp-Image-2026-07-03-at-12-03-16-PM-2-_jpeg.rf.6e9d5863f8a0d30746815713deea50b4.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/8910b133e62daef79399_jpg.rf.c0425df4d76cef264d012c9524c7cac0.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/471c41d2a954b267a9bf_jpg.rf.4be97945cdcdb9dca1e32b5f33d47353.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/test/images/WhatsApp-Image-2026-07-03-at-11-57-43-AM-1-_jpeg.rf.d840b7abac2e92acfb799fc58c88830d.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/test/images/927321c29a7dd6148734_jpg.rf.4e697ff61e22a4f06fbc2fa2d70fa81c.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/71135eb061c4bb2834b5_jpg.rf.b42d50b809427781e11aabcafe881960.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-57-58-AM_jpeg.rf.07aaf3798d3bb4597b97738790709627.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-12-01-08-PM_jpeg.rf.39971e317dc3c69c798c9bee5b68e5b1.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/WhatsApp-Image-2026-07-03-at-12-01-08-PM-1-_jpeg.rf.44c7a05a146cbcbbc3afeb1328c36cb4.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/ab8c9531b80991831e2b_jpg.rf.cb1452eef7e5a7023b05e5dd129b71e5.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/9d0b24d779e80cbbad2d_jpg.rf.e3091e71352f53efba38e0196eca9135.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/08c3b9b331a572e9fbc9_jpg.rf.47091b2c75f62d673161058f4c617e06.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/2a05251e7b50984713f5_jpg.rf.2d371e46fa9a9cda971dc82255cec1a0.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-57-31-AM_jpeg.rf.0f3f9aafe62a40c6ada269bc635e34fa.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-58-22-AM-1-_jpeg.rf.3facd84c6dc37a30912f355454519b97.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-12-02-55-PM_jpeg.rf.437867742c3572515db51bd8d9442acd.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/WhatsApp-Image-2026-07-03-at-11-58-23-AM-1-_jpeg.rf.06354487b120b021b342d5d5eb6bc949.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/WhatsApp-Image-2026-07-03-at-11-58-23-AM-2-_jpeg.rf.12e6173e841713267c7c6f928460e7a6.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/WhatsApp-Image-2026-07-03-at-12-00-54-PM_jpeg.rf.f452ebe21af57a206cf0099992a22cdf.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-12-00-34-PM-2-_jpeg.rf.93f3a94d8ae5921fa8e61cf62a01941e.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/36dccd6307a7fbd801d3_jpg.rf.6a6249830cc84516b001f90994a5e1d7.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/test/images/d3b9c36c583b721a058b_jpg.rf.674e4ac894aa749223dc62a8f221cdbc.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/392dd4934876e29bf6cd_jpg.rf.542e12abbaac80100e33d02ab4d181e3.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-12-00-51-PM_jpeg.rf.4eb2985ae042c0e40d9947f6827f182e.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/9b375e96a00568fd4dc9_jpg.rf.6b88ea2022e108e696677db4cceb7f7c.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/WhatsApp-Image-2026-07-03-at-11-57-18-AM-1-_jpeg.rf.1b745a6ae3d3aa7fcd62e73a7c75e158.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/test/images/WhatsApp-Image-2026-07-03-at-11-57-20-AM_jpeg.rf.186b41101dd625aa15700c9ea12d1923.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/5aae0b69f91f8bdcbbf7_jpg.rf.b6983fd4127023336eeb7ee485d2f70c.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-57-45-AM-1-_jpeg.rf.d59de69a9002db562490c24297e46c22.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/a0bab6bc320585fa213a_jpg.rf.ba1109e56470427dcbd70ef0a17e16a7.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-59-00-AM-3-_jpeg.rf.f8ac320723aedf4edce9cf5a0230a32b.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-12-00-52-PM_jpeg.rf.f9abdd1d7e8d0fd90f0073b0c3a6ae09.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-57-21-AM_jpeg.rf.e533e6909b76423bd99c2337cd6fe1a6.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-57-50-AM_jpeg.rf.a95a46ed54a201c8bba806db89978ca2.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-12-00-40-PM-2-_jpeg.rf.5c73751f2b2c36c912419d5a3f31835c.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-57-17-AM-2-_jpeg.rf.62c3a1bd2885ac44ecbc8ec7b83da2dd.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-58-39-AM_jpeg.rf.b468250bfadebfbb7e64ad2ee75565af.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/c2a9b50ff52dd7dda148_jpg.rf.eb7170f527ca61f6a3c870aca3db6e23.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/WhatsApp-Image-2026-07-03-at-11-58-27-AM_jpeg.rf.014079245367617006b59ee4c7c7fb4f.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-12-01-13-PM-1-_jpeg.rf.eaa37cbeab66e7ca67d642723cbc815c.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/1f4e07b914f69cf7734a_jpeg.rf.120bcfb4ad79c9737acb894798520a87.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-58-00-AM-2-_jpeg.rf.d66f8862f5faad027a34e55c5fca53ff.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-12-00-52-PM-1-_jpeg.rf.7415621cc2a5bdfe44447f79140bd213.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/test/images/WhatsApp-Image-2026-07-03-at-11-57-17-AM_jpeg.rf.c023e0f72194c050fe5968057ad4a2e9.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-57-16-AM_jpeg.rf.b8d6768d8a0324dcbe0067deb3f30322.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/test/images/WhatsApp-Image-2026-07-03-at-11-58-26-AM_jpeg.rf.d0dc60fe6d1696109d04775b1808359b.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-57-10-AM_jpeg.rf.841362bcc4f0c9cfaf4f5bf60107b328.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-57-02-AM_jpeg.rf.2e675a700d201ad47d85e96db6a07424.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/d840c16a733d06010b10_jpg.rf.3f4e5bd9451fe7c99ecfe918844b063f.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/WhatsApp-Image-2026-07-03-at-12-01-15-PM-1-_jpeg.rf.6d4dcffe5d67618db97f6005cf837772.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/test/images/WhatsApp-Image-2026-07-03-at-11-58-30-AM_jpeg.rf.04705d93f3255e3432edb82dfa7d8ba7.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/6230e5bfdf3c5cd5e6ec_jpeg.rf.9c711a2f97702112edbfd4964f5d21b1.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-12-01-13-PM_jpeg.rf.57d89fb504b43c799e4f4e479c49865a.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/WhatsApp-Image-2026-07-03-at-11-57-23-AM_jpeg.rf.6f87179ee1ed76c8dd62da997afc89c2.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-58-08-AM-2-_jpeg.rf.a732a0ecaa8eca85771c1d465206ed47.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/98d66ec21cca75d245dd_jpeg.rf.6947ecd98a60e54ce570dd3a976c8014.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-57-28-AM-1-_jpeg.rf.918b72a6eafb86cc69db4b6a7d1e2d9b.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-58-00-AM-1-_jpeg.rf.d95686c4c188a9035fb0fc07afb48174.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/WhatsApp-Image-2026-07-03-at-11-57-54-AM-1-_jpeg.rf.c90c46acca6e61b9849fb3d8484bea45.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-57-00-AM_jpeg.rf.7380bd645aad8934219b6c74c07c3581.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-57-35-AM_jpeg.rf.d5565989d6e0ac18aebb3ba8b2501dda.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/WhatsApp-Image-2026-07-03-at-11-57-20-AM-2-_jpeg.rf.55fe4b40a72dd1a1a4b246e6854f55db.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-57-32-AM-1-_jpeg.rf.0828add7c8b7eae77317d0e144a128e3.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-58-37-AM_jpeg.rf.69128d31a5f2b8e3b36d0007fa080b2f.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/32766c4e23b881d53bb7_jpeg.rf.0dd51a38db1307b54c47481960c1f609.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-12-00-27-PM_jpeg.rf.0e4f0c3859b70cda93a6a4b08fac2214.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/WhatsApp-Image-2026-07-03-at-11-56-54-AM_jpeg.rf.72c573234d6d423948ee8b9b923e9652.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/WhatsApp-Image-2026-07-03-at-11-57-09-AM-1-_jpeg.rf.b69a25fc2e1a8982f6a56211e54fd940.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-59-01-AM-2-_jpeg.rf.97168b1f4fd9f593e8a74150f03417e2.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-56-55-AM_jpeg.rf.f2918ce1919e1416a1f8832d008bdda9.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-58-59-AM-3-_jpeg.rf.0c03a7a31ce6d7d015e47142a5fd5aca.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/d328c4489632a61b2071_jpg.rf.0479b9462b6821b317046b70a521876c.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/valid/images/e0f00e2e506f411a0b91_jpg.rf.a67b894ac16e9b775c0fd7877e4f3d9a.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-57-37-AM_jpeg.rf.0ffe063e6175126d42e23a7fbd035740.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-57-41-AM-1-_jpeg.rf.a67926adff9d234dd510c772c8a6a574.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/test/images/WhatsApp-Image-2026-07-03-at-11-57-01-AM-1-_jpeg.rf.2ec5d18b680525d06219df4ae79bfeac.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  },
+  {
+    "manifest": "model-improvement/01-dataset-audit/v2-label-policy-review.csv",
+    "recorded_source": "work/v2-frozen-export-20260902/train/images/WhatsApp-Image-2026-07-03-at-11-57-38-AM_jpeg.rf.1e6e92e17ffacfd0da81b67f2811f055.jpg",
+    "recorded_path_available": false,
+    "content_hash_available_elsewhere": null,
+    "eligible_without_review": false
+  }
+]

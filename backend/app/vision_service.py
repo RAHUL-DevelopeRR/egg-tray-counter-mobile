@@ -6,6 +6,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
 from app.api.candidate import router
+from app.api.heatmap_candidate import configure_heatmap
 from app.config import Settings
 
 
@@ -29,4 +30,5 @@ def create_vision_app(token: str | None = None) -> FastAPI:
         return {'status': 'ok', 'mode': 'diagnostic_only', 'inventory_verification_ready': False}
 
     app.include_router(router)
+    configure_heatmap(app)
     return app

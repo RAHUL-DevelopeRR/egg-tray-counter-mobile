@@ -1,5 +1,66 @@
 # Progress
 
+## 2026-09-28 — controlled heatmap development and failed grouped validation
+
+Verified local HEAD and remote codex/hybrid-cell-counting both started at
+5967ce82cd76ef9d2c11c1050f347b14a71f3200; initial working tree clean. Implemented
+content-addressed inventory/lineage/splits, frozen incomplete V5 control,
+Gaussian target builder/QA, pretrained small PyTorch heatmap, train/eval runners,
+deterministic sequence solver, polygon localization audit, authenticated warmed
+research route, AWS custom-container/Spot configuration and production design.
+
+Final inventory947 egg-image paths527 unique contents138 candidate near links,
+two conservative leakage groups;2 unrelated design images excluded. Reviewed
+seven faces125 visible-layer centers: original six118 plus a manually inspected
+7-layer small stack from the existing individual-tray photos. Same-source five
+focused faces always remain together. No physical filled-inventory truth invented.
+Source/hash/lineage/frozen-snapshot/125-target checks pass. V5 control stays six
+TRAIN crops118 boxes, VALID/TEST empty and training_release_eligible=false;
+no V5 model trained. 72 legacy review candidates still need full-resolution QA;
+three older reviewed source hashes wh009/025/069 are unavailable locally.
+
+CPU six-face20epoch smoke fit gives6/6 raw counts exact, but19 missed labeled
+positions and19 spurious peaks at fixed6px tolerance. Actual two-group LOCO
+development validation:0/7 exact,0/2 groups exact, MAE12.142857, signed−9.857143;
+103 missed positions34 unmatched/spurious peaks. Held-out counts2/2/4/6/11/16
+vs20/20/20/20/19/19;15vs7. This candidate fails generalization and must not replace
+V2. Solver rejects all inventory claims: rejection100%, false accepted0,
+accepted-scan accuracy undefined. These tiny visual-reference groups are not
+new physical acceptance data. Forward-only CPU latency12.21ms/face, excluding
+image upload/localization/rectification/bands. The final recorded rerun was
+48.80ms/face (earlier12.21ms); these single CPU probes vary with system load and
+are not a deployment latency benchmark.
+
+Actual localization5 reviewed→8 proposed:3 IoU.5 matches,3 fragmented faces,
+0 merges,0 wholly unassociated faces;2 fail one-to-oneIoU matching. Authenticated
+real-checkpoint route/auth/hash mismatch/homography/rim output checks pass;
+quality diagnostics present, completeness/occupancy/grid unresolved, total=null,
+verified=false. All77 backend tests pass including11 solver cases; training
+self-check passes. AWS bundle18 files staged locally, no S3/account operation.
+One-epoch local resume check restored a removed output best.pt from checkpoints
+with identical SHA256499993284f1205fa0a95aff0705c911f122e487c6bfdc20b9b65b154f2febada.
+Docker/AWS CLI unavailable; image build/GPU/cloud execution remain unverified.
+
+Artifacts: STACK-HEATMAP-HYBRID-V1 research only; report
+reports/stack-heatmap-20260928/README.md, datasetmanifestSHA
+7d376b4e79a363f6d45d82f65b908bb53ae5dcffe566b17349b31303572a30de.
+Local-only recorded smokecheckpointSHA8fbac40e4bf813f5fcc785ead7f93011aad3e94f4b11580584e410d745b98512;
+CVfold0SHA977d644e8bdab45ec4c5053c57019a95135ab4ddc134b942e870b4f5be114a3c;
+CVfold1SHA0119797ad85763bea4b160a6377a0aab33e4009a79a0e788ad3820bd77ee3478.
+Weights under ignored work/; report histories/metrics/checksums published.
+The report artifact path disables Git newline normalization to preserve its
+content hashes across Windows/Linux checkout; staged manifest/frozen bytes checked.
+Production RoboflowV2 and last recorded APK0.3.3+9 unchanged by this task;
+no live production/version claim was rechecked, no APK rebuilt or deployment.
+
+Next: complete full-resolution existing label/scene QA across varied counts,
+freeze an eligible V5 control with independent development groups, audit heatmap
+location/pitch failures before tuning, improve stack localization separately,
+label occupancy independently. AWS execution requires explicit cost approval and
+verified IAM/image/quota. New physically recounted holdout gates production only,
+not development/training. Full architecture/reproduction in
+model-improvement/stack-heatmap/README.md and aws/README.md.
+
 ## 2026-09-24 — focused layer-label audit and training supplement
 
 Prepared five rectified faces with99 manually reviewed visible-layer boxes,

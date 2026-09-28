@@ -6,6 +6,13 @@ Current decision: **NOT PRODUCTION READY**.
 
 ## Status
 
+- 2026-09-28 controlled heatmap development implemented and locally trained.
+  Two conservative scene groups/seven reviewed faces125centers; grouped
+  validation **0/7 exact, MAE12.142857**. Candidate rejected; raw training-fit
+  counts are not generalization. Frozen V5control incomplete, not trained.
+  [Experiment and AWS preparation](stack-heatmap/README.md),
+  [measured report](../reports/stack-heatmap-20260928/README.md).
+
 - 2026-09-08 cell-identity fix implemented locally in Worker/mobile: operator-entered per-photo cell IDs, same-cell grouping, manual recount for unresolved cells, old-server rejection. Eight Worker tests and five Flutter tests pass; analyzer clean. V2 regression remains **2/10 exact, MAE 22.9**. **Not deployed** under the strict shipment gate; independent safety-fix approval requested.
 - Fixed V2 SAHI-style 2x2 tiling trial: **0/10 exact, MAE 46.2; DO NOT DEPLOY**. Forty tile requests, unchanged confidence 35 / overlap 50, no post-result tuning. See [tiled evidence](07-validation/v2-tiled-2x2-c35-o50-20260908/README.md).
 - Warehouse convention confirmed: **only egg-filled trays**, one box per individual tray layer; empty nested trays are non-targets. All 74 originals are hash-verified and have an explicit review-queue row. Full-frame box review is **incomplete** (two local 7-box drafts, zero training approvals). Do not confuse contact-sheet triage, a convention assignment, or prior crop labels with complete annotation. Retraining/data expansion release remains blocked.

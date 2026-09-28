@@ -1,5 +1,14 @@
 # Controlled training plan
 
+2026-09-28 active milestone: V5-CLEAN-CONTROL and STACK-HEATMAP-HYBRID-V1.
+Use [stack experiment](../stack-heatmap/README.md). Existing reviewed data may
+support grouped development training before new physical acceptance collection.
+Two local group-held-out heatmap runs completed and failed0/7exact MAE12.142857.
+V5control snapshot remains incomplete/ineligible; no ordinary blind retrain.
+The historical experiment ladder below is not authorization to change several
+architecture/data/threshold variables together. Production requires untouched
+physical warehouse truth; AWS GPU/account charges require explicit approval.
+
 Training is gated on human-reviewed scene metadata and labels. Starting another cloud run on the current data would spend credits without fixing the known cause.
 
 ## Experiments

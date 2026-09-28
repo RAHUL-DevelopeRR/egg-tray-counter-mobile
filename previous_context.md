@@ -1,5 +1,24 @@
 # Previous context — 2026-09-14 checkpoint
 
+## 2026-09-28 continuation — supersedes earlier training blockers
+
+Read the latest PROGRESS.md/context.md and reports/stack-heatmap-20260928/README.md.
+Task began from verified local/remote5967ce82cd76ef9d2c11c1050f347b14a71f3200.
+Development must proceed on existing data; new physical holdout gates production
+only. AWS account is available per user, but no billable work is approved.
+Inventory947paths527unique, two conservative groups, reviewed7faces125centers.
+Two actual group-held-out CPU heatmap runs fail0/7 exact MAE12.142857; six-face
+training fit6/6 is not generalization and hides row-location errors. Frozen V5
+subset incomplete/ineligible, not trained. Deterministic solver, localization
+audit and optional authenticated warmed backend implemented; every inventory
+result remains null/unverified.77 backend tests and dataset/training checks pass.
+Weights are local work/ only; report metrics/QA/checksums are retained. No APK,
+production-model update or AWS deployment. Next: existing full-resolution QA,
+more genuine development groups/varied layer counts, heatmap pitch/location audit,
+stack localizer and independent occupancy labels, then approved AWS execution.
+Do not resurrect the earlier instruction to wait for a new scene before any
+training. Preserve historical benchmarks; only final acceptance needs new truth.
+
 ## 2026-09-23 continuation
 
 Read docs/WAREHOUSE_3D_ACCEPTANCE_PLAN.md and current PROGRESS.md first.

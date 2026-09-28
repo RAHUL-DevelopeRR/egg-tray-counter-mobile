@@ -8,6 +8,18 @@ that the process is installed, reachable or authenticated.
 
 ## Minimum tools for this repository
 
+2026-09-28 heatmap/AWS development additions (runtime checks, not new config.toml
+MCP entries): Python3.12 and isolated torch2.6.0+cpu/torchvision0.21.0+cpu ran
+locally; no provider auth needed. Bundled primary Python plus existing
+work/vision-deps supplies CV/test dependencies. Docker and AWS CLI are absent
+from PATH on this host, so the prepared container/request is not cloud-tested.
+AWS private S3/ECR/SageMaker/ECS/EC2 actions require account IAM authentication
+and scoped roles; user reports an account, but credentials were not inspected.
+No billable action is approved. Public AWS/PyTorch/RF-DETR docs require no private
+auth. See model-improvement/stack-heatmap/aws/README.md for job prerequisites,
+checkpoint paths and the explicit cost-approval gate. Server heatmap route needs
+a trusted local checkpoint and private VISION_SERVICE_TOKEN, never APK credentials.
+
 | Tool or service | Needed for | Local requirements | Authentication |
 | --- | --- | --- | --- |
 | Git and the GitHub remote | Commit and push source, reports and APK metadata | Git; a configured remote and credential helper | GitHub credential is required for push, but it is not configured as an MCP in config.toml |

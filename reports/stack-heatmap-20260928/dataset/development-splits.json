@@ -1,0 +1,32 @@
+{
+  "scene_splits": {
+    "session-2026-07-03": "train",
+    "session-2026-09-15": "valid"
+  },
+  "cv_folds": [
+    {
+      "fold": 1,
+      "train_scene_ids": [
+        "session-2026-07-03"
+      ],
+      "validation_scene_ids": [
+        "session-2026-09-15"
+      ]
+    },
+    {
+      "fold": 2,
+      "train_scene_ids": [
+        "session-2026-09-15"
+      ],
+      "validation_scene_ids": [
+        "session-2026-07-03"
+      ]
+    }
+  ],
+  "cv_status": "two_group_development_only_small_blurred_second_face",
+  "final_acceptance_status": "new_physically_counted_scene_required",
+  "quarantined_inventory_groups": [
+    "session-2026-07-03",
+    "session-2026-09-15"
+  ]
+}

@@ -1,3 +1,20 @@
+> Current milestone (2026-09-28): user requested V5 clean control plus a small
+> stack heatmap/rim/sequence experiment, leakage-safe development and AWS setup.
+> A new physical holdout is a production gate; it must not block development.
+> User now has AWS account; no billable resources without explicit approval.
+> Implemented inventory947 paths527 unique, seven reviewed faces125 centers,
+> two conservative groups, target QA, PyTorch baseline, actual two-group CV,
+> solver/localization audit, optional authenticated research backend and AWS
+> container/Spot request preparation. V5 frozen subset incomplete: six TRAIN
+> crops118 boxes, VALID/TEST empty; not trained. Occupancy remains unknown.
+> Heatmap raw six-face training fit6/6 exact hides19 missed/19 spurious positions.
+> Grouped held-out result0/7 exact MAE12.142857; candidate rejected. No V2/APK
+> replacement or cloud deployment. Only SceneCertifier may eventually verify
+> inventory; current candidate route always null total/false verification.
+> See reports/stack-heatmap-20260928/README.md and
+> model-improvement/stack-heatmap/aws/README.md for measured results, blockers
+> and next steps. Historical entries below remain historical snapshots.
+>
 > Latest focused preparation (2026-09-24): five rectified faces/99 visible-layer
 > labels prepared locally and uploaded to Roboflow as TRAIN only; dataset395.
 > All five cloud label totals verified at20/20/20/20/19. No training/new model

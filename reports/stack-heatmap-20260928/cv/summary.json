@@ -1,0 +1,102 @@
+{
+  "scope": "tiny_grouped_development_not_physical_acceptance",
+  "folds": 2,
+  "stacks": 7,
+  "per_stack_exact": 0,
+  "group_exact": 0,
+  "mae": 12.142857142857142,
+  "mean_signed_error": -9.857142857142858,
+  "missed_layers": 103,
+  "duplicate_or_spurious_layers": 34,
+  "latency_ms_per_stack": 48.79901428557787,
+  "false_accepted_count": 0,
+  "rejection_rate": 1.0,
+  "accepted_scan_accuracy": null,
+  "manifest_sha256": "7d376b4e79a363f6d45d82f65b908bb53ae5dcffe566b17349b31303572a30de",
+  "rows": [
+    {
+      "id": "focused-1",
+      "scene_id": "session-2026-07-03",
+      "reference": 20,
+      "candidate_count": 2,
+      "signed_error": -18,
+      "missed_layers": 18,
+      "duplicate_or_spurious_layers": 0,
+      "latency_ms": 54.064499999943415,
+      "verified": false,
+      "occupancy": "unknown"
+    },
+    {
+      "id": "focused-2",
+      "scene_id": "session-2026-07-03",
+      "reference": 20,
+      "candidate_count": 2,
+      "signed_error": -18,
+      "missed_layers": 20,
+      "duplicate_or_spurious_layers": 2,
+      "latency_ms": 54.064499999943415,
+      "verified": false,
+      "occupancy": "unknown"
+    },
+    {
+      "id": "focused-3",
+      "scene_id": "session-2026-07-03",
+      "reference": 20,
+      "candidate_count": 4,
+      "signed_error": -16,
+      "missed_layers": 20,
+      "duplicate_or_spurious_layers": 4,
+      "latency_ms": 54.064499999943415,
+      "verified": false,
+      "occupancy": "unknown"
+    },
+    {
+      "id": "focused-4",
+      "scene_id": "session-2026-07-03",
+      "reference": 20,
+      "candidate_count": 6,
+      "signed_error": -14,
+      "missed_layers": 16,
+      "duplicate_or_spurious_layers": 2,
+      "latency_ms": 54.064499999943415,
+      "verified": false,
+      "occupancy": "unknown"
+    },
+    {
+      "id": "focused-5",
+      "scene_id": "session-2026-07-03",
+      "reference": 19,
+      "candidate_count": 11,
+      "signed_error": -8,
+      "missed_layers": 15,
+      "duplicate_or_spurious_layers": 7,
+      "latency_ms": 54.064499999943415,
+      "verified": false,
+      "occupancy": "unknown"
+    },
+    {
+      "id": "side-19",
+      "scene_id": "session-2026-07-03",
+      "reference": 19,
+      "candidate_count": 16,
+      "signed_error": -3,
+      "missed_layers": 9,
+      "duplicate_or_spurious_layers": 6,
+      "latency_ms": 54.064499999943415,
+      "verified": false,
+      "occupancy": "unknown"
+    },
+    {
+      "id": "scene2-centre-7",
+      "scene_id": "session-2026-09-15",
+      "reference": 7,
+      "candidate_count": 15,
+      "signed_error": 8,
+      "missed_layers": 5,
+      "duplicate_or_spurious_layers": 13,
+      "latency_ms": 17.206099999384605,
+      "verified": false,
+      "occupancy": "unknown"
+    }
+  ]
+}
