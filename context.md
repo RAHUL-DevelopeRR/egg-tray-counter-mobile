@@ -1,3 +1,16 @@
+> Reporting update (2026-10-01): Both monthly reports now use larger A4 print
+> typography. September includes a user-supplied app screenshot with 89/92/92
+> per-photo detections for a user-reported six-times-fifteen 90-tray scene.
+> The screenshot says COUNT NOT VERIFIED; no fused total or independent
+> physical recount is established from it. See reports/monthly-review-2026/.
+>
+> Reporting clarification (2026-10-01): August and September 2026 monthly
+> progress reviews are saved in `reports/monthly-review-2026/`. In those reports
+> "actual" means manually reviewed visible tray layers unless a physical
+> recount is expressly documented. A single 100-vs-99 assisted total is 98.99%
+> count agreement, not 99% field accuracy; its five stack counts are only 1/5
+> exact. Production V2, mobile APK and exact inventory verification are unchanged.
+>
 > Current milestone (2026-09-28): user requested V5 clean control plus a small
 
 Current follow-up (2026-09-28): reports/stack-heatmap-followup-20260928/README.md

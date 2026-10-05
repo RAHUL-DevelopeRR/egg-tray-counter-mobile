@@ -1,5 +1,71 @@
 # Progress
 
+## 2026-10-05 — hosted-path and Android emulator audit
+
+Checked the live Cloudflare Worker and the current local release APK without
+changing production deployment. The Worker `/ready` reports Roboflow serverless
+model `projec-mutta/2`; `/health` reports `hybrid_ready: false`. The Flutter
+default URL points to that Worker. No hosted Python 3D/vision endpoint is
+configured or integrated into this APK; `backend/app/vision_service.py` remains
+diagnostic-only and reports `inventory_verification_ready: false`.
+
+Installed the existing 0.3.3+9 release APK on BlueStacks Pie64 through ADB,
+replacing emulator version 0.3.1. Verified app launch, `SERVER REACHABLE`, and
+the three-photo upload screen. This is a transport/UI smoke test only: no new
+APK was built, no model inference or physically recounted scene was tested on
+the emulator, and camera geometry/lighting cannot be validated there.
+
+Next: freeze a physically recounted untouched scene set with per-stack filled
+and empty counts; benchmark V2 and the offline stack-localization/layer evidence
+pipeline on held-out scenes with exact-match, MAE, and rejection rates. Connect
+and host a vision service only after that pipeline beats the current baseline
+and preserves unresolved outcomes for hidden occupancy and uncertain matches.
+
+## 2026-10-01 — monthly review print-readability revision
+
+Rebuilt both August and September reviews with 12 pt body text, 16 pt main
+headings and at least 10.5 pt PDF table text for A4 print. September now
+includes the user-supplied mobile scan screenshot for a user-reported six-stack,
+15-per-stack (90-tray) scene: per-photo V2 detections left 89, right 92,
+straight 92; the app explicitly shows `COUNT NOT VERIFIED`. The reference is
+user-reported and original scan photos/physical recount were not supplied for
+independent verification. These per-view comparisons are not an accepted fused
+inventory total or a field-accuracy estimate.
+
+Verification: regenerated both editable DOCX files and PDFs from the saved
+builders; August PDF is three A4 pages and September PDF is five A4 pages.
+Rendered PDF pages were visually inspected; table text, paired photos, captions,
+full mobile screenshot, and end sections are readable without orphaned pages.
+Source contents and arithmetic were checked. Direct DOCX visual render remains
+unavailable on this machine because LibreOffice is absent; PDFs are the
+print-verified artifacts. Next remains independent physical per-stack recount
+and scene-held-out acceptance before any exact-inventory claim.
+
+## 2026-10-01 — August and September monthly progress reviews
+
+Created separate formal August and September 2026 reviews, each as editable DOCX
+and print-ready PDF under `reports/monthly-review-2026/`. They follow the supplied
+academic report structure and include retained original/debugging photos, manual
+visual references, production per-photo model results, count-agreement arithmetic,
+challenges, next-month plans and status tables. The August review records the
+frozen 31 August 10-image baseline (2/10 exact, MAE 22.9, 58.43% mean count
+agreement). The September review records the fresh 99-layer wide/19-layer side
+visual references, V2 counts 76/19, and manually assisted rectified count 100
+with only 1/5 exact stacks. It explicitly rejects a 99% field-accuracy claim.
+No physical egg-filled inventory ground truth, production retraining, or 3D
+reconstruction was inferred from these photographs.
+
+Verification: source figures and counts reconciled against saved evaluation
+reports and fresh backend response; both PDFs contain three A4 pages and were
+rendered and visually inspected page by page. The editable DOCX files were
+generated from the same source, but direct DOCX rendering could not be checked
+because LibreOffice is unavailable on this host. PDF was produced and checked
+separately. Current artifacts are the four August/September DOCX/PDF files;
+production remains V2 and the APK is unchanged. Next steps: obtain a physically
+recounted untouched scene with per-stack filled/empty labels; run a controlled
+scene-held-out V5 comparison, report exact/MAE/rejection metrics, then consider
+backend and APK promotion only after acceptance.
+
 ## 2026-09-28 — reviewed-data follow-up and checkpoint-selection diagnosis
 
 Continued from verified local/remote f6164c20ba876f0e9326eb2a4b75e25849a2298f,
