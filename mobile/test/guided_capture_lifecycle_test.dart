@@ -139,7 +139,7 @@ void main() {
       expect(camera.creates, 1);
       expect(find.byType(CameraPreview), findsOneWidget);
       final capture = tester.widget<FilledButton>(
-        find.widgetWithText(FilledButton, 'CAPTURE LEFT'),
+        find.widgetWithText(FilledButton, 'CAPTURE STRAIGHT'),
       );
       expect(capture.onPressed, isNull);
       tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.inactive);

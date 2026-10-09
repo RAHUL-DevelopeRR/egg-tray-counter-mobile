@@ -5,9 +5,7 @@ import '../../services/api_client.dart';
 import '../../services/history_database.dart';
 import '../../services/settings_store.dart';
 import '../scan_flow/scan_flow_screen.dart';
-import '../grid_height/grid_height_screen.dart';
 import '../settings/settings_screen.dart';
-import '../reconstruction/reconstruction_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({required this.settings, required this.history, super.key});
@@ -128,36 +126,10 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 28),
               _BackendCard(online: _backendOnline),
               const SizedBox(height: 12),
-              OutlinedButton.icon(
-                onPressed: () => Navigator.of(context).push<void>(
-                  MaterialPageRoute(
-                    builder: (_) =>
-                        ReconstructionScreen(settings: widget.settings),
-                  ),
-                ),
-                icon: const Icon(Icons.view_in_ar),
-                label: const Text('3D reconstruction (diagnostic)'),
-              ),
-              const SizedBox(height: 20),
-              FilledButton.icon(
-                onPressed: () => Navigator.of(context).push<void>(
-                  MaterialPageRoute(
-                    builder: (_) => GridHeightScreen(store: widget.settings),
-                  ),
-                ),
-                icon: const Icon(Icons.grid_view),
-                label: const Text('GRID + HEIGHT PILOT'),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                'Offline ruler measurements · physical recount required',
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 20),
               FilledButton.icon(
                 onPressed: _startingScan ? null : _startScan,
                 icon: const Icon(Icons.camera_alt_outlined),
-                label: const Text('THREE-PHOTO SCAN'),
+                label: const Text('SCAN A BLOCK — CAMERA'),
               ),
               const SizedBox(height: 12),
               OutlinedButton.icon(
@@ -165,11 +137,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ? null
                     : () => _startScan(uploadPhotos: true),
                 icon: const Icon(Icons.photo_library_outlined),
-                label: const Text('UPLOAD PHOTOS'),
+                label: const Text('SCAN A BLOCK — GALLERY'),
               ),
               const SizedBox(height: 12),
               const Text(
-                'Photograph the same group of stacks from left, right and straight. Painted floor IDs are optional.',
+                'One block at a time: photograph its front face (STRAIGHT), then its LEFT and RIGHT side faces, square-on, phone level at mid-height. Then record your count.',
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 32),

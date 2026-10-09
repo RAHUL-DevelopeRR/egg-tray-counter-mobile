@@ -37,6 +37,8 @@ void main() {
       EggCounterApp(settings: _BlankSettings(), history: _UnavailableHistory()),
     );
     await tester.pump();
+    await tester.tap(find.byTooltip('Settings'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('GRID + HEIGHT PILOT'));
     await tester.pumpAndSettle();
     expect(find.text('Grid + height pilot'), findsOneWidget);

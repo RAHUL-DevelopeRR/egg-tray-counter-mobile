@@ -48,7 +48,7 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
   bool _capturing = false;
   bool _torchChanging = false;
   String? _cameraError;
-  CaptureFrameGate _frameGate = const CaptureFrameGate();
+  CaptureFrameGate _frameGate = const CaptureFrameGate(stackContained: true, topAndBaseVisible: true, viewAngleConfirmed: true);
   PreflightReport _report = PreflightReport.waiting;
   Future<void> _cameraTask = Future<void>.value();
   int _cameraGeneration = 0;
@@ -199,35 +199,6 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
     }
   }
 
-  /// Stores an operator reference for tilt guidance, not camera calibration.
-  Future<void> _setLevelReference() async {
-    final raw = _live.rawPose;
-    if (raw == null) {
-      _message(
-        'The tilt sensor has not reported a reading yet. Hold the phone still for a moment.',
-      );
-      return;
-    }
-    final calibration = PoseCalibration(
-      rollOffsetDeg: raw.rollDeg,
-      pitchOffsetDeg: raw.pitchDownDeg,
-      referenceSet: true,
-    );
-    _live.setCalibration(calibration);
-    await widget.settings?.setPoseCalibration(calibration);
-    if (!mounted) return;
-    _message(
-      'Tilt reference stored. This does not measure your left/right viewpoint.',
-    );
-  }
-
-  Future<void> _clearLevelReference() async {
-    _live.setCalibration(PoseCalibration.none);
-    await widget.settings?.clearPoseCalibration();
-    if (!mounted) return;
-    _message('Level reference cleared. Checks use absolute gravity again.');
-  }
-
   bool get _liveReady =>
       _cameraActive &&
       _live.streamError == null &&
@@ -277,9 +248,9 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
     String? pendingPhoto;
     setState(() => _capturing = true);
     try {
-      final cellId = await _confirmCell();
-      if (cellId == null || !mounted) return;
-      // The operator can move while the optional-ID dialog is open.
+      const cellId = '';
+      if (!mounted) return;
+      // The operator can move between the tap and the still capture.
       if (!_liveReady ||
           generation != _cameraGeneration ||
           !identical(controller, _controller)) {
@@ -346,7 +317,7 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
       if (!mounted) return;
       setState(() {
         _view = _nextMissing!;
-        _frameGate = const CaptureFrameGate();
+        _frameGate = const CaptureFrameGate(stackContained: true, topAndBaseVisible: true, viewAngleConfirmed: true);
       });
       _live.setView(_view);
     } on CameraException catch (error) {
@@ -422,68 +393,6 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
         ],
       ),
     );
-  }
-
-  Future<String?> _confirmCell() async {
-    var input = '';
-    final form = GlobalKey<FormState>();
-    final id = await showDialog<String>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('${_view.name.toUpperCase()}: capture the same stacks'),
-        content: Form(
-          key: form,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text(
-                  'Keep the same group of stacks in all three photos. If a painted cell ID is present, enter it. Otherwise leave this blank for model analysis.',
-                ),
-                TextFormField(
-                  onChanged: (value) => input = value,
-                  autofocus: true,
-                  maxLength: 32,
-                  textCapitalization: TextCapitalization.characters,
-                  decoration: const InputDecoration(
-                    labelText: 'Painted cell ID (optional)',
-                  ),
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) return null;
-                    try {
-                      ScanSession.normalizeCellId(value);
-                      return null;
-                    } on FormatException catch (error) {
-                      return error.message;
-                    }
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('CANCEL'),
-          ),
-          FilledButton(
-            onPressed: () {
-              if (form.currentState!.validate()) {
-                Navigator.pop(
-                  context,
-                  input.trim().isEmpty
-                      ? ''
-                      : ScanSession.normalizeCellId(input),
-                );
-              }
-            },
-            child: const Text('CAPTURE'),
-          ),
-        ],
-      ),
-    );
-    return id;
   }
 
   void _message(String text) {
@@ -571,6 +480,22 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
                               ? PreflightSeverity.advisory
                               : PreflightSeverity.pass,
                         ),
+                        // The live verdict sits inside the viewfinder so the
+                        // camera keeps the screen; it is one strip, not a panel.
+                        Positioned(
+                          left: 8,
+                          right: 8,
+                          bottom: 8,
+                          child: _ConstraintBanner(
+                            report: _report,
+                            streamError:
+                                _live.streamError ??
+                                (!_live.frameFresh
+                                    ? 'Waiting for a fresh camera frame. Hold still.'
+                                    : null),
+                            locked: !_captureAllowed,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -579,38 +504,8 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
             ),
           ),
         ),
-        SizedBox(
-          height: 160,
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Column(
-              children: [
-                _ConstraintBanner(
-                  report: _report,
-                  streamError:
-                      _live.streamError ??
-                      (!_live.frameFresh
-                          ? 'Waiting for a fresh camera frame. Hold still.'
-                          : null),
-                  locked: !_captureAllowed,
-                ),
-                _LevelReferenceBar(
-                  calibration: _live.calibration,
-                  rawPose: _live.rawPose,
-                  onSet: _setLevelReference,
-                  onClear: _clearLevelReference,
-                ),
-              ],
-            ),
-          ),
-        ),
-        _FrameChecklist(
-          gate: _frameGate,
-          view: _view,
-          onChanged: (gate) => setState(() => _frameGate = gate),
-        ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
+          padding: const EdgeInsets.fromLTRB(20, 10, 20, 16),
           child: FilledButton.icon(
             onPressed: prepared && _captureAllowed && _frameGate.ready
                 ? _capture
@@ -641,26 +536,43 @@ class _ConstraintBanner extends StatelessWidget {
   final String? streamError;
   final bool locked;
 
+  List<PreflightCheck> get _visible => [
+    for (final check in report.checks)
+      if (check.id != PreflightCheckId.calibration) check,
+  ];
+
+  PreflightCheck? get _primary {
+    final visible = _visible;
+    for (final check in visible) {
+      if (check.blocking) return check;
+    }
+    for (final check in visible) {
+      if (check.advisory) return check;
+    }
+    return null;
+  }
+
   Color get _color {
-    if (report.blocked) return const Color(0xFFB3261E);
-    if (report.hasAdvisory) return const Color(0xFF8A5A00);
+    final primary = _primary;
+    if (primary?.blocking ?? false) return const Color(0xFFB3261E);
+    if (primary?.advisory ?? false) return const Color(0xFF8A5A00);
     if (report.metrics == null) return const Color(0xFF37474F);
     return const Color(0xFF1B5E20);
   }
 
   @override
   Widget build(BuildContext context) {
-    final primary = report.primary;
-    final measured = report.measuredAt;
+    final primary = _primary;
     return DecoratedBox(
       decoration: BoxDecoration(
         color: _color.withValues(alpha: 0.88),
         borderRadius: BorderRadius.circular(14),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
             if (streamError != null)
               Text(
@@ -670,20 +582,27 @@ class _ConstraintBanner extends StatelessWidget {
                   fontSize: 12,
                 ),
               )
-            else if (primary == null)
+            else if (report.metrics == null)
               const Text(
                 'ANALYSING FRAME',
                 style: TextStyle(fontWeight: FontWeight.w900),
+              )
+            else if (primary == null)
+              const Row(
+                children: [
+                  Icon(Icons.verified, size: 18),
+                  SizedBox(width: 8),
+                  Text(
+                    'READY TO CAPTURE',
+                    style: TextStyle(fontWeight: FontWeight.w900),
+                  ),
+                ],
               )
             else ...[
               Row(
                 children: [
                   Icon(
-                    primary.blocking
-                        ? Icons.block
-                        : primary.advisory
-                        ? Icons.warning_amber
-                        : Icons.verified,
+                    primary.blocking ? Icons.block : Icons.warning_amber,
                     size: 18,
                   ),
                   const SizedBox(width: 8),
@@ -695,51 +614,29 @@ class _ConstraintBanner extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 4),
-              Text(primary.detail, style: const TextStyle(fontSize: 12)),
-              if (primary.action != null) ...[
-                const SizedBox(height: 4),
-                Text(
-                  primary.action!,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-              ],
-              if (locked && report.blockingCount > 0)
-                const Padding(
-                  padding: EdgeInsets.only(top: 4),
+              if (primary.action != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 2),
                   child: Text(
-                    'CAPTURE LOCKED UNTIL THIS IS FIXED',
-                    style: TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 0.6,
+                    primary.action!,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ),
             ],
-            if (report.checks.isNotEmpty) ...[
-              const SizedBox(height: 8),
-              Wrap(
-                spacing: 6,
-                runSpacing: 4,
-                children: [
-                  for (final id in PreflightCheckId.values)
-                    _CheckChip(id: id, severity: _severityFor(report, id)),
-                ],
-              ),
-            ],
-            if (measured != null)
+            if (report.checks.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.only(top: 6),
-                child: Text(
-                  'Roll ${report.pose?.rollDeg.abs().toStringAsFixed(1) ?? '-'}° · '
-                  'Pitch ${report.pose?.pitchDownDeg.toStringAsFixed(1) ?? '-'}° · '
-                  'Sharpness ${report.metrics?.sharpness.toStringAsFixed(0) ?? '-'} · '
-                  'Light ${report.metrics?.meanLuma.toStringAsFixed(0) ?? '-'}/255',
-                  style: const TextStyle(fontSize: 11),
+                child: Wrap(
+                  spacing: 6,
+                  runSpacing: 4,
+                  children: [
+                    for (final id in PreflightCheckId.values)
+                      if (id != PreflightCheckId.calibration)
+                        _CheckChip(id: id, severity: _severityFor(report, id)),
+                  ],
                 ),
               ),
           ],
@@ -769,13 +666,12 @@ class _CheckChip extends StatelessWidget {
   final PreflightSeverity severity;
 
   static const Map<PreflightCheckId, String> _labels = {
-    PreflightCheckId.calibration: 'LEVEL REF',
     PreflightCheckId.lighting: 'LIGHT',
     PreflightCheckId.sharpness: 'FOCUS',
     PreflightCheckId.tilt: 'TILT',
     PreflightCheckId.framing: 'FRAMING',
     PreflightCheckId.coverage: 'COVERAGE',
-    PreflightCheckId.direction: 'ANGLE',
+    PreflightCheckId.direction: 'SQUARE-ON',
   };
 
   @override
@@ -815,107 +711,6 @@ class _CheckChip extends StatelessWidget {
   }
 }
 
-/// Takes and clears the operator's level reference without leaving the camera.
-class _LevelReferenceBar extends StatelessWidget {
-  const _LevelReferenceBar({
-    required this.calibration,
-    required this.rawPose,
-    required this.onSet,
-    required this.onClear,
-  });
-
-  final PoseCalibration calibration;
-  final DevicePose? rawPose;
-  final VoidCallback onSet;
-  final VoidCallback onClear;
-
-  @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: 0.62),
-        borderRadius: BorderRadius.circular(14),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(14, 8, 8, 8),
-        child: Row(
-          children: [
-            Expanded(
-              child: Text(
-                calibration.isSet
-                    ? 'Level reference set (${calibration.rollOffsetDeg.abs().toStringAsFixed(1)}° roll, '
-                          '${calibration.pitchOffsetDeg.toStringAsFixed(1)}° pitch stored)'
-                    : 'Align with the upright tray stacks, then set a tilt reference. '
-                          'Left/right position still needs your check.',
-                style: const TextStyle(fontSize: 11),
-              ),
-            ),
-            const SizedBox(width: 8),
-            if (calibration.isSet)
-              TextButton(onPressed: onClear, child: const Text('CLEAR'))
-            else
-              FilledButton.tonal(
-                onPressed: rawPose == null ? null : onSet,
-                child: const Text('SET LEVEL'),
-              ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _FrameChecklist extends StatelessWidget {
-  const _FrameChecklist({
-    required this.gate,
-    required this.view,
-    required this.onChanged,
-  });
-
-  final CaptureFrameGate gate;
-  final CaptureView view;
-  final ValueChanged<CaptureFrameGate> onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-      child: Column(
-        children: [
-          CheckboxListTile(
-            dense: true,
-            visualDensity: VisualDensity.compact,
-            value: gate.stackContained,
-            onChanged: (value) =>
-                onChanged(gate.copyWith(stackContained: value ?? false)),
-            title: const Text(
-              'The same complete group of stacks is inside the guide',
-            ),
-          ),
-          CheckboxListTile(
-            dense: true,
-            visualDensity: VisualDensity.compact,
-            value: gate.topAndBaseVisible,
-            onChanged: (value) =>
-                onChanged(gate.copyWith(topAndBaseVisible: value ?? false)),
-            title: const Text('The stack tops and bases are visible'),
-          ),
-          CheckboxListTile(
-            dense: true,
-            visualDensity: VisualDensity.compact,
-            value: gate.viewAngleConfirmed,
-            onChanged: (value) =>
-                onChanged(gate.copyWith(viewAngleConfirmed: value ?? false)),
-            title: Text(
-              'I moved to the ${view.name.toUpperCase()} viewpoint; the same stacks remain visible',
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _CaptureHeader extends StatelessWidget {
   const _CaptureHeader({
     required this.view,
@@ -930,7 +725,7 @@ class _CaptureHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 12, 20, 18),
+      padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

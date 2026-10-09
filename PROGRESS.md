@@ -46,6 +46,19 @@ after the face counting is validated. Publishing this checkpoint to
 codex/hybrid-cell-counting at the user's request; the rim-count files still in
 progress are left for the next commit.
 
+Capture UI rework (user feedback: constraints filled the screen, old
+overlapping-views wording, legacy entries on home): capture order is now
+STRAIGHT -> LEFT -> RIGHT with block-face instructions (square-on, fill the
+frame, phone level at mid-height); the guide is one rectangle for every face;
+the painted-cell dialog, the three confirmation checkboxes and the level-
+reference bar are gone (the stored level reference still feeds the advisory
+only); the live verdict is a thin strip inside the viewfinder (headline,
+action, check chips; "SQUARE-ON" replaces "ANGLE", no LEVEL REF chip), so the
+camera keeps the screen between the view chips and the capture button. Home
+shows SCAN A BLOCK - CAMERA / GALLERY and recent scans; the 3D point cloud
+and grid+height pilot moved under Settings > Diagnostics. Analyzer clean, 79
+Flutter tests pass (order and label tests updated). APK 0.4.3+14 building.
+
 Added scripts/replay_field_scans.py: lists a scan's R2 keys, downloads photos
 and manual count, re-submits to staging, scores replayed block vs manual
 (blocks exact / rescan rate / observed stacks exact and within 1). Rim-edge

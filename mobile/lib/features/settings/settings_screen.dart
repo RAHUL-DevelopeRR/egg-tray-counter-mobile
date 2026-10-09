@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../services/settings_store.dart';
+import '../grid_height/grid_height_screen.dart';
+import '../reconstruction/reconstruction_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({required this.store, super.key});
@@ -71,6 +73,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
                 const SizedBox(height: 20),
                 FilledButton(onPressed: _save, child: const Text('SAVE SETTINGS')),
+                const SizedBox(height: 28),
+                Text(
+                  'Diagnostics (not part of block counting)',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                const SizedBox(height: 8),
+                OutlinedButton.icon(
+                  onPressed: () => Navigator.of(context).push<void>(
+                    MaterialPageRoute(
+                      builder: (_) => GridHeightScreen(store: widget.store),
+                    ),
+                  ),
+                  icon: const Icon(Icons.grid_view),
+                  label: const Text('GRID + HEIGHT PILOT'),
+                ),
+                const SizedBox(height: 8),
+                OutlinedButton.icon(
+                  onPressed: () => Navigator.of(context).push<void>(
+                    MaterialPageRoute(
+                      builder: (_) => ReconstructionScreen(settings: widget.store),
+                    ),
+                  ),
+                  icon: const Icon(Icons.view_in_ar),
+                  label: const Text('3D POINT CLOUD (EXPERIMENTAL)'),
+                ),
                 const SizedBox(height: 28),
                 const Card(
                   child: Padding(

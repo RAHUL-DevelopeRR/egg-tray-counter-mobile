@@ -559,10 +559,9 @@ class FramePreflight {
             '${ratio.toStringAsFixed(2)}x the vertical tray edge span of the '
             'other half. Single-view yaw cannot be measured exactly indoors, so '
             'this is a hint, not a calibrated angle.',
-        action: view == CaptureView.straight
-            ? 'For STRAIGHT, face the row squarely so both sides look the same.'
-            : 'For ${view.name.toUpperCase()}, step around the stacks until the '
-                  'guide outline matches the on-screen shape.',
+        action:
+            'Face the ${view.name.toUpperCase()} face squarely so both halves '
+            'of the stack look the same.',
       ),
     ];
   }

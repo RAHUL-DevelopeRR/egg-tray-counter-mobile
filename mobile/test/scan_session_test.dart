@@ -13,14 +13,14 @@ void main() {
     session.clear(CaptureView.left);
     expect(session.constraintEvidence, isEmpty);
   });
-  test('capture state advances LEFT, RIGHT, STRAIGHT', () {
+  test('capture state advances STRAIGHT, LEFT, RIGHT', () {
     final session = ScanSession(scanId: 'scan-1');
+    expect(session.nextMissing, CaptureView.straight);
+    session.setPath(CaptureView.straight, 'straight.jpg', cellId: 'A1');
     expect(session.nextMissing, CaptureView.left);
     session.setPath(CaptureView.left, 'left.jpg', cellId: 'A1');
     expect(session.nextMissing, CaptureView.right);
     session.setPath(CaptureView.right, 'right.jpg', cellId: 'A1');
-    expect(session.nextMissing, CaptureView.straight);
-    session.setPath(CaptureView.straight, 'straight.jpg', cellId: 'A1');
     expect(session.isComplete, isTrue);
     expect(session.nextMissing, isNull);
   });
