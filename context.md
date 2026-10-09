@@ -1,3 +1,8 @@
+> 2026-10-09 13:30: APK 0.4.5+16 on the phone. Capture screen = full-screen
+> camera; portrait/landscape follows how the phone is held (no button), live
+> checks rotation-aware. Landscape not yet tried by hand. Field data still
+> awaited; score with scripts/export_manual_counts.py + replay_field_scans.py.
+
 > Midday 2026-10-09: counting now uses the walk counter (51/53 exact on
 > references, 99 block exact on staging); rescan reasons include "hold the
 > phone level at mid-height". Staging ec90aef6. Rim-edge verification being

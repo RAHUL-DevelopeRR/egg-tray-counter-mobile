@@ -142,22 +142,26 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final cameraUp = _phase == _FlowPhase.capture && !widget.uploadPhotos;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(switch (_phase) {
-          _FlowPhase.capture =>
-            widget.uploadPhotos ? 'Upload photos' : 'Guided capture',
-          _FlowPhase.processing => 'Verifying count',
-          _FlowPhase.result => 'Scan result',
-        }),
-        leading: IconButton(
-          onPressed: () {
-            _client?.cancel();
-            Navigator.pop(context);
-          },
-          icon: const Icon(Icons.close),
-        ),
-      ),
+      backgroundColor: cameraUp ? Colors.black : null,
+      appBar: cameraUp
+          ? null
+          : AppBar(
+              title: Text(switch (_phase) {
+                _FlowPhase.capture =>
+                  widget.uploadPhotos ? 'Upload photos' : 'Guided capture',
+                _FlowPhase.processing => 'Verifying count',
+                _FlowPhase.result => 'Scan result',
+              }),
+              leading: IconButton(
+                onPressed: () {
+                  _client?.cancel();
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.close),
+              ),
+            ),
       body: switch (_phase) {
         _FlowPhase.capture =>
           widget.uploadPhotos
@@ -175,6 +179,10 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
                   initialView: _captureView,
                   settings: widget.settings,
                   onComplete: _process,
+                  onClose: () {
+                    _client?.cancel();
+                    Navigator.pop(context);
+                  },
                 ),
         _FlowPhase.processing => _ProcessingPane(
           progress: _uploadProgress,
@@ -431,24 +439,24 @@ class _ResultPane extends StatelessWidget {
           FilledButton(onPressed: onNewScan, child: const Text('NEW SCAN'))
         else ...[
           if (result.block?.totalTrays == null)
-          FilledButton.tonal(
-            onPressed: () => showDialog<void>(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: const Text('Manual recount'),
-                content: const Text(
-                  'Count each physical stack once and record its tray count in your inventory log. Do not sum overlapping photographs. To retry, capture the same complete group of stacks from left, right and straight. Floor IDs are optional.',
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text('UNDERSTOOD'),
+            FilledButton.tonal(
+              onPressed: () => showDialog<void>(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text('Manual recount'),
+                  content: const Text(
+                    'Count each physical stack once and record its tray count in your inventory log. Do not sum overlapping photographs. To retry, capture the same complete group of stacks from left, right and straight. Floor IDs are optional.',
                   ),
-                ],
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text('UNDERSTOOD'),
+                    ),
+                  ],
+                ),
               ),
+              child: const Text('MANUAL RECOUNT'),
             ),
-            child: const Text('MANUAL RECOUNT'),
-          ),
           TextButton(onPressed: onNewScan, child: const Text('NEW SCAN')),
           FilledButton(
             onPressed: onRetake,

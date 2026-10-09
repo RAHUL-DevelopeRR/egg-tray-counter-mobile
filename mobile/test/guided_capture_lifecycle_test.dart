@@ -4,6 +4,7 @@ import 'package:camera/camera.dart' show CameraPreview;
 // Camera's own platform interface is used only to fake hardware in this test.
 // ignore: depend_on_referenced_packages
 import 'package:camera_platform_interface/camera_platform_interface.dart';
+import 'package:egg_tray_counter/features/capture/camera_guide_overlay.dart';
 import 'package:egg_tray_counter/features/capture/guided_capture_pane.dart';
 import 'package:egg_tray_counter/models/scan_session.dart';
 import 'package:flutter/material.dart';
@@ -105,9 +106,12 @@ void main() {
     }
   });
 
-  Future<void> show(WidgetTester tester) async {
+  Future<void> show(
+    WidgetTester tester, {
+    Size size = const Size(480, 1000),
+  }) async {
     tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
-    tester.view.physicalSize = const Size(480, 1000);
+    tester.view.physicalSize = size;
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
@@ -130,6 +134,44 @@ void main() {
       await tester.pump(const Duration(milliseconds: 10));
     }
   }
+
+  testWidgets('viewfinder covers the screen in portrait and in landscape', (
+    tester,
+  ) async {
+    // The camera frame is scaled to cover whatever shape the screen has; the
+    // controls sit over it, so nothing shrinks the picture.
+    await show(tester);
+    await drainCamera(tester);
+    final portraitGuide = tester.getRect(find.byType(CameraGuideOverlay));
+    expect(portraitGuide.height, greaterThanOrEqualTo(1000));
+    expect(portraitGuide.width, greaterThanOrEqualTo(480));
+    expect(
+      tester
+          .getCenter(find.widgetWithText(FilledButton, 'CAPTURE STRAIGHT'))
+          .dy,
+      greaterThan(900),
+    );
+    expect(tester.takeException(), isNull);
+    await tester.pumpWidget(const SizedBox());
+    await drainCamera(tester);
+
+    await show(tester, size: const Size(1000, 480));
+    await drainCamera(tester);
+    expect(find.byType(CameraPreview), findsOneWidget);
+    final landscapeGuide = tester.getRect(find.byType(CameraGuideOverlay));
+    expect(landscapeGuide.width, greaterThanOrEqualTo(1000));
+    expect(landscapeGuide.height, greaterThanOrEqualTo(480));
+    expect(
+      tester
+          .getCenter(find.widgetWithText(FilledButton, 'CAPTURE STRAIGHT'))
+          .dx,
+      greaterThan(750),
+    );
+    expect(find.text('TURN TORCH ON'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+    await tester.pumpWidget(const SizedBox());
+    await drainCamera(tester);
+  });
 
   testWidgets(
     'camera restarts after inactive cleared controller; no frame locks capture',

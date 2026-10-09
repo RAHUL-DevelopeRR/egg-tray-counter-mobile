@@ -37,6 +37,8 @@ class LiveFramePreflight extends ValueNotifier<PreflightReport> {
   CameraController? _controller;
   StreamSubscription<AccelerometerEvent>? _accelerometer;
   DevicePose? _rawPose;
+  double? _rawRollDeg;
+  int _displayRotation = 0;
   PoseCalibration _calibration = PoseCalibration.none;
   FrameMetrics? _metrics;
   CaptureView _view = CaptureView.left;
@@ -55,6 +57,24 @@ class LiveFramePreflight extends ValueNotifier<PreflightReport> {
   bool get streaming => _streaming;
 
   PoseCalibration get calibration => _calibration;
+
+  /// Roll straight from the accelerometer, before the display-rotation
+  /// correction: the pane uses it to decide portrait or landscape.
+  double? get rawRollDeg =>
+      _lastPose != null &&
+          DateTime.now().difference(_lastPose!) <= const Duration(seconds: 2)
+      ? _rawRollDeg
+      : null;
+
+  /// Screen rotation the app has chosen (0, 90 = landscape left, 270 =
+  /// landscape right). Frames are rotated into that orientation and the roll
+  /// is measured relative to it, so a phone held sideways is "level".
+  void setDisplayRotation(int degrees) {
+    if (![0, 90, 270].contains(degrees)) {
+      throw ArgumentError.value(degrees, 'degrees');
+    }
+    _displayRotation = degrees;
+  }
 
   DevicePose? get rawPose =>
       _lastPose != null &&
@@ -167,7 +187,23 @@ class LiveFramePreflight extends ValueNotifier<PreflightReport> {
   }
 
   void _onAccelerometer(AccelerometerEvent event) {
-    _rawPose = devicePoseFromAccelerometer(event.x, event.y, event.z);
+    final base = devicePoseFromAccelerometer(event.x, event.y, event.z);
+    if (base == null) return;
+    // Roll is meaningless when the phone lies nearly flat (gravity mostly on
+    // z); keep whatever orientation was chosen last.
+    final inPlane = event.x * event.x + event.y * event.y;
+    _rawRollDeg = inPlane > 9.0 ? base.rollDeg : null;
+    // Held sideways the raw roll sits near +90 (landscape left) or -90
+    // (landscape right); relative to the rotated screen that is level.
+    final rollOffset = switch (_displayRotation) {
+      90 => -90.0,
+      270 => 90.0,
+      _ => 0.0,
+    };
+    _rawPose = DevicePose(
+      rollDeg: base.rollDeg + rollOffset,
+      pitchDownDeg: base.pitchDownDeg,
+    );
     _lastPose = DateTime.now();
   }
 
@@ -191,7 +227,11 @@ class LiveFramePreflight extends ValueNotifier<PreflightReport> {
           height: image.height,
           rowStride: plane.bytesPerRow,
           pixelStride: plane.bytesPerPixel ?? 1,
-          rotationDegrees: _controller?.description.sensorOrientation ?? 0,
+          rotationDegrees:
+              ((_controller?.description.sensorOrientation ?? 0) -
+                  _displayRotation +
+                  360) %
+              360,
         ),
       );
       _metrics = metrics;

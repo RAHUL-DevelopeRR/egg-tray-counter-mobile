@@ -75,6 +75,23 @@ scripts/export_manual_counts.py; master CSVs in reports/field-test-20261009/
 (WH-99 and MECH-DONE so far; the first MECH-TEST record predates latest.json).
 Analyzer clean, 79 Flutter tests, 49 Worker tests.
 
+Orientation follows the hand (0.4.5+16, user: "the camera orientation
+doesn't change, only whether the image is captured straight or as landscape"
+and the 0.4.4 landscape screen was unusable): the rotate button is gone. The
+capture screen drops its app bar; the camera frame is scaled to cover the
+whole screen with close / torch / view chips / instruction over the top and
+the verdict strip + CAPTURE button over the bottom (landscape: button on the
+right, strip bottom-left). The screen turns to landscape when the phone is
+rolled past 60 degrees and back to portrait under 30 degrees, from the
+accelerometer (works with the system rotation lock on); LiveFramePreflight
+gets setDisplayRotation so roll is measured against the rotated screen and
+live frames are rotated by sensorOrientation minus display rotation. New
+widget test covers portrait and landscape viewports (80 Flutter tests, analyzer
+clean). Verified on the phone in portrait only (phone-e2e/12); landscape needs
+a hand on the phone - if it comes up upside down the roll sign in
+_followOrientation is the fix. APK egg-tray-counter-0.4.5-block-staging.apk
+(SHA-256 34a0349a3e4b11d4...) installed, versionName 0.4.5.
+
 Rim-edge counter result (same-set tuning on the 13 straight-on WhatsApp
 photos, not validation; reports/rim-count-20261009/): rim count exact 38/53
 reference stacks, within 1 47/53; where the span count is wrong it disagrees
