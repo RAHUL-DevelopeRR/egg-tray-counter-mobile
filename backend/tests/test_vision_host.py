@@ -48,9 +48,10 @@ def test_rim_count_route_counts_painted_rims_and_requires_auth():
         pixels[int(y):int(y) + 4, 40:160] = 230
         centres.append(y + 2)
         y += 26 - 8 * k / 19
+    pitch = float(np.median(np.diff(centres)))
+    pixels[int(centres[-1] + 0.5 * pitch):, :] = 120  # floor under the stack
     buffer = BytesIO()
     Image.fromarray(pixels).save(buffer, format='PNG')
-    pitch = float(np.median(np.diff(centres)))
     columns = [{'column': 1, 'x_min': 40, 'x_max': 160, 'y_first': centres[0], 'y_last': centres[-1],
                 'pitch_px': pitch, 'span_count': 20, 'model_boxes': 20}]
 

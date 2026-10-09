@@ -59,6 +59,33 @@ shows SCAN A BLOCK - CAMERA / GALLERY and recent scans; the 3D point cloud
 and grid+height pilot moved under Settings > Diagnostics. Analyzer clean, 79
 Flutter tests pass (order and label tests updated). APK 0.4.3+14 building.
 
+Camera-first capture (0.4.4+15, user feedback that the camera still had too
+little room and no portrait/landscape choice): the viewfinder now fills the
+screen between a one-row header (step chips, rotate button) plus a one-line
+instruction with the torch toggle, and the capture button; a rotate button
+switches the capture screen between portrait and landscape (controls move to
+a side column; remembered for the app session; portrait restored on exit).
+Main back camera preferred by lens type with a fallback, stills at 1080p
+(veryHigh) instead of maximum resolution, zoom errors non-fatal (a fake
+camera without zoom revealed that setZoomLevel could abort camera setup).
+Gallery photos are capped at 2000 px on the long side before upload. Worker
+ca684530: when the block model names a face in its first conflict, the rescan
+recommends that face. Added GET /v1/manual-counts and
+scripts/export_manual_counts.py; master CSVs in reports/field-test-20261009/
+(WH-99 and MECH-DONE so far; the first MECH-TEST record predates latest.json).
+Analyzer clean, 79 Flutter tests, 49 Worker tests.
+
+Rim-edge counter result (same-set tuning on the 13 straight-on WhatsApp
+photos, not validation; reports/rim-count-20261009/): rim count exact 38/53
+reference stacks, within 1 47/53; where the span count is wrong it disagrees
+on 11/13 (and gives the reference value on 7), but it also disagrees on 9/40
+stacks where the span is right. Decision: RIM_VERIFY stays off; the rim count
+is a rescan hint, not a gate, until held-out field originals show a lower
+false-alarm rate. No Lambda rebuild today; the leftover empty builder
+security group and instance profile were removed. APK 0.4.4+15 (SHA-256
+e94b65fb12d783a5...) installed and checked on the phone in both
+orientations (phone-e2e/10, 11).
+
 Added scripts/replay_field_scans.py: lists a scan's R2 keys, downloads photos
 and manual count, re-submits to staging, scores replayed block vs manual
 (blocks exact / rescan rate / observed stacks exact and within 1). Rim-edge

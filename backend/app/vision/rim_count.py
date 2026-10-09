@@ -44,15 +44,17 @@ class RimParams:
 
     widen_fraction: float = 0.10  # strip widened by this fraction of the column width in total
     core_fraction: float = 0.60  # central fraction of the strip width that is averaged
-    window_fraction: float = 0.75  # search margin beyond the first/last box centre, in pitches
-    smooth_fraction: float = 0.08  # gaussian sigma as a fraction of the pitch (at least 1 px)
+    window_fraction: float = 1.0  # search margin beyond the first/last box centre, in pitches
+    smooth_fraction: float = 0.16  # gaussian sigma as a fraction of the pitch (at least 1 px)
     min_distance_fraction: float = 0.60  # minimum accepted peak distance, in local pitches
-    prominence_fraction: float = 0.30  # minimum prominence relative to the strip's strong peaks
-    channel: str = "green"  # "green" or "gray"
+    prominence_fraction: float = 0.60  # minimum prominence relative to the nearby strong peaks
+    channel: str = "gray"  # "gray" or "green"
     polarity: str = "dark_below"  # "dark_below", "bright_below" or "absolute"
     aggregate: str = "mean"  # how the edge map is reduced across the core width: mean, median, support
     infer_missing: bool = True  # count a gap of ~2 local pitches as one missed rim
     pitch_clamp: tuple[float, float] = (0.5, 1.6)  # local pitch bounds relative to pitch_px
+    local_prominence: bool = True  # threshold against the strong peaks within +/-3 pitches, not the strip
+    end_pair_ratio: float = 0.75  # drop an end peak when its gap pair is this much shorter than the next pair
 
 
 DEFAULT_PARAMS = RimParams()
@@ -162,6 +164,55 @@ def _accept_peaks(
     return accepted, multiples
 
 
+def _reference_prominence(
+    peaks: np.ndarray, prominences: np.ndarray, pitch: float, strong: float, params: RimParams
+) -> np.ndarray:
+    """Per-candidate reference: the strong peaks within +/-3 pitches (perspective-compressed layers
+    at one end of a stack are much weaker than the other end), floored at a quarter of the strip's
+    strong peaks so a stretch of pure noise cannot lower the bar to itself."""
+    if not params.local_prominence:
+        return np.full(peaks.shape, strong)
+    reference = np.empty(peaks.shape, dtype=float)
+    radius = 3.0 * pitch
+    for k, y in enumerate(peaks):
+        near = prominences[np.abs(peaks - y) <= radius]
+        local = float(np.median(np.sort(near)[::-1][:6])) if near.size else strong
+        reference[k] = max(local, 0.25 * strong)
+    return reference
+
+
+def _prune_end_peaks(accepted: list[tuple], multiples: list[int], params: RimParams) -> tuple[list, list]:
+    """Drop one end peak when the two end-most gaps together are much shorter than the next pair.
+
+    Consecutive gaps alternate when stacked trays alternate orientation, but the sum of two
+    consecutive gaps is always about two pitches; an extra half-pitch edge at the stack end (floor,
+    pallet, the row of eggs behind) makes the end pair sum about 1.5 pitches instead.
+    """
+    for _ in range(2):
+        for end in ("top", "bottom"):
+            if len(accepted) < 5:
+                return accepted, multiples
+            ys = [y for y, _ in accepted]
+            gaps = np.diff(ys).astype(float) / np.asarray(multiples, dtype=float)
+            if end == "top":
+                pair, next_pair = gaps[0] + gaps[1], gaps[2] + gaps[3]
+                candidates = (0, 1)
+            else:
+                pair, next_pair = gaps[-1] + gaps[-2], gaps[-3] + gaps[-4]
+                candidates = (len(accepted) - 1, len(accepted) - 2)
+            if next_pair <= 0 or pair >= params.end_pair_ratio * next_pair:
+                continue
+            drop = min(candidates, key=lambda k: accepted[k][1])
+            accepted = accepted[:drop] + accepted[drop + 1 :]
+            if drop == 0:
+                multiples = multiples[1:]
+            elif drop == len(accepted):
+                multiples = multiples[:-1]
+            else:
+                multiples = multiples[: drop - 1] + [1] + multiples[drop + 1 :]
+    return accepted, multiples
+
+
 def _neighbour_pitch(unit_gaps: np.ndarray, index: int) -> float:
     """Median of the neighbouring single-pitch gaps (up to three on each side), excluding this one."""
     neighbours = [g for k, g in enumerate(unit_gaps) if k != index and abs(k - index) <= 3]
@@ -192,29 +243,40 @@ def _count_column(image: np.ndarray, column: dict, index: int, params: RimParams
     peaks, props = find_peaks(window, distance=max(1, int(round(0.3 * pitch))), prominence=0.0)
     if peaks.size == 0:
         return _empty(column, index, "no edge peaks in the search window")
+    # Known bias: prominence is the height over the shallower adjacent trough, so the last rim,
+    # followed by flat floor, scores lower than interior rims. Height above the baseline and height
+    # over the deeper trough were both tried on the field set and are much worse (baseline drift,
+    # distant bases inflating weak peaks); prominence stays.
     prominences = np.asarray(props["prominences"], dtype=float)
     expected = max(3, int(round((yb - ya) / pitch)))
     strong = float(np.median(np.sort(prominences)[::-1][:expected]))
-    threshold = params.prominence_fraction * strong
-    keep = prominences >= threshold
+    reference = _reference_prominence(peaks, prominences, pitch, strong, params)
+    keep = prominences >= params.prominence_fraction * reference
     if not keep.any():
         return _empty(column, index, "all edge peaks fall below the prominence threshold")
     accepted, multiples = _accept_peaks(peaks[keep], prominences[keep], pitch, params)
+    accepted, multiples = _prune_end_peaks(accepted, multiples, params)
     ys = np.array([ya + y for y, _ in accepted], dtype=float)
     proms = np.array([p for _, p in accepted], dtype=float)
     gaps = np.diff(ys)
     inferred = 0
-    residuals = []
+    units = gaps / np.asarray(multiples, dtype=float)
     for k, (gap, m) in enumerate(zip(gaps, multiples, strict=True)):
-        local = _neighbour_pitch(gaps / np.asarray(multiples, dtype=float), k)
+        local = _neighbour_pitch(units, k)
         ratio = gap / local if local > 0 else 1.0
         if params.infer_missing and m >= 2 and abs(ratio - m) <= 0.3 * m:
             inferred += m - 1
-            residuals.append(abs(ratio - m) / m)
-        else:
-            residuals.append(abs(ratio - 1.0))
     rim_count = int(len(ys) + inferred)
-    regularity = float(np.clip(1.0 - np.mean(residuals) / 0.35, 0.0, 1.0)) if residuals else 0.0
+    # Regularity on sums of neighbouring single-pitch gaps: stacked trays alternate orientation, so
+    # consecutive gaps alternate long/short while each pair still spans two pitches.
+    residuals = []
+    for k in range(len(units) - 1):
+        local = _neighbour_pitch(units, k)
+        if local > 0:
+            residuals.append(abs((units[k] + units[k + 1]) / (2.0 * local) - 1.0))
+    if not residuals and len(units) == 1:
+        residuals.append(0.0)
+    regularity = float(np.clip(1.0 - np.mean(residuals) / 0.25, 0.0, 1.0)) if residuals else 0.0
     prominence_term = float(np.clip(np.median(proms) / max(strong, 1e-6), 0.0, 1.0)) if strong > 0 else 0.0
     confidence = float(np.clip(0.6 * regularity + 0.4 * prominence_term - 0.15 * inferred, 0.0, 1.0))
     if len(ys) < 2:

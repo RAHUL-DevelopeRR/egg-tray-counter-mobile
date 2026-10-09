@@ -15,14 +15,16 @@ def _painted_stack(gaps, *, thickness=4, width=160, doubled_at=None, noise=0.0, 
         y += gap
     height = int(centres[-1] + 60)
     image = np.full((height, width, 3), 30, np.uint8)
+    pitch = float(np.median(np.diff(centres))) if len(centres) > 1 else 30.0
+    image[int(centres[-1] + 0.5 * pitch) :, :] = 120  # floor under the stack, as in a real photo
     for c in centres:
         top = int(round(c - thickness / 2))
         image[top : top + thickness, 20 : width - 20] = 230
     if doubled_at is not None:
         top = int(round(centres[doubled_at] - thickness / 2))
-        image[top : top + thickness, 20 : width - 20] = 30
-        image[top : top + 1, 20 : width - 20] = 230  # two 1 px lines 3 px apart
-        image[top + 3 : top + 4, 20 : width - 20] = 230
+        image[top : top + thickness + 1, 20 : width - 20] = 30
+        image[top : top + 2, 20 : width - 20] = 230  # two 2 px lines whose tops are 3 px apart
+        image[top + 3 : top + 5, 20 : width - 20] = 230
     if noise:
         rng = np.random.default_rng(seed)
         image = np.clip(image.astype(float) + rng.normal(0, noise, image.shape), 0, 255).astype(np.uint8)
