@@ -644,6 +644,24 @@ async function rimVerify(files: Record<string, File>, columns: Record<string, Sp
   return status;
 }
 
+// Every scan's latest manual count (operator ground truth), for scoring and the master CSV.
+async function listManualCounts(env: Bindings) {
+  if (!env.SCAN_ARCHIVE) throw new HttpError(503, "archive_unavailable", "Scan archive is not configured");
+  const records: unknown[] = [];
+  let cursor: string | undefined;
+  do {
+    const page = await env.SCAN_ARCHIVE.list({ prefix: "scans/", cursor, limit: 1000 });
+    for (const object of page.objects) {
+      if (!object.key.endsWith("/manual-count/latest.json")) continue;
+      const body = await env.SCAN_ARCHIVE.get(object.key);
+      if (body) records.push(await body.json());
+      if (records.length >= 500) break;
+    }
+    cursor = page.truncated ? page.cursor : undefined;
+  } while (cursor && records.length < 500);
+  return json({ count: records.length, records });
+}
+
 function modelDiagnostics(scanId: string, results: Record<string, ViewInference>, cellIds: Record<string, string>, env: Bindings, latency: number,
   precomputed?: Record<string, SpanColumn[]>, rimStatus?: Record<string, string>) {
   const columns = precomputed ?? Object.fromEntries(VIEWS.map(view => [view, spanColumns(results[view].detections ?? [])]));
@@ -772,6 +790,7 @@ export default {
       if (request.method === "POST" && url.pathname === "/v1/scans/count") return await countScan(request, env);
       const manual = url.pathname.match(/^\/v1\/scans\/([^/]+)\/manual-count$/);
       if (request.method === "POST" && manual) return await manualCount(request, env, manual[1].toLowerCase());
+      if (request.method === "GET" && url.pathname === "/v1/manual-counts") return await listManualCounts(env);
       const archive = url.pathname.match(/^\/v1\/scans\/([^/]+)\/archive$/);
       if (request.method === "GET" && archive) return await listArchive(env, archive[1].toLowerCase());
       return json({ detail: { code: "not_found", message: "Route not found" } }, 404);

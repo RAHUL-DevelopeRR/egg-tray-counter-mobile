@@ -28,7 +28,8 @@ VIEWS = ("left", "right", "straight")
 
 
 def get_json(url: str) -> dict:
-    with urllib.request.urlopen(url, timeout=60) as response:
+    request = urllib.request.Request(url, headers={"User-Agent": "egg-tray-tools/1.0"})
+    with urllib.request.urlopen(request, timeout=60) as response:
         return json.load(response)
 
 
@@ -74,7 +75,7 @@ def replay(scan_id: str, out: Path) -> dict | None:
     if not result_path.exists():
         body, boundary = multipart({"scan_id": str(uuid.uuid4()), "scan_contract": "model_spatial_v1"}, photos)
         request = urllib.request.Request(f"{STAGING}/v1/scans/count", data=body, method="POST",
-                                         headers={"Content-Type": f"multipart/form-data; boundary={boundary}"})
+                                         headers={"Content-Type": f"multipart/form-data; boundary={boundary}", "User-Agent": "egg-tray-tools/1.0"})
         with urllib.request.urlopen(request, timeout=300) as response:
             result_path.write_bytes(response.read())
     block = json.load(open(result_path))["block"]

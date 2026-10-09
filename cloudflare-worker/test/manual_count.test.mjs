@@ -45,3 +45,15 @@ test('archive listing returns key names for one scan only', async t => {
   assert.deepEqual(body.keys.map(k => k.key), [`scans/${SCAN}/straight/abc`, `scans/${SCAN}/manual-count/latest.json`]);
   assert.equal((await worker.fetch(new Request('https://local/v1/scans/not-a-uuid/archive'), env(archive))).status, 422);
 });
+
+test('manual-count listing returns every scan latest record', async t => {
+  t.mock.method(console, 'log', () => {});
+  const objects = [{key: `scans/${SCAN}/manual-count/latest.json`}, {key: `scans/${SCAN}/manual-count/2026.json`}, {key: `scans/${SCAN}/straight/abc`}];
+  const archive = {put: async () => {}, list: async () => ({objects, truncated: false}),
+    get: async (key) => ({json: async () => ({scan_id: SCAN, block_id: 'B01', key})})};
+  const response = await worker.fetch(new Request('https://local/v1/manual-counts'), env(archive));
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.equal(body.count, 1);
+  assert.equal(body.records[0].block_id, 'B01');
+});
