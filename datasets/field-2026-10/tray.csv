@@ -1,0 +1,5 @@
+measurement,value_cm,notes
+tray_width,,front edge of one tray
+tray_depth,,side edge of one tray
+layer_height_filled,,height of 10 filled stacked trays divided by 10
+layer_height_empty,,height of 10 empty nested trays divided by 10

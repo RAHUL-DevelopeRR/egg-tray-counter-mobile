@@ -1,0 +1,4 @@
+block_id,x,y,filled_trays,empty_trays,missing,notes
+B01,0,0,,,no,
+B01,1,0,,,no,
+B01,0,1,,,no,interior example: y=1 is the row behind the front row

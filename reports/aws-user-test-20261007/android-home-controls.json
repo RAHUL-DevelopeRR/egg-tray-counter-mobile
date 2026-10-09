@@ -1,0 +1,52 @@
+[
+  {
+    "label": "EGG TRAY\nCounter",
+    "bounds": "[30,63][690,147]",
+    "clickable": "false"
+  },
+  {
+    "label": "Settings",
+    "bounds": "[618,69][690,141]",
+    "clickable": "true"
+  },
+  {
+    "label": "SERVER REACHABLE",
+    "bounds": "[30,189][690,273]",
+    "clickable": "false"
+  },
+  {
+    "label": "GRID + HEIGHT PILOT",
+    "bounds": "[30,303][690,387]",
+    "clickable": "true"
+  },
+  {
+    "label": "Offline ruler measurements · physical recount required",
+    "bounds": "[30,399][690,429]",
+    "clickable": "false"
+  },
+  {
+    "label": "THREE-PHOTO SCAN",
+    "bounds": "[30,459][690,543]",
+    "clickable": "true"
+  },
+  {
+    "label": "UPLOAD PHOTOS",
+    "bounds": "[30,561][690,633]",
+    "clickable": "true"
+  },
+  {
+    "label": "Photograph the same group of stacks from left, right and straight. Painted floor IDs are optional.",
+    "bounds": "[30,651][690,711]",
+    "clickable": "false"
+  },
+  {
+    "label": "Recent scans",
+    "bounds": "[30,759][690,801]",
+    "clickable": "false"
+  },
+  {
+    "label": "No scans yet. Completed scan metadata will appear here.",
+    "bounds": "[30,819][690,915]",
+    "clickable": "false"
+  }
+]

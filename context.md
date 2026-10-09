@@ -1,3 +1,120 @@
+> Midday 2026-10-09: counting now uses the walk counter (51/53 exact on
+> references, 99 block exact on staging); rescan reasons include "hold the
+> phone level at mid-height". Staging ec90aef6. Rim-edge verification being
+> built. Tonight: scripts/replay_field_scans.py on the field scans.
+
+> 2026-10-09: manual count is inside the app (RECORD MANUAL COUNT on the
+> result screen -> per-stack form -> SAVE AND SEND -> R2 scans/<id>/manual-count/
+> latest.json). Phone picker fixed by using the Android Photo Picker. APK
+> 0.4.0+11 (SHA 0c48ffea...) installed on the Redmi with the staging URL.
+> End-to-end verified on the phone (APK now 0.4.1+12 with DONE - NEXT BLOCK);
+> scoring: scripts/score_field_blocks.py. No accuracy claim yet. Field test today.
+
+> Staging Worker now serves block_model_v1 (version a012c14e..., probed OK 2026-10-08). Production unchanged. Field test tomorrow uses APK 0.4.0 + staging URL.
+
+> Day 1 of the 3-day block scope (2026-10-08, Claude Code): block model wired
+> end to end. Worker model_spatial_v1 now returns block_model_v1 (STRAIGHT = X
+> face, LEFT/RIGHT = Y faces, interior COMPUTED, observed/computed kept apart,
+> total only when faces agree) plus a capture gate (pitch gradient <= 1.2,
+> coverage >= 0.45 or 0.25 for a lone stack, height >= 0.4; tuned on the 39
+> tagged photos: 17/18 frontal accepted, 18/21 non-frontal rejected). TS port
+> proven bit-identical to Python on all 180 archived columns. APK 0.4.0+11
+> built (block panel, isometric block view). Suites: backend 21, Worker 39,
+> Flutter 74, all green. Not deployed, not committed, not installed (BlueStacks
+> off). Next: deploy to the STAGING Worker on user approval, install APK, Day 2
+> field test per docs/FIELD_TEST_BLOCK_20261009.md.
+
+> Block model (2026-10-08, Claude Code): user's target is X-face count x
+> Y-face count x height -> 3D block -> total. Implemented
+> backend/app/vision/block_model.py: grid from two face results (layer_span),
+> shared corner counted once, recessed face stacks -> missing front cell with
+> the stack behind promoted, interior cells ASSUMED (typical height) unless a
+> top-view occupancy grid is supplied; totals keep observed and assumed
+> separate; verified only when every cell is observed and faces agree. 8 tests
+> pass (14 with layer_span). Photogrammetry stays diagnostic. Next: port span +
+> block to the Worker response, APK block render and capture rule, 2-day field
+> test with on-site per-stack counts. 3-day scope agreed in principle.
+
+> Per-stack verification (2026-10-08, Claude Code): 13 straight-on labelled
+> photos cut into stack columns and inspected. New span counter
+> (backend/app/vision/layer_span.py, 6 tests pass) = first-to-last box span /
+> median spacing + 1. On 53 resolved stacks: raw V2 boxes 58% exact, span 75%
+> exact, 100% within ±1; nine single-block scenes within 2 of the user total.
+> Per-stack 20s are inferred from scene totals, not physical recounts.
+> Unresolved: img04/img09 (multi-depth), img50 (close-up perspective).
+> Next: stack segmentation by depth, rectify before counting, APK frontal
+> rule, user confirms labels. See reports/field-labelled-20261007/README.md.
+
+> Field labels (2026-10-07, Claude Code): user supplied 52 WhatsApp photos with
+> handwritten verified stack-face totals (Downloads/FileOfEggLabels, copied to
+> datasets/field-2026-10/labelled-20261007/). Labels are scene/region totals,
+> not per-stack; transcription in labels.csv awaits user confirmation.
+> Production V2 baseline: block faces 1/39 exact, MAE 59.1; frontal fill-frame
+> faces 12/18 within 5% (median 4.2%), angled 0/16 and distant 0/5 within 5%.
+> Next: confirm labels, obtain un-annotated originals, enforce frontal capture,
+> test tiled/per-face inference. See reports/field-labelled-20261007/README.md.
+
+> Claude Code handover (2026-10-07): Read docs/CLAUDE_CODE_HANDOFF.md first.
+> The staging integration is complete enough for diagnostic testing, but the
+> requested recognizable tray 3D model is not implemented. The current dots are
+> sparse matched image features. No exact count may be derived from point count,
+> reprojection error, or the 3D box. Preserve physical_trays=null and
+> verified=false. The next implementation must add dense depth/meshing only
+> after checking calibrated overlap, then add tray/stack identity and count
+> validation against physically counted held-out scenes. Production Worker and
+> default APK URL are unchanged. Working tree is dirty by design; do not reset,
+> commit, or push without explicit user instruction.
+
+> Latest integration checkpoint (2026-10-07): APK 0.3.4+10 now reaches the
+> staging Worker /v1/reconstruct and existing AWS Lambda. Wide-pair sparse
+> geometry displayed in BlueStacks; all four API pairs matched direct Lambda.
+> Production Worker/default APK URL remain unchanged. AWS image is now
+> pilot-20261007-integration, digest 8511bd3af2afb02a8d7c8107bc83f2032c14299eefbd504cf6105e0d30218dba.
+> Backend/Worker/Flutter checks passed (82/20/66 tests; final analyzer clean).
+> Remaining emulator pair/rotation checks and full UI audit are pending.
+> User expects recognizable tray geometry: current output is ONLY sparse
+> matched feature points. Dense depth/meshing and tray-instance association are
+> absent; a successful geometry status or low pixel error does not establish
+> exact counting. Preserve physical_trays=null and verified=false. See
+> reports/reconstruct-integration-20261007/README.md. No commit/push authorized
+> by the current integration prompt. Earlier checkpoints below are historical.
+>
+> Current deployment (2026-10-07): AWS CLI login now works. Lambda
+> egg-tray-vision-pilot in ap-south-1 has the protected two-view reconstruction
+> route /candidate/reconstruct; image pilot-20261007, digest
+> sha256:4ef6034d8adb553478d86f73a131d6c8dff3ba943cf1d49a063b11315cda70fb.
+> Photo replay returned 200 and repeatable AWS geometry: 175 matches, 125
+> fundamental inliers, 76/94/100 sparse points under assumed focal lengths.
+> Windows fits differ (121 inliers, 67/86/100 points). Neither result is a tray
+> count: unknown calibration, arbitrary scale and unresolved stack identity/
+> occupancy keep physical_trays=null and verified=false. Existing Worker/APK
+> are not integrated with AWS. Temporary EC2 builder and its access resources
+> were removed. See reports/aws-reconstruction-deploy-20261007/. The older
+> checkpoints below describe historical states, including the earlier auth block.
+>
+> Current verification (2026-10-07): AWS public health is still HTTP 200 and
+> unauthenticated candidate requests receive 401. AWS Core now returns Unknown
+> tool after reconnection, blocking account changes/protected replay. No new
+> deployment or mobile AWS integration occurred. A NEW local overlapping-wide
+> pair yielded 175 strict SIFT matches/121 fundamental inliers and 67/86/100
+> sparse points under assumed focal lengths. These are uncalibrated geometry
+> hypotheses, not tray counts. Reviewed visible references remain 99 and 19;
+> physical inventory remains unresolved. APK 0.3.3+9 hit a BlueStacks white
+> rendering screen despite accessible home controls. OpenGL-only restart is
+> complete; the post-change upload/result test is pending following desktop
+> interaction interruptions. No new mobile count was obtained. See
+> reports/aws-user-test-20261007/ for the current evidence.
+>
+> Current AWS milestone (2026-10-06): The Python diagnostic is now hosted on
+> Lambda egg-tray-vision-pilot in ap-south-1. Its HTTPS health route returns 200;
+> candidate requests require a server-side token in SSM SecureString. The saved
+> three-photo replay returned 16 proposals, zero accepted cross-view matches,
+> null physical/eligible inventory and verified=false, matching the local result.
+> Hosting is verified; successful 3D reconstruction/exact inventory is not.
+> Production APK/Worker still use Roboflow V2. The temporary image builder is
+> terminated and its access resources removed. See reports/aws-vision-check-20261006/.
+> The Oct 5 deployment notes below are historical and superseded by this update.
+>
 > Reporting update (2026-10-01): Both monthly reports now use larger A4 print
 > typography. September includes a user-supplied app screenshot with 89/92/92
 > per-photo detections for a user-reported six-times-fifteen 90-tray scene.
@@ -607,3 +724,14 @@ and empty counts per stack. Calibrate quality thresholds using those captures.
 Only then evaluate count error and false acceptance. Stack visibility, true
 viewpoint calibration and hidden occupancy remain unimplemented/unverified;
 no exact-count or 100-percent accuracy claim is supported.
+> Deployment update (2026-10-05): User asked to host the Python vision backend
+> on AWS and verify real-photo 3D reconstruction. AWS is the requested host.
+> AWS Core briefly reconnected: account 608942062000 in ap-south-1 now has a
+> private seven-day S3 pilot bucket and ECR repository. Reauthentication is
+> required again before upload/build; no Lambda image, function, or endpoint
+> exists yet. This machine has no local AWS CLI/profile or Docker. The local
+> diagnostic returns an unresolved count for the saved photos; see
+> reports/aws-vision-check-20261005/. Hosting does not certify tray identity,
+> egg occupancy, or exact warehouse inventory. Keep production V2 separate
+> until a physically recounted, scene-held-out acceptance test passes.
+>

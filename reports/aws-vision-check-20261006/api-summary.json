@@ -1,0 +1,41 @@
+{
+  "url": "https://e3mkfxljv7ja42ygklbacg3fge0cibxg.lambda-url.ap-south-1.on.aws/",
+  "health_status": 200,
+  "health": {
+    "status": "ok",
+    "mode": "diagnostic_only",
+    "inventory_verification_ready": false
+  },
+  "health_ms": 3330,
+  "unauthenticated_candidate_status": 401,
+  "candidate_status": 200,
+  "candidate_ms": 14391,
+  "source_view_assignment": {
+    "left": 1,
+    "straight": 2,
+    "right": 3
+  },
+  "source_views_are_calibrated": false,
+  "stable_scene_physically_confirmed": false,
+  "source_sha256": {
+    "left": "bd2ba34e77d6cda94ed982d678590d9a5a0bde5a9b684dbaec0591ffa6ca0970",
+    "straight": "c0787e5dfab960ca142539c052860a0f8b8e8814b6eb95cc9b6daa03f2c1e1c8",
+    "right": "a63e3532c9850d20b4c2b18b3ed3404ff55f83536cfa99175c688f136999497c"
+  },
+  "model_evidence": "archived Roboflow V2 detections; no fresh inference",
+  "status": "recapture_required",
+  "verified": false,
+  "physical_trays": null,
+  "eligible_egg_trays": null,
+  "stack_candidates": 16,
+  "correspondences": 0,
+  "sop_unverified": [
+    "vertical_stacks",
+    "orthogonal_layout",
+    "all_positions_observed",
+    "top_base_visible",
+    "stable_arrangement",
+    "boundaries_identifiable",
+    "front_side_separation"
+  ]
+}

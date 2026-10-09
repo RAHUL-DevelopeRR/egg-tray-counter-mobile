@@ -22,6 +22,8 @@ class GuidedCapturePane extends StatefulWidget {
     required this.onComplete,
     this.initialView,
     this.settings,
+    this.views = CaptureView.values,
+    this.mainCameraOnly = false,
     super.key,
   });
 
@@ -30,6 +32,8 @@ class GuidedCapturePane extends StatefulWidget {
   final CaptureView? initialView;
   final ValueChanged<ScanSession> onComplete;
   final SettingsStore? settings;
+  final List<CaptureView> views;
+  final bool mainCameraOnly;
 
   @override
   State<GuidedCapturePane> createState() => _GuidedCapturePaneState();
@@ -54,14 +58,20 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _view =
-        widget.initialView ?? widget.session.nextMissing ?? CaptureView.left;
+    _view = widget.initialView ?? _nextMissing ?? widget.views.first;
     _live
       ..addListener(_onLiveReport)
       ..setView(_view)
       ..startSensors();
     _loadLevelReference();
     _initializeCamera();
+  }
+
+  CaptureView? get _nextMissing {
+    for (final view in widget.views) {
+      if (widget.session.pathFor(view) == null) return view;
+    }
+    return null;
   }
 
   void _onLiveReport() {
@@ -79,6 +89,15 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
 
   CameraDescription? get _preferredCamera {
     if (widget.cameras.isEmpty) return null;
+    if (widget.mainCameraOnly) {
+      for (final camera in widget.cameras) {
+        if (camera.lensDirection == CameraLensDirection.back &&
+            camera.lensType == CameraLensType.wide) {
+          return camera;
+        }
+      }
+      return null;
+    }
     return widget.cameras.cast<CameraDescription?>().firstWhere(
       (camera) => camera?.lensDirection == CameraLensDirection.back,
       orElse: () => widget.cameras.first,
@@ -100,7 +119,11 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
     if (!mounted || !_cameraActive || generation != _cameraGeneration) return;
     final camera = _preferredCamera;
     if (camera == null) {
-      setState(() => _cameraError = 'No camera is available on this device.');
+      setState(
+        () => _cameraError = widget.mainCameraOnly
+            ? 'The main camera cannot be identified on this device. Upload original 1x photos instead.'
+            : 'No camera is available on this device.',
+      );
       return;
     }
     final next = CameraController(
@@ -113,6 +136,7 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
     );
     try {
       await next.initialize();
+      if (widget.mainCameraOnly) await next.setZoomLevel(1.0);
       if (!mounted || !_cameraActive || generation != _cameraGeneration) {
         await _disposeCamera(next);
         return;
@@ -315,13 +339,13 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
       if (previousPath != null && previousPath != photo.path) {
         await _deleteCapture(previousPath);
       }
-      if (widget.session.isComplete) {
+      if (_nextMissing == null) {
         widget.onComplete(widget.session);
         return;
       }
       if (!mounted) return;
       setState(() {
-        _view = widget.session.nextMissing!;
+        _view = _nextMissing!;
         _frameGate = const CaptureFrameGate();
       });
       _live.setView(_view);
@@ -488,7 +512,11 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
     final prepared = controller != null && controller.value.isInitialized;
     return Column(
       children: [
-        _CaptureHeader(view: _view, session: widget.session),
+        _CaptureHeader(
+          view: _view,
+          session: widget.session,
+          views: widget.views,
+        ),
         TextButton.icon(
           onPressed: prepared && _cameraActive && !_capturing && !_torchChanging
               ? _toggleTorch
@@ -889,10 +917,15 @@ class _FrameChecklist extends StatelessWidget {
 }
 
 class _CaptureHeader extends StatelessWidget {
-  const _CaptureHeader({required this.view, required this.session});
+  const _CaptureHeader({
+    required this.view,
+    required this.session,
+    required this.views,
+  });
 
   final CaptureView view;
   final ScanSession session;
+  final List<CaptureView> views;
 
   @override
   Widget build(BuildContext context) {
@@ -902,7 +935,7 @@ class _CaptureHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            children: CaptureView.values
+            children: views
                 .map(
                   (item) => Expanded(
                     child: Padding(

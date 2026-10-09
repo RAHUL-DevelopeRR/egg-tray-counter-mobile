@@ -1,3 +1,5 @@
+import 'block_result.dart';
+
 class ViewResult {
   const ViewResult({
     required this.quality,
@@ -63,9 +65,11 @@ class ScanResult {
     required this.stacks,
     this.recommendedView,
     this.rescanReason,
+    this.block,
   });
 
   final String scanId;
+  final BlockResult? block;
   final bool accepted;
   final String status;
   final int? physicalStackCount;
@@ -106,6 +110,9 @@ class ScanResult {
           .toList(growable: false),
       recommendedView: rescan?['recommended_view'] as String?,
       rescanReason: rescan?['reason'] as String?,
+      block: json['block'] is Map<String, dynamic>
+          ? BlockResult.fromJson(json['block'] as Map<String, dynamic>)
+          : null,
     );
   }
 }

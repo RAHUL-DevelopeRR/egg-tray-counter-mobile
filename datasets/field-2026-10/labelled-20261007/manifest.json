@@ -1,0 +1,557 @@
+{
+ "source_folder": "C:\\Users\\DELL\\Downloads\\FileOfEggLabels",
+ "images": [
+  {
+   "id": 1,
+   "file": "img-01.jpg",
+   "source_name": "10b527a9-d829-4e11-83d4-e8daf313b1a1.jpg",
+   "sha256": "803585bfe669dab28481b1b840ba50b678ce00082d1b7edc03731359992ef359",
+   "bytes": 173155,
+   "width": 1280,
+   "height": 582,
+   "exif": false
+  },
+  {
+   "id": 2,
+   "file": "img-02.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 8.57.25 PM (1).jpeg",
+   "sha256": "c75d95aab77f664d35aa78e54bfdb06732b9a15e7f286d30e9294afdd9672e17",
+   "bytes": 249294,
+   "width": 1280,
+   "height": 1109,
+   "exif": false
+  },
+  {
+   "id": 3,
+   "file": "img-03.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 8.57.25 PM.jpeg",
+   "sha256": "bb76ebf063aff5782db72bedcd5642c6ebaedd66f90063c6cfc23d42f6570ecd",
+   "bytes": 277283,
+   "width": 960,
+   "height": 1280,
+   "exif": false
+  },
+  {
+   "id": 4,
+   "file": "img-04.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 8.57.26 PM (1).jpeg",
+   "sha256": "312737fcdbc9c1793a8bcd31ebaae18441a747f0bab525ab9b2917b530939e00",
+   "bytes": 278110,
+   "width": 960,
+   "height": 1280,
+   "exif": false
+  },
+  {
+   "id": 5,
+   "file": "img-05.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 8.57.26 PM.jpeg",
+   "sha256": "a4392c0a9c75f3a637e4694347b94878126c24d34fb7544d5313ff35431515c2",
+   "bytes": 255017,
+   "width": 1278,
+   "height": 960,
+   "exif": false
+  },
+  {
+   "id": 6,
+   "file": "img-06.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 8.57.27 PM (1).jpeg",
+   "sha256": "f7756b24b59c1e0a2ffe965787f05d0f1b12b998d2424c1be6885c057fb997f7",
+   "bytes": 273047,
+   "width": 960,
+   "height": 1280,
+   "exif": false
+  },
+  {
+   "id": 7,
+   "file": "img-07.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 8.57.27 PM (2).jpeg",
+   "sha256": "2a4b6816ccb870bd225b1c5d3c02cdc6e090d720e1004c693c65a40d17e2143a",
+   "bytes": 276350,
+   "width": 960,
+   "height": 1280,
+   "exif": false
+  },
+  {
+   "id": 8,
+   "file": "img-08.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 8.57.27 PM.jpeg",
+   "sha256": "76db53a0a4cbb156e78be87242d9e90e1985ff83674f97d5d5872f0575fbae2a",
+   "bytes": 292565,
+   "width": 1280,
+   "height": 960,
+   "exif": false
+  },
+  {
+   "id": 9,
+   "file": "img-09.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 8.57.28 PM (1).jpeg",
+   "sha256": "22fe8ad3370e5da9d2a582e417dd5f589c9df6cbdafa9a3939608fac6d701f7b",
+   "bytes": 290034,
+   "width": 960,
+   "height": 1280,
+   "exif": false
+  },
+  {
+   "id": 10,
+   "file": "img-10.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 8.57.28 PM (2).jpeg",
+   "sha256": "c2425fd7140b9f95ab0082c9b7c92411c2290b56f02a102a67550db2866739d8",
+   "bytes": 279630,
+   "width": 960,
+   "height": 1280,
+   "exif": false
+  },
+  {
+   "id": 11,
+   "file": "img-11.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 8.57.28 PM.jpeg",
+   "sha256": "6803b9fe7412bd37b20a66297f9675fbb39aa72e7fbcb0f9dddb63e681233235",
+   "bytes": 259237,
+   "width": 960,
+   "height": 1280,
+   "exif": false
+  },
+  {
+   "id": 12,
+   "file": "img-12.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 8.57.29 PM (1).jpeg",
+   "sha256": "b4a377c6da79c08017cd5541af90c364d771ca3c85f539ddfd491e97ef805b28",
+   "bytes": 270347,
+   "width": 1280,
+   "height": 960,
+   "exif": false
+  },
+  {
+   "id": 13,
+   "file": "img-13.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 8.57.29 PM.jpeg",
+   "sha256": "775578bad4554674eb707a954900bb4027af02ffdf203dce0b420ff25b0e96ea",
+   "bytes": 270747,
+   "width": 1280,
+   "height": 960,
+   "exif": false
+  },
+  {
+   "id": 14,
+   "file": "img-14.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 8.57.31 PM (1).jpeg",
+   "sha256": "ece7ea5d7ef56af48af1428ac5e163e7fa20c6bc67c252ba73433912dbad13fa",
+   "bytes": 329376,
+   "width": 960,
+   "height": 1280,
+   "exif": false
+  },
+  {
+   "id": 15,
+   "file": "img-15.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 8.57.32 PM (1).jpeg",
+   "sha256": "cc481592c33a1d7a3ef1d6b5a200a1a675dc2a62fcfb3c7daa127a35a8105a83",
+   "bytes": 313629,
+   "width": 960,
+   "height": 1280,
+   "exif": false
+  },
+  {
+   "id": 16,
+   "file": "img-16.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 8.57.32 PM.jpeg",
+   "sha256": "4ecf35169e51f634e8bb9a572fcaedda1f96d48171a2c44130f265357d78014b",
+   "bytes": 372653,
+   "width": 1280,
+   "height": 960,
+   "exif": false
+  },
+  {
+   "id": 17,
+   "file": "img-17.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 8.57.33 PM (1).jpeg",
+   "sha256": "6f69d4f3a29ba225cf6a2e22a47f1c1888f5a3b13baf2dbb9c2a917f1b7a75e3",
+   "bytes": 280968,
+   "width": 1280,
+   "height": 960,
+   "exif": false
+  },
+  {
+   "id": 18,
+   "file": "img-18.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 8.57.33 PM.jpeg",
+   "sha256": "f85280c8919d0556025b4eb94e11bd301cf743ed5da2fe7a6c8e6a883c15345a",
+   "bytes": 345683,
+   "width": 1280,
+   "height": 960,
+   "exif": false
+  },
+  {
+   "id": 19,
+   "file": "img-19.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 8.57.50 PM.jpeg",
+   "sha256": "581bd15c16fa868c93ef6556a6fd663907733ad2cae8c6035e945a8dae4cf971",
+   "bytes": 452529,
+   "width": 1600,
+   "height": 1200,
+   "exif": false
+  },
+  {
+   "id": 20,
+   "file": "img-20.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.04.58 PM.jpeg",
+   "sha256": "d8c8983ab7cc37b733046029040415870491779e1101257781e424afe7705041",
+   "bytes": 403634,
+   "width": 1200,
+   "height": 1600,
+   "exif": false
+  },
+  {
+   "id": 21,
+   "file": "img-21.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.07.22 PM.jpeg",
+   "sha256": "0398f6c5f9016129c3f1544d7878f6ac83c39262df4f36f9c6796084e494ed83",
+   "bytes": 182788,
+   "width": 1280,
+   "height": 582,
+   "exif": false
+  },
+  {
+   "id": 22,
+   "file": "img-22.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.10.52 PM.jpeg",
+   "sha256": "e25f9f1a90df8fbffc69eacfe2b05b6e9bb750add804b0c62010a1a2964174f7",
+   "bytes": 328156,
+   "width": 1280,
+   "height": 960,
+   "exif": false
+  },
+  {
+   "id": 23,
+   "file": "img-23.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.14.45 PM.jpeg",
+   "sha256": "fb4f7cca6e300aa79758eaf9b8f6c4ea8de0a17c6b309dea5fb651cb52bfb825",
+   "bytes": 260430,
+   "width": 1280,
+   "height": 960,
+   "exif": false
+  },
+  {
+   "id": 24,
+   "file": "img-24.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.16.01 PM.jpeg",
+   "sha256": "64c7873491a23a0d57d4efb65c79e4acd9dd734ddf72f14150398b93ea5c69a7",
+   "bytes": 194421,
+   "width": 1280,
+   "height": 582,
+   "exif": false
+  },
+  {
+   "id": 25,
+   "file": "img-25.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.17.23 PM (1).jpeg",
+   "sha256": "6d6316ee498e287b3f54e8b40b4bb3a88117d9da2eb755fc3b0c2317afdab567",
+   "bytes": 389681,
+   "width": 900,
+   "height": 1600,
+   "exif": false
+  },
+  {
+   "id": 26,
+   "file": "img-26.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.17.23 PM.jpeg",
+   "sha256": "73d16a805cab05b3b79f22f29a067d199f112087848b82aa615ba5d7f8bbeb31",
+   "bytes": 188889,
+   "width": 1280,
+   "height": 960,
+   "exif": false
+  },
+  {
+   "id": 27,
+   "file": "img-27.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.17.24 PM (1).jpeg",
+   "sha256": "5f6192d0a35fa43b0a4d5fa33cded3b59536022067cd0abbde14a4c72e88ef94",
+   "bytes": 369454,
+   "width": 900,
+   "height": 1600,
+   "exif": false
+  },
+  {
+   "id": 28,
+   "file": "img-28.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.17.24 PM.jpeg",
+   "sha256": "8512ce101330a36ef5e0990789550d642c10674327b3084d35ba44893989dd96",
+   "bytes": 379801,
+   "width": 1600,
+   "height": 900,
+   "exif": false
+  },
+  {
+   "id": 29,
+   "file": "img-29.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.17.30 PM (1).jpeg",
+   "sha256": "aa8a0ab9dbb2dda58b53c21548633ec944623157f1851b5847f787849651b431",
+   "bytes": 349619,
+   "width": 1600,
+   "height": 900,
+   "exif": false
+  },
+  {
+   "id": 30,
+   "file": "img-30.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.17.30 PM (2).jpeg",
+   "sha256": "edd3b7745b8b1e3b5367dcf0c124d3c8d420cc6f3aab19a90f11bea76533bd35",
+   "bytes": 330791,
+   "width": 1600,
+   "height": 900,
+   "exif": false
+  },
+  {
+   "id": 31,
+   "file": "img-31.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.17.30 PM.jpeg",
+   "sha256": "936f115049c2195a3b2c74cf009061f8b3a6ba0cd5ad6d63e743310765dece74",
+   "bytes": 345481,
+   "width": 900,
+   "height": 1600,
+   "exif": false
+  },
+  {
+   "id": 32,
+   "file": "img-32.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.18.14 PM.jpeg",
+   "sha256": "fc86f9d70cd37eed83bca6d6edb3eaa7379bfa8eac58a86e9cb9a566eba96b78",
+   "bytes": 128369,
+   "width": 580,
+   "height": 1280,
+   "exif": false
+  },
+  {
+   "id": 33,
+   "file": "img-33.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.22.19 PM.jpeg",
+   "sha256": "442bb4923479f9cfc6607b03538a624528d2f830768701240ef505b5504b37a7",
+   "bytes": 170330,
+   "width": 1280,
+   "height": 580,
+   "exif": false
+  },
+  {
+   "id": 34,
+   "file": "img-34.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.28.39 PM.jpeg",
+   "sha256": "08ece1480e197722ac86346f190e4afb41ec0dda9c0d1ef32511492138383f17",
+   "bytes": 486857,
+   "width": 1600,
+   "height": 1200,
+   "exif": false
+  },
+  {
+   "id": 35,
+   "file": "img-35.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.49.02 PM.jpeg",
+   "sha256": "18d82ecebe1d8ad79cceb4225043ab4e18258dac7eab1de2c56774beb423c9c5",
+   "bytes": 136403,
+   "width": 1280,
+   "height": 580,
+   "exif": false
+  },
+  {
+   "id": 36,
+   "file": "img-36.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.49.03 PM (1).jpeg",
+   "sha256": "a19cdbd4d34799c4cb9f25494da4febf16d910bfe062733733cea0d7b8fa4b1d",
+   "bytes": 280089,
+   "width": 1280,
+   "height": 960,
+   "exif": false
+  },
+  {
+   "id": 37,
+   "file": "img-37.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.49.03 PM.jpeg",
+   "sha256": "49b99002c7a856ba2a640a728d6023c01b44126d9439a784e78df57237568b2f",
+   "bytes": 310255,
+   "width": 1600,
+   "height": 720,
+   "exif": false
+  },
+  {
+   "id": 38,
+   "file": "img-38.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.49.04 PM.jpeg",
+   "sha256": "e31ae2fb86d912a40fae54c0c25414952379e892050ea1db631067a5880d00ba",
+   "bytes": 161781,
+   "width": 1280,
+   "height": 582,
+   "exif": false
+  },
+  {
+   "id": 39,
+   "file": "img-39.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.50.26 PM.jpeg",
+   "sha256": "2fba068084e12d457df761cb58ba4ef204852f4f973f5a23c63a679d7c608b6e",
+   "bytes": 122453,
+   "width": 582,
+   "height": 1280,
+   "exif": false
+  },
+  {
+   "id": 40,
+   "file": "img-40.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.54.24 PM.jpeg",
+   "sha256": "aefa71273017b073fa5fc2c4bdb2d810c95be298612a4426b7393d43b04c4568",
+   "bytes": 219476,
+   "width": 960,
+   "height": 1280,
+   "exif": false
+  },
+  {
+   "id": 41,
+   "file": "img-41.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.54.42 PM (1).jpeg",
+   "sha256": "038d6c3a08d6db83edd24a02d9b7cdcaf36ec3a838d1cfa45183653a1754f292",
+   "bytes": 175102,
+   "width": 1280,
+   "height": 960,
+   "exif": false
+  },
+  {
+   "id": 42,
+   "file": "img-42.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.54.42 PM (2).jpeg",
+   "sha256": "48212a141e419f435b6aa5a3d9d716897d307cc00331330017962e9e59149993",
+   "bytes": 205768,
+   "width": 960,
+   "height": 1280,
+   "exif": false
+  },
+  {
+   "id": 43,
+   "file": "img-43.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.54.42 PM (3).jpeg",
+   "sha256": "d6e64e0a0e160f64dca44c3f29ccc9a79ef40f55ad222cb2f6e25d544f469032",
+   "bytes": 234935,
+   "width": 1200,
+   "height": 1600,
+   "exif": false
+  },
+  {
+   "id": 44,
+   "file": "img-44.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.54.42 PM (4).jpeg",
+   "sha256": "742a6ffb95890189a35d2aca0f044dd780df469df8e91f2c90271c70e14be9ac",
+   "bytes": 257150,
+   "width": 1020,
+   "height": 960,
+   "exif": false
+  },
+  {
+   "id": 45,
+   "file": "img-45.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.54.42 PM (5).jpeg",
+   "sha256": "6ee83d68de98f513cc4e709dff2fbdb5ed47a9dc478e2668dd56d891047db859",
+   "bytes": 136242,
+   "width": 533,
+   "height": 1280,
+   "exif": false
+  },
+  {
+   "id": 46,
+   "file": "img-46.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.54.42 PM.jpeg",
+   "sha256": "33161764bc19f6fb7df35c26a3431910596f5abe5bfac7d9435ab88f1206e74f",
+   "bytes": 104914,
+   "width": 391,
+   "height": 1280,
+   "exif": false
+  },
+  {
+   "id": 47,
+   "file": "img-47.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.54.44 PM (1).jpeg",
+   "sha256": "bd1a37426ec1dbcfa4a8d500eff952ca9d072aa1a383bb3936d933e5e9d346ca",
+   "bytes": 150442,
+   "width": 1280,
+   "height": 960,
+   "exif": false
+  },
+  {
+   "id": 48,
+   "file": "img-48.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.54.44 PM (2).jpeg",
+   "sha256": "99c15fb865843b8a6f037148ce6c26d5c98c5a2dd24e5d82c0c00dd6cc5e328d",
+   "bytes": 205794,
+   "width": 960,
+   "height": 1280,
+   "exif": false
+  },
+  {
+   "id": 49,
+   "file": "img-49.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.54.44 PM (3).jpeg",
+   "sha256": "5eb15a01f7555f571f74456b834722dd07da184e03ee59a5b682b4a71d611414",
+   "bytes": 178567,
+   "width": 1200,
+   "height": 1600,
+   "exif": false
+  },
+  {
+   "id": 50,
+   "file": "img-50.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.54.44 PM (4).jpeg",
+   "sha256": "5f70e3742c0054e8e2236377681755aa97b578e24d877d90452e3c13817a01ae",
+   "bytes": 311960,
+   "width": 900,
+   "height": 1600,
+   "exif": false
+  },
+  {
+   "id": 51,
+   "file": "img-51.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.54.44 PM.jpeg",
+   "sha256": "b02987e3a59928291acae756f93521e93ec8cdf8dfd84c150f4208305defbf48",
+   "bytes": 262731,
+   "width": 1280,
+   "height": 960,
+   "exif": false
+  },
+  {
+   "id": 52,
+   "file": "img-52.jpeg",
+   "source_name": "WhatsApp Image 2026-10-07 at 9.56.08 PM.jpeg",
+   "sha256": "936611bd09e65d60b4eb951b9f8f6b228da5f4479947930955c06ead7d482f6c",
+   "bytes": 290943,
+   "width": 1280,
+   "height": 960,
+   "exif": false
+  }
+ ],
+ "near_duplicate_pairs": [
+  {
+   "a": 8,
+   "b": 23,
+   "dhash_distance_of_256": 13
+  },
+  {
+   "a": 11,
+   "b": 40,
+   "dhash_distance_of_256": 24
+  },
+  {
+   "a": 16,
+   "b": 22,
+   "dhash_distance_of_256": 6
+  },
+  {
+   "a": 21,
+   "b": 24,
+   "dhash_distance_of_256": 39
+  },
+  {
+   "a": 25,
+   "b": 27,
+   "dhash_distance_of_256": 33
+  },
+  {
+   "a": 42,
+   "b": 48,
+   "dhash_distance_of_256": 1
+  }
+ ]
+}

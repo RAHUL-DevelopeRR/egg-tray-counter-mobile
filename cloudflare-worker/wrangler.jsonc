@@ -6,7 +6,10 @@
   "compatibility_date": "2026-08-22",
   "workers_dev": true,
   "r2_buckets": [
-    { "binding": "SCAN_ARCHIVE", "bucket_name": "egg-tray-scan-archive" }
+    {
+      "binding": "SCAN_ARCHIVE",
+      "bucket_name": "egg-tray-scan-archive"
+    }
   ],
   "observability": {
     "enabled": true,
@@ -18,5 +21,25 @@
     "OVERLAP": "50",
     "MAX_VIEW_COUNT_RATIO": "1.25",
     "EGGS_PER_TRAY": "30"
+  },
+  "env": {
+    "staging": {
+      "name": "egg-tray-counter-api-staging",
+      "r2_buckets": [
+        {
+          "binding": "SCAN_ARCHIVE",
+          "bucket_name": "egg-tray-scan-archive"
+        }
+      ],
+      "vars": {
+        "MODEL_ID": "projec-mutta/2",
+        "CONFIDENCE": "35",
+        "OVERLAP": "50",
+        "MAX_VIEW_COUNT_RATIO": "1.25",
+        "EGGS_PER_TRAY": "30",
+        "RECONSTRUCTION_ENABLED": "true",
+        "VISION_SERVICE_URL": "https://e3mkfxljv7ja42ygklbacg3fge0cibxg.lambda-url.ap-south-1.on.aws"
+      }
+    }
   }
 }

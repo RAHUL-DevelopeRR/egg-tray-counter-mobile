@@ -14,6 +14,9 @@ import '../../services/history_database.dart';
 import '../../services/settings_store.dart';
 import '../capture/guided_capture_pane.dart';
 import '../capture/photo_upload_pane.dart';
+import '../../services/manual_count_store.dart';
+import 'block_view.dart';
+import 'manual_count_screen.dart';
 
 enum _FlowPhase { capture, processing, result }
 
@@ -43,6 +46,7 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
   ApiClient? _client;
   double? _uploadProgress;
   String? _error;
+  final ManualCountRepository _manualCounts = SqliteManualCountRepository();
 
   @override
   void initState() {
@@ -186,6 +190,22 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
           onRetake: () => _retake(_result!.recommendedView),
           onNewScan: _newScan,
           onDone: () => Navigator.pop(context),
+          onManualCount: () async {
+            final baseUrl = await widget.settings.getBaseUrl();
+            if (!context.mounted) return;
+            final done = await Navigator.push<bool>(
+              context,
+              MaterialPageRoute(
+                builder: (_) => ManualCountScreen(
+                  result: _result!,
+                  repository: _manualCounts,
+                  baseUrl: baseUrl,
+                ),
+              ),
+            );
+            // The operator finished this block: go straight to the next one.
+            if (done == true && mounted) _newScan();
+          },
         ),
       },
     );
@@ -278,12 +298,14 @@ class _ResultPane extends StatelessWidget {
     required this.onRetake,
     required this.onNewScan,
     required this.onDone,
+    required this.onManualCount,
   });
 
   final ScanResult result;
   final VoidCallback onRetake;
   final VoidCallback onNewScan;
   final VoidCallback onDone;
+  final VoidCallback onManualCount;
 
   @override
   Widget build(BuildContext context) {
@@ -301,13 +323,28 @@ class _ResultPane extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         Text(
-          result.accepted ? 'VERIFIED' : 'COUNT NOT VERIFIED',
+          result.accepted
+              ? 'VERIFIED'
+              : (result.block?.totalTrays != null
+                    ? 'BLOCK COUNT'
+                    : 'COUNT NOT VERIFIED'),
           textAlign: TextAlign.center,
           style: Theme.of(
             context,
           ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w900),
         ),
         const SizedBox(height: 22),
+        if (result.block != null) ...[
+          BlockPanel(block: result.block!),
+          const SizedBox(height: 10),
+          FilledButton.icon(
+            key: const ValueKey('manual-count-button'),
+            onPressed: onManualCount,
+            icon: const Icon(Icons.fact_check_outlined),
+            label: const Text('RECORD MANUAL COUNT'),
+          ),
+          const SizedBox(height: 18),
+        ],
         if (result.accepted) ...[
           _MetricRow(label: 'Verified cells', value: '${result.stacks.length}'),
           _MetricRow(
@@ -330,19 +367,23 @@ class _ResultPane extends StatelessWidget {
             ).textTheme.displayMedium?.copyWith(fontWeight: FontWeight.w900),
           ),
         ] else ...[
-          Text(
-            result.rescanReason ??
-                'The photographs did not resolve the physical tray count.',
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 18),
-          ...result.views.entries.map(
-            (entry) => _MetricRow(
-              label: entry.key.toUpperCase(),
-              value: entry.value.accepted ? 'VERIFIED' : 'REVIEW EVIDENCE',
+          // With a computed block total the block panel is the result; the
+          // legacy per-photo evidence rows would contradict it on screen.
+          if (result.block?.totalTrays == null) ...[
+            Text(
+              result.rescanReason ??
+                  'The photographs did not resolve the physical tray count.',
+              textAlign: TextAlign.center,
             ),
-          ),
-          if (result.stacks.isNotEmpty) ...[
+            const SizedBox(height: 18),
+            ...result.views.entries.map(
+              (entry) => _MetricRow(
+                label: entry.key.toUpperCase(),
+                value: entry.value.accepted ? 'VERIFIED' : 'REVIEW EVIDENCE',
+              ),
+            ),
+          ],
+          if (result.block?.totalTrays == null && result.stacks.isNotEmpty) ...[
             const SizedBox(height: 12),
             ...result.stacks.map(
               (stack) => Card(
@@ -389,6 +430,7 @@ class _ResultPane extends StatelessWidget {
         if (result.accepted)
           FilledButton(onPressed: onNewScan, child: const Text('NEW SCAN'))
         else ...[
+          if (result.block?.totalTrays == null)
           FilledButton.tonal(
             onPressed: () => showDialog<void>(
               context: context,

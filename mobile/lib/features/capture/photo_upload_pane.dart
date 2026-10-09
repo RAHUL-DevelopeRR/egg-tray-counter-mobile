@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:file_selector/file_selector.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
@@ -72,15 +72,11 @@ class _PhotoUploadPaneState extends State<PhotoUploadPane> {
     });
     String? owned;
     try {
-      final selected = await openFile(
-        acceptedTypeGroups: const [
-          XTypeGroup(
-            label: 'Photos',
-            extensions: ['jpg', 'jpeg', 'png'],
-            mimeTypes: ['image/jpeg', 'image/png'],
-            uniformTypeIdentifiers: ['public.jpeg', 'public.png'],
-          ),
-        ],
+      // The gallery picker is what a warehouse operator will use; the generic
+      // document picker never lists files on some MIUI phones.
+      final selected = await ImagePicker().pickImage(
+        source: ImageSource.gallery,
+        requestFullMetadata: false,
       );
       if (selected == null || !mounted) return;
       owned = await compute(prepareUploadedPhoto, selected.path);

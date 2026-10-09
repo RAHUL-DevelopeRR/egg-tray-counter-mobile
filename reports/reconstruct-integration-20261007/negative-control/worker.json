@@ -1,0 +1,58 @@
+{
+  "sources": [
+    {
+      "filename": "first.jpg",
+      "sha256": "bd2ba34e77d6cda94ed982d678590d9a5a0bde5a9b684dbaec0591ffa6ca0970",
+      "width": 1200,
+      "height": 1600
+    },
+    {
+      "filename": "second.jpg",
+      "sha256": "fb5bd22bfe8d1b3da1714ad9f1ef9f90330d562d6bd499bb6005446886506e66",
+      "width": 1200,
+      "height": 1600
+    }
+  ],
+  "mutual_matches": 2,
+  "physical_trays": null,
+  "verified": false,
+  "calibration": null,
+  "stable_scene_confirmed": false,
+  "status": "insufficient_matches",
+  "reason": "Too few shared features. Capture views with more overlap.",
+  "scale": "arbitrary_unit_baseline",
+  "focal_hypotheses": [],
+  "note": "Feature points are not trays. Assumed intrinsics, arbitrary scale; no occupancy or stack identity certified.",
+  "matching_sensitivity": [
+    {
+      "ratio": 0.65,
+      "mutual_candidates": 2,
+      "accepted_physical_identity": false
+    },
+    {
+      "ratio": 0.75,
+      "mutual_candidates": 8,
+      "accepted_physical_identity": false,
+      "fundamental_inliers": 7,
+      "homography_inliers": 4,
+      "note": "Unvalidated matches; RANSAC support alone does not establish stack identity."
+    },
+    {
+      "ratio": 0.85,
+      "mutual_candidates": 52,
+      "accepted_physical_identity": false,
+      "fundamental_inliers": 10,
+      "homography_inliers": 5,
+      "note": "Unvalidated matches; RANSAC support alone does not establish stack identity."
+    }
+  ],
+  "scan_id": "196bed35-9c74-4a17-8021-62a00d8683db",
+  "input_hashes": {
+    "first": "bd2ba34e77d6cda94ed982d678590d9a5a0bde5a9b684dbaec0591ffa6ca0970",
+    "second": "fb5bd22bfe8d1b3da1714ad9f1ef9f90330d562d6bd499bb6005446886506e66"
+  },
+  "timing": {
+    "upstream_ms": 8459
+  },
+  "client_processing": null
+}

@@ -1,8 +1,12 @@
 import 'dart:io';
+import 'dart:convert';
+import '../models/reconstruction_result.dart';
+import 'reconstruction_photos.dart';
 
 import 'package:dio/dio.dart';
 
 import '../models/capture_view.dart';
+import '../models/manual_count.dart';
 import '../models/scan_result.dart';
 import '../models/scan_session.dart';
 
@@ -43,6 +47,55 @@ class ApiClient {
       throw const FormatException(
         'The server needs the optional-marker scan update. No images were uploaded. Update the backend and retry.',
       );
+    }
+  }
+
+  Future<ReconstructionResult> reconstruct(PreparedPair pair) async {
+    final health = await _dio.get<Map<String, dynamic>>('/health');
+    if (health.data?['scan_contracts'] is! List ||
+        !(health.data!['scan_contracts'] as List).contains('reconstruct_v1')) {
+      throw const FormatException(
+        'This server does not support 3D reconstruction. Select the staging server in Settings.',
+      );
+    }
+    final form = FormData.fromMap({
+      'client_processing': jsonEncode(pair.metadata),
+    });
+    for (var i = 0; i < 2; i++) {
+      final signature = await File(pair.paths[i]).openRead(0, 8).first;
+      final png = signature.first == 137;
+      form.files.add(
+        MapEntry(
+          i == 0 ? 'first' : 'second',
+          await MultipartFile.fromFile(
+            pair.paths[i],
+            filename: '${i == 0 ? 'first' : 'second'}.${png ? 'png' : 'jpg'}',
+            contentType: DioMediaType.parse(png ? 'image/png' : 'image/jpeg'),
+          ),
+        ),
+      );
+    }
+    _cancelToken = CancelToken();
+    try {
+      final response = await _dio.post<Map<String, dynamic>>(
+        '/v1/reconstruct',
+        data: form,
+        cancelToken: _cancelToken,
+        options: Options(
+          sendTimeout: const Duration(seconds: 120),
+          receiveTimeout: const Duration(seconds: 150),
+        ),
+      );
+      if (response.data == null) {
+        throw const FormatException('Empty 3D response');
+      }
+      return ReconstructionResult.fromJson(response.data!);
+    } on DioException catch (error) {
+      final data = error.response?.data;
+      if (data is Map && data['detail'] is Map) {
+        throw FormatException(data['detail']['message'].toString());
+      }
+      rethrow;
     }
   }
 
@@ -112,6 +165,23 @@ class ApiClient {
       }
     }
     throw lastError ?? const HttpException('Scan request failed');
+  }
+
+  /// Stores the operator's on-site count next to the scan's archived photos.
+  Future<Map<String, dynamic>> submitManualCount(
+    ManualCount count, {
+    String? appVersion,
+  }) async {
+    final response = await _dio.post<Map<String, dynamic>>(
+      '/v1/scans/${count.scanId}/manual-count',
+      data: count.toJson(appVersion: appVersion),
+      options: Options(contentType: 'application/json'),
+    );
+    final data = response.data;
+    if (data == null || data['stored'] != true) {
+      throw const FormatException('The server did not store the manual count.');
+    }
+    return data;
   }
 
   bool _retryable(DioException error) => {

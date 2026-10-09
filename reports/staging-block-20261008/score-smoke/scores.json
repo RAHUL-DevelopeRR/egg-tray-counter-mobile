@@ -1,0 +1,28 @@
+{
+ "blocks": {
+  "n": 1,
+  "with_total": 0,
+  "exact": 0,
+  "within_2": 0,
+  "abs_err_sum": 0,
+  "withheld": 1,
+  "mae_when_total": null,
+  "rescan_rate_pct": 100.0
+ },
+ "stacks": {
+  "observed": {
+   "n": 5,
+   "exact_pct": 60.0,
+   "within_1_pct": 100.0
+  },
+  "computed": {
+   "n": 0,
+   "exact_pct": null,
+   "within_1_pct": null
+  }
+ },
+ "interior_assumption": {
+  "n": 0,
+  "exact_pct": null
+ }
+}

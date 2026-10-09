@@ -1,0 +1,12 @@
+{
+  "url": "https://e3mkfxljv7ja42ygklbacg3fge0cibxg.lambda-url.ap-south-1.on.aws",
+  "health_status": 200,
+  "health": {
+    "status": "ok",
+    "mode": "diagnostic_only",
+    "inventory_verification_ready": false
+  },
+  "unauthenticated_candidate_status": 401,
+  "aws_core_auth": "requires_reauthentication",
+  "protected_photo_replay_this_session": false
+}

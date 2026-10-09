@@ -1,0 +1,10 @@
+{
+  "State": "Active",
+  "LastUpdateStatus": "Successful",
+  "Memory": 2048,
+  "Timeout": 120,
+  "image_digest": "sha256:4ef6034d8adb553478d86f73a131d6c8dff3ba943cf1d49a063b11315cda70fb",
+  "image_tag": "pilot-20261007",
+  "region": "ap-south-1",
+  "source_zip": "vision-20261007.zip"
+}

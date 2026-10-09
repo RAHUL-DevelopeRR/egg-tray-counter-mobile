@@ -7,6 +7,7 @@ import '../../services/settings_store.dart';
 import '../scan_flow/scan_flow_screen.dart';
 import '../grid_height/grid_height_screen.dart';
 import '../settings/settings_screen.dart';
+import '../reconstruction/reconstruction_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({required this.settings, required this.history, super.key});
@@ -126,6 +127,17 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 28),
               _BackendCard(online: _backendOnline),
+              const SizedBox(height: 12),
+              OutlinedButton.icon(
+                onPressed: () => Navigator.of(context).push<void>(
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        ReconstructionScreen(settings: widget.settings),
+                  ),
+                ),
+                icon: const Icon(Icons.view_in_ar),
+                label: const Text('3D reconstruction (diagnostic)'),
+              ),
               const SizedBox(height: 20),
               FilledButton.icon(
                 onPressed: () => Navigator.of(context).push<void>(

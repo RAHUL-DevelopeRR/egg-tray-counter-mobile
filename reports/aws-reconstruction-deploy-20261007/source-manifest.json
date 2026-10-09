@@ -1,0 +1,57 @@
+{
+  "source_zip_sha256": "06213e5dcba530b4d28c8e5f0b4285b7590eab3875ffdce4577f5683b9d2820f",
+  "source_files": {
+    "backend/app/config.py": "2296bd9bb477e29efea0d5a914bc0c335ea50ccb99a10176a2e1060a2f04c8cd",
+    "backend/app/errors.py": "f94021ea823f294fb29c20e8ead103d744e4d6b33ef907b5c447029074b1dce6",
+    "backend/app/logging_config.py": "dfa863a76a0722491ce932beae6c3ab6211a097386cc82cd63cd5a9d7bda251c",
+    "backend/app/main.py": "f78899beb27639e45875b07cbaf275b662546d5526cf4fd08868a6263ede600e",
+    "backend/app/repository.py": "1bdf860b96a52919e0a70e7e5492fe4cd89fe3611975bad8cd26305a8ca027d1",
+    "backend/app/vision_service.py": "c8dd1c67af44cd58b82530673c4bae66e9e809f24c1c776960a6ee95bdd1d57f",
+    "backend/app/__init__.py": "e04b29bfc275e2b83061f07d0230c08547671579d40dae931e3f81d940352ca1",
+    "backend/app/api/candidate.py": "e4910455646640fc24bf53f5549314d52d65324f78e4ae45b8c3dac5c9a5e382",
+    "backend/app/api/heatmap_candidate.py": "e897036f2772f87ab40cf1632a3c38ad420027fdb401158e3c18e021ef38917f",
+    "backend/app/api/routes.py": "ba8bacb77e2633cae4ab4f0613096e4df6a91c39527f9259bd6345ddab129f17",
+    "backend/app/api/__init__.py": "287dde60ec7ec6256b313b37631ec8ac5e38c23a37c454824eee8d1723bc760d",
+    "backend/app/providers/base.py": "db6d4ecb574f7b52e9013a556205a75ed84593e4493a46e8c01794d48617219a",
+    "backend/app/providers/mock.py": "5450eed6691e76202d825f20cbd7981015791f9110479c27c53f9715cbebf813",
+    "backend/app/providers/roboflow.py": "5693113b03e43995862d8d9e90b3de8039d9d980a2c72b759bbc2181f973f634",
+    "backend/app/providers/__init__.py": "77b97c32dfd50ed14f32f180f0b664b603070827585834dfbab8a5c36e548042",
+    "backend/app/schemas/candidate.py": "8700d3718f16b3c86bacd37845aba2012b5041d93f333513f0cb39bca4ade8ad",
+    "backend/app/schemas/scan.py": "0a34ca634e902bc5b592a182b2af5ceb4d7bb14d8b0a54b53cedc1914d34fcb9",
+    "backend/app/schemas/__init__.py": "5bd921fa8412b2ef5ac6fc8afc82453c53407fe245f43350b524caadb82037ed",
+    "backend/app/services/counting.py": "9250143d5ec8b1eee5279ff51a1c35608c687f36c802eb47f6fb4c015ebc43dc",
+    "backend/app/services/__init__.py": "0a1b4044a318df9337a0d4f2f026f179a09a89b64364b0841607dbad1c1f75a5",
+    "backend/app/vision/confidence.py": "08621d4f2145fc9487b48e1e26accd83665206368c69205c9c70c2acf78c67f7",
+    "backend/app/vision/fusion.py": "88dcb5c35160bb3132a88c0f5e80a600d5fcfb3750bc38627a6a7dd1018e2a18",
+    "backend/app/vision/heatmap_model.py": "010918694053d68b024b812e29e60daaef3238597f039a5126565a623286351a",
+    "backend/app/vision/heatmap_sequence.py": "997ad92ac4cb314d0b3dc1dc61b92ea76b442532ac3556f7c46013249d45794c",
+    "backend/app/vision/hybrid.py": "71eb150a1d69058d44a88d18c51bb686d84477a14077997e45d703de4f5ed106",
+    "backend/app/vision/layer_signal.py": "eb7c57f7f63d9999df5f16640cad1311f7b8ed4d76b5d2ca668ee05c5eb663f9",
+    "backend/app/vision/overlay.py": "731d8ca8a8aca76b7f743553d1c18631846189a9c4210f534a159e13fa8ac96e",
+    "backend/app/vision/preprocessing.py": "6d1b9236192e6de63053d1bb09f534544d3178073c0269b81802e89c3086168c",
+    "backend/app/vision/quality.py": "b903860021ef7c1088b5d8a194c20bb148e60a3661efd4d5174c34111a1c0247",
+    "backend/app/vision/reconstruction.py": "e0bb2bb0f8be48d8d9bd8a48c3f01114805dcb6ddeaca28d28f8a7862f59ac1e",
+    "backend/app/vision/rectification.py": "fe0e7e8fe39874d7cca716de0f86824c1752109cc6746f21517173db6b6325cf",
+    "backend/app/vision/regional_quality.py": "b6edc8c6c8fe9bbda48ef25a18310d10850d2c675905951fb1cac16f6e462c42",
+    "backend/app/vision/spatial_3d.py": "d04300ce669a8f7d9430c7190071eaf66a85207e435182ceaea74b0a218688c3",
+    "backend/app/vision/stack_matching.py": "b1e97c6b6cd0d9bff66016eedad50dd87e03ff0beae237712737cf6548179d18",
+    "backend/app/vision/stack_measurement.py": "a9048010bfa1b3b8df2bf76de727e0d2f706a84a91ca1e21c1f6987d39a38024",
+    "backend/app/vision/__init__.py": "dcdc58244342e734b5ef03d13d3b2d2a2f2a282e2007c30d8e47c46770f97893"
+  },
+  "local_tests": "15 passed (hosting and spatial)",
+  "local_api_replay": "HTTP 200, exact equality with CLI geometry hypotheses",
+  "photo_sources": [
+    {
+      "filename": "image-1.jpg",
+      "sha256": "bd2ba34e77d6cda94ed982d678590d9a5a0bde5a9b684dbaec0591ffa6ca0970",
+      "width": 1200,
+      "height": 1600
+    },
+    {
+      "filename": "image-2.jpg",
+      "sha256": "c0787e5dfab960ca142539c052860a0f8b8e8814b6eb95cc9b6daa03f2c1e1c8",
+      "width": 1200,
+      "height": 1600
+    }
+  ]
+}

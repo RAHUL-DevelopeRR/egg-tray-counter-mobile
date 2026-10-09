@@ -1,5 +1,454 @@
 # Progress
 
+## 2026-10-09 (midday) - walk counter, perspective rule, rescan reasons (Claude Code)
+
+Measured fault in the second phone scan: layer spacing shrank 28 -> 16 px
+from top to base (camera above mid-height) and the detector double-boxed /
+skipped layers; the span rule (one global pitch) rounded to 21 on a 20-layer
+stack. Replaced the layer count with walk_layers (backend
+app/vision/layer_span.py, Worker walkLayers): local pitch tracked over the
+last three accepted gaps, clamped to 0.6-1.4 of the global pitch; a box closer
+than 0.65 x local pitch is a duplicate (includes stray half-pitch boxes);
+multi-pitch gaps fill missed layers; perspective_gradient = top-third /
+bottom-third spacing. On the 53 reference stacks: span exact 40/53, walk exact
+51/53, both 53/53 within 1; the two misses have the base layer cut off in the
+photo. TS/Python parity on all 180 archived columns (one third-decimal
+gradient rounding tie). Block model now uses walk_count; a stack is rescan
+when |span - walk| > 1 or gradient > 1.5, with an operator reason ("camera
+looked down ...; hold the phone level at mid-height" / "layer counts
+disagree ... retake this face"), including side-face corners (bug fixed:
+their reason was dropped). Backend 27 tests, Worker 45 tests, lint clean on
+touched files. Staging versions 26b23130 -> ec90aef6. Live probe on the real
+99 block with raw files: 20/20/20/20/19, 5x1 fully observed, total 99, no
+conflicts (previously 21/20/20/20/19 and a corner conflict); the from-above
+side photo now reads 19 (was 23 with walk v1). Production untouched; the
+phone build 0.4.1 needs no change (reasons arrive through block.conflicts).
+
+Afternoon: rim-edge verification wired in the Worker behind RIM_VERIFY
+(rimVerify posts each photo + its columns to the Python service's
+/candidate/rim-count in parallel; a confident rim count that differs from the
+walk count marks that stack rescan with the reason "rim edges count N layers
+but boxes count M"; service errors give verification status "unavailable"
+and never block a scan; Python block_model has the same rule; Worker 48
+tests, backend 28). Staging a414ea83 with the flag off until the Lambda has
+the route. On-device capture rule tightened: camera pitch-down limit 28 -> 12
+degrees (comfortable 8) with the message "hold the phone level at the middle
+height of the stack"; 32 capture tests pass; APK 0.4.2+13 building, to be
+installed when the phone returns. AWS CLI session expired: the Lambda image
+rebuild for the rim route needs the user's browser login again.
+
+APK 0.4.2+13 (SHA-256 8a1a42647a3c0fe6...) installed on the Redmi at 11:58 and
+launched against staging. User asked for an elevated view showing the block
+interior: feasible as an optional fourth photo that observes stack tops
+(footprint present/missing and relative top heights), not interior layer
+counts; needs a small elevated-view training set and a top-detector; planned
+after the face counting is validated. Publishing this checkpoint to
+codex/hybrid-cell-counting at the user's request; the rim-count files still in
+progress are left for the next commit.
+
+Added scripts/replay_field_scans.py: lists a scan's R2 keys, downloads photos
+and manual count, re-submits to staging, scores replayed block vs manual
+(blocks exact / rescan rate / observed stacks exact and within 1). Rim-edge
+second count (independent verification) in progress in backend
+app/vision/rim_count.py with an offline evaluation; not wired yet.
+
+## 2026-10-09 - manual count in the app, phone picker fix, end-to-end on the Redmi (Claude Code)
+
+User required the on-site count to live inside the app, tied to the scan's
+block, and an end-to-end test on the connected phone. Added: Worker route
+POST /v1/scans/:id/manual-count (validates block_id and per-stack
+filled/empty/unreachable, stores scans/<id>/manual-count/<timestamp>.json and
+latest.json in R2, never used for counting; 2 tests), APK ManualCountScreen
+(one row per block cell pre-filled with the app's layers, block ID, notes,
+SAVE ON PHONE / SAVE AND SEND / COPY CSV; SQLite store; 4 tests), and a
+RECORD MANUAL COUNT button on the result screen.
+
+Phone: the system Files picker lists nothing for any app on this Redmi Note 9
+Pro (Android 12). Diagnosed from logcat/dumpsys; with user approval reverted
+the Files app update (pm uninstall of the /data update) and turned on the
+paused Android Device Policy work profile - neither fixed it. Switched the
+upload slots to image_picker with useAndroidPhotoPicker; the Photo Picker
+lists media correctly. APK rebuilt (0.4.0+11, SHA-256 0c48ffeada0692a3...),
+installed, server URL set to staging through the Settings screen.
+
+Measured on the phone (reports/staging-block-20261008/phone-e2e/): mechanics
+trio -> 5x4 block drawn, total withheld (two stacks rescan: raw vs span
+disagreement on app re-encoded JPEGs; same files raw from the laptop gave 400);
+real 99 block with a borrowed left photo -> 5x1 drawn, 101 observed, total
+withheld by the corner rule (21 vs 19). Manual counts sent from the phone for
+both; WH-99 fetched back from R2 with the app layers and the human
+20/20/20/20/19 side by side. Staging versions 4ffa06e0 then fa3a0a49;
+production untouched. Suites: Worker 41, Flutter 78 (+manual count), backend 21.
+
+Later the same morning: the user found the manual-count page a dead end.
+Added DONE - NEXT BLOCK after a successful send (pops to the scan flow and
+starts a new scan), extra bottom padding, keyboard dismiss on save, "SEND
+AGAIN (CORRECTION)" label; 2 more Flutter tests. APK 0.4.1+12 built, SHA-256
+b6487aea0052bfa7..., installed; third phone run (MECH-DONE) confirmed
+scan -> manual count -> send -> DONE -> fresh upload pane. Staging Worker
+d70d6495 adds GET /v1/scans/:id/archive (R2 key names for one scan; 42 Worker
+tests). scripts/score_field_blocks.py fetches each scan's latest.json with
+wrangler and reports per-stack exact/within-1 (observed vs computed), block
+agreement, rescan rate and interior-assumption exactness; smoke-tested on the
+WH-99 record (5 stacks, 60% exact, 100% within 1, total withheld). Phone is
+left on the upload pane with the staging URL, ready for the field test.
+
+Open: app-side JPEG re-encoding (quality 95) shifts detections enough to
+trigger the +/-1 rule; decide after field data whether to send originals. No
+same-block STRAIGHT/LEFT/RIGHT set exists on the laptop, so no accuracy claim
+from today's phone run. Next: field test per docs/FIELD_TEST_BLOCK_20261009.md
+using the in-app manual count; Day 3 scoring from R2 latest.json per scan.
+
+Staging deployed and probed (2026-10-08 evening): egg-tray-counter-api-staging version a012c14e-8ad0-4a50-b2ab-9a697a0df857; user set ROBOFLOW_API_KEY on staging; /ready ready; real three-photo scan HTTP 200 in 11.5 s returned block_model_v1 5x4, 220 observed + 180 computed = 400, all views pass the capture gate. Production unchanged. Evidence: reports/staging-block-20261008/. APK 0.4.0 users must set the staging URL in Settings.
+
+## 2026-10-08 - Day 1 of the 3-day block scope: model, Worker, APK, capture gate (Claude Code)
+
+User set the target: STRAIGHT (X face) x LEFT/RIGHT (Y faces) x height ->
+block grid -> 3D render -> total; interior stacks are the calculation, not a
+doubt; both side faces are photographed; the top view is dropped; photogrammetry
+stays diagnostic. Implemented in three layers with the same rules:
+
+- backend/app/vision/block_model.py (build_block/render_boxes, 15 tests) and
+  layer_span.py (6 tests): corner counted once and must agree in height and
+  recessed state; LEFT/RIGHT depths must agree; recessed column = missing front
+  cell, stack behind promoted; no room behind -> conflict; two faces promoting
+  different heights -> conflict; interior cells status "computed"; totals keep
+  observed_trays and computed_trays separate; total_trays only without
+  conflicts/rescans; fully_observed only for single-row blocks. Reference pitch
+  is the median of the front group. Rounding half-to-even in both languages.
+- cloudflare-worker/src/index.ts: spanColumns/faceColumns/buildBlock port and
+  block_model_v1 in the model_spatial_v1 response (legacy top-level total_trays
+  stays null for the installed APK); captureQuality gate per view with
+  block.capture and an operator rescan reason; ViewInference now keeps the
+  Roboflow image size. Tests: 39 pass (block 11, capture 8, existing 20).
+- mobile 0.4.0+11: BlockResult model, BlockPanel with isometric painter
+  (observed green / computed grey / missing red / rescan amber, far-to-near
+  order, front row visible), result screen shows BLOCK COUNT with the panel
+  and hides the contradictory legacy evidence rows when a block total exists.
+  flutter analyze clean; 74 tests pass. Release APK built:
+  egg-tray-counter-0.4.0-block-staging.apk, versionCode 11, 58.3 MB, debug
+  signer 27a05295..., SHA-256 f554976ebead827f267e22edbbba39ead38ebdfd351a821bc7f0fe03fa9c78ce.
+
+Verification beyond unit tests (measured): adversarial review found and I
+fixed four block-model bugs (largest-pitch reference, lost stack behind a
+recessed column at depth 1, corner recess ignored, double promotion) and two
+port/painter defects; TS-vs-Python parity on all 52 archived photos: 180
+columns, 1440 values bit-identical, 0 mismatches (work/parity-20261008/,
+git-ignored); painter orientation/order re-verified by computation. Capture
+gate tuned on the 39 tagged photos (tags assigned after seeing V2 errors, so
+hindsight-biased; near-duplicates shrink the effective sample): frontal 17/18
+accepted (img 4 rejected, the two-depth scene), non-frontal 18/21 rejected
+(25, 26, 41 pass: steep single column and uniform-pitch two-depth scenes are
+invisible to these signals). Gradient margin is thin (frontal max 1.139 vs
+rejection at 1.201). Single-column faces use coverage >= 0.25 so a one-row
+block's side face is not refused.
+
+Not done: no deployment (staging Worker still serves the previous code), no
+commit, no emulator install (BlueStacks not running), no field data yet. The
+block total is X x Y x height computed from faces, not a field-validated
+inventory; interior stacks are not observed. Day 2 protocol:
+docs/FIELD_TEST_BLOCK_20261009.md with datasets/field-2026-10/counts.csv.
+
+Next: user approves deploy to the STAGING Worker (wrangler, no production
+change) and sets the staging URL in the APK; install 0.4.0 on the phone;
+scan 10 blocks with on-site per-stack counts; Day 3 scoring (accepted-stack
+exactness, block agreement, rescan rate, interior-assumption error).
+
+## 2026-10-08 - block model backend (Claude Code)
+
+User restated the target: photograph the X face and the Y face of a block,
+count stacks and layers on each, multiply out the grid, render it in 3D, and
+handle missing stacks and unequal heights by depth. Implemented the grid stage
+that was missing between layer_span and the existing assemble_grid accounting:
+backend/app/vision/block_model.py (build_block, render_boxes). Rules: X face
+observes the front row, Y face observes one side column, the corner stack is
+counted once and must agree within 1 layer or the cell is a conflict; a face
+column whose layer pitch is < 0.85 of the front pitch is recessed -> front
+cell missing, the stack behind becomes observed; a column whose raw box count
+and span count differ by > 1 is a rescan cell; interior cells are ASSUMED at
+the median observed height unless an optional top-view occupancy grid marks
+them present or missing. Output keeps observed_trays and assumed_trays
+separate, total_if_assumed only without conflicts/rescans, verified_total only
+when every cell is observed. render_boxes emits one box per stack by status.
+
+Verification: tests/test_block_model.py 8 passed (5x4 uniform -> 8 observed
+cells/160 observed/240 assumed/400 if assumed, single-row verified 100,
+corner conflict, recessed column, rescan, top view, render, input rejection);
+with test_layer_span 14 passed; ruff clean. Pipeline smoke on real archived
+detections (img19 as X face, img30 as Y face; different blocks, mechanics
+only): 5x4, observed 159, assumed 240, total_if_assumed 399, verified false.
+No Worker, APK, deployment or model change.
+
+Next (3-day scope): port span count + block model into the Worker response
+(pure arithmetic on RF boxes) or call Lambda with detections; APK: capture
+rule (one face, straight-on, fill frame, mid-height), per-stack screen, block
+render from render_boxes with observed/assumed/missing colours; field test of
+10 blocks with on-site per-stack counts; report accepted-stack exactness,
+scene agreement, rejection rate and interior-assumption error rate.
+
+## 2026-10-08 - per-stack manual verification and span counter (Claude Code)
+
+Cut the 13 straight-on labelled photos into stack columns using archived V2
+box x-centres and inspected enlarged columns with model marks, rim grids and
+per-layer cell strips (renders in reports/field-labelled-20261007/per-stack/).
+Whiteness/egg-colour row heuristics failed on the WhatsApp copies; rim grids
+were confused by background tray tops and wrong pitch priors. Adopted a span
+count: round((last box centre - first box centre) / median spacing) + 1, which
+removes duplicate boxes but cannot recover unboxed top/bottom layers.
+
+Measured on 53 resolved stacks across 10 scenes: raw V2 box count exact 31/53,
+within 1 49/53; span count exact 40/53, within 1 53/53. Span scene totals
+100/100/100/81/61/79/121/158/158 vs labels 100/100/100/80/60/80/120/160/160.
+Per-stack 20s for those scenes are inferred from user totals plus the machine
+evidence; they are not independent physical per-stack counts, and 19 vs 20
+could not always be separated by eye at 1-2 MP. Unresolved: img04 and img09
+(blocks at two or three depths merged by x-clustering; img09 has an empty top
+tray and nested empties), img50 (close-up from above; lower rows perspective-
+compressed; model and span both 35 vs label 40). Reference 20/20/20/20/19 for
+img01 retained.
+
+Code: backend/app/vision/layer_span.py (count_layers_by_span, diagnostic,
+verified=False) and backend/tests/test_layer_span.py; 6 tests pass with
+work/heatmap-env Python plus work/vision-deps packages. No API route, Worker,
+APK, deployment or model change. Evidence: per_stack_counts.csv,
+span_summary.py, per-stack/ renders, README section.
+
+Next: segment stacks by depth (face polygons, not x-clusters) before counting;
+rectify close-up faces before the span count; wire span count into the
+candidate route as diagnostic per-stack evidence; add APK frontal/fill-frame
+rule; user confirms label readings and supplies originals; reserve held-out
+scenes.
+
+## 2026-10-07 - labelled field photos and first measured V2 baseline (Claude Code)
+
+User supplied 52 photos with handwritten verified stack-face totals in
+Downloads/FileOfEggLabels. Copied byte-for-byte with SHA-256 manifest to
+datasets/field-2026-10/labelled-20261007/ (intake.py). All are WhatsApp copies
+(0.2-1.9 MP, no EXIF) with ink drawn into pixels. Transcribed labels into
+labels.csv with confidence and scope notes; user confirmation of
+medium-confidence readings (21, 28, 40, 41, 43, 45, 46, 52) and scope (3, 26,
+40, 41, 43, 52) is pending. Six near-duplicate pairs and several same-block
+multi-angle groups recorded; images are not independent samples.
+
+Ran unchanged production Worker/Roboflow projec-mutta/2 on all 52 (labels not
+sent); one Windows TLS error retried successfully; repeat counts for images 1/2
+identical. Measured: all 5/52 exact, MAE 45.1, V2 sum 2839 vs label sum 5041.
+Block faces 1/39 exact, 6/39 within 2, MAE 59.1. By assistant capture tag
+(assigned after seeing errors, so hindsight-biased): frontal fill-frame 12/18
+within 5% (median 4.2%); angled/corner/multi-block 0/16 (median 70.2%);
+distant/wide 0/5 (median 94.5%). Same-block checks independent of tags: block
+80 gives 81 frontal, 52 oblique, 18/20 steep side; block 109 gives 117 frontal,
+60 corner. Wide scenes collapse (358 -> 1; 205/204 -> 0). No per-stack truth,
+filled/empty split or inventory total established. No code, deployment, model
+or APK change. Report: reports/field-labelled-20261007/README.md.
+
+Next: user confirms transcription and supplies un-annotated originals if
+available; add APK frontal/fill-frame capture gate; test tiled or per-face
+cropped V2 inference on the angled/distant failures (needs Roboflow calls);
+label per-stack counts constrained by the user's totals for the three-check
+per-stack counter; keep a held-out subset untouched.
+
+## 2026-10-07 - Claude Code handover
+
+This checkout is intentionally uncommitted and unpushed. The active work is the
+reconstruction diagnostic, not a verified counting release. APK 0.3.4+10 reaches
+the staging Worker and AWS Lambda, but the current view is sparse SIFT/RANSAC
+triangulation: its dots are matched image features, not tray objects. It has no
+dense depth, mesh, texture, tray-instance association, or exact inventory total.
+Keep physical_trays: null, verified: false, and arbitrary scale until those
+stages are implemented and measured against physical ground truth.
+
+Handover file: docs/CLAUDE_CODE_HANDOFF.md. It records the current artifacts,
+known limitations, commands, deployed endpoints/digests, tools/MCPs, skills,
+and the smallest safe next steps. Do not redeploy production or commit/push
+unless the user explicitly requests it.
+
+## 2026-10-07 - Staging reconstruction integration and APK checkpoint
+
+Implemented render-ready sparse geometry (colored points capped at 2,000,
+camera poses, bounds, EXIF focal estimate when available, explicit failure
+statuses), staging-only Worker archive/relay, and APK 0.3.4+10 photo/camera
+entry and orbitable diagnostic viewer. Production URL default and counting
+route remain unchanged. User approved staging deployment and secret attachment.
+
+AWS image pilot-20261007-integration is Active/Successful, digest
+sha256:8511bd3af2afb02a8d7c8107bc83f2032c14299eefbd504cf6105e0d30218dba.
+Temporary builder i-010cbb8cea282372d was terminated and its access resources
+removed during deployment cleanup. Staging Worker version after secret attachment:
+bae12d3c-5069-4c88-97e2-8b2e5e89f452. No production Worker deployment.
+
+Checks: backend 82 tests, Worker 20 tests, TypeScript compile and staging dry-run,
+Flutter 66 tests passed. Final flutter analyze: no issues (170.2 seconds).
+APK built, signature verified (existing Android debug certificate), version checked,
+and installed in BlueStacks. SHA256:
+B42252BF5910EDC9A5E017A8EE08B4A23652CA62104564AA3724E87156ED150B.
+
+Four API photo-pair tests returned HTTP 200 and exactly matched direct AWS
+geometry: wide 175 matches/125 inliers/76,94,100 points; negative 2 matches and
+insufficient_matches; wide-side 9/9/8,9,9 points; side-close 180/129/76,120,87.
+Staging health advertises reconstruct_v1; production health does not. Anonymous
+AWS reconstruction remains protected. BlueStacks now renders; selecting the wide
+pair through the APK displayed 76 points/125 inliers/0.376 px at focal factor 0.7.
+One emulator screenshot saved. User supplied a further screenshot showing 100
+points/125 inliers/0.447 px. Remaining manual pair tests/two-rotation evidence and
+full UI review are pending after interaction interruptions; no complete UI pass claimed.
+
+User clarification: expected a recognizable 3D model of trays. Current algorithm
+is sparse two-view SIFT/RANSAC/triangulation, not dense meshing or tray-instance
+reconstruction. Low reprojection error is not count accuracy. No calibrated scale,
+physical count, model retraining or deduplicated inventory is established.
+Report: reports/reconstruct-integration-20261007/README.md.
+Next: finish outstanding UI checks; audit tray/stack correspondences with overlays;
+evaluate calibrated overlapping views for dense reconstruction separately from
+instance counting, against physically counted held-out scenes. No commit or push.
+
+## 2026-10-07 - AWS reconstruction route deployed and photo-tested
+
+The user approved official CLI installation/login and completed browser sign-in.
+Installed AWS CLI 2.37.10 per-user; STS confirmed account 608942062000. Reused the
+existing Lambda, SSM secret and ECR repository. Moved the existing local geometry
+algorithm into app.vision.reconstruction; the CLI now calls that same module.
+Added protected POST /candidate/reconstruct with bounded uploads/pixels,
+distinct/equal-dimension photo validation, temporary-file cleanup and one active
+reconstruction per process. Public health advertises two_view_sfm_diagnostic_v1.
+
+Deployed pilot-20261007, digest
+sha256:4ef6034d8adb553478d86f73a131d6c8dff3ba943cf1d49a063b11315cda70fb.
+Direct AWS queries confirmed Active/Successful and the resolved image digest.
+Temporary t3.small builder i-06d048e4cbd40a49d is confirmed terminated; role,
+instance profile and security group were removed. No provisioned concurrency.
+
+Verification: 15 local host/spatial tests passed; real-photo local API geometry
+matched CLI exactly. Public health 200, unauthenticated routes 401, authenticated
+band diagnostic and reconstruction 200. Original overlapping wide image-1/2
+hashes match. AWS: 175 matches, 125 fundamental inliers, 76/94/100 sparse points
+under focal factors 0.7/1.0/1.4, 10.703 seconds. A second hosted reconstruction
+was exactly equal, 10.568 seconds. Windows: 121 inliers, 67/86/100 points; platform
+fits differ and point totals are not tray totals. Band route still reports 16
+stack candidates / zero accepted correspondences and null inventory. Both routes
+remain diagnostic_only / verified=false. Reports and PLY evidence:
+reports/aws-reconstruction-deploy-20261007/.
+
+Current APK 0.3.3+9 and Worker still use their existing production model path;
+no AWS/mobile integration, fresh model inference, retraining or verified warehouse
+count is claimed. Reviewed visible references 99/19 are retained separately.
+Exact next steps: camera calibration; unchanged scene with physical per-stack
+filled/empty truth; stack-face localization and cross-view identity/layer matching;
+held-out exact-count validation; only then Worker/mobile integration. Earlier
+entries below preserve the pre-deployment checkpoints.
+
+## 2026-10-07 - live AWS check and overlapping-wide-photo reconstruction
+
+The existing AWS Lambda diagnostic's public health returned HTTP 200 and its
+unauthenticated candidate route returned 401. Health still explicitly says
+diagnostic_only/inventory_verification_ready=false. AWS Core first required
+reauthentication; after the user reconnected it returned Unknown tool, including
+for its list_regions method. No account mutation, new deployment or protected
+photo replay succeeded this session. AWS CLI is absent; an installation/login
+permission question is pending. Production APK/Worker still use Roboflow V2,
+with no AWS diagnostic gateway integration. Windows Worker health/ready probes
+failed during TLS with WinError 10054, which does not prove a server outage.
+
+New local geometry experiment reused scripts/reconstruct_pair.py on the two
+overlapping wide originals, warehouse-20260923 image-1/image-2: 175 strict mutual
+SIFT matches, 121 fundamental inliers, 46 homography inliers. Assumed focal-width
+factors 0.7/1.0/1.4 produced sparse PLY hypotheses of 67/86/100 points. Factor 1.0
+median reprojection error is 0.448 px. 101 inliers lie inside coarse manually
+inspected tray bounds in both images; this is not instance/identity validation.
+Unknown intrinsics, arbitrary scale and unconfirmed unchanged stock prevent a
+verified inventory claim. Feature points are not trays. This camera-geometry
+experiment is local, distinct from the deployed stack/band diagnostic route.
+
+Reviewed wide/narrow photo evidence against the retained numbered visible-layer
+references: 99 (20/20/20/20/19) and 19. Archived V2 counts 76/19 have absolute
+errors 23/0 against those references. No fresh inference, no sum across views,
+no independent physical filled/empty truth, and no 99% field accuracy claim.
+Host/spatial contract checks passed all 14 tests with one anyio deprecation.
+
+Launched BlueStacks Pie64 and the installed APK 0.3.3+9 through its visible UI.
+Copied four existing photos to its Download/egg-tray-test folder. Android's
+accessibility tree shows SERVER REACHABLE and upload controls, but Windows and
+Android screenshots are white. App logs contain EGL_BAD_MATCH. OpenGL-only
+rendering was selected in BlueStacks settings, restart completed, and config gl
+and Android boot completion confirmed. The restarted launcher appeared normally;
+further app interaction was interrupted by minimization/user input. A post-change
+app upload/result flow is not verified; no scan was submitted from this APK.
+
+Evidence: reports/aws-user-test-20261007/ (health, source hashes, matches, PLY
+hypotheses, Android accessibility and startup rendering evidence).
+Next: restore AWS tooling or approve official CLI/login; verify protected AWS
+photo replay and separately authenticated gateway integration; finish emulator
+user upload/result flow; establish calibrated stack identities/layers from
+overlapping corner views and evaluate untouched physical recounts.
+
+## 2026-10-06 — AWS vision diagnostic deployed and verified
+
+AWS authentication succeeded for account 608942062000. Deployed the existing
+diagnostic FastAPI service to Lambda `egg-tray-vision-pilot` in ap-south-1:
+https://e3mkfxljv7ja42ygklbacg3fge0cibxg.lambda-url.ap-south-1.on.aws/.
+Health is public; candidate requests require a server-side bearer credential
+stored as SSM SecureString `/egg-tray-vision-pilot/service-token`. Lambda is
+Active, 2048 MB, timeout 120 seconds, no provisioned concurrency. ECR image
+`pilot-20261006` digest is
+`sha256:f4843cebc73d1dbe15f717799cdb9361ef2deb0b5c57e82a0a92cfa3e7b9a472`.
+
+CodeBuild's account build quota was zero, so a temporary no-ingress t3.small
+builder built/pushed the image. Confirmed instance i-085685badf81960c1 terminated;
+removed its role, profile and security group, plus the unused CodeBuild project
+and role. Retained metered resources: on-demand Lambda, ECR image, seven-day
+logs, private seven-day S3 staging objects, encrypted standard SSM parameter.
+No actual bill estimate or free-service guarantee is established.
+
+Live cold-start verification exposed a Uvicorn connection-limit bug: readiness
+plus the initial request exceeded limit 2, producing HTTP 503. Corrected the
+Lambda ImageConfig command and future Dockerfile to use one worker without that
+connection limit. Replayed saved warehouse photos and archived V2 boxes:
+health HTTP 200, unauthenticated candidate HTTP 401, authenticated candidate
+HTTP 200; 16 proposed regions, zero accepted matches, null tray/egg-filled
+totals, verified=false, recapture_required. These summary results match the
+local diagnostic. Candidate client timing 14391 ms is one observation.
+This is hosted transport/execution verification, not a 3D or field-count success.
+Targeted host/spatial contract tests: 14 passed; one dependency deprecation warning.
+
+Artifacts: backend/Dockerfile.vision-lambda, buildspec.vision-lambda.yml,
+build-vision-on-ec2.sh, scripts/probe_vision_host.py and
+reports/aws-vision-check-20261006/. Mobile APK/Worker/V2 were not changed.
+Next: expose a separately verified gateway diagnostic route if needed; improve
+stack localization and layer-center/edge evidence on current reviewed scenes;
+add calibrated camera/stack identity evidence; obtain untouched physical
+filled/empty scene recounts for independent acceptance before promotion.
+
+## 2026-10-05 — AWS diagnostic deployment attempt and real-photo recheck
+
+User authorized hosting the Python vision backend on AWS and asked for a real
+3D verification. AWS Core reconnected long enough to confirm account
+608942062000 and inspect ap-south-1. Created private S3 staging bucket
+`egg-tray-vision-pilot-608942062000-ap-south-1` (public access blocked,
+AES256, seven-day object expiry) and ECR repository `egg-tray-vision-pilot`.
+AWS Core then returned `UNAUTHORIZED` again before source upload or image build.
+There is no CodeBuild project, Lambda function, service endpoint, or live AWS
+image verification yet. The machine has no AWS CLI/profile or Docker. Prepared
+`backend/Dockerfile.vision-lambda` and `backend/buildspec.vision-lambda.yml`
+and validated the local source ZIP. Production remains Cloudflare Worker +
+Roboflow V2; APK and Worker were not changed.
+
+Re-ran the saved two-view photo geometry script: 2 strict mutual matches,
+no accepted pose/point cloud, null physical tray total. Re-ran the authenticated
+local diagnostic API on three saved warehouse photos with archived V2 boxes:
+HTTP 200, diagnostic-only health, recapture required, 16 candidate regions,
+zero accepted correspondences, null inventory, verified false. The slot labels
+are transport assignments, not calibrated views; scene stability and physical
+filled/empty counts are unconfirmed. Targeted host/spatial tests: 14 passed.
+Evidence and deployment gate: `reports/aws-vision-check-20261005/`.
+
+Next: after AWS Core reconnects, upload the source ZIP, build the bounded-cost
+diagnostic Lambda image and verify its live authenticated route with the same
+saved inputs. Inspect and clean up pilot AWS resources if deployment cannot
+finish. Do not present
+that hosted diagnostic as exact inventory. For exact-count development, capture
+untouched physically recounted scenes, complete camera/stack identity evidence,
+and evaluate per-stack layer and occupancy errors before app promotion.
+
 ## 2026-10-05 — hosted-path and Android emulator audit
 
 Checked the live Cloudflare Worker and the current local release APK without

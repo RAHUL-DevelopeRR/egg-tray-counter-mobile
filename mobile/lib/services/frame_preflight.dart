@@ -212,9 +212,12 @@ class PreflightPolicy {
 
   static const double maxRollDeg = 4;
   static const double minPitchDownDeg = -5;
-  static const double maxPitchDownDeg = 28;
+  // Measured 2026-10-09: a camera looking down on a stack shrinks the layer
+  // spacing from top to base (28 px -> 16 px on a 20-layer stack) and costs
+  // one tray in the count. Hold the phone level at the stack's mid-height.
+  static const double maxPitchDownDeg = 12;
   static const double comfortableMinPitchDownDeg = 0;
-  static const double comfortableMaxPitchDownDeg = 22;
+  static const double comfortableMaxPitchDownDeg = 8;
 
   static const double minCoverage = 0.18;
   static const double comfortableCoverage = 0.32;
@@ -628,9 +631,10 @@ class FramePreflight {
                 '(accepted '
                 '${PreflightPolicy.minPitchDownDeg.toStringAsFixed(0)} to '
                 '${PreflightPolicy.maxPitchDownDeg.toStringAsFixed(0)}deg). '
-                'Hidden layers are created by extreme viewing angles.',
+                'Looking down on the stack squeezes the lower layers together '
+                'and the count loses a tray.',
             action: pitch > 0
-                ? 'Raise the phone towards the middle of the stack height.'
+                ? 'Hold the phone level at the middle height of the stack.'
                 : 'Lower the phone towards the middle of the stack height.',
           ),
         );
@@ -647,7 +651,8 @@ class FramePreflight {
                 '${PreflightPolicy.comfortableMinPitchDownDeg.toStringAsFixed(0)} to '
                 '${PreflightPolicy.comfortableMaxPitchDownDeg.toStringAsFixed(0)}deg.',
             action:
-                'Adjust the phone height so rims and base are both visible.',
+                'Hold the phone level at the middle height of the stack so the '
+                'layer spacing stays even from top to base.',
           ),
         );
       }

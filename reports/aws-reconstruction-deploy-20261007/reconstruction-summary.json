@@ -1,0 +1,15 @@
+{
+  "response_status": 200,
+  "unauthenticated_status": 401,
+  "processing_ms": 10703,
+  "status": "uncalibrated_geometry_only",
+  "mutual_matches": 175,
+  "fundamental_inliers": 125,
+  "triangulated_points": [
+    76,
+    94,
+    100
+  ],
+  "physical_trays": null,
+  "verified": false
+}

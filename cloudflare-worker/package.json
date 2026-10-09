@@ -5,7 +5,8 @@
     "build": "tsc --outDir dist --noEmit false",
     "check": "npm run build && wrangler deploy --dry-run && node --test test/*.test.mjs",
     "deploy": "npm run build && wrangler deploy",
-    "types": "wrangler types"
+    "types": "wrangler types",
+    "test": "npm run build && node --test test/*.test.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.20.3",

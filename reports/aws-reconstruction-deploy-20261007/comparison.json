@@ -1,0 +1,27 @@
+{
+  "host_repeat_exact_equal": true,
+  "repeat_ms": 10568,
+  "cloud_mutual_matches": 175,
+  "cloud_fundamental_inliers": 125,
+  "cloud_triangulated_points": [
+    76,
+    94,
+    100
+  ],
+  "cloud_median_error_px": [
+    0.37647979414324473,
+    0.3145874792534913,
+    0.4470675927322275
+  ],
+  "local_fundamental_inliers": 121,
+  "local_triangulated_points": [
+    67,
+    86,
+    100
+  ],
+  "cross_platform_geometry_exact_equal": false,
+  "photo_hashes_match_local": true,
+  "physical_trays": null,
+  "verified": false,
+  "note": "Point totals are not tray totals; Windows/Linux geometric fits differ."
+}

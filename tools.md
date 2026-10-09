@@ -1,5 +1,32 @@
 # Tools and MCP inventory
 
+## Claude Code handover: tools and skills used on 2026-10-07
+
+The following were actually used while implementing and verifying the staging
+reconstruction diagnostic. This is an activity record, not a new dependency
+requirement.
+
+| Capability | How it was used | Auth/secret note |
+| --- | --- | --- |
+| functions.exec / local shell | Read/edit repository files, run tests, build Flutter APK, run pytest, npm/TypeScript checks, inspect Git state | No provider secret printed |
+| mcp__node_repl__js through @oai/sky | Visible BlueStacks interaction: settings, Android photo picker, APK reconstruction result, screenshot capture | Uses the local desktop session; no credential stored in repo |
+| ADB | Install and launch the APK; push fixture photos to the emulator | Device authorization only |
+| AWS CLI | Check Lambda state, retrieve the existing SSM token into a pipe, and verify the deployed image | Token was never written to source, logs, reports or APK |
+| Wrangler / Cloudflare Worker | Deploy staging only, attach the server-side token, run health and relay checks | Cloudflare session auth; production was not deployed |
+| web | Check primary COLMAP documentation for sparse-vs-dense reconstruction terminology | Public documentation only |
+
+Skills used: computer-use for the Windows/BlueStacks workflow, antislop and
+antislop-ui for the post-build UI review rules, and ponytail for keeping the
+diagnostic implementation minimal and avoiding a heavy 3D dependency. The AWS,
+Roboflow and Cloudflare skills are available/configured in this environment but
+were not used as a substitute for the tested CLI/Worker commands unless a future
+agent verifies otherwise. The codex-app-tools plugin supplied workspace/app
+integration; unified-computer-use supplied the visible desktop bridge.
+
+Not used as counting dependencies: WhatsApp, Apify, Composio, Agent Reach,
+document/spreadsheet/presentation plugins, or Roboflow retraining. Do not add
+them to the runtime path for this handover.
+
 2026-09-28 follow-up runtime: the same local CPU Python/PyTorch environment ran
 four grouped comparisons and all verification checks without provider credentials.
 No new MCP entries, cloud authentication or billable provider actions were needed.
