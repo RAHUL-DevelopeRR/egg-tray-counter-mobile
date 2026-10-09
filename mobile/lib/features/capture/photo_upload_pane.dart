@@ -32,9 +32,19 @@ Future<String> prepareUploadedPhoto(String source) async {
   if (decoded == null) throw const FormatException('Cannot decode this photo.');
   final copy = File('${Directory.systemTemp.path}/${const Uuid().v4()}.jpg');
   try {
-    await copy.writeAsBytes(
-      img.encodeJpg(img.bakeOrientation(decoded), quality: 95),
-    );
+    var oriented = img.bakeOrientation(decoded);
+    // 2000 px on the long side keeps every layer readable and the upload small.
+    final longest = oriented.width > oriented.height ? oriented.width : oriented.height;
+    if (longest > 2000) {
+      final scale = 2000 / longest;
+      oriented = img.copyResize(
+        oriented,
+        width: (oriented.width * scale).round(),
+        height: (oriented.height * scale).round(),
+        interpolation: img.Interpolation.average,
+      );
+    }
+    await copy.writeAsBytes(img.encodeJpg(oriented, quality: 95));
     final quality = await const ImageQualityService().inspect(copy.path);
     if (!quality.accepted) {
       throw FormatException(quality.reason ?? 'Photo quality is insufficient.');

@@ -53,10 +53,13 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
   Future<void> _cameraTask = Future<void>.value();
   int _cameraGeneration = 0;
   bool _cameraActive = true;
+  /// Remembered for the app session: wide blocks are easier in landscape.
+  static bool _landscapePreferred = false;
 
   @override
   void initState() {
     super.initState();
+    _applyOrientation();
     WidgetsBinding.instance.addObserver(this);
     _view = widget.initialView ?? _nextMissing ?? widget.views.first;
     _live
@@ -89,19 +92,30 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
 
   CameraDescription? get _preferredCamera {
     if (widget.cameras.isEmpty) return null;
-    if (widget.mainCameraOnly) {
-      for (final camera in widget.cameras) {
-        if (camera.lensDirection == CameraLensDirection.back &&
-            camera.lensType == CameraLensType.wide) {
-          return camera;
-        }
+    // The main (1x) back camera when the device reports lens types; otherwise
+    // the first back camera, which is the main one on every phone seen so far.
+    for (final camera in widget.cameras) {
+      if (camera.lensDirection == CameraLensDirection.back &&
+          camera.lensType == CameraLensType.wide) {
+        return camera;
       }
-      return null;
     }
     return widget.cameras.cast<CameraDescription?>().firstWhere(
       (camera) => camera?.lensDirection == CameraLensDirection.back,
-      orElse: () => widget.cameras.first,
+      orElse: () => widget.mainCameraOnly ? null : widget.cameras.first,
     );
+  }
+
+  Future<void> _applyOrientation() => SystemChrome.setPreferredOrientations(
+    _landscapePreferred
+        ? const [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]
+        : const [DeviceOrientation.portraitUp],
+  );
+
+  Future<void> _toggleOrientation() async {
+    _landscapePreferred = !_landscapePreferred;
+    await _applyOrientation();
+    if (mounted) setState(() {});
   }
 
   Future<void> _initializeCamera() {
@@ -128,7 +142,9 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
     }
     final next = CameraController(
       camera,
-      ResolutionPreset.max,
+      // 1080p: enough pixels per layer for the counter, a tenth of the upload
+      // bytes of a full-resolution still, no Worker resource limits.
+      ResolutionPreset.veryHigh,
       enableAudio: false,
       // The analysis stream reads plane 0 of the preview, which is luminance
       // only in yuv420. Still captures stay JPEG regardless.
@@ -136,7 +152,11 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
     );
     try {
       await next.initialize();
-      if (widget.mainCameraOnly) await next.setZoomLevel(1.0);
+      try {
+        await next.setZoomLevel(1.0);
+      } on Object {
+        // Zoom control is optional; the preset already selects the main lens.
+      }
       if (!mounted || !_cameraActive || generation != _cameraGeneration) {
         await _disposeCamera(next);
         return;
@@ -401,6 +421,7 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
 
   @override
   void dispose() {
+    SystemChrome.setPreferredOrientations(const [DeviceOrientation.portraitUp]);
     WidgetsBinding.instance.removeObserver(this);
     _cameraActive = false;
     ++_cameraGeneration;
@@ -419,107 +440,198 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
   Widget build(BuildContext context) {
     final controller = _controller;
     final prepared = controller != null && controller.value.isInitialized;
+    final landscape =
+        MediaQuery.orientationOf(context) == Orientation.landscape;
+    final steps = _StepRow(
+      view: _view,
+      session: widget.session,
+      views: widget.views,
+    );
+    final instruction = Text(
+      _view.instruction,
+      maxLines: landscape ? 6 : 2,
+      overflow: TextOverflow.ellipsis,
+      style: Theme.of(context).textTheme.bodySmall,
+    );
+    final torch = TextButton.icon(
+      onPressed: prepared && _cameraActive && !_capturing && !_torchChanging
+          ? _toggleTorch
+          : null,
+      icon: Icon(
+        controller?.value.flashMode == FlashMode.torch
+            ? Icons.flashlight_off
+            : Icons.flashlight_on,
+        size: 18,
+      ),
+      label: Text(
+        controller?.value.flashMode == FlashMode.torch
+            ? 'TURN TORCH OFF'
+            : 'TURN TORCH ON',
+        style: const TextStyle(fontSize: 12),
+      ),
+    );
+    final rotate = IconButton(
+      key: const ValueKey('rotate-capture'),
+      tooltip: _landscapePreferred ? 'Portrait' : 'Landscape',
+      onPressed: _toggleOrientation,
+      icon: Icon(
+        _landscapePreferred
+            ? Icons.stay_current_portrait
+            : Icons.stay_current_landscape,
+      ),
+    );
+    final capture = FilledButton.icon(
+      onPressed: prepared && _captureAllowed && _frameGate.ready
+          ? _capture
+          : null,
+      icon: _capturing
+          ? const SizedBox.square(
+              dimension: 20,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            )
+          : const Icon(Icons.camera_alt),
+      label: Text('CAPTURE ${_view.name.toUpperCase()}'),
+    );
+    final preview = _CameraStage(
+      controller: prepared ? controller : null,
+      landscape: landscape,
+      cameraError: _cameraError,
+      view: _view,
+      report: _report,
+      streamError:
+          _live.streamError ??
+          (!_live.frameFresh
+              ? 'Waiting for a fresh camera frame. Hold still.'
+              : null),
+      locked: !_captureAllowed,
+    );
+    if (landscape) {
+      return Row(
+        children: [
+          Expanded(child: Padding(padding: const EdgeInsets.all(6), child: preview)),
+          SizedBox(
+            width: 236,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(4, 8, 12, 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  steps,
+                  const SizedBox(height: 8),
+                  instruction,
+                  Row(children: [Expanded(child: torch), rotate]),
+                  const Spacer(),
+                  capture,
+                ],
+              ),
+            ),
+          ),
+        ],
+      );
+    }
     return Column(
       children: [
-        _CaptureHeader(
-          view: _view,
-          session: widget.session,
-          views: widget.views,
+        Padding(
+          padding: const EdgeInsets.fromLTRB(12, 4, 4, 0),
+          child: Row(children: [Expanded(child: steps), rotate]),
         ),
-        TextButton.icon(
-          onPressed: prepared && _cameraActive && !_capturing && !_torchChanging
-              ? _toggleTorch
-              : null,
-          icon: Icon(
-            controller?.value.flashMode == FlashMode.torch
-                ? Icons.flashlight_off
-                : Icons.flashlight_on,
-          ),
-          label: Text(
-            controller?.value.flashMode == FlashMode.torch
-                ? 'TURN TORCH OFF'
-                : 'TURN TORCH ON',
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+          child: Row(
+            children: [
+              Expanded(child: instruction),
+              torch,
+            ],
           ),
         ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(24),
-              child: ColoredBox(
-                color: Colors.black,
-                child: Center(
-                  child: AspectRatio(
-                    // The preview box matches the image aspect so the on-screen
-                    // guide is the same normalised rectangle the analyser uses.
-                    aspectRatio: prepared
-                        ? 1 / controller.value.aspectRatio
-                        : 0.75,
-                    child: Stack(
-                      fit: StackFit.expand,
-                      children: [
-                        if (prepared)
-                          CameraPreview(controller)
-                        else
-                          Center(
-                            child: _cameraError == null
-                                ? const CircularProgressIndicator()
-                                : Padding(
-                                    padding: const EdgeInsets.all(24),
-                                    child: Text(
-                                      _cameraError!,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                          ),
-                        CameraGuideOverlay(
-                          view: _view,
-                          severity: _report.blocked
-                              ? PreflightSeverity.blocking
-                              : _report.hasAdvisory
-                              ? PreflightSeverity.advisory
-                              : PreflightSeverity.pass,
-                        ),
-                        // The live verdict sits inside the viewfinder so the
-                        // camera keeps the screen; it is one strip, not a panel.
-                        Positioned(
-                          left: 8,
-                          right: 8,
-                          bottom: 8,
-                          child: _ConstraintBanner(
-                            report: _report,
-                            streamError:
-                                _live.streamError ??
-                                (!_live.frameFresh
-                                    ? 'Waiting for a fresh camera frame. Hold still.'
-                                    : null),
-                            locked: !_captureAllowed,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: preview,
           ),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 16),
-          child: FilledButton.icon(
-            onPressed: prepared && _captureAllowed && _frameGate.ready
-                ? _capture
-                : null,
-            icon: _capturing
-                ? const SizedBox.square(
-                    dimension: 20,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  )
-                : const Icon(Icons.camera_alt),
-            label: Text('CAPTURE ${_view.name.toUpperCase()}'),
-          ),
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+          child: capture,
         ),
       ],
+    );
+  }
+}
+
+/// The viewfinder with the guide and the live verdict strip laid over it.
+class _CameraStage extends StatelessWidget {
+  const _CameraStage({
+    required this.controller,
+    required this.landscape,
+    required this.cameraError,
+    required this.view,
+    required this.report,
+    required this.streamError,
+    required this.locked,
+  });
+
+  final CameraController? controller;
+  final bool landscape;
+  final String? cameraError;
+  final CaptureView view;
+  final PreflightReport report;
+  final String? streamError;
+  final bool locked;
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = this.controller;
+    final sensorAspect = controller?.value.aspectRatio ?? (4 / 3);
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(18),
+      child: ColoredBox(
+        color: Colors.black,
+        child: Center(
+          child: AspectRatio(
+            // The preview box matches the image aspect so the on-screen guide
+            // is the same normalised rectangle the analyser uses.
+            aspectRatio: landscape ? sensorAspect : 1 / sensorAspect,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                if (controller != null)
+                  CameraPreview(controller)
+                else
+                  Center(
+                    child: cameraError == null
+                        ? const CircularProgressIndicator()
+                        : Padding(
+                            padding: const EdgeInsets.all(24),
+                            child: Text(
+                              cameraError!,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                  ),
+                CameraGuideOverlay(
+                  view: view,
+                  severity: report.blocked
+                      ? PreflightSeverity.blocking
+                      : report.hasAdvisory
+                      ? PreflightSeverity.advisory
+                      : PreflightSeverity.pass,
+                ),
+                Positioned(
+                  left: 8,
+                  right: 8,
+                  bottom: 8,
+                  child: _ConstraintBanner(
+                    report: report,
+                    streamError: streamError,
+                    locked: locked,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -711,8 +823,8 @@ class _CheckChip extends StatelessWidget {
   }
 }
 
-class _CaptureHeader extends StatelessWidget {
-  const _CaptureHeader({
+class _StepRow extends StatelessWidget {
+  const _StepRow({
     required this.view,
     required this.session,
     required this.views,
@@ -724,38 +836,21 @@ class _CaptureHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: views
-                .map(
-                  (item) => Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 3),
-                      child: _StepChip(
-                        label: item.name.toUpperCase(),
-                        complete: session.pathFor(item) != null,
-                        current: item == view,
-                      ),
-                    ),
-                  ),
-                )
-                .toList(growable: false),
-          ),
-          const SizedBox(height: 18),
-          Text(
-            view.title,
-            style: Theme.of(
-              context,
-            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900),
-          ),
-          const SizedBox(height: 6),
-          Text(view.instruction),
-        ],
-      ),
+    return Row(
+      children: views
+          .map(
+            (item) => Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 3),
+                child: _StepChip(
+                  label: item.name.toUpperCase(),
+                  complete: session.pathFor(item) != null,
+                  current: item == view,
+                ),
+              ),
+            ),
+          )
+          .toList(growable: false),
     );
   }
 }
@@ -776,7 +871,7 @@ class _StepChip extends StatelessWidget {
     final scheme = Theme.of(context).colorScheme;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
-      padding: const EdgeInsets.symmetric(vertical: 9),
+      padding: const EdgeInsets.symmetric(vertical: 7),
       decoration: BoxDecoration(
         color: complete || current
             ? scheme.primaryContainer

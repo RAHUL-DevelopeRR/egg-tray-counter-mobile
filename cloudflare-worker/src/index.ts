@@ -669,6 +669,15 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
     captureQuality(columns[view], results[view].image?.width ?? null, results[view].image?.height ?? null)]));
   const rejectedView = worstView(capture, VIEWS);
   const assembled = buildBlock(columns.straight, columns.left, columns.right);
+  // When the block model names a face in its first conflict, that is the photo to retake.
+  const namedFace = (() => {
+    for (const c of assembled.conflicts) {
+      const reason = String(c.reason ?? "");
+      const m = /^(LEFT|RIGHT|STRAIGHT):/.exec(reason) ?? /STRAIGHT and (LEFT|RIGHT)/.exec(reason);
+      if (m) return { view: m[1].toLowerCase(), reason };
+    }
+    return null;
+  })();
   // A face that fails the capture gate gives no usable column counts, so the block total is withheld.
   const block = rejectedView ? { ...assembled, total_trays: null, faces_consistent: false, fully_observed: false } : assembled;
   // Model boxes are useful evidence, but not proof of cross-view identity or egg occupancy.
@@ -676,7 +685,9 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
   const reason = "Model detections are available. Physical stack matching and egg occupancy remain unresolved; these per-photo counts are not a verified inventory total.";
   const rescan = rejectedView
     ? { recommended_view: rejectedView, reason: `${CAPTURE_ADVICE} (${rejectedView.toUpperCase()}: ${capture[rejectedView].reasons.join("; ")})` }
-    : { recommended_view: "straight", reason };
+    : namedFace
+      ? { recommended_view: namedFace.view, reason: namedFace.reason }
+      : { recommended_view: "straight", reason };
   return json({
     scan_id: scanId, status: "rescan_required", accepted: false,
     physical_stack_count: null, total_trays: null, total_eggs: null,
