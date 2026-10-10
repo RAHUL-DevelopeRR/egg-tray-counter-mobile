@@ -1,0 +1,72 @@
+[
+ {
+  "photo": "scene 01 (upright, no app)",
+  "scan": "0ce3962e-f817-42cf-a2f9-2867ab4f82ce",
+  "view": "straight",
+  "boxes": 102,
+  "box_aspect": 5.594,
+  "walk": [
+   20,
+   20,
+   20,
+   20,
+   19
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20,
+   19
+  ],
+  "stacks_exact": true,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "scene 02 (upright, no app)",
+  "scan": "0ce3962e-f817-42cf-a2f9-2867ab4f82ce",
+  "view": "left",
+  "boxes": 82,
+  "box_aspect": 6.295,
+  "walk": [
+   20,
+   20,
+   20,
+   20
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20
+  ],
+  "stacks_exact": true,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "scene 19 (upright, no app)",
+  "scan": "0ce3962e-f817-42cf-a2f9-2867ab4f82ce",
+  "view": "right",
+  "boxes": 100,
+  "box_aspect": 5.459,
+  "walk": [
+   20,
+   20,
+   20,
+   20,
+   20
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20,
+   20
+  ],
+  "stacks_exact": true,
+  "accepted": true,
+  "reasons": []
+ }
+]

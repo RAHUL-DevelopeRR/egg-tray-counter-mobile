@@ -36,9 +36,9 @@ class LiveFramePreflight extends ValueNotifier<PreflightReport> {
 
   CameraController? _controller;
   StreamSubscription<AccelerometerEvent>? _accelerometer;
-  DevicePose? _rawPose;
-  double? _rawRollDeg;
-  int _displayRotation = 0;
+  DevicePose? _sensorPose;
+  bool _sensorInPlane = false;
+  int _captureRotation = 0;
   PoseCalibration _calibration = PoseCalibration.none;
   FrameMetrics? _metrics;
   CaptureView _view = CaptureView.left;
@@ -58,31 +58,62 @@ class LiveFramePreflight extends ValueNotifier<PreflightReport> {
 
   PoseCalibration get calibration => _calibration;
 
-  /// Roll straight from the accelerometer, before the display-rotation
-  /// correction: the pane uses it to decide portrait or landscape.
-  double? get rawRollDeg =>
+  bool get _poseFresh =>
       _lastPose != null &&
-          DateTime.now().difference(_lastPose!) <= const Duration(seconds: 2)
-      ? _rawRollDeg
-      : null;
+      DateTime.now().difference(_lastPose!) <= const Duration(seconds: 2);
 
-  /// Screen rotation the app has chosen (0, 90 = landscape left, 270 =
-  /// landscape right). Frames are rotated into that orientation and the roll
-  /// is measured relative to it, so a phone held sideways is "level".
-  void setDisplayRotation(int degrees) {
+  /// Roll straight from the accelerometer, relative to the phone's own
+  /// upright: the pane uses it to tell portrait from sideways. Null when the
+  /// phone lies nearly flat, where roll means nothing.
+  double? get rawRollDeg =>
+      _poseFresh && _sensorInPlane ? _sensorPose?.rollDeg : null;
+
+  /// How the phone is held while the screen stays portrait (0, 90 = turned
+  /// counter-clockwise, 270 = turned clockwise; see nextCaptureRotation).
+  /// Live frames are turned the same way before they are measured, and roll
+  /// is measured from that orientation's level, so a phone held level
+  /// sideways reads as level and the tray rims read as horizontal.
+  int get captureRotation => _captureRotation;
+
+  void setCaptureRotation(int degrees) {
     if (![0, 90, 270].contains(degrees)) {
       throw ArgumentError.value(degrees, 'degrees');
     }
-    _displayRotation = degrees;
+    if (degrees == _captureRotation) return;
+    _captureRotation = degrees;
+    // A frame measured the other way up must not unlock capture.
+    _metrics = null;
+    _lastAnalysis = null;
+    _publish();
   }
 
-  DevicePose? get rawPose =>
-      _lastPose != null &&
-          DateTime.now().difference(_lastPose!) <= const Duration(seconds: 2)
-      ? _rawPose
-      : null;
+  DevicePose? get rawPose {
+    final sensor = _sensorPose;
+    if (!_poseFresh || sensor == null) return null;
+    final offset = switch (_captureRotation) {
+      90 => -90.0,
+      270 => 90.0,
+      _ => 0.0,
+    };
+    var roll = sensor.rollDeg + offset;
+    if (roll > 180) roll -= 360;
+    if (roll <= -180) roll += 360;
+    return DevicePose(rollDeg: roll, pitchDownDeg: sensor.pitchDownDeg);
+  }
 
-  DevicePose? get pose => rawPose == null ? null : _calibration.apply(rawPose!);
+  /// A stored level reference was taken upright; its roll offset means
+  /// nothing sideways, so only its pitch offset is applied there.
+  DevicePose? get pose {
+    final raw = rawPose;
+    if (raw == null) return null;
+    final calibration = _captureRotation == 0
+        ? _calibration
+        : PoseCalibration(
+            pitchOffsetDeg: _calibration.pitchOffsetDeg,
+            referenceSet: _calibration.referenceSet,
+          );
+    return calibration.apply(raw);
+  }
 
   bool get frameFresh =>
       _metrics != null &&
@@ -115,21 +146,21 @@ class LiveFramePreflight extends ValueNotifier<PreflightReport> {
           ).listen(
             _onAccelerometer,
             onError: (Object _) {
-              _rawPose = null;
+              _sensorPose = null;
               _lastPose = null;
               _publish();
             },
           );
     } on Object {
       // A device without an accelerometer still gets every image check.
-      _rawPose = null;
+      _sensorPose = null;
     }
   }
 
   Future<void> stopSensors() async {
     final subscription = _accelerometer;
     _accelerometer = null;
-    _rawPose = null;
+    _sensorPose = null;
     _lastPose = null;
     await subscription?.cancel();
   }
@@ -189,21 +220,9 @@ class LiveFramePreflight extends ValueNotifier<PreflightReport> {
   void _onAccelerometer(AccelerometerEvent event) {
     final base = devicePoseFromAccelerometer(event.x, event.y, event.z);
     if (base == null) return;
-    // Roll is meaningless when the phone lies nearly flat (gravity mostly on
-    // z); keep whatever orientation was chosen last.
-    final inPlane = event.x * event.x + event.y * event.y;
-    _rawRollDeg = inPlane > 9.0 ? base.rollDeg : null;
-    // Held sideways the raw roll sits near +90 (landscape left) or -90
-    // (landscape right); relative to the rotated screen that is level.
-    final rollOffset = switch (_displayRotation) {
-      90 => -90.0,
-      270 => 90.0,
-      _ => 0.0,
-    };
-    _rawPose = DevicePose(
-      rollDeg: base.rollDeg + rollOffset,
-      pitchDownDeg: base.pitchDownDeg,
-    );
+    _sensorPose = base;
+    // Roll is meaningless when gravity lies mostly along z (phone flat).
+    _sensorInPlane = event.x * event.x + event.y * event.y > 9.0;
     _lastPose = DateTime.now();
   }
 
@@ -229,7 +248,7 @@ class LiveFramePreflight extends ValueNotifier<PreflightReport> {
           pixelStride: plane.bytesPerPixel ?? 1,
           rotationDegrees:
               ((_controller?.description.sensorOrientation ?? 0) -
-                  _displayRotation +
+                  _captureRotation +
                   360) %
               360,
         ),
@@ -325,7 +344,11 @@ LumaPlane? lumaFromJpeg(Uint8List bytes) {
     return null;
   }
   if (decoded == null) return null;
-  final oriented = img.bakeOrientation(decoded);
+  return lumaFromImage(img.bakeOrientation(decoded));
+}
+
+/// Luminance of an already upright image at analysis width.
+LumaPlane lumaFromImage(img.Image oriented) {
   final sample = oriented.width > kAnalysisWidth
       ? img.copyResize(
           oriented,

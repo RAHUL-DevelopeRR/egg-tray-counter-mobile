@@ -7,9 +7,9 @@ import 'package:flutter/services.dart';
 
 import '../../models/capture_view.dart';
 import '../../models/scan_session.dart';
+import '../../services/captured_still.dart';
 import '../../services/frame_evidence.dart';
 import '../../services/frame_preflight.dart';
-import '../../services/image_quality_service.dart';
 import '../../services/live_frame_preflight.dart';
 import '../../services/settings_store.dart';
 import 'camera_guide_overlay.dart';
@@ -45,7 +45,6 @@ class GuidedCapturePane extends StatefulWidget {
 
 class _GuidedCapturePaneState extends State<GuidedCapturePane>
     with WidgetsBindingObserver {
-  final _quality = const ImageQualityService();
   final _live = LiveFramePreflight();
   CameraController? _controller;
   late CaptureView _view;
@@ -62,9 +61,11 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
   int _cameraGeneration = 0;
   bool _cameraActive = true;
 
-  /// 0, 90 (landscape left) or 270 (landscape right), chosen from how the
-  /// phone is held so the camera and the layout always agree.
-  int _displayRotation = 0;
+  /// How the phone is held (0 upright, 90 turned counter-clockwise, 270
+  /// clockwise). The screen itself never rotates: the viewfinder stays fixed
+  /// to the phone like a normal camera app, the text and guide turn to face
+  /// the operator, and the saved photo is turned upright to match.
+  int _captureRotation = 0;
 
   @override
   void initState() {
@@ -89,7 +90,7 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
 
   void _onLiveReport() {
     if (!mounted) return;
-    _followOrientation(_live.rawRollDeg);
+    _followHand(_live.rawRollDeg);
     setState(() => _report = _live.value);
   }
 
@@ -117,28 +118,13 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
     );
   }
 
-  /// Follows the hand, not the system rotation lock: past 60 degrees of roll
-  /// the screen turns to that landscape side, back under 30 degrees it
-  /// returns to portrait. The live analysis is told the same rotation.
-  void _followOrientation(double? rawRoll) {
-    if (rawRoll == null) return;
-    final magnitude = rawRoll.abs();
-    var target = _displayRotation;
-    if (_displayRotation == 0 && magnitude > 60) {
-      target = rawRoll > 0 ? 90 : 270;
-    } else if (_displayRotation != 0 && magnitude < 30) {
-      target = 0;
-    }
-    if (target == _displayRotation) return;
-    _displayRotation = target;
-    _live.setDisplayRotation(target);
-    SystemChrome.setPreferredOrientations([
-      switch (target) {
-        90 => DeviceOrientation.landscapeLeft,
-        270 => DeviceOrientation.landscapeRight,
-        _ => DeviceOrientation.portraitUp,
-      },
-    ]);
+  /// Reads how the phone is held from the accelerometer; works with the
+  /// system rotation lock on, and never turns the screen.
+  void _followHand(double? rawRoll) {
+    final next = nextCaptureRotation(_captureRotation, rawRoll);
+    if (next == _captureRotation) return;
+    _captureRotation = next;
+    _live.setCaptureRotation(next);
   }
 
   Future<void> _initializeCamera() {
@@ -184,11 +170,9 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
         await _disposeCamera(next);
         return;
       }
-      await next.lockCaptureOrientation(DeviceOrientation.portraitUp);
-      if (!mounted || !_cameraActive || generation != _cameraGeneration) {
-        await _disposeCamera(next);
-        return;
-      }
+      // No capture-orientation lock: the plugin rotates the preview and tags
+      // the still from the display rotation at capture time, so a sideways
+      // phone gives an upright landscape photo like any camera app.
       setState(() {
         _controller = next;
         _cameraError = null;
@@ -288,6 +272,7 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
     }
     if (!_captureAllowed || !_frameGate.ready) return;
     final generation = _cameraGeneration;
+    String? rawPhoto;
     String? pendingPhoto;
     setState(() => _capturing = true);
     try {
@@ -303,12 +288,14 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
         return;
       }
       final capturePose = _live.pose;
+      // How the phone is held at the tap: the photo is turned to match.
+      final rotation = _captureRotation;
       // Android refuses a still capture while an image stream is active.
       await _live.stopCamera();
       XFile photo;
       try {
         photo = await controller.takePicture();
-        pendingPhoto = photo.path;
+        rawPhoto = photo.path;
       } finally {
         if (mounted &&
             _cameraActive &&
@@ -317,15 +304,24 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
           await _live.restartCamera();
         }
       }
-      final still = await _verify(photo.path, controller, capturePose);
+      final prepared = await prepareCapturedStill(
+        StillRequest(
+          sourcePath: photo.path,
+          targetPath: _uprightPath(photo.path),
+          captureRotation: rotation,
+          sensorOrientation: controller.description.sensorOrientation,
+        ),
+      );
+      if (prepared != null) pendingPhoto = prepared.path;
       if (!mounted || generation != _cameraGeneration) return;
-      if (still == null) {
+      if (prepared == null) {
         await _showRejection(
           'Photo could not be checked',
           'The saved photo could not be decoded. Retake this view.',
         );
         return;
       }
+      final still = _verify(prepared.analysis, controller, capturePose);
       if (still.blocked) {
         await _showRejection(
           still.firstBlocker!.headline,
@@ -333,24 +329,33 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
         );
         return;
       }
-      final quality = await _quality.inspect(photo.path);
-      if (!mounted || generation != _cameraGeneration) return;
-      if (!quality.accepted) {
+      if (!prepared.quality.accepted) {
         await _showRejection(
           'Retake ${_view.name.toUpperCase()}',
-          quality.reason ?? 'Image quality is not sufficient.',
+          prepared.quality.reason ?? 'Image quality is not sufficient.',
         );
         return;
       }
       final previousPath = widget.session.pathFor(_view);
       widget.session.setPath(
         _view,
-        photo.path,
+        prepared.path,
         cellId: cellId,
-        evidence: jsonEncode({...still.toJson(), 'source': 'captured_still'}),
+        evidence: jsonEncode({
+          ...still.toJson(),
+          'source': 'captured_still',
+          'capture_orientation': switch (rotation) {
+            90 => 'landscape_left',
+            270 => 'landscape_right',
+            _ => 'portrait',
+          },
+          'upright_pixels': true,
+          'width': prepared.width,
+          'height': prepared.height,
+        }),
       );
       pendingPhoto = null; // The session now owns this file.
-      if (previousPath != null && previousPath != photo.path) {
+      if (previousPath != null && previousPath != prepared.path) {
         await _deleteCapture(previousPath);
       }
       if (_nextMissing == null) {
@@ -375,28 +380,36 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
         _message('Could not read the saved photo. Please retake it.');
       }
     } finally {
+      if (rawPhoto != null) await _deleteCapture(rawPhoto);
       if (pendingPhoto != null) await _deleteCapture(pendingPhoto);
       if (mounted) setState(() => _capturing = false);
     }
   }
 
-  /// Re-runs every check on the still that was actually written to disk, using
-  /// the angle held at capture time. The preview and the still are different
-  /// crops, so guide-derived checks are limited to advisories here while
-  /// lighting, focus and clipping keep full blocking power.
-  Future<PreflightReport?> _verify(
-    String path,
+  String _uprightPath(String raw) =>
+      '${raw.replaceFirst(RegExp(r'\.jpe?g$', caseSensitive: false), '')}'
+      '-upright.jpg';
+
+  /// Re-runs every check on the photo that will be uploaded, measured on the
+  /// whole upright frame (the geometry the live frames had) with the angle
+  /// held at capture time. A device whose still has a different aspect from
+  /// its preview keeps the guide-derived checks advisory, while lighting,
+  /// focus and clipping keep full blocking power.
+  PreflightReport _verify(
+    LumaPlane plane,
     CameraController controller,
     DevicePose? capturePose,
-  ) async {
-    final bytes = await File(path).readAsBytes();
-    final plane = lumaFromJpeg(bytes);
-    if (plane == null) return null;
-    // The camera sensor is landscape-native; this pane locks capture upright.
-    final previewAspect = 1 / controller.value.aspectRatio;
+  ) {
+    // previewSize is in sensor coordinates (long side first); the upright
+    // frame is portrait or landscape the way the phone was held.
+    final sensorAspect = controller.value.aspectRatio;
+    final landscapeAspect = sensorAspect >= 1 ? sensorAspect : 1 / sensorAspect;
     final stillAspect = plane.width / plane.height;
+    final previewAspect = stillAspect >= 1
+        ? landscapeAspect
+        : 1 / landscapeAspect;
     final guide = mapGuideToStill(
-      const FrameAnalyzer().guide,
+      _live.analyzer.guide,
       previewAspect: previewAspect,
       stillAspect: stillAspect,
     );
@@ -426,18 +439,22 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
   }
 
   Future<void> _showRejection(String title, String body) async {
+    final turns = _captureRotation ~/ 90;
     await showDialog<void>(
       context: context,
-      builder: (context) => AlertDialog(
-        icon: const Icon(Icons.photo_camera_back_outlined),
-        title: Text(title),
-        content: Text(body),
-        actions: [
-          FilledButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('RETAKE'),
-          ),
-        ],
+      builder: (context) => _WorldOriented(
+        quarterTurns: turns,
+        child: AlertDialog(
+          icon: const Icon(Icons.photo_camera_back_outlined),
+          title: Text(title),
+          content: Text(body),
+          actions: [
+            FilledButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('RETAKE'),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -467,7 +484,8 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
   Widget build(BuildContext context) {
     final controller = _controller;
     final prepared = controller != null && controller.value.isInitialized;
-    final portrait = MediaQuery.orientationOf(context) == Orientation.portrait;
+    final turns = _captureRotation ~/ 90;
+    final sideways = turns != 0;
     final torch = TextButton.icon(
       style: TextButton.styleFrom(
         foregroundColor: Colors.white,
@@ -492,7 +510,7 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
     );
     final capture = FilledButton.icon(
       style: FilledButton.styleFrom(
-        minimumSize: Size(portrait ? double.infinity : 200, 52),
+        minimumSize: Size(sideways ? 200 : double.infinity, 52),
       ),
       onPressed: prepared && _captureAllowed && _frameGate.ready
           ? _capture
@@ -553,7 +571,7 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 child: Text(
                   _view.instruction,
-                  maxLines: 2,
+                  maxLines: sideways ? 1 : 2,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(color: Colors.white, fontSize: 12),
                 ),
@@ -563,19 +581,27 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
         ],
       ),
     );
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        _CameraStage(
-          controller: prepared ? controller : null,
-          portrait: portrait,
-          cameraError: _cameraError,
-          view: _view,
-          report: _report,
-        ),
-        Positioned(top: 0, left: 0, right: 0, child: top),
-        if (portrait)
-          Positioned(
+    final bottom = sideways
+        ? Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: SafeArea(
+              top: false,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(12, 0, 12, 10),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Expanded(child: banner),
+                    const SizedBox(width: 12),
+                    capture,
+                  ],
+                ),
+              ),
+            ),
+          )
+        : Positioned(
             left: 0,
             right: 0,
             bottom: 0,
@@ -590,55 +616,49 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
                 ),
               ),
             ),
-          )
-        else ...[
-          Positioned(
-            left: 0,
-            bottom: 0,
-            right: 236,
-            child: SafeArea(
-              top: false,
-              right: false,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(12, 0, 0, 10),
-                child: banner,
-              ),
-            ),
+          );
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        _CameraStage(
+          controller: prepared ? controller : null,
+          guideTurns: turns,
+          cameraError: _cameraError,
+          view: _view,
+          report: _report,
+        ),
+        _WorldOriented(
+          quarterTurns: turns,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Positioned(top: 0, left: 0, right: 0, child: top),
+              bottom,
+            ],
           ),
-          Positioned(
-            right: 0,
-            top: 0,
-            bottom: 0,
-            child: SafeArea(
-              left: false,
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 16),
-                  child: capture,
-                ),
-              ),
-            ),
-          ),
-        ],
+        ),
       ],
     );
   }
 }
 
-/// The viewfinder: the camera frame scaled to cover the whole area, with the
-/// guide drawn in frame coordinates so it means the same as the analyser's
-/// rectangle. Nothing else is laid out around it.
+/// The viewfinder: the whole portrait camera frame, as large as the screen
+/// allows, so what the operator sees is exactly what is photographed and
+/// counted (a neighbouring stack at the edge is visible, not hidden off
+/// screen). It never rotates; when the phone is held sideways the guide is
+/// drawn turned to the operator, in the same upright-frame coordinates the
+/// analyser measures.
 class _CameraStage extends StatelessWidget {
   const _CameraStage({
     required this.controller,
-    required this.portrait,
+    required this.guideTurns,
     required this.cameraError,
     required this.view,
     required this.report,
   });
 
   final CameraController? controller;
-  final bool portrait;
+  final int guideTurns;
   final String? cameraError;
   final CaptureView view;
   final PreflightReport report;
@@ -670,19 +690,55 @@ class _CameraStage extends StatelessWidget {
     return ColoredBox(
       color: Colors.black,
       child: FittedBox(
-        fit: BoxFit.cover,
+        fit: BoxFit.contain,
         clipBehavior: Clip.hardEdge,
         child: SizedBox(
-          width: portrait ? short : long,
-          height: portrait ? long : short,
+          width: short,
+          height: long,
           child: Stack(
             fit: StackFit.expand,
             children: [
               CameraPreview(controller),
-              CameraGuideOverlay(view: view, severity: severity),
+              RotatedBox(
+                quarterTurns: guideTurns,
+                child: CameraGuideOverlay(view: view, severity: severity),
+              ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// Lays [child] out for the way the phone is held and turns it to match, so
+/// text reads upright to the operator while the screen stays portrait.
+/// Screen insets (status bar, gesture bar) are turned with it.
+class _WorldOriented extends StatelessWidget {
+  const _WorldOriented({required this.quarterTurns, required this.child});
+
+  /// 0, 1 (phone turned counter-clockwise) or 3 (turned clockwise).
+  final int quarterTurns;
+  final Widget child;
+
+  EdgeInsets _turn(EdgeInsets p) => quarterTurns == 1
+      ? EdgeInsets.fromLTRB(p.top, p.right, p.bottom, p.left)
+      : EdgeInsets.fromLTRB(p.bottom, p.left, p.top, p.right);
+
+  @override
+  Widget build(BuildContext context) {
+    if (quarterTurns % 4 == 0) return child;
+    final media = MediaQuery.of(context);
+    return RotatedBox(
+      quarterTurns: quarterTurns,
+      child: MediaQuery(
+        data: media.copyWith(
+          size: media.size.flipped,
+          padding: _turn(media.padding),
+          viewPadding: _turn(media.viewPadding),
+          viewInsets: EdgeInsets.zero,
+        ),
+        child: child,
       ),
     );
   }

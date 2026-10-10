@@ -8,6 +8,9 @@ const column = (x, layers, {pitch = 40, duplicateAt = null, width = 80} = {}) =>
   return boxes;
 };
 
+// Real tray boxes are about six times wider than tall; the capture gate refuses square ones as sideways.
+const trayShaped = boxes => boxes.map(b => ({...b, height: Math.round(b.width / 6)}));
+
 test('span count removes duplicate boxes and splits columns by x', () => {
   const cols = spanColumns([...column(100, 20, {duplicateAt: 7}), ...column(300, 18), ...column(500, 2)]);
   assert.deepEqual(cols.map(c => [c.model_boxes, c.span_count, c.duplicate_boxes]), [[21, 20, 1], [18, 18, 0]]);
@@ -41,7 +44,7 @@ test('left/right depth disagreement and corner conflict withhold the total', () 
 
 test('model path returns a block contract with a computed total for a one-stack scene', async t => {
   t.mock.method(console, 'log', () => {});
-  t.mock.method(globalThis, 'fetch', async () => Response.json({predictions: column(100, 20)}));
+  t.mock.method(globalThis, 'fetch', async () => Response.json({predictions: trayShaped(column(100, 20))}));
   const form = new FormData();
   form.set('scan_contract', 'model_spatial_v1');
   ['left', 'right', 'straight'].forEach((view, i) => form.set(view,

@@ -54,16 +54,19 @@ class _Camera extends CameraPlatform {
       );
   @override
   Stream<CameraErrorEvent> onCameraError(int cameraId) => errors.stream;
+  final orientations =
+      StreamController<DeviceOrientationChangedEvent>.broadcast();
+  final locks = <DeviceOrientation>[];
   @override
   Stream<DeviceOrientationChangedEvent> onDeviceOrientationChanged() =>
-      const Stream.empty();
+      orientations.stream;
   @override
   bool supportsImageStreaming() => true;
   @override
   Future<void> lockCaptureOrientation(
     int cameraId,
     DeviceOrientation orientation,
-  ) async {}
+  ) async => locks.add(orientation);
   @override
   Stream<CameraImageData> onStreamedFrameAvailable(
     int cameraId, {
@@ -135,16 +138,51 @@ void main() {
     }
   }
 
-  testWidgets('viewfinder covers the screen in portrait and in landscape', (
+  testWidgets('preview turns with the device orientation and is never locked', (
     tester,
   ) async {
-    // The camera frame is scaled to cover whatever shape the screen has; the
-    // controls sit over it, so nothing shrinks the picture.
+    // A sideways phone must show an upright picture: the camera package
+    // rotates CameraPreview by the device orientation unless a capture lock
+    // overrides it (0.4.5 locked portraitUp, which drew landscape sideways).
+    await show(tester, size: const Size(1000, 480));
+    await drainCamera(tester);
+    expect(camera.locks, isEmpty);
+    int turns() => tester
+        .widget<RotatedBox>(
+          find.descendant(
+            of: find.byType(CameraPreview),
+            matching: find.byType(RotatedBox),
+          ),
+        )
+        .quarterTurns;
+    expect(turns(), 0);
+    camera.orientations.add(
+      const DeviceOrientationChangedEvent(DeviceOrientation.landscapeLeft),
+    );
+    await drainCamera(tester);
+    expect(turns(), 3);
+    camera.orientations.add(
+      const DeviceOrientationChangedEvent(DeviceOrientation.landscapeRight),
+    );
+    await drainCamera(tester);
+    expect(turns(), 1);
+    expect(tester.takeException(), isNull);
+    await tester.pumpWidget(const SizedBox());
+    await drainCamera(tester);
+  });
+
+  testWidgets('viewfinder shows the whole camera frame, full width', (
+    tester,
+  ) async {
+    // What is on screen is exactly what is photographed: the 720x1280 frame
+    // is scaled to the 480 px width (853 px tall) of a 480x1000 screen, with
+    // the controls over it.
     await show(tester);
     await drainCamera(tester);
-    final portraitGuide = tester.getRect(find.byType(CameraGuideOverlay));
-    expect(portraitGuide.height, greaterThanOrEqualTo(1000));
-    expect(portraitGuide.width, greaterThanOrEqualTo(480));
+    final guide = tester.getRect(find.byType(CameraGuideOverlay));
+    expect(guide.width, closeTo(480, 0.5));
+    expect(guide.height, closeTo(480 * 1280 / 720, 0.5));
+    expect(guide.center.dy, closeTo(500, 0.5));
     expect(
       tester
           .getCenter(find.widgetWithText(FilledButton, 'CAPTURE STRAIGHT'))
@@ -154,24 +192,102 @@ void main() {
     expect(tester.takeException(), isNull);
     await tester.pumpWidget(const SizedBox());
     await drainCamera(tester);
-
-    await show(tester, size: const Size(1000, 480));
-    await drainCamera(tester);
-    expect(find.byType(CameraPreview), findsOneWidget);
-    final landscapeGuide = tester.getRect(find.byType(CameraGuideOverlay));
-    expect(landscapeGuide.width, greaterThanOrEqualTo(1000));
-    expect(landscapeGuide.height, greaterThanOrEqualTo(480));
-    expect(
-      tester
-          .getCenter(find.widgetWithText(FilledButton, 'CAPTURE STRAIGHT'))
-          .dx,
-      greaterThan(750),
-    );
-    expect(find.text('TURN TORCH ON'), findsOneWidget);
-    expect(tester.takeException(), isNull);
-    await tester.pumpWidget(const SizedBox());
-    await drainCamera(tester);
   });
+
+  testWidgets(
+    'held sideways the screen stays portrait; text and guide turn to the hand',
+    (tester) async {
+      final messenger = tester.binding.defaultBinaryMessenger;
+      final orientationRequests = <Object?>[];
+      messenger.setMockMethodCallHandler(SystemChannels.platform, (call) async {
+        if (call.method == 'SystemChrome.setPreferredOrientations') {
+          orientationRequests.add(call.arguments);
+        }
+        return null;
+      });
+      addTearDown(
+        () => messenger.setMockMethodCallHandler(SystemChannels.platform, null),
+      );
+      const accelerometer = EventChannel(
+        'dev.fluttercommunity.plus/sensors/accelerometer',
+      );
+      MockStreamHandlerEventSink? gravity;
+      messenger.setMockStreamHandler(
+        accelerometer,
+        MockStreamHandler.inline(
+          onListen: (_, sink) {
+            gravity = sink;
+          },
+        ),
+      );
+      addTearDown(() => messenger.setMockStreamHandler(accelerometer, null));
+
+      await show(tester);
+      await drainCamera(tester);
+      expect(gravity, isNotNull);
+      final button = find.widgetWithText(FilledButton, 'CAPTURE STRAIGHT');
+      int overlayTurns() {
+        final boxes = find.ancestor(
+          of: button,
+          matching: find.byType(RotatedBox),
+        );
+        return boxes.evaluate().isEmpty
+            ? 0
+            : tester.widget<RotatedBox>(boxes.first).quarterTurns;
+      }
+
+      int guideTurns() => tester
+          .widget<RotatedBox>(
+            find
+                .ancestor(
+                  of: find.byType(CameraGuideOverlay),
+                  matching: find.byType(RotatedBox),
+                )
+                .first,
+          )
+          .quarterTurns;
+
+      Future<void> hold(double x, double y) async {
+        gravity!.success([x, y, 0.0, 0.0]);
+        await tester.pump(const Duration(milliseconds: 600));
+      }
+
+      expect((overlayTurns(), guideTurns()), (0, 0));
+
+      // Top of the phone to the operator's left (turned counter-clockwise):
+      // the operator's bottom-right is the screen's bottom-left.
+      await hold(9.81, 0);
+      expect((overlayTurns(), guideTurns()), (1, 1));
+      var centre = tester.getCenter(button);
+      expect(centre.dx, lessThan(240));
+      expect(centre.dy, greaterThan(500));
+      expect(find.text('TURN TORCH ON'), findsOneWidget);
+      expect(find.text('CAMERA IS TILTED'), findsNothing);
+      expect(tester.takeException(), isNull);
+
+      // Turned clockwise: the operator's bottom-right is the screen's top-right.
+      await hold(-9.81, 0);
+      expect((overlayTurns(), guideTurns()), (3, 3));
+      centre = tester.getCenter(button);
+      expect(centre.dx, greaterThan(240));
+      expect(centre.dy, lessThan(500));
+      expect(tester.takeException(), isNull);
+
+      // Back upright.
+      await hold(0, 9.81);
+      expect((overlayTurns(), guideTurns()), (0, 0));
+
+      // The screen was never asked to rotate, and the camera never locked.
+      expect(
+        orientationRequests,
+        everyElement(equals(['DeviceOrientation.portraitUp'])),
+      );
+      expect(camera.locks, isEmpty);
+      expect(find.byType(CameraPreview), findsOneWidget);
+      await tester.pumpWidget(const SizedBox());
+      await drainCamera(tester);
+    },
+  );
 
   testWidgets(
     'camera restarts after inactive cleared controller; no frame locks capture',

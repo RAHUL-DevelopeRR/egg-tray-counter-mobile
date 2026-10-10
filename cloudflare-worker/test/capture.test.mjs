@@ -132,3 +132,31 @@ test('a single stack filling the frame height is accepted although it cannot fil
   const far = boxes.map(b => ({...b, y: 600 + (b.y - 200) * 0.18, width: 50, height: 7}));
   assert.equal(captureQuality(spanColumns(far), 960, 1280).accepted, false);
 });
+
+test('a narrow face that fills the frame height passes in a wide landscape frame', () => {
+  // Two 20-layer stacks, 240 px wide, in a 1920x864 landscape still: coverage 0.25, height 0.9.
+  const two = spanColumns([0, 1].map(i => column(840 + i * 240, 20, {pitch: 38, width: 230, y0: 60})).flat());
+  const wide = captureQuality(two, 1920, 864, 6);
+  assert.equal(wide.accepted, true, JSON.stringify(wide));
+  assert.ok(wide.metrics.coverage_x < .45);
+  assert.ok(wide.metrics.height_frac >= .8);
+  assert.equal(wide.metrics.box_aspect, 6);
+  // The same stacks small in the frame are still refused for coverage and distance.
+  const small = spanColumns([0, 1].map(i => column(900 + i * 120, 20, {pitch: 15, width: 115, y0: 200})).flat());
+  const far = captureQuality(small, 1920, 864, 6);
+  assert.equal(far.accepted, false);
+  assert.ok(far.reasons.includes('stacks cover too little of the frame width'));
+});
+
+test('square boxes from a sideways photo refuse the face before anything is counted', () => {
+  const quality = captureQuality(face([40, 40, 40, 40, 40]), FRAME.width, FRAME.height, 1.6);
+  assert.equal(quality.accepted, false);
+  assert.match(quality.reasons[0], /sideways/);
+  assert.equal(quality.metrics.box_aspect, 1.6);
+  const none = captureQuality([], FRAME.width, FRAME.height, 1.2);
+  assert.deepEqual(none.reasons.length, 2);
+  assert.match(none.reasons[0], /sideways/);
+  // Tray-shaped boxes, or no size information, leave the verdict unchanged.
+  assert.equal(captureQuality(face([40, 40, 40, 40, 40]), FRAME.width, FRAME.height, 5.8).accepted, true);
+  assert.equal(captureQuality(face([40, 40, 40, 40, 40]), FRAME.width, FRAME.height).accepted, true);
+});

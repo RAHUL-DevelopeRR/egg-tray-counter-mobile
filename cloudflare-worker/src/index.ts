@@ -506,22 +506,39 @@ const GATE = {
   min_coverage_single: 0.25, // a lone stack (side face of a one-row block) cannot fill a portrait frame's width
   min_height_frac: 0.4,      // tallest column span (first to last box centre + one pitch) as a fraction of the image height
   recess_floor: 0.6,         // one column at 0.6-0.85 of the front-group pitch is a stack set back one position, not an angle
+  // A face filling most of the frame height is close enough even when it is narrow: a 1-3 stack face in a
+  // landscape photo cannot fill the width. Neutral on the 39 tagged photos (2026-10-09).
+  full_height_waiver: 0.8,
+  // Tray boxes are wide (median width/height 3.1-6.4 on every usable photo); a sideways photo makes the
+  // detector return a few square boxes (1.1-2.6). Below this the face is refused, not counted.
+  min_box_aspect: 2.75,
 };
 const NO_STACKS = "no stacks detected";
+const SIDEWAYS = "the trays look sideways or unclear in this photo; hold the phone level and retake";
 const CAPTURE_ADVICE = "Step closer and face the block squarely; the whole face must fill the frame";
 type CaptureMetrics = { columns: number; model_boxes: number; pitch_px: number | null; pitch_frac: number | null;
   height_frac: number | null; coverage_x: number | null; pitch_gradient: number | null; recessed_columns: number;
-  min_pitch_scale: number | null; image: ImageSize | null };
+  min_pitch_scale: number | null; box_aspect: number | null; image: ImageSize | null };
 type CaptureQuality = { accepted: boolean; reasons: string[]; metrics: CaptureMetrics };
 const round3 = (v: number | null) => v === null ? null : Math.round(v * 1000) / 1000;
 
-function captureQuality(columns: SpanColumn[], imageWidth: number | null, imageHeight: number | null): CaptureQuality {
+/** Median width/height of the detections; null when no box has a size. */
+function medianBoxAspect(detections: Prediction[]): number | null {
+  const aspects = detections.filter(d => (d.width ?? 0) > 0 && (d.height ?? 0) > 0).map(d => d.width! / d.height!);
+  return aspects.length ? median(aspects) : null;
+}
+
+function captureQuality(columns: SpanColumn[], imageWidth: number | null, imageHeight: number | null,
+  boxAspect: number | null = null): CaptureQuality {
   const w = imageWidth !== null && Number.isFinite(imageWidth) && imageWidth > 0 ? imageWidth : null;
   const h = imageHeight !== null && Number.isFinite(imageHeight) && imageHeight > 0 ? imageHeight : null;
   const image = w && h ? { width: w, height: h } : null;
+  const aspect = boxAspect !== null && Number.isFinite(boxAspect) ? boxAspect : null;
+  const sideways = aspect !== null && aspect < GATE.min_box_aspect;
   if (!columns.length) {
-    return { accepted: false, reasons: [NO_STACKS], metrics: { columns: 0, model_boxes: 0, pitch_px: null, pitch_frac: null,
-      height_frac: null, coverage_x: null, pitch_gradient: null, recessed_columns: 0, min_pitch_scale: null, image } };
+    return { accepted: false, reasons: sideways ? [SIDEWAYS, NO_STACKS] : [NO_STACKS], metrics: { columns: 0, model_boxes: 0,
+      pitch_px: null, pitch_frac: null, height_frac: null, coverage_x: null, pitch_gradient: null, recessed_columns: 0,
+      min_pitch_scale: null, box_aspect: round3(aspect), image } };
   }
   const ordered = [...columns].sort((a, b) => a.x_min - b.x_min);
   const pitches = ordered.map(c => c.pitch_px);
@@ -548,15 +565,18 @@ function captureQuality(columns: SpanColumn[], imageWidth: number | null, imageH
   const heightFrac = h ? Math.max(...ordered.map(c => c.y_last - c.y_first + c.pitch_px)) / h : null;
   const pitchFrac = h ? faceMedian / h : null;
   const reasons: string[] = [];
+  // Sideways first: every other reason is measured on boxes that are not trays.
+  if (sideways) reasons.push(SIDEWAYS);
   if (gradient > GATE.max_pitch_gradient) reasons.push("layer pitch changes across the face (angled or corner view)");
   const minCoverage = ordered.length === 1 ? GATE.min_coverage_single : GATE.min_coverage_x;
-  if (coverage !== null && coverage < minCoverage) reasons.push("stacks cover too little of the frame width");
+  const fillsHeight = heightFrac !== null && heightFrac >= GATE.full_height_waiver;
+  if (coverage !== null && coverage < minCoverage && !fillsHeight) reasons.push("stacks cover too little of the frame width");
   if (heightFrac !== null && heightFrac < GATE.min_height_frac) reasons.push("stacks are too small in the frame (too far away)");
   return { accepted: !reasons.length, reasons, metrics: {
     columns: ordered.length, model_boxes: ordered.reduce((s, c) => s + c.model_boxes, 0),
     pitch_px: Math.round(faceMedian * 100) / 100, pitch_frac: round3(pitchFrac), height_frac: round3(heightFrac),
     coverage_x: round3(coverage), pitch_gradient: round3(gradient), recessed_columns: recessed.length,
-    min_pitch_scale: round3(Math.min(...scales)), image } };
+    min_pitch_scale: round3(Math.min(...scales)), box_aspect: round3(aspect), image } };
 }
 
 // Worst view first: no stacks, then most reasons, then the smallest face in the frame, then LEFT/RIGHT/STRAIGHT order.
@@ -666,7 +686,8 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
   precomputed?: Record<string, SpanColumn[]>, rimStatus?: Record<string, string>) {
   const columns = precomputed ?? Object.fromEntries(VIEWS.map(view => [view, spanColumns(results[view].detections ?? [])]));
   const capture = Object.fromEntries(VIEWS.map(view => [view,
-    captureQuality(columns[view], results[view].image?.width ?? null, results[view].image?.height ?? null)]));
+    captureQuality(columns[view], results[view].image?.width ?? null, results[view].image?.height ?? null,
+      medianBoxAspect(results[view].detections ?? []))]));
   const rejectedView = worstView(capture, VIEWS);
   const assembled = buildBlock(columns.straight, columns.left, columns.right);
   // When the block model names a face in its first conflict, that is the photo to retake.

@@ -64,3 +64,17 @@ position, and the landscape side (roll +90 = landscapeLeft) follows the
 Android accelerometer convention; if the first field try shows landscape
 upside down, the sign in `_followOrientation` is the one-line fix. APK
 SHA-256 34a0349a3e4b11d4…, installed and verified versionName 0.4.5.
+
+## 0.4.6 to 0.4.8 - the screen stays put, the photo is straightened (2026-10-09/10)
+
+User on 0.4.5 landscape: "the camera is panning". The capture-orientation lock
+(portrait) was the cause; 0.4.6 removed it. 0.4.7 (installed 15:55, SHA-256
+8f0d2e4bc95f19b7...) stops rotating the screen altogether: the viewfinder is
+fixed to the phone, the tilt sensor decides upright / turned left / turned
+right, the chips, text, verdict strip, CAPTURE button and dialogs turn to
+face the operator, and the saved photo is turned upright and uploaded without
+a rotation tag. Portrait checked on the phone (unchanged look); sideways is
+covered by widget tests only. 0.4.8 (SHA-256 2416b9d9e21f7715..., built, not
+installed) removes the 20:9 trim of the upload, measured to cost a layer on
+some stacks, and shows the whole camera frame. Server-side evidence for the
+sideways case is in reports/orientation-20261009/.

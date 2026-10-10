@@ -17,7 +17,7 @@ class ManualCountScreen extends StatefulWidget {
     required this.result,
     required this.repository,
     required this.baseUrl,
-    this.appVersion = '0.4.5+16',
+    this.appVersion = '0.4.8+19',
   });
 
   final ScanResult result;
@@ -257,7 +257,9 @@ class _ManualCountScreenState extends State<ManualCountScreen> {
           FilledButton.icon(
             onPressed: _busy ? null : () => _save(send: true),
             icon: const Icon(Icons.cloud_upload_outlined),
-            label: Text(_sent ? 'SEND AGAIN (CORRECTION)' : 'SAVE AND SEND TO SERVER'),
+            label: Text(
+              _sent ? 'SEND AGAIN (CORRECTION)' : 'SAVE AND SEND TO SERVER',
+            ),
           ),
           const SizedBox(height: 8),
           OutlinedButton(

@@ -1,5 +1,80 @@
 # Progress
 
+## 2026-10-10 - camera follows the hand without turning the screen; sideways photos count exactly (Claude Code)
+
+User feedback on 0.4.5: in landscape the camera picture itself was drawn
+sideways ("the camera pans"), and "whether the photo is captured straight or
+sideways, the count should be exact". Four independent readers (camera
+plugin, app upload path, Worker/Roboflow, live checks) plus staging
+measurements established: (1) the pane locked the capture orientation to
+portrait; the camera package's CameraPreview rotates by that lock while the
+camerax plugin's own rotated preview subtracts the device orientation, so in
+landscape they disagreed by one quarter turn, and the same lock tagged every
+still as portrait, so a sideways capture reached the server rotated and the
+detector collapsed (0-11 boxes); (2) Roboflow honours the EXIF orientation
+tag (sideways pixels + tag 6/8 give the same per-column counts as the upright
+file) but untagged sideways pixels collapse detection and the old gate still
+accepted 2 of 6 such frames; (3) the width-coverage rule rejected correct
+landscape frames of 1-3-stack faces that fill most of the height.
+
+Fixes. 0.4.6: lock removed; the still check maps the guide by the still's
+orientation. 0.4.7 (installed on the Redmi 2026-10-09 15:55, SHA-256
+8f0d2e4bc95f19b7...): the screen never rotates, like a normal camera app.
+nextCaptureRotation (mobile/lib/services/captured_still.dart) turns the
+accelerometer roll into 0 / 90 / 270 with hysteresis (past 60 deg sideways,
+under 30 deg upright, a flat phone keeps the last value); step chips,
+instruction, torch, verdict strip, CAPTURE and the rejection dialog are
+turned with _WorldOriented (RotatedBox plus rotated MediaQuery padding); the
+guide is drawn turned inside the portrait frame. LiveFramePreflight
+.setCaptureRotation rotates live frames by (sensorOrientation -
+captureRotation), measures roll relative to the hand, lends only the pitch
+offset of a stored level reference sideways, and discards the last frame on a
+change so a frame measured the other way up cannot unlock capture. After
+takePicture, prepareCapturedStill (compute isolate) decodes the still, turns
+it by stillRotationCw(captureRotation) into the world-upright picture, strips
+the orientation tag, measures blur/exposure, and the session uploads that
+file (raw still deleted; evidence JSON gains capture_orientation,
+upright_pixels, width, height). 0.4.8 (built, SHA-256 2416b9d9e21f7715...,
+NOT installed: the phone was unplugged): the 20:9 screen trim of the upload is
+removed and the viewfinder shows the whole frame (BoxFit.contain), so what is
+seen is what is counted. Worker (staging f5776f0d, production untouched):
+GATE.full_height_waiver = 0.8 (coverage reason waived when the tallest column
+spans >= 80% of the frame height; zero verdict changes on the 39 tagged
+photos, all 7 landscape variants accepted) and GATE.min_box_aspect = 2.75
+(median detection width/height below it -> "the trays look sideways or
+unclear in this photo; hold the phone level and retake", placed first so
+worstView names that view; metrics.box_aspect added). Lowest usable aspect on
+the tuning set 3.09 (img-9), highest sideways 2.64; the rule refuses all 6
+sideways frames and none of the 39 tagged photos or landscape variants.
+
+Measured (staging; reports/orientation-20261009/): synthetic Redmi stills
+(1920x1080, EXIF 6, sensor pixels per hand position) built from labelled
+photos 01 (99), 02 (80), 19 (100), run through the real prepareCapturedStill
+and the staging Worker. Without the screen trim: 01 r90, 02 r90, 02 r270,
+19 r90 all exact per stack. With the trim: 19 exact both sides, 01 r90 one
+stack 19 (ref 20), 02 r90 one stack 19, 02 r270 two stacks 19; the trim alone
+reproduces the 02 misses, hence 0.4.8. Old-app sideways files are now refused
+(0 / 11 boxes, sideways reason). Upright padded scenes: all exact.
+
+Tests: Flutter 94 (new captured_still_test 7, live_frame_rotation_test 5;
+lifecycle: preview never locked, portrait viewfinder, sideways overlays turn
+while the screen is never asked to rotate), Worker 51 (full-height waiver,
+sideways refusal; one-stack fixture made tray-shaped), analyzer clean. Not
+verified: sideways capture by hand on the phone; the synthetic stills assume
+CameraX writes EXIF 6 for every still with the display locked portrait
+(inferred from the CameraX file path, not measured on the Redmi; the untagged
+sensor-pixel case is handled as well). No new field scans: staging holds
+only the WH-99 and MECH-DONE manual counts. The formatter touched eleven
+unrelated files during this work; those edits were reverted, not committed.
+
+Next: install 0.4.8 when the phone is back (adb install -r
+egg-tray-counter-0.4.8-block-staging.apk, then check versionName 0.4.8);
+hand-test sideways both ways (picture must not turn, text upright, TILT green
+when level); photograph one block upright and sideways and compare the two
+counts; run scripts/export_manual_counts.py and scripts/replay_field_scans.py
+on real scans; promote the gate rules to production only after real landscape
+phone photos confirm them.
+
 ## 2026-10-09 (midday) - walk counter, perspective rule, rescan reasons (Claude Code)
 
 Measured fault in the second phone scan: layer spacing shrank 28 -> 16 px

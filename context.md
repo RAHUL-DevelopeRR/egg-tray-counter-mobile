@@ -1,3 +1,12 @@
+> 2026-10-10: Redmi has APK 0.4.7; 0.4.8 is built (no screen trim, whole
+> frame shown) but not installed because the phone was unplugged. The capture
+> screen never rotates; the hand decides portrait or sideways; photos are
+> uploaded upright without a rotation tag. Staging Worker f5776f0d refuses
+> sideways photos and accepts narrow faces that fill the height. Measured on
+> synthetic phone stills: sideways counts match upright exactly once the
+> screen trim is gone (reports/orientation-20261009/). Still needed: a hand
+> test sideways on the phone, then real field scans with hand counts.
+
 > 2026-10-09 13:30: APK 0.4.5+16 on the phone. Capture screen = full-screen
 > camera; portrait/landscape follows how the phone is held (no button), live
 > checks rotation-aware. Landscape not yet tried by hand. Field data still
