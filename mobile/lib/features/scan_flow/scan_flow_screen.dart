@@ -82,12 +82,7 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
       });
     } on DioException catch (error) {
       if (!mounted) return;
-      final detail = error.response?.data;
-      setState(() {
-        _error = detail is Map && detail['detail'] is Map
-            ? (detail['detail'] as Map)['message']?.toString()
-            : error.message ?? 'Network request failed.';
-      });
+      setState(() => _error = ApiClient.describe(error));
     } on Object catch (error) {
       if (!mounted) return;
       setState(() => _error = error.toString());

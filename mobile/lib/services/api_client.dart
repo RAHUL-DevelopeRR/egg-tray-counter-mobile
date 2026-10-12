@@ -16,21 +16,73 @@ class ApiClient {
         BaseOptions(
           baseUrl: baseUrl,
           connectTimeout: const Duration(seconds: 10),
-          sendTimeout: const Duration(seconds: 45),
-          receiveTimeout: const Duration(seconds: 45),
+          // Three photos (about 1.5 MB) over a mobile link that drops 40% of
+          // its packets (measured on Jio LTE to workers.dev, 2026-10-12) can
+          // take well over a minute; the old 45 s cut such uploads off.
+          sendTimeout: const Duration(seconds: 150),
+          receiveTimeout: const Duration(seconds: 90),
         ),
       );
 
   final Dio _dio;
   CancelToken? _cancelToken;
 
+  /// Pauses between retries: short, then longer, so a dropped TLS handshake
+  /// (the common failure on this link) gets a fresh connection each time.
+  static const List<Duration> _backoff = [
+    Duration(milliseconds: 800),
+    Duration(seconds: 2),
+    Duration(seconds: 5),
+  ];
+
+  /// Three quick tries: one dropped handshake must not read as "offline".
   Future<bool> health() async {
-    try {
-      final response = await _dio.get<Map<String, dynamic>>('/health');
-      return response.statusCode == 200 && response.data?['status'] == 'ok';
-    } on DioException {
-      return false;
+    for (var attempt = 0; attempt < 3; attempt += 1) {
+      try {
+        final response = await _dio.get<Map<String, dynamic>>(
+          '/health',
+          options: Options(receiveTimeout: const Duration(seconds: 12)),
+        );
+        return response.statusCode == 200 && response.data?['status'] == 'ok';
+      } on DioException catch (error) {
+        if (!_retryable(error) || attempt == 2) return false;
+        await Future<void>.delayed(_backoff[attempt]);
+      }
     }
+    return false;
+  }
+
+  /// What went wrong, in the operator's words. Server-provided messages win.
+  static String describe(DioException error) {
+    final detail = error.response?.data;
+    if (detail is Map && detail['detail'] is Map) {
+      final message = (detail['detail'] as Map)['message']?.toString();
+      if (message != null && message.isNotEmpty) return message;
+    }
+    final status = error.response?.statusCode;
+    if (status != null) {
+      return 'The server answered with error $status. Try again; if it repeats, '
+          'the server needs attention.';
+    }
+    return switch (error.type) {
+      DioExceptionType.connectionTimeout || DioExceptionType.connectionError =>
+        'The phone could not reach the server (connection dropped). The mobile '
+            'signal to the server is unstable here: move to better signal or '
+            'Wi-Fi and tap RETRY SAME SCAN.',
+      DioExceptionType.sendTimeout =>
+        'The photos could not be uploaded in time (weak or unstable signal). '
+            'Move to better signal or Wi-Fi and tap RETRY SAME SCAN.',
+      DioExceptionType.receiveTimeout =>
+        'The server did not answer in time. Tap RETRY SAME SCAN; the photos '
+            'are kept.',
+      DioExceptionType.cancel => 'The scan was cancelled.',
+      _ => switch (error.error) {
+        SocketException() || HandshakeException() || HttpException() =>
+          'The connection to the server dropped. Move to better signal or '
+              'Wi-Fi and tap RETRY SAME SCAN.',
+        _ => error.message ?? 'Network request failed.',
+      },
+    };
   }
 
   static bool supportsCellIdentity(Map<String, dynamic>? data) =>
@@ -42,8 +94,20 @@ class ApiClient {
       (data!['scan_contracts'] as List).contains('model_spatial_v1');
 
   Future<void> requireModelScan() async {
-    final response = await _dio.get<Map<String, dynamic>>('/health');
-    if (!supportsModelScan(response.data)) {
+    Response<Map<String, dynamic>>? response;
+    for (var attempt = 0; attempt < 3; attempt += 1) {
+      try {
+        response = await _dio.get<Map<String, dynamic>>(
+          '/health',
+          options: Options(receiveTimeout: const Duration(seconds: 12)),
+        );
+        break;
+      } on DioException catch (error) {
+        if (!_retryable(error) || attempt == 2) rethrow;
+        await Future<void>.delayed(_backoff[attempt]);
+      }
+    }
+    if (!supportsModelScan(response!.data)) {
       throw const FormatException(
         'The server needs the optional-marker scan update. No images were uploaded. Update the backend and retry.',
       );
@@ -109,7 +173,9 @@ class ApiClient {
     await requireModelScan();
     _cancelToken = CancelToken();
     DioException? lastError;
-    for (var attempt = 0; attempt < 2; attempt += 1) {
+    // Four tries with growing pauses: a dropped handshake or a stalled upload
+    // on a lossy link is retried with a fresh connection before giving up.
+    for (var attempt = 0; attempt < 4; attempt += 1) {
       try {
         final form = FormData.fromMap({
           'scan_id': session.scanId,
@@ -158,10 +224,10 @@ class ApiClient {
         return ScanResult.fromJson(data);
       } on DioException catch (error) {
         lastError = error;
-        if (CancelToken.isCancel(error) || !_retryable(error) || attempt == 1) {
+        if (CancelToken.isCancel(error) || !_retryable(error) || attempt == 3) {
           rethrow;
         }
-        await Future<void>.delayed(const Duration(milliseconds: 400));
+        await Future<void>.delayed(_backoff[attempt]);
       }
     }
     throw lastError ?? const HttpException('Scan request failed');
@@ -184,12 +250,18 @@ class ApiClient {
     return data;
   }
 
-  bool _retryable(DioException error) => {
-    DioExceptionType.connectionError,
-    DioExceptionType.connectionTimeout,
-    DioExceptionType.receiveTimeout,
-    DioExceptionType.sendTimeout,
-  }.contains(error.type);
+  /// Transport failures are retried; an HTTP answer from the server is not.
+  bool _retryable(DioException error) =>
+      error.response == null &&
+      ({
+            DioExceptionType.connectionError,
+            DioExceptionType.connectionTimeout,
+            DioExceptionType.receiveTimeout,
+            DioExceptionType.sendTimeout,
+          }.contains(error.type) ||
+          error.error is SocketException ||
+          error.error is HandshakeException ||
+          error.error is HttpException);
 
   void cancel() {
     _cancelToken?.cancel('Operator cancelled scan');

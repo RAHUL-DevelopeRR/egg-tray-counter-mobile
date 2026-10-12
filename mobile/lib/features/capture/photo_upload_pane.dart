@@ -9,6 +9,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../models/capture_view.dart';
 import '../../models/scan_session.dart';
+import '../../services/captured_still.dart';
 import '../../services/image_quality_service.dart';
 
 /// Makes an owned JPEG copy: scan cleanup must never delete the user's original.
@@ -33,10 +34,12 @@ Future<String> prepareUploadedPhoto(String source) async {
   final copy = File('${Directory.systemTemp.path}/${const Uuid().v4()}.jpg');
   try {
     var oriented = img.bakeOrientation(decoded);
-    // 2000 px on the long side keeps every layer readable and the upload small.
-    final longest = oriented.width > oriented.height ? oriented.width : oriented.height;
-    if (longest > 2000) {
-      final scale = 2000 / longest;
+    // Same long side and quality as camera stills (see captured_still.dart).
+    final longest = oriented.width > oriented.height
+        ? oriented.width
+        : oriented.height;
+    if (longest > kUploadLongSide) {
+      final scale = kUploadLongSide / longest;
       oriented = img.copyResize(
         oriented,
         width: (oriented.width * scale).round(),
@@ -44,7 +47,9 @@ Future<String> prepareUploadedPhoto(String source) async {
         interpolation: img.Interpolation.average,
       );
     }
-    await copy.writeAsBytes(img.encodeJpg(oriented, quality: 95));
+    await copy.writeAsBytes(
+      img.encodeJpg(oriented, quality: kUploadJpegQuality),
+    );
     final quality = await const ImageQualityService().inspect(copy.path);
     if (!quality.accepted) {
       throw FormatException(quality.reason ?? 'Photo quality is insufficient.');

@@ -33,8 +33,11 @@ void main() {
     messenger.setMockStreamHandler(accelerometer, null);
   });
 
+  /// Holds the phone still long enough for the smoothed sensor to settle.
   Future<void> hold(double x, double y, [double z = 0]) async {
-    gravity.success([x, y, z, 0.0]);
+    for (var i = 0; i < 40; i += 1) {
+      gravity.success([x, y, z, 0.0]);
+    }
     await Future<void>.delayed(Duration.zero);
   }
 
@@ -85,6 +88,21 @@ void main() {
       expect(live.pose!.pitchDownDeg, closeTo(-2, 0.5));
     });
   });
+
+  test(
+    'hand tremor is smoothed away but a real turn is taken at once',
+    () async {
+      await hold(0, 9.81);
+      // One jittery sample of 5 degrees barely moves the smoothed roll.
+      gravity.success([9.81 * 0.087, 9.81 * 0.996, 0.0, 0.0]);
+      await Future<void>.delayed(Duration.zero);
+      expect(live.pose!.rollDeg.abs(), lessThan(1.5));
+      // Turning the phone sideways is seen immediately.
+      gravity.success([9.81, 0.0, 0.0, 0.0]);
+      await Future<void>.delayed(Duration.zero);
+      expect(live.rawRollDeg, closeTo(90, 0.5));
+    },
+  );
 
   test('a flat phone gives no roll, so the orientation is kept', () async {
     await hold(0.3, 0.2, 9.8);

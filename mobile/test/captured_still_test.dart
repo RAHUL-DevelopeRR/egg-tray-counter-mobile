@@ -138,6 +138,23 @@ void main() {
     }
   });
 
+  test('a full-size still is scaled to 1600 px on the long side', () {
+    final scene = _scene(1920, 1080);
+    final prepared = prepareCapturedStillSync(
+      StillRequest(
+        sourcePath: _phoneStill(dir, scene, 90).path,
+        targetPath: '${dir.path}/scaled.jpg',
+        captureRotation: 90,
+        sensorOrientation: 90,
+      ),
+    )!;
+    expect((prepared.width, prepared.height), (1600, 900));
+    final out = img.decodeJpg(File(prepared.path).readAsBytesSync())!;
+    expect((out.width, out.height), (1600, 900));
+    expect(_red(out, 0.19, 0.30), isTrue);
+    expect(_green(out, 0.5, 0.78), isTrue);
+  });
+
   test('an untagged sensor-oriented still is turned upright first', () {
     final scene = _scene(180, 320);
     final pixels = img.copyRotate(scene, angle: -90); // no EXIF tag

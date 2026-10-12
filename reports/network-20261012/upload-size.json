@@ -1,0 +1,208 @@
+[
+ {
+  "photo": "1280px 01 r90",
+  "scan": "e8ed341d-b4ae-40f8-aecd-a08ac659050a",
+  "view": "straight",
+  "boxes": 103,
+  "box_aspect": 5.556,
+  "walk": [
+   20,
+   20,
+   20,
+   20,
+   19
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20,
+   19
+  ],
+  "stacks_exact": true,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "1280px 02 r90",
+  "scan": "e8ed341d-b4ae-40f8-aecd-a08ac659050a",
+  "view": "left",
+  "boxes": 83,
+  "box_aspect": 6.318,
+  "walk": [
+   20,
+   20,
+   20,
+   20
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20
+  ],
+  "stacks_exact": true,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "1280px 02 r270",
+  "scan": "e8ed341d-b4ae-40f8-aecd-a08ac659050a",
+  "view": "right",
+  "boxes": 81,
+  "box_aspect": 6.333,
+  "walk": [
+   20,
+   20,
+   20,
+   20
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20
+  ],
+  "stacks_exact": true,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "1280px 19 r90",
+  "scan": "441be94b-8ede-48c9-9a23-1f1e2df679f4",
+  "view": "straight",
+  "boxes": 101,
+  "box_aspect": 5.5,
+  "walk": [
+   20,
+   20,
+   20,
+   20,
+   20
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20,
+   20
+  ],
+  "stacks_exact": true,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "1600px 01 r90",
+  "scan": "441be94b-8ede-48c9-9a23-1f1e2df679f4",
+  "view": "left",
+  "boxes": 101,
+  "box_aspect": 5.571,
+  "walk": [
+   20,
+   20,
+   20,
+   20,
+   19
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20,
+   19
+  ],
+  "stacks_exact": true,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "1600px 02 r270",
+  "scan": "441be94b-8ede-48c9-9a23-1f1e2df679f4",
+  "view": "right",
+  "boxes": 83,
+  "box_aspect": 6.4,
+  "walk": [
+   20,
+   20,
+   20,
+   20
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20
+  ],
+  "stacks_exact": true,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "1600px 19 r90",
+  "scan": "329a4387-4749-4726-80d3-2bc30e982f80",
+  "view": "straight",
+  "boxes": 102,
+  "box_aspect": 5.48,
+  "walk": [
+   20,
+   20,
+   20,
+   20,
+   20
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20,
+   20
+  ],
+  "stacks_exact": true,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "1600px 02 r90",
+  "scan": "329a4387-4749-4726-80d3-2bc30e982f80",
+  "view": "left",
+  "boxes": 83,
+  "box_aspect": 6.308,
+  "walk": [
+   20,
+   20,
+   20,
+   20
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20
+  ],
+  "stacks_exact": true,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "1280px 02 r90 again",
+  "scan": "329a4387-4749-4726-80d3-2bc30e982f80",
+  "view": "right",
+  "boxes": 83,
+  "box_aspect": 6.318,
+  "walk": [
+   20,
+   20,
+   20,
+   20
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20
+  ],
+  "stacks_exact": true,
+  "accepted": true,
+  "reasons": []
+ }
+]

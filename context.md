@@ -1,3 +1,11 @@
+> 2026-10-12: "backend offline" / failed scans = dropped TLS handshakes and
+> 40-66% packet loss on the path to the *.workers.dev addresses from the
+> operator's Jio/Wi-Fi connections (reports/network-20261012/); the Workers
+> are healthy. App 0.4.9 retries, waits longer, uploads 1600 px photos
+> (counts measured identical) and words the error. Tilt limit 8 deg with a
+> smoothed sensor. Proposed real fix: custom domain on the owner's Cloudflare
+> zone. Phone has 0.4.8; 0.4.9 building.
+
 > 2026-10-10: Redmi has APK 0.4.7; 0.4.8 is built (no screen trim, whole
 > frame shown) but not installed because the phone was unplugged. The capture
 > screen never rotates; the hand decides portrait or sideways; photos are

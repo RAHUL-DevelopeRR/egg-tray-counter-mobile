@@ -210,7 +210,11 @@ class PreflightPolicy {
   static const double minSharpness = 18;
   static const double advisorySharpness = 30;
 
-  static const double maxRollDeg = 4;
+  // A hand-held phone wobbles 3-5 degrees; 4 degrees blocked honest holds.
+  // Up to 8 degrees the layer spacing the counter reads changes by under 1%
+  // (cos 8 deg = 0.990) and a stack stays one column, so 8 is the limit and
+  // the advisory starts at 60% of it.
+  static const double maxRollDeg = 8;
   static const double minPitchDownDeg = -5;
   // Measured 2026-10-09: a camera looking down on a stack shrinks the layer
   // spacing from top to base (28 px -> 16 px on a 20-layer stack) and costs

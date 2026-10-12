@@ -217,12 +217,34 @@ class LiveFramePreflight extends ValueNotifier<PreflightReport> {
     await startCamera(controller);
   }
 
+  // Gravity vector smoothed against hand tremor. Small changes are blended
+  // in (about a third of a second to settle at the UI sensor rate); a big
+  // move, such as turning the phone sideways, is taken at once.
+  double? _gx, _gy, _gz;
+  static const double _smoothing = 0.15;
+  static const double _snapDelta = 2.5; // m/s^2, about 15 degrees
+
   void _onAccelerometer(AccelerometerEvent event) {
-    final base = devicePoseFromAccelerometer(event.x, event.y, event.z);
+    final gx = _gx, gy = _gy, gz = _gz;
+    if (gx == null ||
+        gy == null ||
+        gz == null ||
+        (event.x - gx).abs() > _snapDelta ||
+        (event.y - gy).abs() > _snapDelta ||
+        (event.z - gz).abs() > _snapDelta) {
+      _gx = event.x;
+      _gy = event.y;
+      _gz = event.z;
+    } else {
+      _gx = gx + _smoothing * (event.x - gx);
+      _gy = gy + _smoothing * (event.y - gy);
+      _gz = gz + _smoothing * (event.z - gz);
+    }
+    final base = devicePoseFromAccelerometer(_gx!, _gy!, _gz!);
     if (base == null) return;
     _sensorPose = base;
     // Roll is meaningless when gravity lies mostly along z (phone flat).
-    _sensorInPlane = event.x * event.x + event.y * event.y > 9.0;
+    _sensorInPlane = _gx! * _gx! + _gy! * _gy! > 9.0;
     _lastPose = DateTime.now();
   }
 

@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               const SizedBox(height: 28),
-              _BackendCard(online: _backendOnline),
+              _BackendCard(online: _backendOnline, onRetry: _refresh),
               const SizedBox(height: 12),
               FilledButton.icon(
                 onPressed: _startingScan ? null : _startScan,
@@ -172,9 +172,10 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class _BackendCard extends StatelessWidget {
-  const _BackendCard({required this.online});
+  const _BackendCard({required this.online, required this.onRetry});
 
   final bool? online;
+  final VoidCallback onRetry;
 
   @override
   Widget build(BuildContext context) {
@@ -185,27 +186,30 @@ class _BackendCard extends StatelessWidget {
     };
     final label = switch (online) {
       true => 'SERVER REACHABLE',
-      false => 'BACKEND OFFLINE',
+      false => 'SERVER NOT REACHED — TAP TO RETRY',
       null => 'CHECKING BACKEND',
     };
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(18),
-        child: Row(
-          children: [
-            Container(
-              width: 10,
-              height: 10,
-              decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-            ),
-            const SizedBox(width: 12),
-            Text(
-              label,
-              style: TextStyle(color: color, fontWeight: FontWeight.w800),
-            ),
-            const Spacer(),
-            const Icon(Icons.shield_outlined, size: 20),
-          ],
+      child: InkWell(
+        onTap: onRetry,
+        child: Padding(
+          padding: const EdgeInsets.all(18),
+          child: Row(
+            children: [
+              Container(
+                width: 10,
+                height: 10,
+                decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+              ),
+              const SizedBox(width: 12),
+              Text(
+                label,
+                style: TextStyle(color: color, fontWeight: FontWeight.w800),
+              ),
+              const Spacer(),
+              const Icon(Icons.shield_outlined, size: 20),
+            ],
+          ),
         ),
       ),
     );

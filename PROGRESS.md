@@ -1,5 +1,54 @@
 # Progress
 
+## 2026-10-12 - "backend offline" diagnosed as the mobile network path; retries, smaller uploads, tilt smoothing (0.4.9) (Claude Code)
+
+Operator report on the Redmi: the home screen sometimes says the backend is
+offline and scans sometimes fail. Phone log (logcat): no app error, no crash;
+MIUI killed the app once from the recents screen ("SwipeUpClean", low-memory
+device). Measured (reports/network-20261012/): the staging and production
+Workers answer in milliseconds whenever a connection completes, but TLS
+handshakes to the two *.workers.dev hostnames are dropped on about a third
+of IPv4 attempts from the laptop's Wi-Fi and on every IPv6 attempt; another
+workers.dev host and other Cloudflare sites are clean over IPv4, Google is
+clean; from the phone's Jio IPv6 path the Worker host loses 40-66% of
+packets while Google loses none. So the fault is the network path to the
+workers.dev addresses, not the server code. One dropped handshake on the
+pre-upload health check failed a scan before any photo was sent, and a 1.5 MB
+upload on a 40%-loss link exceeded the 45 s send timeout.
+
+App 0.4.9+20: health check and pre-upload check try three times, the upload
+four times with 0.8/2/5 s pauses (connection resets, handshake failures and
+timeouts retried; HTTP answers not); send timeout 150 s, receive 90 s; the
+status card reads "SERVER NOT REACHED - TAP TO RETRY" and retries on tap;
+scan errors are worded for the operator (ApiClient.describe). Uploads are
+capped at 1600 px on the long side at JPEG quality 92 (camera and gallery
+paths share kUploadLongSide / kUploadJpegQuality): 138-290 KB per photo
+instead of 437-669 KB, measured identical per-stack counts at 1280 and 1600
+px on photos 01, 02 (both sides) and 19 against staging. Real fix proposed,
+not done: a Workers custom domain on the owner's own Cloudflare zone.
+
+Tilt: the operator saw tilt warnings in normal holds. PreflightPolicy
+.maxRollDeg was 4 degrees (advisory from 2.4), below hand tremor; a roll of
+8 degrees changes the layer spacing the counter reads by under 1% and keeps
+a stack in one column, so the limit is now 8 (advisory from 4.8). The
+accelerometer is smoothed in LiveFramePreflight (exponential, factor 0.15 per
+sample at the UI rate, about a third of a second to settle) with an immediate
+snap on moves above about 15 degrees so turning the phone sideways is seen
+at once; new test "hand tremor is smoothed away but a real turn is taken at
+once". Pitch limits unchanged (looking down costs a layer, measured earlier).
+
+Also today: 0.4.8 installed on the phone and verified; backend survey
+(production Worker 0482e52c of 2026-08-22 without the block model, staging
+f5776f0d with it, Lambda diagnostic-only, R2 archive shared); the only new
+photos on the phone were personal documents (pulled copies deleted, not
+used); the 99-block gallery scan was set up (three photos selected) but the
+upload was not completed because the operator was using the phone.
+Flutter 96 tests, analyzer clean.
+
+Next: install 0.4.9 (building), finish the 99-block gallery scan on the
+phone and screenshot the block, hand-test sideways capture and the tilt
+chip, decide on the custom domain, field scans with hand counts.
+
 ## 2026-10-10 - camera follows the hand without turning the screen; sideways photos count exactly (Claude Code)
 
 User feedback on 0.4.5: in landscape the camera picture itself was drawn

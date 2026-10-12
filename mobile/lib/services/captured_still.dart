@@ -7,6 +7,11 @@ import 'frame_evidence.dart';
 import 'image_quality_service.dart';
 import 'live_frame_preflight.dart';
 
+/// Long side of every uploaded photo and its JPEG quality; the gallery path
+/// uses the same values so both paths send the same kind of file.
+const int kUploadLongSide = 1600;
+const int kUploadJpegQuality = 92;
+
 /// How the phone is held while the screen stays portrait, in the Android
 /// display-rotation convention: 0 upright, 90 turned counter-clockwise (top
 /// of the phone to the operator's left, raw roll near +90), 270 turned
@@ -121,15 +126,29 @@ PreparedStill? prepareCapturedStillSync(StillRequest request) {
   }
 
   final turn = stillRotationCw(request.captureRotation);
-  final upload = turn == 0 ? screen : img.copyRotate(screen, angle: turn);
+  var upload = turn == 0 ? screen : img.copyRotate(screen, angle: turn);
+  // The detector works at 1280 px on the long side; 1600 px keeps a margin and
+  // sends less than half the bytes of a 1920 px still, which matters on a
+  // mobile link that drops packets. Measured identical counts (2026-10-12).
+  final longest = upload.width > upload.height ? upload.width : upload.height;
+  if (longest > kUploadLongSide) {
+    final scale = kUploadLongSide / longest;
+    upload = img.copyResize(
+      upload,
+      width: (upload.width * scale).round(),
+      height: (upload.height * scale).round(),
+      interpolation: img.Interpolation.average,
+    );
+  }
   upload.exif.imageIfd.orientation = null;
   final analysis = lumaFromImage(upload);
 
   final quality = const ImageQualityService().inspectImage(upload);
   try {
-    File(
-      request.targetPath,
-    ).writeAsBytesSync(img.encodeJpg(upload, quality: 95), flush: true);
+    File(request.targetPath).writeAsBytesSync(
+      img.encodeJpg(upload, quality: kUploadJpegQuality),
+      flush: true,
+    );
   } on FileSystemException {
     return null;
   }
