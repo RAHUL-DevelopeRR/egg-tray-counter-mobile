@@ -17,7 +17,7 @@ class ManualCountScreen extends StatefulWidget {
     required this.result,
     required this.repository,
     required this.baseUrl,
-    this.appVersion = '0.4.9+20',
+    this.appVersion = '0.4.10+21',
   });
 
   final ScanResult result;

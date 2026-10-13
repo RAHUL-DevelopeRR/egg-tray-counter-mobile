@@ -4,7 +4,8 @@
 > are healthy. App 0.4.9 retries, waits longer, uploads 1600 px photos
 > (counts measured identical) and words the error. Tilt limit 8 deg with a
 > smoothed sensor. Proposed real fix: custom domain on the owner's Cloudflare
-> zone. Phone has 0.4.8; 0.4.9 building.
+> zone. Phone has 0.4.9 (99-block gallery scan exact on the phone in 25 s);
+> 0.4.10 (result icon fix) built, SHA-256 50914fda4f963bfd..., delivered to the user, not yet installed.
 
 > 2026-10-10: Redmi has APK 0.4.7; 0.4.8 is built (no screen trim, whole
 > frame shown) but not installed because the phone was unplugged. The capture

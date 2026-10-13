@@ -45,9 +45,17 @@ used); the 99-block gallery scan was set up (three photos selected) but the
 upload was not completed because the operator was using the phone.
 Flutter 96 tests, analyzer clean.
 
-Next: install 0.4.9 (building), finish the 99-block gallery scan on the
-phone and screenshot the block, hand-test sideways capture and the tilt
-chip, decide on the custom domain, field scans with hand counts.
+0.4.9+20 installed on the Redmi (SHA-256 d48061bc0a1fa76c...) and driven
+end to end through the gallery path: the three 99-block photos picked in the
+app, uploaded, counted on staging and drawn as a block in 25 s: 5 wide x 1
+deep, 20/20/20/20/19, total 99 (phone-e2e/13). Result-screen fix in
+0.4.10+21 (built, SHA-256 50914fda4f963bfd..., not yet installed): the warning triangle was shown over every block result because
+the legacy top-level "accepted" flag is always false on the block path; the
+verified icon now shows whenever the block has a total, the warning only when
+the total is withheld.
+
+Next: hand-test sideways capture and the tilt chip, decide on the custom
+domain, field scans with hand counts.
 
 ## 2026-10-10 - camera follows the hand without turning the screen; sideways photos count exactly (Claude Code)
 

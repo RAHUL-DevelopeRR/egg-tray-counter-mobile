@@ -78,3 +78,13 @@ covered by widget tests only. 0.4.8 (SHA-256 2416b9d9e21f7715..., built, not
 installed) removes the 20:9 trim of the upload, measured to cost a layer on
 some stacks, and shows the whole camera frame. Server-side evidence for the
 sideways case is in reports/orientation-20261009/.
+
+## 0.4.9 - gallery scan of the 99 block on the phone (2026-10-12 16:27)
+
+Network retries, 1600 px uploads and the 8-degree tilt limit installed
+(SHA-256 d48061bc0a1fa76c...). The three archived photos of the 99 block were
+picked from the Photo Picker, the same-stacks box ticked, UPLOAD AND COUNT
+tapped: 25 s later the block screen shows 5 wide x 1 deep, 20/20/20/20/19,
+99 trays, all stacks observed (13). The warning triangle above BLOCK COUNT
+is the legacy "not a verified inventory" flag; 0.4.10 shows the verified
+icon whenever the block has a total.

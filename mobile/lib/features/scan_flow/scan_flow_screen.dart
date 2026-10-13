@@ -315,12 +315,14 @@ class _ResultPane extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 22, 20, 32),
       children: [
+        // A block whose faces agree has a total; the warning sign is for a
+        // withheld total (a face needs retaking), not for the normal result.
         Icon(
-          result.accepted
+          result.accepted || result.block?.totalTrays != null
               ? Icons.verified_outlined
               : Icons.warning_amber_rounded,
           size: 76,
-          color: result.accepted
+          color: result.accepted || result.block?.totalTrays != null
               ? const Color(0xFF63E6A5)
               : const Color(0xFFFFB86B),
         ),
