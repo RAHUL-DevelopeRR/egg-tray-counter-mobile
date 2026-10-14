@@ -94,3 +94,20 @@ def test_archived_img01_walk_corrects_the_span_rounding():
     cols = count_layers_by_span(_archived(1))
     assert [c["span_count"] for c in cols] == [21, 20, 20, 20, 19]
     assert [c["walk_count"] for c in cols] == [20, 20, 20, 20, 19]
+
+
+def test_walk_does_not_bridge_a_long_run_of_missing_boxes():
+    # Three boxes and one far stray used to become 101 layers (97 invented).
+    walk = walk_layers([0, 40, 80, 4000], 36.0)
+    assert walk["count"] == 4 and walk["filled"] == 0 and walk["unresolved_gaps"] == 1
+
+
+def test_walk_still_fills_up_to_two_missed_layers_in_one_gap():
+    ys = [100 + 40 * k for k in range(20) if k not in (9, 10)]
+    walk = walk_layers(ys, 36.0)
+    assert walk["count"] == 20 and walk["filled"] == 2 and walk["unresolved_gaps"] == 0
+
+
+def test_columns_report_box_height_for_the_spacing_check():
+    col = count_layers_by_span(_boxes(20, 100))[0]
+    assert col["box_height_px"] == 36.0 and col["walk_unresolved_gaps"] == 0

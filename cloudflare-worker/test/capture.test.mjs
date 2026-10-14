@@ -96,6 +96,7 @@ test('a view that fails the capture gate withholds the block total and names tha
   assert.equal(result.block.contract, 'block_model_v1');
   assert.equal(result.block.total_trays, null);
   assert.equal(result.block.total_eggs, null);
+  assert.equal(result.block.status, 'needs_view'); assert.equal(result.result_status, 'needs_view');
   assert.equal(result.block.faces_consistent, false);
   assert.equal(result.block.fully_observed, false);
   assert.equal(result.block.observed_trays, 160);           // 5 front + 3 LEFT-side cells x 20: geometry is still reported, only the total is withheld

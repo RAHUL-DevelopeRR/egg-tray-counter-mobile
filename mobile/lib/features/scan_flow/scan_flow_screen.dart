@@ -16,6 +16,7 @@ import '../capture/guided_capture_pane.dart';
 import '../capture/photo_upload_pane.dart';
 import '../../services/manual_count_store.dart';
 import 'block_view.dart';
+import 'result_look.dart';
 import 'manual_count_screen.dart';
 
 enum _FlowPhase { capture, processing, result }
@@ -312,27 +313,15 @@ class _ResultPane extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // One result state drives the icon, the headline and the saved history.
+    final look = resultLook(result.resultStatus);
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 22, 20, 32),
       children: [
-        // A block whose faces agree has a total; the warning sign is for a
-        // withheld total (a face needs retaking), not for the normal result.
-        Icon(
-          result.accepted || result.block?.totalTrays != null
-              ? Icons.verified_outlined
-              : Icons.warning_amber_rounded,
-          size: 76,
-          color: result.accepted || result.block?.totalTrays != null
-              ? const Color(0xFF63E6A5)
-              : const Color(0xFFFFB86B),
-        ),
+        Icon(look.icon, size: 76, color: look.color),
         const SizedBox(height: 12),
         Text(
-          result.accepted
-              ? 'VERIFIED'
-              : (result.block?.totalTrays != null
-                    ? 'BLOCK COUNT'
-                    : 'COUNT NOT VERIFIED'),
+          look.headline,
           textAlign: TextAlign.center,
           style: Theme.of(
             context,

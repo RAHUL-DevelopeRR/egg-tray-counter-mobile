@@ -66,9 +66,11 @@ class HistoryDatabase {
       {
         'scan_id': result.scanId,
         'created_at': DateTime.now().toUtc().toIso8601String(),
-        'status': result.status,
-        'tray_count': result.totalTrays,
-        'egg_count': result.totalEggs,
+        // Same state and total the result screen showed (block scans used to
+        // be stored as rescan_required with no count).
+        'status': result.resultStatus,
+        'tray_count': result.shownTrays,
+        'egg_count': result.shownEggs,
         'model_version': result.modelVersion,
         'latency_ms': result.latencyMs,
       },

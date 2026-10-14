@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../services/api_client.dart';
 import '../../services/history_database.dart';
 import '../../services/settings_store.dart';
+import '../scan_flow/result_look.dart';
 import '../scan_flow/scan_flow_screen.dart';
 import '../settings/settings_screen.dart';
 
@@ -223,17 +224,16 @@ class _HistoryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final verified = entry.status == 'verified';
+    final look = resultLook(entry.status);
+    final count = entry.trayCount;
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Card(
         child: ListTile(
-          leading: CircleAvatar(
-            child: Icon(verified ? Icons.check : Icons.refresh),
-          ),
+          leading: CircleAvatar(child: Icon(look.icon, color: look.color)),
           title: Text(
-            verified
-                ? '${entry.trayCount} trays - ${entry.eggCount} eggs'
+            count != null
+                ? '${entry.status == 'estimated' ? 'About ' : ''}$count trays'
                 : 'Rescan required',
           ),
           subtitle: Text(
@@ -241,7 +241,7 @@ class _HistoryTile extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          trailing: Text(verified ? 'VERIFIED' : 'RETAKE'),
+          trailing: Text(look.label),
         ),
       ),
     );

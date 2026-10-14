@@ -18,6 +18,10 @@ from __future__ import annotations
 
 import numpy as np
 
+# Largest run of missed layers the walk will fill inside one gap. On the 53 reference stacks no
+# gap needed more than one; bridging longer runs turned three boxes and a stray into 101 layers.
+MAX_FILLED_PER_GAP = 2
+
 
 def _columns(detections: list[dict]) -> list[list[dict]]:
     if not detections:
@@ -42,18 +46,22 @@ def walk_layers(ys: list[float], height: float) -> dict:
     as a duplicate (this includes stray boxes sitting between two layers),
     fills missed layers when a gap is close to a multiple of the pitch, and
     lets the local pitch drift between 0.6 and 1.4 of the global pitch so it
-    follows perspective without collapsing after a stray box. Returns the
-    count, the accepted gaps and the top/base gap ratio (perspective
-    gradient; > 1.5 means the camera looked down on the stack).
+    follows perspective without collapsing after a stray box. A gap hiding
+    more than MAX_FILLED_PER_GAP layers is not bridged: the box after it
+    counts as one layer and the gap is reported in ``unresolved_gaps`` so the
+    caller can ask for a retake instead of inventing the missing run. Returns
+    the count, the accepted gaps, the filled layers and the top/base gap
+    ratio (perspective gradient; > 1.5 means the camera looked down).
     """
     ys = sorted(float(y) for y in ys)
     if not ys:
-        return {"count": 0, "gaps": [], "duplicates": 0, "filled": 0, "perspective_gradient": None}
+        return {"count": 0, "gaps": [], "duplicates": 0, "filled": 0, "unresolved_gaps": 0,
+                "perspective_gradient": None}
     raw_gaps = np.diff(ys)
     real = raw_gaps[raw_gaps > 0.5 * height]
     global_pitch = float(np.median(real)) if len(real) else float(height)
     pitch = global_pitch
-    count, duplicates, filled, gaps = 1, 0, 0, []
+    count, duplicates, filled, unresolved, gaps = 1, 0, 0, 0, []
     last = ys[0]
     for y in ys[1:]:
         gap = y - last
@@ -61,18 +69,22 @@ def walk_layers(ys: list[float], height: float) -> dict:
             duplicates += 1
             continue
         steps = max(1, int(round(gap / pitch)))
+        last = y
+        if steps - 1 > MAX_FILLED_PER_GAP:
+            unresolved += 1
+            count += 1
+            continue
         if steps > 1:
             filled += steps - 1
         count += steps
         gaps.extend([gap / steps] * steps)
         pitch = float(min(max(np.median(gaps[-3:]), 0.6 * global_pitch), 1.4 * global_pitch))
-        last = y
     gradient = None
     if len(gaps) >= 6:
         third = max(2, len(gaps) // 3)
         gradient = round(float(np.median(gaps[:third]) / np.median(gaps[-third:])), 3)
     return {"count": count, "gaps": [round(g, 2) for g in gaps], "duplicates": duplicates,
-            "filled": filled, "perspective_gradient": gradient}
+            "filled": filled, "unresolved_gaps": unresolved, "perspective_gradient": gradient}
 
 
 def count_layers_by_span(detections: list[dict]) -> list[dict]:
@@ -102,8 +114,10 @@ def count_layers_by_span(detections: list[dict]) -> list[dict]:
                 "span_count": span,
                 "walk_count": walk["count"],
                 "walk_filled": walk["filled"],
+                "walk_unresolved_gaps": walk["unresolved_gaps"],
                 "perspective_gradient": walk["perspective_gradient"],
                 "pitch_px": round(pitch, 2),
+                "box_height_px": round(height, 2),
                 "duplicate_boxes": int(len(column) - len(real) - 1),
                 "x_min": round(float(min(d["x"] - d["width"] / 2 for d in column)), 1),
                 "x_max": round(float(max(d["x"] + d["width"] / 2 for d in column)), 1),

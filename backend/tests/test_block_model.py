@@ -74,7 +74,9 @@ def test_face_seeing_a_stack_another_face_calls_missing_is_a_conflict():
     right = [col(0, 20), col(1, 16, pitch=30.0)]
     block = build_block(straight, right=right)
     assert block["total_trays"] is None
-    assert any("disagree" in c["reason"] for c in block["conflicts"])
+    # The shared corner already contradicts itself (set back on STRAIGHT only), which is reported first.
+    reasons = [c["reason"] for c in block["conflicts"]]
+    assert any("disagree" in r or "set back on one face only" in r for r in reasons)
 
 
 def test_two_faces_promoting_different_heights_into_one_cell_conflict():
@@ -144,3 +146,74 @@ def test_confident_rim_disagreement_requests_rescan_but_low_confidence_does_not(
     agree = col(1, 20)
     agree.update(rim_count=20, rim_confidence=0.9)
     assert build_block([col(0, 20), agree], left=face(1))["total_trays"] == 40
+
+
+def test_opposite_side_faces_of_a_one_wide_block_are_merged_not_overwritten():
+    # B01: LEFT and RIGHT both see the rear stack of a 1 x 2 block; 18 vs 22 used to return 42, consistent.
+    block = build_block([col(0, 20)], left=[col(0, 18), col(1, 20)], right=[col(0, 20), col(1, 22)])
+    assert block["total_trays"] is None and block["status"] == "conflict"
+    assert block["fully_observed"] is False
+    rear = next(c for c in block["cells"] if (c["x"], c["y"]) == (0, 1))
+    assert rear["status"] == "conflict" and rear["source"] == "left+right"
+    conflict = next(c for c in block["conflicts"] if c.get("cell") == [0, 1])
+    assert (conflict["left_layers"], conflict["right_layers"]) == (18, 22)
+    reversed_order = build_block([col(0, 20)], left=[col(0, 22), col(1, 20)], right=[col(0, 20), col(1, 18)])
+    assert reversed_order["total_trays"] is None
+
+
+def test_opposite_side_faces_that_agree_are_observed_once():
+    block = build_block([col(0, 20)], left=[col(0, 18), col(1, 20)], right=[col(0, 20), col(1, 18)])
+    assert block["total_trays"] == 38 and block["status"] == "exact"
+    rear = next(c for c in block["cells"] if (c["x"], c["y"]) == (0, 1))
+    assert rear["source"] == "left+right"
+
+
+def test_one_layer_corner_difference_keeps_a_total_but_only_as_an_estimate():
+    # B02: 20 vs 19 used to be silently exact.
+    block = build_block([col(0, 20)], left=[col(0, 19)])
+    assert block["total_trays"] == 20 and block["status"] == "estimated"
+    assert block["ambiguities"][0]["cell"] == [0, 0]
+    assert (block["ambiguities"][0]["straight_layers"], block["ambiguities"][0]["left_layers"]) == (20, 19)
+
+
+def test_ambiguous_corner_keeps_the_reading_with_fewer_filled_layers():
+    straight = col(0, 20)
+    straight["walk_filled"] = 2
+    block = build_block([straight], left=[col(0, 19)])
+    assert block["total_trays"] == 19 and block["ambiguities"][0]["chosen"] == 19
+
+
+def test_gap_filled_layers_are_counted_but_reported():
+    # B06: a recovered layer stays in the count and its derivation is kept.
+    filled = col(1, 20)
+    filled["walk_filled"] = 1
+    block = build_block([col(0, 20), filled], left=face(1))
+    assert block["total_trays"] == 40 and block["status"] == "exact" and block["filled_trays"] == 1
+    assert next(c for c in block["cells"] if c["x"] == 1)["filled_layers"] == 1
+
+
+def test_status_separates_exact_estimated_conflict_and_missing_faces():
+    assert build_block(face(5), left=face(1))["status"] == "exact"
+    assert build_block(face(5), left=face(4), right=face(4))["status"] == "estimated"   # interior computed
+    assert build_block(face(5), left=face(4), right=face(3))["status"] == "conflict"
+    assert build_block(face(2), left=[])["status"] == "needs_view"
+
+
+def test_boxes_on_alternate_layers_only_send_the_face_for_a_retake():
+    # 2026-10-13 corner block: box height 28 px against a 43 px walk pitch, about half the layers read.
+    sparse = col(1, 10, pitch=43.0)
+    sparse["box_height_px"] = 28.0
+    block = build_block([col(0, 20), sparse], left=face(1))
+    assert block["total_trays"] is None and block["rescan_cells"] == [[1, 0]]
+    assert any("step closer" in c["reason"] for c in block["conflicts"])
+    normal = col(1, 20)
+    normal["box_height_px"] = 34.0
+    assert build_block([col(0, 20), normal], left=face(1))["total_trays"] == 40
+
+
+def test_unbridged_gap_sends_the_face_for_a_retake():
+    gappy = col(1, 12)
+    gappy["walk_unresolved_gaps"] = 1
+    block = build_block([col(0, 20), gappy], left=face(1))
+    assert block["total_trays"] is None
+    assert any("missing over several layers" in c["reason"] for c in block["conflicts"])

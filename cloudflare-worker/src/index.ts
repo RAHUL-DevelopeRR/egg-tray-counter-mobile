@@ -334,13 +334,19 @@ function readOptionalCellIds(form: FormData): Record<string, string> {
 // ---- Per-stack span counting and block model (ported from backend/app/vision/layer_span.py and block_model.py).
 // Measured 2026-10-08 on 53 labelled stacks: span count exact 75%, within ±1 100%; raw box count exact 58%.
 type SpanColumn = { column: number; model_boxes: number; span_count: number; walk_count: number; walk_filled: number;
-  perspective_gradient: number | null; pitch_px: number; duplicate_boxes: number; x_min: number; x_max: number; y_first: number; y_last: number;
+  walk_unresolved_gaps?: number; perspective_gradient: number | null; pitch_px: number; box_height_px?: number;
+  duplicate_boxes: number; x_min: number; x_max: number; y_first: number; y_last: number;
   rim_count?: number | null; rim_confidence?: number | null };
-type FaceColumn = { layers: number; scale: number; recessed: boolean; count_agreement: boolean; reason: string | null; source: string };
-type Cell = { x: number; y: number; status: string; layers: number | null; source: string };
+type FaceColumn = { layers: number; filled: number; scale: number; recessed: boolean; count_agreement: boolean; reason: string | null; source: string };
+type Cell = { x: number; y: number; status: string; layers: number | null; source: string; filled_layers?: number };
 const RECESS_SCALE = 0.85;
-const MAX_PERSPECTIVE_GRADIENT = 1.5;
-const MIN_RIM_CONFIDENCE = 0.5;  // rim-edge verification only vetoes when its own confidence is at least this  // top-third / bottom-third layer spacing; measured frontal photos stay <= 1.42
+const MAX_PERSPECTIVE_GRADIENT = 1.5;  // top-third / bottom-third layer spacing; measured frontal photos stay <= 1.42
+const MIN_RIM_CONFIDENCE = 0.5;  // rim-edge verification only vetoes when its own confidence is at least this
+// Tray boxes are about as tall as the layer spacing (0.79-1.16 on the 53 reference stacks). Far away, cross-stacked
+// trays get boxes on alternate layers only, the spacing doubles and the count halves (2026-10-13 corner block: 0.64-0.67).
+const MIN_BOX_PITCH_RATIO = 0.75;
+// Largest run of missed layers filled inside one gap; no reference stack needed more than one.
+const MAX_FILLED_PER_GAP = 2;
 const median = (values: number[]) => {
   const s = [...values].sort((a, b) => a - b);
   return s.length % 2 ? s[(s.length - 1) / 2] : (s[s.length / 2 - 1] + s[s.length / 2]) / 2;
@@ -354,32 +360,34 @@ const roundHalfEven = (v: number) => {
 };
 
 // Port of layer_span.walk_layers: count layers with a slowly varying local pitch, merging
-// duplicate boxes and filling single missed layers. Exact on 51/53 reference stacks (span: 40/53).
+// duplicate boxes and filling short runs of missed layers. Exact on 51/53 reference stacks (span: 40/53).
+// A gap hiding more than MAX_FILLED_PER_GAP layers is not bridged; it is reported as unresolved.
 function walkLayers(ysIn: number[], height: number) {
   const ys = [...ysIn].sort((a, b) => a - b);
-  if (!ys.length) return { count: 0, gaps: [] as number[], duplicates: 0, filled: 0, perspective_gradient: null as number | null };
+  if (!ys.length) return { count: 0, gaps: [] as number[], duplicates: 0, filled: 0, unresolved_gaps: 0, perspective_gradient: null as number | null };
   const rawGaps = ys.slice(1).map((y, i) => y - ys[i]);
   const real = rawGaps.filter(g => g > 0.5 * height);
   const globalPitch = real.length ? median(real) : height;
   let pitch = globalPitch;
-  let count = 1, duplicates = 0, filled = 0, last = ys[0];
+  let count = 1, duplicates = 0, filled = 0, unresolved = 0, last = ys[0];
   const gaps: number[] = [];
   for (const y of ys.slice(1)) {
     const gap = y - last;
     if (gap < 0.65 * pitch) { duplicates++; continue; }          // duplicate or stray half-pitch box
     const steps = Math.max(1, roundHalfEven(gap / pitch));
+    last = y;
+    if (steps - 1 > MAX_FILLED_PER_GAP) { unresolved++; count++; continue; }
     if (steps > 1) filled += steps - 1;
     count += steps;
     for (let k = 0; k < steps; k++) gaps.push(gap / steps);
     pitch = Math.min(Math.max(median(gaps.slice(-3)), 0.6 * globalPitch), 1.4 * globalPitch);
-    last = y;
   }
   let gradient: number | null = null;
   if (gaps.length >= 6) {
     const third = Math.max(2, Math.floor(gaps.length / 3));
     gradient = roundHalfEven(1000 * median(gaps.slice(0, third)) / median(gaps.slice(-third))) / 1000;
   }
-  return { count, gaps, duplicates, filled, perspective_gradient: gradient };
+  return { count, gaps, duplicates, filled, unresolved_gaps: unresolved, perspective_gradient: gradient };
 }
 
 function spanColumns(detections: Prediction[]): SpanColumn[] {
@@ -400,8 +408,8 @@ function spanColumns(detections: Prediction[]): SpanColumn[] {
     const pitch = real.length ? median(real) : height;
     const walk = walkLayers(ys, height);
     return { column: index + 1, model_boxes: column.length, span_count: roundHalfEven((ys[ys.length - 1] - ys[0]) / pitch) + 1,
-      walk_count: walk.count, walk_filled: walk.filled, perspective_gradient: walk.perspective_gradient,
-      pitch_px: roundHalfEven(pitch * 100) / 100, duplicate_boxes: column.length - real.length - 1,
+      walk_count: walk.count, walk_filled: walk.filled, walk_unresolved_gaps: walk.unresolved_gaps, perspective_gradient: walk.perspective_gradient,
+      pitch_px: roundHalfEven(pitch * 100) / 100, box_height_px: roundHalfEven(height * 100) / 100, duplicate_boxes: column.length - real.length - 1,
       x_min: roundHalfEven(Math.min(...column.map(b => b.x - b.width / 2)) * 10) / 10,
       x_max: roundHalfEven(Math.max(...column.map(b => b.x + b.width / 2)) * 10) / 10,
       y_first: roundHalfEven(ys[0] * 10) / 10, y_last: roundHalfEven(ys[ys.length - 1] * 10) / 10 };
@@ -417,68 +425,110 @@ function faceColumns(columns: SpanColumn[], name: string): FaceColumn[] {
   return ordered.map(c => {
     const scale = reference ? c.pitch_px / reference : 1;
     const layers = c.walk_count ?? c.span_count;
+    const boxRatio = c.box_height_px && c.pitch_px ? c.box_height_px / c.pitch_px : null;
     let reason: string | null = null;
     const rim = c.rim_count ?? null, rimConf = c.rim_confidence ?? 0;
-    if (Math.abs(c.span_count - layers) > 1) reason = `layer counts disagree (span ${c.span_count}, walk ${layers}); retake this face`;
+    if (boxRatio !== null && boxRatio < MIN_BOX_PITCH_RATIO) reason = "boxes found on only some layers (trays too small in the photo); step closer and retake this face";
+    else if (c.walk_unresolved_gaps) reason = "boxes are missing over several layers of this stack; retake this face";
+    else if (Math.abs(c.span_count - layers) > 1) reason = `layer counts disagree (span ${c.span_count}, walk ${layers}); retake this face`;
     else if (rim !== null && rimConf >= MIN_RIM_CONFIDENCE && rim !== layers) reason = `rim edges count ${rim} layers but boxes count ${layers}; retake this face`;
     else if (c.perspective_gradient !== null && c.perspective_gradient > MAX_PERSPECTIVE_GRADIENT)
       reason = `camera looked down on the stack (spacing ratio ${c.perspective_gradient}); hold the phone level at mid-height`;
-    return { layers, scale, recessed: scale < RECESS_SCALE, count_agreement: reason === null, reason, source: name };
+    return { layers, filled: c.walk_filled ?? 0, scale, recessed: scale < RECESS_SCALE, count_agreement: reason === null, reason, source: name };
   });
 }
 
 const BLOCK_NOTE = "Interior stacks are computed from the observed faces (X x Y x height); missing or shorter interior stacks are not visible from the faces.";
 
-function blockResult(width: number | null, depth: number | null, facesUsed: string[], typical: number | null, cells: Cell[], conflicts: Record<string, unknown>[]) {
+// status: exact (every stack seen, faces agree), estimated (a total, but hidden stacks computed or a reading
+// ambiguous), conflict (no total; retake the named face), needs_view (a face is missing or refused).
+function blockResult(width: number | null, depth: number | null, facesUsed: string[], typical: number | null, cells: Cell[],
+  conflicts: Record<string, unknown>[], ambiguities: Record<string, unknown>[] = [], needsView = false) {
   const observed = cells.filter(c => c.status === "observed").reduce((s, c) => s + (c.layers ?? 0), 0);
   const computed = cells.filter(c => c.status === "computed").reduce((s, c) => s + (c.layers ?? 0), 0);
+  const filled = cells.filter(c => c.status === "observed").reduce((s, c) => s + (c.filled_layers ?? 0), 0);
   const rescan = cells.filter(c => c.status === "rescan" || c.status === "conflict").map(c => [c.x, c.y]);
   const consistent = !conflicts.length && !rescan.length && typical !== null;
-  return { width, depth, faces_used: facesUsed, typical_layers: typical, cells, observed_trays: observed, computed_trays: computed,
-    total_trays: consistent ? observed + computed : null, fully_observed: consistent && computed === 0, faces_consistent: consistent,
-    conflicts, rescan_cells: rescan, note: BLOCK_NOTE };
+  const total = consistent ? observed + computed : null;
+  const status = needsView ? "needs_view" : total === null ? "conflict" : computed || ambiguities.length ? "estimated" : "exact";
+  return { status, width, depth, faces_used: facesUsed, typical_layers: typical, cells, observed_trays: observed, computed_trays: computed,
+    filled_trays: filled, total_trays: total, fully_observed: consistent && computed === 0, faces_consistent: consistent,
+    conflicts, ambiguities, rescan_cells: rescan, note: BLOCK_NOTE };
 }
 
 function buildBlock(straightCols: SpanColumn[], leftCols: SpanColumn[], rightCols: SpanColumn[]) {
   const facesUsed = [...(straightCols.length ? ["straight"] : []), ...(leftCols.length ? ["left"] : []), ...(rightCols.length ? ["right"] : [])];
   if (!straightCols.length || (!leftCols.length && !rightCols.length)) {
-    return blockResult(null, null, facesUsed, null, [], [{ reason: "STRAIGHT and at least one side face must show stacks" }]);
+    return blockResult(null, null, facesUsed, null, [], [{ reason: "STRAIGHT and at least one side face must show stacks" }], [], true);
   }
   const xf = faceColumns(straightCols, "straight");
   const lf = leftCols.length ? faceColumns(leftCols, "left").reverse() : null;   // left photo: front corner is right-most
   const rf = rightCols.length ? faceColumns(rightCols, "right") : null;          // right photo: front corner is left-most
   const width = xf.length;
   const conflicts: Record<string, unknown>[] = [];
+  const ambiguities: Record<string, unknown>[] = [];
   const sides = ([["left", lf], ["right", rf]] as [string, FaceColumn[] | null][]).filter(([, f]) => f);
   const depths = Object.fromEntries(sides.map(([n, f]) => [n, f!.length]));
   if (new Set(Object.values(depths)).size > 1) conflicts.push({ reason: "depth differs between LEFT and RIGHT faces", ...depths });
   const depth = Math.max(...Object.values(depths));
-  for (const [name, f, xi] of [["left", lf, 0], ["right", rf, width - 1]] as [string, FaceColumn[] | null, number][]) {
-    if (!f) continue;
-    const a = xf[xi], b = f[0];
-    if (!b.count_agreement) conflicts.push({ cell: [xi, 0], reason: `${name.toUpperCase()}: ${b.reason}` });
-    if (a.recessed !== b.recessed) conflicts.push({ cell: [xi, 0], reason: `corner stack is set back on one face only (STRAIGHT vs ${name.toUpperCase()})` });
-    else if (Math.abs(a.layers - b.layers) > 1) conflicts.push({ cell: [xi, 0],
-      reason: `corner height differs between STRAIGHT and ${name.toUpperCase()}`, straight_layers: a.layers, [`${name}_layers`]: b.layers });
-  }
   const heights = [...xf, ...(lf ?? []), ...(rf ?? [])].filter(c => !c.recessed).map(c => c.layers);
   const typical = heights.length ? roundHalfEven(median(heights)) : null;
   const cells = new Map<string, Cell>();
   for (let y = 0; y < depth; y++) for (let x = 0; x < width; x++) cells.set(`${x},${y}`, { x, y, status: "computed", layers: typical, source: "faces" });
-  const promotions = new Map<string, Partial<Cell>[]>();
-  const place = (key: string, col: FaceColumn, source: string, behindKey: string) => {
-    const cell = cells.get(key)!;
-    if (col.recessed) {
-      Object.assign(cell, { status: "missing", layers: 0, source });
-      if (cells.has(behindKey)) promotions.set(behindKey, [...(promotions.get(behindKey) ?? []), { status: "observed", layers: col.layers, source: `${source}-recessed` }]);
-      else conflicts.push({ cell: [cell.x, cell.y], reason: `${source.toUpperCase()} shows a stack behind a missing one, but the faces give no room for it; rescan` });
-    } else Object.assign(cell, { status: "observed", layers: col.layers, source });
-    if (!col.count_agreement) { cell.status = "rescan"; conflicts.push({ cell: [cell.x, cell.y], reason: `${source.toUpperCase()}: ${col.reason}` }); }
-  };
-  xf.forEach((col, x) => place(`${x},0`, col, "straight", `${x},1`));
+  // Every face reading of a cell, merged below, never overwritten: STRAIGHT sees the front row, each side face its
+  // column (corner included). A one-wide block puts LEFT and RIGHT on the same cells.
+  type Reading = { col: FaceColumn; name: string; behind: string };
+  const seen = new Map<string, Reading[]>();
+  const add = (key: string, r: Reading) => seen.set(key, [...(seen.get(key) ?? []), r]);
+  xf.forEach((col, x) => add(`${x},0`, { col, name: "straight", behind: `${x},1` }));
   for (const [name, f, xi, dx] of [["left", lf, 0, 1], ["right", rf, width - 1, -1]] as [string, FaceColumn[] | null, number, number][]) {
-    if (!f) continue;
-    f.forEach((col, y) => { if (y === 0 || y >= depth) return; place(`${xi},${y}`, col, name, `${xi + dx},${y}`); });
+    (f ?? []).forEach((col, y) => add(`${xi},${y}`, { col, name, behind: `${xi + dx},${y}` }));
+  }
+  const FACE_ORDER = ["straight", "left", "right"];
+  const promotions = new Map<string, Partial<Cell>[]>();
+  for (const [key, readings] of seen) {
+    const cell = cells.get(key)!;
+    const names = readings.map(r => r.name);
+    const source = names.join("+");
+    const corner = cell.y === 0 && readings.length > 1;
+    const unsure = readings.filter(r => !r.col.count_agreement);
+    for (const r of unsure) conflicts.push({ cell: [cell.x, cell.y], reason: `${r.name.toUpperCase()}: ${r.col.reason}` });
+    if (unsure.length) {
+      Object.assign(cell, { status: "rescan", layers: readings[0].col.recessed ? 0 : readings[0].col.layers, source });
+      continue;
+    }
+    if (new Set(readings.map(r => r.col.recessed)).size > 1) {
+      const other = readings.find(r => r.col.recessed !== readings[0].col.recessed)!.name;
+      conflicts.push({ cell: [cell.x, cell.y],
+        reason: `${corner ? "corner stack" : "stack"} is set back on one face only (${names[0].toUpperCase()} vs ${other.toUpperCase()})` });
+      Object.assign(cell, { status: "conflict", layers: null, source });
+      continue;
+    }
+    if (readings[0].col.recessed) {
+      Object.assign(cell, { status: "missing", layers: 0, source });
+      for (const r of readings) {
+        if (cell.y === 0 && r.name !== "straight") continue;   // a side face looks along the front row past a missing corner
+        if (cells.has(r.behind)) promotions.set(r.behind, [...(promotions.get(r.behind) ?? []),
+          { status: "observed", layers: r.col.layers, filled_layers: r.col.filled, source: `${r.name}-recessed` }]);
+        else conflicts.push({ cell: [cell.x, cell.y], reason: `${r.name.toUpperCase()} shows a stack behind a missing one, but the faces give no room for it; rescan` });
+      }
+      continue;
+    }
+    const values = Object.fromEntries(readings.map(r => [r.name, r.col.layers])) as Record<string, number>;
+    const low = readings.reduce((a, b) => b.col.layers < a.col.layers ? b : a).name;
+    const high = readings.reduce((a, b) => b.col.layers > a.col.layers ? b : a).name;
+    const layerFields = Object.fromEntries(Object.entries(values).map(([n, v]) => [`${n}_layers`, v]));
+    if (values[high] - values[low] > 1) {
+      const pair = [...new Set([low, high])].sort((a, b) => FACE_ORDER.indexOf(a) - FACE_ORDER.indexOf(b));
+      conflicts.push({ cell: [cell.x, cell.y], reason: `${corner && "straight" in values ? "corner height" : "height"} differs between ${pair[0].toUpperCase()} and ${pair[1].toUpperCase()}`, ...layerFields });
+      Object.assign(cell, { status: "conflict", layers: null, source });
+      continue;
+    }
+    // Agreeing faces, or one layer apart: keep the reading with fewest gap-filled layers (STRAIGHT on a tie)
+    // and record the ambiguity so the total is only an estimate.
+    const best = [...readings].sort((a, b) => a.col.filled - b.col.filled || Number(a.name !== "straight") - Number(b.name !== "straight"))[0].col;
+    Object.assign(cell, { status: "observed", layers: best.layers, filled_layers: best.filled, source });
+    if (values[high] !== values[low]) ambiguities.push({ cell: [cell.x, cell.y], reason: "faces differ by one layer", ...layerFields, chosen: best.layers });
   }
   for (const [key, candidates] of promotions) {
     const cell = cells.get(key)!;
@@ -490,7 +540,7 @@ function buildBlock(straightCols: SpanColumn[], leftCols: SpanColumn[], rightCol
       conflicts.push({ cell: [cell.x, cell.y], reason: "faces disagree about the stack behind a missing one" });
     }
   }
-  return blockResult(width, depth, facesUsed, typical, [...cells.values()], conflicts);
+  return blockResult(width, depth, facesUsed, typical, [...cells.values()], conflicts, ambiguities);
 }
 
 // ---- Capture-quality gate for the model_spatial_v1 path.
@@ -700,7 +750,8 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
     return null;
   })();
   // A face that fails the capture gate gives no usable column counts, so the block total is withheld.
-  const block = rejectedView ? { ...assembled, total_trays: null, faces_consistent: false, fully_observed: false } : assembled;
+  const block = rejectedView
+    ? { ...assembled, status: "needs_view", total_trays: null, faces_consistent: false, fully_observed: false } : assembled;
   // Model boxes are useful evidence, but not proof of cross-view identity or egg occupancy.
   // Do not substitute whole-photo voting for an unfinished spatial hybrid pipeline.
   const reason = "Model detections are available. Physical stack matching and egg occupancy remain unresolved; these per-photo counts are not a verified inventory total.";
@@ -710,7 +761,8 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
       ? { recommended_view: namedFace.view, reason: namedFace.reason }
       : { recommended_view: "straight", reason };
   return json({
-    scan_id: scanId, status: "rescan_required", accepted: false,
+    // Legacy top-level fields stay "not verified" for installed APKs; result_status is the block's one result state.
+    scan_id: scanId, status: "rescan_required", accepted: false, result_status: block.status,
     physical_stack_count: null, total_trays: null, total_eggs: null,
     eggs_per_tray: Number(env.EGGS_PER_TRAY), cell_ids: cellIds,
     model: { provider: "roboflow_serverless", model_id: env.MODEL_ID },
@@ -726,7 +778,9 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
     // from observed faces; it is not a field-validated inventory until the held-out scene test passes.
     block: { ...block, contract: "block_model_v1", eggs_per_tray: Number(env.EGGS_PER_TRAY),
       verification: { method: "rim_edges", views: rimStatus ?? Object.fromEntries(VIEWS.map(v => [v, "disabled"])) },
-      total_eggs: block.total_trays === null ? null : block.total_trays * Number(env.EGGS_PER_TRAY), capture },
+      // Egg occupancy is not measured: this is tray capacity if every counted tray is full.
+      total_eggs: block.total_trays === null ? null : block.total_trays * Number(env.EGGS_PER_TRAY),
+      eggs_basis: "capacity_if_every_tray_full", capture },
     rescan,
   });
 }
@@ -808,7 +862,7 @@ async function reconstructPair(request: Request, env: Bindings) {
     timing:{upstream_ms:Date.now()-started}, client_processing:processing});
 }
 
-export { base64, buildBlock, captureQuality, fuseCounts, fuseCells, readCellIds, readOptionalCellIds, spanColumns };
+export { base64, buildBlock, captureQuality, fuseCounts, fuseCells, readCellIds, readOptionalCellIds, spanColumns, walkLayers };
 
 export default {
   async fetch(request, env): Promise<Response> {

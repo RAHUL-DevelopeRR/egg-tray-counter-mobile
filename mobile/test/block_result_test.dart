@@ -1,4 +1,5 @@
 import 'package:egg_tray_counter/features/scan_flow/block_view.dart';
+import 'package:egg_tray_counter/features/scan_flow/result_look.dart';
 import 'package:egg_tray_counter/models/block_result.dart';
 import 'package:egg_tray_counter/models/scan_result.dart';
 import 'package:flutter/material.dart';
@@ -94,7 +95,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(home: Scaffold(body: BlockPanel(block: block))),
     );
-    expect(find.text('COMPUTED FROM 3 FACES'), findsOneWidget);
+    expect(find.text('ESTIMATE: 20 TRAYS IN HIDDEN STACKS'), findsOneWidget);
     expect(find.text('2 wide × 2 deep'), findsOneWidget);
     expect(find.byType(CustomPaint), findsWidgets);
   });
@@ -154,5 +155,49 @@ void main() {
   test('hasGrid requires positive dimensions', () {
     final json = _block()..['width'] = 0..['depth'] = 0;
     expect(BlockResult.fromJson(json).hasGrid, isFalse);
+  });
+
+  test('server status is used; older servers derive it from the totals', () {
+    expect(BlockResult.fromJson(_block()..['status'] = 'estimated').status, 'estimated');
+    expect(BlockResult.fromJson(_block()).status, 'exact');
+    expect(BlockResult.fromJson(_block()..['computed_trays'] = 20).status, 'estimated');
+    expect(BlockResult.fromJson(_block()..['total_trays'] = null).status, 'conflict');
+  });
+
+  test('result status, shown total and history agree for block scans', () {
+    final estimate = ScanResult.fromJson(
+      _scan(block: _block()..['status'] = 'estimated'..['computed_trays'] = 20),
+    );
+    expect(estimate.resultStatus, 'estimated');
+    expect(estimate.shownTrays, 80);
+    expect(estimate.shownEggs, 2400);
+    expect(resultLook(estimate.resultStatus).label, 'ESTIMATE');
+    final withheld = ScanResult.fromJson(
+      _scan(block: _block()..['status'] = 'conflict'..['total_trays'] = null..['total_eggs'] = null),
+    );
+    expect(withheld.shownTrays, isNull);
+    expect(resultLook(withheld.resultStatus).label, 'RETAKE');
+    expect(resultLook('exact').headline, 'BLOCK COUNTED');
+    expect(resultLook('rescan_required').headline, 'RETAKE NEEDED');
+  });
+
+  testWidgets('one-layer disagreement is shown as an estimate with its reason', (
+    tester,
+  ) async {
+    final block = BlockResult.fromJson(
+      _block()
+        ..['status'] = 'estimated'
+        ..['filled_trays'] = 1
+        ..['ambiguities'] = [
+          {'reason': 'faces differ by one layer', 'cell': [0, 0], 'straight_layers': 20, 'left_layers': 19},
+        ],
+    );
+    await tester.pumpWidget(
+      MaterialApp(home: Scaffold(body: SingleChildScrollView(child: BlockPanel(block: block)))),
+    );
+    expect(find.text('ESTIMATE: FACES DIFFER BY ONE LAYER'), findsOneWidget);
+    expect(find.textContaining('straight_layers=20'), findsOneWidget);
+    expect(find.text('Layers between detected boxes'), findsOneWidget);
+    expect(find.text('Eggs if every tray is full'), findsOneWidget);
   });
 }

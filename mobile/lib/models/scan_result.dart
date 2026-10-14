@@ -83,6 +83,16 @@ class ScanResult {
   final String? recommendedView;
   final String? rescanReason;
 
+  /// One result state for the icon, headline and history: `verified` for the
+  /// legacy painted-cell route, otherwise the block's status (exact,
+  /// estimated, conflict, needs_view), else the legacy top-level status.
+  String get resultStatus => accepted ? 'verified' : block?.status ?? status;
+
+  /// The tray total the result shows: legacy verified total or block total.
+  int? get shownTrays => accepted ? totalTrays : block?.totalTrays;
+
+  int? get shownEggs => accepted ? totalEggs : block?.totalEggs;
+
   factory ScanResult.fromJson(Map<String, dynamic> json) {
     final processing = json['processing'] as Map<String, dynamic>;
     final viewsJson = json['views'] as Map<String, dynamic>;

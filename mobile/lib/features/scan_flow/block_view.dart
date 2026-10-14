@@ -152,14 +152,16 @@ class BlockPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final headline = block.totalTrays != null
-        ? (block.fullyObserved
-              ? 'ALL STACKS OBSERVED'
-              : 'COMPUTED FROM ${block.facesUsed.length} FACES')
-        : 'RESCAN REQUIRED';
-    final color = block.totalTrays != null
-        ? (block.fullyObserved ? kObserved : kComputed)
-        : kRescan;
+    final (headline, color) = switch (block.status) {
+      kBlockExact => ('ALL STACKS SEEN', kObserved),
+      kBlockEstimated when block.computedTrays > 0 => (
+        'ESTIMATE: ${block.computedTrays} TRAYS IN HIDDEN STACKS',
+        kComputed,
+      ),
+      kBlockEstimated => ('ESTIMATE: FACES DIFFER BY ONE LAYER', kComputed),
+      'needs_view' => ('RETAKE A PHOTO', kRescan),
+      _ => ('RESCAN REQUIRED', kRescan),
+    };
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -185,18 +187,27 @@ class BlockPanel extends StatelessWidget {
                 alignment: WrapAlignment.center,
                 spacing: 14,
                 children: const [
-                  _Legend(color: kObserved, label: 'observed'),
-                  _Legend(color: kComputed, label: 'computed'),
-                  _Legend(color: kMissing, label: 'missing'),
+                  _Legend(color: kObserved, label: 'seen'),
+                  _Legend(color: kComputed, label: 'hidden, computed'),
+                  _Legend(color: kMissing, label: 'no stack'),
                   _Legend(color: kRescan, label: 'rescan'),
                 ],
               ),
               const Divider(height: 24),
               _Row('Block', '${block.width} wide × ${block.depth} deep'),
-              _Row('Observed trays', '${block.observedTrays}'),
-              _Row('Computed trays', '${block.computedTrays}'),
+              _Row('Seen trays', '${block.observedTrays}'),
+              _Row('Hidden trays (computed)', '${block.computedTrays}'),
+              if (block.filledTrays > 0)
+                _Row('Layers between detected boxes', '${block.filledTrays}'),
               _Row('Total trays', '${block.totalTrays ?? '—'}'),
-              _Row('Total eggs', '${block.totalEggs ?? '—'}'),
+              // Egg occupancy is not measured: 30 per tray is capacity.
+              _Row('Eggs if every tray is full', '${block.totalEggs ?? '—'}'),
+            ],
+            if (block.ambiguities.isNotEmpty) ...[
+              const SizedBox(height: 10),
+              ...block.ambiguities.map(
+                (a) => Text('• $a', style: theme.textTheme.bodySmall),
+              ),
             ],
             if (block.conflicts.isNotEmpty || block.rescanCells.isNotEmpty) ...[
               const SizedBox(height: 10),

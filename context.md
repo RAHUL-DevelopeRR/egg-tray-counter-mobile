@@ -1,3 +1,14 @@
+> 2026-10-14 (later): step 1 counting fixes in source (Python, Worker, app 0.4.11+22), not
+> deployed or built: merged face readings, one-layer ambiguity -> "estimated", gap fill capped
+> at 2 layers, box/pitch < 0.75 -> retake, block `status` exact/estimated/conflict/needs_view
+> drives the app icon and history. See the latest PROGRESS.md entry.
+
+> 2026-10-14: 13 Oct field scans replayed (reports/field-scans-20261013/): 4 new blocks, none
+> with a manual count, so still no accuracy figure. 3 withheld (gate refused 6/12 faces: too far
+> away / corner block), 1 total 165 with 60 computed. Phone still 0.4.9; Jio IPv6 to workers.dev
+> 50% loss vs IPv4 0%. Production Worker is 4c1480e6 (no block model). Field-count discipline
+> (manual count per scan) is the gating requirement for every next step.
+
 > 2026-10-12: "backend offline" / failed scans = dropped TLS handshakes and
 > 40-66% packet loss on the path to the *.workers.dev addresses from the
 > operator's Jio/Wi-Fi connections (reports/network-20261012/); the Workers

@@ -14,6 +14,16 @@ the front cell is marked missing and the cell behind becomes observed. When
 the grid has no cell behind (the faces say depth 1) that is a contradiction
 and the block is sent for rescan instead of silently losing the stack.
 
+Every face that sees a cell contributes an observation; observations are
+merged, never overwritten. Heights more than one layer apart are a
+conflict. One layer apart is an ambiguity: the better-supported reading is
+kept and the block is only an estimate.
+
+``status`` is the one result state the app shows and stores:
+``exact`` (every stack seen, faces agree), ``estimated`` (a total exists but
+hidden stacks are computed or a reading is ambiguous), ``conflict`` (no
+total; retake the named face) or ``needs_view`` (a face is missing).
+
 Inputs are per-column records from ``layer_span.count_layers_by_span``.
 Never raises on empty faces: a face with no stacks is a conflict in the
 result, matching the Worker port.
@@ -26,6 +36,10 @@ import statistics
 RECESS_SCALE = 0.85  # pitch ratio below which a face column is treated as set back
 MIN_RIM_CONFIDENCE = 0.5  # rim-edge verification only vetoes when its own confidence is at least this
 MAX_PERSPECTIVE_GRADIENT = 1.5  # top-third / bottom-third layer spacing; measured frontal photos stay <= 1.42
+# Tray boxes are about as tall as the layer spacing (0.79-1.16 on the 53 reference stacks). Far
+# away, cross-stacked trays get boxes on alternate layers only, the spacing doubles and the count
+# halves (2026-10-13 corner block: 0.64-0.67, about 10 of 20 layers).
+MIN_BOX_PITCH_RATIO = 0.75
 
 
 def _round_half_even(value: float) -> int:
@@ -47,11 +61,18 @@ def _face(columns: list[dict], name: str) -> list[dict]:
         layers = int(column.get("walk_count", span))
         scale = column["pitch_px"] / reference if reference else 1.0
         gradient = column.get("perspective_gradient")
+        box_height = column.get("box_height_px")
+        box_ratio = box_height / column["pitch_px"] if box_height and column["pitch_px"] else None
         # Two box-based counts must agree; a steep top/base spacing ratio means the
         # camera looked down on the stack and the base layers may be compressed away.
         reason = None
         rim, rim_conf = column.get("rim_count"), column.get("rim_confidence") or 0.0
-        if abs(span - layers) > 1:
+        if box_ratio is not None and box_ratio < MIN_BOX_PITCH_RATIO:
+            reason = ("boxes found on only some layers (trays too small in the photo); "
+                      "step closer and retake this face")
+        elif column.get("walk_unresolved_gaps"):
+            reason = "boxes are missing over several layers of this stack; retake this face"
+        elif abs(span - layers) > 1:
             reason = f"layer counts disagree (span {span}, walk {layers}); retake this face"
         elif rim is not None and rim_conf >= MIN_RIM_CONFIDENCE and int(rim) != layers:
             reason = f"rim edges count {int(rim)} layers but boxes count {layers}; retake this face"
@@ -63,6 +84,7 @@ def _face(columns: list[dict], name: str) -> list[dict]:
         face.append(
             {
                 "layers": layers,
+                "filled": int(column.get("walk_filled") or 0),
                 "scale": round(scale, 3),
                 "recessed": scale < RECESS_SCALE,
                 "count_agreement": reason is None,
@@ -73,12 +95,23 @@ def _face(columns: list[dict], name: str) -> list[dict]:
     return face
 
 
-def _result(width, depth, faces_used, typical, cells, conflicts, note):
+def _result(width, depth, faces_used, typical, cells, conflicts, note, ambiguities=(), needs_view=False):
     observed = sum(c["layers"] or 0 for c in cells if c["status"] == "observed")
     computed = sum(c["layers"] or 0 for c in cells if c["status"] == "computed")
+    filled = sum(c.get("filled_layers", 0) for c in cells if c["status"] == "observed")
     rescan = [[c["x"], c["y"]] for c in cells if c["status"] in {"rescan", "conflict"}]
     consistent = not conflicts and not rescan and typical is not None
+    total = observed + computed if consistent else None
+    if needs_view:
+        status = "needs_view"
+    elif total is None:
+        status = "conflict"
+    elif computed or ambiguities:
+        status = "estimated"
+    else:
+        status = "exact"
     return {
+        "status": status,
         "width": width,
         "depth": depth,
         "faces_used": faces_used,
@@ -86,10 +119,12 @@ def _result(width, depth, faces_used, typical, cells, conflicts, note):
         "cells": cells,
         "observed_trays": observed,
         "computed_trays": computed,
-        "total_trays": observed + computed if consistent else None,
+        "filled_trays": filled,
+        "total_trays": total,
         "fully_observed": consistent and computed == 0,
         "faces_consistent": consistent,
         "conflicts": conflicts,
+        "ambiguities": list(ambiguities),
         "rescan_cells": rescan,
         "note": note,
     }
@@ -117,35 +152,18 @@ def build_block(
     if not straight or (not left and not right):
         return _result(
             None, None, faces_used, None, [],
-            [{"reason": "STRAIGHT and at least one side face must show stacks"}], NOTE,
+            [{"reason": "STRAIGHT and at least one side face must show stacks"}], NOTE, needs_view=True,
         )
     xf = _face(straight, "straight")
     lf = list(reversed(_face(left, "left"))) if left else None
     rf = _face(right, "right") if right else None
     width = len(xf)
     conflicts: list[dict] = []
+    ambiguities: list[dict] = []
     depths = {name: len(f) for name, f in (("left", lf), ("right", rf)) if f}
     if len(set(depths.values())) > 1:
         conflicts.append({"reason": "depth differs between LEFT and RIGHT faces", **depths})
     depth = max(depths.values())
-
-    # Corner agreement: same height and same recessed state on both faces.
-    for name, f, xi in (("left", lf, 0), ("right", rf, width - 1)):
-        if not f:
-            continue
-        a, b = xf[xi], f[0]
-        if not b["count_agreement"]:
-            conflicts.append({"cell": [xi, 0], "reason": f"{name.upper()}: {b['reason']}"})
-        if a["recessed"] != b["recessed"]:
-            conflicts.append(
-                {"cell": [xi, 0],
-                 "reason": f"corner stack is set back on one face only (STRAIGHT vs {name.upper()})"}
-            )
-        elif abs(a["layers"] - b["layers"]) > 1:
-            conflicts.append(
-                {"cell": [xi, 0], "reason": f"corner height differs between STRAIGHT and {name.upper()}",
-                 "straight_layers": a["layers"], f"{name}_layers": b["layers"]}
-            )
 
     heights = [c["layers"] for c in xf + (lf or []) + (rf or []) if not c["recessed"]]
     typical = _round_half_even(statistics.median(heights)) if heights else None
@@ -153,36 +171,68 @@ def build_block(
     cells = {(x, y): {"x": x, "y": y, "status": "computed", "layers": typical, "source": "faces"}
              for y in range(depth) for x in range(width)}
 
-    def place(key, col, source, behind_key):
-        cell = cells[key]
-        if col["recessed"]:
-            cell.update(status="missing", layers=0, source=source)
-            if behind_key in cells:
-                promotions.setdefault(behind_key, []).append(
-                    {"status": "observed", "layers": col["layers"], "source": f"{source}-recessed"}
-                )
-            else:
-                conflicts.append(
-                    {"cell": list(key),
-                     "reason": f"{source.upper()} shows a stack behind a missing one, "
-                               "but the faces give no room for it; rescan"}
-                )
-        else:
-            cell.update(status="observed", layers=col["layers"], source=source)
-        if not col["count_agreement"]:
-            cell["status"] = "rescan"
-            conflicts.append({"cell": list(key), "reason": f"{source.upper()}: {col['reason']}"})
+    # Every face reading of a cell: (face column, face name, the cell seen when this one is missing).
+    # STRAIGHT sees the front row; each side face sees its column, corner included. A one-wide
+    # block puts LEFT and RIGHT on the same cells, so readings are merged, never overwritten.
+    seen: dict[tuple[int, int], list[tuple[dict, str, tuple[int, int]]]] = {}
+    for x, col in enumerate(xf):
+        seen.setdefault((x, 0), []).append((col, "straight", (x, 1)))
+    for name, f, xi, dx in (("left", lf, 0, 1), ("right", rf, width - 1, -1)):
+        for y, col in enumerate(f or []):
+            seen.setdefault((xi, y), []).append((col, name, (xi + dx, y)))
 
     promotions: dict[tuple[int, int], list[dict]] = {}
-    for x, col in enumerate(xf):
-        place((x, 0), col, "straight", (x, 1))
-    for name, f, xi, dx in (("left", lf, 0, 1), ("right", rf, width - 1, -1)):
-        if not f:
+    for key, readings in seen.items():
+        cell = cells[key]
+        names = [name for _, name, _ in readings]
+        source = "+".join(names)
+        corner = key[1] == 0 and len(readings) > 1
+        unsure = [(col, name) for col, name, _ in readings if not col["count_agreement"]]
+        for col, name in unsure:
+            conflicts.append({"cell": list(key), "reason": f"{name.upper()}: {col['reason']}"})
+        if unsure:
+            first = readings[0][0]
+            cell.update(status="rescan", layers=0 if first["recessed"] else first["layers"], source=source)
             continue
-        for y, col in enumerate(f):
-            if y == 0 or y >= depth:
-                continue  # corner handled from STRAIGHT; extra rows already a depth conflict
-            place((xi, y), col, name, (xi + dx, y))
+        if len({col["recessed"] for col, _, _ in readings}) > 1:
+            other = next(name for col, name, _ in readings if col["recessed"] != readings[0][0]["recessed"])
+            where = "corner stack" if corner else "stack"
+            faces = f"{names[0].upper()} vs {other.upper()}"
+            conflicts.append({"cell": list(key), "reason": f"{where} is set back on one face only ({faces})"})
+            cell.update(status="conflict", layers=None, source=source)
+            continue
+        if readings[0][0]["recessed"]:
+            cell.update(status="missing", layers=0, source=source)
+            for col, name, behind in readings:
+                if key[1] == 0 and name != "straight":
+                    continue  # a side face looks along the front row past a missing corner
+                if behind in cells:
+                    promotions.setdefault(behind, []).append(
+                        {"status": "observed", "layers": col["layers"], "filled_layers": col["filled"],
+                         "source": f"{name}-recessed"})
+                else:
+                    conflicts.append({"cell": list(key),
+                                      "reason": f"{name.upper()} shows a stack behind a missing one, "
+                                                "but the faces give no room for it; rescan"})
+            continue
+        values = {name: col["layers"] for col, name, _ in readings}
+        layer_fields = {f"{name}_layers": v for name, v in values.items()}
+        low, high = min(values, key=values.get), max(values, key=values.get)
+        if values[high] - values[low] > 1:
+            pair = sorted({low, high}, key=["straight", "left", "right"].index)
+            where = "corner height" if corner and "straight" in values else "height"
+            reason = f"{where} differs between {pair[0].upper()} and {pair[1].upper()}"
+            conflicts.append({"cell": list(key), "reason": reason, **layer_fields})
+            cell.update(status="conflict", layers=None, source=source)
+            continue
+        # Agreeing faces, or one layer apart: keep the reading with fewest gap-filled layers
+        # (STRAIGHT on a tie) and record the ambiguity so the total is only an estimate.
+        best = min(readings, key=lambda r: (r[0]["filled"], r[1] != "straight"))[0]
+        cell.update(status="observed", layers=best["layers"], filled_layers=best["filled"], source=source)
+        if values[high] != values[low]:
+            ambiguities.append({"cell": list(key), "reason": "faces differ by one layer", **layer_fields,
+                                "chosen": best["layers"]})
+
     for key, candidates in promotions.items():
         cell = cells[key]
         layers = {c["layers"] for c in candidates}
@@ -197,7 +247,7 @@ def build_block(
             )
 
     cell_list = [cells[(x, y)] for y in range(depth) for x in range(width)]
-    return _result(width, depth, faces_used, typical, cell_list, conflicts, NOTE)
+    return _result(width, depth, faces_used, typical, cell_list, conflicts, NOTE, ambiguities)
 
 
 def render_boxes(block: dict, tray_w: float = 1.0, tray_d: float = 1.0, layer_h: float = 0.25) -> list[dict]:

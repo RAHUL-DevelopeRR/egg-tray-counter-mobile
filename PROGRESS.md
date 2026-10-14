@@ -1,5 +1,93 @@
 # Progress
 
+## 2026-10-14 (later) - step 1 counting fixes: merged faces, ambiguity, bounded gap fill, one result status (Claude Code)
+
+Plan bugs B01/B02/B03/B06/B08 from C:\Users\DELL\deepseekfs\future-plan.md, plus the half-count
+found in the 13 Oct corner block, fixed in Python (backend/app/vision/block_model.py,
+layer_span.py) and the Worker port (cloudflare-worker/src/index.ts), and in the app (0.4.11+22).
+Not deployed, not built, not committed.
+
+- B01: every face reading of a cell is merged (no overwrite); a one-wide block whose LEFT and
+  RIGHT give the rear stack 18 vs 22 is now a conflict (was 42, consistent, fully observed).
+- B02: faces one layer apart keep a total but status "estimated", with an `ambiguities` entry;
+  the reading with fewer gap-filled layers wins, STRAIGHT on a tie. Two layers apart = conflict.
+- B03: the walk fills at most 2 missed layers per gap (MAX_FILLED_PER_GAP; no reference stack
+  needs more than 1); longer runs are `walk_unresolved_gaps` and send the face for a retake.
+  [0, 40, 80, 4000] now counts 4 (was 101).
+- B06: `walk_filled` is carried to the cell (`filled_layers`) and block (`filled_trays`).
+- Half-count: column box height / walk pitch below 0.75 sends the face for a retake ("step
+  closer"). References 0.79-1.16; 13 Oct corner block front 0.64-0.67; in the 39 tagged photos
+  it flags only 3 sparse or undercounted non-reference columns among the frontal photos.
+- B08: block `status` = exact / estimated / conflict / needs_view; top-level `result_status`;
+  legacy top-level fields unchanged for installed APKs. The app's icon, headline, block panel
+  and history all use it (history used to store block scans as rescan_required with no count);
+  egg total labelled "if every tray is full" (`eggs_basis`).
+
+Measured: 53 reference stacks still walk 51/53 exact; Python and Worker give identical block
+results on 27 real scenes (18 archived batches, 4 field scans of 13 Oct, 5 staging replays).
+Changes on real scenes: the 99-block (fake LEFT photo, corner 20 vs 19) and the 399 mechanics
+trio keep their totals but become "estimated"; 9b4c783e stays 165, estimated (corner 15 vs 16 =
+cover tray); ef823816 asks for a step-closer retake; archived batch 12 (three unrelated photos)
+no longer invents 718. Tests: backend block/layer 53 (11 new), full backend suite passes but 2 of
+7 full runs hit intermittent OpenCV "Unknown C++ exception" in untouched cv2 tests (reruns pass);
+Worker 57 (6 new) and staging dry-run build OK; Flutter analyzer clean, 99 tests (3 new).
+
+Deployed with the user's approval: staging Worker version 47cb2378-6e3e-483e-b709-b99da9960470
+(production 4c1480e6 untouched). Live replay on staging: 99-block 99 estimated, 9b4c783e 165
+estimated, ef823816 / 30aca6a1 / f81c04d7 withheld (ef823816 first reason "step closer"); laptop
+uploads still hit TLS resets (3 in a row once). APK egg-tray-counter-0.4.11-block-staging.apk,
+SHA-256 02ece3b6d52883c92481eee8cc61ab46149091f460f26fc8698a76cb95e768f5, 61,508,183 bytes,
+installed on the Redmi 12:00 (versionName 0.4.11, versionCode 22); launched: SERVER REACHABLE,
+staging URL kept. Old history rows still read "Rescan required" (stored by the old app). adb
+screencap hung on this phone; screen text read with uiautomator instead.
+
+Next: field scans with RECORD MANUAL COUNT on every block (10+, incl. a corner and a
+cross-stacked block); then 0.4.12: prefer IPv4, device key on manual-count/list routes, fix
+replay_field_scans.py empty-file crash; then detector retrain (far cross-stacked rows, cover-tray
+class) and capture options (wall side, same-face check, raised top photo).
+
+Mistake made and repaired this session: editing six files through PowerShell 5.1
+Get-Content/Set-Content added a BOM and garbled non-ASCII characters (x sign). Repaired by
+reversing the cp1252 misread; every non-ASCII line now matches HEAD. Use the editor tool, not
+PowerShell text round-trips, on UTF-8 files here.
+
+Not done in step 1 (need data or capture work): empty cover trays still count as filled (needs a
+detector class), same-face-twice detection and a "side against a wall" capture option,
+short stacks (< 3 boxes) and different-depth stacks merged in one column (B04/B05).
+
+## 2026-10-14 - 13 Oct field scans replayed; phone, network and backend survey; plan review (Claude Code)
+
+Analysis only: no code change, deployment, APK build or phone setting change.
+Details: reports/field-scans-20261013/README.md.
+
+- Phone: 0.4.9+20 still installed (0.4.10 not installed). It rebooted 13 Oct 18:53 and the app
+  has not run since, so no app log covers the 13 Oct scans. Jio today: IPv6 to the staging Worker
+  host 50% loss, IPv4 0% loss. Laptop uploads were still reset during the TLS handshake 2 of 6 times.
+- Backend: staging f5776f0d (block model), production 4c1480e6 of 2026-09-23 (no block model;
+  the 2026-10-12 entry's "0482e52c" is not what wrangler lists), Lambda health 200 diagnostic-only,
+  AWS token expired. R2: 102 scans; manual counts are still only WH-99 and MECH-DONE.
+- 13 Oct scans: 7 arrived; 3 repeat the 99-block photos; 4 new ones without manual counts.
+  Replayed on staging: f81c04d7 (mixed label photos) withheld; 30aca6a1 withheld (all faces too far
+  away or too narrow); ef823816 (5x4 block in a room corner) withheld, 8 stacks flagged, 144/233
+  would be computed; 9b4c783e 4x3 total 165 (105 observed + 60 computed), all faces accepted,
+  unverified. The gate refused 6/12 faces, each for a reason visible in the photo.
+- Found: replay_field_scans.py crashes on rerun when a scan has no manual count (empty file left).
+
+Hand count by eye (visual, not physical; reports/field-scans-20261013/, app-vs-hand-3d.png):
+ef823816 = 393 filled (153 seen + 240 hidden) + 19 empty covers versus the app's 233 (-41%).
+Cross-stacked trays (5/6-egg rows alternate) photographed from far are boxed only on alternate
+rows, so pitch doubles and layers halve. Its LEFT and RIGHT photos are the same side face (left
+side against a wall). 9b4c783e = 164 versus the app's 165 (the empty cover tray was counted);
+observed stacks 6/7 exact, 7/7 within 1. Reviewed C:\Users\DELL\deepseekfs\future-plan.md:
+B01/B02/B03 reproduced on the current code; the plan lacks cross-stacking, cover trays, duplicate
+faces and wall-bound blocks.
+
+Next: (1) manual count on every field scan, 20 blocks minimum; (2) network: prefer IPv4 in the
+app and/or the custom domain; (3) install 0.4.10; (4) warehouse capture modes for wall/corner
+blocks and an elevated top photo for interior stacks; (5) promote the block model to production
+only after the field score. The Sept plans in docs/ (WAREHOUSE_3D_ACCEPTANCE_PLAN.md,
+COUNTING_EXECUTION_PLAN.md) predate the block model and need refreshing.
+
 ## 2026-10-12 - "backend offline" diagnosed as the mobile network path; retries, smaller uploads, tilt smoothing (0.4.9) (Claude Code)
 
 Operator report on the Redmi: the home screen sometimes says the backend is
