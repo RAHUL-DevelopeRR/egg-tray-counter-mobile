@@ -1,5 +1,113 @@
 # Progress
 
+## 2026-10-15 (later) - walk-overfill experiment: label-free walk variants (Claude Code subagent)
+
+Offline only (no deploy, no inference, no commit; backend/ untouched, deployed counting unchanged in 0.4.12).
+New: scripts/experiment_walk_fill.py (--out), scripts/tests/test_experiment_walk_fill.py (12 pass),
+reports/experiment-walk-fill-20261015/ (README, results.json; 2 runs byte-identical, SHA-256 3aa1b07c...).
+
+Measured:
+- The deployed walk overfills by a pitch ratchet: filled sub-gaps feed its local pitch down to the 0.6
+  floor, so ordinary gaps are doubled (img-04 `f`: 17 boxes, span 19, walk 27).
+- Variants were chosen by a pre-declared label-free rule. The stage-1 output was saved before any label
+  code existed and does not change when every label value is perturbed.
+- Chosen: V4 (local pitch from one-layer gaps only).
+  - Equal-extent pairs differing by more than 1: 15 → 11 of 29 (25 physical pairs); sum of differences
+    97 → 47; filled layers 92 → 58.
+  - Unchanged: 0 of 53 reference columns and 0 of 19 accepted totals. Of 66 photos it newly accepts only
+    img-45, at 25 from a merged front/rear column; arm C reads that column as 20.
+- Excluded: V1 (cap) and V2 (span fallback), which would disable the span/walk flag and change no outcome.
+  Also V3 (strict fill), which broke the reference columns (4 of 53 changed) and, in the labels, made 3
+  more accepted results wrong.
+- Labels, secondary, scored after the choice:
+  - V4 keeps 10 accepted / 9 correct / 1 wrong on the 22 clusters, with absolute error 431 → 451, all of
+    it on withheld photos;
+  - per-stack absolute error 26 → 22 (9 observations, 8 stacks); references 51/53.
+
+With the overfill removed, far faces undercount: the user-100 stacks read 16/16/18/15/14 against 20. So
+detector recall and capture distance stay first for the withheld far faces, on corrected evidence (15 of 18
+small-scale pairs → 11).
+
+Next:
+- Run V4 in shadow next to V0 on physically counted field scans. Do not let it change acceptance until a
+  merged-column guard exists (C's depth split or a filled-share check).
+- Not for 0.4.12.
+
+## 2026-10-15/17 - 0.4.12 code complete: scan jobs, device keys, evaluation on existing data (Claude Code)
+
+STATUS 2026-10-17: committed and pushed to codex/hybrid-cell-counting at the user's request. NOT yet
+deployed, built or installed: the wrangler OAuth login expired (14 Oct 16:52 UTC) and the Redmi has not
+been attached since 14 Oct evening. Staging is still 47cb2378 (0.4.11), the phone still runs 0.4.11.
+Measured on the final tree: Worker npm test 111/111, staging and production dry runs OK (production
+config unchanged); flutter analyze clean, flutter test 167/167; scripts/tests 75/75; backend suite
+passed (one run; OpenCV tests remain intermittently flaky as recorded before).
+Remaining steps (need the user): `npx wrangler login` in cloudflare-worker; set ADMIN_TOKEN on staging
+from work/secrets/staging-admin-token (`npx wrangler secret put ADMIN_TOKEN --env staging`, value piped,
+never printed); `npm run build && npx wrangler deploy --env staging` (wrangler.jsonc staging is
+AUTH_MODE observe); build the APK (0.4.12+23) and install on the Redmi; approve it with
+`python scripts/devices.py approve <full device id>` (EGG_ADMIN_TOKEN set); run Settings > Diagnostics >
+NETWORK TEST and collect `adb logcat | findstr EGGNET`; one complete gallery scan + manual count; then
+`npx wrangler deploy --env staging --var AUTH_MODE:enforce`, set the file to enforce, verify 401/403
+for unauthenticated requests. Portrait/landscape capture needs a hand on the phone.
+mobile/test/support/loopback_tls.dart holds a throwaway self-signed localhost key for loopback TLS
+tests only (trusted by nothing else).
+
+Verified start state: HEAD 318eb04 local only (origin at a3e1f89); staging 47cb2378; production
+4c1480e6 unchanged (health without block contracts); Redmi had 0.4.11 build 22 (not attached since
+14 Oct evening). Contract: docs/SCAN_JOBS_AND_DEVICES.md. Audit outputs (scratch, not in repo):
+routes/sessions, Cloudflare options (R2 create-only put `If-None-Match: *` measured atomic in
+Miniflare; zone zero-x.live available for a custom domain), network (adb shell has no HTTPS client;
+Dart connectionFactory must return a TLS socket; laptop over Jio hotspot 14 Oct: staging /health
+IPv4 20/20, IPv6 19/20), dataset (MUTAA repo = the 41 MUTAA originals + the 52 count-labelled
+photos already in the repo by SHA-256; 24 labels usable at image level, 8 per-stack user reports,
+0 counted genuine three-view sets; only labelled ids 30, 31, 46, 47, 49, 50 have no copy in any
+training export). Roboflow (read-only): production projec-mutta/2 rfdetr-medium trained 21 Aug on
+99 images (recall 67.3%); v3/v4 trained in Sep, not promoted; no training on any October data.
+Rollout order required: set ADMIN_TOKEN on staging, deploy with registration available but not
+enforced, install 0.4.12, approve the phone by full device id, then enforce.
+
+Done so far (uncommitted, tests measured):
+- Worker: AUTH_MODE open|enforce, devices (self-generated id + secret, admin approve/revoke via
+  scripts/devices.py, revocation final, 4 KiB registration cap, sanitised labels, shared-display-code
+  guard), scan jobs on R2 create-only/CAS (stored result, replay, 409 scan_id_conflict, 202 while
+  running, takeover after lease, result route 200/202/404/409), manual counts idempotent by
+  count_id with latest ordered by min(created_at, recorded_at), admin-only listings with cursor,
+  diagnostics upload route. Follow-ups done: AUTH_MODE observe (rollout step; 0.4.11 still works
+  without headers), lease 150 s (Cloudflare keeps a disconnected request ~30 s; worst-case count
+  ~242 s computed, so a slow live job can be redone - results stay consistent), fingerprint v2 incl.
+  scan_contract and cell ids, staging manual counts only under STATE_PREFIX (production shares the
+  bucket and stays open), per-scan manual-count route, admin archive lists the job's image hashes,
+  STATE_PREFIX required. Final: npm test 111/111.
+- App 0.4.12+23: device identity in flutter_secure_storage, registration/approval gate, shared Dio
+  with IPv4-first TLS connector, NETWORK TEST screen (EGGNET logcat lines), new scan id per
+  retake, pending scans on disk with RESUME/DISCARD, five failure classes, result polling, history
+  v2 (older rows shown unknown, never rewritten), manual count count_id/created_at/app_total.
+  Android backup and device transfer disabled. flutter analyze clean; flutter test 167/167.
+- Scripts: 0-byte cache crash fixed in replay and score scripts, admin header from
+  EGG_ADMIN_TOKEN, cursor pagination, stable replay ids, newest photo per view; scripts/tests pass.
+  accuracy-evaluation/ERRATA-20261015.md (img02 = img06; 99-block labels) without editing the CSV.
+- Evaluation (reports/eval-20261015, saved detections, 0.4.11 logic, development set): 22 label
+  clusters -> 10 accepted, 9 exact, 1 wrong (img-30, 78 vs 80, leak-free), 12 withheld; trios are
+  workflow tests only (substituted 99-block and mechanics trios still give an estimated total).
+- Experiment (reports/experiment-stack-faces-20261015): 20 photos / 99 reviewed polygons; manual
+  polygons remove 2 of 18 error trays; automatic separation C finds 58/71 target stacks vs 48/71.
+  Verifier: "retrain first" not established - the walk counter's gap filling over-counts on
+  regular boxes (12 of 62 polygons hold 74 of 92 filled layers).
+- Corrections applied after two verification rounds: the walk reference set is label-conditioned as
+  a whole, so 9 of the 10 accepted clusters are in-sample and only img-47 is out of sample; img-32 and
+  img-46 are logic-development photos ("not used in logic tuning" n=5: 1 accepted, 1 correct);
+  hold-out listed by block (G03, G29, G30, G31, G32); label-perturbation tests cover all three
+  evaluation scripts (predictions byte-identical when every label changes).
+- Walk-overfill experiment (reports/experiment-walk-fill-20261015, entry above): label-free V4
+  fixes the pitch ratchet, moves 0 of 19 accepted results; shadow mode only.
+- Bottleneck (verified statement): the binding constraint is held-out physical truth (0 physical
+  counts, 0 counted genuine trios). On single faces the remaining error after V4 is far-face
+  undercounting where a layer is under ~3% of the frame height (3 blocks) - detector recall at small
+  scale or capturing closer, not separable with these data; cross-view matching cannot be ranked.
+  Next milestone: physical per-stack counts on >= 3 new blocks as STRAIGHT/LEFT/RIGHT sets at about
+  1.5/3/5 m, then detector retraining on far and cross-stacked field faces held out by block; V4 and
+  stack separation C in shadow mode meanwhile; add a same-face (duplicate side photo) check.
+
 ## 2026-10-14 (later) - step 1 counting fixes: merged faces, ambiguity, bounded gap fill, one result status (Claude Code)
 
 Plan bugs B01/B02/B03/B06/B08 from C:\Users\DELL\deepseekfs\future-plan.md, plus the half-count

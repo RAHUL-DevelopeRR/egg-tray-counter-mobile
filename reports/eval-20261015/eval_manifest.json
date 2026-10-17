@@ -1,0 +1,1323 @@
+{
+ "generated": "2026-10-15",
+ "purpose": "Evaluation targets for scripts/evaluate_labelled.py. Labels are scoring targets only; the prediction code never reads this file's label fields.",
+ "label_source": "user handwriting on the photos (WhatsApp, 7 Oct 2026), transcribed in datasets/field-2026-10/labelled-20261007/labels.csv; digits re-read 2026-10-15 (all agree).",
+ "scope_source": "2026-10-15 dataset audit (second pass, assistant interpretation of what each number counts; tier A scope clear, tier B scope probable). Not confirmed by the user.",
+ "leak_source": "2026-10-15 audit square-NCC clean-copy search over every training export; v2 tag split = Roboflow tag clean-manual-auto-reconciled-v2 today (109 images carry it; frozen v2 has 99).",
+ "logic_dev_source": "gate tuning set = reports/field-labelled-20261007/capture_tags.csv (39 photos); walk reference photos = reports/field-labelled-20261007/per_stack_counts.csv (13 photos).",
+ "walk_development_source": "9 Oct live probe of the walk counter on the 99-block trio: reports/staging-block-20261008/scan-99block-walk.json (walk v1) read RIGHT = img-32 as 23; scan-99block-walk2.json (after the walk change) read it as 19 (PROGRESS 2026-10-09: 'the from-above side photo now reads 19 (was 23 with walk v1)'). The same probe used img-01 as STRAIGHT and warehouse image-4 as LEFT (19 in both runs).",
+ "orientation_development_source": "Capture-gate development for 0.4.8 (commit 1e8591e, staging f5776f0d): reports/orientation-20261009 used img-46 as one of its five scenes (scripts/count_on_staging.py sends the original img-46 and an r90 app upload of it), and its padded 1920x1080 variant img-46-cpad (server-orientation-variants.csv; work/scratch-landscape/worker/images/img-46-cpad.jpg) is one of the 7 landscape variants on which the full-height waiver (0.8, scripts/gate_rules.py) and the sideways guard (median box width/height 2.75, scripts/sideways_rule.py) were checked (PROGRESS 2026-10-10: 'all 7 landscape variants accepted'). The other scenes there (img-01, 02, 19, 20, and variant img-50-cpad) are already in the gate tuning set. img-46 is therefore a counting-logic development photo.",
+ "walk_reference_rows_citing_label": {
+  "source": "reports/field-labelled-20261007/per_stack_counts.csv, basis column",
+  "rows_image_col": [
+   [
+    2,
+    1
+   ],
+   [
+    8,
+    6
+   ],
+   [
+    20,
+    3
+   ],
+   [
+    23,
+    4
+   ],
+   [
+    23,
+    6
+   ],
+   [
+    24,
+    3
+   ],
+   [
+    30,
+    2
+   ],
+   [
+    50,
+    2
+   ]
+  ],
+  "rows_with_reference_value": 7,
+  "note": "These rows give the per-stack reference as implied by the photo's label (for example 'label 80 implies 20'). 7 of them carry an assistant_count and are among the 53 reference stacks the walk counter was checked on (reports/field-labelled-20261007/eval_walk.py); img-50 col 2 cites the label but has no reference value. Two of the 8 are on leak-free photos: img-30 col 2 and img-50 col 2."
+ },
+ "not_usable_source": "2026-10-15 audit evaluation_ready.none_ids (28 labels not usable at image level); label values from labels.csv; scope and reason text from the audit inventory. Scored only in a secondary table, never in a headline number.",
+ "photos": [
+  {
+   "label_id": 1,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-01.jpg",
+   "sha256": "803585bfe669dab28481b1b840ba50b678ce00082d1b7edc03731359992ef359",
+   "width": 1280,
+   "height": 582,
+   "label_value": 99,
+   "label_as_written": "99",
+   "tier": "A",
+   "label_confidence": "high",
+   "label_scope": "whole visible face of a 5 x 1 block = the block total (left end against the wall)",
+   "issue": "label is the block total; per-stack 20/20/20/20/19 is an assistant reference, only the 19 end stack is user-confirmed",
+   "near_duplicate_cluster": "ND0014",
+   "group_id": "G01",
+   "detector_leak": "leaked",
+   "clean_copy_sets": [
+    "review_queue",
+    "rf_v1_export"
+   ],
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "gate_tuning_capture_tag": "frontal_fill",
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": true,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 2,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-02.jpeg",
+   "sha256": "c75d95aab77f664d35aa78e54bfdb06732b9a15e7f286d30e9294afdd9672e17",
+   "width": 1280,
+   "height": 1109,
+   "label_value": 80,
+   "label_as_written": "80",
+   "tier": "A",
+   "label_confidence": "high",
+   "label_scope": "front face, 4 stacks x 20; block is several rows deep",
+   "issue": "face count, not block inventory",
+   "near_duplicate_cluster": "ND0141",
+   "group_id": "G04",
+   "detector_leak": "leaked",
+   "clean_copy_sets": [
+    "review_queue",
+    "rf_v1_export"
+   ],
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "gate_tuning_capture_tag": "frontal_fill",
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 4,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-04.jpeg",
+   "sha256": "312737fcdbc9c1793a8bcd31ebaae18441a747f0bab525ab9b2917b530939e00",
+   "width": 960,
+   "height": 1280,
+   "label_value": 115,
+   "label_as_written": "115",
+   "tier": "B",
+   "label_confidence": "medium",
+   "label_scope": "visible face of a two-depth arrangement (short stack standing in front)",
+   "issue": "two depths; per-stack unresolved",
+   "near_duplicate_cluster": "ND0143",
+   "group_id": "G05",
+   "detector_leak": "leaked",
+   "clean_copy_sets": [
+    "review_queue",
+    "rf_v1_export"
+   ],
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "gate_tuning_capture_tag": "frontal_fill",
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 8,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-08.jpeg",
+   "sha256": "76db53a0a4cbb156e78be87242d9e90e1985ff83674f97d5d5872f0575fbae2a",
+   "width": 1280,
+   "height": 960,
+   "label_value": 160,
+   "label_as_written": "160",
+   "tier": "A",
+   "label_confidence": "high",
+   "label_scope": "front face, 8 stacks x 20, square-on",
+   "issue": "same photograph as img-23: score once",
+   "near_duplicate_cluster": "ND0145",
+   "group_id": "G06",
+   "detector_leak": "leaked",
+   "clean_copy_sets": [
+    "review_queue",
+    "rf_v1_export"
+   ],
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "gate_tuning_capture_tag": "frontal_fill",
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 9,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-09.jpeg",
+   "sha256": "22fe8ad3370e5da9d2a582e417dd5f589c9df6cbdafa9a3939608fac6d701f7b",
+   "width": 960,
+   "height": 1280,
+   "label_value": 75,
+   "label_as_written": "75",
+   "tier": "B",
+   "label_confidence": "low",
+   "label_scope": "close three-depth arrangement with a short front stack and an empty top tray",
+   "issue": "multi-depth; whether the empty tray counts is unknown",
+   "near_duplicate_cluster": "ND0146",
+   "group_id": "G08",
+   "detector_leak": "leaked",
+   "clean_copy_sets": [
+    "review_queue",
+    "rf_v1_export"
+   ],
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "gate_tuning_capture_tag": "frontal_fill",
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 19,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-19.jpeg",
+   "sha256": "581bd15c16fa868c93ef6556a6fd663907733ad2cae8c6035e945a8dae4cf971",
+   "width": 1600,
+   "height": 1200,
+   "label_value": 100,
+   "label_as_written": "100",
+   "tier": "A",
+   "label_confidence": "high",
+   "label_scope": "front face 5 x 20, square-on",
+   "issue": "clean copy in canonical_clean/train (1600x1200)",
+   "near_duplicate_cluster": "ND0049",
+   "group_id": "G02",
+   "detector_leak": "leaked",
+   "clean_copy_sets": [
+    "canonical_clean"
+   ],
+   "v2_tag_split_today": "train",
+   "in_gate_tuning_set": true,
+   "gate_tuning_capture_tag": "frontal_fill",
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 20,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-20.jpeg",
+   "sha256": "d8c8983ab7cc37b733046029040415870491779e1101257781e424afe7705041",
+   "width": 1200,
+   "height": 1600,
+   "label_value": 60,
+   "label_as_written": "60",
+   "tier": "B",
+   "label_confidence": "medium",
+   "label_scope": "front face 3 x 20, close; part of another block at the left edge",
+   "issue": "edge clutter; clean copy in canonical_clean/train",
+   "near_duplicate_cluster": "ND0071",
+   "group_id": "G17",
+   "detector_leak": "leaked",
+   "clean_copy_sets": [
+    "canonical_clean"
+   ],
+   "v2_tag_split_today": "train",
+   "in_gate_tuning_set": true,
+   "gate_tuning_capture_tag": "frontal_fill",
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 21,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-21.jpeg",
+   "sha256": "0398f6c5f9016129c3f1544d7878f6ac83c39262df4f36f9c6796084e494ed83",
+   "width": 1280,
+   "height": 582,
+   "label_value": 100,
+   "label_as_written": "100 (upside down)",
+   "tier": "A",
+   "label_confidence": "high",
+   "label_scope": "front face 5 x 20, wide 20:9 frame",
+   "issue": "burst shot of img-24 (one near-duplicate cluster)",
+   "near_duplicate_cluster": "ND0155",
+   "group_id": "G02",
+   "detector_leak": "leaked",
+   "clean_copy_sets": [
+    "review_queue",
+    "rf_v1_export"
+   ],
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "gate_tuning_capture_tag": "frontal_fill",
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 23,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-23.jpeg",
+   "sha256": "fb4f7cca6e300aa79758eaf9b8f6c4ea8de0a17c6b309dea5fb651cb52bfb825",
+   "width": 1280,
+   "height": 960,
+   "label_value": 160,
+   "label_as_written": "160",
+   "tier": "A",
+   "label_confidence": "high",
+   "label_scope": "same photograph as img-08",
+   "issue": "duplicate of img-08: score once",
+   "near_duplicate_cluster": "ND0145",
+   "group_id": "G06",
+   "detector_leak": "leaked",
+   "clean_copy_sets": [
+    "review_queue",
+    "rf_v1_export"
+   ],
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "gate_tuning_capture_tag": "frontal_fill",
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 24,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-24.jpeg",
+   "sha256": "64c7873491a23a0d57d4efb65c79e4acd9dd734ddf72f14150398b93ea5c69a7",
+   "width": 1280,
+   "height": 582,
+   "label_value": 100,
+   "label_as_written": "100",
+   "tier": "A",
+   "label_confidence": "high",
+   "label_scope": "front face 5 x 20, wide 20:9 frame",
+   "issue": "burst shot of img-21",
+   "near_duplicate_cluster": "ND0155",
+   "group_id": "G02",
+   "detector_leak": "leaked",
+   "clean_copy_sets": [
+    "review_queue",
+    "rf_v1_export"
+   ],
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "gate_tuning_capture_tag": "frontal_fill",
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 30,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-30.jpeg",
+   "sha256": "edd3b7745b8b1e3b5367dcf0c124d3c8d420cc6f3aab19a90f11bea76533bd35",
+   "width": 1600,
+   "height": 900,
+   "label_value": 80,
+   "label_as_written": "80",
+   "tier": "A",
+   "label_confidence": "high",
+   "label_scope": "the 80 face square-on, 4 x 20; a sliver of another stack at the left edge",
+   "issue": "no copy in any training set",
+   "near_duplicate_cluster": "ND0160",
+   "group_id": "G03",
+   "detector_leak": "leak_free",
+   "clean_copy_sets": [],
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "gate_tuning_capture_tag": "frontal_fill",
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 31,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-31.jpeg",
+   "sha256": "936f115049c2195a3b2c74cf009061f8b3a6ba0cd5ad6d63e743310765dece74",
+   "width": 900,
+   "height": 1600,
+   "label_value": 80,
+   "label_as_written": "80",
+   "tier": "B",
+   "label_confidence": "medium",
+   "label_scope": "the same 4-column face, oblique; nearest column cut by the left edge",
+   "issue": "oblique; no copy in any training set",
+   "near_duplicate_cluster": "ND0161",
+   "group_id": "G03",
+   "detector_leak": "leak_free",
+   "clean_copy_sets": [],
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "gate_tuning_capture_tag": "angled_or_multi",
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 32,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-32.jpeg",
+   "sha256": "fc86f9d70cd37eed83bca6d6edb3eaa7379bfa8eac58a86e9cb9a566eba96b78",
+   "width": 580,
+   "height": 1280,
+   "label_value": 19,
+   "label_as_written": "19",
+   "tier": "A",
+   "label_confidence": "high",
+   "label_scope": "the free end stack of the 99 block, seen end-on",
+   "issue": "user-written per-stack value",
+   "near_duplicate_cluster": "ND0013",
+   "group_id": "G01",
+   "detector_leak": "leaked",
+   "clean_copy_sets": [
+    "review_queue",
+    "rf_v1_export"
+   ],
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": false,
+   "gate_tuning_capture_tag": null,
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": true,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 33,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-33.jpeg",
+   "sha256": "442bb4923479f9cfc6607b03538a624528d2f830768701240ef505b5504b37a7",
+   "width": 1280,
+   "height": 580,
+   "label_value": 358,
+   "label_as_written": "358",
+   "tier": "B",
+   "label_confidence": "medium",
+   "label_scope": "the long egg-filled face; empty crates and empty pulp stacks at both edges",
+   "issue": "distant capture (tiny layers); empties at edges must be ignored",
+   "near_duplicate_cluster": "ND0162",
+   "group_id": "G12",
+   "detector_leak": "leaked",
+   "clean_copy_sets": [
+    "review_queue",
+    "rf_v1_export"
+   ],
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "gate_tuning_capture_tag": "distant_or_wide",
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 34,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-34.jpeg",
+   "sha256": "08ece1480e197722ac86346f190e4afb41ec0dda9c0d1ef32511492138383f17",
+   "width": 1600,
+   "height": 1200,
+   "label_value": 120,
+   "label_as_written": "120",
+   "tier": "A",
+   "label_confidence": "high",
+   "label_scope": "front face 6 x 20, square-on",
+   "issue": "same photograph as accuracy img05 (assistant 120); clean copy in canonical_clean/test",
+   "near_duplicate_cluster": "ND0019",
+   "group_id": "G21",
+   "detector_leak": "leaked",
+   "clean_copy_sets": [
+    "accuracy_eval",
+    "canonical_clean",
+    "review_queue",
+    "rf_v1_export"
+   ],
+   "v2_tag_split_today": "train",
+   "in_gate_tuning_set": true,
+   "gate_tuning_capture_tag": "frontal_fill",
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 35,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-35.jpeg",
+   "sha256": "18d82ecebe1d8ad79cceb4225043ab4e18258dac7eab1de2c56774beb423c9c5",
+   "width": 1280,
+   "height": 580,
+   "label_value": 1,
+   "label_as_written": "1",
+   "tier": "A",
+   "label_confidence": "high",
+   "label_scope": "single tray",
+   "issue": "",
+   "near_duplicate_cluster": "ND0088",
+   "group_id": "G22",
+   "detector_leak": "leaked",
+   "clean_copy_sets": [
+    "canonical_clean",
+    "review_queue",
+    "rf_v1_export"
+   ],
+   "v2_tag_split_today": "valid",
+   "in_gate_tuning_set": false,
+   "gate_tuning_capture_tag": null,
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 36,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-36.jpeg",
+   "sha256": "a19cdbd4d34799c4cb9f25494da4febf16d910bfe062733733cea0d7b8fa4b1d",
+   "width": 1280,
+   "height": 960,
+   "label_value": 109,
+   "label_as_written": "109",
+   "tier": "B",
+   "label_confidence": "medium",
+   "label_scope": "front face of the img-17 block; stacks of another block at the left edge, a set-back short stack at right",
+   "issue": "edge clutter",
+   "near_duplicate_cluster": "ND0163",
+   "group_id": "G15",
+   "detector_leak": "leaked",
+   "clean_copy_sets": [
+    "review_queue",
+    "rf_v1_export"
+   ],
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "gate_tuning_capture_tag": "frontal_fill",
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 38,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-38.jpeg",
+   "sha256": "e31ae2fb86d912a40fae54c0c25414952379e892050ea1db631067a5880d00ba",
+   "width": 1280,
+   "height": 582,
+   "label_value": 118,
+   "label_as_written": "118",
+   "tier": "B",
+   "label_confidence": "low",
+   "label_scope": "two groups of 3 egg stacks; empty green trays and crates at right apparently not counted",
+   "issue": "two depths; empties in frame; scope not user-confirmed",
+   "near_duplicate_cluster": "ND0057",
+   "group_id": "G23",
+   "detector_leak": "leaked",
+   "clean_copy_sets": [
+    "canonical_clean",
+    "review_queue",
+    "rf_v1_export"
+   ],
+   "v2_tag_split_today": "valid",
+   "in_gate_tuning_set": true,
+   "gate_tuning_capture_tag": "distant_or_wide",
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 39,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-39.jpeg",
+   "sha256": "2fba068084e12d457df761cb58ba4ef204852f4f973f5a23c63a679d7c608b6e",
+   "width": 582,
+   "height": 1280,
+   "label_value": 2,
+   "label_as_written": "2",
+   "tier": "A",
+   "label_confidence": "high",
+   "label_scope": "2 trays top-down, close",
+   "issue": "",
+   "near_duplicate_cluster": "ND0045",
+   "group_id": "G24",
+   "detector_leak": "leaked",
+   "clean_copy_sets": [
+    "canonical_clean",
+    "rf_v1_export"
+   ],
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": false,
+   "gate_tuning_capture_tag": null,
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 40,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-40.jpeg",
+   "sha256": "aefa71273017b073fa5fc2c4bdb2d810c95be298612a4426b7393d43b04c4568",
+   "width": 960,
+   "height": 1280,
+   "label_value": 10,
+   "label_as_written": "10",
+   "tier": "B",
+   "label_confidence": "medium",
+   "label_scope": "whole scene: 4 loose trays + 6-tray stack",
+   "issue": "same photograph as img-11 (2 | 6)",
+   "near_duplicate_cluster": "ND0061",
+   "group_id": "G07",
+   "detector_leak": "leaked",
+   "clean_copy_sets": [
+    "canonical_clean",
+    "review_queue",
+    "rf_v1_export"
+   ],
+   "v2_tag_split_today": "train",
+   "in_gate_tuning_set": false,
+   "gate_tuning_capture_tag": null,
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 46,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-46.jpeg",
+   "sha256": "33161764bc19f6fb7df35c26a3431910596f5abe5bfac7d9435ab88f1206e74f",
+   "width": 391,
+   "height": 1280,
+   "label_value": 20,
+   "label_as_written": "20",
+   "tier": "B",
+   "label_confidence": "medium",
+   "label_scope": "single stack (391 px crop); label partly cut at top",
+   "issue": "user-written per-stack value",
+   "near_duplicate_cluster": "ND0168",
+   "group_id": "G29",
+   "detector_leak": "leak_free",
+   "clean_copy_sets": [],
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": false,
+   "gate_tuning_capture_tag": null,
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": true
+  },
+  {
+   "label_id": 47,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-47.jpeg",
+   "sha256": "bd1a37426ec1dbcfa4a8d500eff952ca9d072aa1a383bb3936d933e5e9d346ca",
+   "width": 1280,
+   "height": 960,
+   "label_value": 7,
+   "label_as_written": "7",
+   "tier": "A",
+   "label_confidence": "high",
+   "label_scope": "single stack of 7 filled trays; empty tray stacks in the background",
+   "issue": "empties in frame must be ignored",
+   "near_duplicate_cluster": "ND0169",
+   "group_id": "G30",
+   "detector_leak": "leak_free",
+   "clean_copy_sets": [],
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": false,
+   "gate_tuning_capture_tag": null,
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 49,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-49.jpeg",
+   "sha256": "5eb15a01f7555f571f74456b834722dd07da184e03ee59a5b682b4a71d611414",
+   "width": 1200,
+   "height": 1600,
+   "label_value": 1,
+   "label_as_written": "1",
+   "tier": "A",
+   "label_confidence": "high",
+   "label_scope": "single pulp tray",
+   "issue": "REDMI 13 watermark 2026.09.05 09:45",
+   "near_duplicate_cluster": "ND0170",
+   "group_id": "G31",
+   "detector_leak": "leak_free",
+   "clean_copy_sets": [],
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": false,
+   "gate_tuning_capture_tag": null,
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false
+  },
+  {
+   "label_id": 50,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-50.jpeg",
+   "sha256": "5f70e3742c0054e8e2236377681755aa97b578e24d877d90452e3c13817a01ae",
+   "width": 900,
+   "height": 1600,
+   "label_value": 40,
+   "label_as_written": "40",
+   "tier": "B",
+   "label_confidence": "medium",
+   "label_scope": "two stacks close from above",
+   "issue": "perspective-compressed lower rows; ink reads like 4D",
+   "near_duplicate_cluster": "ND0010",
+   "group_id": "G32",
+   "detector_leak": "leak_free",
+   "clean_copy_sets": [],
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "gate_tuning_capture_tag": "frontal_fill",
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false
+  }
+ ],
+ "not_usable": [
+  {
+   "label_id": 3,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-03.jpeg",
+   "sha256": "bb76ebf063aff5782db72bedcd5642c6ebaedd66f90063c6cfc23d42f6570ecd",
+   "width": 960,
+   "height": 1280,
+   "label_value": 80,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0142",
+   "group_id": "G04",
+   "audit_scope": "probably the img-02 face seen at an angle; a second face and a separate short stack group are also in frame",
+   "audit_reason_not_usable": "scope covers one face of a multi-face, multi-object frame"
+  },
+  {
+   "label_id": 5,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-05.jpeg",
+   "sha256": "a4392c0a9c75f3a637e4694347b94878126c24d34fb7544d5313ff35431515c2",
+   "width": 1278,
+   "height": 960,
+   "label_value": 235,
+   "region_labels": "120|115",
+   "near_duplicate_cluster": "ND0144",
+   "group_id": "G05",
+   "audit_scope": "two bracketed blocks; right one is probably the img-04 block; stacks/crates at far left outside brackets",
+   "audit_reason_not_usable": "region labels: need the bracket ROIs; 235 is not a whole-image count"
+  },
+  {
+   "label_id": 6,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-06.jpeg",
+   "sha256": "f7756b24b59c1e0a2ffe965787f05d0f1b12b998d2424c1be6885c057fb997f7",
+   "width": 960,
+   "height": 1280,
+   "label_value": 4,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0031",
+   "group_id": "G07",
+   "audit_scope": "4 loose trays inside a drawn polygon; stacks at top edge outside",
+   "audit_reason_not_usable": "region label (bracket)"
+  },
+  {
+   "label_id": 7,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-07.jpeg",
+   "sha256": "2a4b6816ccb870bd225b1c5d3c02cdc6e090d720e1004c693c65a40d17e2143a",
+   "width": 960,
+   "height": 1280,
+   "label_value": 4,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0092",
+   "group_id": "G07",
+   "audit_scope": "same 4 loose trays; stack corner at top edge outside",
+   "audit_reason_not_usable": "region label (bracket)"
+  },
+  {
+   "label_id": 10,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-10.jpeg",
+   "sha256": "c2425fd7140b9f95ab0082c9b7c92411c2290b56f02a102a67550db2866739d8",
+   "width": 960,
+   "height": 1280,
+   "label_value": 30,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0147",
+   "group_id": "G09",
+   "audit_scope": "bracket over a pulp-tray block whose visible layers far exceed 30",
+   "audit_reason_not_usable": "unit/scope unclear"
+  },
+  {
+   "label_id": 11,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-11.jpeg",
+   "sha256": "6803b9fe7412bd37b20a66297f9675fbb39aa72e7fbcb0f9dddb63e681233235",
+   "width": 960,
+   "height": 1280,
+   "label_value": 8,
+   "region_labels": "2|6",
+   "near_duplicate_cluster": "ND0061",
+   "group_id": "G07",
+   "audit_scope": "2 loose trays (bracketed) + a 6-tray stack; 2 more loose trays visible unbracketed",
+   "audit_reason_not_usable": "same photograph as img-40 (labelled 10 for the whole scene)"
+  },
+  {
+   "label_id": 12,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-12.jpeg",
+   "sha256": "b4a377c6da79c08017cd5541af90c364d771ca3c85f539ddfd491e97ef805b28",
+   "width": 1280,
+   "height": 960,
+   "label_value": 205,
+   "region_labels": "100|105",
+   "near_duplicate_cluster": "ND0148",
+   "group_id": "G11",
+   "audit_scope": "two faces of ONE block meeting at a corner",
+   "audit_reason_not_usable": "labels.csv sums 205, which double-counts the shared corner column; not a visible-tray or block total"
+  },
+  {
+   "label_id": 13,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-13.jpeg",
+   "sha256": "775578bad4554674eb707a954900bb4027af02ffdf203dce0b420ff25b0e96ea",
+   "width": 1280,
+   "height": 960,
+   "label_value": 204,
+   "region_labels": "84|120",
+   "near_duplicate_cluster": "ND0149",
+   "group_id": "G12",
+   "audit_scope": "short end face (84) + a bracketed part of the long face (120); the long face continues outside the bracket",
+   "audit_reason_not_usable": "region labels; probably the long block of img-33"
+  },
+  {
+   "label_id": 14,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-14.jpeg",
+   "sha256": "ece7ea5d7ef56af48af1428ac5e163e7fa20c6bc67c252ba73433912dbad13fa",
+   "width": 960,
+   "height": 1280,
+   "label_value": 132,
+   "region_labels": "80|52",
+   "near_duplicate_cluster": "ND0150",
+   "group_id": "G13",
+   "audit_scope": "two faces at an inside corner; the 52 face is cut by the right frame edge",
+   "audit_reason_not_usable": "52 + the short stack cut off = img-15's 62 for the same face"
+  },
+  {
+   "label_id": 15,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-15.jpeg",
+   "sha256": "cc481592c33a1d7a3ef1d6b5a200a1a675dc2a62fcfb3c7daa127a35a8105a83",
+   "width": 960,
+   "height": 1280,
+   "label_value": 62,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0151",
+   "group_id": "G13",
+   "audit_scope": "one face with a pulp inset, including a short front stack; neighbouring blocks outside",
+   "audit_reason_not_usable": "region label (bracket)"
+  },
+  {
+   "label_id": 16,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-16.jpeg",
+   "sha256": "4ecf35169e51f634e8bb9a572fcaedda1f96d48171a2c44130f265357d78014b",
+   "width": 1280,
+   "height": 960,
+   "label_value": 119,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0152",
+   "group_id": "G14",
+   "audit_scope": "front face; bracket excludes the stack at the right edge",
+   "audit_reason_not_usable": "region label; same photograph as img-22"
+  },
+  {
+   "label_id": 17,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-17.jpeg",
+   "sha256": "6f69d4f3a29ba225cf6a2e22a47f1c1888f5a3b13baf2dbb9c2a917f1b7a75e3",
+   "width": 1280,
+   "height": 960,
+   "label_value": 109,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0153",
+   "group_id": "G15",
+   "audit_scope": "front face of a corner view; side face outside the bracket",
+   "audit_reason_not_usable": "region label; same block as img-36"
+  },
+  {
+   "label_id": 18,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-18.jpeg",
+   "sha256": "f85280c8919d0556025b4eb94e11bd301cf743ed5da2fe7a6c8e6a883c15345a",
+   "width": 1280,
+   "height": 960,
+   "label_value": 129,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0154",
+   "group_id": "G16",
+   "audit_scope": "bracket over 7 columns; stacks at both edges outside",
+   "audit_reason_not_usable": "region label"
+  },
+  {
+   "label_id": 22,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-22.jpeg",
+   "sha256": "e25f9f1a90df8fbffc69eacfe2b05b6e9bb750add804b0c62010a1a2964174f7",
+   "width": 1280,
+   "height": 960,
+   "label_value": 119,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0152",
+   "group_id": "G14",
+   "audit_scope": "same photograph as img-16 without the bracket; right-edge stack of another block in frame",
+   "audit_reason_not_usable": "use img-16's scope; do not score twice"
+  },
+  {
+   "label_id": 25,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-25.jpeg",
+   "sha256": "6d6316ee498e287b3f54e8b40b4bb3a88117d9da2eb755fc3b0c2317afdab567",
+   "width": 900,
+   "height": 1600,
+   "label_value": 80,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0156",
+   "group_id": "G03",
+   "audit_scope": "the 80 face at a grazing angle plus the block's other face",
+   "audit_reason_not_usable": "label covers one of two visible faces"
+  },
+  {
+   "label_id": 26,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-26.jpeg",
+   "sha256": "73d16a805cab05b3b79f22f29a067d199f112087848b82aa615ba5d7f8bbeb31",
+   "width": 1280,
+   "height": 960,
+   "label_value": 125,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0157",
+   "group_id": "G18",
+   "audit_scope": "front block (4 stacks) plus a partly occluded back-left block, no bracket",
+   "audit_reason_not_usable": "occluded part cannot be checked from the photo"
+  },
+  {
+   "label_id": 27,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-27.jpeg",
+   "sha256": "5f6192d0a35fa43b0a4d5fa33cded3b59536022067cd0abbde14a4c72e88ef94",
+   "width": 900,
+   "height": 1600,
+   "label_value": 80,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0156",
+   "group_id": "G03",
+   "audit_scope": "as img-25 (near-identical capture)",
+   "audit_reason_not_usable": "label covers one of two visible faces"
+  },
+  {
+   "label_id": 28,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-28.jpeg",
+   "sha256": "8512ce101330a36ef5e0990789550d642c10674327b3084d35ba44893989dd96",
+   "width": 1600,
+   "height": 900,
+   "label_value": 143,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0158",
+   "group_id": "G19",
+   "audit_scope": "L-shaped corner block (wing + 6-column face) + 1 loose tray",
+   "audit_reason_not_usable": "same block and arrangement as img-51 labelled 262"
+  },
+  {
+   "label_id": 29,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-29.jpeg",
+   "sha256": "aa8a0ab9dbb2dda58b53c21548633ec944623157f1851b5847f787849651b431",
+   "width": 1600,
+   "height": 900,
+   "label_value": 130,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0159",
+   "group_id": "G20",
+   "audit_scope": "steep oblique long face plus a corner wing",
+   "audit_reason_not_usable": "scope unclear"
+  },
+  {
+   "label_id": 37,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-37.jpeg",
+   "sha256": "49b99002c7a856ba2a640a728d6023c01b44126d9439a784e78df57237568b2f",
+   "width": 1600,
+   "height": 720,
+   "label_value": 4,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0048",
+   "group_id": "G07",
+   "audit_scope": "the same 4 loose trays top-down; stacks at the top/right edges not counted",
+   "audit_reason_not_usable": "label covers a subset of the visible trays"
+  },
+  {
+   "label_id": 41,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-41.jpeg",
+   "sha256": "038d6c3a08d6db83edd24a02d9b7cdcaf36ec3a838d1cfa45183653a1754f292",
+   "width": 1280,
+   "height": 960,
+   "label_value": 81,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0011",
+   "group_id": "G18",
+   "audit_scope": "front pair of stacks + back-left group of 3 stacks (left one cut by the frame)",
+   "audit_reason_not_usable": "arithmetic of 81 does not fit the visible stacks; scope unverified"
+  },
+  {
+   "label_id": 42,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-42.jpeg",
+   "sha256": "48212a141e419f435b6aa5a3d9d716897d307cc00331330017962e9e59149993",
+   "width": 960,
+   "height": 1280,
+   "label_value": 180,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0164",
+   "group_id": "G25",
+   "audit_scope": "L-shaped corner block; most of it hidden",
+   "audit_reason_not_usable": "label exceeds what is visible: likely a block total"
+  },
+  {
+   "label_id": 43,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-43.jpeg",
+   "sha256": "d6e64e0a0e160f64dca44c3f29ccc9a79ef40f55ad222cb2f6e25d544f469032",
+   "width": 1200,
+   "height": 1600,
+   "label_value": 5,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0165",
+   "group_id": "G26",
+   "audit_scope": "one loose orange tray + a stack cut by the top frame edge",
+   "audit_reason_not_usable": "stack cut by the frame"
+  },
+  {
+   "label_id": 44,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-44.jpeg",
+   "sha256": "742a6ffb95890189a35d2aca0f044dd780df469df8e91f2c90271c70e14be9ac",
+   "width": 1020,
+   "height": 960,
+   "label_value": 185,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0166",
+   "group_id": "G27",
+   "audit_scope": "whole frame: the 5-column user-100 face (101 incl. 1 empty) + set-back columns, wing, loose and empty trays",
+   "audit_reason_not_usable": "multi-part scene; its 5-column part has per-stack truth via user-100 crop"
+  },
+  {
+   "label_id": 45,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-45.jpeg",
+   "sha256": "6ee83d68de98f513cc4e709dff2fbdb5ed47a9dc478e2668dd56d891047db859",
+   "width": 533,
+   "height": 1280,
+   "label_value": 107,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0167",
+   "group_id": "G28",
+   "audit_scope": "533 px-wide crop of an L arrangement; most stacks hidden or cropped",
+   "audit_reason_not_usable": "label exceeds what is visible"
+  },
+  {
+   "label_id": 48,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-48.jpeg",
+   "sha256": "99c15fb865843b8a6f037148ce6c26d5c98c5a2dd24e5d82c0c00dd6cc5e328d",
+   "width": 960,
+   "height": 1280,
+   "label_value": 180,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0164",
+   "group_id": "G25",
+   "audit_scope": "same photograph as img-42",
+   "audit_reason_not_usable": "duplicate of img-42"
+  },
+  {
+   "label_id": 51,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-51.jpeg",
+   "sha256": "b02987e3a59928291acae756f93521e93ec8cdf8dfd84c150f4208305defbf48",
+   "width": 1280,
+   "height": 960,
+   "label_value": 262,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0171",
+   "group_id": "G19",
+   "audit_scope": "same L-shaped block as img-28, from further back",
+   "audit_reason_not_usable": "conflicts with img-28 (143)"
+  },
+  {
+   "label_id": 52,
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-52.jpeg",
+   "sha256": "936611bd09e65d60b4eb951b9f8f6b228da5f4479947930955c06ead7d482f6c",
+   "width": 1280,
+   "height": 960,
+   "label_value": 25,
+   "region_labels": null,
+   "near_duplicate_cluster": "ND0172",
+   "group_id": "G33",
+   "audit_scope": "several small stacks incl. a stack of empty trays, loose trays",
+   "audit_reason_not_usable": "whether empties count is unknown"
+  }
+ ],
+ "per_stack": [
+  {
+   "case": "img-32 free end of the 99 block",
+   "photo": "label_id 32",
+   "detections": {
+    "batch": "reports/field-labelled-20261007/raw/batch-11.json",
+    "view": "right"
+   },
+   "image": [
+    580,
+    1280
+   ],
+   "x_range": null,
+   "stacks": [
+    {
+     "position": 1,
+     "filled": 19,
+     "empty": null
+    }
+   ],
+   "truth_source": "user-written 19 on the photo; the same 19 stack is user-confirmed in reports/two-view-20260924/README.md:5-6",
+   "physical_stack": "S99-end",
+   "walk_development_photo": true
+  },
+  {
+   "case": "warehouse image-4 (same 19 stack)",
+   "photo": "reports/warehouse-20260923/input/image-4.jpg",
+   "detections": {
+    "response": "reports/staging-block-20261008/scan-99block-walk2.json",
+    "view": "left"
+   },
+   "image": null,
+   "x_range": null,
+   "stacks": [
+    {
+     "position": 1,
+     "filled": 19,
+     "empty": null
+    }
+   ],
+   "truth_source": "user confirmed 19 (reports/two-view-20260924/README.md:5-6); top of the stack is clipped in this photo (reports/warehouse-20260923/summary.json)",
+   "physical_stack": "S99-end",
+   "walk_development_photo": true
+  },
+  {
+   "case": "img-46 single stack (391 px crop)",
+   "photo": "label_id 46",
+   "detections": {
+    "batch": "reports/field-labelled-20261007/raw/batch-16.json",
+    "view": "left"
+   },
+   "image": [
+    391,
+    1280
+   ],
+   "x_range": null,
+   "stacks": [
+    {
+     "position": 1,
+     "filled": 20,
+     "empty": null
+    }
+   ],
+   "truth_source": "user-written 20 (label partly cut at the top)",
+   "physical_stack": "S46",
+   "walk_development_photo": false
+  },
+  {
+   "case": "img-47 single stack of 7",
+   "photo": "label_id 47",
+   "detections": {
+    "batch": "reports/field-labelled-20261007/raw/batch-16.json",
+    "view": "right"
+   },
+   "image": [
+    1280,
+    960
+   ],
+   "x_range": null,
+   "stacks": [
+    {
+     "position": 1,
+     "filled": 7,
+     "empty": null
+    }
+   ],
+   "truth_source": "user-written 7; empty tray stacks stand behind it",
+   "physical_stack": "S47",
+   "walk_development_photo": false
+  },
+  {
+   "case": "user-100 face inside img-44",
+   "photo": "label_id 44 (image-level label 185 is not usable)",
+   "detections": {
+    "batch": "reports/field-labelled-20261007/raw/batch-15.json",
+    "view": "right"
+   },
+   "image": [
+    1020,
+    960
+   ],
+   "x_range": [
+    12.8,
+    562.4
+   ],
+   "x_range_method": "reports/user-100-tray-case-20260915/scene-annotated.jpg located in img-44 by SIFT + RANSAC similarity (1,089 of 1,212 matches inliers, scale 0.814); columns whose centre lies inside the crop's x-range are the five stacks, numbered left to right. Uses only image geometry, no count.",
+   "stacks": [
+    {
+     "position": 1,
+     "filled": 20,
+     "empty": 0
+    },
+    {
+     "position": 2,
+     "filled": 20,
+     "empty": 0
+    },
+    {
+     "position": 3,
+     "filled": 20,
+     "empty": 1
+    },
+    {
+     "position": 4,
+     "filled": 20,
+     "empty": 0
+    },
+    {
+     "position": 5,
+     "filled": 20,
+     "empty": 0
+    }
+   ],
+   "truth_source": "user report, reports/user-100-tray-case-20260915/reference.json (not recounted)",
+   "physical_stack": "U100-1..5",
+   "walk_development_photo": false
+  }
+ ],
+ "multi_view": [
+  {
+   "trio": "99-block substituted trio",
+   "r2_scans": [
+    "2a607d2d",
+    "1fdf2436",
+    "6705058b",
+    "d6d087ea",
+    "6fe33b1d",
+    "ffa2cafa",
+    "ecf634f0",
+    "17d51cb3",
+    "abe6bead"
+   ],
+   "faces": "STRAIGHT img-01 (front); LEFT warehouse image-4 and RIGHT img-32 are the SAME free end; the true left end stands against the wall",
+   "genuine": false,
+   "expected": "no exact result (a side face is substituted)",
+   "replays": [
+    {
+     "path": "reports/staging-block-20261008/scan-99block-a.json",
+     "recorded": "staging, saved 2026-10-09 08:22 IST (block model, span counter)"
+    },
+    {
+     "path": "reports/staging-block-20261008/scan-99block-walk.json",
+     "recorded": "staging, saved 2026-10-09 11:30 IST (walk counter)"
+    },
+    {
+     "path": "reports/staging-block-20261008/scan-99block-walk2.json",
+     "recorded": "staging, saved 2026-10-09 11:34 IST (walk counter)"
+    },
+    {
+     "path": "reports/eval-20261015/staging47-replay/6fe33b1d-4605-4b53-84f4-86bff313c1f3.json",
+     "recorded": "staging 47cb2378 (0.4.11 Worker), live replay 2026-10-14 11:51 IST of the phone scan 6fe33b1d (app re-encodes; LEFT has 22 boxes, not 19)"
+    }
+   ]
+  },
+  {
+   "trio": "mechanics trio",
+   "r2_scans": [
+    "eaa108f5",
+    "445c3010",
+    "f3dbf7c6",
+    "d6c2c77a",
+    "dfaf5f78"
+   ],
+   "faces": "STRAIGHT img-19, LEFT img-30, RIGHT img-02: three different blocks",
+   "genuine": false,
+   "expected": "no exact result (three unrelated blocks; MECH-DONE 399 is not truth)",
+   "replays": [
+    {
+     "path": "reports/staging-block-20261008/scan-img19-30-02.json",
+     "recorded": "staging a012c14e, saved 2026-10-08 21:16 IST (span counter)"
+    },
+    {
+     "path": "reports/staging-block-20261008/scan-mech-walk.json",
+     "recorded": "staging, saved 2026-10-09 11:30 IST (walk counter)"
+    }
+   ]
+  },
+  {
+   "trio": "30aca6a1 (13 Oct)",
+   "r2_scans": [
+    "30aca6a1",
+    "1d37b3d7",
+    "7a8bbb85"
+   ],
+   "faces": "three unrelated views; STRAIGHT is 9b4c783e's front from far",
+   "genuine": false,
+   "expected": "no exact result",
+   "replays": [
+    {
+     "path": "reports/field-scans-20261013/replay/30aca6a1-56da-4564-ac09-93de66c4404d.json",
+     "recorded": "staging f5776f0d (pre-0.4.11 Worker), 2026-10-14"
+    },
+    {
+     "path": "reports/eval-20261015/staging47-replay/30aca6a1-56da-4564-ac09-93de66c4404d.json",
+     "recorded": "staging 47cb2378 (0.4.11 Worker), live replay 2026-10-14 11:53 IST"
+    }
+   ]
+  },
+  {
+   "trio": "ef823816 (13 Oct)",
+   "r2_scans": [
+    "ef823816",
+    "705b5860",
+    "a578b58d"
+   ],
+   "faces": "5 x 4 room-corner block; LEFT and RIGHT are the same right-side face",
+   "genuine": false,
+   "expected": "no exact result (duplicated side face)",
+   "replays": [
+    {
+     "path": "reports/field-scans-20261013/replay/ef823816-899d-4e97-9614-10f1ec47c25a.json",
+     "recorded": "staging f5776f0d (pre-0.4.11 Worker), 2026-10-14"
+    },
+    {
+     "path": "reports/eval-20261015/staging47-replay/ef823816-899d-4e97-9614-10f1ec47c25a.json",
+     "recorded": "staging 47cb2378 (0.4.11 Worker), live replay 2026-10-14 11:53 IST"
+    }
+   ]
+  },
+  {
+   "trio": "9b4c783e (13 Oct)",
+   "r2_scans": [
+    "9b4c783e",
+    "88ec003b",
+    "2488facf"
+   ],
+   "faces": "plausible genuine three-face set of one 4 x 3 block (visual only)",
+   "genuine": true,
+   "expected": "no physical count exists; assistant hand reading from photos 164 (not physical)",
+   "replays": [
+    {
+     "path": "reports/field-scans-20261013/replay/9b4c783e-7edb-43ed-b7d2-2f8eed889f60.json",
+     "recorded": "staging f5776f0d (pre-0.4.11 Worker), 2026-10-14"
+    },
+    {
+     "path": "reports/eval-20261015/staging47-replay/9b4c783e-7edb-43ed-b7d2-2f8eed889f60.json",
+     "recorded": "staging 47cb2378 (0.4.11 Worker), live replay 2026-10-14 11:52 IST"
+    }
+   ]
+  },
+  {
+   "trio": "f81c04d7 (13 Oct)",
+   "r2_scans": [
+    "f81c04d7",
+    "7d34c100",
+    "1f668334"
+   ],
+   "faces": "WhatsApp label photos: LEFT img-50, RIGHT img-41, STRAIGHT a crop of img-41",
+   "genuine": false,
+   "expected": "no exact result",
+   "replays": [
+    {
+     "path": "reports/field-scans-20261013/replay/f81c04d7-5fec-4d64-aa8c-54098abf2415.json",
+     "recorded": "staging f5776f0d (pre-0.4.11 Worker), 2026-10-14"
+    },
+    {
+     "path": "reports/eval-20261015/staging47-replay/f81c04d7-5fec-4d64-aa8c-54098abf2415.json",
+     "recorded": "staging 47cb2378 (0.4.11 Worker), live replay 2026-10-14 11:53 IST"
+    }
+   ]
+  }
+ ],
+ "multi_view_not_replayed": [
+  {
+   "trio": "warehouse/two-view pairs (R2 145e7b92, d6e19418, 77824bf2, 6c3c8e3a)",
+   "why": "no saved block-model response in the repo"
+  },
+  {
+   "trio": "production-20260918 (MUTAA image-04/02/01)",
+   "why": "no saved block-model response"
+  },
+  {
+   "trio": "manual-reference live check 2026-09-13",
+   "why": "no saved block-model response"
+  }
+ ]
+}

@@ -1,3 +1,18 @@
+> 2026-10-15: release 0.4.12 (staging only; production 4c1480e6 stays open and unchanged).
+> Contract docs/SCAN_JOBS_AND_DEVICES.md (read its "As built" section). Decisions: phones get their own
+> device id + secret (secure storage, never in the APK), approved by the admin with scripts/devices.py
+> (EGG_ADMIN_TOKEN, local file work/secrets/staging-admin-token, git-ignored); staging rolls out in
+> AUTH_MODE=observe (0.4.11 still works) and switches to enforce after the phone is approved; one
+> stored job per scan id (retries replay, other photos 409); staging hand counts live under
+> state/staging/ because production shares the bucket and stays open; the app keeps unfinished scans
+> on disk and tells upload failed / result lost / processing failed / rejected / not authorised apart.
+> Evaluation on existing data (reports/eval-20261015, experiment-stack-faces-20261015,
+> experiment-walk-fill-20261015): MUTAA = photos already in the repo; 24 usable image-level labels,
+> 0 physical counts, 0 counted genuine three-view sets; accepted results are nearly all in-sample.
+> Next milestone is decided by data, not code: physical per-stack counts on >= 3 new blocks as
+> STRAIGHT/LEFT/RIGHT sets at three distances, then detector retraining on far and cross-stacked faces
+> held out by block; walk fix V4 and stack separation C in shadow mode meanwhile.
+
 > 2026-10-14 (later): step 1 counting fixes in source (Python, Worker, app 0.4.11+22), not
 > deployed or built: merged face readings, one-layer ambiguity -> "estimated", gap fill capped
 > at 2 layers, box/pitch < 0.75 -> retake, block `status` exact/estimated/conflict/needs_view

@@ -1,6 +1,14 @@
 import { Buffer } from "node:buffer";
 
-type Bindings = Env & { ROBOFLOW_API_KEY: string; SCAN_ARCHIVE?: R2Bucket; RECONSTRUCTION_ENABLED?: string; RIM_VERIFY?: string; VISION_SERVICE_URL?: string; VISION_SERVICE_TOKEN?: string };
+// AUTH_MODE: unset or "open" keeps the open 0.4.11 behaviour; "enforce" turns on devices, admin and scan jobs;
+// "observe" (the rollout step between them) enforces every request that carries a credential and answers an upload
+// without one as 0.4.11 did. Any other value enforces.
+// STATE_PREFIX: per-environment R2 prefix for device, job and manual-count records (both Workers bind one bucket).
+// Required when AUTH_MODE is not open: without it every route that needs state answers 503 state_prefix_missing,
+// so a deployment that lost it never shares another environment's records.
+// ADMIN_TOKEN: Worker secret; absent means every admin call is refused.
+type Bindings = Env & { ROBOFLOW_API_KEY: string; SCAN_ARCHIVE?: R2Bucket; RECONSTRUCTION_ENABLED?: string; RIM_VERIFY?: string; VISION_SERVICE_URL?: string; VISION_SERVICE_TOKEN?: string;
+  AUTH_MODE?: string; STATE_PREFIX?: string; ADMIN_TOKEN?: string };
 
 type Prediction = { class?: string; confidence?: number; x?: number; y?: number; width?: number; height?: number };
 type ImageSize = { width: number; height: number };
@@ -9,15 +17,17 @@ type ViewInference = { count: number; confidence: number; detections?: Predictio
 const VIEWS = ["left", "right", "straight"] as const;
 const MAX_IMAGE_BYTES = 20 * 1024 * 1024;
 const RETRYABLE = new Set([429, 502, 503, 504]);
+const SCAN_ID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 
 class HttpError extends Error {
-  constructor(public status: number, public code: string, message: string) {
+  // extra: additional top-level response fields (for example the scan job block).
+  constructor(public status: number, public code: string, message: string, public extra: Record<string, unknown> = {}) {
     super(message);
   }
 }
 
-const json = (body: unknown, status = 200) =>
-  Response.json(body, { status, headers: { "Cache-Control": "no-store" } });
+const json = (body: unknown, status = 200, headers: Record<string, string> = {}) =>
+  Response.json(body, { status, headers: { "Cache-Control": "no-store", ...headers } });
 
 function fuseCounts(results: Record<string, ViewInference>, maxViewCountRatio = 1.25) {
   // Detector confidence is not calibrated count confidence: this is only a rejection guard.
@@ -152,7 +162,18 @@ async function sha256(file: File) {
   return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
 }
 
+// A validated, hashed upload: the input of both the open route and a scan job. scanContract: the form field as sent
+// (null when absent).
+type ParsedScan = { scanId: string; files: Record<string, File>; hashes: string[]; cellIds: Record<string, string>;
+  scanContract: string | null; modelScan: boolean; baselineScan: boolean; requestStarted: number; multipartMs: number };
+
 async function countScan(request: Request, env: Bindings) {
+  const scan = await readScan(request);
+  await archiveScan(env, scan);
+  return json(await scanPipeline(env, scan));
+}
+
+async function readScan(request: Request): Promise<ParsedScan> {
   const requestStarted = Date.now();
   if (!request.headers.get("content-type")?.startsWith("multipart/form-data")) {
     throw new HttpError(415, "invalid_content_type", "Expected multipart form data");
@@ -170,7 +191,7 @@ async function countScan(request: Request, env: Bindings) {
   const baselineScan = requestedContract === null && !VIEWS.some(view => form.has(`${view}_cell_id`));
   const cellIds = modelScan || baselineScan ? readOptionalCellIds(form) : readCellIds(form);
   const rawScanId = String(form.get("scan_id") ?? crypto.randomUUID()).toLowerCase();
-  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(rawScanId)) {
+  if (!SCAN_ID.test(rawScanId)) {
     throw new HttpError(422, "invalid_scan_id", "scan_id must be a UUID");
   }
   const files = Object.fromEntries(VIEWS.map((view) => [view, form.get(view)])) as Record<string, string | File | null>;
@@ -197,12 +218,16 @@ async function countScan(request: Request, env: Bindings) {
   if (new Set(hashes).size !== 3) {
     throw new HttpError(422, "duplicate_view", "LEFT, RIGHT, and STRAIGHT must be distinct photographs");
   }
+  return { scanId: rawScanId, files: files as Record<string, File>, hashes, cellIds,
+    scanContract: requestedContract === null ? null : String(requestedContract), modelScan, baselineScan, requestStarted, multipartMs };
+}
 
-  // Private, content-addressed originals survive failed inference and retries.
-  // No public download route: operators retrieve using authenticated R2 access.
+// Private, content-addressed originals survive failed inference and retries.
+// No public download route: operators retrieve using authenticated R2 access.
+async function archiveScan(env: Bindings, { scanId: rawScanId, files, hashes }: ParsedScan) {
   if (env.SCAN_ARCHIVE) {
     for (const [index, view] of VIEWS.entries()) {
-      const file = files[view] as File;
+      const file = files[view];
       await env.SCAN_ARCHIVE.put(`scans/${rawScanId}/${view}/${hashes[index]}`, file.stream(), {
         httpMetadata: { contentType: file.type },
         customMetadata: { scan_id: rawScanId, view, sha256: hashes[index], received_at: new Date().toISOString() },
@@ -210,9 +235,14 @@ async function countScan(request: Request, env: Bindings) {
     }
     console.log(JSON.stringify({ event: "scan_archived", scan_id: rawScanId }));
   }
+}
+
+// Inference, fusion and the block model; returns the count response body.
+async function scanPipeline(env: Bindings, scan: ParsedScan): Promise<Record<string, unknown>> {
+  const { scanId: rawScanId, files, cellIds, modelScan, baselineScan, requestStarted, multipartMs } = scan;
   const started = Date.now();
   const results = {} as Record<string, ViewInference>;
-  for (const view of VIEWS) results[view] = await infer(files[view] as File, env, modelScan,
+  for (const view of VIEWS) results[view] = await infer(files[view], env, modelScan,
     {scan_id: rawScanId, view});
   console.log(JSON.stringify({event: "scan_stages_complete", scan_id: rawScanId,
     multipart_ms: multipartMs, inference_ms: Date.now() - started,
@@ -221,7 +251,7 @@ async function countScan(request: Request, env: Bindings) {
     console.log(JSON.stringify({event: "scan_complete", scan_id: rawScanId, accepted: false,
       counts: Object.fromEntries(VIEWS.map(v => [v, results[v].count])), latency_ms: Date.now() - started}));
     const columns = Object.fromEntries(VIEWS.map(view => [view, spanColumns(results[view].detections ?? [])]));
-    const rimStatus = await rimVerify(files as Record<string, File>, columns, env);
+    const rimStatus = await rimVerify(files, columns, env);
     console.log(JSON.stringify({event: "rim_verify", scan_id: rawScanId, status: rimStatus}));
     return modelDiagnostics(rawScanId, results, cellIds, env, Date.now() - started, columns, rimStatus);
   }
@@ -239,7 +269,7 @@ async function countScan(request: Request, env: Bindings) {
   }]));
   const counts = Object.fromEntries(VIEWS.map((view) => [view, results[view].count]));
   console.log(JSON.stringify({ event: "scan_complete", scan_id: rawScanId, accepted, counts, latency_ms: latency }));
-  return json({
+  return {
     scan_id: rawScanId,
     status: accepted ? "verified" : "manual_recount_required",
     accepted,
@@ -257,7 +287,7 @@ async function countScan(request: Request, env: Bindings) {
       recommended_view: VIEWS.find((view) => !stacks.find((stack) => stack.physical_stack_id === cellIds[view])!.accepted),
       reason: "MANUAL RECOUNT REQUIRED: inspect each listed cell separately. Do not compare different cell totals.",
     },
-  });
+  };
 }
 
 // Compatibility with the requested August baseline; not the spatial/hybrid path.
@@ -291,7 +321,7 @@ function baselineResponse(scanId: string, results: Record<string, ViewInference>
     ? Math.min(...VIEWS.filter((view) => results[view].count === finalCount).map((view) => results[view].confidence))
     : 0;
   console.log(JSON.stringify({ event: "scan_complete", scan_id: scanId, accepted, counts, latency_ms: latency }));
-  return json({
+  return {
     scan_id: scanId,
     status: accepted ? "verified" : "rescan_required",
     accepted,
@@ -315,7 +345,7 @@ function baselineResponse(scanId: string, results: Record<string, ViewInference>
       recommended_view: VIEWS.reduce((a, b) => results[a].count <= results[b].count ? a : b),
       reason: "RESCAN REQUIRED: views must agree without a large count mismatch",
     },
-  });
+  };
 }
 
 function readOptionalCellIds(form: FormData): Record<string, string> {
@@ -639,9 +669,25 @@ function worstView(capture: Record<string, CaptureQuality>, views: readonly stri
 // scan's archived photos. It is ground truth for scoring; the Worker never uses it for counting.
 async function manualCount(request: Request, env: Bindings, scanId: string) {
   if (!env.SCAN_ARCHIVE) throw new HttpError(503, "archive_unavailable", "Manual counts need the scan archive");
-  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(scanId)) {
+  if (!SCAN_ID.test(scanId)) {
     throw new HttpError(422, "invalid_scan_id", "scan_id must be a UUID");
   }
+  const { blockId, clean, notes, tray, appVersion, totals } = await readManualCountBody(request);
+  const recordedAt = new Date().toISOString();
+  const record = { kind: "manual_count_v1", scan_id: scanId, block_id: blockId, cells: clean, notes, tray, recorded_at: recordedAt,
+    app_version: appVersion, totals };
+  const key = `scans/${scanId}/manual-count/${recordedAt.replace(/[:.]/g, "-")}.json`;
+  const body_ = JSON.stringify(record);
+  const meta = { httpMetadata: { contentType: "application/json" }, customMetadata: { scan_id: scanId, block_id: blockId, kind: "manual_count" } };
+  // Timestamped history plus a fixed "latest" key so scoring can fetch one object per scan.
+  await env.SCAN_ARCHIVE.put(key, body_, meta);
+  await env.SCAN_ARCHIVE.put(`scans/${scanId}/manual-count/latest.json`, body_, meta);
+  console.log(JSON.stringify({ event: "manual_count_stored", scan_id: scanId, block_id: blockId, cells: clean.length, key }));
+  return json({ stored: true, key, latest_key: `scans/${scanId}/manual-count/latest.json`, totals });
+}
+
+// The operator's count as validated today; shared by the open route and the enforced (count_id) route.
+async function readManualCountBody(request: Request) {
   let body: Record<string, unknown>;
   try { body = await request.json() as Record<string, unknown>; } catch { throw new HttpError(422, "invalid_json", "Body must be JSON"); }
   const blockId = String(body?.block_id ?? "").trim();
@@ -661,29 +707,38 @@ async function manualCount(request: Request, env: Bindings, scanId: string) {
   const notes = typeof body.notes === "string" ? body.notes.slice(0, 2000) : "";
   const trayRaw = body.tray && typeof body.tray === "object" ? Object.entries(body.tray as Record<string, unknown>) : [];
   const tray = Object.fromEntries(trayRaw.filter(([k, v]) => k.length <= 40 && typeof v === "number" && Number.isFinite(v)).slice(0, 10));
-  const recordedAt = new Date().toISOString();
   const totals = { filled: clean.reduce((s, c) => s + c.filled, 0), empty: clean.reduce((s, c) => s + c.empty, 0), unreachable: clean.filter(c => c.unreachable).length };
-  const record = { kind: "manual_count_v1", scan_id: scanId, block_id: blockId, cells: clean, notes, tray, recorded_at: recordedAt,
-    app_version: typeof body.app_version === "string" ? body.app_version.slice(0, 32) : null, totals };
-  const key = `scans/${scanId}/manual-count/${recordedAt.replace(/[:.]/g, "-")}.json`;
-  const body_ = JSON.stringify(record);
-  const meta = { httpMetadata: { contentType: "application/json" }, customMetadata: { scan_id: scanId, block_id: blockId, kind: "manual_count" } };
-  // Timestamped history plus a fixed "latest" key so scoring can fetch one object per scan.
-  await env.SCAN_ARCHIVE.put(key, body_, meta);
-  await env.SCAN_ARCHIVE.put(`scans/${scanId}/manual-count/latest.json`, body_, meta);
-  console.log(JSON.stringify({ event: "manual_count_stored", scan_id: scanId, block_id: blockId, cells: clean.length, key }));
-  return json({ stored: true, key, latest_key: `scans/${scanId}/manual-count/latest.json`, totals });
+  const appVersion = typeof body.app_version === "string" ? body.app_version.slice(0, 32) : null;
+  return { body, blockId, clean, notes, tray, appVersion, totals };
 }
 
 // Keys archived for one scan (photos by view/sha, manual counts). Key names only; bytes need
 // authenticated R2 access. Scan ids are unguessable UUIDs.
-async function listArchive(env: Bindings, scanId: string) {
+// withJob (admin route when enforced): also the scan job's photo hashes, null when the scan has no job. The open
+// production Worker can add photos under the same prefix, so the job names the three photos this scan counted.
+// It lists each view and the manual counts separately (up to 100 keys each), because the open manual-count route adds
+// an object under manual-count/ on every call, which sorts between left/ and right/ and would push those photos out of
+// one shared listing; `truncated_prefixes` names every prefix that had more (`truncated`: any did).
+async function listArchive(env: Bindings, scanId: string, withJob = false) {
   if (!env.SCAN_ARCHIVE) throw new HttpError(503, "archive_unavailable", "Scan archive is not configured");
-  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(scanId)) {
+  if (!SCAN_ID.test(scanId)) {
     throw new HttpError(422, "invalid_scan_id", "scan_id must be a UUID");
   }
-  const listed = await env.SCAN_ARCHIVE.list({ prefix: `scans/${scanId}/`, limit: 100 });
-  return json({ scan_id: scanId, keys: listed.objects.map(o => ({ key: o.key, size: o.size, uploaded: o.uploaded })) });
+  const entry = (o: R2Object) => ({ key: o.key, size: o.size, uploaded: o.uploaded });
+  if (!withJob) {
+    const listed = await env.SCAN_ARCHIVE.list({ prefix: `scans/${scanId}/`, limit: 100 });
+    return json({ scan_id: scanId, keys: listed.objects.map(entry) });
+  }
+  const bucket = env.SCAN_ARCHIVE;
+  const key = jobKey(env, scanId);
+  const prefixes = [...VIEWS, "manual-count"].map((name) => `scans/${scanId}/${name}/`).sort();   // R2 key order
+  const listed = await Promise.all(prefixes.map((prefix) => bucket.list({ prefix, limit: 100 })));
+  const keys = listed.flatMap((page) => page.objects.map(entry));
+  const truncatedPrefixes = prefixes.filter((_, i) => listed[i].truncated);
+  const stored = await readState<JobRecord>(bucket, key);
+  const job = stored ? { image_hashes: stored.value.image_hashes, status: stored.value.status, attempt: stored.value.attempt,
+    owner: stored.value.owner, pipeline_version: stored.value.pipeline_version, created_at: stored.value.created_at } : null;
+  return json({ scan_id: scanId, keys, truncated: truncatedPrefixes.length > 0, truncated_prefixes: truncatedPrefixes, job });
 }
 
 // Independent second count: the Python service counts horizontal rim edges inside each stack
@@ -760,7 +815,7 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
     : namedFace
       ? { recommended_view: namedFace.view, reason: namedFace.reason }
       : { recommended_view: "straight", reason };
-  return json({
+  return {
     // Legacy top-level fields stay "not verified" for installed APKs; result_status is the block's one result state.
     scan_id: scanId, status: "rescan_required", accepted: false, result_status: block.status,
     physical_stack_count: null, total_trays: null, total_eggs: null,
@@ -782,7 +837,7 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
       total_eggs: block.total_trays === null ? null : block.total_trays * Number(env.EGGS_PER_TRAY),
       eggs_basis: "capacity_if_every_tray_full", capture },
     rescan,
-  });
+  };
 }
 
 async function reconstructPair(request: Request, env: Bindings) {
@@ -862,13 +917,765 @@ async function reconstructPair(request: Request, env: Bindings) {
     timing:{upstream_ms:Date.now()-started}, client_processing:processing});
 }
 
+// ---- Devices, admin and scan jobs (AUTH_MODE=enforce or observe; contract: docs/SCAN_JOBS_AND_DEVICES.md).
+// Records live in SCAN_ARCHIVE under STATE_PREFIX, outside scans/, so the archive listings never return them.
+// Claims are create-only puts (If-None-Match: *); status changes are compare-and-swap puts (etagMatches).
+// A null put means another request won. A claim is never decided from a GET.
+// Open mode (AUTH_MODE unset or "open") never reaches this code: jobs and idempotency are enforce-only, so the
+// installed 0.4.11 app keeps exactly today's answers until production is promoted. Observe mode reaches it for
+// every request that carries a credential.
+const PIPELINE_VERSION = "worker-0.4.12";
+// How long a claimed job is left to its attempt before a retry may take it over. Cloudflare keeps waitUntil work alive
+// for at most 30 s after the client disconnects, so an attempt whose phone gave up (the app's 90 s receive timeout, or
+// a dropped link the edge noticed) is cancelled by about 120 s after the claim and writes nothing; one whose
+// disconnect is never seen runs to its end and stores its result. 150 s is past that 120 s, and well inside
+// the app's 3-minute wait for the result, so the app gets 409 processing_interrupted and uploads again instead of
+// reporting the result lost. The longest count is computed, not measured: about 182 s of sequential inference with
+// retries (3 views x up to 3 tries of 20 s, plus back-off) and up to 60 s of rim verification when RIM_VERIFY is on.
+// Only a client that stays connected that long (the replay script) can outlive the lease; a retry then counts again
+// and finishJob gives both the same stored answer (one extra inference, never two answers).
+const LEASE_MS = 150_000;
+// The job fingerprint covers the photos and what the upload asked for; jobs written before it have version 1
+// (the photo hashes alone) and are matched on the photos only, as they were.
+const FINGERPRINT_VERSION = 2;
+const CAS_RETRIES = 5;
+// latest.json: each lost round means another save moved it, so one round per save racing on the scan is enough
+// (8 saves in ascending count time need up to 8; CAS_RETRIES = 5 answered 503 to the newest ones in the tests).
+// The bound only stops a runaway (2 R2 calls per round).
+const LATEST_RETRIES = 16;
+const MAX_DIAGNOSTIC_BYTES = 25 * 1024 * 1024;
+// Registration is the one enforced route that reads a body before any credential; the app sends about 150 bytes.
+const MAX_REGISTRATION_BYTES = 4 * 1024;
+// Control characters, bidi overrides and invisible marks in a registrant's label could forge or hide rows in the
+// admin's device table (scripts/devices.py); each run becomes one space.
+const UNSAFE_TEXT = /[\u0000-\u001f\u007f-\u009f\u061c\u200b-\u200f\u2028-\u202e\u2060-\u2069\ufeff]+/g;
+// A manual count's created_at may run at most this far ahead of the server clock.
+const MAX_CLOCK_SKEW_MS = 60 * 60 * 1000;
+const UUID_V4 = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
+const DEVICE_SECRET = /^[A-Za-z0-9_-]{43,128}={0,2}$/;   // at least 32 random bytes, base64url
+const ISO_TIME = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d{1,9})?)?(Z|[+-]\d{2}:\d{2})$/;
+
+type DeviceStatus = "pending" | "active" | "revoked";
+type DeviceRecord = { v: 1; device_id: string; secret_sha256: string; status: DeviceStatus; label: string | null;
+  app_version: string | null; created_at: string; approved_at: string | null; revoked_at: string | null };
+type JobError = { status: number; code: string; message: string };
+// fingerprint_version, scan_contract and cell_ids are absent on jobs written before fingerprint version 2.
+type JobRecord = { v: 1; scan_id: string; owner: string; image_hashes: Record<string, string>; fingerprint: string;
+  fingerprint_version?: number; scan_contract?: string | null; cell_ids?: Record<string, string>;
+  pipeline_version: string; status: "running" | "done" | "failed"; attempt: number; lease_until: string;
+  created_at: string; updated_at: string; result?: Record<string, unknown>; error?: JobError };
+type DeviceCaller = { kind: "device"; device_id: string; record: DeviceRecord };
+type Caller = { kind: "admin" } | DeviceCaller;
+type Stored<T> = { value: T; etag: string };
+type ManualRecord = { scan_id: string; block_id: string; cells: unknown; notes: unknown; tray: unknown; app_version: unknown;
+  app_total?: unknown; created_at?: string; recorded_at?: string; count_id?: string; totals?: unknown; recorded_by?: string };
+
+type AuthMode = "open" | "observe" | "enforce";
+
+// Unset or "open" keeps 0.4.11; "observe" is the rollout step; any other value enforces, so a mistyped mode fails closed.
+function authMode(env: Bindings): AuthMode {
+  const mode = (env.AUTH_MODE ?? "").trim().toLowerCase();
+  if (mode === "" || mode === "open") return "open";
+  return mode === "observe" ? "observe" : "enforce";
+}
+
+// A credential is carried by an X-Device-Id header or any Authorization header (Device, Bearer or another scheme,
+// which the enforced path refuses): such a request is never answered as an open one.
+const carriesCredential = (request: Request) =>
+  request.headers.has("x-device-id") || (request.headers.get("authorization") ?? "").trim() !== "";
+
+// No default: a non-production deployment that lost its STATE_PREFIX (a copied env, a `--var STATE_PREFIX:` override)
+// would otherwise read and write production's devices, jobs and manual counts. Production sets it when promoted.
+function statePrefix(env: Bindings) {
+  const prefix = (env.STATE_PREFIX ?? "").trim();
+  if (!prefix) throw new HttpError(503, "state_prefix_missing", "STATE_PREFIX is not configured for this Worker");
+  return prefix.endsWith("/") ? prefix : `${prefix}/`;
+}
+
+function stateBucket(env: Bindings) {
+  if (!env.SCAN_ARCHIVE) throw new HttpError(503, "state_unavailable", "Device and scan records need the scan archive");
+  return env.SCAN_ARCHIVE;
+}
+
+const deviceKey = (env: Bindings, id: string) => `${statePrefix(env)}devices/${id}.json`;
+const jobKey = (env: Bindings, id: string) => `${statePrefix(env)}jobs/${id}.json`;
+const manualPrefix = (env: Bindings, scanId: string) => `${statePrefix(env)}manual-counts/${scanId}/`;
+const legacyManualPrefix = (scanId: string) => `scans/${scanId}/manual-count/`;
+const createOnly = () => new Headers({ "If-None-Match": "*" });
+const isoAt = (ms: number) => new Date(ms).toISOString();
+const displayCode = (id: string) => `${id.slice(0, 4)}-${id.slice(4, 8)}`.toUpperCase();
+
+async function digestText(text: string) {
+  return new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text)));
+}
+const toHex = (bytes: Uint8Array) => [...bytes].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+const fromHex = (text: string) => /^[0-9a-f]{64}$/.test(text)
+  ? Uint8Array.from(text.match(/../g)!.map((pair) => parseInt(pair, 16))) : new Uint8Array(32);
+
+// Both sides are SHA-256 digests (fixed, public length): every byte is compared, no early exit.
+function sameDigest(a: Uint8Array, b: Uint8Array) {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a[i] ^ b[i];
+  return diff === 0;
+}
+
+async function readState<T>(bucket: R2Bucket, key: string): Promise<Stored<T> | null> {
+  const object = await bucket.get(key);
+  return object ? { value: await object.json<T>(), etag: object.etag } : null;
+}
+
+function writeState(bucket: R2Bucket, key: string, value: unknown, customMetadata: Record<string, string>, onlyIf: R2Conditional | Headers) {
+  return bucket.put(key, JSON.stringify(value), { httpMetadata: { contentType: "application/json" }, customMetadata, onlyIf });
+}
+
+const writeJob = (bucket: R2Bucket, key: string, job: JobRecord, onlyIf: R2Conditional | Headers) =>
+  writeState(bucket, key, job, { status: job.status, owner: job.owner }, onlyIf);
+
+// ---- Authentication. Device: X-Device-Id plus "Authorization: Device <secret>". Admin: "Authorization: Bearer <ADMIN_TOKEN>".
+// Secrets and tokens are never logged; the device id is.
+function presentedCredential(request: Request) {
+  const match = /^(\S+)\s+(\S+)$/.exec((request.headers.get("authorization") ?? "").trim());
+  return { scheme: match?.[1].toLowerCase() ?? "", credential: match?.[2] ?? "" };
+}
+
+// audience "admin": the admin token only. "device_or_admin": a Bearer header is checked as the admin token,
+// anything else as an active device.
+async function authenticate(request: Request, env: Bindings, audience: "admin" | "device_or_admin"): Promise<Caller> {
+  const { scheme, credential } = presentedCredential(request);
+  if (audience === "admin" || scheme === "bearer") {
+    if (scheme === "bearer" && await adminTokenMatches(credential, env)) return { kind: "admin" };
+    console.log(JSON.stringify({ event: "admin_auth_failed" }));
+    throw new HttpError(401, "admin_auth_failed", "Administrator token missing or wrong");
+  }
+  return authenticateDevice(request, env, false);
+}
+
+async function authenticateDevice(request: Request, env: Bindings, anyStatus: boolean): Promise<DeviceCaller> {
+  const { scheme, credential } = presentedCredential(request);
+  const deviceId = (request.headers.get("x-device-id") ?? "").trim().toLowerCase();
+  if (scheme !== "device" || !credential || !deviceId) {
+    throw new HttpError(401, "device_credentials_required", "This server needs the device id and device secret");
+  }
+  const known = UUID_V4.test(deviceId);
+  const stored = known ? await readState<DeviceRecord>(stateBucket(env), deviceKey(env, deviceId)) : null;
+  // Unknown id and wrong secret take the same path and give the same answer (no oracle).
+  const matches = sameDigest(await digestText(credential), fromHex(stored?.value.secret_sha256 ?? ""));
+  if (!stored || !matches) {
+    console.log(JSON.stringify({ event: "device_auth_failed", device_id: known ? deviceId : null }));
+    throw new HttpError(401, "device_auth_failed", "Device id or secret not recognised");
+  }
+  const record = stored.value;
+  if (!anyStatus && record.status !== "active") {
+    console.log(JSON.stringify({ event: "device_refused", device_id: deviceId, status: record.status }));
+    if (record.status === "pending") {
+      throw new HttpError(403, "device_pending", `Device ${displayCode(deviceId)} is waiting for administrator approval`);
+    }
+    throw new HttpError(403, "device_revoked", `Device ${displayCode(deviceId)} has been revoked`);
+  }
+  return { kind: "device", device_id: deviceId, record };
+}
+
+async function adminTokenMatches(token: string, env: Bindings) {
+  const expected = env.ADMIN_TOKEN ?? "";
+  const matches = sameDigest(await digestText(token), await digestText(expected));
+  return expected.length > 0 && matches;
+}
+
+const ownerOf = (caller: Caller) => caller.kind === "admin" ? "admin" : caller.device_id;
+const canAccess = (caller: Caller, job: JobRecord) => caller.kind === "admin" || job.owner === caller.device_id;
+const deviceView = (record: DeviceRecord) => ({ device_id: record.device_id, status: record.status, display_code: displayCode(record.device_id) });
+const adminDeviceView = ({ secret_sha256: _hash, ...record }: DeviceRecord) => ({ ...record, display_code: displayCode(record.device_id) });
+
+// Reads a JSON body of at most `limit` bytes. A declared or actual larger body is refused without buffering it.
+async function readSmallJson(request: Request, limit: number) {
+  const tooLarge = () => new HttpError(413, "request_too_large", `This request body is limited to ${limit} bytes`);
+  if (Number(request.headers.get("content-length")) > limit) throw tooLarge();
+  const chunks: Uint8Array[] = [];
+  let bytes = 0;
+  const reader = request.body?.getReader();
+  while (reader) {
+    const chunk = await reader.read();
+    if (chunk.done) break;
+    bytes += chunk.value.byteLength;
+    if (bytes > limit) {
+      await reader.cancel();
+      throw tooLarge();
+    }
+    chunks.push(chunk.value);
+  }
+  const body = new Uint8Array(bytes);
+  let offset = 0;
+  for (const chunk of chunks) { body.set(chunk, offset); offset += chunk.byteLength; }
+  try { return JSON.parse(new TextDecoder().decode(body)) as unknown; } catch { throw new HttpError(422, "invalid_json", "Body must be JSON"); }
+}
+
+// ---- Device registry: create-only registration, admin approve/revoke by compare-and-swap.
+async function registerDevice(request: Request, env: Bindings) {
+  const bucket = stateBucket(env);
+  const body = (await readSmallJson(request, MAX_REGISTRATION_BYTES) ?? {}) as Record<string, unknown>;
+  const deviceId = typeof body.device_id === "string" ? body.device_id.trim().toLowerCase() : "";
+  if (!UUID_V4.test(deviceId)) throw new HttpError(422, "invalid_device_id", "device_id must be a UUID v4");
+  const secret = typeof body.secret === "string" ? body.secret : "";
+  if (!DEVICE_SECRET.test(secret)) throw new HttpError(422, "invalid_device_secret", "secret must be at least 32 random bytes in base64url");
+  const text = (value: unknown, max: number) => {
+    const clean = typeof value === "string" ? value.replace(UNSAFE_TEXT, " ").replace(/\s+/g, " ").trim().slice(0, max).trim() : "";
+    return clean || null;
+  };
+  const presented = await digestText(secret);
+  const record: DeviceRecord = { v: 1, device_id: deviceId, secret_sha256: toHex(presented), status: "pending",
+    label: text(body.label, 64), app_version: text(body.app_version, 32), created_at: isoAt(Date.now()), approved_at: null, revoked_at: null };
+  const key = deviceKey(env, deviceId);
+  for (let round = 0; round < CAS_RETRIES; round++) {
+    if (await writeState(bucket, key, record, { status: record.status }, createOnly())) {
+      console.log(JSON.stringify({ event: "device_registered", device_id: deviceId }));
+      return json(deviceView(record));
+    }
+    const existing = await readState<DeviceRecord>(bucket, key);
+    if (!existing) continue;   // removed between the claim and the read: claim again
+    // Same id and same secret: a retried registration. The record is never rewritten.
+    if (!sameDigest(presented, fromHex(existing.value.secret_sha256))) {
+      console.log(JSON.stringify({ event: "device_register_conflict", device_id: deviceId }));
+      throw new HttpError(409, "device_exists", "This device id is already registered with another secret");
+    }
+    return json(deviceView(existing.value));
+  }
+  throw new HttpError(503, "device_registry_busy", "Device registration is busy; try again");
+}
+
+async function listDevices(env: Bindings, url: URL) {
+  const bucket = stateBucket(env);
+  const status = url.searchParams.get("status");
+  const listed = await bucket.list({ prefix: `${statePrefix(env)}devices/`, cursor: url.searchParams.get("cursor") || undefined,
+    limit: 100, include: ["customMetadata"] });
+  const devices = [];
+  for (const object of listed.objects) {
+    if (status && object.customMetadata?.status !== status) continue;
+    const stored = await readState<DeviceRecord>(bucket, object.key);
+    if (stored && (!status || stored.value.status === status)) devices.push(adminDeviceView(stored.value));
+  }
+  return json({ devices, cursor: listed.truncated ? listed.cursor : null });
+}
+
+// Approve (pending -> active) or revoke (-> revoked). Repeating the same change is a no-op. Revocation is final: a
+// revoked device keeps its old secret, so one mistaken approve would bring a lost phone back; a reinstalled phone
+// registers a new device id instead. The CAS also stops an approve that read "pending" from landing over a revoke.
+async function setDeviceStatus(env: Bindings, rawId: string, target: "active" | "revoked") {
+  const bucket = stateBucket(env);
+  const deviceId = rawId.toLowerCase();
+  if (!UUID_V4.test(deviceId)) throw new HttpError(422, "invalid_device_id", "device_id must be a UUID v4");
+  const key = deviceKey(env, deviceId);
+  for (let round = 0; round < CAS_RETRIES; round++) {
+    const stored = await readState<DeviceRecord>(bucket, key);
+    if (!stored) throw new HttpError(404, "device_not_found", "No device with this id");
+    if (stored.value.status === target) return json(adminDeviceView(stored.value));
+    if (stored.value.status === "revoked") {
+      throw new HttpError(409, "device_revoked", `Device ${displayCode(deviceId)} was revoked and cannot be approved again; ` +
+        "a reinstalled phone registers a new device id");
+    }
+    const now = isoAt(Date.now());
+    const next: DeviceRecord = { ...stored.value, status: target, ...(target === "active" ? { approved_at: now } : { revoked_at: now }) };
+    if (await writeState(bucket, key, next, { status: target }, { etagMatches: stored.etag })) {
+      console.log(JSON.stringify({ event: "device_status_changed", device_id: deviceId, from: stored.value.status, status: target }));
+      return json(adminDeviceView(next));
+    }
+  }
+  throw new HttpError(409, "device_changed", "The device record kept changing; try again");
+}
+
+// ---- Scan jobs: one scan id = one ordered photo triplet; retries replay the stored response.
+const jobView = (job: JobRecord, replayed = false) =>
+  ({ scan_id: job.scan_id, status: job.status, attempt: job.attempt, replayed, pipeline_version: job.pipeline_version });
+const leaseValid = (job: JobRecord) => Date.parse(job.lease_until) > Date.now();
+
+// A done job answers with the stored response (the version that computed it); only the replay flag changes.
+function replay(job: JobRecord) {
+  const result = job.result ?? {};
+  const stored = (result.job ?? jobView(job)) as Record<string, unknown>;
+  return json({ ...result, job: { ...stored, replayed: true } });
+}
+
+function stillProcessing(job: JobRecord) {
+  const remaining = Date.parse(job.lease_until) - Date.now();
+  const retryAfter = Number.isFinite(remaining) ? Math.max(1, Math.min(5, Math.ceil(remaining / 1000))) : 5;
+  return json({ detail: { code: "processing", message: "This scan is still being counted; ask again shortly" },
+    job: { ...jobView({ ...job, status: "running" }), retry_after_s: retryAfter } }, 202, { "Retry-After": String(retryAfter) });
+}
+
+// What one upload asks for: the photos in view order, the scan_contract as sent and the cell ids (by view name).
+// The same photos with another contract or other cell ids are another request (409 scan_id_conflict), not a retry.
+async function requestIdentity(scan: ParsedScan) {
+  const cellIds = Object.fromEntries(Object.entries(scan.cellIds).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)));
+  const fingerprint = toHex(await digestText(JSON.stringify([FINGERPRINT_VERSION, ...scan.hashes, scan.scanContract, Object.entries(cellIds)])));
+  return { fingerprint, fingerprint_version: FINGERPRINT_VERSION, scan_contract: scan.scanContract, cell_ids: cellIds };
+}
+
+// A job written before fingerprint version 2 holds the photo hashes alone ("left|right|straight"): its missing
+// contract and cell ids match any request, as they did then, so the same photos still replay.
+async function sameRequest(job: JobRecord, scan: ParsedScan, fingerprint: string) {
+  if ((job.fingerprint_version ?? 1) === 1) return job.fingerprint === toHex(await digestText(scan.hashes.join("|")));
+  return job.fingerprint === fingerprint;
+}
+
+async function countScanJob(request: Request, env: Bindings, caller: Caller, ctx?: ExecutionContext) {
+  const bucket = stateBucket(env);
+  const scan = await readScan(request);
+  const imageHashes = Object.fromEntries(VIEWS.map((view, i) => [view, scan.hashes[i]]));
+  const identity = await requestIdentity(scan);
+  const key = jobKey(env, scan.scanId);
+  const now = Date.now();
+  const claim: JobRecord = { v: 1, scan_id: scan.scanId, owner: ownerOf(caller), image_hashes: imageHashes, ...identity,
+    pipeline_version: PIPELINE_VERSION, status: "running", attempt: 1, lease_until: isoAt(now + LEASE_MS),
+    created_at: isoAt(now), updated_at: isoAt(now) };
+  for (let round = 0; round < CAS_RETRIES; round++) {
+    const won = await writeJob(bucket, key, claim, createOnly());
+    if (won) {
+      console.log(JSON.stringify({ event: "job_claimed", scan_id: claim.scan_id, owner: claim.owner, attempt: 1 }));
+      return runJob(env, bucket, key, claim, won.etag, scan, ctx);
+    }
+    const stored = await readState<JobRecord>(bucket, key);
+    if (!stored) continue;   // removed between the claim and the read: claim again
+    const job = stored.value;
+    if (!canAccess(caller, job)) throw new HttpError(403, "scan_forbidden", "This scan belongs to another device");
+    if (!await sameRequest(job, scan, identity.fingerprint)) {
+      throw new HttpError(409, "scan_id_conflict",
+        "This scan id was already used with other photos or other scan settings; a retake needs a new scan id");
+    }
+    if (job.status === "done") {
+      console.log(JSON.stringify({ event: "job_replayed", scan_id: job.scan_id, owner: job.owner, attempt: job.attempt }));
+      return replay(job);
+    }
+    if (job.status === "running" && leaseValid(job)) return stillProcessing(job);
+    // The lease ran out (the Worker counting it died) or the job failed: take it over with a new lease. The takeover
+    // counts this request, so the job takes its identity (a version 1 job is upgraded; a version 2 one is unchanged).
+    const at = Date.now();
+    const { error: _previous, ...rest } = job;
+    const takeover: JobRecord = { ...rest, ...identity, status: "running", attempt: job.attempt + 1, lease_until: isoAt(at + LEASE_MS),
+      updated_at: isoAt(at), pipeline_version: PIPELINE_VERSION };
+    const taken = await writeJob(bucket, key, takeover, { etagMatches: stored.etag });
+    if (!taken) return stillProcessing(takeover);
+    console.log(JSON.stringify({ event: "job_taken_over", scan_id: job.scan_id, owner: job.owner, attempt: takeover.attempt, previous: job.status }));
+    return runJob(env, bucket, key, takeover, taken.etag, scan, ctx);
+  }
+  throw new HttpError(503, "scan_job_busy", "The scan record is busy; try again");
+}
+
+// Only the claim holder archives and counts. Any error after the claim marks the job failed and is answered
+// as that error, never as a count; if even that write fails, the lease running out lets a retry take over.
+// waitUntil lets a count that started finish and be stored when the phone's link drops mid-request, for at most 30 s
+// after the disconnect; a longer count is cancelled and the lease (LEASE_MS) lets a retry take the job over.
+function runJob(env: Bindings, bucket: R2Bucket, key: string, job: JobRecord, etag: string, scan: ParsedScan, ctx?: ExecutionContext) {
+  const work = (async () => {
+    let body: Record<string, unknown>;
+    try {
+      await archiveScan(env, scan);
+      body = await scanPipeline(env, scan);
+    } catch (error) {
+      const failure: JobError = error instanceof HttpError ? { status: error.status, code: error.code, message: error.message }
+        : { status: 500, code: "internal_error", message: "Scan could not be processed" };
+      const outcome = await failJob(bucket, key, job, etag, failure, error instanceof HttpError ? null : "unexpected_error");
+      if (outcome instanceof Response) return outcome;
+      throw new HttpError(failure.status, failure.code, failure.message, { job: jobView(outcome) });
+    }
+    return finishJob(bucket, key, job, etag, body);
+  })();
+  ctx?.waitUntil(work.catch(() => undefined));
+  return work;
+}
+
+// Stores the failure (CAS on this attempt's etag). When the lease was lost, the attempt that holds the job decides
+// the answer, as in finishJob: its stored result is replayed and a valid lease is answered 202. Otherwise the
+// error is returned with the job as it is stored ("failed" only when this failure was recorded).
+async function failJob(bucket: R2Bucket, key: string, job: JobRecord, etag: string, failure: JobError,
+  errorType: string | null): Promise<Response | JobRecord> {
+  const failed: JobRecord = { ...job, status: "failed", updated_at: isoAt(Date.now()), error: failure };
+  let stored = false;
+  try {
+    stored = !!await writeJob(bucket, key, failed, { etagMatches: etag });
+  } catch { /* not recorded: the lease runs out and a retry takes the job over */ }
+  console.log(JSON.stringify({ event: "job_failed", scan_id: job.scan_id, owner: job.owner, attempt: job.attempt,
+    code: failure.code, error_type: errorType, stored }));
+  if (stored) return failed;
+  let latest: Stored<JobRecord> | null = null;
+  try { latest = await readState<JobRecord>(bucket, key); } catch { /* unknown: answer with this attempt's state */ }
+  if (!latest || latest.etag === etag || latest.value.fingerprint !== job.fingerprint) return job;
+  if (latest.value.attempt === job.attempt) return latest.value;   // this attempt's own write landed although the call threw
+  console.log(JSON.stringify({ event: "job_lease_lost", scan_id: job.scan_id, attempt: job.attempt, holder_attempt: latest.value.attempt,
+    holder_status: latest.value.status }));
+  if (latest.value.status === "done") return replay(latest.value);
+  if (latest.value.status === "running" && leaseValid(latest.value)) return stillProcessing(latest.value);
+  return latest.value;
+}
+
+async function finishJob(bucket: R2Bucket, key: string, job: JobRecord, etag: string, body: Record<string, unknown>) {
+  const response = { ...body, job: jobView({ ...job, status: "done" }) };
+  let current: Stored<JobRecord> = { value: job, etag };
+  try {
+    for (let round = 0; round < CAS_RETRIES; round++) {
+      const { error: _stale, ...rest } = current.value;
+      const done: JobRecord = { ...rest, status: "done", attempt: job.attempt, pipeline_version: job.pipeline_version,
+        updated_at: isoAt(Date.now()), result: response };
+      if (await writeJob(bucket, key, done, { etagMatches: current.etag })) {
+        console.log(JSON.stringify({ event: "job_done", scan_id: job.scan_id, owner: job.owner, attempt: job.attempt }));
+        return json(response);
+      }
+      // The lease ran out and another request took the job over. A stored result wins; otherwise this result
+      // (same photos) is stored over the other attempt so every later answer is the same.
+      const latest = await readState<JobRecord>(bucket, key);
+      if (!latest || latest.value.fingerprint !== job.fingerprint) break;
+      if (latest.value.status === "done") return replay(latest.value);
+      console.log(JSON.stringify({ event: "job_lease_lost", scan_id: job.scan_id, attempt: job.attempt, holder_attempt: latest.value.attempt }));
+      current = latest;
+    }
+  } catch { /* the count itself succeeded; the lease covers the unstored job */ }
+  console.log(JSON.stringify({ event: "job_result_not_stored", scan_id: job.scan_id, attempt: job.attempt }));
+  return json(response);
+}
+
+async function scanResult(env: Bindings, caller: Caller, scanId: string) {
+  if (!SCAN_ID.test(scanId)) throw new HttpError(422, "invalid_scan_id", "scan_id must be a UUID");
+  const stored = await readState<JobRecord>(stateBucket(env), jobKey(env, scanId));
+  if (!stored) throw new HttpError(404, "scan_not_found", "The server never received this scan; upload it again");
+  const job = stored.value;
+  if (!canAccess(caller, job)) throw new HttpError(403, "scan_forbidden", "This scan belongs to another device");
+  if (job.status === "done") return replay(job);
+  if (job.status === "running" && leaseValid(job)) return stillProcessing(job);
+  if (job.status === "running") {
+    throw new HttpError(409, "processing_interrupted", "Counting stopped before it finished; upload the same photos again", { job: jobView(job) });
+  }
+  throw new HttpError(409, "scan_failed", "Counting failed; upload the same photos again", { job: { ...jobView(job), error: job.error ?? null } });
+}
+
+// ---- Manual counts with idempotency: one object per count_id (create-only) and a latest.json that only
+// moves forward in count time (countTime).
+// Stored only under STATE_PREFIX (manual-counts/<scan_id>/<count_id>.json and .../latest.json), never under scans/:
+// staging and production bind one bucket and production runs open, and its open manual-count route writes
+// scans/<id>/manual-count/latest.json for any scan id. Records under scans/ (0.4.11, the open route, and the
+// pre-state-prefix 0.4.12 builds) are read as "legacy_scans" and marked as not tamper-proof.
+const manualMeta = (record: ManualRecord) => ({ httpMetadata: { contentType: "application/json" }, customMetadata: {
+  scan_id: record.scan_id, block_id: record.block_id, kind: "manual_count", count_id: String(record.count_id), created_at: String(record.created_at) } });
+// What the operator saved; the server's recorded_at and recorded_by are left out of the comparison.
+const manualContent = (record: ManualRecord) =>
+  JSON.stringify([record.block_id, record.cells, record.notes, record.tray, record.app_version, record.app_total ?? null, record.created_at]);
+
+async function hasArchivedPhotos(bucket: R2Bucket, scanId: string) {
+  const listed = await bucket.list({ prefix: `scans/${scanId}/`, limit: 100 });
+  return listed.objects.some((object) => VIEWS.some((view) => object.key.startsWith(`scans/${scanId}/${view}/`)));
+}
+
+async function manualCountJob(request: Request, env: Bindings, caller: Caller, scanId: string) {
+  const bucket = stateBucket(env);
+  if (!SCAN_ID.test(scanId)) throw new HttpError(422, "invalid_scan_id", "scan_id must be a UUID");
+  const job = await readState<JobRecord>(bucket, jobKey(env, scanId));
+  if (job && !canAccess(caller, job.value)) throw new HttpError(403, "scan_forbidden", "This scan belongs to another device");
+  // Scans counted before 0.4.12 have no job: only the administrator may attach a count, and only to archived photos.
+  if (!job && !(caller.kind === "admin" && await hasArchivedPhotos(bucket, scanId))) {
+    throw new HttpError(404, "scan_not_found", "Manual counts need a scan this server received");
+  }
+  const { body, blockId, clean, notes, tray, appVersion, totals } = await readManualCountBody(request);
+  const countId = typeof body.count_id === "string" ? body.count_id.trim().toLowerCase() : "";
+  if (!UUID_V4.test(countId)) throw new HttpError(422, "invalid_count_id", "count_id must be a UUID v4");
+  const createdAt = typeof body.created_at === "string" ? body.created_at.trim() : "";
+  const createdMs = ISO_TIME.test(createdAt) ? Date.parse(createdAt) : NaN;
+  if (!Number.isFinite(createdMs) || createdMs < Date.UTC(2020, 0, 1)) {
+    throw new HttpError(422, "invalid_created_at", "created_at must be an ISO 8601 time with a zone, e.g. 2026-10-15T07:19:00Z");
+  }
+  if (createdMs > Date.now() + MAX_CLOCK_SKEW_MS) {
+    throw new HttpError(422, "invalid_created_at", "created_at is in the future; check the phone's clock");
+  }
+  const appTotal = body.app_total ?? null;
+  if (appTotal !== null && !(Number.isInteger(appTotal) && (appTotal as number) >= 0 && (appTotal as number) <= 1_000_000)) {
+    throw new HttpError(422, "invalid_app_total", "app_total must be a whole number of trays or null");
+  }
+  const record = { kind: "manual_count_v1", scan_id: scanId, block_id: blockId, cells: clean, notes, tray, recorded_at: isoAt(Date.now()),
+    created_at: createdAt, count_id: countId, app_total: appTotal as number | null, app_version: appVersion, totals, recorded_by: ownerOf(caller) };
+  const key = `${manualPrefix(env, scanId)}${countId}.json`;
+  const latestKey = `${manualPrefix(env, scanId)}latest.json`;
+  let saved: ManualRecord = record;
+  let replayed = false;
+  if (!await bucket.put(key, JSON.stringify(record), { ...manualMeta(record), onlyIf: createOnly() })) {
+    const existing = await readState<ManualRecord>(bucket, key);
+    if (!existing) throw new HttpError(503, "manual_count_busy", "The manual count could not be saved; send it again");
+    if (manualContent(existing.value) !== manualContent(record)) {
+      throw new HttpError(409, "manual_count_conflict", "This count_id was already saved with other values; a correction needs a new count_id");
+    }
+    saved = existing.value;
+    replayed = true;
+  }
+  // Run on a replay too: a lost response may have come before latest.json was moved.
+  const isLatest = await promoteLatest(bucket, latestKey, saved);
+  console.log(JSON.stringify({ event: "manual_count_stored", scan_id: scanId, block_id: blockId, cells: clean.length, key,
+    count_id: countId, replayed, is_latest: isLatest, recorded_by: saved.recorded_by ?? null }));
+  return json({ stored: true, replayed, key, latest_key: latestKey, is_latest: isLatest, count_id: countId, totals: saved.totals, record: saved });
+}
+
+// When the operator made a count: the phone's created_at, but never later than the server's recorded_at. A phone
+// clock running fast (up to MAX_CLOCK_SKEW_MS is accepted) would otherwise pin latest.json until real time caught
+// up, and every later correction would be stored as not latest. A late retry still keeps its early created_at.
+// 0.4.11 records have no created_at; their server recorded_at stands in.
+function countTime(record: ManualRecord) {
+  const created = Date.parse(String(record.created_at ?? ""));
+  const recorded = Date.parse(String(record.recorded_at ?? ""));
+  if (Number.isFinite(created) && Number.isFinite(recorded)) return Math.min(created, recorded);
+  return Number.isFinite(created) ? created : recorded;
+}
+
+// latest.json is replaced only by a newer count time (compare-and-swap loop), so a late retry of an older count
+// cannot overwrite a newer correction.
+async function promoteLatest(bucket: R2Bucket, key: string, record: ManualRecord) {
+  const created = countTime(record);
+  for (let round = 0; round < LATEST_RETRIES; round++) {
+    const current = await readState<ManualRecord>(bucket, key);
+    if (current && current.value.count_id === record.count_id) return true;
+    const currentTime = current ? countTime(current.value) : NaN;
+    if (current && Number.isFinite(currentTime) && currentTime >= created) return false;
+    if (await bucket.put(key, JSON.stringify(record), { ...manualMeta(record), onlyIf: current ? { etagMatches: current.etag } : createOnly() })) {
+      return true;
+    }
+  }
+  throw new HttpError(503, "manual_count_busy", "The manual count is saved but the scan's latest count is busy; send it again");
+}
+
+// Where a manual-count record was read from. "state": written by this Worker's enforced route under STATE_PREFIX.
+// "legacy_scans": under scans/<id>/manual-count/, which the open production Worker can overwrite for any scan id.
+type ManualSource = "state" | "legacy_scans";
+const LEGACY_MANUAL_NOTE = "stored under scans/, which the open production Worker can overwrite; not tamper-proof";
+
+function tagManual(value: unknown, storage: ManualSource): Record<string, unknown> | null {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+  return storage === "state" ? { ...value, storage, tamper_proof: true }
+    : { ...value, storage, tamper_proof: false, storage_note: LEGACY_MANUAL_NOTE };
+}
+
+async function readManual(bucket: R2Bucket, key: string, storage: ManualSource) {
+  const object = await bucket.get(key);
+  if (!object) return null;
+  try { return tagManual(await object.json(), storage); } catch { return null; }
+}
+
+const listingPrefix = (env: Bindings, source: ManualSource) => source === "state" ? `${statePrefix(env)}manual-counts/` : "scans/";
+
+// The listing cursor names the source and the position inside it: base64url of {v: 1, source, r2, after?}. `after` is
+// the last key read (the next listing starts after it); `r2` is an R2 cursor, used only after a page that returned no
+// keys, and in cursors issued before `after` existed.
+function encodeListingCursor(source: ManualSource, r2: string | null, after: string | null) {
+  return Buffer.from(JSON.stringify({ v: 1, source, r2, ...(after ? { after } : {}) }), "utf8").toString("base64url");
+}
+
+function decodeListingCursor(text: string, env: Bindings): { source: ManualSource; r2: string | undefined; after: string | undefined } {
+  const invalid = () => new HttpError(422, "invalid_cursor", "cursor is not valid; start again without it");
+  let value: unknown;
+  try { value = JSON.parse(Buffer.from(text, "base64url").toString("utf8")); } catch { throw invalid(); }
+  const { v, source, r2, after } = (value ?? {}) as Record<string, unknown>;
+  if (v !== 1 || (source !== "state" && source !== "legacy_scans") || (r2 !== null && (typeof r2 !== "string" || !r2))) throw invalid();
+  if (after !== undefined && (typeof after !== "string" || !after.startsWith(listingPrefix(env, source)))) throw invalid();
+  return { source, r2: r2 ?? undefined, after };
+}
+
+// R2 calls (lists, GETs and HEADs) one listing request may make, well below the 1000 subrequests a Worker request may
+// make to Cloudflare services; a record costs at most LISTING_CALLS_PER_RECORD of them.
+const LISTING_R2_CALLS = 400;
+const LISTING_CALLS_PER_RECORD = 3;
+
+// Why a legacy record is not listed as its scan's count: the scan has a state record (listed instead), or a scan job (a
+// 0.4.12 client saves its count only under the state prefix, so a scans/ record for such a scan came through an open
+// route). Null: the scan has neither, and its legacy record is its count.
+async function legacyShadow(env: Bindings, bucket: R2Bucket, scanId: string): Promise<"state" | "scan_job" | null> {
+  if (!SCAN_ID.test(scanId)) return null;
+  const [state, job] = await Promise.all([bucket.head(`${manualPrefix(env, scanId)}latest.json`), bucket.head(jobKey(env, scanId))]);
+  return state ? "state" : job ? "scan_job" : null;
+}
+
+// Admin listing of every scan's latest manual count: first the records under STATE_PREFIX, then the legacy records
+// under scans/*/manual-count/latest.json, each tagged with its storage. A scan appears at most once: a legacy record
+// whose scan has a state record or a scan job is left out and named in `legacy_shadowed` ({scan_id, by}).
+// An answer stops at `limit` records (default 100, max 500) or LISTING_R2_CALLS R2 calls, whichever comes first, even
+// inside an R2 page; `cursor` continues after the last key read, null at the end. An answer may hold fewer records
+// than `limit` (or none) and still have a cursor.
+async function listManualCountsPage(env: Bindings, url: URL) {
+  if (!env.SCAN_ARCHIVE) throw new HttpError(503, "archive_unavailable", "Scan archive is not configured");
+  const bucket = env.SCAN_ARCHIVE;
+  const requested = Number(url.searchParams.get("limit") ?? 100);
+  const limit = Number.isInteger(requested) && requested >= 1 ? Math.min(requested, 500) : 100;
+  const start = url.searchParams.get("cursor");
+  let { source, r2: cursor, after } = start ? decodeListingCursor(start, env)
+    : { source: "state" as ManualSource, r2: undefined as string | undefined, after: undefined as string | undefined };
+  let done = false;
+  let calls = 0;
+  const records: unknown[] = [];
+  const shadowed: { scan_id: string; by: "state" | "scan_job" }[] = [];
+  const full = () => records.length >= limit || calls + LISTING_CALLS_PER_RECORD > LISTING_R2_CALLS;
+  pages: for (let page = 0; page < 10 && !full(); page++) {
+    const state = source === "state";
+    let listed: R2Objects;
+    calls++;
+    const position = cursor ? { cursor } : after ? { startAfter: after } : {};
+    try { listed = await bucket.list({ prefix: listingPrefix(env, source), ...position, limit: 1000 }); }
+    catch (error) {
+      if (page === 0 && cursor) throw new HttpError(422, "invalid_cursor", "cursor is not valid; start again without it");
+      throw error;
+    }
+    cursor = undefined;
+    for (const object of listed.objects) {
+      if (full()) break pages;
+      if (object.key.endsWith(state ? "/latest.json" : "/manual-count/latest.json")) {
+        const legacyScan = state ? null : object.key.split("/")[1];   // scans/<id>/manual-count/latest.json
+        let by: "state" | "scan_job" | null = null;
+        if (legacyScan !== null) {
+          calls += 2;
+          by = await legacyShadow(env, bucket, legacyScan);
+        }
+        if (by && legacyScan !== null) shadowed.push({ scan_id: legacyScan, by });
+        else {
+          calls++;
+          const record = await readManual(bucket, object.key, source);
+          if (record) records.push(record);
+        }
+      }
+      after = object.key;
+    }
+    if (listed.truncated) {
+      if (!listed.objects.length) cursor = listed.cursor;   // nothing read: continue from R2's own position
+    } else if (state) {
+      source = "legacy_scans";
+      after = undefined;
+    } else {
+      done = true;
+      break;
+    }
+  }
+  return json({ count: records.length, records, legacy_shadowed: shadowed,
+    cursor: done ? null : encodeListingCursor(source, cursor ?? null, after ?? null) });
+}
+
+// Every key under `prefix` (one scan's manual counts: a few objects), bounded against a runaway listing.
+async function listKeys(bucket: R2Bucket, prefix: string) {
+  const keys: string[] = [];
+  let cursor: string | undefined;
+  for (let page = 0; page < 10; page++) {
+    const listed = await bucket.list({ prefix, cursor, limit: 1000 });
+    keys.push(...listed.objects.map((object) => object.key));
+    if (!listed.truncated) break;
+    cursor = listed.cursor;
+  }
+  return keys;
+}
+
+const countIdsIn = (keys: string[], prefix: string) => keys.map((key) => key.slice(prefix.length))
+  .filter((name) => name.endsWith(".json") && UUID_V4.test(name.slice(0, -5))).map((name) => name.slice(0, -5)).sort();
+
+// One scan's manual counts for its owner or the admin: `latest` is the state latest.json; for a scan without a job
+// (counted before 0.4.12, the admin's only) the legacy one (tagged) stands in when there is none. A scan with a job
+// was counted by a 0.4.12 client, which always saves its count with its credential, under the state prefix, so a
+// scans/ record for it came through an open route (production, or an observe request without a credential) and is
+// never its count. `legacy_latest` is the scans/ record whenever it is not the one returned as `latest`.
+async function manualCountRead(env: Bindings, caller: Caller, scanId: string) {
+  const bucket = stateBucket(env);
+  if (!SCAN_ID.test(scanId)) throw new HttpError(422, "invalid_scan_id", "scan_id must be a UUID");
+  const job = await readState<JobRecord>(bucket, jobKey(env, scanId));
+  if (job && !canAccess(caller, job.value)) throw new HttpError(403, "scan_forbidden", "This scan belongs to another device");
+  if (!job && caller.kind !== "admin") throw new HttpError(404, "scan_not_found", "Manual counts need a scan this server received");
+  const prefix = manualPrefix(env, scanId);
+  const legacyPrefix = legacyManualPrefix(scanId);
+  const state = await readManual(bucket, `${prefix}latest.json`, "state");
+  const legacy = await readManual(bucket, `${legacyPrefix}latest.json`, "legacy_scans");
+  const latest = state ?? (job ? null : legacy);
+  return json({ scan_id: scanId, latest, storage: latest?.storage ?? null, count_ids: countIdsIn(await listKeys(bucket, prefix), prefix),
+    legacy_count_ids: countIdsIn(await listKeys(bucket, legacyPrefix), legacyPrefix), legacy_latest: latest === legacy ? null : legacy });
+}
+
+// Upload probe: reads and discards the body so the phone can measure its link without spending inference.
+async function diagnosticsUpload(request: Request, caller: Caller) {
+  const tooLarge = () => new HttpError(413, "upload_too_large", "Diagnostic uploads are limited to 25 MB");
+  if (Number(request.headers.get("content-length")) > MAX_DIAGNOSTIC_BYTES) throw tooLarge();
+  const started = Date.now();
+  let bytes = 0;
+  const reader = request.body?.getReader();
+  while (reader) {
+    const chunk = await reader.read();
+    if (chunk.done) break;
+    bytes += chunk.value.byteLength;
+    if (bytes > MAX_DIAGNOSTIC_BYTES) {
+      await reader.cancel();
+      throw tooLarge();
+    }
+  }
+  const ms = Date.now() - started;
+  console.log(JSON.stringify({ event: "diagnostics_upload", device_id: ownerOf(caller), bytes, ms }));
+  return json({ bytes, ms });
+}
+
+// Open: 0.4.11's answer. Enforce and observe advertise the same device auth and scan jobs (a 0.4.12 app then always
+// sends its credential), plus which of the two is on.
+function health(env: Bindings) {
+  const contracts = ["cell_identity_v1", "model_spatial_v1", ...(env.RECONSTRUCTION_ENABLED === "true" ? ["reconstruct_v1"] : [])];
+  const mode = authMode(env);
+  if (mode === "open") return json({ status: "ok", scan_contract: "cell_identity_v1", scan_contracts: contracts, hybrid_ready: false });
+  return json({ status: "ok", scan_contract: "cell_identity_v1", scan_contracts: [...contracts, "scan_jobs_v1"], hybrid_ready: false,
+    auth: "device_v1", auth_mode: mode });
+}
+
+// Every route except /health and /ready when AUTH_MODE is enforce or observe. Credentials are checked before the body
+// is read. Observe answers an upload that carries no credential at all (the installed 0.4.11 app) exactly as the open
+// Worker does: count, manual count and, where enabled, reconstruct. Everything else is as in enforce.
+async function routeEnforced(request: Request, env: Bindings, url: URL, mode: AuthMode, ctx?: ExecutionContext): Promise<Response> {
+  const { method } = request;
+  const path = url.pathname;
+  const openUpload = mode === "observe" && !carriesCredential(request);
+  const observed = (route: string) => console.log(JSON.stringify({ event: "observe_open_request", route }));
+  if (method === "POST" && path === "/v1/devices") return await registerDevice(request, env);
+  if (method === "GET" && path === "/v1/devices/me") return json(deviceView((await authenticateDevice(request, env, true)).record));
+  if (method === "POST" && path === "/v1/scans/count") {
+    if (openUpload) { observed("scans/count"); return await countScan(request, env); }
+    return await countScanJob(request, env, await authenticate(request, env, "device_or_admin"), ctx);
+  }
+  const result = path.match(/^\/v1\/scans\/([^/]+)\/result$/);
+  if (method === "GET" && result) return await scanResult(env, await authenticate(request, env, "device_or_admin"), result[1].toLowerCase());
+  const manual = path.match(/^\/v1\/scans\/([^/]+)\/manual-count$/);
+  if (method === "POST" && manual) {
+    if (openUpload) { observed("scans/manual-count"); return await manualCount(request, env, manual[1].toLowerCase()); }
+    return await manualCountJob(request, env, await authenticate(request, env, "device_or_admin"), manual[1].toLowerCase());
+  }
+  if (method === "GET" && manual) return await manualCountRead(env, await authenticate(request, env, "device_or_admin"), manual[1].toLowerCase());
+  const archive = path.match(/^\/v1\/scans\/([^/]+)\/archive$/);
+  if (method === "GET" && archive) {
+    await authenticate(request, env, "admin");
+    return await listArchive(env, archive[1].toLowerCase(), true);
+  }
+  if (method === "GET" && path === "/v1/manual-counts") {
+    await authenticate(request, env, "admin");
+    return await listManualCountsPage(env, url);
+  }
+  if (method === "POST" && path === "/v1/reconstruct" && env.RECONSTRUCTION_ENABLED === "true") {
+    if (openUpload) { observed("reconstruct"); return await reconstructPair(request, env); }
+    await authenticate(request, env, "device_or_admin");
+    return await reconstructPair(request, env);
+  }
+  if (method === "POST" && path === "/v1/diagnostics/upload") {
+    return await diagnosticsUpload(request, await authenticate(request, env, "device_or_admin"));
+  }
+  if (method === "GET" && path === "/v1/admin/devices") {
+    await authenticate(request, env, "admin");
+    return await listDevices(env, url);
+  }
+  const admin = path.match(/^\/v1\/admin\/devices\/([^/]+)\/(approve|revoke)$/);
+  if (method === "POST" && admin) {
+    await authenticate(request, env, "admin");
+    return await setDeviceStatus(env, admin[1], admin[2] === "approve" ? "active" : "revoked");
+  }
+  return json({ detail: { code: "not_found", message: "Route not found" } }, 404);
+}
+
 export { base64, buildBlock, captureQuality, fuseCounts, fuseCells, readCellIds, readOptionalCellIds, spanColumns, walkLayers };
 
 export default {
-  async fetch(request, env): Promise<Response> {
+  async fetch(request, env, ctx): Promise<Response> {
     const url = new URL(request.url);
     try {
-      if (request.method === "GET" && url.pathname === "/health") return json({ status: "ok", scan_contract: "cell_identity_v1", scan_contracts: ["cell_identity_v1", "model_spatial_v1", ...(env.RECONSTRUCTION_ENABLED === "true" ? ["reconstruct_v1"] : [])], hybrid_ready: false });
+      if (request.method === "GET" && url.pathname === "/health") return health(env);
+      const ready = request.method === "GET" && url.pathname === "/ready";
+      const mode = authMode(env);
+      if (mode !== "open" && !ready) return await routeEnforced(request, env, url, mode, ctx);
       if (request.method === "POST" && url.pathname === "/v1/reconstruct" && env.RECONSTRUCTION_ENABLED === "true") return await reconstructPair(request, env);
       if (request.method === "GET" && url.pathname === "/ready") {
         return json({ status: env.ROBOFLOW_API_KEY ? "ready" : "not_ready", provider: "roboflow_serverless", model_reference: env.MODEL_ID }, env.ROBOFLOW_API_KEY ? 200 : 503);
@@ -881,7 +1688,7 @@ export default {
       if (request.method === "GET" && archive) return await listArchive(env, archive[1].toLowerCase());
       return json({ detail: { code: "not_found", message: "Route not found" } }, 404);
     } catch (error) {
-      if (error instanceof HttpError) return json({ detail: { code: error.code, message: error.message } }, error.status);
+      if (error instanceof HttpError) return json({ detail: { code: error.code, message: error.message }, ...error.extra }, error.status);
       console.error(JSON.stringify({ event: "request_failed", error_type: "unexpected_error" }));
       return json({ detail: { code: "internal_error", message: "Scan could not be processed" } }, 500);
     }

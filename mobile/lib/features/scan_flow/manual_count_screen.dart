@@ -1,6 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:uuid/uuid.dart';
 
+import '../../app/app_version.dart';
 import '../../models/manual_count.dart';
 import '../../models/scan_result.dart';
 import '../../services/api_client.dart';
@@ -17,13 +20,17 @@ class ManualCountScreen extends StatefulWidget {
     required this.result,
     required this.repository,
     required this.baseUrl,
-    this.appVersion = '0.4.10+21',
+    this.appVersion = kAppVersion,
+    this.client,
   });
 
   final ScanResult result;
   final ManualCountRepository repository;
   final String baseUrl;
   final String appVersion;
+
+  /// Replaces the shared connection (tests).
+  final ApiClient? client;
 
   @override
   State<ManualCountScreen> createState() => _ManualCountScreenState();
@@ -38,6 +45,12 @@ class _ManualCountScreenState extends State<ManualCountScreen> {
   String? _status;
   bool _busy = false;
   bool _sent = false;
+
+  /// The last save whose send may have reached the server (no answer, or a
+  /// 5xx): sending the same counts again reuses its count_id and time, so
+  /// the server keeps one record even if the first try did arrive. Changed
+  /// counts are a correction with a new count_id.
+  ManualCount? _unconfirmed;
 
   @override
   void initState() {
@@ -101,39 +114,88 @@ class _ManualCountScreenState extends State<ManualCountScreen> {
 
   Future<void> _save({bool send = false}) async {
     FocusManager.instance.primaryFocus?.unfocus();
-    final count = _collect();
-    if (count.blockId.isEmpty) {
+    final collected = _collect();
+    if (collected.blockId.isEmpty) {
       setState(() => _status = 'Enter the block ID first.');
       return;
     }
+    // Each operator save is one count: a new count_id and time, unless it
+    // resends the counts whose last send failed.
+    final retry = _unconfirmed;
+    final count = retry != null && retry.sameCountsAs(collected)
+        ? collected.copyWith(countId: retry.countId, createdAt: retry.createdAt)
+        : collected.copyWith(
+            countId: const Uuid().v4(),
+            createdAt: DateTime.now(),
+          );
     setState(() {
       _busy = true;
       _status = null;
     });
     try {
-      await widget.repository.save(count);
-      var saved = count;
-      if (send) {
-        final response = await ApiClient(
-          widget.baseUrl,
-        ).submitManualCount(count, appVersion: widget.appVersion);
-        saved = count.copyWith(submitted: true);
-        await widget.repository.save(saved);
-        final totals = response['totals'];
-        setState(() {
-          _sent = true;
-          _status =
-              'Sent to server: filled ${totals?['filled']}, empty ${totals?['empty']}.';
-        });
-      } else {
-        setState(() => _status = 'Saved on this phone.');
+      try {
+        await widget.repository.save(count);
+      } on Object catch (error) {
+        if (mounted) {
+          setState(() => _status = 'Could not save on this phone: $error');
+        }
+        return;
       }
+      _count = count;
+      if (!send) {
+        if (mounted) setState(() => _status = 'Saved on this phone.');
+        return;
+      }
+      final Map<String, dynamic> response;
+      try {
+        response = await (widget.client ?? ApiClient(widget.baseUrl))
+            .submitManualCount(count, appVersion: widget.appVersion);
+      } on Object catch (error) {
+        // Only a send the server may have stored (no answer, or a 5xx) is
+        // repeated with the same count_id and time. A refusal stored
+        // nothing, and repeating its body (e.g. a created_at from a clock
+        // that was wrong) would be refused again: the next save is new.
+        _unconfirmed = _mayHaveStored(error) ? count : null;
+        final reason = error is DioException
+            ? ApiClient.describe(error)
+            : '$error';
+        if (mounted) {
+          setState(
+            () => _status = 'Saved on phone; sending failed: $reason',
+          );
+        }
+        return;
+      }
+      _unconfirmed = null;
+      final saved = count.copyWith(submitted: true);
       _count = saved;
-    } on Object catch (error) {
-      setState(() => _status = 'Saved on phone; sending failed: $error');
+      try {
+        await widget.repository.save(saved);
+      } on Object {
+        // The server has it; only the phone's "submitted" flag is stale.
+      }
+      final totals = response['totals'];
+      // is_latest false: stored, but a count made later is this scan's
+      // latest, and only the latest is exported as ground truth.
+      final latest = response['is_latest'] != false;
+      if (!mounted) return;
+      setState(() {
+        _sent = true;
+        _status = latest
+            ? 'Sent to server: filled ${totals?['filled']}, empty ${totals?['empty']}.'
+            : 'Stored on the server, but it already has a later count for '
+                  'this scan and keeps that one as the scan\'s count. If this '
+                  'is the correct count, tap SEND AGAIN (CORRECTION).';
+      });
     } finally {
       if (mounted) setState(() => _busy = false);
     }
+  }
+
+  static bool _mayHaveStored(Object error) {
+    if (error is! DioException) return false;
+    final status = error.response?.statusCode;
+    return status == null || status >= 500;
   }
 
   Future<void> _copyCsv() async {

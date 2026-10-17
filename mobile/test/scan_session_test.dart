@@ -64,4 +64,23 @@ void main() {
     expect(session.isComplete, isTrue);
     expect(session.cellIds, isEmpty);
   });
+
+  test('a retake is a new scan id that keeps the other two photos', () {
+    final first = ScanSession(scanId: 'scan-a')
+      ..setPath(CaptureView.left, 'left.jpg', cellId: 'A1', evidence: '{"l":1}')
+      ..setPath(CaptureView.right, 'right.jpg', evidence: '{"r":1}')
+      ..setPath(CaptureView.straight, 'straight.jpg', evidence: '{"s":1}');
+    final retake = first.retake(CaptureView.right, scanId: 'scan-b');
+    expect(retake.scanId, 'scan-b');
+    expect(retake.scanId, isNot(first.scanId));
+    expect(retake.pathFor(CaptureView.right), isNull);
+    expect(retake.nextMissing, CaptureView.right);
+    expect(retake.pathFor(CaptureView.left), 'left.jpg');
+    expect(retake.pathFor(CaptureView.straight), 'straight.jpg');
+    expect(retake.cellIds, {'left': 'A1'});
+    expect(retake.constraintEvidence, {'left': '{"l":1}', 'straight': '{"s":1}'});
+    // The original triplet is untouched.
+    expect(first.isComplete, isTrue);
+    expect(first.constraintEvidence['right'], '{"r":1}');
+  });
 }

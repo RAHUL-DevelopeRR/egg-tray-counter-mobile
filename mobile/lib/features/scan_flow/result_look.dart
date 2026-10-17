@@ -32,3 +32,12 @@ ResultLook resultLook(String status) => switch (status) {
     label: 'RETAKE',
   ),
 };
+
+/// A history row whose stored status says nothing about the scan (saved by
+/// an app before 0.4.12, see `ScanHistoryEntry.recordedByOlderApp`).
+const ResultLook unknownLook = (
+  icon: Icons.help_outline,
+  color: Colors.blueGrey,
+  headline: 'UNKNOWN',
+  label: 'UNKNOWN',
+);

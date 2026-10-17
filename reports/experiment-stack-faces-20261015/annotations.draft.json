@@ -1,0 +1,5634 @@
+{
+ "schema_version": "stack-faces-draft-1",
+ "created": "2026-10-15",
+ "status": "draft: drawn by one annotator (Claude Code) by eye; not yet reviewed by the user or a second annotator",
+ "purpose": "Stack-face geometry for the A/B/C counting experiment (arm B needs stack-face polygons). Geometry only: no layer, tray or egg counts are recorded here.",
+ "rules": [
+  "Count labels (handwritten numbers, labels.csv, user reports) were not read or used to place any polygon, depth row or membership decision; label scope text from the audit was used only to say which block is the target.",
+  "Coordinates are pixels of the EXIF-transposed (upright) image, which is the frame of the saved detections in every file listed (frame_check per image).",
+  "Saved detections were overlaid only to confirm the coordinate frame; polygons were drawn from the pixels, not from the boxes."
+ ],
+ "fields": {
+  "id": "polygon id, unique within the image",
+  "polygon": "[[x, y], ...] in upright image pixels, simple polygon, first vertex not repeated",
+  "role": "target (the block the label or scan refers to) | neighbour (stack outside the target block)",
+  "depth_row": "0 = front row facing the camera, 1 = one stack depth behind, 2+ further; for neighbours a rough distance rank",
+  "top_visible": "the stack's top tray is in frame and not hidden",
+  "base_visible": "the bottom tray is in frame and not hidden",
+  "clipped": "none | top | bottom | side | combinations (cut by the frame edge)",
+  "blurred": "defocus or motion blur strong enough to merge tray rows, by eye (see sharpness_lapvar)",
+  "contents_note": "filled | empty cover on top | nested empties | mixed | unknown (descriptive only)",
+  "occluded": "what hides part of the face, if anything",
+  "face_view": "front | side | oblique_top | top | oblique_side | unknown (which face of the stack the polygon covers)",
+  "physical_stack_inferred": "key of the physical stack (block:cell or photo:name), for linking views; inferred, not verified",
+  "membership_uncertain": "true when target vs neighbour (or the depth row) is a judgement call",
+  "area_px": "polygon area (measured)",
+  "sharpness_lapvar": "variance of the 3x3 Laplacian inside the polygon at native resolution (measured; comparable only within one photo)"
+ },
+ "images": [
+  {
+   "id": "scan-9b4c783e-straight",
+   "source_path": "C:/Users/DELL/AppData/Local/Temp/claude/C--Users-DELL-Downloads-self-enhancing-agent-framework-egg-tray-counter-mobile/6b2bcba2-89c7-4eff-982d-2296e543e21d/scratchpad/replay-20261013/scans/9b4c783e-7edb-43ed-b7d2-2f8eed889f60/straight.jpg",
+   "source_sha256": "3e7f044c76b166e6022d6d16e701165c1e29b2d591ab628dd503806ac970887e",
+   "source_note": "R2 scans/9b4c783e-7edb-43ed-b7d2-2f8eed889f60 straight (13 Oct 2026 upload, 1600 px); local copy in the session scratchpad, not in the repo (byte-identical in replay-20261013 and replay-staging47)",
+   "detections_path": "reports/field-scans-20261013/replay/9b4c783e-7edb-43ed-b7d2-2f8eed889f60.json#views.straight",
+   "width": 1600,
+   "height": 1360,
+   "label_scope": "none (scan without a count)",
+   "cases": [
+    "same_stack_several_views",
+    "set_back_stack_different_depth",
+    "neighbour_outside_target",
+    "empty_cover_on_top"
+   ],
+   "frame_check": {
+    "stored_size": [
+     1600,
+     1360
+    ],
+    "exif_orientation": null,
+    "upright_size": [
+     1600,
+     1360
+    ],
+    "detection_file_size": [
+     1600,
+     1360
+    ],
+    "detection_file_size_matches": true,
+    "detection_coordinate_frame_field": "worker response (x,y = box centre)",
+    "n_detections": 63,
+    "detection_extent_xyxy": [
+     21.0,
+     190.0,
+     1589.0,
+     1312.0
+    ],
+    "detections_within_upright_frame": true,
+    "detections_would_fit_swapped_frame": false,
+    "verdict": "same frame"
+   },
+   "detection_overlap_diagnostic": {
+    "detection_centres_in_target_polygons": 63,
+    "detection_centres_in_any_polygon": 63,
+    "n_detections": 63,
+    "meaning": "diagnostic only; detections did not shape polygons and are not counts"
+   },
+   "polygons": [
+    {
+     "id": "s1",
+     "polygon": [
+      [
+       18,
+       140
+      ],
+      [
+       430,
+       138
+      ],
+      [
+       455,
+       700
+      ],
+      [
+       480,
+       1290
+      ],
+      [
+       99,
+       1288
+      ],
+      [
+       64,
+       700
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "9b4c:(0,0)",
+     "membership_uncertain": false,
+     "note": "front-left stack; top tray (y 140-185) shows posts and no eggs",
+     "area_px": 452601,
+     "sharpness_lapvar": 4592.3
+    },
+    {
+     "id": "s2",
+     "polygon": [
+      [
+       430,
+       138
+      ],
+      [
+       886,
+       140
+      ],
+      [
+       877,
+       700
+      ],
+      [
+       868,
+       1310
+      ],
+      [
+       480,
+       1306
+      ],
+      [
+       455,
+       700
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "9b4c:(1,0)",
+     "membership_uncertain": false,
+     "note": "front-middle stack; top tray shows posts and no eggs",
+     "area_px": 492495,
+     "sharpness_lapvar": 5479.3
+    },
+    {
+     "id": "s3",
+     "polygon": [
+      [
+       886,
+       190
+      ],
+      [
+       1312,
+       190
+      ],
+      [
+       1298,
+       750
+      ],
+      [
+       1272,
+       1322
+      ],
+      [
+       868,
+       1322
+      ],
+      [
+       877,
+       700
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "9b4c:(2,0)",
+     "membership_uncertain": false,
+     "note": "front-right stack; eggs bulge above its top tray (no cover)",
+     "area_px": 473560,
+     "sharpness_lapvar": 6569.9
+    },
+    {
+     "id": "s4",
+     "polygon": [
+      [
+       1312,
+       331
+      ],
+      [
+       1586,
+       331
+      ],
+      [
+       1580,
+       650
+      ],
+      [
+       1562,
+       900
+      ],
+      [
+       1549,
+       1149
+      ],
+      [
+       1275,
+       1149
+      ],
+      [
+       1281,
+       1000
+      ],
+      [
+       1298,
+       750
+      ],
+      [
+       1312,
+       500
+      ]
+     ],
+     "role": "target",
+     "depth_row": 1,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "left (by s3)",
+     "face_view": "front",
+     "physical_stack_inferred": "9b4c:(3,1)",
+     "membership_uncertain": true,
+     "note": "set-back column at the right, one stack depth behind the front row (base y 1149 vs 1272-1311). Taken as the block's cell behind the empty front-right cell: the RIGHT view shows the front-row stack set back at its front end, the 30aca6a1 STRAIGHT (same block, far) shows the same layout, and its top state (eggs, no cover) matches RIGHT r2. If the block is read as 3 wide, re-tag as neighbour.",
+     "area_px": 224272,
+     "sharpness_lapvar": 2302.4
+    },
+    {
+     "id": "n1",
+     "polygon": [
+      [
+       1585,
+       450
+      ],
+      [
+       1600,
+       450
+      ],
+      [
+       1600,
+       960
+      ],
+      [
+       1560,
+       960
+      ],
+      [
+       1566,
+       700
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 2,
+     "top_visible": false,
+     "base_visible": false,
+     "clipped": "side",
+     "blurred": false,
+     "contents_note": "unknown",
+     "occluded": "left (by s4)",
+     "face_view": "unknown",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "dark tray edges further back, right of s4; anything right of s4's right edge lies outside the block's right side in a square-on view, so this is a neighbour; cut by the frame",
+     "area_px": 15745,
+     "sharpness_lapvar": 4526.3
+    }
+   ],
+   "notes": "Close square-on face, camera pitched slightly down. Detection frame: replay JSON views.straight.image = 1600x1360 = this file; no EXIF orientation."
+  },
+  {
+   "id": "scan-9b4c783e-left",
+   "source_path": "C:/Users/DELL/AppData/Local/Temp/claude/C--Users-DELL-Downloads-self-enhancing-agent-framework-egg-tray-counter-mobile/6b2bcba2-89c7-4eff-982d-2296e543e21d/scratchpad/replay-20261013/scans/9b4c783e-7edb-43ed-b7d2-2f8eed889f60/left.jpg",
+   "source_sha256": "2fcb2e4b6ff02d31ec71fd9fc8bb9368dad70071d00372911619bc770c3484d6",
+   "source_note": "R2 scans/9b4c783e-7edb-43ed-b7d2-2f8eed889f60 left (13 Oct 2026 upload); scratchpad copy",
+   "detections_path": "reports/field-scans-20261013/replay/9b4c783e-7edb-43ed-b7d2-2f8eed889f60.json#views.left",
+   "width": 1520,
+   "height": 1600,
+   "label_scope": "none (scan without a count)",
+   "cases": [
+    "same_stack_several_views",
+    "neighbour_outside_target",
+    "empty_cover_on_top"
+   ],
+   "frame_check": {
+    "stored_size": [
+     1520,
+     1600
+    ],
+    "exif_orientation": null,
+    "upright_size": [
+     1520,
+     1600
+    ],
+    "detection_file_size": [
+     1520,
+     1600
+    ],
+    "detection_file_size_matches": true,
+    "detection_coordinate_frame_field": "worker response (x,y = box centre)",
+    "n_detections": 48,
+    "detection_extent_xyxy": [
+     0.0,
+     226.0,
+     1469.0,
+     1545.0
+    ],
+    "detections_within_upright_frame": true,
+    "detections_would_fit_swapped_frame": false,
+    "verdict": "same frame"
+   },
+   "detection_overlap_diagnostic": {
+    "detection_centres_in_target_polygons": 48,
+    "detection_centres_in_any_polygon": 48,
+    "n_detections": 48,
+    "meaning": "diagnostic only; detections did not shape polygons and are not counts"
+   },
+   "polygons": [
+    {
+     "id": "l1",
+     "polygon": [
+      [
+       5,
+       258
+      ],
+      [
+       470,
+       250
+      ],
+      [
+       484,
+       900
+      ],
+      [
+       497,
+       1562
+      ],
+      [
+       80,
+       1556
+      ],
+      [
+       45,
+       1100
+      ],
+      [
+       25,
+       700
+      ],
+      [
+       8,
+       500
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "side",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "side",
+     "physical_stack_inferred": "9b4c:(0,2)",
+     "membership_uncertain": false,
+     "note": "rear stack of the left face (block back at the viewer's left); its upper-left corner touches the frame edge; top tray (y 240-310) shows posts and no eggs",
+     "area_px": 583757,
+     "sharpness_lapvar": 6834.9
+    },
+    {
+     "id": "l2",
+     "polygon": [
+      [
+       470,
+       246
+      ],
+      [
+       962,
+       240
+      ],
+      [
+       956,
+       900
+      ],
+      [
+       950,
+       1555
+      ],
+      [
+       497,
+       1550
+      ],
+      [
+       484,
+       900
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "side",
+     "physical_stack_inferred": "9b4c:(0,1)",
+     "membership_uncertain": false,
+     "note": "middle stack of the left face; top tray shows posts and no eggs",
+     "area_px": 618458,
+     "sharpness_lapvar": 7047.6
+    },
+    {
+     "id": "l3",
+     "polygon": [
+      [
+       962,
+       228
+      ],
+      [
+       1483,
+       230
+      ],
+      [
+       1470,
+       500
+      ],
+      [
+       1450,
+       750
+      ],
+      [
+       1416,
+       1505
+      ],
+      [
+       1410,
+       1575
+      ],
+      [
+       950,
+       1570
+      ],
+      [
+       956,
+       900
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "side",
+     "physical_stack_inferred": "9b4c:(0,0)",
+     "membership_uncertain": false,
+     "note": "front-left corner stack (block front at the viewer's right) = STRAIGHT s1 from the side (inferred; both show an empty top tray); a person's leg is beside it at x 1440-1520",
+     "area_px": 658067,
+     "sharpness_lapvar": 6998.9
+    },
+    {
+     "id": "n1",
+     "polygon": [
+      [
+       0,
+       540
+      ],
+      [
+       10,
+       540
+      ],
+      [
+       25,
+       700
+      ],
+      [
+       45,
+       1100
+      ],
+      [
+       75,
+       1500
+      ],
+      [
+       60,
+       1560
+      ],
+      [
+       0,
+       1560
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 1,
+     "top_visible": false,
+     "base_visible": true,
+     "clipped": "side",
+     "blurred": false,
+     "contents_note": "unknown",
+     "occluded": "right (by l1)",
+     "face_view": "unknown",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "dark red/brown trays behind the block's back corner, seen edge-on; cut by the frame",
+     "area_px": 44850,
+     "sharpness_lapvar": 3980.3
+    }
+   ],
+   "notes": "Left face of the same block, square-on. Detection frame: views.left.image = 1520x1600 = this file."
+  },
+  {
+   "id": "scan-9b4c783e-right",
+   "source_path": "C:/Users/DELL/AppData/Local/Temp/claude/C--Users-DELL-Downloads-self-enhancing-agent-framework-egg-tray-counter-mobile/6b2bcba2-89c7-4eff-982d-2296e543e21d/scratchpad/replay-20261013/scans/9b4c783e-7edb-43ed-b7d2-2f8eed889f60/right.jpg",
+   "source_sha256": "5f393c112221e10bdb968a2577e3b6f851ca3e20eb623164511058ea611ef450",
+   "source_note": "R2 scans/9b4c783e-7edb-43ed-b7d2-2f8eed889f60 right (13 Oct 2026 upload); scratchpad copy",
+   "detections_path": "reports/field-scans-20261013/replay/9b4c783e-7edb-43ed-b7d2-2f8eed889f60.json#views.right",
+   "width": 1104,
+   "height": 1600,
+   "label_scope": "none (scan without a count)",
+   "cases": [
+    "same_stack_several_views",
+    "set_back_stack_different_depth",
+    "hazy_backlit",
+    "neighbour_outside_target"
+   ],
+   "frame_check": {
+    "stored_size": [
+     1104,
+     1600
+    ],
+    "exif_orientation": null,
+    "upright_size": [
+     1104,
+     1600
+    ],
+    "detection_file_size": [
+     1104,
+     1600
+    ],
+    "detection_file_size_matches": true,
+    "detection_coordinate_frame_field": "worker response (x,y = box centre)",
+    "n_detections": 44,
+    "detection_extent_xyxy": [
+     40.0,
+     426.0,
+     1098.0,
+     1554.0
+    ],
+    "detections_within_upright_frame": true,
+    "detections_would_fit_swapped_frame": false,
+    "verdict": "same frame"
+   },
+   "detection_overlap_diagnostic": {
+    "detection_centres_in_target_polygons": 44,
+    "detection_centres_in_any_polygon": 44,
+    "n_detections": 44,
+    "meaning": "diagnostic only; detections did not shape polygons and are not counts"
+   },
+   "polygons": [
+    {
+     "id": "r1",
+     "polygon": [
+      [
+       47,
+       604
+      ],
+      [
+       250,
+       604
+      ],
+      [
+       255,
+       1000
+      ],
+      [
+       258,
+       1361
+      ],
+      [
+       85,
+       1361
+      ],
+      [
+       76,
+       1000
+      ]
+     ],
+     "role": "target",
+     "depth_row": 1,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "right (by r2)",
+     "face_view": "side",
+     "physical_stack_inferred": "9b4c:(2,0)",
+     "membership_uncertain": false,
+     "note": "right side of the front-row right stack, set back because the corner cell (3,0) in front of it is empty (= STRAIGHT s3, inferred; both show eggs on the top tray)",
+     "area_px": 139172,
+     "sharpness_lapvar": 3480.8
+    },
+    {
+     "id": "r2",
+     "polygon": [
+      [
+       250,
+       523
+      ],
+      [
+       654,
+       523
+      ],
+      [
+       658,
+       1000
+      ],
+      [
+       660,
+       1548
+      ],
+      [
+       262,
+       1544
+      ],
+      [
+       255,
+       1000
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "side",
+     "physical_stack_inferred": "9b4c:(3,1)",
+     "membership_uncertain": false,
+     "note": "right-face stack nearest the block front (= STRAIGHT s4, inferred); eggs on the top tray",
+     "area_px": 411134,
+     "sharpness_lapvar": 1200.8
+    },
+    {
+     "id": "r3",
+     "polygon": [
+      [
+       654,
+       434
+      ],
+      [
+       1061,
+       434
+      ],
+      [
+       1058,
+       1000
+      ],
+      [
+       1053,
+       1556
+      ],
+      [
+       660,
+       1548
+      ],
+      [
+       658,
+       1000
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "side",
+     "physical_stack_inferred": "9b4c:(3,2)",
+     "membership_uncertain": false,
+     "note": "right-face rear stack; eggs on the top tray; upper half washed out by back-light",
+     "area_px": 447255,
+     "sharpness_lapvar": 955.7
+    },
+    {
+     "id": "n1",
+     "polygon": [
+      [
+       1061,
+       455
+      ],
+      [
+       1104,
+       455
+      ],
+      [
+       1104,
+       1430
+      ],
+      [
+       1053,
+       1430
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 1,
+     "top_visible": false,
+     "base_visible": false,
+     "clipped": "side",
+     "blurred": false,
+     "contents_note": "unknown",
+     "occluded": "left (by r3)",
+     "face_view": "unknown",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "dark red trays beyond the back of the block, cut by the frame",
+     "area_px": 45825,
+     "sharpness_lapvar": 6795.3
+    }
+   ],
+   "notes": "Back-lit and hazy (low contrast over the upper half), not motion-blurred. Detection frame: views.right.image = 1104x1600 = this file."
+  },
+  {
+   "id": "labelled-img-01",
+   "source_path": "datasets/field-2026-10/labelled-20261007/originals/img-01.jpg",
+   "source_sha256": "803585bfe669dab28481b1b840ba50b678ce00082d1b7edc03731359992ef359",
+   "source_note": null,
+   "detections_path": "reports/field-labelled-20261007/raw/batch-01.json#views.left (also batch-18 views.right)",
+   "width": 1280,
+   "height": 582,
+   "label_scope": "whole visible face of a 5 x 1 block (audit tier A)",
+   "cases": [
+    "substituted_trio_member",
+    "same_block_several_views"
+   ],
+   "frame_check": {
+    "stored_size": [
+     1280,
+     582
+    ],
+    "exif_orientation": null,
+    "upright_size": [
+     1280,
+     582
+    ],
+    "detection_file_size": null,
+    "detection_file_size_matches": null,
+    "detection_coordinate_frame_field": "worker response (x,y = box centre)",
+    "n_detections": 101,
+    "detection_extent_xyxy": [
+     293.0,
+     40.0,
+     952.0,
+     467.0
+    ],
+    "detections_within_upright_frame": true,
+    "detections_would_fit_swapped_frame": false,
+    "verdict": "same frame"
+   },
+   "detection_overlap_diagnostic": {
+    "detection_centres_in_target_polygons": 101,
+    "detection_centres_in_any_polygon": 101,
+    "n_detections": 101,
+    "meaning": "diagnostic only; detections did not shape polygons and are not counts"
+   },
+   "polygons": [
+    {
+     "id": "s1",
+     "polygon": [
+      [
+       298,
+       50
+      ],
+      [
+       447,
+       48
+      ],
+      [
+       455,
+       250
+      ],
+      [
+       462,
+       468
+      ],
+      [
+       372,
+       470
+      ],
+      [
+       350,
+       300
+      ],
+      [
+       320,
+       150
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "G01:(0,0)",
+     "membership_uncertain": false,
+     "note": "left-end stack; its left side stands against the wall (audit G01)",
+     "area_px": 48624,
+     "sharpness_lapvar": 7749.2
+    },
+    {
+     "id": "s2",
+     "polygon": [
+      [
+       447,
+       48
+      ],
+      [
+       578,
+       46
+      ],
+      [
+       584,
+       250
+      ],
+      [
+       590,
+       466
+      ],
+      [
+       462,
+       468
+      ],
+      [
+       455,
+       250
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "G01:(1,0)",
+     "membership_uncertain": false,
+     "note": "",
+     "area_px": 54288,
+     "sharpness_lapvar": 7881.9
+    },
+    {
+     "id": "s3",
+     "polygon": [
+      [
+       578,
+       46
+      ],
+      [
+       700,
+       45
+      ],
+      [
+       702,
+       250
+      ],
+      [
+       703,
+       462
+      ],
+      [
+       590,
+       466
+      ],
+      [
+       584,
+       250
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "G01:(2,0)",
+     "membership_uncertain": false,
+     "note": "",
+     "area_px": 49266,
+     "sharpness_lapvar": 8755.8
+    },
+    {
+     "id": "s4",
+     "polygon": [
+      [
+       700,
+       45
+      ],
+      [
+       822,
+       55
+      ],
+      [
+       820,
+       250
+      ],
+      [
+       818,
+       458
+      ],
+      [
+       703,
+       462
+      ],
+      [
+       702,
+       250
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "G01:(3,0)",
+     "membership_uncertain": false,
+     "note": "",
+     "area_px": 48464,
+     "sharpness_lapvar": 7965.7
+    },
+    {
+     "id": "s5",
+     "polygon": [
+      [
+       822,
+       70
+      ],
+      [
+       948,
+       75
+      ],
+      [
+       935,
+       300
+      ],
+      [
+       912,
+       452
+      ],
+      [
+       818,
+       458
+      ],
+      [
+       820,
+       250
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "G01:(4,0)",
+     "membership_uncertain": false,
+     "note": "free right-end stack; its top is lower than the others",
+     "area_px": 43692,
+     "sharpness_lapvar": 12111.5
+    }
+   ],
+   "notes": "G01 block front, small and far (stacks 120-150 px wide); eggs visible above every top tray. Handwritten ink is below the block, not over any stack. Same block as img-32 / warehouse image-4 (audit G01). WhatsApp copy, no EXIF; detections from the production Worker on this file."
+  },
+  {
+   "id": "labelled-img-32",
+   "source_path": "datasets/field-2026-10/labelled-20261007/originals/img-32.jpeg",
+   "source_sha256": "fc86f9d70cd37eed83bca6d6edb3eaa7379bfa8eac58a86e9cb9a566eba96b78",
+   "source_note": null,
+   "detections_path": "reports/field-labelled-20261007/raw/batch-11.json#views.right",
+   "width": 580,
+   "height": 1280,
+   "label_scope": "the free end stack of the G01 block, end-on (audit tier A + per-stack)",
+   "cases": [
+    "substituted_trio_member",
+    "same_stack_several_views",
+    "single_stack"
+   ],
+   "frame_check": {
+    "stored_size": [
+     580,
+     1280
+    ],
+    "exif_orientation": null,
+    "upright_size": [
+     580,
+     1280
+    ],
+    "detection_file_size": null,
+    "detection_file_size_matches": null,
+    "detection_coordinate_frame_field": "worker response (x,y = box centre)",
+    "n_detections": 24,
+    "detection_extent_xyxy": [
+     299.0,
+     278.0,
+     553.0,
+     1022.0
+    ],
+    "detections_within_upright_frame": true,
+    "detections_would_fit_swapped_frame": false,
+    "verdict": "same frame"
+   },
+   "detection_overlap_diagnostic": {
+    "detection_centres_in_target_polygons": 24,
+    "detection_centres_in_any_polygon": 24,
+    "n_detections": 24,
+    "meaning": "diagnostic only; detections did not shape polygons and are not counts"
+   },
+   "polygons": [
+    {
+     "id": "s1",
+     "polygon": [
+      [
+       300,
+       285
+      ],
+      [
+       535,
+       278
+      ],
+      [
+       548,
+       520
+      ],
+      [
+       552,
+       800
+      ],
+      [
+       553,
+       1032
+      ],
+      [
+       345,
+       1040
+      ],
+      [
+       330,
+       700
+      ],
+      [
+       305,
+       500
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "side",
+     "physical_stack_inferred": "G01:(4,0) end face",
+     "membership_uncertain": false,
+     "note": "end face of the block's free end stack, square-on; leans slightly; top (eggs on top) and base in frame",
+     "area_px": 170605,
+     "sharpness_lapvar": 9376.1
+    }
+   ],
+   "notes": "RIGHT slot of the G01 (end-wall block) trio; the same physical end as warehouse image-4 (LEFT slot), so the trio is substituted (audit: 168 SIFT inliers img-32 vs warehouse-4). Ink at the upper left, clear of the stack. Not clipped here."
+  },
+  {
+   "id": "warehouse-image-4",
+   "source_path": "reports/warehouse-20260923/input/image-4.jpg",
+   "source_sha256": "fb5bd22bfe8d1b3da1714ad9f1ef9f90330d562d6bd499bb6005446886506e66",
+   "source_note": null,
+   "detections_path": "reports/warehouse-20260923/image-4-analysis.json#stacks[0].visible_detections",
+   "width": 1200,
+   "height": 1600,
+   "label_scope": "same free end stack as img-32 (user-confirmed per audit; not used here)",
+   "cases": [
+    "clipped_top",
+    "substituted_trio_member",
+    "same_stack_several_views",
+    "single_stack"
+   ],
+   "frame_check": {
+    "stored_size": [
+     1200,
+     1600
+    ],
+    "exif_orientation": null,
+    "upright_size": [
+     1200,
+     1600
+    ],
+    "detection_file_size": [
+     1200,
+     1600
+    ],
+    "detection_file_size_matches": true,
+    "detection_coordinate_frame_field": "decoded image pixels",
+    "n_detections": 19,
+    "detection_extent_xyxy": [
+     337.0,
+     0.0,
+     823.0,
+     1443.0
+    ],
+    "detections_within_upright_frame": true,
+    "detections_would_fit_swapped_frame": false,
+    "verdict": "same frame"
+   },
+   "detection_overlap_diagnostic": {
+    "detection_centres_in_target_polygons": 19,
+    "detection_centres_in_any_polygon": 19,
+    "n_detections": 19,
+    "meaning": "diagnostic only; detections did not shape polygons and are not counts"
+   },
+   "polygons": [
+    {
+     "id": "s1",
+     "polygon": [
+      [
+       352,
+       0
+      ],
+      [
+       800,
+       0
+      ],
+      [
+       825,
+       72
+      ],
+      [
+       805,
+       400
+      ],
+      [
+       790,
+       700
+      ],
+      [
+       770,
+       1100
+      ],
+      [
+       760,
+       1300
+      ],
+      [
+       752,
+       1450
+      ],
+      [
+       365,
+       1452
+      ],
+      [
+       355,
+       1100
+      ],
+      [
+       350,
+       700
+      ],
+      [
+       340,
+       45
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": false,
+     "base_visible": true,
+     "clipped": "top",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "side",
+     "physical_stack_inferred": "G01:(4,0) end face",
+     "membership_uncertain": false,
+     "note": "close square-on view of the free end stack; the upper trays run out of the frame at y = 0",
+     "area_px": 635322,
+     "sharpness_lapvar": 5641.7
+    }
+   ],
+   "notes": "Same stack as labelled img-32. Analysis JSON quality width/height 1200x1600 = this file; no EXIF."
+  },
+  {
+   "id": "labelled-img-04",
+   "source_path": "datasets/field-2026-10/labelled-20261007/originals/img-04.jpeg",
+   "source_sha256": "312737fcdbc9c1793a8bcd31ebaae18441a747f0bab525ab9b2917b530939e00",
+   "source_note": null,
+   "detections_path": "reports/field-labelled-20261007/raw/batch-02.json#views.left",
+   "width": 960,
+   "height": 1280,
+   "label_scope": "visible face of a two-depth arrangement (audit tier B)",
+   "cases": [
+    "overlapping_stacks_different_depths",
+    "empty_cover_on_top",
+    "neighbour_outside_target",
+    "handwriting_in_frame"
+   ],
+   "frame_check": {
+    "stored_size": [
+     960,
+     1280
+    ],
+    "exif_orientation": null,
+    "upright_size": [
+     960,
+     1280
+    ],
+    "detection_file_size": null,
+    "detection_file_size_matches": null,
+    "detection_coordinate_frame_field": "worker response (x,y = box centre)",
+    "n_detections": 110,
+    "detection_extent_xyxy": [
+     63.0,
+     523.0,
+     886.0,
+     1040.0
+    ],
+    "detections_within_upright_frame": true,
+    "detections_would_fit_swapped_frame": false,
+    "verdict": "same frame"
+   },
+   "detection_overlap_diagnostic": {
+    "detection_centres_in_target_polygons": 110,
+    "detection_centres_in_any_polygon": 110,
+    "n_detections": 110,
+    "meaning": "diagnostic only; detections did not shape polygons and are not counts"
+   },
+   "polygons": [
+    {
+     "id": "a",
+     "polygon": [
+      [
+       65,
+       525
+      ],
+      [
+       200,
+       523
+      ],
+      [
+       202,
+       760
+      ],
+      [
+       203,
+       1000
+      ],
+      [
+       80,
+       1007
+      ],
+      [
+       72,
+       760
+      ]
+     ],
+     "role": "target",
+     "depth_row": 1,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "rear-row stack (base ~1003, the two front stacks reach ~1048)",
+     "area_px": 62093,
+     "sharpness_lapvar": 2833.5
+    },
+    {
+     "id": "b",
+     "polygon": [
+      [
+       200,
+       523
+      ],
+      [
+       335,
+       522
+      ],
+      [
+       340,
+       760
+      ],
+      [
+       345,
+       998
+      ],
+      [
+       208,
+       1000
+      ],
+      [
+       202,
+       760
+      ]
+     ],
+     "role": "target",
+     "depth_row": 1,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "",
+     "area_px": 65288,
+     "sharpness_lapvar": 2503.1
+    },
+    {
+     "id": "c_rear",
+     "polygon": [
+      [
+       335,
+       522
+      ],
+      [
+       462,
+       521
+      ],
+      [
+       462,
+       655
+      ],
+      [
+       340,
+       658
+      ]
+     ],
+     "role": "target",
+     "depth_row": 1,
+     "top_visible": true,
+     "base_visible": false,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "below (by c_front)",
+     "face_view": "front",
+     "physical_stack_inferred": "img04:c_rear",
+     "membership_uncertain": false,
+     "note": "upper part of the rear stack behind c_front; visible only above the shorter front stack",
+     "area_px": 16812,
+     "sharpness_lapvar": 2513.4
+    },
+    {
+     "id": "c_front",
+     "polygon": [
+      [
+       340,
+       655
+      ],
+      [
+       470,
+       655
+      ],
+      [
+       485,
+       850
+      ],
+      [
+       490,
+       1045
+      ],
+      [
+       352,
+       1050
+      ],
+      [
+       348,
+       850
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "front stack standing on the floor ahead of the rear row; its top tray (y 655-700) shows posts and empty cups (the eggs just above it belong to c_rear); cover status moderately certain",
+     "area_px": 53200,
+     "sharpness_lapvar": 2357.4
+    },
+    {
+     "id": "d_rear",
+     "polygon": [
+      [
+       465,
+       521
+      ],
+      [
+       625,
+       520
+      ],
+      [
+       628,
+       600
+      ],
+      [
+       490,
+       608
+      ],
+      [
+       470,
+       600
+      ]
+     ],
+     "role": "target",
+     "depth_row": 1,
+     "top_visible": true,
+     "base_visible": false,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "below (by d_front)",
+     "face_view": "front",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "rear stack visible above d_front; a tray at its left end sits tilted",
+     "area_px": 13274,
+     "sharpness_lapvar": 3359.6
+    },
+    {
+     "id": "d_front",
+     "polygon": [
+      [
+       490,
+       605
+      ],
+      [
+       628,
+       600
+      ],
+      [
+       628,
+       800
+      ],
+      [
+       628,
+       1030
+      ],
+      [
+       497,
+       1045
+      ],
+      [
+       490,
+       800
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "front stack; eggs in its top tray; boundary with d_rear (y ~605) uncertain by ~10 px",
+     "area_px": 59225,
+     "sharpness_lapvar": 2765.6
+    },
+    {
+     "id": "e",
+     "polygon": [
+      [
+       625,
+       520
+      ],
+      [
+       770,
+       520
+      ],
+      [
+       772,
+       760
+      ],
+      [
+       775,
+       1015
+      ],
+      [
+       635,
+       1022
+      ],
+      [
+       630,
+       760
+      ]
+     ],
+     "role": "target",
+     "depth_row": 1,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": null,
+     "membership_uncertain": true,
+     "note": "base ~1020, between the rear row (~1000) and the front stacks (~1045); depth row uncertain",
+     "area_px": 70902,
+     "sharpness_lapvar": 2971.0
+    },
+    {
+     "id": "f",
+     "polygon": [
+      [
+       770,
+       520
+      ],
+      [
+       890,
+       518
+      ],
+      [
+       890,
+       760
+      ],
+      [
+       887,
+       995
+      ],
+      [
+       780,
+       1005
+      ],
+      [
+       775,
+       760
+      ]
+     ],
+     "role": "target",
+     "depth_row": 1,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "",
+     "area_px": 54965,
+     "sharpness_lapvar": 3200.9
+    },
+    {
+     "id": "n1",
+     "polygon": [
+      [
+       0,
+       615
+      ],
+      [
+       62,
+       615
+      ],
+      [
+       68,
+       790
+      ],
+      [
+       0,
+       800
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 1,
+     "top_visible": true,
+     "base_visible": false,
+     "clipped": "side",
+     "blurred": false,
+     "contents_note": "mixed",
+     "occluded": "none",
+     "face_view": "unknown",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "loose trays and a low dark stack on the floor at the left edge, outside the arrangement; cut by the frame",
+     "area_px": 11715,
+     "sharpness_lapvar": 4816.7
+    }
+   ],
+   "notes": "Light-green trays; rear tops flush at y ~520 while two front stacks stand ~45 px lower on the floor, so the rear stacks show above them. Ink is in the background above the stacks, not over any stack."
+  },
+  {
+   "id": "labelled-img-09",
+   "source_path": "datasets/field-2026-10/labelled-20261007/originals/img-09.jpeg",
+   "source_sha256": "22fe8ad3370e5da9d2a582e417dd5f589c9df6cbdafa9a3939608fac6d701f7b",
+   "source_note": null,
+   "detections_path": "reports/field-labelled-20261007/raw/batch-03.json#views.straight",
+   "width": 960,
+   "height": 1280,
+   "label_scope": "close multi-depth arrangement with a short front stack (audit tier B, low)",
+   "cases": [
+    "overlapping_stacks_different_depths",
+    "empty_cover_on_top",
+    "two_faces_of_one_stack",
+    "clipped_side",
+    "handwriting_in_frame"
+   ],
+   "frame_check": {
+    "stored_size": [
+     960,
+     1280
+    ],
+    "exif_orientation": null,
+    "upright_size": [
+     960,
+     1280
+    ],
+    "detection_file_size": null,
+    "detection_file_size_matches": null,
+    "detection_coordinate_frame_field": "worker response (x,y = box centre)",
+    "n_detections": 71,
+    "detection_extent_xyxy": [
+     0.0,
+     214.0,
+     960.0,
+     1187.0
+    ],
+    "detections_within_upright_frame": true,
+    "detections_would_fit_swapped_frame": false,
+    "verdict": "same frame"
+   },
+   "detection_overlap_diagnostic": {
+    "detection_centres_in_target_polygons": 70,
+    "detection_centres_in_any_polygon": 70,
+    "n_detections": 71,
+    "meaning": "diagnostic only; detections did not shape polygons and are not counts"
+   },
+   "polygons": [
+    {
+     "id": "f_left",
+     "polygon": [
+      [
+       290,
+       545
+      ],
+      [
+       400,
+       615
+      ],
+      [
+       403,
+       900
+      ],
+      [
+       405,
+       1225
+      ],
+      [
+       370,
+       1175
+      ],
+      [
+       320,
+       1090
+      ],
+      [
+       300,
+       900
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "side",
+     "physical_stack_inferred": "img09:f",
+     "membership_uncertain": false,
+     "note": "left side face of the short protruding stack f (its vertical corner edge is at x ~400); visible because the cell to its left is empty",
+     "area_px": 57552,
+     "sharpness_lapvar": 3122.4
+    },
+    {
+     "id": "f_front",
+     "polygon": [
+      [
+       400,
+       615
+      ],
+      [
+       625,
+       555
+      ],
+      [
+       612,
+       700
+      ],
+      [
+       605,
+       900
+      ],
+      [
+       620,
+       1128
+      ],
+      [
+       565,
+       1156
+      ],
+      [
+       480,
+       1205
+      ],
+      [
+       405,
+       1225
+      ],
+      [
+       403,
+       900
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "img09:f",
+     "membership_uncertain": false,
+     "note": "front face of the short stack f; its top tray, seen from above at y ~490-615, shows posts and empty cups (one empty tray visible; whether more are nested is not resolvable)",
+     "area_px": 125598,
+     "sharpness_lapvar": 5285.5
+    },
+    {
+     "id": "mb",
+     "polygon": [
+      [
+       228,
+       215
+      ],
+      [
+       470,
+       215
+      ],
+      [
+       470,
+       495
+      ],
+      [
+       300,
+       505
+      ],
+      [
+       290,
+       545
+      ],
+      [
+       300,
+       900
+      ],
+      [
+       320,
+       1090
+      ],
+      [
+       284,
+       1105
+      ],
+      [
+       262,
+       700
+      ],
+      [
+       240,
+       400
+      ]
+     ],
+     "role": "target",
+     "depth_row": 1,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "below (by f)",
+     "face_view": "front",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "row-1 stack behind f on the left; seen above f's top tray and in the narrow gap between l and f",
+     "area_px": 86250,
+     "sharpness_lapvar": 3195.5
+    },
+    {
+     "id": "rb",
+     "polygon": [
+      [
+       470,
+       215
+      ],
+      [
+       650,
+       215
+      ],
+      [
+       640,
+       485
+      ],
+      [
+       470,
+       495
+      ]
+     ],
+     "role": "target",
+     "depth_row": 1,
+     "top_visible": true,
+     "base_visible": false,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "below (by f)",
+     "face_view": "front",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "row-1 stack behind f on the right, seen only above f's top tray",
+     "area_px": 48100,
+     "sharpness_lapvar": 3347.2
+    },
+    {
+     "id": "l",
+     "polygon": [
+      [
+       0,
+       218
+      ],
+      [
+       230,
+       215
+      ],
+      [
+       255,
+       700
+      ],
+      [
+       282,
+       1105
+      ],
+      [
+       60,
+       1182
+      ],
+      [
+       40,
+       1178
+      ],
+      [
+       22,
+       700
+      ],
+      [
+       0,
+       500
+      ]
+     ],
+     "role": "target",
+     "depth_row": 1,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "side",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "left stack in row 1 (measured base y ~1105 at its right end lines up with f's back-left base corner ~1090, not f's front corner at ~1225), nothing in front of it; frame edge cuts its upper-left corner",
+     "area_px": 221959,
+     "sharpness_lapvar": 2481.4
+    },
+    {
+     "id": "r1",
+     "polygon": [
+      [
+       650,
+       215
+      ],
+      [
+       842,
+       215
+      ],
+      [
+       815,
+       600
+      ],
+      [
+       795,
+       1045
+      ],
+      [
+       720,
+       1092
+      ],
+      [
+       620,
+       1128
+      ],
+      [
+       605,
+       900
+      ],
+      [
+       612,
+       700
+      ],
+      [
+       625,
+       555
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "row-0 stack right of f, in the same plane as f's front face; rows rise to the right (face recedes to the right)",
+     "area_px": 169138,
+     "sharpness_lapvar": 4677.5
+    },
+    {
+     "id": "r2",
+     "polygon": [
+      [
+       842,
+       215
+      ],
+      [
+       960,
+       215
+      ],
+      [
+       960,
+       930
+      ],
+      [
+       795,
+       1045
+      ],
+      [
+       815,
+       600
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "side",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "next row-0 stack, cut by the right frame edge",
+     "area_px": 110115,
+     "sharpness_lapvar": 4312.3
+    },
+    {
+     "id": "n1",
+     "polygon": [
+      [
+       0,
+       700
+      ],
+      [
+       18,
+       700
+      ],
+      [
+       25,
+       1050
+      ],
+      [
+       45,
+       1185
+      ],
+      [
+       0,
+       1190
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 1,
+     "top_visible": false,
+     "base_visible": true,
+     "clipped": "side",
+     "blurred": false,
+     "contents_note": "unknown",
+     "occluded": "right (by l)",
+     "face_view": "unknown",
+     "physical_stack_inferred": null,
+     "membership_uncertain": true,
+     "note": "another stack left of l, separated by a dark gap; may belong to the arrangement's third depth; cut by the frame",
+     "area_px": 12362,
+     "sharpness_lapvar": 2375.7
+    }
+   ],
+   "notes": "Oblique view of one face receding to the right, with a short stack (f) protruding one row in front and showing two faces. depth_row 0 = row of f/r1/r2, 1 = row of l/mb/rb (by base lines and by f's back-left base corner meeting l's base; bases measured with green-pixel profiles: f corner 1225, f_front 1205-1155, r1 1125-1045, r2 1005-950, l 1180-1115). Boundaries uncertain by +-15 px. Ink above the stacks in the background."
+  },
+  {
+   "id": "scan-ef823816-straight",
+   "source_path": "C:/Users/DELL/AppData/Local/Temp/claude/C--Users-DELL-Downloads-self-enhancing-agent-framework-egg-tray-counter-mobile/6b2bcba2-89c7-4eff-982d-2296e543e21d/scratchpad/replay-20261013/scans/ef823816-899d-4e97-9614-10f1ec47c25a/straight.jpg",
+   "source_sha256": "f5cef16f3d89c7b2d46e06ccb563a0a3e73908286828be4246e253b579166bbe",
+   "source_note": "R2 scans/ef823816-899d-4e97-9614-10f1ec47c25a straight (13 Oct 2026 upload, 1600 px); scratchpad copy",
+   "detections_path": "reports/field-scans-20261013/replay/ef823816-899d-4e97-9614-10f1ec47c25a.json#views.straight",
+   "width": 1200,
+   "height": 1600,
+   "label_scope": "none (scan without a count)",
+   "cases": [
+    "same_stack_several_views",
+    "short_stack_in_block",
+    "set_back_stack_different_depth",
+    "empty_cover_on_top",
+    "hazy_backlit",
+    "far_small_faces",
+    "block_against_walls"
+   ],
+   "frame_check": {
+    "stored_size": [
+     1200,
+     1600
+    ],
+    "exif_orientation": null,
+    "upright_size": [
+     1200,
+     1600
+    ],
+    "detection_file_size": [
+     1200,
+     1600
+    ],
+    "detection_file_size_matches": true,
+    "detection_coordinate_frame_field": "worker response (x,y = box centre)",
+    "n_detections": 60,
+    "detection_extent_xyxy": [
+     215.0,
+     666.0,
+     971.0,
+     1179.0
+    ],
+    "detections_within_upright_frame": true,
+    "detections_would_fit_swapped_frame": true,
+    "verdict": "same frame"
+   },
+   "detection_overlap_diagnostic": {
+    "detection_centres_in_target_polygons": 60,
+    "detection_centres_in_any_polygon": 60,
+    "n_detections": 60,
+    "meaning": "diagnostic only; detections did not shape polygons and are not counts"
+   },
+   "polygons": [
+    {
+     "id": "s1",
+     "polygon": [
+      [
+       212,
+       697
+      ],
+      [
+       362,
+       697
+      ],
+      [
+       386,
+       940
+      ],
+      [
+       410,
+       1186
+      ],
+      [
+       285,
+       1183
+      ],
+      [
+       248,
+       940
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "ef82:(0,0)",
+     "membership_uncertain": false,
+     "note": "left-most front stack; the block's left side is against the wall",
+     "area_px": 67098,
+     "sharpness_lapvar": 1948.8
+    },
+    {
+     "id": "s2",
+     "polygon": [
+      [
+       362,
+       697
+      ],
+      [
+       512,
+       697
+      ],
+      [
+       531,
+       940
+      ],
+      [
+       550,
+       1185
+      ],
+      [
+       410,
+       1186
+      ],
+      [
+       386,
+       940
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "ef82:(1,0)",
+     "membership_uncertain": false,
+     "note": "",
+     "area_px": 70837,
+     "sharpness_lapvar": 1767.9
+    },
+    {
+     "id": "s3",
+     "polygon": [
+      [
+       512,
+       697
+      ],
+      [
+       665,
+       697
+      ],
+      [
+       680,
+       940
+      ],
+      [
+       695,
+       1178
+      ],
+      [
+       550,
+       1185
+      ],
+      [
+       531,
+       940
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "ef82:(2,0)",
+     "membership_uncertain": false,
+     "note": "",
+     "area_px": 72253,
+     "sharpness_lapvar": 1180.1
+    },
+    {
+     "id": "s4",
+     "polygon": [
+      [
+       665,
+       697
+      ],
+      [
+       818,
+       697
+      ],
+      [
+       824,
+       940
+      ],
+      [
+       832,
+       1170
+      ],
+      [
+       695,
+       1178
+      ],
+      [
+       680,
+       940
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "ef82:(3,0)",
+     "membership_uncertain": false,
+     "note": "",
+     "area_px": 69008,
+     "sharpness_lapvar": 783.8
+    },
+    {
+     "id": "s5_front",
+     "polygon": [
+      [
+       822,
+       830
+      ],
+      [
+       930,
+       828
+      ],
+      [
+       965,
+       870
+      ],
+      [
+       970,
+       1000
+      ],
+      [
+       972,
+       1170
+      ],
+      [
+       832,
+       1170
+      ],
+      [
+       826,
+       940
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "ef82:(4,0)",
+     "membership_uncertain": false,
+     "note": "short front-right corner stack; eggs on its top tray seen from above (y ~830-890), no cover; its right end shows tray profiles edge-on",
+     "area_px": 47578,
+     "sharpness_lapvar": 991.4
+    },
+    {
+     "id": "s5_rear",
+     "polygon": [
+      [
+       818,
+       652
+      ],
+      [
+       935,
+       655
+      ],
+      [
+       938,
+       828
+      ],
+      [
+       822,
+       830
+      ]
+     ],
+     "role": "target",
+     "depth_row": 1,
+     "top_visible": true,
+     "base_visible": false,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "unknown",
+     "occluded": "below (by s5_front)",
+     "face_view": "front",
+     "physical_stack_inferred": "ef82:(4,1)",
+     "membership_uncertain": false,
+     "note": "stack behind the short corner stack, seen above it; washed out by back-light from the doorway",
+     "area_px": 20444,
+     "sharpness_lapvar": 668.3
+    }
+   ],
+   "notes": "Far, slightly elevated view of a block standing in a room corner (left wall touching the block). The top surface (y ~600-697) shows the top trays from above with posts and empty cups; it is not a face and has no polygon. Low contrast, soft, back-lit at the right; rows are resolvable. Detection frame: views.straight.image = 1200x1600 = this file."
+  },
+  {
+   "id": "scan-ef823816-right",
+   "source_path": "C:/Users/DELL/AppData/Local/Temp/claude/C--Users-DELL-Downloads-self-enhancing-agent-framework-egg-tray-counter-mobile/6b2bcba2-89c7-4eff-982d-2296e543e21d/scratchpad/replay-20261013/scans/ef823816-899d-4e97-9614-10f1ec47c25a/right.jpg",
+   "source_sha256": "e932880e6c70dbdf7059e1cbb7abf61fcc3a5d3f2a39ad877b3e642fb64f3869",
+   "source_note": "R2 scans/ef823816-899d-4e97-9614-10f1ec47c25a right (13 Oct 2026 upload); scratchpad copy",
+   "detections_path": "reports/field-scans-20261013/replay/ef823816-899d-4e97-9614-10f1ec47c25a.json#views.right",
+   "width": 1200,
+   "height": 1600,
+   "label_scope": "none (scan without a count)",
+   "cases": [
+    "same_stack_several_views",
+    "duplicate_side_photo",
+    "short_stack_in_block",
+    "set_back_stack_different_depth",
+    "empty_cover_on_top"
+   ],
+   "frame_check": {
+    "stored_size": [
+     1200,
+     1600
+    ],
+    "exif_orientation": null,
+    "upright_size": [
+     1200,
+     1600
+    ],
+    "detection_file_size": [
+     1200,
+     1600
+    ],
+    "detection_file_size_matches": true,
+    "detection_coordinate_frame_field": "worker response (x,y = box centre)",
+    "n_detections": 85,
+    "detection_extent_xyxy": [
+     92.0,
+     478.0,
+     1137.0,
+     1323.0
+    ],
+    "detections_within_upright_frame": true,
+    "detections_would_fit_swapped_frame": false,
+    "verdict": "same frame"
+   },
+   "detection_overlap_diagnostic": {
+    "detection_centres_in_target_polygons": 85,
+    "detection_centres_in_any_polygon": 85,
+    "n_detections": 85,
+    "meaning": "diagnostic only; detections did not shape polygons and are not counts"
+   },
+   "polygons": [
+    {
+     "id": "r_short",
+     "polygon": [
+      [
+       92,
+       830
+      ],
+      [
+       200,
+       800
+      ],
+      [
+       330,
+       775
+      ],
+      [
+       325,
+       840
+      ],
+      [
+       333,
+       1060
+      ],
+      [
+       342,
+       1300
+      ],
+      [
+       150,
+       1300
+      ],
+      [
+       135,
+       1220
+      ],
+      [
+       88,
+       900
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "side",
+     "physical_stack_inferred": "ef82:(4,0)",
+     "membership_uncertain": false,
+     "note": "right side of the short front-right corner stack (front end at the viewer's left); eggs on its top tray seen from above (y ~775-835), no cover",
+     "area_px": 110282,
+     "sharpness_lapvar": 15425.6
+    },
+    {
+     "id": "r_setback",
+     "polygon": [
+      [
+       150,
+       452
+      ],
+      [
+       290,
+       452
+      ],
+      [
+       296,
+       620
+      ],
+      [
+       330,
+       775
+      ],
+      [
+       200,
+       800
+      ],
+      [
+       185,
+       806
+      ],
+      [
+       172,
+       620
+      ]
+     ],
+     "role": "target",
+     "depth_row": 1,
+     "top_visible": true,
+     "base_visible": false,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "below (by r_short)",
+     "face_view": "side",
+     "physical_stack_inferred": "ef82:(3,0)",
+     "membership_uncertain": false,
+     "note": "right side of the front-row stack (3,0), one stack width back, seen above the short corner stack; in shadow",
+     "area_px": 45270,
+     "sharpness_lapvar": 6917.2
+    },
+    {
+     "id": "r2",
+     "polygon": [
+      [
+       292,
+       510
+      ],
+      [
+       562,
+       510
+      ],
+      [
+       566,
+       900
+      ],
+      [
+       570,
+       1315
+      ],
+      [
+       342,
+       1302
+      ],
+      [
+       333,
+       1060
+      ],
+      [
+       325,
+       840
+      ],
+      [
+       296,
+       620
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "side",
+     "physical_stack_inferred": "ef82:(4,1)",
+     "membership_uncertain": false,
+     "note": "",
+     "area_px": 195047,
+     "sharpness_lapvar": 20834.2
+    },
+    {
+     "id": "r3",
+     "polygon": [
+      [
+       562,
+       510
+      ],
+      [
+       840,
+       512
+      ],
+      [
+       822,
+       900
+      ],
+      [
+       800,
+       1325
+      ],
+      [
+       570,
+       1315
+      ],
+      [
+       566,
+       900
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "side",
+     "physical_stack_inferred": "ef82:(4,2)",
+     "membership_uncertain": false,
+     "note": "",
+     "area_px": 205975,
+     "sharpness_lapvar": 20865.3
+    },
+    {
+     "id": "r4",
+     "polygon": [
+      [
+       840,
+       512
+      ],
+      [
+       1142,
+       505
+      ],
+      [
+       1090,
+       900
+      ],
+      [
+       1038,
+       1325
+      ],
+      [
+       800,
+       1325
+      ],
+      [
+       822,
+       900
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "side",
+     "physical_stack_inferred": "ef82:(4,3)",
+     "membership_uncertain": false,
+     "note": "rear stack of the right face; the back wall is just beyond it",
+     "area_px": 218980,
+     "sharpness_lapvar": 18473.9
+    }
+   ],
+   "notes": "Close view of the block's right face, camera pitched down (verticals converge toward the base: right edge x 1142 at the top, 1038 at the base). Top surface y ~440-510 shows posts and empty cups. Bases measured: short 1300, r2 1315, r3 1330, r4 1340. Detection frame: views.right.image = 1200x1600."
+  },
+  {
+   "id": "scan-ef823816-left",
+   "source_path": "C:/Users/DELL/AppData/Local/Temp/claude/C--Users-DELL-Downloads-self-enhancing-agent-framework-egg-tray-counter-mobile/6b2bcba2-89c7-4eff-982d-2296e543e21d/scratchpad/replay-20261013/scans/ef823816-899d-4e97-9614-10f1ec47c25a/left.jpg",
+   "source_sha256": "0f16e27a7b269aa2d4d8980bed78f836615ff6eaa7504decf374b926943a8612",
+   "source_note": "R2 scans/ef823816-899d-4e97-9614-10f1ec47c25a left (13 Oct 2026 upload); scratchpad copy",
+   "detections_path": "reports/field-scans-20261013/replay/ef823816-899d-4e97-9614-10f1ec47c25a.json#views.left",
+   "width": 1200,
+   "height": 1600,
+   "label_scope": "none (scan without a count)",
+   "cases": [
+    "duplicate_side_photo",
+    "same_stack_several_views",
+    "short_stack_in_block",
+    "set_back_stack_different_depth",
+    "far_small_faces"
+   ],
+   "frame_check": {
+    "stored_size": [
+     1200,
+     1600
+    ],
+    "exif_orientation": null,
+    "upright_size": [
+     1200,
+     1600
+    ],
+    "detection_file_size": [
+     1200,
+     1600
+    ],
+    "detection_file_size_matches": true,
+    "detection_coordinate_frame_field": "worker response (x,y = box centre)",
+    "n_detections": 63,
+    "detection_extent_xyxy": [
+     292.0,
+     664.0,
+     1006.0,
+     1269.0
+    ],
+    "detections_within_upright_frame": true,
+    "detections_would_fit_swapped_frame": false,
+    "verdict": "same frame"
+   },
+   "detection_overlap_diagnostic": {
+    "detection_centres_in_target_polygons": 63,
+    "detection_centres_in_any_polygon": 63,
+    "n_detections": 63,
+    "meaning": "diagnostic only; detections did not shape polygons and are not counts"
+   },
+   "polygons": [
+    {
+     "id": "l_short",
+     "polygon": [
+      [
+       290,
+       890
+      ],
+      [
+       318,
+       888
+      ],
+      [
+       370,
+       885
+      ],
+      [
+       452,
+       878
+      ],
+      [
+       455,
+       935
+      ],
+      [
+       458,
+       1100
+      ],
+      [
+       461,
+       1268
+      ],
+      [
+       320,
+       1270
+      ],
+      [
+       310,
+       1150
+      ],
+      [
+       288,
+       960
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "side",
+     "physical_stack_inferred": "ef82:(4,0)",
+     "membership_uncertain": false,
+     "note": "the same short corner stack as RIGHT r_short, from further away; eggs on its top tray",
+     "area_px": 59792,
+     "sharpness_lapvar": 12614.2
+    },
+    {
+     "id": "l_setback",
+     "polygon": [
+      [
+       303,
+       650
+      ],
+      [
+       450,
+       650
+      ],
+      [
+       452,
+       878
+      ],
+      [
+       370,
+       885
+      ],
+      [
+       318,
+       888
+      ],
+      [
+       310,
+       760
+      ]
+     ],
+     "role": "target",
+     "depth_row": 1,
+     "top_visible": true,
+     "base_visible": false,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "below (by l_short)",
+     "face_view": "side",
+     "physical_stack_inferred": "ef82:(3,0)",
+     "membership_uncertain": false,
+     "note": "= RIGHT r_setback",
+     "area_px": 32830,
+     "sharpness_lapvar": 3364.9
+    },
+    {
+     "id": "l2",
+     "polygon": [
+      [
+       450,
+       695
+      ],
+      [
+       624,
+       695
+      ],
+      [
+       630,
+       980
+      ],
+      [
+       634,
+       1268
+      ],
+      [
+       461,
+       1268
+      ],
+      [
+       458,
+       1100
+      ],
+      [
+       455,
+       935
+      ],
+      [
+       452,
+       878
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "side",
+     "physical_stack_inferred": "ef82:(4,1)",
+     "membership_uncertain": false,
+     "note": "= RIGHT r2",
+     "area_px": 99810,
+     "sharpness_lapvar": 13379.2
+    },
+    {
+     "id": "l3",
+     "polygon": [
+      [
+       624,
+       692
+      ],
+      [
+       800,
+       690
+      ],
+      [
+       808,
+       980
+      ],
+      [
+       814,
+       1246
+      ],
+      [
+       634,
+       1262
+      ],
+      [
+       630,
+       980
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "side",
+     "physical_stack_inferred": "ef82:(4,2)",
+     "membership_uncertain": false,
+     "note": "= RIGHT r3",
+     "area_px": 100246,
+     "sharpness_lapvar": 14400.0
+    },
+    {
+     "id": "l4",
+     "polygon": [
+      [
+       800,
+       690
+      ],
+      [
+       1003,
+       688
+      ],
+      [
+       995,
+       960
+      ],
+      [
+       978,
+       1245
+      ],
+      [
+       814,
+       1250
+      ],
+      [
+       808,
+       980
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "side",
+     "physical_stack_inferred": "ef82:(4,3)",
+     "membership_uncertain": false,
+     "note": "= RIGHT r4",
+     "area_px": 103428,
+     "sharpness_lapvar": 15577.4
+    }
+   ],
+   "notes": "Uploaded in the LEFT slot but shows the block's RIGHT face (audit: 477 SIFT inliers LEFT vs RIGHT); the block's real left face is against the wall and cannot be photographed. Polygons are the same physical stacks as scan-ef823816-right. Bases measured: short 1270, l2 1268, l3/l4 ~1245. Detection frame: views.left.image = 1200x1600."
+  },
+  {
+   "id": "scan-30aca6a1-straight",
+   "source_path": "C:/Users/DELL/AppData/Local/Temp/claude/C--Users-DELL-Downloads-self-enhancing-agent-framework-egg-tray-counter-mobile/6b2bcba2-89c7-4eff-982d-2296e543e21d/scratchpad/replay-20261013/scans/30aca6a1-56da-4564-ac09-93de66c4404d/straight.jpg",
+   "source_sha256": "ea782d44994c56a2ac7ae92b52893249d435391b436c3824e5918c536f6e6649",
+   "source_note": "R2 scans/30aca6a1-56da-4564-ac09-93de66c4404d straight (13 Oct 2026 upload, 1600 px wide-angle); scratchpad copy",
+   "detections_path": "reports/field-scans-20261013/replay/30aca6a1-56da-4564-ac09-93de66c4404d.json#views.straight",
+   "width": 1600,
+   "height": 902,
+   "label_scope": "none (scan without a count)",
+   "cases": [
+    "neighbour_outside_target",
+    "same_stack_several_views",
+    "set_back_stack_different_depth",
+    "nested_empties_neighbour",
+    "far_small_faces"
+   ],
+   "frame_check": {
+    "stored_size": [
+     1600,
+     902
+    ],
+    "exif_orientation": null,
+    "upright_size": [
+     1600,
+     902
+    ],
+    "detection_file_size": [
+     1600,
+     902
+    ],
+    "detection_file_size_matches": true,
+    "detection_coordinate_frame_field": "worker response (x,y = box centre)",
+    "n_detections": 62,
+    "detection_extent_xyxy": [
+     471.0,
+     139.0,
+     1267.0,
+     665.0
+    ],
+    "detections_within_upright_frame": true,
+    "detections_would_fit_swapped_frame": false,
+    "verdict": "same frame"
+   },
+   "detection_overlap_diagnostic": {
+    "detection_centres_in_target_polygons": 61,
+    "detection_centres_in_any_polygon": 62,
+    "n_detections": 62,
+    "meaning": "diagnostic only; detections did not shape polygons and are not counts"
+   },
+   "polygons": [
+    {
+     "id": "s1",
+     "polygon": [
+      [
+       470,
+       143
+      ],
+      [
+       656,
+       141
+      ],
+      [
+       662,
+       400
+      ],
+      [
+       668,
+       645
+      ],
+      [
+       505,
+       642
+      ],
+      [
+       488,
+       400
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "9b4c:(0,0)",
+     "membership_uncertain": false,
+     "note": "= 9b4c783e STRAIGHT s1 (inferred)",
+     "area_px": 87464,
+     "sharpness_lapvar": 24332.7
+    },
+    {
+     "id": "s2",
+     "polygon": [
+      [
+       656,
+       141
+      ],
+      [
+       852,
+       143
+      ],
+      [
+       848,
+       400
+      ],
+      [
+       842,
+       655
+      ],
+      [
+       668,
+       648
+      ],
+      [
+       662,
+       400
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "9b4c:(1,0)",
+     "membership_uncertain": false,
+     "note": "= 9b4c783e STRAIGHT s2",
+     "area_px": 94547,
+     "sharpness_lapvar": 24730.0
+    },
+    {
+     "id": "s3",
+     "polygon": [
+      [
+       857,
+       170
+      ],
+      [
+       1055,
+       175
+      ],
+      [
+       1035,
+       420
+      ],
+      [
+       1015,
+       660
+      ],
+      [
+       840,
+       660
+      ],
+      [
+       848,
+       400
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "9b4c:(2,0)",
+     "membership_uncertain": false,
+     "note": "= 9b4c783e STRAIGHT s3; eggs on the top tray",
+     "area_px": 91290,
+     "sharpness_lapvar": 24202.2
+    },
+    {
+     "id": "s4",
+     "polygon": [
+      [
+       1055,
+       198
+      ],
+      [
+       1172,
+       202
+      ],
+      [
+       1150,
+       400
+      ],
+      [
+       1137,
+       598
+      ],
+      [
+       1020,
+       598
+      ],
+      [
+       1035,
+       420
+      ]
+     ],
+     "role": "target",
+     "depth_row": 1,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "left (by s3)",
+     "face_view": "front",
+     "physical_stack_inferred": "9b4c:(3,1)",
+     "membership_uncertain": true,
+     "note": "= 9b4c783e STRAIGHT s4, the set-back column (base y ~598 vs 642-660 for the front row)",
+     "area_px": 45860,
+     "sharpness_lapvar": 8594.3
+    },
+    {
+     "id": "n_far",
+     "polygon": [
+      [
+       1150,
+       297
+      ],
+      [
+       1272,
+       297
+      ],
+      [
+       1262,
+       400
+      ],
+      [
+       1255,
+       500
+      ],
+      [
+       1145,
+       500
+      ],
+      [
+       1150,
+       400
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 2,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "left (by s4)",
+     "face_view": "front",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "separate stack further back to the right (base y ~500, eggs ~16 px vs ~28 px on s1); right of the block's right edge, so outside it",
+     "area_px": 23151,
+     "sharpness_lapvar": 11146.6
+    },
+    {
+     "id": "n_empty",
+     "polygon": [
+      [
+       1420,
+       283
+      ],
+      [
+       1600,
+       272
+      ],
+      [
+       1600,
+       512
+      ],
+      [
+       1290,
+       512
+      ],
+      [
+       1290,
+       475
+      ],
+      [
+       1330,
+       445
+      ],
+      [
+       1380,
+       370
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 3,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "side",
+     "blurred": false,
+     "contents_note": "nested empties",
+     "occluded": "none",
+     "face_view": "unknown",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "leaning pile of nested empty green trays with a lower pile in front and white pulp trays on top; cut by the right frame edge",
+     "area_px": 56935,
+     "sharpness_lapvar": 11123.0
+    }
+   ],
+   "notes": "The 9b4c783e block shot from far with the ultra-wide lens (README 13 Oct: same block). Faces are small (~190 px wide). Detection frame: views.straight.image = 1600x902 = this file."
+  },
+  {
+   "id": "labelled-img-06",
+   "source_path": "datasets/field-2026-10/labelled-20261007/originals/img-06.jpeg",
+   "source_sha256": "f7756b24b59c1e0a2ffe965787f05d0f1b12b998d2424c1be6885c057fb997f7",
+   "source_note": null,
+   "detections_path": "reports/field-labelled-20261007/raw/batch-02.json#views.straight",
+   "width": 960,
+   "height": 1280,
+   "label_scope": "loose trays inside a drawn polygon; stacks at the top edge outside (audit: label not usable)",
+   "cases": [
+    "short_stacks_1_2_trays",
+    "neighbour_outside_target",
+    "handwriting_over_trays"
+   ],
+   "frame_check": {
+    "stored_size": [
+     960,
+     1280
+    ],
+    "exif_orientation": null,
+    "upright_size": [
+     960,
+     1280
+    ],
+    "detection_file_size": null,
+    "detection_file_size_matches": null,
+    "detection_coordinate_frame_field": "worker response (x,y = box centre)",
+    "n_detections": 4,
+    "detection_extent_xyxy": [
+     41.0,
+     175.0,
+     954.0,
+     791.0
+    ],
+    "detections_within_upright_frame": true,
+    "detections_would_fit_swapped_frame": true,
+    "verdict": "same frame"
+   },
+   "detection_overlap_diagnostic": {
+    "detection_centres_in_target_polygons": 4,
+    "detection_centres_in_any_polygon": 4,
+    "n_detections": 4,
+    "meaning": "diagnostic only; detections did not shape polygons and are not counts"
+   },
+   "polygons": [
+    {
+     "id": "t_bl",
+     "polygon": [
+      [
+       45,
+       315
+      ],
+      [
+       190,
+       272
+      ],
+      [
+       320,
+       246
+      ],
+      [
+       392,
+       268
+      ],
+      [
+       408,
+       375
+      ],
+      [
+       330,
+       405
+      ],
+      [
+       200,
+       430
+      ],
+      [
+       100,
+       465
+      ],
+      [
+       60,
+       480
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "front edge (by t_fl eggs)",
+     "face_view": "oblique_top",
+     "physical_stack_inferred": "img06:back-left tray",
+     "membership_uncertain": false,
+     "note": "single loose tray (dark grey), back-left; outline = tray top + near side",
+     "area_px": 54432,
+     "sharpness_lapvar": 2559.3
+    },
+    {
+     "id": "t_fl",
+     "polygon": [
+      [
+       45,
+       500
+      ],
+      [
+       150,
+       470
+      ],
+      [
+       300,
+       425
+      ],
+      [
+       440,
+       400
+      ],
+      [
+       480,
+       445
+      ],
+      [
+       530,
+       560
+      ],
+      [
+       560,
+       650
+      ],
+      [
+       545,
+       705
+      ],
+      [
+       420,
+       745
+      ],
+      [
+       250,
+       800
+      ],
+      [
+       130,
+       840
+      ],
+      [
+       70,
+       860
+      ],
+      [
+       45,
+       760
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "oblique_top",
+     "physical_stack_inferred": "img06:front-left tray",
+     "membership_uncertain": false,
+     "note": "single loose tray (teal), front-left; its near side with posts is visible along the bottom",
+     "area_px": 165788,
+     "sharpness_lapvar": 3277.9
+    },
+    {
+     "id": "t_br",
+     "polygon": [
+      [
+       415,
+       240
+      ],
+      [
+       560,
+       190
+      ],
+      [
+       690,
+       158
+      ],
+      [
+       740,
+       200
+      ],
+      [
+       800,
+       262
+      ],
+      [
+       790,
+       290
+      ],
+      [
+       700,
+       305
+      ],
+      [
+       560,
+       345
+      ],
+      [
+       450,
+       375
+      ],
+      [
+       415,
+       300
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "front edge (by t_fr eggs)",
+     "face_view": "oblique_top",
+     "physical_stack_inferred": "img06:back-right tray",
+     "membership_uncertain": false,
+     "note": "single loose tray (dark green), back-right",
+     "area_px": 49842,
+     "sharpness_lapvar": 2310.2
+    },
+    {
+     "id": "t_fr",
+     "polygon": [
+      [
+       445,
+       385
+      ],
+      [
+       560,
+       345
+      ],
+      [
+       700,
+       305
+      ],
+      [
+       790,
+       290
+      ],
+      [
+       880,
+       330
+      ],
+      [
+       960,
+       370
+      ],
+      [
+       960,
+       560
+      ],
+      [
+       800,
+       610
+      ],
+      [
+       650,
+       668
+      ],
+      [
+       565,
+       700
+      ],
+      [
+       540,
+       600
+      ],
+      [
+       480,
+       470
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "side",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "oblique_top",
+     "physical_stack_inferred": "img06:front-right tray",
+     "membership_uncertain": false,
+     "note": "single loose tray (red), front-right; continues past the right frame edge",
+     "area_px": 140752,
+     "sharpness_lapvar": 2466.5
+    },
+    {
+     "id": "n1",
+     "polygon": [
+      [
+       245,
+       0
+      ],
+      [
+       565,
+       0
+      ],
+      [
+       565,
+       60
+      ],
+      [
+       560,
+       170
+      ],
+      [
+       505,
+       215
+      ],
+      [
+       300,
+       245
+      ],
+      [
+       275,
+       200
+      ],
+      [
+       255,
+       60
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 1,
+     "top_visible": false,
+     "base_visible": true,
+     "clipped": "top",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "oblique_side",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "stack of light-green trays with eggs behind the loose trays, outside the drawn polygon; cut by the top edge",
+     "area_px": 66775,
+     "sharpness_lapvar": 2181.0
+    },
+    {
+     "id": "n2",
+     "polygon": [
+      [
+       562,
+       45
+      ],
+      [
+       700,
+       28
+      ],
+      [
+       835,
+       55
+      ],
+      [
+       842,
+       110
+      ],
+      [
+       700,
+       145
+      ],
+      [
+       590,
+       152
+      ],
+      [
+       565,
+       120
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 1,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "mixed",
+     "occluded": "none",
+     "face_view": "oblique_top",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "light-green tray, mostly empty cups with a few eggs, behind the loose trays",
+     "area_px": 26870,
+     "sharpness_lapvar": 2201.5
+    },
+    {
+     "id": "n3",
+     "polygon": [
+      [
+       180,
+       0
+      ],
+      [
+       245,
+       0
+      ],
+      [
+       255,
+       60
+      ],
+      [
+       262,
+       140
+      ],
+      [
+       215,
+       148
+      ],
+      [
+       195,
+       60
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 1,
+     "top_visible": false,
+     "base_visible": true,
+     "clipped": "top",
+     "blurred": false,
+     "contents_note": "unknown",
+     "occluded": "none",
+     "face_view": "unknown",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "dark tray stack at the top-left edge",
+     "area_px": 8298,
+     "sharpness_lapvar": 4872.1
+    },
+    {
+     "id": "n4",
+     "polygon": [
+      [
+       565,
+       0
+      ],
+      [
+       960,
+       0
+      ],
+      [
+       960,
+       95
+      ],
+      [
+       900,
+       95
+      ],
+      [
+       850,
+       55
+      ],
+      [
+       700,
+       28
+      ],
+      [
+       565,
+       42
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 2,
+     "top_visible": false,
+     "base_visible": true,
+     "clipped": "top+side",
+     "blurred": false,
+     "contents_note": "unknown",
+     "occluded": "none",
+     "face_view": "unknown",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "dark green trays (appear empty) at the top-right, behind n2",
+     "area_px": 20400,
+     "sharpness_lapvar": 1896.9
+    }
+   ],
+   "notes": "Four loose single trays on the floor, seen obliquely from above; every target 'stack' is one tray, so each polygon is the tray outline (top + near side) rather than a vertical face. The drawn blue polygon and the handwritten digit are ink, not geometry. No EXIF."
+  },
+  {
+   "id": "labelled-img-35",
+   "source_path": "datasets/field-2026-10/labelled-20261007/originals/img-35.jpeg",
+   "source_sha256": "18d82ecebe1d8ad79cceb4225043ab4e18258dac7eab1de2c56774beb423c9c5",
+   "source_note": null,
+   "detections_path": "reports/field-labelled-20261007/raw/batch-12.json#views.right",
+   "width": 1280,
+   "height": 580,
+   "label_scope": "single tray (audit tier A)",
+   "cases": [
+    "short_stacks_1_2_trays",
+    "single_stack",
+    "neighbour_outside_target"
+   ],
+   "frame_check": {
+    "stored_size": [
+     1280,
+     580
+    ],
+    "exif_orientation": null,
+    "upright_size": [
+     1280,
+     580
+    ],
+    "detection_file_size": null,
+    "detection_file_size_matches": null,
+    "detection_coordinate_frame_field": "worker response (x,y = box centre)",
+    "n_detections": 1,
+    "detection_extent_xyxy": [
+     229.0,
+     117.0,
+     858.0,
+     310.0
+    ],
+    "detections_within_upright_frame": true,
+    "detections_would_fit_swapped_frame": false,
+    "verdict": "same frame"
+   },
+   "detection_overlap_diagnostic": {
+    "detection_centres_in_target_polygons": 1,
+    "detection_centres_in_any_polygon": 1,
+    "n_detections": 1,
+    "meaning": "diagnostic only; detections did not shape polygons and are not counts"
+   },
+   "polygons": [
+    {
+     "id": "t1",
+     "polygon": [
+      [
+       285,
+       122
+      ],
+      [
+       600,
+       118
+      ],
+      [
+       840,
+       120
+      ],
+      [
+       858,
+       190
+      ],
+      [
+       872,
+       288
+      ],
+      [
+       812,
+       318
+      ],
+      [
+       650,
+       312
+      ],
+      [
+       420,
+       312
+      ],
+      [
+       300,
+       312
+      ],
+      [
+       232,
+       288
+      ],
+      [
+       255,
+       195
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "side",
+     "physical_stack_inferred": "img35:tray",
+     "membership_uncertain": false,
+     "note": "one filled tray on the floor, low side view",
+     "area_px": 116004,
+     "sharpness_lapvar": 4202.0
+    },
+    {
+     "id": "n1",
+     "polygon": [
+      [
+       0,
+       0
+      ],
+      [
+       45,
+       0
+      ],
+      [
+       45,
+       70
+      ],
+      [
+       0,
+       70
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 0,
+     "top_visible": false,
+     "base_visible": false,
+     "clipped": "top+side",
+     "blurred": true,
+     "contents_note": "unknown",
+     "occluded": "none",
+     "face_view": "unknown",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "out-of-focus green trays in the background at the top-left corner",
+     "area_px": 3150,
+     "sharpness_lapvar": 957.4
+    }
+   ],
+   "notes": "Low camera, one tray. Ink below the tray. No EXIF."
+  },
+  {
+   "id": "labelled-img-39",
+   "source_path": "datasets/field-2026-10/labelled-20261007/originals/img-39.jpeg",
+   "source_sha256": "2fba068084e12d457df761cb58ba4ef204852f4f973f5a23c63a679d7c608b6e",
+   "source_note": null,
+   "detections_path": "reports/field-labelled-20261007/raw/batch-13.json#views.straight",
+   "width": 582,
+   "height": 1280,
+   "label_scope": "two trays top-down (audit tier A)",
+   "cases": [
+    "short_stacks_1_2_trays",
+    "top_down_view",
+    "clipped_top",
+    "handwriting_in_frame"
+   ],
+   "frame_check": {
+    "stored_size": [
+     582,
+     1280
+    ],
+    "exif_orientation": null,
+    "upright_size": [
+     582,
+     1280
+    ],
+    "detection_file_size": null,
+    "detection_file_size_matches": null,
+    "detection_coordinate_frame_field": "worker response (x,y = box centre)",
+    "n_detections": 5,
+    "detection_extent_xyxy": [
+     0.0,
+     0.0,
+     552.0,
+     874.0
+    ],
+    "detections_within_upright_frame": true,
+    "detections_would_fit_swapped_frame": false,
+    "verdict": "same frame"
+   },
+   "detection_overlap_diagnostic": {
+    "detection_centres_in_target_polygons": 3,
+    "detection_centres_in_any_polygon": 5,
+    "n_detections": 5,
+    "meaning": "diagnostic only; detections did not shape polygons and are not counts"
+   },
+   "polygons": [
+    {
+     "id": "t_upper",
+     "polygon": [
+      [
+       0,
+       0
+      ],
+      [
+       478,
+       0
+      ],
+      [
+       482,
+       60
+      ],
+      [
+       490,
+       250
+      ],
+      [
+       478,
+       330
+      ],
+      [
+       300,
+       345
+      ],
+      [
+       60,
+       352
+      ],
+      [
+       0,
+       340
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": false,
+     "clipped": "top+side",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "top",
+     "physical_stack_inferred": "img39:upper tray",
+     "membership_uncertain": false,
+     "note": "tray seen from above, cut by the top and left frame edges",
+     "area_px": 166595,
+     "sharpness_lapvar": 3256.2
+    },
+    {
+     "id": "t_lower",
+     "polygon": [
+      [
+       40,
+       365
+      ],
+      [
+       300,
+       372
+      ],
+      [
+       530,
+       368
+      ],
+      [
+       560,
+       400
+      ],
+      [
+       560,
+       830
+      ],
+      [
+       300,
+       840
+      ],
+      [
+       30,
+       845
+      ],
+      [
+       22,
+       700
+      ],
+      [
+       28,
+       400
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "top",
+     "physical_stack_inferred": "img39:lower tray",
+     "membership_uncertain": false,
+     "note": "tray seen from above, fully in frame",
+     "area_px": 250435,
+     "sharpness_lapvar": 4485.0
+    },
+    {
+     "id": "n1",
+     "polygon": [
+      [
+       0,
+       345
+      ],
+      [
+       30,
+       350
+      ],
+      [
+       38,
+       600
+      ],
+      [
+       32,
+       860
+      ],
+      [
+       0,
+       860
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 0,
+     "top_visible": false,
+     "base_visible": false,
+     "clipped": "side",
+     "blurred": false,
+     "contents_note": "unknown",
+     "occluded": "none",
+     "face_view": "unknown",
+     "physical_stack_inferred": null,
+     "membership_uncertain": true,
+     "note": "green tray edge at the left frame edge; relation to the two trays unknown",
+     "area_px": 17675,
+     "sharpness_lapvar": 2902.6
+    }
+   ],
+   "notes": "Top-down close view of two trays; the person's shirt and the ink are below them. No EXIF."
+  },
+  {
+   "id": "labelled-img-41",
+   "source_path": "datasets/field-2026-10/labelled-20261007/originals/img-41.jpeg",
+   "source_sha256": "038d6c3a08d6db83edd24a02d9b7cdcaf36ec3a838d1cfa45183653a1754f292",
+   "source_note": null,
+   "detections_path": "reports/field-labelled-20261007/raw/batch-14.json#views.right",
+   "width": 1280,
+   "height": 960,
+   "label_scope": "front pair of stacks + back-left group of 3 stacks (audit: label not usable, scope unclear)",
+   "cases": [
+    "blurred_target_stacks",
+    "overlapping_stacks_different_depths",
+    "clipped_side",
+    "duplicate_side_photo (= R2 f81c04d7 RIGHT)",
+    "handwriting_in_frame"
+   ],
+   "frame_check": {
+    "stored_size": [
+     1280,
+     960
+    ],
+    "exif_orientation": null,
+    "upright_size": [
+     1280,
+     960
+    ],
+    "detection_file_size": null,
+    "detection_file_size_matches": null,
+    "detection_coordinate_frame_field": "worker response (x,y = box centre)",
+    "n_detections": 49,
+    "detection_extent_xyxy": [
+     156.0,
+     163.0,
+     928.0,
+     869.0
+    ],
+    "detections_within_upright_frame": true,
+    "detections_would_fit_swapped_frame": true,
+    "verdict": "same frame"
+   },
+   "detection_overlap_diagnostic": {
+    "detection_centres_in_target_polygons": 49,
+    "detection_centres_in_any_polygon": 49,
+    "n_detections": 49,
+    "meaning": "diagnostic only; detections did not shape polygons and are not counts"
+   },
+   "polygons": [
+    {
+     "id": "fL",
+     "polygon": [
+      [
+       495,
+       195
+      ],
+      [
+       700,
+       192
+      ],
+      [
+       698,
+       500
+      ],
+      [
+       690,
+       870
+      ],
+      [
+       505,
+       872
+      ],
+      [
+       500,
+       500
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "img41:front-left",
+     "membership_uncertain": false,
+     "note": "front pair, left stack; eggs on the top tray; slightly soft",
+     "area_px": 132807,
+     "sharpness_lapvar": 2295.1
+    },
+    {
+     "id": "fR",
+     "polygon": [
+      [
+       700,
+       192
+      ],
+      [
+       932,
+       198
+      ],
+      [
+       920,
+       310
+      ],
+      [
+       905,
+       500
+      ],
+      [
+       892,
+       560
+      ],
+      [
+       878,
+       870
+      ],
+      [
+       690,
+       870
+      ],
+      [
+       698,
+       500
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "img41:front-right",
+     "membership_uncertain": false,
+     "note": "front pair, right stack; its right edge shows tray ends (right side face, a few px wide); base ~878 measured",
+     "area_px": 138171,
+     "sharpness_lapvar": 2960.1
+    },
+    {
+     "id": "b1",
+     "polygon": [
+      [
+       0,
+       165
+      ],
+      [
+       150,
+       160
+      ],
+      [
+       165,
+       300
+      ],
+      [
+       170,
+       500
+      ],
+      [
+       168,
+       668
+      ],
+      [
+       0,
+       672
+      ]
+     ],
+     "role": "target",
+     "depth_row": 1,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "side",
+     "blurred": true,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "img41:back-1",
+     "membership_uncertain": false,
+     "note": "back group, left stack, cut by the left frame edge; out of focus by eye but its Laplacian variance stays fairly high because of the bright stepped tray ends; base ~670 measured (closer than b2/b3); its right side shows as stepped tray ends at x ~120-170",
+     "area_px": 83903,
+     "sharpness_lapvar": 1729.4
+    },
+    {
+     "id": "b2",
+     "polygon": [
+      [
+       150,
+       148
+      ],
+      [
+       300,
+       145
+      ],
+      [
+       305,
+       400
+      ],
+      [
+       300,
+       640
+      ],
+      [
+       168,
+       640
+      ],
+      [
+       165,
+       300
+      ]
+     ],
+     "role": "target",
+     "depth_row": 2,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": true,
+     "contents_note": "unknown",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "img41:back-2",
+     "membership_uncertain": false,
+     "note": "back group, middle stack, in shadow; out of focus; base ~640",
+     "area_px": 68512,
+     "sharpness_lapvar": 272.2
+    },
+    {
+     "id": "b3",
+     "polygon": [
+      [
+       300,
+       160
+      ],
+      [
+       450,
+       165
+      ],
+      [
+       455,
+       400
+      ],
+      [
+       452,
+       628
+      ],
+      [
+       300,
+       630
+      ],
+      [
+       305,
+       400
+      ]
+     ],
+     "role": "target",
+     "depth_row": 2,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": true,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "img41:back-3",
+     "membership_uncertain": false,
+     "note": "back group, right stack; out of focus; base ~628",
+     "area_px": 70188,
+     "sharpness_lapvar": 294.9
+    }
+   ],
+   "notes": "The back group is defocused (depth of field), the front pair is in moderate focus. Bases measured with green-pixel profiles: front 875-878, b1 675, b2 640, b3 628. Whether the back group belongs to the label's block is the audit's reading (scope 'none'); it is tagged target here. No EXIF."
+  },
+  {
+   "id": "labelled-img-47",
+   "source_path": "datasets/field-2026-10/labelled-20261007/originals/img-47.jpeg",
+   "source_sha256": "bd1a37426ec1dbcfa4a8d500eff952ca9d072aa1a383bb3936d933e5e9d346ca",
+   "source_note": null,
+   "detections_path": "reports/field-labelled-20261007/raw/batch-16.json#views.right",
+   "width": 1280,
+   "height": 960,
+   "label_scope": "single stack of filled trays; empty stacks behind (audit tier A)",
+   "cases": [
+    "single_stack",
+    "short_stack",
+    "neighbour_outside_target",
+    "nested_empties_neighbour",
+    "blurred_neighbours",
+    "handwriting_in_frame"
+   ],
+   "frame_check": {
+    "stored_size": [
+     1280,
+     960
+    ],
+    "exif_orientation": null,
+    "upright_size": [
+     1280,
+     960
+    ],
+    "detection_file_size": null,
+    "detection_file_size_matches": null,
+    "detection_coordinate_frame_field": "worker response (x,y = box centre)",
+    "n_detections": 7,
+    "detection_extent_xyxy": [
+     550.0,
+     191.0,
+     1064.0,
+     792.0
+    ],
+    "detections_within_upright_frame": true,
+    "detections_would_fit_swapped_frame": false,
+    "verdict": "same frame"
+   },
+   "detection_overlap_diagnostic": {
+    "detection_centres_in_target_polygons": 7,
+    "detection_centres_in_any_polygon": 7,
+    "n_detections": 7,
+    "meaning": "diagnostic only; detections did not shape polygons and are not counts"
+   },
+   "polygons": [
+    {
+     "id": "s1",
+     "polygon": [
+      [
+       575,
+       215
+      ],
+      [
+       1030,
+       200
+      ],
+      [
+       1052,
+       290
+      ],
+      [
+       1060,
+       420
+      ],
+      [
+       1062,
+       560
+      ],
+      [
+       1055,
+       700
+      ],
+      [
+       1058,
+       830
+      ],
+      [
+       1050,
+       856
+      ],
+      [
+       600,
+       856
+      ],
+      [
+       582,
+       780
+      ],
+      [
+       565,
+       650
+      ],
+      [
+       555,
+       420
+      ],
+      [
+       555,
+       290
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "img47:stack",
+     "membership_uncertain": false,
+     "note": "one short stack, close, square-on; eggs on the top tray (no cover)",
+     "area_px": 317616,
+     "sharpness_lapvar": 410.9
+    },
+    {
+     "id": "n1",
+     "polygon": [
+      [
+       0,
+       0
+      ],
+      [
+       72,
+       0
+      ],
+      [
+       100,
+       160
+      ],
+      [
+       118,
+       250
+      ],
+      [
+       125,
+       262
+      ],
+      [
+       150,
+       400
+      ],
+      [
+       170,
+       550
+      ],
+      [
+       178,
+       650
+      ],
+      [
+       100,
+       690
+      ],
+      [
+       25,
+       722
+      ],
+      [
+       0,
+       720
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 2,
+     "top_visible": false,
+     "base_visible": true,
+     "clipped": "top+side",
+     "blurred": true,
+     "contents_note": "nested empties",
+     "occluded": "none",
+     "face_view": "unknown",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "tall leaning pile of nested empty trays at the left, nearest of the background piles, out of focus",
+     "area_px": 92938,
+     "sharpness_lapvar": 212.7
+    },
+    {
+     "id": "n2",
+     "polygon": [
+      [
+       122,
+       255
+      ],
+      [
+       320,
+       243
+      ],
+      [
+       338,
+       300
+      ],
+      [
+       355,
+       450
+      ],
+      [
+       372,
+       545
+      ],
+      [
+       172,
+       548
+      ],
+      [
+       150,
+       400
+      ],
+      [
+       127,
+       265
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 3,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": true,
+     "contents_note": "nested empties",
+     "occluded": "left (by n1)",
+     "face_view": "unknown",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "dark pile of empty trays further back between n1 and n3, out of focus",
+     "area_px": 59654,
+     "sharpness_lapvar": 151.7
+    },
+    {
+     "id": "n3",
+     "polygon": [
+      [
+       293,
+       0
+      ],
+      [
+       576,
+       0
+      ],
+      [
+       565,
+       250
+      ],
+      [
+       555,
+       420
+      ],
+      [
+       560,
+       550
+      ],
+      [
+       372,
+       550
+      ],
+      [
+       355,
+       450
+      ],
+      [
+       338,
+       300
+      ],
+      [
+       320,
+       243
+      ],
+      [
+       310,
+       243
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 2,
+     "top_visible": false,
+     "base_visible": true,
+     "clipped": "top",
+     "blurred": true,
+     "contents_note": "nested empties",
+     "occluded": "right (by s1)",
+     "face_view": "unknown",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "tall pile of nested empty trays behind the target, out of focus; cut by the top edge",
+     "area_px": 129958,
+     "sharpness_lapvar": 845.2
+    },
+    {
+     "id": "n4",
+     "polygon": [
+      [
+       1203,
+       382
+      ],
+      [
+       1280,
+       372
+      ],
+      [
+       1280,
+       505
+      ],
+      [
+       1203,
+       505
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 1,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "side",
+     "blurred": true,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "unknown",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "small tray pile with eggs at the right edge, cut by the frame",
+     "area_px": 9856,
+     "sharpness_lapvar": 518.9
+    }
+   ],
+   "notes": "Sharpest photo region is the target; the background piles are defocused. Ink at the lower left on the floor. Leak-free id per the audit. No EXIF."
+  },
+  {
+   "id": "mutaa-image-07",
+   "source_path": "reports/mutaa-20260916/originals/image-07.jpeg",
+   "source_sha256": "0c593a7210c8ced72b3d5b2c651d5c2c30cb123aeb31a2caa08ecf687b723b5e",
+   "source_note": null,
+   "detections_path": "reports/mutaa-20260916/analysis/image-07-detections.json#detections",
+   "width": 1856,
+   "height": 4096,
+   "label_scope": "no count label (MUTAA archive); target chosen here = the block on the floor in front",
+   "cases": [
+    "exif_rotated_coordinate_frame",
+    "overlapping_stacks_different_depths",
+    "neighbour_outside_target",
+    "set_back_stack_different_depth",
+    "two_faces_of_one_stack",
+    "empty_cover_on_top"
+   ],
+   "frame_check": {
+    "stored_size": [
+     4096,
+     1856
+    ],
+    "exif_orientation": 8,
+    "upright_size": [
+     1856,
+     4096
+    ],
+    "detection_file_size": [
+     1856,
+     4096
+    ],
+    "detection_file_size_matches": true,
+    "detection_coordinate_frame_field": "exif_transposed_pixels",
+    "n_detections": 56,
+    "detection_extent_xyxy": [
+     278.0,
+     1765.0,
+     1756.0,
+     2995.0
+    ],
+    "detections_within_upright_frame": true,
+    "detections_would_fit_swapped_frame": false,
+    "verdict": "same frame"
+   },
+   "detection_overlap_diagnostic": {
+    "detection_centres_in_target_polygons": 55,
+    "detection_centres_in_any_polygon": 56,
+    "n_detections": 56,
+    "meaning": "diagnostic only; detections did not shape polygons and are not counts"
+   },
+   "polygons": [
+    {
+     "id": "F1_side",
+     "polygon": [
+      [
+       592,
+       1880
+      ],
+      [
+       645,
+       1935
+      ],
+      [
+       648,
+       2400
+      ],
+      [
+       652,
+       3015
+      ],
+      [
+       600,
+       3015
+      ],
+      [
+       598,
+       2400
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "side",
+     "physical_stack_inferred": "m07:F1",
+     "membership_uncertain": false,
+     "note": "narrow left side face of the front-left stack, visible because L beside it is set back",
+     "area_px": 56605,
+     "sharpness_lapvar": 7110.1
+    },
+    {
+     "id": "F1",
+     "polygon": [
+      [
+       645,
+       1935
+      ],
+      [
+       905,
+       1935
+      ],
+      [
+       906,
+       2450
+      ],
+      [
+       906,
+       2995
+      ],
+      [
+       652,
+       3015
+      ],
+      [
+       648,
+       2400
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "m07:F1",
+     "membership_uncertain": false,
+     "note": "front row; base ~3015 measured",
+     "area_px": 275310,
+     "sharpness_lapvar": 6597.6
+    },
+    {
+     "id": "F2",
+     "polygon": [
+      [
+       905,
+       1935
+      ],
+      [
+       1200,
+       1933
+      ],
+      [
+       1198,
+       2450
+      ],
+      [
+       1197,
+       2972
+      ],
+      [
+       906,
+       2995
+      ],
+      [
+       906,
+       2450
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "m07:F2",
+     "membership_uncertain": false,
+     "note": "base ~2985",
+     "area_px": 306955,
+     "sharpness_lapvar": 7922.8
+    },
+    {
+     "id": "F3",
+     "polygon": [
+      [
+       1200,
+       1933
+      ],
+      [
+       1495,
+       1930
+      ],
+      [
+       1485,
+       2450
+      ],
+      [
+       1478,
+       2932
+      ],
+      [
+       1197,
+       2972
+      ],
+      [
+       1198,
+       2450
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "m07:F3",
+     "membership_uncertain": false,
+     "note": "base ~2950",
+     "area_px": 293362,
+     "sharpness_lapvar": 7170.1
+    },
+    {
+     "id": "F4",
+     "polygon": [
+      [
+       1495,
+       1930
+      ],
+      [
+       1758,
+       1925
+      ],
+      [
+       1740,
+       2400
+      ],
+      [
+       1716,
+       2905
+      ],
+      [
+       1478,
+       2932
+      ],
+      [
+       1485,
+       2450
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "m07:F4",
+     "membership_uncertain": false,
+     "note": "base ~2918; right edge measured 1755/1735/1715",
+     "area_px": 249518,
+     "sharpness_lapvar": 6070.4
+    },
+    {
+     "id": "L",
+     "polygon": [
+      [
+       280,
+       1992
+      ],
+      [
+       560,
+       1992
+      ],
+      [
+       565,
+       2400
+      ],
+      [
+       570,
+       2910
+      ],
+      [
+       298,
+       2908
+      ],
+      [
+       287,
+       2500
+      ]
+     ],
+     "role": "target",
+     "depth_row": 1,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "m07:L",
+     "membership_uncertain": true,
+     "note": "shorter stack left of the front row, set back (base ~2920, F1's left side visible beside it); membership in the front block is not certain",
+     "area_px": 254699,
+     "sharpness_lapvar": 1897.6
+    },
+    {
+     "id": "BL1",
+     "polygon": [
+      [
+       175,
+       1690
+      ],
+      [
+       430,
+       1690
+      ],
+      [
+       430,
+       1990
+      ],
+      [
+       280,
+       1992
+      ],
+      [
+       282,
+       2405
+      ],
+      [
+       178,
+       2405
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 2,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "lower right (by L)",
+     "face_view": "front",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "separate block standing on the raised platform behind (platform edge visible at the left, base ~2405; MUTAA image-10/11 show the platform and the second block)",
+     "area_px": 119566,
+     "sharpness_lapvar": 3553.4
+    },
+    {
+     "id": "BL2",
+     "polygon": [
+      [
+       430,
+       1690
+      ],
+      [
+       690,
+       1690
+      ],
+      [
+       690,
+       1850
+      ],
+      [
+       595,
+       1880
+      ],
+      [
+       560,
+       1992
+      ],
+      [
+       430,
+       1992
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 2,
+     "top_visible": true,
+     "base_visible": false,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "below (by the front block and L)",
+     "face_view": "front",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "",
+     "area_px": 64495,
+     "sharpness_lapvar": 7175.8
+    },
+    {
+     "id": "BL3",
+     "polygon": [
+      [
+       690,
+       1690
+      ],
+      [
+       945,
+       1690
+      ],
+      [
+       945,
+       1850
+      ],
+      [
+       690,
+       1850
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 2,
+     "top_visible": true,
+     "base_visible": false,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "below (by the front block)",
+     "face_view": "front",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "",
+     "area_px": 40800,
+     "sharpness_lapvar": 11762.5
+    },
+    {
+     "id": "BL4",
+     "polygon": [
+      [
+       945,
+       1700
+      ],
+      [
+       1160,
+       1700
+      ],
+      [
+       1160,
+       1850
+      ],
+      [
+       945,
+       1850
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 2,
+     "top_visible": true,
+     "base_visible": false,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "empty cover on top",
+     "occluded": "below (by the front block)",
+     "face_view": "front",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "top tray shows posts and no eggs",
+     "area_px": 32250,
+     "sharpness_lapvar": 10516.7
+    },
+    {
+     "id": "BL5",
+     "polygon": [
+      [
+       1160,
+       1705
+      ],
+      [
+       1380,
+       1705
+      ],
+      [
+       1385,
+       1855
+      ],
+      [
+       1160,
+       1850
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 2,
+     "top_visible": true,
+     "base_visible": false,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "below (by the front block)",
+     "face_view": "front",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "eggs on the top tray",
+     "area_px": 32812,
+     "sharpness_lapvar": 7608.9
+    },
+    {
+     "id": "BL6",
+     "polygon": [
+      [
+       1380,
+       1740
+      ],
+      [
+       1570,
+       1745
+      ],
+      [
+       1572,
+       1860
+      ],
+      [
+       1385,
+       1855
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 2,
+     "top_visible": true,
+     "base_visible": false,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "below (by the front block)",
+     "face_view": "front",
+     "physical_stack_inferred": null,
+     "membership_uncertain": false,
+     "note": "top a little lower than BL5; eggs visible on its top tray",
+     "area_px": 21660,
+     "sharpness_lapvar": 7204.7
+    }
+   ],
+   "notes": "Camera original, stored 4096x1856 with EXIF orientation 8; all coordinates are in the EXIF-transposed upright frame 1856x4096, the frame of the saved detections (coordinate_frame 'exif_transposed_pixels'; analysis quality width/height 1856x4096). The front block's top surface (y ~1840-1935) shows posts and empty cups. No count label exists for this photo, so the target choice is the annotator's."
+  },
+  {
+   "id": "labelled-img-46",
+   "source_path": "datasets/field-2026-10/labelled-20261007/originals/img-46.jpeg",
+   "source_sha256": "33161764bc19f6fb7df35c26a3431910596f5abe5bfac7d9435ab88f1206e74f",
+   "source_note": null,
+   "detections_path": "reports/field-labelled-20261007/raw/batch-16.json#views.left",
+   "width": 391,
+   "height": 1280,
+   "label_scope": "single stack, 391 px crop (audit tier B + per-stack)",
+   "cases": [
+    "clipped_bottom",
+    "clipped_side",
+    "single_stack",
+    "handwriting_in_frame"
+   ],
+   "frame_check": {
+    "stored_size": [
+     391,
+     1280
+    ],
+    "exif_orientation": null,
+    "upright_size": [
+     391,
+     1280
+    ],
+    "detection_file_size": null,
+    "detection_file_size_matches": null,
+    "detection_coordinate_frame_field": "worker response (x,y = box centre)",
+    "n_detections": 18,
+    "detection_extent_xyxy": [
+     28.0,
+     140.0,
+     391.0,
+     1271.0
+    ],
+    "detections_within_upright_frame": true,
+    "detections_would_fit_swapped_frame": false,
+    "verdict": "same frame"
+   },
+   "detection_overlap_diagnostic": {
+    "detection_centres_in_target_polygons": 18,
+    "detection_centres_in_any_polygon": 18,
+    "n_detections": 18,
+    "meaning": "diagnostic only; detections did not shape polygons and are not counts"
+   },
+   "polygons": [
+    {
+     "id": "s1",
+     "polygon": [
+      [
+       38,
+       160
+      ],
+      [
+       391,
+       155
+      ],
+      [
+       391,
+       1280
+      ],
+      [
+       78,
+       1280
+      ],
+      [
+       68,
+       1000
+      ],
+      [
+       60,
+       800
+      ],
+      [
+       66,
+       600
+      ],
+      [
+       42,
+       400
+      ],
+      [
+       36,
+       200
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": false,
+     "clipped": "bottom+side",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "front",
+     "physical_stack_inferred": "img46:stack",
+     "membership_uncertain": false,
+     "note": "one stack filling a narrow crop; eggs on the top tray (y ~150-185); trays continue past the bottom frame edge (no floor below them) and past the right crop edge; left edge measured with green-pixel profiles (x 36-42 near the top, 60-78 lower down)",
+     "area_px": 372882,
+     "sharpness_lapvar": 1655.1
+    }
+   ],
+   "notes": "Narrow WhatsApp crop (391x1280) of a single stack; the far right strip (x > 350) is defocused green that continues the stack or a nearer stack - not separable, kept inside s1. Ink above the stack. Leak-free id per the audit. No EXIF."
+  },
+  {
+   "id": "labelled-img-43",
+   "source_path": "datasets/field-2026-10/labelled-20261007/originals/img-43.jpeg",
+   "source_sha256": "d6e64e0a0e160f64dca44c3f29ccc9a79ef40f55ad222cb2f6e25d544f469032",
+   "source_note": null,
+   "detections_path": "reports/field-labelled-20261007/raw/batch-15.json#views.left",
+   "width": 1200,
+   "height": 1600,
+   "label_scope": "one loose orange tray + a stack cut by the top frame edge (audit: not usable)",
+   "cases": [
+    "clipped_top",
+    "clipped_side",
+    "short_stacks_1_2_trays",
+    "orange_plastic",
+    "handwriting_in_frame"
+   ],
+   "frame_check": {
+    "stored_size": [
+     1200,
+     1600
+    ],
+    "exif_orientation": null,
+    "upright_size": [
+     1200,
+     1600
+    ],
+    "detection_file_size": null,
+    "detection_file_size_matches": null,
+    "detection_coordinate_frame_field": "worker response (x,y = box centre)",
+    "n_detections": 7,
+    "detection_extent_xyxy": [
+     0.0,
+     7.0,
+     968.0,
+     732.0
+    ],
+    "detections_within_upright_frame": true,
+    "detections_would_fit_swapped_frame": true,
+    "verdict": "same frame"
+   },
+   "detection_overlap_diagnostic": {
+    "detection_centres_in_target_polygons": 7,
+    "detection_centres_in_any_polygon": 7,
+    "n_detections": 7,
+    "meaning": "diagnostic only; detections did not shape polygons and are not counts"
+   },
+   "polygons": [
+    {
+     "id": "t1",
+     "polygon": [
+      [
+       490,
+       428
+      ],
+      [
+       620,
+       410
+      ],
+      [
+       760,
+       402
+      ],
+      [
+       880,
+       400
+      ],
+      [
+       905,
+       410
+      ],
+      [
+       925,
+       450
+      ],
+      [
+       945,
+       520
+      ],
+      [
+       960,
+       600
+      ],
+      [
+       968,
+       690
+      ],
+      [
+       930,
+       722
+      ],
+      [
+       600,
+       712
+      ],
+      [
+       400,
+       722
+      ],
+      [
+       345,
+       690
+      ],
+      [
+       345,
+       630
+      ],
+      [
+       375,
+       570
+      ],
+      [
+       420,
+       510
+      ],
+      [
+       460,
+       450
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": true,
+     "base_visible": true,
+     "clipped": "none",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "none",
+     "face_view": "oblique_top",
+     "physical_stack_inferred": "img43:loose tray",
+     "membership_uncertain": false,
+     "note": "one loose orange tray on the floor, eggs in it; outline = egg tops + front side with feet",
+     "area_px": 169583,
+     "sharpness_lapvar": 1360.5
+    },
+    {
+     "id": "s1",
+     "polygon": [
+      [
+       0,
+       0
+      ],
+      [
+       405,
+       0
+      ],
+      [
+       420,
+       30
+      ],
+      [
+       445,
+       90
+      ],
+      [
+       452,
+       150
+      ],
+      [
+       470,
+       190
+      ],
+      [
+       478,
+       230
+      ],
+      [
+       485,
+       300
+      ],
+      [
+       490,
+       380
+      ],
+      [
+       488,
+       420
+      ],
+      [
+       470,
+       460
+      ],
+      [
+       440,
+       495
+      ],
+      [
+       300,
+       505
+      ],
+      [
+       120,
+       512
+      ],
+      [
+       40,
+       510
+      ],
+      [
+       0,
+       470
+      ]
+     ],
+     "role": "target",
+     "depth_row": 0,
+     "top_visible": false,
+     "base_visible": true,
+     "clipped": "top+side",
+     "blurred": false,
+     "contents_note": "filled",
+     "occluded": "lower right corner (by t1 eggs)",
+     "face_view": "oblique_side",
+     "physical_stack_inferred": "img43:stack",
+     "membership_uncertain": true,
+     "note": "orange stack seen from its corner, cut by the top and left frame edges; base visible at y ~510; whether the label's scope includes it is the audit's reading, not verified",
+     "area_px": 234195,
+     "sharpness_lapvar": 1454.7
+    },
+    {
+     "id": "n1",
+     "polygon": [
+      [
+       0,
+       470
+      ],
+      [
+       40,
+       512
+      ],
+      [
+       70,
+       560
+      ],
+      [
+       60,
+       640
+      ],
+      [
+       0,
+       660
+      ]
+     ],
+     "role": "neighbour",
+     "depth_row": 1,
+     "top_visible": false,
+     "base_visible": true,
+     "clipped": "side",
+     "blurred": false,
+     "contents_note": "unknown",
+     "occluded": "none",
+     "face_view": "unknown",
+     "physical_stack_inferred": null,
+     "membership_uncertain": true,
+     "note": "white pulp trays at the left edge below the stack, cut by the frame",
+     "area_px": 9280,
+     "sharpness_lapvar": 1857.7
+    }
+   ],
+   "notes": "REDMI 13 camera watermark with date at the bottom (5 Sep 2026; audit G26 = MUTAA 34/35 scene). Ink on the floor between the stack and the camera, not over any tray. No EXIF."
+  }
+ ]
+}

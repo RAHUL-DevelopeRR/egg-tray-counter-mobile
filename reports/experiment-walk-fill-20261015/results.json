@@ -1,0 +1,10202 @@
+{
+ "experiment": "walk-fill variants, 2026-10-15",
+ "label_rule": "stage 1 reads no count label; stage 2 reads labels only to score, after the choice",
+ "stage_1_label_free": {
+  "variants": {
+   "V0": "deployed walk (layer_span.walk_layers)",
+   "V1": "V0 clipped to [span - 1, span + 1]",
+   "V2": "span when |V0 - span| > 1, else V0",
+   "V3": "fill only when |gap/pitch - steps| <= 0.25 and local pitch within 15% of global; else one step",
+   "V4": "local pitch from one-layer gaps only (filled sub-gaps do not feed the pitch)"
+  },
+  "overfill_decomposition_V0": {
+   "polygons_3plus_boxes": 62,
+   "filled_total": 92,
+   "walk_gt_span_plus1": {
+    "polygons": 12,
+    "filled": 74,
+    "photos": [
+     "labelled-img-04",
+     "labelled-img-09",
+     "labelled-img-46",
+     "mutaa-image-07",
+     "scan-ef823816-left",
+     "scan-ef823816-straight"
+    ],
+    "rows": [
+     {
+      "image": "labelled-img-04",
+      "polygon": "a",
+      "boxes": 18,
+      "span_count": 17,
+      "walk_count": 19,
+      "walk_filled": 3,
+      "box_pitch_ratio": 1.0
+     },
+     {
+      "image": "labelled-img-04",
+      "polygon": "f",
+      "boxes": 17,
+      "span_count": 19,
+      "walk_count": 27,
+      "walk_filled": 11,
+      "box_pitch_ratio": 0.941
+     },
+     {
+      "image": "labelled-img-09",
+      "polygon": "f_front",
+      "boxes": 10,
+      "span_count": 12,
+      "walk_count": 14,
+      "walk_filled": 4,
+      "box_pitch_ratio": 1.418
+     },
+     {
+      "image": "labelled-img-09",
+      "polygon": "l",
+      "boxes": 18,
+      "span_count": 18,
+      "walk_count": 21,
+      "walk_filled": 4,
+      "box_pitch_ratio": 1.053
+     },
+     {
+      "image": "labelled-img-09",
+      "polygon": "r1",
+      "boxes": 17,
+      "span_count": 17,
+      "walk_count": 20,
+      "walk_filled": 4,
+      "box_pitch_ratio": 1.232
+     },
+     {
+      "image": "labelled-img-09",
+      "polygon": "r2",
+      "boxes": 14,
+      "span_count": 15,
+      "walk_count": 20,
+      "walk_filled": 6,
+      "box_pitch_ratio": 1.01
+     },
+     {
+      "image": "scan-ef823816-straight",
+      "polygon": "s2",
+      "boxes": 13,
+      "span_count": 14,
+      "walk_count": 19,
+      "walk_filled": 6,
+      "box_pitch_ratio": 0.8
+     },
+     {
+      "image": "scan-ef823816-straight",
+      "polygon": "s3",
+      "boxes": 12,
+      "span_count": 11,
+      "walk_count": 18,
+      "walk_filled": 7,
+      "box_pitch_ratio": 0.671
+     },
+     {
+      "image": "scan-ef823816-left",
+      "polygon": "l2",
+      "boxes": 15,
+      "span_count": 14,
+      "walk_count": 22,
+      "walk_filled": 7,
+      "box_pitch_ratio": 0.769
+     },
+     {
+      "image": "scan-ef823816-left",
+      "polygon": "l3",
+      "boxes": 15,
+      "span_count": 16,
+      "walk_count": 27,
+      "walk_filled": 12,
+      "box_pitch_ratio": 0.914
+     },
+     {
+      "image": "mutaa-image-07",
+      "polygon": "F3",
+      "boxes": 11,
+      "span_count": 10,
+      "walk_count": 17,
+      "walk_filled": 7,
+      "box_pitch_ratio": 0.714
+     },
+     {
+      "image": "labelled-img-46",
+      "polygon": "s1",
+      "boxes": 18,
+      "span_count": 17,
+      "walk_count": 19,
+      "walk_filled": 3,
+      "box_pitch_ratio": 1.03
+     }
+    ]
+   },
+   "of_which_regular_boxes": {
+    "polygons": 10,
+    "filled": 60
+   },
+   "span_gt_walk_plus1": {
+    "polygons": 4,
+    "rows": [
+     {
+      "image": "labelled-img-04",
+      "polygon": "b",
+      "boxes": 18,
+      "span_count": 18,
+      "walk_count": 15
+     },
+     {
+      "image": "scan-ef823816-left",
+      "polygon": "l_short",
+      "boxes": 12,
+      "span_count": 12,
+      "walk_count": 9
+     },
+     {
+      "image": "scan-ef823816-left",
+      "polygon": "l4",
+      "boxes": 17,
+      "span_count": 18,
+      "walk_count": 15
+     },
+     {
+      "image": "mutaa-image-07",
+      "polygon": "F4",
+      "boxes": 11,
+      "span_count": 11,
+      "walk_count": 9
+     }
+    ]
+   }
+  },
+  "criteria": {
+   "V0": {
+    "description": "deployed walk (layer_span.walk_layers)",
+    "equal_extent": {
+     "pairs": 29,
+     "photos": 9,
+     "photos_distinct_faces": 7,
+     "physical_pairs": 25,
+     "diff_gt1": 15,
+     "diff_gt0": 16,
+     "abs_diff_sum": 97,
+     "diff_max": 12,
+     "physical": {
+      "physical_pairs": 25,
+      "physical_pairs_diff_gt1_in_any_photo": 13,
+      "distinct_faces": 7
+     },
+     "large_scale_pitch_ge_3pct": {
+      "pairs": 11,
+      "photos": 4,
+      "diff_gt1": 0,
+      "abs_diff_sum": 0,
+      "diff_max": 0,
+      "physical_pairs": 10,
+      "physical_pairs_diff_gt1_in_any_photo": 0,
+      "distinct_faces": 3
+     },
+     "small_scale_pitch_lt_3pct": {
+      "pairs": 18,
+      "photos": 5,
+      "diff_gt1": 15,
+      "abs_diff_sum": 97,
+      "diff_max": 12,
+      "physical_pairs": 15,
+      "physical_pairs_diff_gt1_in_any_photo": 13,
+      "distinct_faces": 4
+     }
+    },
+    "walk_span": {
+     "polygons": 62,
+     "physical_stacks": 46,
+     "count_gt_span_plus1": 12,
+     "count_lt_span_minus1": 4,
+     "abs_count_minus_span_sum": 87,
+     "filled_layers": 92,
+     "polygons_with_fills": 25,
+     "layers": 907,
+     "polygons_changed_vs_V0": 0,
+     "on_V0_overfill_polygons": {
+      "polygons": 12,
+      "filled": 74,
+      "count_minus_span": [
+       2,
+       8,
+       2,
+       3,
+       3,
+       5,
+       5,
+       7,
+       8,
+       11,
+       7,
+       2
+      ]
+     }
+    },
+    "walk_span_note": null,
+    "cross_view": {
+     "stacks": 5,
+     "spread_gt1": 1,
+     "spread_gt0": 3,
+     "spread_sum": 8,
+     "spread_max": 6,
+     "per_stack": [
+      {
+       "physical_stack": "9b4c:(0,0)",
+       "views": {
+        "scan-9b4c783e-straight:s1": 15,
+        "scan-9b4c783e-left:l3": 16,
+        "scan-30aca6a1-straight:s1": 16
+       },
+       "spread": 1
+      },
+      {
+       "physical_stack": "9b4c:(1,0)",
+       "views": {
+        "scan-9b4c783e-straight:s2": 15,
+        "scan-30aca6a1-straight:s2": 15
+       },
+       "spread": 0
+      },
+      {
+       "physical_stack": "9b4c:(2,0)",
+       "views": {
+        "scan-9b4c783e-straight:s3": 15,
+        "scan-9b4c783e-right:r1": 15,
+        "scan-30aca6a1-straight:s3": 15
+       },
+       "spread": 0
+      },
+      {
+       "physical_stack": "9b4c:(3,1)",
+       "views": {
+        "scan-9b4c783e-straight:s4": 14,
+        "scan-9b4c783e-right:r2": 14,
+        "scan-30aca6a1-straight:s4": 13
+       },
+       "spread": 1
+      },
+      {
+       "physical_stack": "ef82:(4,0)",
+       "views": {
+        "scan-ef823816-straight:s5_front": 8,
+        "scan-ef823816-right:r_short": 14
+       },
+       "spread": 6
+      }
+     ]
+    },
+    "cross_view_supplement": {
+     "ef823816 LEFT vs RIGHT (same face photographed twice)": {
+      "stacks": 4,
+      "spread_gt1": 3,
+      "spread_gt0": 4,
+      "spread_sum": 18,
+      "spread_max": 8,
+      "per_stack": [
+       {
+        "physical_stack": "ef82:(4,0)",
+        "views": {
+         "scan-ef823816-right:r_short": 14,
+         "scan-ef823816-left:l_short": 9
+        },
+        "spread": 5
+       },
+       {
+        "physical_stack": "ef82:(4,1)",
+        "views": {
+         "scan-ef823816-right:r2": 21,
+         "scan-ef823816-left:l2": 22
+        },
+        "spread": 1
+       },
+       {
+        "physical_stack": "ef82:(4,2)",
+        "views": {
+         "scan-ef823816-right:r3": 19,
+         "scan-ef823816-left:l3": 27
+        },
+        "spread": 8
+       },
+       {
+        "physical_stack": "ef82:(4,3)",
+        "views": {
+         "scan-ef823816-right:r4": 19,
+         "scan-ef823816-left:l4": 15
+        },
+        "spread": 4
+       }
+      ]
+     },
+     "G01 (4,0) free end: img-01, img-32, warehouse-4 (walk-development photos)": {
+      "stacks": 1,
+      "spread_gt1": 0,
+      "spread_gt0": 0,
+      "spread_sum": 0,
+      "spread_max": 0,
+      "per_stack": [
+       {
+        "physical_stack": "G01:(4,0)",
+        "views": {
+         "labelled-img-01:s5": 19,
+         "labelled-img-32:s1": 19,
+         "warehouse-image-4:s1": 19
+        },
+        "spread": 0
+       }
+      ]
+     }
+    },
+    "reference": {
+     "columns": 53,
+     "photos": 10,
+     "count_ne_span": 11,
+     "count_minus_span_gt1": 0,
+     "filled_layers": 11,
+     "columns_with_fills": 9,
+     "equal_extent_pairs": 67,
+     "equal_extent_diff_gt0": 1,
+     "equal_extent_diff_gt1": 0,
+     "equal_extent_abs_diff_sum": 1,
+     "counts": [
+      [
+       1,
+       1,
+       20
+      ],
+      [
+       1,
+       2,
+       20
+      ],
+      [
+       1,
+       3,
+       20
+      ],
+      [
+       1,
+       4,
+       20
+      ],
+      [
+       1,
+       5,
+       19
+      ],
+      [
+       2,
+       1,
+       20
+      ],
+      [
+       2,
+       2,
+       20
+      ],
+      [
+       2,
+       3,
+       20
+      ],
+      [
+       2,
+       4,
+       20
+      ],
+      [
+       8,
+       1,
+       20
+      ],
+      [
+       8,
+       2,
+       20
+      ],
+      [
+       8,
+       3,
+       20
+      ],
+      [
+       8,
+       4,
+       20
+      ],
+      [
+       8,
+       5,
+       20
+      ],
+      [
+       8,
+       6,
+       20
+      ],
+      [
+       8,
+       7,
+       20
+      ],
+      [
+       8,
+       8,
+       20
+      ],
+      [
+       19,
+       1,
+       20
+      ],
+      [
+       19,
+       2,
+       20
+      ],
+      [
+       19,
+       3,
+       20
+      ],
+      [
+       19,
+       4,
+       20
+      ],
+      [
+       19,
+       5,
+       20
+      ],
+      [
+       20,
+       1,
+       20
+      ],
+      [
+       20,
+       2,
+       20
+      ],
+      [
+       20,
+       3,
+       20
+      ],
+      [
+       21,
+       1,
+       20
+      ],
+      [
+       21,
+       2,
+       20
+      ],
+      [
+       21,
+       3,
+       20
+      ],
+      [
+       21,
+       4,
+       20
+      ],
+      [
+       21,
+       5,
+       20
+      ],
+      [
+       23,
+       1,
+       20
+      ],
+      [
+       23,
+       2,
+       20
+      ],
+      [
+       23,
+       3,
+       20
+      ],
+      [
+       23,
+       4,
+       20
+      ],
+      [
+       23,
+       5,
+       20
+      ],
+      [
+       23,
+       6,
+       20
+      ],
+      [
+       23,
+       7,
+       20
+      ],
+      [
+       23,
+       8,
+       20
+      ],
+      [
+       24,
+       1,
+       20
+      ],
+      [
+       24,
+       2,
+       20
+      ],
+      [
+       24,
+       3,
+       20
+      ],
+      [
+       24,
+       4,
+       20
+      ],
+      [
+       24,
+       5,
+       20
+      ],
+      [
+       30,
+       1,
+       20
+      ],
+      [
+       30,
+       2,
+       19
+      ],
+      [
+       30,
+       3,
+       20
+      ],
+      [
+       30,
+       4,
+       19
+      ],
+      [
+       34,
+       1,
+       20
+      ],
+      [
+       34,
+       2,
+       20
+      ],
+      [
+       34,
+       3,
+       20
+      ],
+      [
+       34,
+       4,
+       20
+      ],
+      [
+       34,
+       5,
+       20
+      ],
+      [
+       34,
+       6,
+       20
+      ]
+     ],
+     "changed_vs_V0": 0
+    }
+   },
+   "V1": {
+    "description": "V0 clipped to [span - 1, span + 1]",
+    "equal_extent": {
+     "pairs": 29,
+     "photos": 9,
+     "photos_distinct_faces": 7,
+     "physical_pairs": 25,
+     "diff_gt1": 10,
+     "diff_gt0": 15,
+     "abs_diff_sum": 32,
+     "diff_max": 5,
+     "physical": {
+      "physical_pairs": 25,
+      "physical_pairs_diff_gt1_in_any_photo": 8,
+      "distinct_faces": 7
+     },
+     "large_scale_pitch_ge_3pct": {
+      "pairs": 11,
+      "photos": 4,
+      "diff_gt1": 0,
+      "abs_diff_sum": 0,
+      "diff_max": 0,
+      "physical_pairs": 10,
+      "physical_pairs_diff_gt1_in_any_photo": 0,
+      "distinct_faces": 3
+     },
+     "small_scale_pitch_lt_3pct": {
+      "pairs": 18,
+      "photos": 5,
+      "diff_gt1": 10,
+      "abs_diff_sum": 32,
+      "diff_max": 5,
+      "physical_pairs": 15,
+      "physical_pairs_diff_gt1_in_any_photo": 8,
+      "distinct_faces": 4
+     }
+    },
+    "walk_span": {
+     "polygons": 62,
+     "physical_stacks": 46,
+     "count_gt_span_plus1": 0,
+     "count_lt_span_minus1": 0,
+     "abs_count_minus_span_sum": 29,
+     "filled_layers": 48,
+     "polygons_with_fills": 26,
+     "layers": 863,
+     "polygons_changed_vs_V0": 16,
+     "on_V0_overfill_polygons": {
+      "polygons": 12,
+      "filled": 23,
+      "count_minus_span": [
+       1,
+       1,
+       1,
+       1,
+       1,
+       1,
+       1,
+       1,
+       1,
+       1,
+       1,
+       1
+      ]
+     }
+    },
+    "walk_span_note": "tautological: the count is forced within 1 of span",
+    "cross_view": {
+     "stacks": 5,
+     "spread_gt1": 1,
+     "spread_gt0": 3,
+     "spread_sum": 8,
+     "spread_max": 6,
+     "per_stack": [
+      {
+       "physical_stack": "9b4c:(0,0)",
+       "views": {
+        "scan-9b4c783e-straight:s1": 15,
+        "scan-9b4c783e-left:l3": 16,
+        "scan-30aca6a1-straight:s1": 16
+       },
+       "spread": 1
+      },
+      {
+       "physical_stack": "9b4c:(1,0)",
+       "views": {
+        "scan-9b4c783e-straight:s2": 15,
+        "scan-30aca6a1-straight:s2": 15
+       },
+       "spread": 0
+      },
+      {
+       "physical_stack": "9b4c:(2,0)",
+       "views": {
+        "scan-9b4c783e-straight:s3": 15,
+        "scan-9b4c783e-right:r1": 15,
+        "scan-30aca6a1-straight:s3": 15
+       },
+       "spread": 0
+      },
+      {
+       "physical_stack": "9b4c:(3,1)",
+       "views": {
+        "scan-9b4c783e-straight:s4": 14,
+        "scan-9b4c783e-right:r2": 14,
+        "scan-30aca6a1-straight:s4": 13
+       },
+       "spread": 1
+      },
+      {
+       "physical_stack": "ef82:(4,0)",
+       "views": {
+        "scan-ef823816-straight:s5_front": 8,
+        "scan-ef823816-right:r_short": 14
+       },
+       "spread": 6
+      }
+     ]
+    },
+    "cross_view_supplement": {
+     "ef823816 LEFT vs RIGHT (same face photographed twice)": {
+      "stacks": 4,
+      "spread_gt1": 4,
+      "spread_gt0": 4,
+      "spread_sum": 13,
+      "spread_max": 6,
+      "per_stack": [
+       {
+        "physical_stack": "ef82:(4,0)",
+        "views": {
+         "scan-ef823816-right:r_short": 14,
+         "scan-ef823816-left:l_short": 11
+        },
+        "spread": 3
+       },
+       {
+        "physical_stack": "ef82:(4,1)",
+        "views": {
+         "scan-ef823816-right:r2": 21,
+         "scan-ef823816-left:l2": 15
+        },
+        "spread": 6
+       },
+       {
+        "physical_stack": "ef82:(4,2)",
+        "views": {
+         "scan-ef823816-right:r3": 19,
+         "scan-ef823816-left:l3": 17
+        },
+        "spread": 2
+       },
+       {
+        "physical_stack": "ef82:(4,3)",
+        "views": {
+         "scan-ef823816-right:r4": 19,
+         "scan-ef823816-left:l4": 17
+        },
+        "spread": 2
+       }
+      ]
+     },
+     "G01 (4,0) free end: img-01, img-32, warehouse-4 (walk-development photos)": {
+      "stacks": 1,
+      "spread_gt1": 0,
+      "spread_gt0": 0,
+      "spread_sum": 0,
+      "spread_max": 0,
+      "per_stack": [
+       {
+        "physical_stack": "G01:(4,0)",
+        "views": {
+         "labelled-img-01:s5": 19,
+         "labelled-img-32:s1": 19,
+         "warehouse-image-4:s1": 19
+        },
+        "spread": 0
+       }
+      ]
+     }
+    },
+    "reference": {
+     "columns": 53,
+     "photos": 10,
+     "count_ne_span": 11,
+     "count_minus_span_gt1": 0,
+     "filled_layers": 11,
+     "columns_with_fills": 9,
+     "equal_extent_pairs": 67,
+     "equal_extent_diff_gt0": 1,
+     "equal_extent_diff_gt1": 0,
+     "equal_extent_abs_diff_sum": 1,
+     "counts": [
+      [
+       1,
+       1,
+       20
+      ],
+      [
+       1,
+       2,
+       20
+      ],
+      [
+       1,
+       3,
+       20
+      ],
+      [
+       1,
+       4,
+       20
+      ],
+      [
+       1,
+       5,
+       19
+      ],
+      [
+       2,
+       1,
+       20
+      ],
+      [
+       2,
+       2,
+       20
+      ],
+      [
+       2,
+       3,
+       20
+      ],
+      [
+       2,
+       4,
+       20
+      ],
+      [
+       8,
+       1,
+       20
+      ],
+      [
+       8,
+       2,
+       20
+      ],
+      [
+       8,
+       3,
+       20
+      ],
+      [
+       8,
+       4,
+       20
+      ],
+      [
+       8,
+       5,
+       20
+      ],
+      [
+       8,
+       6,
+       20
+      ],
+      [
+       8,
+       7,
+       20
+      ],
+      [
+       8,
+       8,
+       20
+      ],
+      [
+       19,
+       1,
+       20
+      ],
+      [
+       19,
+       2,
+       20
+      ],
+      [
+       19,
+       3,
+       20
+      ],
+      [
+       19,
+       4,
+       20
+      ],
+      [
+       19,
+       5,
+       20
+      ],
+      [
+       20,
+       1,
+       20
+      ],
+      [
+       20,
+       2,
+       20
+      ],
+      [
+       20,
+       3,
+       20
+      ],
+      [
+       21,
+       1,
+       20
+      ],
+      [
+       21,
+       2,
+       20
+      ],
+      [
+       21,
+       3,
+       20
+      ],
+      [
+       21,
+       4,
+       20
+      ],
+      [
+       21,
+       5,
+       20
+      ],
+      [
+       23,
+       1,
+       20
+      ],
+      [
+       23,
+       2,
+       20
+      ],
+      [
+       23,
+       3,
+       20
+      ],
+      [
+       23,
+       4,
+       20
+      ],
+      [
+       23,
+       5,
+       20
+      ],
+      [
+       23,
+       6,
+       20
+      ],
+      [
+       23,
+       7,
+       20
+      ],
+      [
+       23,
+       8,
+       20
+      ],
+      [
+       24,
+       1,
+       20
+      ],
+      [
+       24,
+       2,
+       20
+      ],
+      [
+       24,
+       3,
+       20
+      ],
+      [
+       24,
+       4,
+       20
+      ],
+      [
+       24,
+       5,
+       20
+      ],
+      [
+       30,
+       1,
+       20
+      ],
+      [
+       30,
+       2,
+       19
+      ],
+      [
+       30,
+       3,
+       20
+      ],
+      [
+       30,
+       4,
+       19
+      ],
+      [
+       34,
+       1,
+       20
+      ],
+      [
+       34,
+       2,
+       20
+      ],
+      [
+       34,
+       3,
+       20
+      ],
+      [
+       34,
+       4,
+       20
+      ],
+      [
+       34,
+       5,
+       20
+      ],
+      [
+       34,
+       6,
+       20
+      ]
+     ],
+     "changed_vs_V0": 0,
+     "changed_columns": []
+    }
+   },
+   "V2": {
+    "description": "span when |V0 - span| > 1, else V0",
+    "equal_extent": {
+     "pairs": 29,
+     "photos": 9,
+     "photos_distinct_faces": 7,
+     "physical_pairs": 25,
+     "diff_gt1": 10,
+     "diff_gt0": 14,
+     "abs_diff_sum": 31,
+     "diff_max": 4,
+     "physical": {
+      "physical_pairs": 25,
+      "physical_pairs_diff_gt1_in_any_photo": 8,
+      "distinct_faces": 7
+     },
+     "large_scale_pitch_ge_3pct": {
+      "pairs": 11,
+      "photos": 4,
+      "diff_gt1": 0,
+      "abs_diff_sum": 0,
+      "diff_max": 0,
+      "physical_pairs": 10,
+      "physical_pairs_diff_gt1_in_any_photo": 0,
+      "distinct_faces": 3
+     },
+     "small_scale_pitch_lt_3pct": {
+      "pairs": 18,
+      "photos": 5,
+      "diff_gt1": 10,
+      "abs_diff_sum": 31,
+      "diff_max": 4,
+      "physical_pairs": 15,
+      "physical_pairs_diff_gt1_in_any_photo": 8,
+      "distinct_faces": 4
+     }
+    },
+    "walk_span": {
+     "polygons": 62,
+     "physical_stacks": 46,
+     "count_gt_span_plus1": 0,
+     "count_lt_span_minus1": 0,
+     "abs_count_minus_span_sum": 13,
+     "filled_layers": 41,
+     "polygons_with_fills": 24,
+     "layers": 855,
+     "polygons_changed_vs_V0": 16,
+     "on_V0_overfill_polygons": {
+      "polygons": 12,
+      "filled": 12,
+      "count_minus_span": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
+     }
+    },
+    "walk_span_note": "tautological: the count is forced within 1 of span",
+    "cross_view": {
+     "stacks": 5,
+     "spread_gt1": 1,
+     "spread_gt0": 3,
+     "spread_sum": 8,
+     "spread_max": 6,
+     "per_stack": [
+      {
+       "physical_stack": "9b4c:(0,0)",
+       "views": {
+        "scan-9b4c783e-straight:s1": 15,
+        "scan-9b4c783e-left:l3": 16,
+        "scan-30aca6a1-straight:s1": 16
+       },
+       "spread": 1
+      },
+      {
+       "physical_stack": "9b4c:(1,0)",
+       "views": {
+        "scan-9b4c783e-straight:s2": 15,
+        "scan-30aca6a1-straight:s2": 15
+       },
+       "spread": 0
+      },
+      {
+       "physical_stack": "9b4c:(2,0)",
+       "views": {
+        "scan-9b4c783e-straight:s3": 15,
+        "scan-9b4c783e-right:r1": 15,
+        "scan-30aca6a1-straight:s3": 15
+       },
+       "spread": 0
+      },
+      {
+       "physical_stack": "9b4c:(3,1)",
+       "views": {
+        "scan-9b4c783e-straight:s4": 14,
+        "scan-9b4c783e-right:r2": 14,
+        "scan-30aca6a1-straight:s4": 13
+       },
+       "spread": 1
+      },
+      {
+       "physical_stack": "ef82:(4,0)",
+       "views": {
+        "scan-ef823816-straight:s5_front": 8,
+        "scan-ef823816-right:r_short": 14
+       },
+       "spread": 6
+      }
+     ]
+    },
+    "cross_view_supplement": {
+     "ef823816 LEFT vs RIGHT (same face photographed twice)": {
+      "stacks": 4,
+      "spread_gt1": 3,
+      "spread_gt0": 4,
+      "spread_sum": 13,
+      "spread_max": 7,
+      "per_stack": [
+       {
+        "physical_stack": "ef82:(4,0)",
+        "views": {
+         "scan-ef823816-right:r_short": 14,
+         "scan-ef823816-left:l_short": 12
+        },
+        "spread": 2
+       },
+       {
+        "physical_stack": "ef82:(4,1)",
+        "views": {
+         "scan-ef823816-right:r2": 21,
+         "scan-ef823816-left:l2": 14
+        },
+        "spread": 7
+       },
+       {
+        "physical_stack": "ef82:(4,2)",
+        "views": {
+         "scan-ef823816-right:r3": 19,
+         "scan-ef823816-left:l3": 16
+        },
+        "spread": 3
+       },
+       {
+        "physical_stack": "ef82:(4,3)",
+        "views": {
+         "scan-ef823816-right:r4": 19,
+         "scan-ef823816-left:l4": 18
+        },
+        "spread": 1
+       }
+      ]
+     },
+     "G01 (4,0) free end: img-01, img-32, warehouse-4 (walk-development photos)": {
+      "stacks": 1,
+      "spread_gt1": 0,
+      "spread_gt0": 0,
+      "spread_sum": 0,
+      "spread_max": 0,
+      "per_stack": [
+       {
+        "physical_stack": "G01:(4,0)",
+        "views": {
+         "labelled-img-01:s5": 19,
+         "labelled-img-32:s1": 19,
+         "warehouse-image-4:s1": 19
+        },
+        "spread": 0
+       }
+      ]
+     }
+    },
+    "reference": {
+     "columns": 53,
+     "photos": 10,
+     "count_ne_span": 11,
+     "count_minus_span_gt1": 0,
+     "filled_layers": 11,
+     "columns_with_fills": 9,
+     "equal_extent_pairs": 67,
+     "equal_extent_diff_gt0": 1,
+     "equal_extent_diff_gt1": 0,
+     "equal_extent_abs_diff_sum": 1,
+     "counts": [
+      [
+       1,
+       1,
+       20
+      ],
+      [
+       1,
+       2,
+       20
+      ],
+      [
+       1,
+       3,
+       20
+      ],
+      [
+       1,
+       4,
+       20
+      ],
+      [
+       1,
+       5,
+       19
+      ],
+      [
+       2,
+       1,
+       20
+      ],
+      [
+       2,
+       2,
+       20
+      ],
+      [
+       2,
+       3,
+       20
+      ],
+      [
+       2,
+       4,
+       20
+      ],
+      [
+       8,
+       1,
+       20
+      ],
+      [
+       8,
+       2,
+       20
+      ],
+      [
+       8,
+       3,
+       20
+      ],
+      [
+       8,
+       4,
+       20
+      ],
+      [
+       8,
+       5,
+       20
+      ],
+      [
+       8,
+       6,
+       20
+      ],
+      [
+       8,
+       7,
+       20
+      ],
+      [
+       8,
+       8,
+       20
+      ],
+      [
+       19,
+       1,
+       20
+      ],
+      [
+       19,
+       2,
+       20
+      ],
+      [
+       19,
+       3,
+       20
+      ],
+      [
+       19,
+       4,
+       20
+      ],
+      [
+       19,
+       5,
+       20
+      ],
+      [
+       20,
+       1,
+       20
+      ],
+      [
+       20,
+       2,
+       20
+      ],
+      [
+       20,
+       3,
+       20
+      ],
+      [
+       21,
+       1,
+       20
+      ],
+      [
+       21,
+       2,
+       20
+      ],
+      [
+       21,
+       3,
+       20
+      ],
+      [
+       21,
+       4,
+       20
+      ],
+      [
+       21,
+       5,
+       20
+      ],
+      [
+       23,
+       1,
+       20
+      ],
+      [
+       23,
+       2,
+       20
+      ],
+      [
+       23,
+       3,
+       20
+      ],
+      [
+       23,
+       4,
+       20
+      ],
+      [
+       23,
+       5,
+       20
+      ],
+      [
+       23,
+       6,
+       20
+      ],
+      [
+       23,
+       7,
+       20
+      ],
+      [
+       23,
+       8,
+       20
+      ],
+      [
+       24,
+       1,
+       20
+      ],
+      [
+       24,
+       2,
+       20
+      ],
+      [
+       24,
+       3,
+       20
+      ],
+      [
+       24,
+       4,
+       20
+      ],
+      [
+       24,
+       5,
+       20
+      ],
+      [
+       30,
+       1,
+       20
+      ],
+      [
+       30,
+       2,
+       19
+      ],
+      [
+       30,
+       3,
+       20
+      ],
+      [
+       30,
+       4,
+       19
+      ],
+      [
+       34,
+       1,
+       20
+      ],
+      [
+       34,
+       2,
+       20
+      ],
+      [
+       34,
+       3,
+       20
+      ],
+      [
+       34,
+       4,
+       20
+      ],
+      [
+       34,
+       5,
+       20
+      ],
+      [
+       34,
+       6,
+       20
+      ]
+     ],
+     "changed_vs_V0": 0,
+     "changed_columns": []
+    }
+   },
+   "V3": {
+    "description": "fill only when |gap/pitch - steps| <= 0.25 and local pitch within 15% of global; else one step",
+    "equal_extent": {
+     "pairs": 29,
+     "photos": 9,
+     "photos_distinct_faces": 7,
+     "physical_pairs": 25,
+     "diff_gt1": 2,
+     "diff_gt0": 14,
+     "abs_diff_sum": 18,
+     "diff_max": 3,
+     "physical": {
+      "physical_pairs": 25,
+      "physical_pairs_diff_gt1_in_any_photo": 2,
+      "distinct_faces": 7
+     },
+     "large_scale_pitch_ge_3pct": {
+      "pairs": 11,
+      "photos": 4,
+      "diff_gt1": 0,
+      "abs_diff_sum": 3,
+      "diff_max": 1,
+      "physical_pairs": 10,
+      "physical_pairs_diff_gt1_in_any_photo": 0,
+      "distinct_faces": 3
+     },
+     "small_scale_pitch_lt_3pct": {
+      "pairs": 18,
+      "photos": 5,
+      "diff_gt1": 2,
+      "abs_diff_sum": 15,
+      "diff_max": 3,
+      "physical_pairs": 15,
+      "physical_pairs_diff_gt1_in_any_photo": 2,
+      "distinct_faces": 4
+     }
+    },
+    "walk_span": {
+     "polygons": 62,
+     "physical_stacks": 46,
+     "count_gt_span_plus1": 0,
+     "count_lt_span_minus1": 9,
+     "abs_count_minus_span_sum": 42,
+     "filled_layers": 10,
+     "polygons_with_fills": 8,
+     "layers": 814,
+     "polygons_changed_vs_V0": 24,
+     "on_V0_overfill_polygons": {
+      "polygons": 12,
+      "filled": 7,
+      "count_minus_span": [
+       0,
+       -4,
+       -1,
+       -1,
+       -1,
+       0,
+       -3,
+       0,
+       0,
+       -2,
+       0,
+       0
+      ]
+     }
+    },
+    "walk_span_note": null,
+    "cross_view": {
+     "stacks": 5,
+     "spread_gt1": 1,
+     "spread_gt0": 3,
+     "spread_sum": 8,
+     "spread_max": 6,
+     "per_stack": [
+      {
+       "physical_stack": "9b4c:(0,0)",
+       "views": {
+        "scan-9b4c783e-straight:s1": 15,
+        "scan-9b4c783e-left:l3": 16,
+        "scan-30aca6a1-straight:s1": 16
+       },
+       "spread": 1
+      },
+      {
+       "physical_stack": "9b4c:(1,0)",
+       "views": {
+        "scan-9b4c783e-straight:s2": 15,
+        "scan-30aca6a1-straight:s2": 15
+       },
+       "spread": 0
+      },
+      {
+       "physical_stack": "9b4c:(2,0)",
+       "views": {
+        "scan-9b4c783e-straight:s3": 15,
+        "scan-9b4c783e-right:r1": 15,
+        "scan-30aca6a1-straight:s3": 15
+       },
+       "spread": 0
+      },
+      {
+       "physical_stack": "9b4c:(3,1)",
+       "views": {
+        "scan-9b4c783e-straight:s4": 14,
+        "scan-9b4c783e-right:r2": 14,
+        "scan-30aca6a1-straight:s4": 13
+       },
+       "spread": 1
+      },
+      {
+       "physical_stack": "ef82:(4,0)",
+       "views": {
+        "scan-ef823816-straight:s5_front": 6,
+        "scan-ef823816-right:r_short": 12
+       },
+       "spread": 6
+      }
+     ]
+    },
+    "cross_view_supplement": {
+     "ef823816 LEFT vs RIGHT (same face photographed twice)": {
+      "stacks": 4,
+      "spread_gt1": 4,
+      "spread_gt0": 4,
+      "spread_sum": 19,
+      "spread_max": 6,
+      "per_stack": [
+       {
+        "physical_stack": "ef82:(4,0)",
+        "views": {
+         "scan-ef823816-right:r_short": 12,
+         "scan-ef823816-left:l_short": 9
+        },
+        "spread": 3
+       },
+       {
+        "physical_stack": "ef82:(4,1)",
+        "views": {
+         "scan-ef823816-right:r2": 20,
+         "scan-ef823816-left:l2": 14
+        },
+        "spread": 6
+       },
+       {
+        "physical_stack": "ef82:(4,2)",
+        "views": {
+         "scan-ef823816-right:r3": 19,
+         "scan-ef823816-left:l3": 14
+        },
+        "spread": 5
+       },
+       {
+        "physical_stack": "ef82:(4,3)",
+        "views": {
+         "scan-ef823816-right:r4": 19,
+         "scan-ef823816-left:l4": 14
+        },
+        "spread": 5
+       }
+      ]
+     },
+     "G01 (4,0) free end: img-01, img-32, warehouse-4 (walk-development photos)": {
+      "stacks": 1,
+      "spread_gt1": 0,
+      "spread_gt0": 0,
+      "spread_sum": 0,
+      "spread_max": 0,
+      "per_stack": [
+       {
+        "physical_stack": "G01:(4,0)",
+        "views": {
+         "labelled-img-01:s5": 19,
+         "labelled-img-32:s1": 19,
+         "warehouse-image-4:s1": 19
+        },
+        "spread": 0
+       }
+      ]
+     }
+    },
+    "reference": {
+     "columns": 53,
+     "photos": 10,
+     "count_ne_span": 14,
+     "count_minus_span_gt1": 0,
+     "filled_layers": 6,
+     "columns_with_fills": 6,
+     "equal_extent_pairs": 67,
+     "equal_extent_diff_gt0": 13,
+     "equal_extent_diff_gt1": 3,
+     "equal_extent_abs_diff_sum": 16,
+     "counts": [
+      [
+       1,
+       1,
+       20
+      ],
+      [
+       1,
+       2,
+       19
+      ],
+      [
+       1,
+       3,
+       20
+      ],
+      [
+       1,
+       4,
+       20
+      ],
+      [
+       1,
+       5,
+       19
+      ],
+      [
+       2,
+       1,
+       20
+      ],
+      [
+       2,
+       2,
+       20
+      ],
+      [
+       2,
+       3,
+       20
+      ],
+      [
+       2,
+       4,
+       20
+      ],
+      [
+       8,
+       1,
+       20
+      ],
+      [
+       8,
+       2,
+       20
+      ],
+      [
+       8,
+       3,
+       20
+      ],
+      [
+       8,
+       4,
+       19
+      ],
+      [
+       8,
+       5,
+       19
+      ],
+      [
+       8,
+       6,
+       20
+      ],
+      [
+       8,
+       7,
+       20
+      ],
+      [
+       8,
+       8,
+       20
+      ],
+      [
+       19,
+       1,
+       20
+      ],
+      [
+       19,
+       2,
+       20
+      ],
+      [
+       19,
+       3,
+       20
+      ],
+      [
+       19,
+       4,
+       20
+      ],
+      [
+       19,
+       5,
+       20
+      ],
+      [
+       20,
+       1,
+       20
+      ],
+      [
+       20,
+       2,
+       20
+      ],
+      [
+       20,
+       3,
+       20
+      ],
+      [
+       21,
+       1,
+       20
+      ],
+      [
+       21,
+       2,
+       20
+      ],
+      [
+       21,
+       3,
+       20
+      ],
+      [
+       21,
+       4,
+       20
+      ],
+      [
+       21,
+       5,
+       20
+      ],
+      [
+       23,
+       1,
+       20
+      ],
+      [
+       23,
+       2,
+       20
+      ],
+      [
+       23,
+       3,
+       20
+      ],
+      [
+       23,
+       4,
+       18
+      ],
+      [
+       23,
+       5,
+       20
+      ],
+      [
+       23,
+       6,
+       20
+      ],
+      [
+       23,
+       7,
+       20
+      ],
+      [
+       23,
+       8,
+       20
+      ],
+      [
+       24,
+       1,
+       20
+      ],
+      [
+       24,
+       2,
+       20
+      ],
+      [
+       24,
+       3,
+       20
+      ],
+      [
+       24,
+       4,
+       20
+      ],
+      [
+       24,
+       5,
+       20
+      ],
+      [
+       30,
+       1,
+       20
+      ],
+      [
+       30,
+       2,
+       19
+      ],
+      [
+       30,
+       3,
+       20
+      ],
+      [
+       30,
+       4,
+       19
+      ],
+      [
+       34,
+       1,
+       20
+      ],
+      [
+       34,
+       2,
+       20
+      ],
+      [
+       34,
+       3,
+       20
+      ],
+      [
+       34,
+       4,
+       20
+      ],
+      [
+       34,
+       5,
+       20
+      ],
+      [
+       34,
+       6,
+       20
+      ]
+     ],
+     "changed_vs_V0": 4,
+     "changed_columns": [
+      [
+       1,
+       2,
+       20,
+       19
+      ],
+      [
+       8,
+       4,
+       20,
+       19
+      ],
+      [
+       8,
+       5,
+       20,
+       19
+      ],
+      [
+       23,
+       4,
+       20,
+       18
+      ]
+     ]
+    }
+   },
+   "V4": {
+    "description": "local pitch from one-layer gaps only (filled sub-gaps do not feed the pitch)",
+    "equal_extent": {
+     "pairs": 29,
+     "photos": 9,
+     "photos_distinct_faces": 7,
+     "physical_pairs": 25,
+     "diff_gt1": 11,
+     "diff_gt0": 15,
+     "abs_diff_sum": 47,
+     "diff_max": 8,
+     "physical": {
+      "physical_pairs": 25,
+      "physical_pairs_diff_gt1_in_any_photo": 11,
+      "distinct_faces": 7
+     },
+     "large_scale_pitch_ge_3pct": {
+      "pairs": 11,
+      "photos": 4,
+      "diff_gt1": 0,
+      "abs_diff_sum": 0,
+      "diff_max": 0,
+      "physical_pairs": 10,
+      "physical_pairs_diff_gt1_in_any_photo": 0,
+      "distinct_faces": 3
+     },
+     "small_scale_pitch_lt_3pct": {
+      "pairs": 18,
+      "photos": 5,
+      "diff_gt1": 11,
+      "abs_diff_sum": 47,
+      "diff_max": 8,
+      "physical_pairs": 15,
+      "physical_pairs_diff_gt1_in_any_photo": 11,
+      "distinct_faces": 4
+     }
+    },
+    "walk_span": {
+     "polygons": 62,
+     "physical_stacks": 46,
+     "count_gt_span_plus1": 8,
+     "count_lt_span_minus1": 5,
+     "abs_count_minus_span_sum": 53,
+     "filled_layers": 58,
+     "polygons_with_fills": 25,
+     "layers": 867,
+     "polygons_changed_vs_V0": 6,
+     "on_V0_overfill_polygons": {
+      "polygons": 12,
+      "filled": 40,
+      "count_minus_span": [
+       2,
+       -3,
+       2,
+       3,
+       3,
+       5,
+       4,
+       3,
+       1,
+       0,
+       1,
+       2
+      ]
+     }
+    },
+    "walk_span_note": null,
+    "cross_view": {
+     "stacks": 5,
+     "spread_gt1": 1,
+     "spread_gt0": 3,
+     "spread_sum": 8,
+     "spread_max": 6,
+     "per_stack": [
+      {
+       "physical_stack": "9b4c:(0,0)",
+       "views": {
+        "scan-9b4c783e-straight:s1": 15,
+        "scan-9b4c783e-left:l3": 16,
+        "scan-30aca6a1-straight:s1": 16
+       },
+       "spread": 1
+      },
+      {
+       "physical_stack": "9b4c:(1,0)",
+       "views": {
+        "scan-9b4c783e-straight:s2": 15,
+        "scan-30aca6a1-straight:s2": 15
+       },
+       "spread": 0
+      },
+      {
+       "physical_stack": "9b4c:(2,0)",
+       "views": {
+        "scan-9b4c783e-straight:s3": 15,
+        "scan-9b4c783e-right:r1": 15,
+        "scan-30aca6a1-straight:s3": 15
+       },
+       "spread": 0
+      },
+      {
+       "physical_stack": "9b4c:(3,1)",
+       "views": {
+        "scan-9b4c783e-straight:s4": 14,
+        "scan-9b4c783e-right:r2": 14,
+        "scan-30aca6a1-straight:s4": 13
+       },
+       "spread": 1
+      },
+      {
+       "physical_stack": "ef82:(4,0)",
+       "views": {
+        "scan-ef823816-straight:s5_front": 8,
+        "scan-ef823816-right:r_short": 14
+       },
+       "spread": 6
+      }
+     ]
+    },
+    "cross_view_supplement": {
+     "ef823816 LEFT vs RIGHT (same face photographed twice)": {
+      "stacks": 4,
+      "spread_gt1": 4,
+      "spread_gt0": 4,
+      "spread_sum": 18,
+      "spread_max": 6,
+      "per_stack": [
+       {
+        "physical_stack": "ef82:(4,0)",
+        "views": {
+         "scan-ef823816-right:r_short": 14,
+         "scan-ef823816-left:l_short": 9
+        },
+        "spread": 5
+       },
+       {
+        "physical_stack": "ef82:(4,1)",
+        "views": {
+         "scan-ef823816-right:r2": 21,
+         "scan-ef823816-left:l2": 15
+        },
+        "spread": 6
+       },
+       {
+        "physical_stack": "ef82:(4,2)",
+        "views": {
+         "scan-ef823816-right:r3": 19,
+         "scan-ef823816-left:l3": 16
+        },
+        "spread": 3
+       },
+       {
+        "physical_stack": "ef82:(4,3)",
+        "views": {
+         "scan-ef823816-right:r4": 19,
+         "scan-ef823816-left:l4": 15
+        },
+        "spread": 4
+       }
+      ]
+     },
+     "G01 (4,0) free end: img-01, img-32, warehouse-4 (walk-development photos)": {
+      "stacks": 1,
+      "spread_gt1": 0,
+      "spread_gt0": 0,
+      "spread_sum": 0,
+      "spread_max": 0,
+      "per_stack": [
+       {
+        "physical_stack": "G01:(4,0)",
+        "views": {
+         "labelled-img-01:s5": 19,
+         "labelled-img-32:s1": 19,
+         "warehouse-image-4:s1": 19
+        },
+        "spread": 0
+       }
+      ]
+     }
+    },
+    "reference": {
+     "columns": 53,
+     "photos": 10,
+     "count_ne_span": 11,
+     "count_minus_span_gt1": 0,
+     "filled_layers": 11,
+     "columns_with_fills": 9,
+     "equal_extent_pairs": 67,
+     "equal_extent_diff_gt0": 1,
+     "equal_extent_diff_gt1": 0,
+     "equal_extent_abs_diff_sum": 1,
+     "counts": [
+      [
+       1,
+       1,
+       20
+      ],
+      [
+       1,
+       2,
+       20
+      ],
+      [
+       1,
+       3,
+       20
+      ],
+      [
+       1,
+       4,
+       20
+      ],
+      [
+       1,
+       5,
+       19
+      ],
+      [
+       2,
+       1,
+       20
+      ],
+      [
+       2,
+       2,
+       20
+      ],
+      [
+       2,
+       3,
+       20
+      ],
+      [
+       2,
+       4,
+       20
+      ],
+      [
+       8,
+       1,
+       20
+      ],
+      [
+       8,
+       2,
+       20
+      ],
+      [
+       8,
+       3,
+       20
+      ],
+      [
+       8,
+       4,
+       20
+      ],
+      [
+       8,
+       5,
+       20
+      ],
+      [
+       8,
+       6,
+       20
+      ],
+      [
+       8,
+       7,
+       20
+      ],
+      [
+       8,
+       8,
+       20
+      ],
+      [
+       19,
+       1,
+       20
+      ],
+      [
+       19,
+       2,
+       20
+      ],
+      [
+       19,
+       3,
+       20
+      ],
+      [
+       19,
+       4,
+       20
+      ],
+      [
+       19,
+       5,
+       20
+      ],
+      [
+       20,
+       1,
+       20
+      ],
+      [
+       20,
+       2,
+       20
+      ],
+      [
+       20,
+       3,
+       20
+      ],
+      [
+       21,
+       1,
+       20
+      ],
+      [
+       21,
+       2,
+       20
+      ],
+      [
+       21,
+       3,
+       20
+      ],
+      [
+       21,
+       4,
+       20
+      ],
+      [
+       21,
+       5,
+       20
+      ],
+      [
+       23,
+       1,
+       20
+      ],
+      [
+       23,
+       2,
+       20
+      ],
+      [
+       23,
+       3,
+       20
+      ],
+      [
+       23,
+       4,
+       20
+      ],
+      [
+       23,
+       5,
+       20
+      ],
+      [
+       23,
+       6,
+       20
+      ],
+      [
+       23,
+       7,
+       20
+      ],
+      [
+       23,
+       8,
+       20
+      ],
+      [
+       24,
+       1,
+       20
+      ],
+      [
+       24,
+       2,
+       20
+      ],
+      [
+       24,
+       3,
+       20
+      ],
+      [
+       24,
+       4,
+       20
+      ],
+      [
+       24,
+       5,
+       20
+      ],
+      [
+       30,
+       1,
+       20
+      ],
+      [
+       30,
+       2,
+       19
+      ],
+      [
+       30,
+       3,
+       20
+      ],
+      [
+       30,
+       4,
+       19
+      ],
+      [
+       34,
+       1,
+       20
+      ],
+      [
+       34,
+       2,
+       20
+      ],
+      [
+       34,
+       3,
+       20
+      ],
+      [
+       34,
+       4,
+       20
+      ],
+      [
+       34,
+       5,
+       20
+      ],
+      [
+       34,
+       6,
+       20
+      ]
+     ],
+     "changed_vs_V0": 0,
+     "changed_columns": []
+    }
+   }
+  },
+  "equal_extent_pairs": [
+   {
+    "image": "scan-9b4c783e-straight",
+    "pair": [
+     "s1",
+     "s2"
+    ],
+    "pitch_frac": 0.0532,
+    "span": [
+     15,
+     15
+    ],
+    "V0": [
+     15,
+     15
+    ],
+    "V1": [
+     15,
+     15
+    ],
+    "V2": [
+     15,
+     15
+    ],
+    "V3": [
+     15,
+     15
+    ],
+    "V4": [
+     15,
+     15
+    ]
+   },
+   {
+    "image": "scan-9b4c783e-straight",
+    "pair": [
+     "s1",
+     "s3"
+    ],
+    "pitch_frac": 0.0532,
+    "span": [
+     15,
+     15
+    ],
+    "V0": [
+     15,
+     15
+    ],
+    "V1": [
+     15,
+     15
+    ],
+    "V2": [
+     15,
+     15
+    ],
+    "V3": [
+     15,
+     15
+    ],
+    "V4": [
+     15,
+     15
+    ]
+   },
+   {
+    "image": "scan-9b4c783e-straight",
+    "pair": [
+     "s2",
+     "s3"
+    ],
+    "pitch_frac": 0.0532,
+    "span": [
+     15,
+     15
+    ],
+    "V0": [
+     15,
+     15
+    ],
+    "V1": [
+     15,
+     15
+    ],
+    "V2": [
+     15,
+     15
+    ],
+    "V3": [
+     15,
+     15
+    ],
+    "V4": [
+     15,
+     15
+    ]
+   },
+   {
+    "image": "labelled-img-01",
+    "pair": [
+     "s1",
+     "s2"
+    ],
+    "pitch_frac": 0.0348,
+    "span": [
+     21,
+     20
+    ],
+    "V0": [
+     20,
+     20
+    ],
+    "V1": [
+     20,
+     20
+    ],
+    "V2": [
+     20,
+     20
+    ],
+    "V3": [
+     20,
+     19
+    ],
+    "V4": [
+     20,
+     20
+    ]
+   },
+   {
+    "image": "labelled-img-01",
+    "pair": [
+     "s1",
+     "s3"
+    ],
+    "pitch_frac": 0.0348,
+    "span": [
+     21,
+     20
+    ],
+    "V0": [
+     20,
+     20
+    ],
+    "V1": [
+     20,
+     20
+    ],
+    "V2": [
+     20,
+     20
+    ],
+    "V3": [
+     20,
+     20
+    ],
+    "V4": [
+     20,
+     20
+    ]
+   },
+   {
+    "image": "labelled-img-01",
+    "pair": [
+     "s2",
+     "s3"
+    ],
+    "pitch_frac": 0.0348,
+    "span": [
+     20,
+     20
+    ],
+    "V0": [
+     20,
+     20
+    ],
+    "V1": [
+     20,
+     20
+    ],
+    "V2": [
+     20,
+     20
+    ],
+    "V3": [
+     19,
+     20
+    ],
+    "V4": [
+     20,
+     20
+    ]
+   },
+   {
+    "image": "labelled-img-01",
+    "pair": [
+     "s2",
+     "s4"
+    ],
+    "pitch_frac": 0.0348,
+    "span": [
+     20,
+     20
+    ],
+    "V0": [
+     20,
+     20
+    ],
+    "V1": [
+     20,
+     20
+    ],
+    "V2": [
+     20,
+     20
+    ],
+    "V3": [
+     19,
+     20
+    ],
+    "V4": [
+     20,
+     20
+    ]
+   },
+   {
+    "image": "labelled-img-01",
+    "pair": [
+     "s3",
+     "s4"
+    ],
+    "pitch_frac": 0.0348,
+    "span": [
+     20,
+     20
+    ],
+    "V0": [
+     20,
+     20
+    ],
+    "V1": [
+     20,
+     20
+    ],
+    "V2": [
+     20,
+     20
+    ],
+    "V3": [
+     20,
+     20
+    ],
+    "V4": [
+     20,
+     20
+    ]
+   },
+   {
+    "image": "labelled-img-04",
+    "pair": [
+     "a",
+     "b"
+    ],
+    "pitch_frac": 0.0201,
+    "span": [
+     17,
+     18
+    ],
+    "V0": [
+     19,
+     15
+    ],
+    "V1": [
+     18,
+     17
+    ],
+    "V2": [
+     17,
+     18
+    ],
+    "V3": [
+     17,
+     14
+    ],
+    "V4": [
+     19,
+     15
+    ]
+   },
+   {
+    "image": "labelled-img-04",
+    "pair": [
+     "e",
+     "f"
+    ],
+    "pitch_frac": 0.0201,
+    "span": [
+     18,
+     19
+    ],
+    "V0": [
+     19,
+     27
+    ],
+    "V1": [
+     19,
+     20
+    ],
+    "V2": [
+     19,
+     19
+    ],
+    "V3": [
+     18,
+     15
+    ],
+    "V4": [
+     19,
+     16
+    ]
+   },
+   {
+    "image": "scan-ef823816-straight",
+    "pair": [
+     "s1",
+     "s2"
+    ],
+    "pitch_frac": 0.0266,
+    "span": [
+     11,
+     14
+    ],
+    "V0": [
+     10,
+     19
+    ],
+    "V1": [
+     10,
+     15
+    ],
+    "V2": [
+     10,
+     14
+    ],
+    "V3": [
+     10,
+     11
+    ],
+    "V4": [
+     10,
+     18
+    ]
+   },
+   {
+    "image": "scan-ef823816-straight",
+    "pair": [
+     "s1",
+     "s3"
+    ],
+    "pitch_frac": 0.0266,
+    "span": [
+     11,
+     11
+    ],
+    "V0": [
+     10,
+     18
+    ],
+    "V1": [
+     10,
+     12
+    ],
+    "V2": [
+     10,
+     11
+    ],
+    "V3": [
+     10,
+     11
+    ],
+    "V4": [
+     10,
+     14
+    ]
+   },
+   {
+    "image": "scan-ef823816-straight",
+    "pair": [
+     "s1",
+     "s4"
+    ],
+    "pitch_frac": 0.0266,
+    "span": [
+     11,
+     11
+    ],
+    "V0": [
+     10,
+     10
+    ],
+    "V1": [
+     10,
+     10
+    ],
+    "V2": [
+     10,
+     10
+    ],
+    "V3": [
+     10,
+     10
+    ],
+    "V4": [
+     10,
+     10
+    ]
+   },
+   {
+    "image": "scan-ef823816-straight",
+    "pair": [
+     "s2",
+     "s3"
+    ],
+    "pitch_frac": 0.0266,
+    "span": [
+     14,
+     11
+    ],
+    "V0": [
+     19,
+     18
+    ],
+    "V1": [
+     15,
+     12
+    ],
+    "V2": [
+     14,
+     11
+    ],
+    "V3": [
+     11,
+     11
+    ],
+    "V4": [
+     18,
+     14
+    ]
+   },
+   {
+    "image": "scan-ef823816-straight",
+    "pair": [
+     "s2",
+     "s4"
+    ],
+    "pitch_frac": 0.0266,
+    "span": [
+     14,
+     11
+    ],
+    "V0": [
+     19,
+     10
+    ],
+    "V1": [
+     15,
+     10
+    ],
+    "V2": [
+     14,
+     10
+    ],
+    "V3": [
+     11,
+     10
+    ],
+    "V4": [
+     18,
+     10
+    ]
+   },
+   {
+    "image": "scan-ef823816-straight",
+    "pair": [
+     "s3",
+     "s4"
+    ],
+    "pitch_frac": 0.0266,
+    "span": [
+     11,
+     11
+    ],
+    "V0": [
+     18,
+     10
+    ],
+    "V1": [
+     12,
+     10
+    ],
+    "V2": [
+     11,
+     10
+    ],
+    "V3": [
+     11,
+     10
+    ],
+    "V4": [
+     14,
+     10
+    ]
+   },
+   {
+    "image": "scan-ef823816-right",
+    "pair": [
+     "r2",
+     "r3"
+    ],
+    "pitch_frac": 0.0247,
+    "span": [
+     20,
+     19
+    ],
+    "V0": [
+     21,
+     19
+    ],
+    "V1": [
+     21,
+     19
+    ],
+    "V2": [
+     21,
+     19
+    ],
+    "V3": [
+     20,
+     19
+    ],
+    "V4": [
+     21,
+     19
+    ]
+   },
+   {
+    "image": "scan-ef823816-right",
+    "pair": [
+     "r2",
+     "r4"
+    ],
+    "pitch_frac": 0.0247,
+    "span": [
+     20,
+     20
+    ],
+    "V0": [
+     21,
+     19
+    ],
+    "V1": [
+     21,
+     19
+    ],
+    "V2": [
+     21,
+     19
+    ],
+    "V3": [
+     20,
+     19
+    ],
+    "V4": [
+     21,
+     19
+    ]
+   },
+   {
+    "image": "scan-ef823816-right",
+    "pair": [
+     "r3",
+     "r4"
+    ],
+    "pitch_frac": 0.0247,
+    "span": [
+     19,
+     20
+    ],
+    "V0": [
+     19,
+     19
+    ],
+    "V1": [
+     19,
+     19
+    ],
+    "V2": [
+     19,
+     19
+    ],
+    "V3": [
+     19,
+     19
+    ],
+    "V4": [
+     19,
+     19
+    ]
+   },
+   {
+    "image": "scan-ef823816-left",
+    "pair": [
+     "l2",
+     "l3"
+    ],
+    "pitch_frac": 0.0203,
+    "span": [
+     14,
+     16
+    ],
+    "V0": [
+     22,
+     27
+    ],
+    "V1": [
+     15,
+     17
+    ],
+    "V2": [
+     14,
+     16
+    ],
+    "V3": [
+     14,
+     14
+    ],
+    "V4": [
+     15,
+     16
+    ]
+   },
+   {
+    "image": "scan-ef823816-left",
+    "pair": [
+     "l2",
+     "l4"
+    ],
+    "pitch_frac": 0.0203,
+    "span": [
+     14,
+     18
+    ],
+    "V0": [
+     22,
+     15
+    ],
+    "V1": [
+     15,
+     17
+    ],
+    "V2": [
+     14,
+     18
+    ],
+    "V3": [
+     14,
+     14
+    ],
+    "V4": [
+     15,
+     15
+    ]
+   },
+   {
+    "image": "scan-ef823816-left",
+    "pair": [
+     "l3",
+     "l4"
+    ],
+    "pitch_frac": 0.0203,
+    "span": [
+     16,
+     18
+    ],
+    "V0": [
+     27,
+     15
+    ],
+    "V1": [
+     17,
+     17
+    ],
+    "V2": [
+     16,
+     18
+    ],
+    "V3": [
+     14,
+     14
+    ],
+    "V4": [
+     16,
+     15
+    ]
+   },
+   {
+    "image": "scan-30aca6a1-straight",
+    "pair": [
+     "s2",
+     "s3"
+    ],
+    "pitch_frac": 0.0344,
+    "span": [
+     15,
+     15
+    ],
+    "V0": [
+     15,
+     15
+    ],
+    "V1": [
+     15,
+     15
+    ],
+    "V2": [
+     15,
+     15
+    ],
+    "V3": [
+     15,
+     15
+    ],
+    "V4": [
+     15,
+     15
+    ]
+   },
+   {
+    "image": "labelled-img-41",
+    "pair": [
+     "fL",
+     "fR"
+    ],
+    "pitch_frac": 0.037,
+    "span": [
+     20,
+     21
+    ],
+    "V0": [
+     20,
+     20
+    ],
+    "V1": [
+     20,
+     20
+    ],
+    "V2": [
+     20,
+     20
+    ],
+    "V3": [
+     20,
+     20
+    ],
+    "V4": [
+     20,
+     20
+    ]
+   },
+   {
+    "image": "labelled-img-41",
+    "pair": [
+     "b2",
+     "b3"
+    ],
+    "pitch_frac": 0.037,
+    "span": [
+     3,
+     3
+    ],
+    "V0": [
+     4,
+     4
+    ],
+    "V1": [
+     4,
+     4
+    ],
+    "V2": [
+     4,
+     4
+    ],
+    "V3": [
+     3,
+     3
+    ],
+    "V4": [
+     4,
+     4
+    ]
+   },
+   {
+    "image": "mutaa-image-07",
+    "pair": [
+     "F1",
+     "F2"
+    ],
+    "pitch_frac": 0.0239,
+    "span": [
+     10,
+     11
+    ],
+    "V0": [
+     10,
+     12
+    ],
+    "V1": [
+     10,
+     12
+    ],
+    "V2": [
+     10,
+     12
+    ],
+    "V3": [
+     10,
+     11
+    ],
+    "V4": [
+     10,
+     12
+    ]
+   },
+   {
+    "image": "mutaa-image-07",
+    "pair": [
+     "F1",
+     "F3"
+    ],
+    "pitch_frac": 0.0239,
+    "span": [
+     10,
+     10
+    ],
+    "V0": [
+     10,
+     17
+    ],
+    "V1": [
+     10,
+     11
+    ],
+    "V2": [
+     10,
+     10
+    ],
+    "V3": [
+     10,
+     10
+    ],
+    "V4": [
+     10,
+     11
+    ]
+   },
+   {
+    "image": "mutaa-image-07",
+    "pair": [
+     "F2",
+     "F3"
+    ],
+    "pitch_frac": 0.0239,
+    "span": [
+     11,
+     10
+    ],
+    "V0": [
+     12,
+     17
+    ],
+    "V1": [
+     12,
+     11
+    ],
+    "V2": [
+     12,
+     10
+    ],
+    "V3": [
+     11,
+     10
+    ],
+    "V4": [
+     12,
+     11
+    ]
+   },
+   {
+    "image": "mutaa-image-07",
+    "pair": [
+     "F3",
+     "F4"
+    ],
+    "pitch_frac": 0.0239,
+    "span": [
+     10,
+     11
+    ],
+    "V0": [
+     17,
+     9
+    ],
+    "V1": [
+     11,
+     10
+    ],
+    "V2": [
+     10,
+     11
+    ],
+    "V3": [
+     10,
+     9
+    ],
+    "V4": [
+     11,
+     9
+    ]
+   }
+  ],
+  "pitch_frac_per_photo": {
+   "scan-9b4c783e-straight": 0.0532,
+   "scan-9b4c783e-left": 0.0502,
+   "scan-9b4c783e-right": 0.045,
+   "labelled-img-01": 0.0348,
+   "labelled-img-32": 0.0309,
+   "warehouse-image-4": 0.0472,
+   "labelled-img-04": 0.0201,
+   "labelled-img-09": 0.0385,
+   "scan-ef823816-straight": 0.0266,
+   "scan-ef823816-right": 0.0247,
+   "scan-ef823816-left": 0.0203,
+   "scan-30aca6a1-straight": 0.0344,
+   "labelled-img-41": 0.037,
+   "labelled-img-47": 0.0888,
+   "mutaa-image-07": 0.0239,
+   "labelled-img-46": 0.052,
+   "labelled-img-43": 0.0536
+  },
+  "polygon_counts": [
+   {
+    "image": "scan-9b4c783e-straight",
+    "polygon": "s1",
+    "physical": "9b4c:(0,0)",
+    "boxes": 15,
+    "span": 15,
+    "box_pitch_ratio": 0.979,
+    "V0": 15,
+    "V1": 15,
+    "V2": 15,
+    "V3": 15,
+    "V4": 15,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "scan-9b4c783e-straight",
+    "polygon": "s2",
+    "physical": "9b4c:(1,0)",
+    "boxes": 15,
+    "span": 15,
+    "box_pitch_ratio": 0.943,
+    "V0": 15,
+    "V1": 15,
+    "V2": 15,
+    "V3": 15,
+    "V4": 15,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "scan-9b4c783e-straight",
+    "polygon": "s3",
+    "physical": "9b4c:(2,0)",
+    "boxes": 16,
+    "span": 15,
+    "box_pitch_ratio": 0.942,
+    "V0": 15,
+    "V1": 15,
+    "V2": 15,
+    "V3": 15,
+    "V4": 15,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "scan-9b4c783e-straight",
+    "polygon": "s4",
+    "physical": "9b4c:(3,1)",
+    "boxes": 17,
+    "span": 14,
+    "box_pitch_ratio": 0.965,
+    "V0": 14,
+    "V1": 14,
+    "V2": 14,
+    "V3": 14,
+    "V4": 14,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "scan-9b4c783e-left",
+    "polygon": "l1",
+    "physical": "9b4c:(0,2)",
+    "boxes": 17,
+    "span": 16,
+    "box_pitch_ratio": 0.879,
+    "V0": 16,
+    "V1": 16,
+    "V2": 16,
+    "V3": 16,
+    "V4": 16,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "scan-9b4c783e-left",
+    "polygon": "l2",
+    "physical": "9b4c:(0,1)",
+    "boxes": 15,
+    "span": 15,
+    "box_pitch_ratio": 0.885,
+    "V0": 15,
+    "V1": 15,
+    "V2": 15,
+    "V3": 15,
+    "V4": 15,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "scan-9b4c783e-left",
+    "polygon": "l3",
+    "physical": "9b4c:(0,0)",
+    "boxes": 16,
+    "span": 16,
+    "box_pitch_ratio": 0.853,
+    "V0": 16,
+    "V1": 16,
+    "V2": 16,
+    "V3": 16,
+    "V4": 16,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "scan-9b4c783e-right",
+    "polygon": "r1",
+    "physical": "9b4c:(2,0)",
+    "boxes": 15,
+    "span": 15,
+    "box_pitch_ratio": 1.0,
+    "V0": 15,
+    "V1": 15,
+    "V2": 15,
+    "V3": 15,
+    "V4": 15,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "scan-9b4c783e-right",
+    "polygon": "r2",
+    "physical": "9b4c:(3,1)",
+    "boxes": 14,
+    "span": 14,
+    "box_pitch_ratio": 0.993,
+    "V0": 14,
+    "V1": 14,
+    "V2": 14,
+    "V3": 14,
+    "V4": 14,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "scan-9b4c783e-right",
+    "polygon": "r3",
+    "physical": "9b4c:(3,2)",
+    "boxes": 15,
+    "span": 15,
+    "box_pitch_ratio": 1.02,
+    "V0": 15,
+    "V1": 15,
+    "V2": 15,
+    "V3": 15,
+    "V4": 15,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "labelled-img-01",
+    "polygon": "s1",
+    "physical": "G01:(0,0)",
+    "boxes": 21,
+    "span": 21,
+    "box_pitch_ratio": 1.0,
+    "V0": 20,
+    "V1": 20,
+    "V2": 20,
+    "V3": 20,
+    "V4": 20,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "labelled-img-01",
+    "polygon": "s2",
+    "physical": "G01:(1,0)",
+    "boxes": 19,
+    "span": 20,
+    "box_pitch_ratio": 0.988,
+    "V0": 20,
+    "V1": 20,
+    "V2": 20,
+    "V3": 19,
+    "V4": 20,
+    "V0_filled": 1,
+    "V1_filled": 1,
+    "V2_filled": 1,
+    "V3_filled": 0,
+    "V4_filled": 1
+   },
+   {
+    "image": "labelled-img-01",
+    "polygon": "s3",
+    "physical": "G01:(2,0)",
+    "boxes": 20,
+    "span": 20,
+    "box_pitch_ratio": 0.976,
+    "V0": 20,
+    "V1": 20,
+    "V2": 20,
+    "V3": 20,
+    "V4": 20,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "labelled-img-01",
+    "polygon": "s4",
+    "physical": "G01:(3,0)",
+    "boxes": 21,
+    "span": 20,
+    "box_pitch_ratio": 1.037,
+    "V0": 20,
+    "V1": 20,
+    "V2": 20,
+    "V3": 20,
+    "V4": 20,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "labelled-img-01",
+    "polygon": "s5",
+    "physical": "G01:(4,0)",
+    "boxes": 20,
+    "span": 19,
+    "box_pitch_ratio": 0.951,
+    "V0": 19,
+    "V1": 19,
+    "V2": 19,
+    "V3": 19,
+    "V4": 19,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "labelled-img-32",
+    "polygon": "s1",
+    "physical": "G01:(4,0)",
+    "boxes": 24,
+    "span": 19,
+    "box_pitch_ratio": 1.025,
+    "V0": 19,
+    "V1": 19,
+    "V2": 19,
+    "V3": 19,
+    "V4": 19,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "warehouse-image-4",
+    "polygon": "s1",
+    "physical": "G01:(4,0)",
+    "boxes": 19,
+    "span": 19,
+    "box_pitch_ratio": 0.94,
+    "V0": 19,
+    "V1": 19,
+    "V2": 19,
+    "V3": 19,
+    "V4": 19,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "labelled-img-04",
+    "polygon": "a",
+    "physical": "labelled-img-04:a",
+    "boxes": 18,
+    "span": 17,
+    "box_pitch_ratio": 1.0,
+    "V0": 19,
+    "V1": 18,
+    "V2": 17,
+    "V3": 17,
+    "V4": 19,
+    "V0_filled": 3,
+    "V1_filled": 2,
+    "V2_filled": 1,
+    "V3_filled": 1,
+    "V4_filled": 3
+   },
+   {
+    "image": "labelled-img-04",
+    "polygon": "b",
+    "physical": "labelled-img-04:b",
+    "boxes": 18,
+    "span": 18,
+    "box_pitch_ratio": 1.01,
+    "V0": 15,
+    "V1": 17,
+    "V2": 18,
+    "V3": 14,
+    "V4": 15,
+    "V0_filled": 1,
+    "V1_filled": 3,
+    "V2_filled": 4,
+    "V3_filled": 0,
+    "V4_filled": 1
+   },
+   {
+    "image": "labelled-img-04",
+    "polygon": "c_rear",
+    "physical": "img04:c_rear",
+    "boxes": 7,
+    "span": 6,
+    "box_pitch_ratio": 0.989,
+    "V0": 5,
+    "V1": 5,
+    "V2": 5,
+    "V3": 5,
+    "V4": 5,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "labelled-img-04",
+    "polygon": "c_front",
+    "physical": "labelled-img-04:c_front",
+    "boxes": 15,
+    "span": 15,
+    "box_pitch_ratio": 1.02,
+    "V0": 16,
+    "V1": 16,
+    "V2": 16,
+    "V3": 16,
+    "V4": 16,
+    "V0_filled": 1,
+    "V1_filled": 1,
+    "V2_filled": 1,
+    "V3_filled": 1,
+    "V4_filled": 1
+   },
+   {
+    "image": "labelled-img-04",
+    "polygon": "d_rear",
+    "physical": "labelled-img-04:d_rear",
+    "boxes": 3,
+    "span": 2,
+    "box_pitch_ratio": 0.559,
+    "V0": 2,
+    "V1": 2,
+    "V2": 2,
+    "V3": 2,
+    "V4": 2,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "labelled-img-04",
+    "polygon": "d_front",
+    "physical": "labelled-img-04:d_front",
+    "boxes": 15,
+    "span": 16,
+    "box_pitch_ratio": 0.926,
+    "V0": 16,
+    "V1": 16,
+    "V2": 16,
+    "V3": 11,
+    "V4": 16,
+    "V0_filled": 3,
+    "V1_filled": 3,
+    "V2_filled": 3,
+    "V3_filled": 0,
+    "V4_filled": 3
+   },
+   {
+    "image": "labelled-img-04",
+    "polygon": "e",
+    "physical": "labelled-img-04:e",
+    "boxes": 17,
+    "span": 18,
+    "box_pitch_ratio": 0.935,
+    "V0": 19,
+    "V1": 19,
+    "V2": 19,
+    "V3": 18,
+    "V4": 19,
+    "V0_filled": 3,
+    "V1_filled": 3,
+    "V2_filled": 3,
+    "V3_filled": 2,
+    "V4_filled": 3
+   },
+   {
+    "image": "labelled-img-04",
+    "polygon": "f",
+    "physical": "labelled-img-04:f",
+    "boxes": 17,
+    "span": 19,
+    "box_pitch_ratio": 0.941,
+    "V0": 27,
+    "V1": 20,
+    "V2": 19,
+    "V3": 15,
+    "V4": 16,
+    "V0_filled": 11,
+    "V1_filled": 4,
+    "V2_filled": 3,
+    "V3_filled": 1,
+    "V4_filled": 2
+   },
+   {
+    "image": "labelled-img-09",
+    "polygon": "f_front",
+    "physical": "img09:f",
+    "boxes": 10,
+    "span": 12,
+    "box_pitch_ratio": 1.418,
+    "V0": 14,
+    "V1": 13,
+    "V2": 12,
+    "V3": 11,
+    "V4": 14,
+    "V0_filled": 4,
+    "V1_filled": 3,
+    "V2_filled": 2,
+    "V3_filled": 1,
+    "V4_filled": 4
+   },
+   {
+    "image": "labelled-img-09",
+    "polygon": "mb",
+    "physical": "labelled-img-09:mb",
+    "boxes": 6,
+    "span": 6,
+    "box_pitch_ratio": 0.979,
+    "V0": 6,
+    "V1": 6,
+    "V2": 6,
+    "V3": 6,
+    "V4": 6,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "labelled-img-09",
+    "polygon": "rb",
+    "physical": "labelled-img-09:rb",
+    "boxes": 5,
+    "span": 4,
+    "box_pitch_ratio": 1.049,
+    "V0": 4,
+    "V1": 4,
+    "V2": 4,
+    "V3": 4,
+    "V4": 4,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "labelled-img-09",
+    "polygon": "l",
+    "physical": "labelled-img-09:l",
+    "boxes": 18,
+    "span": 18,
+    "box_pitch_ratio": 1.053,
+    "V0": 21,
+    "V1": 19,
+    "V2": 18,
+    "V3": 17,
+    "V4": 21,
+    "V0_filled": 4,
+    "V1_filled": 2,
+    "V2_filled": 1,
+    "V3_filled": 0,
+    "V4_filled": 4
+   },
+   {
+    "image": "labelled-img-09",
+    "polygon": "r1",
+    "physical": "labelled-img-09:r1",
+    "boxes": 17,
+    "span": 17,
+    "box_pitch_ratio": 1.232,
+    "V0": 20,
+    "V1": 18,
+    "V2": 17,
+    "V3": 16,
+    "V4": 20,
+    "V0_filled": 4,
+    "V1_filled": 2,
+    "V2_filled": 1,
+    "V3_filled": 0,
+    "V4_filled": 4
+   },
+   {
+    "image": "labelled-img-09",
+    "polygon": "r2",
+    "physical": "labelled-img-09:r2",
+    "boxes": 14,
+    "span": 15,
+    "box_pitch_ratio": 1.01,
+    "V0": 20,
+    "V1": 16,
+    "V2": 15,
+    "V3": 15,
+    "V4": 20,
+    "V0_filled": 6,
+    "V1_filled": 2,
+    "V2_filled": 1,
+    "V3_filled": 1,
+    "V4_filled": 6
+   },
+   {
+    "image": "scan-ef823816-straight",
+    "polygon": "s1",
+    "physical": "ef82:(0,0)",
+    "boxes": 13,
+    "span": 11,
+    "box_pitch_ratio": 0.651,
+    "V0": 10,
+    "V1": 10,
+    "V2": 10,
+    "V3": 10,
+    "V4": 10,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "scan-ef823816-straight",
+    "polygon": "s2",
+    "physical": "ef82:(1,0)",
+    "boxes": 13,
+    "span": 14,
+    "box_pitch_ratio": 0.8,
+    "V0": 19,
+    "V1": 15,
+    "V2": 14,
+    "V3": 11,
+    "V4": 18,
+    "V0_filled": 6,
+    "V1_filled": 2,
+    "V2_filled": 1,
+    "V3_filled": 0,
+    "V4_filled": 5
+   },
+   {
+    "image": "scan-ef823816-straight",
+    "polygon": "s3",
+    "physical": "ef82:(2,0)",
+    "boxes": 12,
+    "span": 11,
+    "box_pitch_ratio": 0.671,
+    "V0": 18,
+    "V1": 12,
+    "V2": 11,
+    "V3": 11,
+    "V4": 14,
+    "V0_filled": 7,
+    "V1_filled": 1,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 3
+   },
+   {
+    "image": "scan-ef823816-straight",
+    "polygon": "s4",
+    "physical": "ef82:(3,0)",
+    "boxes": 12,
+    "span": 11,
+    "box_pitch_ratio": 0.64,
+    "V0": 10,
+    "V1": 10,
+    "V2": 10,
+    "V3": 10,
+    "V4": 10,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "scan-ef823816-straight",
+    "polygon": "s5_front",
+    "physical": "ef82:(4,0)",
+    "boxes": 9,
+    "span": 8,
+    "box_pitch_ratio": 0.686,
+    "V0": 8,
+    "V1": 8,
+    "V2": 8,
+    "V3": 6,
+    "V4": 8,
+    "V0_filled": 1,
+    "V1_filled": 1,
+    "V2_filled": 1,
+    "V3_filled": 0,
+    "V4_filled": 1
+   },
+   {
+    "image": "scan-ef823816-right",
+    "polygon": "r_short",
+    "physical": "ef82:(4,0)",
+    "boxes": 14,
+    "span": 13,
+    "box_pitch_ratio": 1.0,
+    "V0": 14,
+    "V1": 14,
+    "V2": 14,
+    "V3": 12,
+    "V4": 14,
+    "V0_filled": 2,
+    "V1_filled": 2,
+    "V2_filled": 2,
+    "V3_filled": 0,
+    "V4_filled": 2
+   },
+   {
+    "image": "scan-ef823816-right",
+    "polygon": "r_setback",
+    "physical": "ef82:(3,0)",
+    "boxes": 6,
+    "span": 6,
+    "box_pitch_ratio": 0.987,
+    "V0": 6,
+    "V1": 6,
+    "V2": 6,
+    "V3": 6,
+    "V4": 6,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "scan-ef823816-right",
+    "polygon": "r2",
+    "physical": "ef82:(4,1)",
+    "boxes": 22,
+    "span": 20,
+    "box_pitch_ratio": 1.038,
+    "V0": 21,
+    "V1": 21,
+    "V2": 21,
+    "V3": 20,
+    "V4": 21,
+    "V0_filled": 1,
+    "V1_filled": 1,
+    "V2_filled": 1,
+    "V3_filled": 0,
+    "V4_filled": 1
+   },
+   {
+    "image": "scan-ef823816-right",
+    "polygon": "r3",
+    "physical": "ef82:(4,2)",
+    "boxes": 21,
+    "span": 19,
+    "box_pitch_ratio": 1.073,
+    "V0": 19,
+    "V1": 19,
+    "V2": 19,
+    "V3": 19,
+    "V4": 19,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "scan-ef823816-right",
+    "polygon": "r4",
+    "physical": "ef82:(4,3)",
+    "boxes": 22,
+    "span": 20,
+    "box_pitch_ratio": 1.139,
+    "V0": 19,
+    "V1": 19,
+    "V2": 19,
+    "V3": 19,
+    "V4": 19,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "scan-ef823816-left",
+    "polygon": "l_short",
+    "physical": "ef82:(4,0)",
+    "boxes": 12,
+    "span": 12,
+    "box_pitch_ratio": 0.868,
+    "V0": 9,
+    "V1": 11,
+    "V2": 12,
+    "V3": 9,
+    "V4": 9,
+    "V0_filled": 0,
+    "V1_filled": 2,
+    "V2_filled": 3,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "scan-ef823816-left",
+    "polygon": "l_setback",
+    "physical": "ef82:(3,0)",
+    "boxes": 4,
+    "span": 5,
+    "box_pitch_ratio": 0.877,
+    "V0": 5,
+    "V1": 5,
+    "V2": 5,
+    "V3": 4,
+    "V4": 5,
+    "V0_filled": 1,
+    "V1_filled": 1,
+    "V2_filled": 1,
+    "V3_filled": 0,
+    "V4_filled": 1
+   },
+   {
+    "image": "scan-ef823816-left",
+    "polygon": "l2",
+    "physical": "ef82:(4,1)",
+    "boxes": 15,
+    "span": 14,
+    "box_pitch_ratio": 0.769,
+    "V0": 22,
+    "V1": 15,
+    "V2": 14,
+    "V3": 14,
+    "V4": 15,
+    "V0_filled": 7,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 2,
+    "V4_filled": 3
+   },
+   {
+    "image": "scan-ef823816-left",
+    "polygon": "l3",
+    "physical": "ef82:(4,2)",
+    "boxes": 15,
+    "span": 16,
+    "box_pitch_ratio": 0.914,
+    "V0": 27,
+    "V1": 17,
+    "V2": 16,
+    "V3": 14,
+    "V4": 16,
+    "V0_filled": 12,
+    "V1_filled": 2,
+    "V2_filled": 1,
+    "V3_filled": 0,
+    "V4_filled": 2
+   },
+   {
+    "image": "scan-ef823816-left",
+    "polygon": "l4",
+    "physical": "ef82:(4,3)",
+    "boxes": 17,
+    "span": 18,
+    "box_pitch_ratio": 0.985,
+    "V0": 15,
+    "V1": 17,
+    "V2": 18,
+    "V3": 14,
+    "V4": 15,
+    "V0_filled": 1,
+    "V1_filled": 3,
+    "V2_filled": 4,
+    "V3_filled": 0,
+    "V4_filled": 1
+   },
+   {
+    "image": "scan-30aca6a1-straight",
+    "polygon": "s1",
+    "physical": "9b4c:(0,0)",
+    "boxes": 16,
+    "span": 16,
+    "box_pitch_ratio": 1.048,
+    "V0": 16,
+    "V1": 16,
+    "V2": 16,
+    "V3": 16,
+    "V4": 16,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "scan-30aca6a1-straight",
+    "polygon": "s2",
+    "physical": "9b4c:(1,0)",
+    "boxes": 17,
+    "span": 15,
+    "box_pitch_ratio": 1.097,
+    "V0": 15,
+    "V1": 15,
+    "V2": 15,
+    "V3": 15,
+    "V4": 15,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "scan-30aca6a1-straight",
+    "polygon": "s3",
+    "physical": "9b4c:(2,0)",
+    "boxes": 15,
+    "span": 15,
+    "box_pitch_ratio": 1.015,
+    "V0": 15,
+    "V1": 15,
+    "V2": 15,
+    "V3": 15,
+    "V4": 15,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "scan-30aca6a1-straight",
+    "polygon": "s4",
+    "physical": "9b4c:(3,1)",
+    "boxes": 13,
+    "span": 13,
+    "box_pitch_ratio": 0.962,
+    "V0": 13,
+    "V1": 13,
+    "V2": 13,
+    "V3": 13,
+    "V4": 13,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "labelled-img-41",
+    "polygon": "fL",
+    "physical": "img41:front-left",
+    "boxes": 21,
+    "span": 20,
+    "box_pitch_ratio": 0.909,
+    "V0": 20,
+    "V1": 20,
+    "V2": 20,
+    "V3": 20,
+    "V4": 20,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "labelled-img-41",
+    "polygon": "fR",
+    "physical": "img41:front-right",
+    "boxes": 22,
+    "span": 21,
+    "box_pitch_ratio": 0.924,
+    "V0": 20,
+    "V1": 20,
+    "V2": 20,
+    "V3": 20,
+    "V4": 20,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "labelled-img-41",
+    "polygon": "b2",
+    "physical": "img41:back-2",
+    "boxes": 3,
+    "span": 3,
+    "box_pitch_ratio": 0.553,
+    "V0": 4,
+    "V1": 4,
+    "V2": 4,
+    "V3": 3,
+    "V4": 4,
+    "V0_filled": 1,
+    "V1_filled": 1,
+    "V2_filled": 1,
+    "V3_filled": 0,
+    "V4_filled": 1
+   },
+   {
+    "image": "labelled-img-41",
+    "polygon": "b3",
+    "physical": "img41:back-3",
+    "boxes": 3,
+    "span": 3,
+    "box_pitch_ratio": 0.597,
+    "V0": 4,
+    "V1": 4,
+    "V2": 4,
+    "V3": 3,
+    "V4": 4,
+    "V0_filled": 1,
+    "V1_filled": 1,
+    "V2_filled": 1,
+    "V3_filled": 0,
+    "V4_filled": 1
+   },
+   {
+    "image": "labelled-img-47",
+    "polygon": "s1",
+    "physical": "img47:stack",
+    "boxes": 7,
+    "span": 7,
+    "box_pitch_ratio": 0.833,
+    "V0": 7,
+    "V1": 7,
+    "V2": 7,
+    "V3": 7,
+    "V4": 7,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "mutaa-image-07",
+    "polygon": "F1",
+    "physical": "m07:F1",
+    "boxes": 11,
+    "span": 10,
+    "box_pitch_ratio": 0.679,
+    "V0": 10,
+    "V1": 10,
+    "V2": 10,
+    "V3": 10,
+    "V4": 10,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "mutaa-image-07",
+    "polygon": "F2",
+    "physical": "m07:F2",
+    "boxes": 13,
+    "span": 11,
+    "box_pitch_ratio": 0.755,
+    "V0": 12,
+    "V1": 12,
+    "V2": 12,
+    "V3": 11,
+    "V4": 12,
+    "V0_filled": 1,
+    "V1_filled": 1,
+    "V2_filled": 1,
+    "V3_filled": 0,
+    "V4_filled": 1
+   },
+   {
+    "image": "mutaa-image-07",
+    "polygon": "F3",
+    "physical": "m07:F3",
+    "boxes": 11,
+    "span": 10,
+    "box_pitch_ratio": 0.714,
+    "V0": 17,
+    "V1": 11,
+    "V2": 10,
+    "V3": 10,
+    "V4": 11,
+    "V0_filled": 7,
+    "V1_filled": 1,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 1
+   },
+   {
+    "image": "mutaa-image-07",
+    "polygon": "F4",
+    "physical": "m07:F4",
+    "boxes": 11,
+    "span": 11,
+    "box_pitch_ratio": 0.762,
+    "V0": 9,
+    "V1": 10,
+    "V2": 11,
+    "V3": 9,
+    "V4": 9,
+    "V0_filled": 0,
+    "V1_filled": 1,
+    "V2_filled": 2,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "mutaa-image-07",
+    "polygon": "L",
+    "physical": "m07:L",
+    "boxes": 9,
+    "span": 8,
+    "box_pitch_ratio": 0.735,
+    "V0": 8,
+    "V1": 8,
+    "V2": 8,
+    "V3": 8,
+    "V4": 8,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   },
+   {
+    "image": "labelled-img-46",
+    "polygon": "s1",
+    "physical": "img46:stack",
+    "boxes": 18,
+    "span": 17,
+    "box_pitch_ratio": 1.03,
+    "V0": 19,
+    "V1": 18,
+    "V2": 17,
+    "V3": 17,
+    "V4": 19,
+    "V0_filled": 3,
+    "V1_filled": 2,
+    "V2_filled": 1,
+    "V3_filled": 1,
+    "V4_filled": 3
+   },
+   {
+    "image": "labelled-img-43",
+    "polygon": "s1",
+    "physical": "img43:stack",
+    "boxes": 6,
+    "span": 5,
+    "box_pitch_ratio": 1.376,
+    "V0": 5,
+    "V1": 5,
+    "V2": 5,
+    "V3": 5,
+    "V4": 5,
+    "V0_filled": 0,
+    "V1_filled": 0,
+    "V2_filled": 0,
+    "V3_filled": 0,
+    "V4_filled": 0
+   }
+  ],
+  "choice": {
+   "rule": "Pre-declared, label-free decision rule (fixed before any label-based number was computed).\n\n    Eligible: (G1) keeps the span-walk check independent (the count does not use span: excludes V1, V2,\n    which would make the deployed 'span/walk disagree' flag impossible); (G2) cross-view stacks with\n    spread > 1 not more than V0; (G3) reference-column equal-extent pairs differing by > 1 not more than V0.\n    Rank eligible variants by (a) equal-extent pairs differing by > 1, then (a) sum of |difference|, then\n    reference columns changed vs V0. A walk change is recommended for a trial only if the winner is not V0.",
+   "ineligible_reasons": {
+    "V0": [],
+    "V1": [
+     "count uses span: the span/walk disagreement flag can no longer fire"
+    ],
+    "V2": [
+     "count uses span: the span/walk disagreement flag can no longer fire"
+    ],
+    "V3": [
+     "more reference equal-extent pairs differing by > 1 than V0"
+    ],
+    "V4": []
+   },
+   "eligible": [
+    "V0",
+    "V4"
+   ],
+   "ranking": [
+    {
+     "variant": "V4",
+     "key": [
+      11,
+      47,
+      0
+     ]
+    },
+    {
+     "variant": "V0",
+     "key": [
+      15,
+      97,
+      0
+     ]
+    }
+   ],
+   "chosen": "V4",
+   "walk_change_for_trial": true
+  },
+  "outcomes": {
+   "photos": 66,
+   "by_source": {
+    "field-scans-20261013": 12,
+    "labelled-20261007": 52,
+    "mutaa-20260916": 1,
+    "warehouse-20260923": 1
+   },
+   "accepted_V0": 19,
+   "flag_on_variant": {
+    "V1": {
+     "photos": 66,
+     "accepted": 19,
+     "newly_accepted": 0,
+     "newly_withheld": 0,
+     "accepted_both_total_changed": 0,
+     "withheld_both_total_changed": 24,
+     "newly_accepted_photos": [],
+     "newly_withheld_photos": [],
+     "changes": [
+      {
+       "photo": "labelled-img-03",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        65
+       ],
+       "variant": [
+        "withheld_gate",
+        64
+       ],
+       "V0_walk": [
+        19,
+        18,
+        19,
+        9
+       ],
+       "variant_walk": [
+        19,
+        18,
+        18,
+        9
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-04",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        120
+       ],
+       "variant": [
+        "withheld_gate",
+        114
+       ],
+       "V0_walk": [
+        19,
+        15,
+        21,
+        19,
+        19,
+        27
+       ],
+       "variant_walk": [
+        18,
+        17,
+        21,
+        19,
+        19,
+        20
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "camera looked down on the stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-09",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        85
+       ],
+       "variant": [
+        "withheld_flagged",
+        77
+       ],
+       "V0_walk": [
+        21,
+        7,
+        17,
+        20,
+        20
+       ],
+       "variant_walk": [
+        19,
+        7,
+        17,
+        18,
+        16
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-10",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        39
+       ],
+       "variant": [
+        "withheld_gate",
+        38
+       ],
+       "V0_walk": [
+        8,
+        16,
+        15
+       ],
+       "variant_walk": [
+        8,
+        16,
+        14
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": []
+      },
+      {
+       "photo": "labelled-img-14",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        80
+       ],
+       "variant": [
+        "withheld_gate",
+        75
+       ],
+       "V0_walk": [
+        18,
+        15,
+        7,
+        5,
+        9,
+        26
+       ],
+       "variant_walk": [
+        18,
+        16,
+        9,
+        5,
+        11,
+        16
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-17",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        63
+       ],
+       "variant": [
+        "withheld_gate",
+        65
+       ],
+       "V0_walk": [
+        6,
+        12,
+        19,
+        19,
+        7
+       ],
+       "variant_walk": [
+        6,
+        17,
+        19,
+        16,
+        7
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-18",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        128
+       ],
+       "variant": [
+        "withheld_flagged",
+        129
+       ],
+       "V0_walk": [
+        10,
+        19,
+        22,
+        19,
+        20,
+        20,
+        18
+       ],
+       "variant_walk": [
+        10,
+        19,
+        22,
+        19,
+        20,
+        20,
+        19
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "camera looked down on the stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-27",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        21
+       ],
+       "variant": [
+        "withheld_gate",
+        20
+       ],
+       "V0_walk": [
+        4,
+        17
+       ],
+       "variant_walk": [
+        6,
+        14
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-28",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        104
+       ],
+       "variant": [
+        "withheld_flagged",
+        95
+       ],
+       "V0_walk": [
+        14,
+        11,
+        19,
+        20,
+        20,
+        20
+       ],
+       "variant_walk": [
+        13,
+        11,
+        18,
+        20,
+        19,
+        14
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-29",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        48
+       ],
+       "variant": [
+        "withheld_gate",
+        47
+       ],
+       "V0_walk": [
+        15,
+        15,
+        18
+       ],
+       "variant_walk": [
+        15,
+        17,
+        15
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack",
+        "camera looked down on the stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-31",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        63
+       ],
+       "variant": [
+        "withheld_gate",
+        49
+       ],
+       "V0_walk": [
+        16,
+        19,
+        18,
+        10
+       ],
+       "variant_walk": [
+        14,
+        14,
+        13,
+        8
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers",
+        "camera looked down on the stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-36",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        114
+       ],
+       "variant": [
+        "withheld_flagged",
+        117
+       ],
+       "V0_walk": [
+        16,
+        20,
+        20,
+        18,
+        20,
+        20
+       ],
+       "variant_walk": [
+        19,
+        20,
+        20,
+        18,
+        20,
+        20
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-38",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        102
+       ],
+       "variant": [
+        "withheld_gate",
+        96
+       ],
+       "V0_walk": [
+        21,
+        20,
+        29,
+        23,
+        9
+       ],
+       "variant_walk": [
+        21,
+        20,
+        20,
+        22,
+        13
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-42",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        15
+       ],
+       "variant": [
+        "withheld_gate",
+        12
+       ],
+       "V0_walk": [
+        13,
+        2
+       ],
+       "variant_walk": [
+        10,
+        2
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "camera looked down on the stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-44",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        120
+       ],
+       "variant": [
+        "withheld_gate",
+        104
+       ],
+       "V0_walk": [
+        16,
+        26,
+        24,
+        15,
+        14,
+        14,
+        11
+       ],
+       "variant_walk": [
+        16,
+        17,
+        17,
+        15,
+        14,
+        14,
+        11
+       ],
+       "V0_flags": [
+        "camera looked down on the stack",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "camera looked down on the stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-45",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        28
+       ],
+       "variant": [
+        "withheld_flagged",
+        26
+       ],
+       "V0_walk": [
+        28
+       ],
+       "variant_walk": [
+        26
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-46",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        19
+       ],
+       "variant": [
+        "withheld_flagged",
+        18
+       ],
+       "V0_walk": [
+        19
+       ],
+       "variant_walk": [
+        18
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "camera looked down on the stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-50",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        44
+       ],
+       "variant": [
+        "withheld_flagged",
+        37
+       ],
+       "V0_walk": [
+        25,
+        19
+       ],
+       "variant_walk": [
+        18,
+        19
+       ],
+       "V0_flags": [
+        "camera looked down on the stack",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "camera looked down on the stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-51",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        92
+       ],
+       "variant": [
+        "withheld_gate",
+        91
+       ],
+       "V0_walk": [
+        12,
+        19,
+        20,
+        20,
+        21
+       ],
+       "variant_walk": [
+        12,
+        19,
+        20,
+        19,
+        21
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "mutaa-image-07",
+       "source": "mutaa-20260916",
+       "V0": [
+        "withheld_gate",
+        58
+       ],
+       "variant": [
+        "withheld_gate",
+        53
+       ],
+       "V0_walk": [
+        8,
+        10,
+        14,
+        17,
+        9
+       ],
+       "variant_walk": [
+        8,
+        10,
+        14,
+        11,
+        10
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "scan-30aca6a1-left",
+       "source": "field-scans-20261013",
+       "V0": [
+        "withheld_gate",
+        59
+       ],
+       "variant": [
+        "withheld_gate",
+        49
+       ],
+       "V0_walk": [
+        16,
+        27,
+        16
+       ],
+       "variant_walk": [
+        16,
+        17,
+        16
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": []
+      },
+      {
+       "photo": "scan-ef823816-left",
+       "source": "field-scans-20261013",
+       "V0": [
+        "withheld_gate",
+        80
+       ],
+       "variant": [
+        "withheld_gate",
+        66
+       ],
+       "V0_walk": [
+        16,
+        22,
+        27,
+        15
+       ],
+       "variant_walk": [
+        17,
+        15,
+        17,
+        17
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": []
+      },
+      {
+       "photo": "scan-ef823816-straight",
+       "source": "field-scans-20261013",
+       "V0": [
+        "withheld_gate",
+        66
+       ],
+       "variant": [
+        "withheld_gate",
+        58
+       ],
+       "V0_walk": [
+        10,
+        19,
+        18,
+        10,
+        9
+       ],
+       "variant_walk": [
+        10,
+        15,
+        12,
+        10,
+        11
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "scan-f81c04d7-left",
+       "source": "field-scans-20261013",
+       "V0": [
+        "withheld_flagged",
+        39
+       ],
+       "variant": [
+        "withheld_flagged",
+        36
+       ],
+       "V0_walk": [
+        19,
+        20
+       ],
+       "variant_walk": [
+        17,
+        19
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "camera looked down on the stack"
+       ]
+      }
+     ]
+    },
+    "V2": {
+     "photos": 66,
+     "accepted": 19,
+     "newly_accepted": 0,
+     "newly_withheld": 0,
+     "accepted_both_total_changed": 0,
+     "withheld_both_total_changed": 24,
+     "newly_accepted_photos": [],
+     "newly_withheld_photos": [],
+     "changes": [
+      {
+       "photo": "labelled-img-03",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        65
+       ],
+       "variant": [
+        "withheld_gate",
+        63
+       ],
+       "V0_walk": [
+        19,
+        18,
+        19,
+        9
+       ],
+       "variant_walk": [
+        19,
+        18,
+        17,
+        9
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-04",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        120
+       ],
+       "variant": [
+        "withheld_gate",
+        113
+       ],
+       "V0_walk": [
+        19,
+        15,
+        21,
+        19,
+        19,
+        27
+       ],
+       "variant_walk": [
+        17,
+        18,
+        21,
+        19,
+        19,
+        19
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "camera looked down on the stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-09",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        85
+       ],
+       "variant": [
+        "withheld_flagged",
+        74
+       ],
+       "V0_walk": [
+        21,
+        7,
+        17,
+        20,
+        20
+       ],
+       "variant_walk": [
+        18,
+        7,
+        17,
+        17,
+        15
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-10",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        39
+       ],
+       "variant": [
+        "withheld_gate",
+        37
+       ],
+       "V0_walk": [
+        8,
+        16,
+        15
+       ],
+       "variant_walk": [
+        8,
+        16,
+        13
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": []
+      },
+      {
+       "photo": "labelled-img-14",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        80
+       ],
+       "variant": [
+        "withheld_gate",
+        77
+       ],
+       "V0_walk": [
+        18,
+        15,
+        7,
+        5,
+        9,
+        26
+       ],
+       "variant_walk": [
+        18,
+        17,
+        10,
+        5,
+        12,
+        15
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-17",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        63
+       ],
+       "variant": [
+        "withheld_gate",
+        65
+       ],
+       "V0_walk": [
+        6,
+        12,
+        19,
+        19,
+        7
+       ],
+       "variant_walk": [
+        6,
+        18,
+        19,
+        15,
+        7
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-18",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        128
+       ],
+       "variant": [
+        "withheld_flagged",
+        130
+       ],
+       "V0_walk": [
+        10,
+        19,
+        22,
+        19,
+        20,
+        20,
+        18
+       ],
+       "variant_walk": [
+        10,
+        19,
+        22,
+        19,
+        20,
+        20,
+        20
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "camera looked down on the stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-27",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        21
+       ],
+       "variant": [
+        "withheld_gate",
+        20
+       ],
+       "V0_walk": [
+        4,
+        17
+       ],
+       "variant_walk": [
+        7,
+        13
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-28",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        104
+       ],
+       "variant": [
+        "withheld_flagged",
+        91
+       ],
+       "V0_walk": [
+        14,
+        11,
+        19,
+        20,
+        20,
+        20
+       ],
+       "variant_walk": [
+        12,
+        11,
+        17,
+        20,
+        18,
+        13
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-29",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        48
+       ],
+       "variant": [
+        "withheld_gate",
+        47
+       ],
+       "V0_walk": [
+        15,
+        15,
+        18
+       ],
+       "variant_walk": [
+        15,
+        18,
+        14
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack",
+        "camera looked down on the stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-31",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        63
+       ],
+       "variant": [
+        "withheld_gate",
+        45
+       ],
+       "V0_walk": [
+        16,
+        19,
+        18,
+        10
+       ],
+       "variant_walk": [
+        13,
+        13,
+        12,
+        7
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers",
+        "camera looked down on the stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-36",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        114
+       ],
+       "variant": [
+        "withheld_flagged",
+        118
+       ],
+       "V0_walk": [
+        16,
+        20,
+        20,
+        18,
+        20,
+        20
+       ],
+       "variant_walk": [
+        20,
+        20,
+        20,
+        18,
+        20,
+        20
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-38",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        102
+       ],
+       "variant": [
+        "withheld_gate",
+        95
+       ],
+       "V0_walk": [
+        21,
+        20,
+        29,
+        23,
+        9
+       ],
+       "variant_walk": [
+        21,
+        20,
+        19,
+        21,
+        14
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-42",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        15
+       ],
+       "variant": [
+        "withheld_gate",
+        11
+       ],
+       "V0_walk": [
+        13,
+        2
+       ],
+       "variant_walk": [
+        9,
+        2
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "camera looked down on the stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-44",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        120
+       ],
+       "variant": [
+        "withheld_gate",
+        102
+       ],
+       "V0_walk": [
+        16,
+        26,
+        24,
+        15,
+        14,
+        14,
+        11
+       ],
+       "variant_walk": [
+        16,
+        16,
+        16,
+        15,
+        14,
+        14,
+        11
+       ],
+       "V0_flags": [
+        "camera looked down on the stack",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "camera looked down on the stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-45",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        28
+       ],
+       "variant": [
+        "withheld_flagged",
+        25
+       ],
+       "V0_walk": [
+        28
+       ],
+       "variant_walk": [
+        25
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-46",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        19
+       ],
+       "variant": [
+        "withheld_flagged",
+        17
+       ],
+       "V0_walk": [
+        19
+       ],
+       "variant_walk": [
+        17
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "camera looked down on the stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-50",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        44
+       ],
+       "variant": [
+        "withheld_flagged",
+        36
+       ],
+       "V0_walk": [
+        25,
+        19
+       ],
+       "variant_walk": [
+        17,
+        19
+       ],
+       "V0_flags": [
+        "camera looked down on the stack",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "camera looked down on the stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-51",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        92
+       ],
+       "variant": [
+        "withheld_gate",
+        90
+       ],
+       "V0_walk": [
+        12,
+        19,
+        20,
+        20,
+        21
+       ],
+       "variant_walk": [
+        12,
+        19,
+        20,
+        18,
+        21
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "mutaa-image-07",
+       "source": "mutaa-20260916",
+       "V0": [
+        "withheld_gate",
+        58
+       ],
+       "variant": [
+        "withheld_gate",
+        53
+       ],
+       "V0_walk": [
+        8,
+        10,
+        14,
+        17,
+        9
+       ],
+       "variant_walk": [
+        8,
+        10,
+        14,
+        10,
+        11
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "scan-30aca6a1-left",
+       "source": "field-scans-20261013",
+       "V0": [
+        "withheld_gate",
+        59
+       ],
+       "variant": [
+        "withheld_gate",
+        48
+       ],
+       "V0_walk": [
+        16,
+        27,
+        16
+       ],
+       "variant_walk": [
+        16,
+        16,
+        16
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": []
+      },
+      {
+       "photo": "scan-ef823816-left",
+       "source": "field-scans-20261013",
+       "V0": [
+        "withheld_gate",
+        80
+       ],
+       "variant": [
+        "withheld_gate",
+        66
+       ],
+       "V0_walk": [
+        16,
+        22,
+        27,
+        15
+       ],
+       "variant_walk": [
+        18,
+        14,
+        16,
+        18
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": []
+      },
+      {
+       "photo": "scan-ef823816-straight",
+       "source": "field-scans-20261013",
+       "V0": [
+        "withheld_gate",
+        66
+       ],
+       "variant": [
+        "withheld_gate",
+        57
+       ],
+       "V0_walk": [
+        10,
+        19,
+        18,
+        10,
+        9
+       ],
+       "variant_walk": [
+        10,
+        14,
+        11,
+        10,
+        12
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "scan-f81c04d7-left",
+       "source": "field-scans-20261013",
+       "V0": [
+        "withheld_flagged",
+        39
+       ],
+       "variant": [
+        "withheld_flagged",
+        34
+       ],
+       "V0_walk": [
+        19,
+        20
+       ],
+       "variant_walk": [
+        16,
+        18
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "camera looked down on the stack"
+       ]
+      }
+     ]
+    },
+    "V3": {
+     "photos": 66,
+     "accepted": 20,
+     "newly_accepted": 1,
+     "newly_withheld": 0,
+     "accepted_both_total_changed": 3,
+     "withheld_both_total_changed": 28,
+     "newly_accepted_photos": [
+      "labelled-img-46"
+     ],
+     "newly_withheld_photos": [],
+     "changes": [
+      {
+       "photo": "labelled-img-01",
+       "source": "labelled-20261007",
+       "V0": [
+        "accepted",
+        99
+       ],
+       "variant": [
+        "accepted",
+        98
+       ],
+       "V0_walk": [
+        20,
+        20,
+        20,
+        20,
+        19
+       ],
+       "variant_walk": [
+        20,
+        19,
+        20,
+        20,
+        19
+       ],
+       "V0_flags": [],
+       "variant_flags": []
+      },
+      {
+       "photo": "labelled-img-03",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        65
+       ],
+       "variant": [
+        "withheld_gate",
+        60
+       ],
+       "V0_walk": [
+        19,
+        18,
+        19,
+        9
+       ],
+       "variant_walk": [
+        17,
+        18,
+        16,
+        9
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-04",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        120
+       ],
+       "variant": [
+        "withheld_gate",
+        98
+       ],
+       "V0_walk": [
+        19,
+        15,
+        21,
+        19,
+        19,
+        27
+       ],
+       "variant_walk": [
+        17,
+        14,
+        21,
+        13,
+        18,
+        15
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "labelled-img-08",
+       "source": "labelled-20261007",
+       "V0": [
+        "accepted",
+        160
+       ],
+       "variant": [
+        "accepted",
+        158
+       ],
+       "V0_walk": [
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20
+       ],
+       "variant_walk": [
+        20,
+        20,
+        20,
+        19,
+        19,
+        20,
+        20,
+        20
+       ],
+       "V0_flags": [],
+       "variant_flags": []
+      },
+      {
+       "photo": "labelled-img-09",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        85
+       ],
+       "variant": [
+        "withheld_flagged",
+        69
+       ],
+       "V0_walk": [
+        21,
+        7,
+        17,
+        20,
+        20
+       ],
+       "variant_walk": [
+        17,
+        7,
+        14,
+        16,
+        15
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-10",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        39
+       ],
+       "variant": [
+        "withheld_gate",
+        34
+       ],
+       "V0_walk": [
+        8,
+        16,
+        15
+       ],
+       "variant_walk": [
+        8,
+        16,
+        10
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "labelled-img-14",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        80
+       ],
+       "variant": [
+        "withheld_gate",
+        65
+       ],
+       "V0_walk": [
+        18,
+        15,
+        7,
+        5,
+        9,
+        26
+       ],
+       "variant_walk": [
+        18,
+        14,
+        7,
+        5,
+        7,
+        14
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-15",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        16
+       ],
+       "variant": [
+        "withheld_gate",
+        15
+       ],
+       "V0_walk": [
+        8,
+        5,
+        3
+       ],
+       "variant_walk": [
+        8,
+        5,
+        2
+       ],
+       "V0_flags": [
+        "boxes found on only some layers"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-17",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        63
+       ],
+       "variant": [
+        "withheld_gate",
+        54
+       ],
+       "V0_walk": [
+        6,
+        12,
+        19,
+        19,
+        7
+       ],
+       "variant_walk": [
+        6,
+        9,
+        19,
+        14,
+        6
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-18",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        128
+       ],
+       "variant": [
+        "withheld_flagged",
+        126
+       ],
+       "V0_walk": [
+        10,
+        19,
+        22,
+        19,
+        20,
+        20,
+        18
+       ],
+       "variant_walk": [
+        10,
+        19,
+        21,
+        19,
+        20,
+        20,
+        17
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "labelled-img-22",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        124
+       ],
+       "variant": [
+        "withheld_flagged",
+        123
+       ],
+       "V0_walk": [
+        19,
+        20,
+        20,
+        20,
+        20,
+        20,
+        5
+       ],
+       "variant_walk": [
+        19,
+        20,
+        20,
+        20,
+        20,
+        20,
+        4
+       ],
+       "V0_flags": [
+        "boxes found on only some layers"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-23",
+       "source": "labelled-20261007",
+       "V0": [
+        "accepted",
+        160
+       ],
+       "variant": [
+        "accepted",
+        158
+       ],
+       "V0_walk": [
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20
+       ],
+       "variant_walk": [
+        20,
+        20,
+        20,
+        18,
+        20,
+        20,
+        20,
+        20
+       ],
+       "V0_flags": [],
+       "variant_flags": []
+      },
+      {
+       "photo": "labelled-img-27",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        21
+       ],
+       "variant": [
+        "withheld_gate",
+        16
+       ],
+       "V0_walk": [
+        4,
+        17
+       ],
+       "variant_walk": [
+        4,
+        12
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-28",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        104
+       ],
+       "variant": [
+        "withheld_flagged",
+        86
+       ],
+       "V0_walk": [
+        14,
+        11,
+        19,
+        20,
+        20,
+        20
+       ],
+       "variant_walk": [
+        10,
+        11,
+        18,
+        19,
+        17,
+        11
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "labelled-img-29",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        48
+       ],
+       "variant": [
+        "withheld_gate",
+        39
+       ],
+       "V0_walk": [
+        15,
+        15,
+        18
+       ],
+       "variant_walk": [
+        14,
+        13,
+        12
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack",
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "labelled-img-31",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        63
+       ],
+       "variant": [
+        "withheld_gate",
+        43
+       ],
+       "V0_walk": [
+        16,
+        19,
+        18,
+        10
+       ],
+       "variant_walk": [
+        12,
+        13,
+        11,
+        7
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-38",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        102
+       ],
+       "variant": [
+        "withheld_gate",
+        88
+       ],
+       "V0_walk": [
+        21,
+        20,
+        29,
+        23,
+        9
+       ],
+       "variant_walk": [
+        21,
+        20,
+        19,
+        19,
+        9
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "labelled-img-41",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        48
+       ],
+       "variant": [
+        "withheld_flagged",
+        46
+       ],
+       "V0_walk": [
+        4,
+        4,
+        20,
+        20
+       ],
+       "variant_walk": [
+        3,
+        3,
+        20,
+        20
+       ],
+       "V0_flags": [
+        "boxes found on only some layers"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-42",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        15
+       ],
+       "variant": [
+        "withheld_gate",
+        14
+       ],
+       "V0_walk": [
+        13,
+        2
+       ],
+       "variant_walk": [
+        12,
+        2
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "labelled-img-44",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        120
+       ],
+       "variant": [
+        "withheld_gate",
+        91
+       ],
+       "V0_walk": [
+        16,
+        26,
+        24,
+        15,
+        14,
+        14,
+        11
+       ],
+       "variant_walk": [
+        11,
+        14,
+        14,
+        15,
+        14,
+        13,
+        10
+       ],
+       "V0_flags": [
+        "camera looked down on the stack",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "labelled-img-45",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        28
+       ],
+       "variant": [
+        "withheld_flagged",
+        18
+       ],
+       "V0_walk": [
+        28
+       ],
+       "variant_walk": [
+        18
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack"
+       ],
+       "variant_flags": [
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "labelled-img-46",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        19
+       ],
+       "variant": [
+        "accepted",
+        17
+       ],
+       "V0_walk": [
+        19
+       ],
+       "variant_walk": [
+        17
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": []
+      },
+      {
+       "photo": "labelled-img-48",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        13
+       ],
+       "variant": [
+        "withheld_gate",
+        11
+       ],
+       "V0_walk": [
+        11,
+        2
+       ],
+       "variant_walk": [
+        9,
+        2
+       ],
+       "V0_flags": [],
+       "variant_flags": []
+      },
+      {
+       "photo": "labelled-img-50",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        44
+       ],
+       "variant": [
+        "withheld_flagged",
+        33
+       ],
+       "V0_walk": [
+        25,
+        19
+       ],
+       "variant_walk": [
+        16,
+        17
+       ],
+       "V0_flags": [
+        "camera looked down on the stack",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "camera looked down on the stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-51",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        92
+       ],
+       "variant": [
+        "withheld_gate",
+        83
+       ],
+       "V0_walk": [
+        12,
+        19,
+        20,
+        20,
+        21
+       ],
+       "variant_walk": [
+        10,
+        17,
+        19,
+        17,
+        20
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "mutaa-image-07",
+       "source": "mutaa-20260916",
+       "V0": [
+        "withheld_gate",
+        58
+       ],
+       "variant": [
+        "withheld_gate",
+        47
+       ],
+       "V0_walk": [
+        8,
+        10,
+        14,
+        17,
+        9
+       ],
+       "variant_walk": [
+        8,
+        10,
+        10,
+        10,
+        9
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "scan-30aca6a1-left",
+       "source": "field-scans-20261013",
+       "V0": [
+        "withheld_gate",
+        59
+       ],
+       "variant": [
+        "withheld_gate",
+        42
+       ],
+       "V0_walk": [
+        16,
+        27,
+        16
+       ],
+       "variant_walk": [
+        13,
+        15,
+        14
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "scan-ef823816-left",
+       "source": "field-scans-20261013",
+       "V0": [
+        "withheld_gate",
+        80
+       ],
+       "variant": [
+        "withheld_gate",
+        57
+       ],
+       "V0_walk": [
+        16,
+        22,
+        27,
+        15
+       ],
+       "variant_walk": [
+        15,
+        14,
+        14,
+        14
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "scan-ef823816-right",
+       "source": "field-scans-20261013",
+       "V0": [
+        "withheld_flagged",
+        79
+       ],
+       "variant": [
+        "withheld_flagged",
+        77
+       ],
+       "V0_walk": [
+        20,
+        21,
+        19,
+        19
+       ],
+       "variant_walk": [
+        19,
+        20,
+        19,
+        19
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack",
+        "camera looked down on the stack"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack"
+       ]
+      },
+      {
+       "photo": "scan-ef823816-straight",
+       "source": "field-scans-20261013",
+       "V0": [
+        "withheld_gate",
+        66
+       ],
+       "variant": [
+        "withheld_gate",
+        49
+       ],
+       "V0_walk": [
+        10,
+        19,
+        18,
+        10,
+        9
+       ],
+       "variant_walk": [
+        10,
+        11,
+        11,
+        10,
+        7
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "scan-f81c04d7-left",
+       "source": "field-scans-20261013",
+       "V0": [
+        "withheld_flagged",
+        39
+       ],
+       "variant": [
+        "withheld_flagged",
+        34
+       ],
+       "V0_walk": [
+        19,
+        20
+       ],
+       "variant_walk": [
+        17,
+        17
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "camera looked down on the stack"
+       ]
+      },
+      {
+       "photo": "scan-f81c04d7-right",
+       "source": "field-scans-20261013",
+       "V0": [
+        "withheld_gate",
+        44
+       ],
+       "variant": [
+        "withheld_gate",
+        43
+       ],
+       "V0_walk": [
+        4,
+        20,
+        20
+       ],
+       "variant_walk": [
+        3,
+        20,
+        20
+       ],
+       "V0_flags": [
+        "boxes found on only some layers"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers"
+       ]
+      }
+     ]
+    },
+    "V4": {
+     "photos": 66,
+     "accepted": 20,
+     "newly_accepted": 1,
+     "newly_withheld": 0,
+     "accepted_both_total_changed": 0,
+     "withheld_both_total_changed": 17,
+     "newly_accepted_photos": [
+      "labelled-img-45"
+     ],
+     "newly_withheld_photos": [],
+     "changes": [
+      {
+       "photo": "labelled-img-03",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        65
+       ],
+       "variant": [
+        "withheld_gate",
+        68
+       ],
+       "V0_walk": [
+        19,
+        18,
+        19,
+        9
+       ],
+       "variant_walk": [
+        20,
+        20,
+        19,
+        9
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "labelled-img-04",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        120
+       ],
+       "variant": [
+        "withheld_gate",
+        109
+       ],
+       "V0_walk": [
+        19,
+        15,
+        21,
+        19,
+        19,
+        27
+       ],
+       "variant_walk": [
+        19,
+        15,
+        21,
+        19,
+        19,
+        16
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "labelled-img-10",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        39
+       ],
+       "variant": [
+        "withheld_gate",
+        32
+       ],
+       "V0_walk": [
+        8,
+        16,
+        15
+       ],
+       "variant_walk": [
+        8,
+        13,
+        11
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "labelled-img-14",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        80
+       ],
+       "variant": [
+        "withheld_gate",
+        78
+       ],
+       "V0_walk": [
+        18,
+        15,
+        7,
+        5,
+        9,
+        26
+       ],
+       "variant_walk": [
+        18,
+        15,
+        7,
+        5,
+        8,
+        25
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "labelled-img-27",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        21
+       ],
+       "variant": [
+        "withheld_gate",
+        18
+       ],
+       "V0_walk": [
+        4,
+        17
+       ],
+       "variant_walk": [
+        4,
+        14
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-28",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        104
+       ],
+       "variant": [
+        "withheld_flagged",
+        100
+       ],
+       "V0_walk": [
+        14,
+        11,
+        19,
+        20,
+        20,
+        20
+       ],
+       "variant_walk": [
+        11,
+        11,
+        19,
+        20,
+        20,
+        19
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "labelled-img-29",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        48
+       ],
+       "variant": [
+        "withheld_gate",
+        45
+       ],
+       "V0_walk": [
+        15,
+        15,
+        18
+       ],
+       "variant_walk": [
+        15,
+        15,
+        15
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-31",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        63
+       ],
+       "variant": [
+        "withheld_gate",
+        53
+       ],
+       "V0_walk": [
+        16,
+        19,
+        18,
+        10
+       ],
+       "variant_walk": [
+        13,
+        15,
+        15,
+        10
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "labelled-img-38",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        102
+       ],
+       "variant": [
+        "withheld_gate",
+        92
+       ],
+       "V0_walk": [
+        21,
+        20,
+        29,
+        23,
+        9
+       ],
+       "variant_walk": [
+        21,
+        20,
+        20,
+        22,
+        9
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers"
+       ]
+      },
+      {
+       "photo": "labelled-img-44",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        120
+       ],
+       "variant": [
+        "withheld_gate",
+        104
+       ],
+       "V0_walk": [
+        16,
+        26,
+        24,
+        15,
+        14,
+        14,
+        11
+       ],
+       "variant_walk": [
+        16,
+        16,
+        18,
+        15,
+        14,
+        14,
+        11
+       ],
+       "V0_flags": [
+        "camera looked down on the stack",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "camera looked down on the stack",
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "labelled-img-45",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        28
+       ],
+       "variant": [
+        "accepted",
+        25
+       ],
+       "V0_walk": [
+        28
+       ],
+       "variant_walk": [
+        25
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack"
+       ],
+       "variant_flags": []
+      },
+      {
+       "photo": "labelled-img-50",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_flagged",
+        44
+       ],
+       "variant": [
+        "withheld_flagged",
+        37
+       ],
+       "V0_walk": [
+        25,
+        19
+       ],
+       "variant_walk": [
+        18,
+        19
+       ],
+       "V0_flags": [
+        "camera looked down on the stack",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "camera looked down on the stack"
+       ]
+      },
+      {
+       "photo": "labelled-img-51",
+       "source": "labelled-20261007",
+       "V0": [
+        "withheld_gate",
+        92
+       ],
+       "variant": [
+        "withheld_gate",
+        91
+       ],
+       "V0_walk": [
+        12,
+        19,
+        20,
+        20,
+        21
+       ],
+       "variant_walk": [
+        11,
+        19,
+        20,
+        20,
+        21
+       ],
+       "V0_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes are missing over several layers of this stack",
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "mutaa-image-07",
+       "source": "mutaa-20260916",
+       "V0": [
+        "withheld_gate",
+        58
+       ],
+       "variant": [
+        "withheld_gate",
+        52
+       ],
+       "V0_walk": [
+        8,
+        10,
+        14,
+        17,
+        9
+       ],
+       "variant_walk": [
+        8,
+        10,
+        14,
+        11,
+        9
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "scan-30aca6a1-left",
+       "source": "field-scans-20261013",
+       "V0": [
+        "withheld_gate",
+        59
+       ],
+       "variant": [
+        "withheld_gate",
+        48
+       ],
+       "V0_walk": [
+        16,
+        27,
+        16
+       ],
+       "variant_walk": [
+        16,
+        16,
+        16
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": []
+      },
+      {
+       "photo": "scan-ef823816-left",
+       "source": "field-scans-20261013",
+       "V0": [
+        "withheld_gate",
+        80
+       ],
+       "variant": [
+        "withheld_gate",
+        62
+       ],
+       "V0_walk": [
+        16,
+        22,
+        27,
+        15
+       ],
+       "variant_walk": [
+        16,
+        15,
+        16,
+        15
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "scan-ef823816-straight",
+       "source": "field-scans-20261013",
+       "V0": [
+        "withheld_gate",
+        66
+       ],
+       "variant": [
+        "withheld_gate",
+        61
+       ],
+       "V0_walk": [
+        10,
+        19,
+        18,
+        10,
+        9
+       ],
+       "variant_walk": [
+        10,
+        18,
+        14,
+        10,
+        9
+       ],
+       "V0_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "boxes found on only some layers",
+        "layer counts disagree"
+       ]
+      },
+      {
+       "photo": "scan-f81c04d7-left",
+       "source": "field-scans-20261013",
+       "V0": [
+        "withheld_flagged",
+        39
+       ],
+       "variant": [
+        "withheld_flagged",
+        38
+       ],
+       "V0_walk": [
+        19,
+        20
+       ],
+       "variant_walk": [
+        19,
+        19
+       ],
+       "V0_flags": [
+        "layer counts disagree"
+       ],
+       "variant_flags": [
+        "camera looked down on the stack",
+        "layer counts disagree"
+       ]
+      }
+     ]
+    }
+   },
+   "flag_kept_on_deployed_walk": {
+    "V1": {
+     "outcomes_changed": 0,
+     "withheld_photo_totals_changed": 24,
+     "accepted_photo_totals_changed": 0
+    },
+    "V2": {
+     "outcomes_changed": 0,
+     "withheld_photo_totals_changed": 24,
+     "accepted_photo_totals_changed": 0
+    }
+   }
+  },
+  "block_results": {
+   "V0": {
+    "99-block substituted trio": {
+     "status": "estimated",
+     "total_trays": 99,
+     "walk_by_view": {
+      "left": [
+       19
+      ],
+      "right": [
+       19
+      ],
+      "straight": [
+       20,
+       20,
+       20,
+       20,
+       19
+      ]
+     },
+     "conflicts": 0,
+     "ambiguities": 1
+    },
+    "mechanics trio": {
+     "status": "estimated",
+     "total_trays": 399,
+     "walk_by_view": {
+      "left": [
+       20,
+       19,
+       20,
+       19
+      ],
+      "right": [
+       20,
+       20,
+       20,
+       20
+      ],
+      "straight": [
+       20,
+       20,
+       20,
+       20,
+       20
+      ]
+     },
+     "conflicts": 0,
+     "ambiguities": 1
+    },
+    "30aca6a1 (13 Oct)": {
+     "status": "needs_view",
+     "total_trays": null,
+     "walk_by_view": {
+      "left": [
+       16,
+       27,
+       16
+      ],
+      "right": [
+       14,
+       14,
+       14
+      ],
+      "straight": [
+       16,
+       15,
+       15,
+       13
+      ]
+     },
+     "conflicts": 2,
+     "ambiguities": 0
+    },
+    "ef823816 (13 Oct)": {
+     "status": "needs_view",
+     "total_trays": null,
+     "walk_by_view": {
+      "left": [
+       16,
+       22,
+       27,
+       15
+      ],
+      "right": [
+       20,
+       21,
+       19,
+       19
+      ],
+      "straight": [
+       10,
+       19,
+       18,
+       10,
+       9
+      ]
+     },
+     "conflicts": 11,
+     "ambiguities": 0
+    },
+    "9b4c783e (13 Oct)": {
+     "status": "estimated",
+     "total_trays": 165,
+     "walk_by_view": {
+      "left": [
+       16,
+       15,
+       16
+      ],
+      "right": [
+       15,
+       14,
+       15
+      ],
+      "straight": [
+       15,
+       15,
+       15,
+       14
+      ]
+     },
+     "conflicts": 0,
+     "ambiguities": 1
+    },
+    "f81c04d7 (13 Oct)": {
+     "status": "needs_view",
+     "total_trays": null,
+     "walk_by_view": {
+      "left": [
+       19,
+       20
+      ],
+      "right": [
+       4,
+       20,
+       20
+      ],
+      "straight": [
+       20,
+       20
+      ]
+     },
+     "conflicts": 4,
+     "ambiguities": 0
+    }
+   },
+   "V1": {
+    "99-block substituted trio": {
+     "status": "estimated",
+     "total_trays": 99,
+     "walk_by_view": {
+      "left": [
+       19
+      ],
+      "right": [
+       19
+      ],
+      "straight": [
+       20,
+       20,
+       20,
+       20,
+       19
+      ]
+     },
+     "conflicts": 0,
+     "ambiguities": 1
+    },
+    "mechanics trio": {
+     "status": "estimated",
+     "total_trays": 399,
+     "walk_by_view": {
+      "left": [
+       20,
+       19,
+       20,
+       19
+      ],
+      "right": [
+       20,
+       20,
+       20,
+       20
+      ],
+      "straight": [
+       20,
+       20,
+       20,
+       20,
+       20
+      ]
+     },
+     "conflicts": 0,
+     "ambiguities": 1
+    },
+    "30aca6a1 (13 Oct)": {
+     "status": "needs_view",
+     "total_trays": null,
+     "walk_by_view": {
+      "left": [
+       16,
+       17,
+       16
+      ],
+      "right": [
+       14,
+       14,
+       14
+      ],
+      "straight": [
+       16,
+       15,
+       15,
+       13
+      ]
+     },
+     "conflicts": 1,
+     "ambiguities": 0
+    },
+    "ef823816 (13 Oct)": {
+     "status": "needs_view",
+     "total_trays": null,
+     "walk_by_view": {
+      "left": [
+       17,
+       15,
+       17,
+       17
+      ],
+      "right": [
+       20,
+       21,
+       19,
+       19
+      ],
+      "straight": [
+       10,
+       15,
+       12,
+       10,
+       11
+      ]
+     },
+     "conflicts": 6,
+     "ambiguities": 0
+    },
+    "9b4c783e (13 Oct)": {
+     "status": "estimated",
+     "total_trays": 165,
+     "walk_by_view": {
+      "left": [
+       16,
+       15,
+       16
+      ],
+      "right": [
+       15,
+       14,
+       15
+      ],
+      "straight": [
+       15,
+       15,
+       15,
+       14
+      ]
+     },
+     "conflicts": 0,
+     "ambiguities": 1
+    },
+    "f81c04d7 (13 Oct)": {
+     "status": "needs_view",
+     "total_trays": null,
+     "walk_by_view": {
+      "left": [
+       17,
+       19
+      ],
+      "right": [
+       4,
+       20,
+       20
+      ],
+      "straight": [
+       20,
+       20
+      ]
+     },
+     "conflicts": 4,
+     "ambiguities": 0
+    }
+   },
+   "V2": {
+    "99-block substituted trio": {
+     "status": "estimated",
+     "total_trays": 99,
+     "walk_by_view": {
+      "left": [
+       19
+      ],
+      "right": [
+       19
+      ],
+      "straight": [
+       20,
+       20,
+       20,
+       20,
+       19
+      ]
+     },
+     "conflicts": 0,
+     "ambiguities": 1
+    },
+    "mechanics trio": {
+     "status": "estimated",
+     "total_trays": 399,
+     "walk_by_view": {
+      "left": [
+       20,
+       19,
+       20,
+       19
+      ],
+      "right": [
+       20,
+       20,
+       20,
+       20
+      ],
+      "straight": [
+       20,
+       20,
+       20,
+       20,
+       20
+      ]
+     },
+     "conflicts": 0,
+     "ambiguities": 1
+    },
+    "30aca6a1 (13 Oct)": {
+     "status": "needs_view",
+     "total_trays": null,
+     "walk_by_view": {
+      "left": [
+       16,
+       16,
+       16
+      ],
+      "right": [
+       14,
+       14,
+       14
+      ],
+      "straight": [
+       16,
+       15,
+       15,
+       13
+      ]
+     },
+     "conflicts": 1,
+     "ambiguities": 0
+    },
+    "ef823816 (13 Oct)": {
+     "status": "needs_view",
+     "total_trays": null,
+     "walk_by_view": {
+      "left": [
+       18,
+       14,
+       16,
+       18
+      ],
+      "right": [
+       20,
+       21,
+       19,
+       19
+      ],
+      "straight": [
+       10,
+       14,
+       11,
+       10,
+       12
+      ]
+     },
+     "conflicts": 6,
+     "ambiguities": 0
+    },
+    "9b4c783e (13 Oct)": {
+     "status": "estimated",
+     "total_trays": 165,
+     "walk_by_view": {
+      "left": [
+       16,
+       15,
+       16
+      ],
+      "right": [
+       15,
+       14,
+       15
+      ],
+      "straight": [
+       15,
+       15,
+       15,
+       14
+      ]
+     },
+     "conflicts": 0,
+     "ambiguities": 1
+    },
+    "f81c04d7 (13 Oct)": {
+     "status": "needs_view",
+     "total_trays": null,
+     "walk_by_view": {
+      "left": [
+       16,
+       18
+      ],
+      "right": [
+       4,
+       20,
+       20
+      ],
+      "straight": [
+       20,
+       20
+      ]
+     },
+     "conflicts": 4,
+     "ambiguities": 0
+    }
+   },
+   "V3": {
+    "99-block substituted trio": {
+     "status": "estimated",
+     "total_trays": 98,
+     "walk_by_view": {
+      "left": [
+       19
+      ],
+      "right": [
+       19
+      ],
+      "straight": [
+       20,
+       19,
+       20,
+       20,
+       19
+      ]
+     },
+     "conflicts": 0,
+     "ambiguities": 1
+    },
+    "mechanics trio": {
+     "status": "estimated",
+     "total_trays": 399,
+     "walk_by_view": {
+      "left": [
+       20,
+       19,
+       20,
+       19
+      ],
+      "right": [
+       20,
+       20,
+       20,
+       20
+      ],
+      "straight": [
+       20,
+       20,
+       20,
+       20,
+       20
+      ]
+     },
+     "conflicts": 0,
+     "ambiguities": 1
+    },
+    "30aca6a1 (13 Oct)": {
+     "status": "needs_view",
+     "total_trays": null,
+     "walk_by_view": {
+      "left": [
+       13,
+       15,
+       14
+      ],
+      "right": [
+       14,
+       14,
+       14
+      ],
+      "straight": [
+       16,
+       15,
+       15,
+       13
+      ]
+     },
+     "conflicts": 3,
+     "ambiguities": 0
+    },
+    "ef823816 (13 Oct)": {
+     "status": "needs_view",
+     "total_trays": null,
+     "walk_by_view": {
+      "left": [
+       15,
+       14,
+       14,
+       14
+      ],
+      "right": [
+       19,
+       20,
+       19,
+       19
+      ],
+      "straight": [
+       10,
+       11,
+       11,
+       10,
+       7
+      ]
+     },
+     "conflicts": 9,
+     "ambiguities": 0
+    },
+    "9b4c783e (13 Oct)": {
+     "status": "estimated",
+     "total_trays": 165,
+     "walk_by_view": {
+      "left": [
+       16,
+       15,
+       16
+      ],
+      "right": [
+       15,
+       14,
+       15
+      ],
+      "straight": [
+       15,
+       15,
+       15,
+       14
+      ]
+     },
+     "conflicts": 0,
+     "ambiguities": 1
+    },
+    "f81c04d7 (13 Oct)": {
+     "status": "needs_view",
+     "total_trays": null,
+     "walk_by_view": {
+      "left": [
+       17,
+       17
+      ],
+      "right": [
+       3,
+       20,
+       20
+      ],
+      "straight": [
+       20,
+       20
+      ]
+     },
+     "conflicts": 4,
+     "ambiguities": 0
+    }
+   },
+   "V4": {
+    "99-block substituted trio": {
+     "status": "estimated",
+     "total_trays": 99,
+     "walk_by_view": {
+      "left": [
+       19
+      ],
+      "right": [
+       19
+      ],
+      "straight": [
+       20,
+       20,
+       20,
+       20,
+       19
+      ]
+     },
+     "conflicts": 0,
+     "ambiguities": 1
+    },
+    "mechanics trio": {
+     "status": "estimated",
+     "total_trays": 399,
+     "walk_by_view": {
+      "left": [
+       20,
+       19,
+       20,
+       19
+      ],
+      "right": [
+       20,
+       20,
+       20,
+       20
+      ],
+      "straight": [
+       20,
+       20,
+       20,
+       20,
+       20
+      ]
+     },
+     "conflicts": 0,
+     "ambiguities": 1
+    },
+    "30aca6a1 (13 Oct)": {
+     "status": "needs_view",
+     "total_trays": null,
+     "walk_by_view": {
+      "left": [
+       16,
+       16,
+       16
+      ],
+      "right": [
+       14,
+       14,
+       14
+      ],
+      "straight": [
+       16,
+       15,
+       15,
+       13
+      ]
+     },
+     "conflicts": 1,
+     "ambiguities": 0
+    },
+    "ef823816 (13 Oct)": {
+     "status": "needs_view",
+     "total_trays": null,
+     "walk_by_view": {
+      "left": [
+       16,
+       15,
+       16,
+       15
+      ],
+      "right": [
+       20,
+       21,
+       19,
+       19
+      ],
+      "straight": [
+       10,
+       18,
+       14,
+       10,
+       9
+      ]
+     },
+     "conflicts": 9,
+     "ambiguities": 0
+    },
+    "9b4c783e (13 Oct)": {
+     "status": "estimated",
+     "total_trays": 165,
+     "walk_by_view": {
+      "left": [
+       16,
+       15,
+       16
+      ],
+      "right": [
+       15,
+       14,
+       15
+      ],
+      "straight": [
+       15,
+       15,
+       15,
+       14
+      ]
+     },
+     "conflicts": 0,
+     "ambiguities": 1
+    },
+    "f81c04d7 (13 Oct)": {
+     "status": "needs_view",
+     "total_trays": null,
+     "walk_by_view": {
+      "left": [
+       19,
+       19
+      ],
+      "right": [
+       4,
+       20,
+       20
+      ],
+      "straight": [
+       20,
+       20
+      ]
+     },
+     "conflicts": 4,
+     "ambiguities": 0
+    }
+   }
+  }
+ },
+ "stage_2_label_based": {
+  "note": "computed after stage 1 fixed the choice; nothing here feeds back into choose_variant",
+  "clusters_22": {
+   "V0": {
+    "clusters_all": {
+     "n": 22,
+     "exact_ungated": 9,
+     "accepted": 10,
+     "accepted_correct": 9,
+     "accepted_wrong": 1,
+     "withheld": 12,
+     "abs_error_sum": 431,
+     "mae": 19.59
+    },
+    "clusters_leak_free": {
+     "n": 6,
+     "exact_ungated": 1,
+     "accepted": 2,
+     "accepted_correct": 1,
+     "accepted_wrong": 1,
+     "withheld": 4,
+     "abs_error_sum": 25,
+     "mae": 4.17
+    },
+    "clusters_leaked": {
+     "n": 16,
+     "exact_ungated": 8,
+     "accepted": 8,
+     "accepted_correct": 8,
+     "accepted_wrong": 0,
+     "withheld": 8,
+     "abs_error_sum": 406,
+     "mae": 25.38
+    },
+    "clusters_not_used_in_tuning": {
+     "n": 5,
+     "exact_ungated": 1,
+     "accepted": 1,
+     "accepted_correct": 1,
+     "accepted_wrong": 0,
+     "withheld": 4,
+     "abs_error_sum": 13,
+     "mae": 2.6
+    },
+    "blocks_all": {
+     "n": 19,
+     "exact_ungated": 7,
+     "accepted": 8,
+     "accepted_correct": 7,
+     "accepted_wrong": 1,
+     "withheld": 11,
+     "abs_error_sum": 414,
+     "mae": 21.79
+    },
+    "blocks_leak_free": {
+     "n": 5,
+     "exact_ungated": 1,
+     "accepted": 2,
+     "accepted_correct": 1,
+     "accepted_wrong": 1,
+     "withheld": 3,
+     "abs_error_sum": 8,
+     "mae": 1.6
+    },
+    "changed_clusters_vs_V0": []
+   },
+   "V1": {
+    "clusters_all": {
+     "n": 22,
+     "exact_ungated": 9,
+     "accepted": 10,
+     "accepted_correct": 9,
+     "accepted_wrong": 1,
+     "withheld": 12,
+     "abs_error_sum": 442,
+     "mae": 20.09
+    },
+    "clusters_leak_free": {
+     "n": 6,
+     "exact_ungated": 1,
+     "accepted": 2,
+     "accepted_correct": 1,
+     "accepted_wrong": 1,
+     "withheld": 4,
+     "abs_error_sum": 39,
+     "mae": 6.5
+    },
+    "clusters_leaked": {
+     "n": 16,
+     "exact_ungated": 8,
+     "accepted": 8,
+     "accepted_correct": 8,
+     "accepted_wrong": 0,
+     "withheld": 8,
+     "abs_error_sum": 403,
+     "mae": 25.19
+    },
+    "clusters_not_used_in_tuning": {
+     "n": 5,
+     "exact_ungated": 1,
+     "accepted": 1,
+     "accepted_correct": 1,
+     "accepted_wrong": 0,
+     "withheld": 4,
+     "abs_error_sum": 13,
+     "mae": 2.6
+    },
+    "blocks_all": {
+     "n": 19,
+     "exact_ungated": 7,
+     "accepted": 8,
+     "accepted_correct": 7,
+     "accepted_wrong": 1,
+     "withheld": 11,
+     "abs_error_sum": 411,
+     "mae": 21.63
+    },
+    "blocks_leak_free": {
+     "n": 5,
+     "exact_ungated": 1,
+     "accepted": 2,
+     "accepted_correct": 1,
+     "accepted_wrong": 1,
+     "withheld": 3,
+     "abs_error_sum": 8,
+     "mae": 1.6
+    },
+    "changed_clusters_vs_V0": [
+     {
+      "label_id": 4,
+      "label": 115,
+      "leak": "leaked",
+      "V0": [
+       "withheld_gate",
+       120,
+       5
+      ],
+      "variant": [
+       "withheld_gate",
+       114,
+       -1
+      ]
+     },
+     {
+      "label_id": 9,
+      "label": 75,
+      "leak": "leaked",
+      "V0": [
+       "withheld_flagged",
+       85,
+       10
+      ],
+      "variant": [
+       "withheld_flagged",
+       77,
+       2
+      ]
+     },
+     {
+      "label_id": 31,
+      "label": 80,
+      "leak": "leak_free",
+      "V0": [
+       "withheld_gate",
+       63,
+       -17
+      ],
+      "variant": [
+       "withheld_gate",
+       49,
+       -31
+      ]
+     },
+     {
+      "label_id": 36,
+      "label": 109,
+      "leak": "leaked",
+      "V0": [
+       "withheld_flagged",
+       114,
+       5
+      ],
+      "variant": [
+       "withheld_flagged",
+       117,
+       8
+      ]
+     },
+     {
+      "label_id": 38,
+      "label": 118,
+      "leak": "leaked",
+      "V0": [
+       "withheld_gate",
+       102,
+       -16
+      ],
+      "variant": [
+       "withheld_gate",
+       96,
+       -22
+      ]
+     },
+     {
+      "label_id": 46,
+      "label": 20,
+      "leak": "leak_free",
+      "V0": [
+       "withheld_flagged",
+       19,
+       -1
+      ],
+      "variant": [
+       "withheld_flagged",
+       18,
+       -2
+      ]
+     },
+     {
+      "label_id": 50,
+      "label": 40,
+      "leak": "leak_free",
+      "V0": [
+       "withheld_flagged",
+       44,
+       4
+      ],
+      "variant": [
+       "withheld_flagged",
+       37,
+       -3
+      ]
+     }
+    ]
+   },
+   "V2": {
+    "clusters_all": {
+     "n": 22,
+     "exact_ungated": 9,
+     "accepted": 10,
+     "accepted_correct": 9,
+     "accepted_wrong": 1,
+     "withheld": 12,
+     "abs_error_sum": 450,
+     "mae": 20.45
+    },
+    "clusters_leak_free": {
+     "n": 6,
+     "exact_ungated": 1,
+     "accepted": 2,
+     "accepted_correct": 1,
+     "accepted_wrong": 1,
+     "withheld": 4,
+     "abs_error_sum": 45,
+     "mae": 7.5
+    },
+    "clusters_leaked": {
+     "n": 16,
+     "exact_ungated": 8,
+     "accepted": 8,
+     "accepted_correct": 8,
+     "accepted_wrong": 0,
+     "withheld": 8,
+     "abs_error_sum": 405,
+     "mae": 25.31
+    },
+    "clusters_not_used_in_tuning": {
+     "n": 5,
+     "exact_ungated": 1,
+     "accepted": 1,
+     "accepted_correct": 1,
+     "accepted_wrong": 0,
+     "withheld": 4,
+     "abs_error_sum": 13,
+     "mae": 2.6
+    },
+    "blocks_all": {
+     "n": 19,
+     "exact_ungated": 7,
+     "accepted": 8,
+     "accepted_correct": 7,
+     "accepted_wrong": 1,
+     "withheld": 11,
+     "abs_error_sum": 415,
+     "mae": 21.84
+    },
+    "blocks_leak_free": {
+     "n": 5,
+     "exact_ungated": 1,
+     "accepted": 2,
+     "accepted_correct": 1,
+     "accepted_wrong": 1,
+     "withheld": 3,
+     "abs_error_sum": 10,
+     "mae": 2.0
+    },
+    "changed_clusters_vs_V0": [
+     {
+      "label_id": 4,
+      "label": 115,
+      "leak": "leaked",
+      "V0": [
+       "withheld_gate",
+       120,
+       5
+      ],
+      "variant": [
+       "withheld_gate",
+       113,
+       -2
+      ]
+     },
+     {
+      "label_id": 9,
+      "label": 75,
+      "leak": "leaked",
+      "V0": [
+       "withheld_flagged",
+       85,
+       10
+      ],
+      "variant": [
+       "withheld_flagged",
+       74,
+       -1
+      ]
+     },
+     {
+      "label_id": 31,
+      "label": 80,
+      "leak": "leak_free",
+      "V0": [
+       "withheld_gate",
+       63,
+       -17
+      ],
+      "variant": [
+       "withheld_gate",
+       45,
+       -35
+      ]
+     },
+     {
+      "label_id": 36,
+      "label": 109,
+      "leak": "leaked",
+      "V0": [
+       "withheld_flagged",
+       114,
+       5
+      ],
+      "variant": [
+       "withheld_flagged",
+       118,
+       9
+      ]
+     },
+     {
+      "label_id": 38,
+      "label": 118,
+      "leak": "leaked",
+      "V0": [
+       "withheld_gate",
+       102,
+       -16
+      ],
+      "variant": [
+       "withheld_gate",
+       95,
+       -23
+      ]
+     },
+     {
+      "label_id": 46,
+      "label": 20,
+      "leak": "leak_free",
+      "V0": [
+       "withheld_flagged",
+       19,
+       -1
+      ],
+      "variant": [
+       "withheld_flagged",
+       17,
+       -3
+      ]
+     },
+     {
+      "label_id": 50,
+      "label": 40,
+      "leak": "leak_free",
+      "V0": [
+       "withheld_flagged",
+       44,
+       4
+      ],
+      "variant": [
+       "withheld_flagged",
+       36,
+       -4
+      ]
+     }
+    ]
+   },
+   "V3": {
+    "clusters_all": {
+     "n": 22,
+     "exact_ungated": 7,
+     "accepted": 11,
+     "accepted_correct": 7,
+     "accepted_wrong": 4,
+     "withheld": 11,
+     "abs_error_sum": 481,
+     "mae": 21.86
+    },
+    "clusters_leak_free": {
+     "n": 6,
+     "exact_ungated": 1,
+     "accepted": 3,
+     "accepted_correct": 1,
+     "accepted_wrong": 2,
+     "withheld": 3,
+     "abs_error_sum": 50,
+     "mae": 8.33
+    },
+    "clusters_leaked": {
+     "n": 16,
+     "exact_ungated": 6,
+     "accepted": 8,
+     "accepted_correct": 6,
+     "accepted_wrong": 2,
+     "withheld": 8,
+     "abs_error_sum": 431,
+     "mae": 26.94
+    },
+    "clusters_not_used_in_tuning": {
+     "n": 5,
+     "exact_ungated": 1,
+     "accepted": 1,
+     "accepted_correct": 1,
+     "accepted_wrong": 0,
+     "withheld": 4,
+     "abs_error_sum": 13,
+     "mae": 2.6
+    },
+    "blocks_all": {
+     "n": 19,
+     "exact_ungated": 5,
+     "accepted": 9,
+     "accepted_correct": 5,
+     "accepted_wrong": 4,
+     "withheld": 10,
+     "abs_error_sum": 444,
+     "mae": 23.37
+    },
+    "blocks_leak_free": {
+     "n": 5,
+     "exact_ungated": 1,
+     "accepted": 3,
+     "accepted_correct": 1,
+     "accepted_wrong": 2,
+     "withheld": 2,
+     "abs_error_sum": 13,
+     "mae": 2.6
+    },
+    "changed_clusters_vs_V0": [
+     {
+      "label_id": 1,
+      "label": 99,
+      "leak": "leaked",
+      "V0": [
+       "accepted",
+       99,
+       0
+      ],
+      "variant": [
+       "accepted",
+       98,
+       -1
+      ]
+     },
+     {
+      "label_id": 4,
+      "label": 115,
+      "leak": "leaked",
+      "V0": [
+       "withheld_gate",
+       120,
+       5
+      ],
+      "variant": [
+       "withheld_gate",
+       98,
+       -17
+      ]
+     },
+     {
+      "label_id": 8,
+      "label": 160,
+      "leak": "leaked",
+      "V0": [
+       "accepted",
+       160,
+       0
+      ],
+      "variant": [
+       "accepted",
+       158,
+       -2
+      ]
+     },
+     {
+      "label_id": 9,
+      "label": 75,
+      "leak": "leaked",
+      "V0": [
+       "withheld_flagged",
+       85,
+       10
+      ],
+      "variant": [
+       "withheld_flagged",
+       69,
+       -6
+      ]
+     },
+     {
+      "label_id": 31,
+      "label": 80,
+      "leak": "leak_free",
+      "V0": [
+       "withheld_gate",
+       63,
+       -17
+      ],
+      "variant": [
+       "withheld_gate",
+       43,
+       -37
+      ]
+     },
+     {
+      "label_id": 38,
+      "label": 118,
+      "leak": "leaked",
+      "V0": [
+       "withheld_gate",
+       102,
+       -16
+      ],
+      "variant": [
+       "withheld_gate",
+       88,
+       -30
+      ]
+     },
+     {
+      "label_id": 46,
+      "label": 20,
+      "leak": "leak_free",
+      "V0": [
+       "withheld_flagged",
+       19,
+       -1
+      ],
+      "variant": [
+       "accepted",
+       17,
+       -3
+      ]
+     },
+     {
+      "label_id": 50,
+      "label": 40,
+      "leak": "leak_free",
+      "V0": [
+       "withheld_flagged",
+       44,
+       4
+      ],
+      "variant": [
+       "withheld_flagged",
+       33,
+       -7
+      ]
+     }
+    ]
+   },
+   "V4": {
+    "clusters_all": {
+     "n": 22,
+     "exact_ungated": 9,
+     "accepted": 10,
+     "accepted_correct": 9,
+     "accepted_wrong": 1,
+     "withheld": 12,
+     "abs_error_sum": 451,
+     "mae": 20.5
+    },
+    "clusters_leak_free": {
+     "n": 6,
+     "exact_ungated": 1,
+     "accepted": 2,
+     "accepted_correct": 1,
+     "accepted_wrong": 1,
+     "withheld": 4,
+     "abs_error_sum": 34,
+     "mae": 5.67
+    },
+    "clusters_leaked": {
+     "n": 16,
+     "exact_ungated": 8,
+     "accepted": 8,
+     "accepted_correct": 8,
+     "accepted_wrong": 0,
+     "withheld": 8,
+     "abs_error_sum": 417,
+     "mae": 26.06
+    },
+    "clusters_not_used_in_tuning": {
+     "n": 5,
+     "exact_ungated": 1,
+     "accepted": 1,
+     "accepted_correct": 1,
+     "accepted_wrong": 0,
+     "withheld": 4,
+     "abs_error_sum": 13,
+     "mae": 2.6
+    },
+    "blocks_all": {
+     "n": 19,
+     "exact_ungated": 7,
+     "accepted": 8,
+     "accepted_correct": 7,
+     "accepted_wrong": 1,
+     "withheld": 11,
+     "abs_error_sum": 424,
+     "mae": 22.32
+    },
+    "blocks_leak_free": {
+     "n": 5,
+     "exact_ungated": 1,
+     "accepted": 2,
+     "accepted_correct": 1,
+     "accepted_wrong": 1,
+     "withheld": 3,
+     "abs_error_sum": 7,
+     "mae": 1.4
+    },
+    "changed_clusters_vs_V0": [
+     {
+      "label_id": 4,
+      "label": 115,
+      "leak": "leaked",
+      "V0": [
+       "withheld_gate",
+       120,
+       5
+      ],
+      "variant": [
+       "withheld_gate",
+       109,
+       -6
+      ]
+     },
+     {
+      "label_id": 31,
+      "label": 80,
+      "leak": "leak_free",
+      "V0": [
+       "withheld_gate",
+       63,
+       -17
+      ],
+      "variant": [
+       "withheld_gate",
+       53,
+       -27
+      ]
+     },
+     {
+      "label_id": 38,
+      "label": 118,
+      "leak": "leaked",
+      "V0": [
+       "withheld_gate",
+       102,
+       -16
+      ],
+      "variant": [
+       "withheld_gate",
+       92,
+       -26
+      ]
+     },
+     {
+      "label_id": 50,
+      "label": 40,
+      "leak": "leak_free",
+      "V0": [
+       "withheld_flagged",
+       44,
+       4
+      ],
+      "variant": [
+       "withheld_flagged",
+       37,
+       -3
+      ]
+     }
+    ]
+   }
+  },
+  "polygon_photos_9": {
+   "rows": [
+    {
+     "image": "labelled-img-01",
+     "label": 99,
+     "tier": "A",
+     "leak": "leaked",
+     "group": "G01",
+     "walk_development": false,
+     "V0": {
+      "A": 99,
+      "A_outcome": "accepted",
+      "B": 99,
+      "err_A": 0,
+      "err_B": 0
+     },
+     "V1": {
+      "A": 99,
+      "A_outcome": "accepted",
+      "B": 99,
+      "err_A": 0,
+      "err_B": 0
+     },
+     "V2": {
+      "A": 99,
+      "A_outcome": "accepted",
+      "B": 99,
+      "err_A": 0,
+      "err_B": 0
+     },
+     "V3": {
+      "A": 98,
+      "A_outcome": "accepted",
+      "B": 98,
+      "err_A": -1,
+      "err_B": -1
+     },
+     "V4": {
+      "A": 99,
+      "A_outcome": "accepted",
+      "B": 99,
+      "err_A": 0,
+      "err_B": 0
+     }
+    },
+    {
+     "image": "labelled-img-32",
+     "label": 19,
+     "tier": "A",
+     "leak": "leaked",
+     "group": "G01",
+     "walk_development": true,
+     "V0": {
+      "A": 19,
+      "A_outcome": "accepted",
+      "B": 19,
+      "err_A": 0,
+      "err_B": 0
+     },
+     "V1": {
+      "A": 19,
+      "A_outcome": "accepted",
+      "B": 19,
+      "err_A": 0,
+      "err_B": 0
+     },
+     "V2": {
+      "A": 19,
+      "A_outcome": "accepted",
+      "B": 19,
+      "err_A": 0,
+      "err_B": 0
+     },
+     "V3": {
+      "A": 19,
+      "A_outcome": "accepted",
+      "B": 19,
+      "err_A": 0,
+      "err_B": 0
+     },
+     "V4": {
+      "A": 19,
+      "A_outcome": "accepted",
+      "B": 19,
+      "err_A": 0,
+      "err_B": 0
+     }
+    },
+    {
+     "image": "warehouse-image-4",
+     "label": 19,
+     "tier": "per-stack (user-confirmed)",
+     "leak": "not in manifest",
+     "group": "G01",
+     "walk_development": true,
+     "V0": {
+      "A": 19,
+      "A_outcome": "accepted",
+      "B": 19,
+      "err_A": 0,
+      "err_B": 0
+     },
+     "V1": {
+      "A": 19,
+      "A_outcome": "accepted",
+      "B": 19,
+      "err_A": 0,
+      "err_B": 0
+     },
+     "V2": {
+      "A": 19,
+      "A_outcome": "accepted",
+      "B": 19,
+      "err_A": 0,
+      "err_B": 0
+     },
+     "V3": {
+      "A": 19,
+      "A_outcome": "accepted",
+      "B": 19,
+      "err_A": 0,
+      "err_B": 0
+     },
+     "V4": {
+      "A": 19,
+      "A_outcome": "accepted",
+      "B": 19,
+      "err_A": 0,
+      "err_B": 0
+     }
+    },
+    {
+     "image": "labelled-img-04",
+     "label": 115,
+     "tier": "B",
+     "leak": "leaked",
+     "group": "G05",
+     "walk_development": false,
+     "V0": {
+      "A": 120,
+      "A_outcome": "withheld_gate",
+      "B": 119,
+      "err_A": 5,
+      "err_B": 4
+     },
+     "V1": {
+      "A": 114,
+      "A_outcome": "withheld_gate",
+      "B": 113,
+      "err_A": -1,
+      "err_B": -2
+     },
+     "V2": {
+      "A": 113,
+      "A_outcome": "withheld_gate",
+      "B": 112,
+      "err_A": -2,
+      "err_B": -3
+     },
+     "V3": {
+      "A": 98,
+      "A_outcome": "withheld_gate",
+      "B": 98,
+      "err_A": -17,
+      "err_B": -17
+     },
+     "V4": {
+      "A": 109,
+      "A_outcome": "withheld_gate",
+      "B": 108,
+      "err_A": -6,
+      "err_B": -7
+     }
+    },
+    {
+     "image": "labelled-img-09",
+     "label": 75,
+     "tier": "B",
+     "leak": "leaked",
+     "group": "G08",
+     "walk_development": false,
+     "V0": {
+      "A": 85,
+      "A_outcome": "withheld_flagged",
+      "B": 85,
+      "err_A": 10,
+      "err_B": 10
+     },
+     "V1": {
+      "A": 77,
+      "A_outcome": "withheld_flagged",
+      "B": 76,
+      "err_A": 2,
+      "err_B": 1
+     },
+     "V2": {
+      "A": 74,
+      "A_outcome": "withheld_flagged",
+      "B": 72,
+      "err_A": -1,
+      "err_B": -3
+     },
+     "V3": {
+      "A": 69,
+      "A_outcome": "withheld_flagged",
+      "B": 69,
+      "err_A": -6,
+      "err_B": -6
+     },
+     "V4": {
+      "A": 85,
+      "A_outcome": "withheld_flagged",
+      "B": 85,
+      "err_A": 10,
+      "err_B": 10
+     }
+    },
+    {
+     "image": "labelled-img-35",
+     "label": 1,
+     "tier": "A",
+     "leak": "leaked",
+     "group": "G22",
+     "walk_development": false,
+     "V0": {
+      "A": 0,
+      "A_outcome": "withheld_gate",
+      "B": 1,
+      "err_A": -1,
+      "err_B": 0
+     },
+     "V1": {
+      "A": 0,
+      "A_outcome": "withheld_gate",
+      "B": 1,
+      "err_A": -1,
+      "err_B": 0
+     },
+     "V2": {
+      "A": 0,
+      "A_outcome": "withheld_gate",
+      "B": 1,
+      "err_A": -1,
+      "err_B": 0
+     },
+     "V3": {
+      "A": 0,
+      "A_outcome": "withheld_gate",
+      "B": 1,
+      "err_A": -1,
+      "err_B": 0
+     },
+     "V4": {
+      "A": 0,
+      "A_outcome": "withheld_gate",
+      "B": 1,
+      "err_A": -1,
+      "err_B": 0
+     }
+    },
+    {
+     "image": "labelled-img-39",
+     "label": 2,
+     "tier": "A",
+     "leak": "leaked",
+     "group": "G24",
+     "walk_development": false,
+     "V0": {
+      "A": 3,
+      "A_outcome": "withheld_gate",
+      "B": 3,
+      "err_A": 1,
+      "err_B": 1
+     },
+     "V1": {
+      "A": 3,
+      "A_outcome": "withheld_gate",
+      "B": 3,
+      "err_A": 1,
+      "err_B": 1
+     },
+     "V2": {
+      "A": 3,
+      "A_outcome": "withheld_gate",
+      "B": 3,
+      "err_A": 1,
+      "err_B": 1
+     },
+     "V3": {
+      "A": 3,
+      "A_outcome": "withheld_gate",
+      "B": 3,
+      "err_A": 1,
+      "err_B": 1
+     },
+     "V4": {
+      "A": 3,
+      "A_outcome": "withheld_gate",
+      "B": 3,
+      "err_A": 1,
+      "err_B": 1
+     }
+    },
+    {
+     "image": "labelled-img-47",
+     "label": 7,
+     "tier": "A",
+     "leak": "leak_free",
+     "group": "G30",
+     "walk_development": false,
+     "V0": {
+      "A": 7,
+      "A_outcome": "accepted",
+      "B": 7,
+      "err_A": 0,
+      "err_B": 0
+     },
+     "V1": {
+      "A": 7,
+      "A_outcome": "accepted",
+      "B": 7,
+      "err_A": 0,
+      "err_B": 0
+     },
+     "V2": {
+      "A": 7,
+      "A_outcome": "accepted",
+      "B": 7,
+      "err_A": 0,
+      "err_B": 0
+     },
+     "V3": {
+      "A": 7,
+      "A_outcome": "accepted",
+      "B": 7,
+      "err_A": 0,
+      "err_B": 0
+     },
+     "V4": {
+      "A": 7,
+      "A_outcome": "accepted",
+      "B": 7,
+      "err_A": 0,
+      "err_B": 0
+     }
+    },
+    {
+     "image": "labelled-img-46",
+     "label": 20,
+     "tier": "B",
+     "leak": "leak_free",
+     "group": "G29",
+     "walk_development": false,
+     "V0": {
+      "A": 19,
+      "A_outcome": "withheld_flagged",
+      "B": 19,
+      "err_A": -1,
+      "err_B": -1
+     },
+     "V1": {
+      "A": 18,
+      "A_outcome": "withheld_flagged",
+      "B": 18,
+      "err_A": -2,
+      "err_B": -2
+     },
+     "V2": {
+      "A": 17,
+      "A_outcome": "withheld_flagged",
+      "B": 17,
+      "err_A": -3,
+      "err_B": -3
+     },
+     "V3": {
+      "A": 17,
+      "A_outcome": "accepted",
+      "B": 17,
+      "err_A": -3,
+      "err_B": -3
+     },
+     "V4": {
+      "A": 19,
+      "A_outcome": "withheld_flagged",
+      "B": 19,
+      "err_A": -1,
+      "err_B": -1
+     }
+    }
+   ],
+   "summary": {
+    "V0": {
+     "all": {
+      "photos": 9,
+      "physical_blocks": 7,
+      "A_exact": 4,
+      "A_abs_error_sum": 18,
+      "A_accepted": 4,
+      "B_exact": 5,
+      "B_abs_error_sum": 16
+     },
+     "leak_free": {
+      "photos": 2,
+      "physical_blocks": 2,
+      "A_exact": 1,
+      "A_abs_error_sum": 1,
+      "A_accepted": 1,
+      "B_exact": 1,
+      "B_abs_error_sum": 1
+     },
+     "not_leak_free": {
+      "photos": 7,
+      "physical_blocks": 5,
+      "A_exact": 3,
+      "A_abs_error_sum": 17,
+      "A_accepted": 3,
+      "B_exact": 4,
+      "B_abs_error_sum": 15
+     }
+    },
+    "V1": {
+     "all": {
+      "photos": 9,
+      "physical_blocks": 7,
+      "A_exact": 4,
+      "A_abs_error_sum": 7,
+      "A_accepted": 4,
+      "B_exact": 5,
+      "B_abs_error_sum": 6
+     },
+     "leak_free": {
+      "photos": 2,
+      "physical_blocks": 2,
+      "A_exact": 1,
+      "A_abs_error_sum": 2,
+      "A_accepted": 1,
+      "B_exact": 1,
+      "B_abs_error_sum": 2
+     },
+     "not_leak_free": {
+      "photos": 7,
+      "physical_blocks": 5,
+      "A_exact": 3,
+      "A_abs_error_sum": 5,
+      "A_accepted": 3,
+      "B_exact": 4,
+      "B_abs_error_sum": 4
+     }
+    },
+    "V2": {
+     "all": {
+      "photos": 9,
+      "physical_blocks": 7,
+      "A_exact": 4,
+      "A_abs_error_sum": 8,
+      "A_accepted": 4,
+      "B_exact": 5,
+      "B_abs_error_sum": 10
+     },
+     "leak_free": {
+      "photos": 2,
+      "physical_blocks": 2,
+      "A_exact": 1,
+      "A_abs_error_sum": 3,
+      "A_accepted": 1,
+      "B_exact": 1,
+      "B_abs_error_sum": 3
+     },
+     "not_leak_free": {
+      "photos": 7,
+      "physical_blocks": 5,
+      "A_exact": 3,
+      "A_abs_error_sum": 5,
+      "A_accepted": 3,
+      "B_exact": 4,
+      "B_abs_error_sum": 7
+     }
+    },
+    "V3": {
+     "all": {
+      "photos": 9,
+      "physical_blocks": 7,
+      "A_exact": 3,
+      "A_abs_error_sum": 29,
+      "A_accepted": 5,
+      "B_exact": 4,
+      "B_abs_error_sum": 28
+     },
+     "leak_free": {
+      "photos": 2,
+      "physical_blocks": 2,
+      "A_exact": 1,
+      "A_abs_error_sum": 3,
+      "A_accepted": 2,
+      "B_exact": 1,
+      "B_abs_error_sum": 3
+     },
+     "not_leak_free": {
+      "photos": 7,
+      "physical_blocks": 5,
+      "A_exact": 2,
+      "A_abs_error_sum": 26,
+      "A_accepted": 3,
+      "B_exact": 3,
+      "B_abs_error_sum": 25
+     }
+    },
+    "V4": {
+     "all": {
+      "photos": 9,
+      "physical_blocks": 7,
+      "A_exact": 4,
+      "A_abs_error_sum": 19,
+      "A_accepted": 4,
+      "B_exact": 5,
+      "B_abs_error_sum": 19
+     },
+     "leak_free": {
+      "photos": 2,
+      "physical_blocks": 2,
+      "A_exact": 1,
+      "A_abs_error_sum": 1,
+      "A_accepted": 1,
+      "B_exact": 1,
+      "B_abs_error_sum": 1
+     },
+     "not_leak_free": {
+      "photos": 7,
+      "physical_blocks": 5,
+      "A_exact": 3,
+      "A_abs_error_sum": 18,
+      "A_accepted": 3,
+      "B_exact": 4,
+      "B_abs_error_sum": 18
+     }
+    }
+   },
+   "note": "img-01, img-32 and warehouse image-4 are block G01; img-32 and warehouse-4 are one stack"
+  },
+  "per_stack_user_reported": {
+   "V0": {
+    "photos": 5,
+    "stack_observations": 9,
+    "physical_stacks": 8,
+    "walk_equals_user_filled": 3,
+    "within_1_of_user_filled": 4,
+    "accepted_observations": 3,
+    "accepted_and_equal": 3,
+    "accepted_physical_stacks": 2,
+    "accepted_from_walk_development_photos": 2,
+    "withheld_observations": 6,
+    "unassigned_cases": 0,
+    "abs_error_sum": 26,
+    "stacks": [
+     [
+      "img-32 free end of the 99 block",
+      1,
+      19,
+      19,
+      "accepted"
+     ],
+     [
+      "warehouse image-4 (same 19 stack)",
+      1,
+      19,
+      19,
+      "accepted"
+     ],
+     [
+      "img-46 single stack (391 px crop)",
+      1,
+      20,
+      19,
+      "withheld_flagged"
+     ],
+     [
+      "img-47 single stack of 7",
+      1,
+      7,
+      7,
+      "accepted"
+     ],
+     [
+      "user-100 face inside img-44",
+      1,
+      20,
+      16,
+      "withheld_gate"
+     ],
+     [
+      "user-100 face inside img-44",
+      2,
+      20,
+      26,
+      "withheld_gate"
+     ],
+     [
+      "user-100 face inside img-44",
+      3,
+      20,
+      24,
+      "withheld_gate"
+     ],
+     [
+      "user-100 face inside img-44",
+      4,
+      20,
+      15,
+      "withheld_gate"
+     ],
+     [
+      "user-100 face inside img-44",
+      5,
+      20,
+      14,
+      "withheld_gate"
+     ]
+    ]
+   },
+   "V1": {
+    "photos": 5,
+    "stack_observations": 9,
+    "physical_stacks": 8,
+    "walk_equals_user_filled": 3,
+    "within_1_of_user_filled": 3,
+    "accepted_observations": 3,
+    "accepted_and_equal": 3,
+    "accepted_physical_stacks": 2,
+    "accepted_from_walk_development_photos": 2,
+    "withheld_observations": 6,
+    "unassigned_cases": 0,
+    "abs_error_sum": 23,
+    "stacks": [
+     [
+      "img-32 free end of the 99 block",
+      1,
+      19,
+      19,
+      "accepted"
+     ],
+     [
+      "warehouse image-4 (same 19 stack)",
+      1,
+      19,
+      19,
+      "accepted"
+     ],
+     [
+      "img-46 single stack (391 px crop)",
+      1,
+      20,
+      18,
+      "withheld_flagged"
+     ],
+     [
+      "img-47 single stack of 7",
+      1,
+      7,
+      7,
+      "accepted"
+     ],
+     [
+      "user-100 face inside img-44",
+      1,
+      20,
+      16,
+      "withheld_gate"
+     ],
+     [
+      "user-100 face inside img-44",
+      2,
+      20,
+      17,
+      "withheld_gate"
+     ],
+     [
+      "user-100 face inside img-44",
+      3,
+      20,
+      17,
+      "withheld_gate"
+     ],
+     [
+      "user-100 face inside img-44",
+      4,
+      20,
+      15,
+      "withheld_gate"
+     ],
+     [
+      "user-100 face inside img-44",
+      5,
+      20,
+      14,
+      "withheld_gate"
+     ]
+    ]
+   },
+   "V2": {
+    "photos": 5,
+    "stack_observations": 9,
+    "physical_stacks": 8,
+    "walk_equals_user_filled": 3,
+    "within_1_of_user_filled": 3,
+    "accepted_observations": 3,
+    "accepted_and_equal": 3,
+    "accepted_physical_stacks": 2,
+    "accepted_from_walk_development_photos": 2,
+    "withheld_observations": 6,
+    "unassigned_cases": 0,
+    "abs_error_sum": 26,
+    "stacks": [
+     [
+      "img-32 free end of the 99 block",
+      1,
+      19,
+      19,
+      "accepted"
+     ],
+     [
+      "warehouse image-4 (same 19 stack)",
+      1,
+      19,
+      19,
+      "accepted"
+     ],
+     [
+      "img-46 single stack (391 px crop)",
+      1,
+      20,
+      17,
+      "withheld_flagged"
+     ],
+     [
+      "img-47 single stack of 7",
+      1,
+      7,
+      7,
+      "accepted"
+     ],
+     [
+      "user-100 face inside img-44",
+      1,
+      20,
+      16,
+      "withheld_gate"
+     ],
+     [
+      "user-100 face inside img-44",
+      2,
+      20,
+      16,
+      "withheld_gate"
+     ],
+     [
+      "user-100 face inside img-44",
+      3,
+      20,
+      16,
+      "withheld_gate"
+     ],
+     [
+      "user-100 face inside img-44",
+      4,
+      20,
+      15,
+      "withheld_gate"
+     ],
+     [
+      "user-100 face inside img-44",
+      5,
+      20,
+      14,
+      "withheld_gate"
+     ]
+    ]
+   },
+   "V3": {
+    "photos": 5,
+    "stack_observations": 9,
+    "physical_stacks": 8,
+    "walk_equals_user_filled": 3,
+    "within_1_of_user_filled": 3,
+    "accepted_observations": 4,
+    "accepted_and_equal": 3,
+    "accepted_physical_stacks": 3,
+    "accepted_from_walk_development_photos": 2,
+    "withheld_observations": 5,
+    "unassigned_cases": 0,
+    "abs_error_sum": 35,
+    "stacks": [
+     [
+      "img-32 free end of the 99 block",
+      1,
+      19,
+      19,
+      "accepted"
+     ],
+     [
+      "warehouse image-4 (same 19 stack)",
+      1,
+      19,
+      19,
+      "accepted"
+     ],
+     [
+      "img-46 single stack (391 px crop)",
+      1,
+      20,
+      17,
+      "accepted"
+     ],
+     [
+      "img-47 single stack of 7",
+      1,
+      7,
+      7,
+      "accepted"
+     ],
+     [
+      "user-100 face inside img-44",
+      1,
+      20,
+      11,
+      "withheld_gate"
+     ],
+     [
+      "user-100 face inside img-44",
+      2,
+      20,
+      14,
+      "withheld_gate"
+     ],
+     [
+      "user-100 face inside img-44",
+      3,
+      20,
+      14,
+      "withheld_gate"
+     ],
+     [
+      "user-100 face inside img-44",
+      4,
+      20,
+      15,
+      "withheld_gate"
+     ],
+     [
+      "user-100 face inside img-44",
+      5,
+      20,
+      14,
+      "withheld_gate"
+     ]
+    ]
+   },
+   "V4": {
+    "photos": 5,
+    "stack_observations": 9,
+    "physical_stacks": 8,
+    "walk_equals_user_filled": 3,
+    "within_1_of_user_filled": 4,
+    "accepted_observations": 3,
+    "accepted_and_equal": 3,
+    "accepted_physical_stacks": 2,
+    "accepted_from_walk_development_photos": 2,
+    "withheld_observations": 6,
+    "unassigned_cases": 0,
+    "abs_error_sum": 22,
+    "stacks": [
+     [
+      "img-32 free end of the 99 block",
+      1,
+      19,
+      19,
+      "accepted"
+     ],
+     [
+      "warehouse image-4 (same 19 stack)",
+      1,
+      19,
+      19,
+      "accepted"
+     ],
+     [
+      "img-46 single stack (391 px crop)",
+      1,
+      20,
+      19,
+      "withheld_flagged"
+     ],
+     [
+      "img-47 single stack of 7",
+      1,
+      7,
+      7,
+      "accepted"
+     ],
+     [
+      "user-100 face inside img-44",
+      1,
+      20,
+      16,
+      "withheld_gate"
+     ],
+     [
+      "user-100 face inside img-44",
+      2,
+      20,
+      16,
+      "withheld_gate"
+     ],
+     [
+      "user-100 face inside img-44",
+      3,
+      20,
+      18,
+      "withheld_gate"
+     ],
+     [
+      "user-100 face inside img-44",
+      4,
+      20,
+      15,
+      "withheld_gate"
+     ],
+     [
+      "user-100 face inside img-44",
+      5,
+      20,
+      14,
+      "withheld_gate"
+     ]
+    ]
+   }
+  },
+  "reference_columns_53": {
+   "V0": {
+    "all": {
+     "columns": 53,
+     "exact": 51,
+     "within_1": 53,
+     "abs_error_sum": 2
+    },
+    "without_label_derived": {
+     "columns": 46,
+     "exact": 45,
+     "within_1": 46,
+     "abs_error_sum": 1
+    },
+    "label_derived_rows": 7
+   },
+   "V1": {
+    "all": {
+     "columns": 53,
+     "exact": 51,
+     "within_1": 53,
+     "abs_error_sum": 2
+    },
+    "without_label_derived": {
+     "columns": 46,
+     "exact": 45,
+     "within_1": 46,
+     "abs_error_sum": 1
+    },
+    "label_derived_rows": 7
+   },
+   "V2": {
+    "all": {
+     "columns": 53,
+     "exact": 51,
+     "within_1": 53,
+     "abs_error_sum": 2
+    },
+    "without_label_derived": {
+     "columns": 46,
+     "exact": 45,
+     "within_1": 46,
+     "abs_error_sum": 1
+    },
+    "label_derived_rows": 7
+   },
+   "V3": {
+    "all": {
+     "columns": 53,
+     "exact": 47,
+     "within_1": 52,
+     "abs_error_sum": 7
+    },
+    "without_label_derived": {
+     "columns": 46,
+     "exact": 42,
+     "within_1": 46,
+     "abs_error_sum": 4
+    },
+    "label_derived_rows": 7
+   },
+   "V4": {
+    "all": {
+     "columns": 53,
+     "exact": 51,
+     "within_1": 53,
+     "abs_error_sum": 2
+    },
+    "without_label_derived": {
+     "columns": 46,
+     "exact": 45,
+     "within_1": 46,
+     "abs_error_sum": 1
+    },
+    "label_derived_rows": 7
+   }
+  },
+  "not_usable_outcome_changes": [
+   {
+    "variant": "V4",
+    "photo": "labelled-img-45",
+    "labels_csv_value": "107",
+    "V0": [
+     "withheld_flagged",
+     28
+    ],
+    "variant_result": [
+     "accepted",
+     25
+    ]
+   }
+  ]
+ }
+}

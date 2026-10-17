@@ -63,6 +63,24 @@ class ScanSession {
     _evidence.remove(view);
   }
 
+  /// The session for a retake of [view]: the other photos, their cell IDs and
+  /// evidence carried over under a new [scanId]. One scan id is one ordered
+  /// triplet; the server refuses an id reused with other photos.
+  ScanSession retake(CaptureView view, {required String scanId}) {
+    final next = ScanSession(scanId: scanId);
+    for (final kept in CaptureView.values) {
+      if (kept == view) continue;
+      final path = _paths[kept];
+      if (path == null) continue;
+      next._paths[kept] = path;
+      final cellId = _cellIds[kept];
+      if (cellId != null) next._cellIds[kept] = cellId;
+      final evidence = _evidence[kept];
+      if (evidence != null) next._evidence[kept] = evidence;
+    }
+    return next;
+  }
+
   CaptureView? get nextMissing {
     for (final view in CaptureView.values) {
       if (!_paths.containsKey(view)) return view;

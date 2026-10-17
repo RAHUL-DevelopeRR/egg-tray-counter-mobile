@@ -1,0 +1,7325 @@
+{
+ "logic": "Worker 318eb04 = staging 47cb2378 (layer_span.py, block_model.py _face, captureQuality port); rim verification off (RIM_VERIFY unset on staging)",
+ "inputs": {
+  "detections": "reports/field-labelled-20261007/raw/batch-*.json",
+  "manifest": "reports/eval-20261015/eval_manifest.json"
+ },
+ "detection_duplicates": [
+  {
+   "label_id": 1,
+   "used": {
+    "file": "reports/field-labelled-20261007/raw/batch-01.json",
+    "view": "left",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "other": {
+    "file": "reports/field-labelled-20261007/raw/batch-18.json",
+    "view": "right",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "identical_boxes": true
+  },
+  {
+   "label_id": 2,
+   "used": {
+    "file": "reports/field-labelled-20261007/raw/batch-01.json",
+    "view": "right",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "other": {
+    "file": "reports/field-labelled-20261007/raw/batch-18.json",
+    "view": "straight",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "identical_boxes": true
+  }
+ ],
+ "settings_check": {
+  "field_labelled_20261007": {
+   "photos": 52,
+   "boxes": 2839,
+   "classes": [
+    "egg_tray"
+   ],
+   "min_confidence": 0.3504,
+   "boxes_below_0.35": 0,
+   "max_pairwise_iou": 0.992,
+   "pairs_iou_above_0.5": 67,
+   "photos_with_pair_iou_above_0.5": 35,
+   "model_ids": [
+    "projec-mutta/2"
+   ],
+   "modes": [
+    "model_spatial_v1"
+   ]
+  },
+  "mutaa_20260916": {
+   "photos": 42,
+   "boxes": 989,
+   "classes": [
+    "egg_tray"
+   ],
+   "min_confidence": 0.3504,
+   "boxes_below_0.35": 0,
+   "max_pairwise_iou": 0.973,
+   "pairs_iou_above_0.5": 41,
+   "photos_with_pair_iou_above_0.5": 19,
+   "model_ids": [
+    "projec-mutta/2"
+   ],
+   "request_metadata": [
+    {
+     "model": "projec-mutta/2",
+     "confidence": 35,
+     "overlap": 50,
+     "classes": "egg_tray",
+     "settings_source": "checked-in gateway configuration"
+    }
+   ],
+   "note": "views include transport repeats (companion images re-sent with single images 13-15)"
+  }
+ },
+ "detection_reproducibility": [
+  {
+   "label_id": 1,
+   "later_response": "reports/staging-block-20261008/scan-99block-walk2.json",
+   "view": "straight",
+   "boxes_7oct": 101,
+   "boxes_later": 101,
+   "identical_boxes": true,
+   "note": null
+  },
+  {
+   "label_id": 32,
+   "later_response": "reports/staging-block-20261008/scan-99block-walk2.json",
+   "view": "right",
+   "boxes_7oct": 24,
+   "boxes_later": 24,
+   "identical_boxes": true,
+   "note": null
+  },
+  {
+   "label_id": 19,
+   "later_response": "reports/staging-block-20261008/scan-mech-walk.json",
+   "view": "straight",
+   "boxes_7oct": 100,
+   "boxes_later": 100,
+   "identical_boxes": true,
+   "note": null
+  },
+  {
+   "label_id": 30,
+   "later_response": "reports/staging-block-20261008/scan-mech-walk.json",
+   "view": "left",
+   "boxes_7oct": 81,
+   "boxes_later": 81,
+   "identical_boxes": true,
+   "note": null
+  },
+  {
+   "label_id": 2,
+   "later_response": "reports/staging-block-20261008/scan-mech-walk.json",
+   "view": "right",
+   "boxes_7oct": 81,
+   "boxes_later": 81,
+   "identical_boxes": true,
+   "note": null
+  },
+  {
+   "label_id": 50,
+   "later_response": "reports/field-scans-20261013/replay/f81c04d7-5fec-4d64-aa8c-54098abf2415.json",
+   "view": "left",
+   "boxes_7oct": 35,
+   "boxes_later": 35,
+   "identical_boxes": false,
+   "note": "not the same file: f81c04d7 LEFT is the app's 1600 px re-encode of img-50 (different JPEG bytes)"
+  }
+ ],
+ "summary_labels": {
+  "all": {
+   "all": {
+    "n": 24,
+    "accepted": 12,
+    "accepted_correct": 11,
+    "accepted_wrong": 1,
+    "withheld": 12,
+    "withheld_gate": 8,
+    "withheld_flagged": 4,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.5,
+    "withheld_rate": 0.5,
+    "exact_rate_on_accepted": 0.9167,
+    "correct_and_shown_rate": 0.4583,
+    "mae_all": 17.958,
+    "median_abs_all": 1.0,
+    "max_abs_all": 358,
+    "mean_signed_all": -15.875,
+    "mae_accepted": 0.167,
+    "median_abs_accepted": 0.0,
+    "max_abs_accepted": 2
+   }
+  },
+  "tier": {
+   "A": {
+    "n": 14,
+    "accepted": 11,
+    "accepted_correct": 10,
+    "accepted_wrong": 1,
+    "withheld": 3,
+    "withheld_gate": 3,
+    "withheld_flagged": 0,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.7857,
+    "withheld_rate": 0.2143,
+    "exact_rate_on_accepted": 0.9091,
+    "correct_and_shown_rate": 0.7143,
+    "mae_all": 0.357,
+    "median_abs_all": 0.0,
+    "max_abs_all": 2,
+    "mean_signed_all": -0.214,
+    "mae_accepted": 0.182,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 2
+   },
+   "B": {
+    "n": 10,
+    "accepted": 1,
+    "accepted_correct": 1,
+    "accepted_wrong": 0,
+    "withheld": 9,
+    "withheld_gate": 5,
+    "withheld_flagged": 4,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.1,
+    "withheld_rate": 0.9,
+    "exact_rate_on_accepted": 1.0,
+    "correct_and_shown_rate": 0.1,
+    "mae_all": 42.6,
+    "median_abs_all": 7.5,
+    "max_abs_all": 358,
+    "mean_signed_all": -37.8,
+    "mae_accepted": 0.0,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 0
+   }
+  },
+  "leak": {
+   "leak_free": {
+    "n": 6,
+    "accepted": 2,
+    "accepted_correct": 1,
+    "accepted_wrong": 1,
+    "withheld": 4,
+    "withheld_gate": 2,
+    "withheld_flagged": 2,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.3333,
+    "withheld_rate": 0.6667,
+    "exact_rate_on_accepted": 0.5,
+    "correct_and_shown_rate": 0.1667,
+    "mae_all": 4.167,
+    "median_abs_all": 1.5,
+    "max_abs_all": 17,
+    "mean_signed_all": -2.833,
+    "mae_accepted": 1.0,
+    "median_abs_accepted": 1.0,
+    "max_abs_accepted": 2
+   },
+   "leaked": {
+    "n": 18,
+    "accepted": 10,
+    "accepted_correct": 10,
+    "accepted_wrong": 0,
+    "withheld": 8,
+    "withheld_gate": 6,
+    "withheld_flagged": 2,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.5556,
+    "withheld_rate": 0.4444,
+    "exact_rate_on_accepted": 1.0,
+    "correct_and_shown_rate": 0.5556,
+    "mae_all": 22.556,
+    "median_abs_all": 0.0,
+    "max_abs_all": 358,
+    "mean_signed_all": -20.222,
+    "mae_accepted": 0.0,
+    "median_abs_accepted": 0.0,
+    "max_abs_accepted": 0
+   }
+  },
+  "size": {
+   "11-60": {
+    "n": 4,
+    "accepted": 2,
+    "accepted_correct": 2,
+    "accepted_wrong": 0,
+    "withheld": 2,
+    "withheld_gate": 0,
+    "withheld_flagged": 2,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.5,
+    "withheld_rate": 0.5,
+    "exact_rate_on_accepted": 1.0,
+    "correct_and_shown_rate": 0.5,
+    "mae_all": 1.25,
+    "median_abs_all": 0.5,
+    "max_abs_all": 4,
+    "mean_signed_all": 0.75,
+    "mae_accepted": 0.0,
+    "median_abs_accepted": 0.0,
+    "max_abs_accepted": 0
+   },
+   "<=10": {
+    "n": 5,
+    "accepted": 1,
+    "accepted_correct": 1,
+    "accepted_wrong": 0,
+    "withheld": 4,
+    "withheld_gate": 4,
+    "withheld_flagged": 0,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.2,
+    "withheld_rate": 0.8,
+    "exact_rate_on_accepted": 1.0,
+    "correct_and_shown_rate": 0.2,
+    "mae_all": 2.6,
+    "median_abs_all": 1,
+    "max_abs_all": 10,
+    "mean_signed_all": -2.2,
+    "mae_accepted": 0.0,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 0
+   },
+   ">60": {
+    "n": 15,
+    "accepted": 9,
+    "accepted_correct": 8,
+    "accepted_wrong": 1,
+    "withheld": 6,
+    "withheld_gate": 4,
+    "withheld_flagged": 2,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.6,
+    "withheld_rate": 0.4,
+    "exact_rate_on_accepted": 0.8889,
+    "correct_and_shown_rate": 0.5333,
+    "mae_all": 27.533,
+    "median_abs_all": 0,
+    "max_abs_all": 358,
+    "mean_signed_all": -24.867,
+    "mae_accepted": 0.222,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 2
+   }
+  },
+  "logic_dev": {
+   "not_used_in_logic_tuning": {
+    "n": 5,
+    "accepted": 1,
+    "accepted_correct": 1,
+    "accepted_wrong": 0,
+    "withheld": 4,
+    "withheld_gate": 4,
+    "withheld_flagged": 0,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.2,
+    "withheld_rate": 0.8,
+    "exact_rate_on_accepted": 1.0,
+    "correct_and_shown_rate": 0.2,
+    "mae_all": 2.6,
+    "median_abs_all": 1,
+    "max_abs_all": 10,
+    "mean_signed_all": -2.2,
+    "mae_accepted": 0.0,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 0
+   },
+   "used_in_tuning": {
+    "n": 19,
+    "accepted": 11,
+    "accepted_correct": 10,
+    "accepted_wrong": 1,
+    "withheld": 8,
+    "withheld_gate": 4,
+    "withheld_flagged": 4,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.5789,
+    "withheld_rate": 0.4211,
+    "exact_rate_on_accepted": 0.9091,
+    "correct_and_shown_rate": 0.5263,
+    "mae_all": 22.0,
+    "median_abs_all": 0,
+    "max_abs_all": 358,
+    "mean_signed_all": -19.474,
+    "mae_accepted": 0.182,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 2
+   }
+  },
+  "detector_and_logic": {
+   "touched": {
+    "n": 22,
+    "accepted": 11,
+    "accepted_correct": 10,
+    "accepted_wrong": 1,
+    "withheld": 11,
+    "withheld_gate": 7,
+    "withheld_flagged": 4,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.5,
+    "withheld_rate": 0.5,
+    "exact_rate_on_accepted": 0.9091,
+    "correct_and_shown_rate": 0.4545,
+    "mae_all": 19.545,
+    "median_abs_all": 1.0,
+    "max_abs_all": 358,
+    "mean_signed_all": -17.273,
+    "mae_accepted": 0.182,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 2
+   },
+   "untouched": {
+    "n": 2,
+    "accepted": 1,
+    "accepted_correct": 1,
+    "accepted_wrong": 0,
+    "withheld": 1,
+    "withheld_gate": 1,
+    "withheld_flagged": 0,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.5,
+    "withheld_rate": 0.5,
+    "exact_rate_on_accepted": 1.0,
+    "correct_and_shown_rate": 0.5,
+    "mae_all": 0.5,
+    "median_abs_all": 0.5,
+    "max_abs_all": 1,
+    "mean_signed_all": -0.5,
+    "mae_accepted": 0.0,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 0
+   }
+  }
+ },
+ "summary_clusters": {
+  "all": {
+   "all": {
+    "n": 22,
+    "accepted": 10,
+    "accepted_correct": 9,
+    "accepted_wrong": 1,
+    "withheld": 12,
+    "withheld_gate": 8,
+    "withheld_flagged": 4,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.4545,
+    "withheld_rate": 0.5455,
+    "exact_rate_on_accepted": 0.9,
+    "correct_and_shown_rate": 0.4091,
+    "mae_all": 19.591,
+    "median_abs_all": 1.0,
+    "max_abs_all": 358,
+    "mean_signed_all": -17.318,
+    "mae_accepted": 0.2,
+    "median_abs_accepted": 0.0,
+    "max_abs_accepted": 2
+   }
+  },
+  "tier": {
+   "A": {
+    "n": 12,
+    "accepted": 9,
+    "accepted_correct": 8,
+    "accepted_wrong": 1,
+    "withheld": 3,
+    "withheld_gate": 3,
+    "withheld_flagged": 0,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.75,
+    "withheld_rate": 0.25,
+    "exact_rate_on_accepted": 0.8889,
+    "correct_and_shown_rate": 0.6667,
+    "mae_all": 0.417,
+    "median_abs_all": 0.0,
+    "max_abs_all": 2,
+    "mean_signed_all": -0.25,
+    "mae_accepted": 0.222,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 2
+   },
+   "B": {
+    "n": 10,
+    "accepted": 1,
+    "accepted_correct": 1,
+    "accepted_wrong": 0,
+    "withheld": 9,
+    "withheld_gate": 5,
+    "withheld_flagged": 4,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.1,
+    "withheld_rate": 0.9,
+    "exact_rate_on_accepted": 1.0,
+    "correct_and_shown_rate": 0.1,
+    "mae_all": 42.6,
+    "median_abs_all": 7.5,
+    "max_abs_all": 358,
+    "mean_signed_all": -37.8,
+    "mae_accepted": 0.0,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 0
+   }
+  },
+  "leak": {
+   "leak_free": {
+    "n": 6,
+    "accepted": 2,
+    "accepted_correct": 1,
+    "accepted_wrong": 1,
+    "withheld": 4,
+    "withheld_gate": 2,
+    "withheld_flagged": 2,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.3333,
+    "withheld_rate": 0.6667,
+    "exact_rate_on_accepted": 0.5,
+    "correct_and_shown_rate": 0.1667,
+    "mae_all": 4.167,
+    "median_abs_all": 1.5,
+    "max_abs_all": 17,
+    "mean_signed_all": -2.833,
+    "mae_accepted": 1.0,
+    "median_abs_accepted": 1.0,
+    "max_abs_accepted": 2
+   },
+   "leaked": {
+    "n": 16,
+    "accepted": 8,
+    "accepted_correct": 8,
+    "accepted_wrong": 0,
+    "withheld": 8,
+    "withheld_gate": 6,
+    "withheld_flagged": 2,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.5,
+    "withheld_rate": 0.5,
+    "exact_rate_on_accepted": 1.0,
+    "correct_and_shown_rate": 0.5,
+    "mae_all": 25.375,
+    "median_abs_all": 0.5,
+    "max_abs_all": 358,
+    "mean_signed_all": -22.75,
+    "mae_accepted": 0.0,
+    "median_abs_accepted": 0.0,
+    "max_abs_accepted": 0
+   }
+  },
+  "size": {
+   "11-60": {
+    "n": 4,
+    "accepted": 2,
+    "accepted_correct": 2,
+    "accepted_wrong": 0,
+    "withheld": 2,
+    "withheld_gate": 0,
+    "withheld_flagged": 2,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.5,
+    "withheld_rate": 0.5,
+    "exact_rate_on_accepted": 1.0,
+    "correct_and_shown_rate": 0.5,
+    "mae_all": 1.25,
+    "median_abs_all": 0.5,
+    "max_abs_all": 4,
+    "mean_signed_all": 0.75,
+    "mae_accepted": 0.0,
+    "median_abs_accepted": 0.0,
+    "max_abs_accepted": 0
+   },
+   "<=10": {
+    "n": 5,
+    "accepted": 1,
+    "accepted_correct": 1,
+    "accepted_wrong": 0,
+    "withheld": 4,
+    "withheld_gate": 4,
+    "withheld_flagged": 0,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.2,
+    "withheld_rate": 0.8,
+    "exact_rate_on_accepted": 1.0,
+    "correct_and_shown_rate": 0.2,
+    "mae_all": 2.6,
+    "median_abs_all": 1,
+    "max_abs_all": 10,
+    "mean_signed_all": -2.2,
+    "mae_accepted": 0.0,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 0
+   },
+   ">60": {
+    "n": 13,
+    "accepted": 7,
+    "accepted_correct": 6,
+    "accepted_wrong": 1,
+    "withheld": 6,
+    "withheld_gate": 4,
+    "withheld_flagged": 2,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.5385,
+    "withheld_rate": 0.4615,
+    "exact_rate_on_accepted": 0.8571,
+    "correct_and_shown_rate": 0.4615,
+    "mae_all": 31.769,
+    "median_abs_all": 2,
+    "max_abs_all": 358,
+    "mean_signed_all": -28.692,
+    "mae_accepted": 0.286,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 2
+   }
+  },
+  "logic_dev": {
+   "not_used_in_logic_tuning": {
+    "n": 5,
+    "accepted": 1,
+    "accepted_correct": 1,
+    "accepted_wrong": 0,
+    "withheld": 4,
+    "withheld_gate": 4,
+    "withheld_flagged": 0,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.2,
+    "withheld_rate": 0.8,
+    "exact_rate_on_accepted": 1.0,
+    "correct_and_shown_rate": 0.2,
+    "mae_all": 2.6,
+    "median_abs_all": 1,
+    "max_abs_all": 10,
+    "mean_signed_all": -2.2,
+    "mae_accepted": 0.0,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 0
+   },
+   "used_in_tuning": {
+    "n": 17,
+    "accepted": 9,
+    "accepted_correct": 8,
+    "accepted_wrong": 1,
+    "withheld": 8,
+    "withheld_gate": 4,
+    "withheld_flagged": 4,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.5294,
+    "withheld_rate": 0.4706,
+    "exact_rate_on_accepted": 0.8889,
+    "correct_and_shown_rate": 0.4706,
+    "mae_all": 24.588,
+    "median_abs_all": 1,
+    "max_abs_all": 358,
+    "mean_signed_all": -21.765,
+    "mae_accepted": 0.222,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 2
+   }
+  },
+  "detector_and_logic": {
+   "touched": {
+    "n": 20,
+    "accepted": 9,
+    "accepted_correct": 8,
+    "accepted_wrong": 1,
+    "withheld": 11,
+    "withheld_gate": 7,
+    "withheld_flagged": 4,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.45,
+    "withheld_rate": 0.55,
+    "exact_rate_on_accepted": 0.8889,
+    "correct_and_shown_rate": 0.4,
+    "mae_all": 21.5,
+    "median_abs_all": 1.0,
+    "max_abs_all": 358,
+    "mean_signed_all": -19.0,
+    "mae_accepted": 0.222,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 2
+   },
+   "untouched": {
+    "n": 2,
+    "accepted": 1,
+    "accepted_correct": 1,
+    "accepted_wrong": 0,
+    "withheld": 1,
+    "withheld_gate": 1,
+    "withheld_flagged": 0,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.5,
+    "withheld_rate": 0.5,
+    "exact_rate_on_accepted": 1.0,
+    "correct_and_shown_rate": 0.5,
+    "mae_all": 0.5,
+    "median_abs_all": 0.5,
+    "max_abs_all": 1,
+    "mean_signed_all": -0.5,
+    "mae_accepted": 0.0,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 0
+   }
+  }
+ },
+ "summary_blocks": {
+  "all": {
+   "all": {
+    "n": 19,
+    "accepted": 8,
+    "accepted_correct": 7,
+    "accepted_wrong": 1,
+    "withheld": 11,
+    "withheld_gate": 7,
+    "withheld_flagged": 4,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.4211,
+    "withheld_rate": 0.5789,
+    "exact_rate_on_accepted": 0.875,
+    "correct_and_shown_rate": 0.3684,
+    "mae_all": 21.789,
+    "median_abs_all": 1,
+    "max_abs_all": 358,
+    "mean_signed_all": -19.158,
+    "mae_accepted": 0.25,
+    "median_abs_accepted": 0.0,
+    "max_abs_accepted": 2
+   }
+  },
+  "tier": {
+   "A": {
+    "n": 10,
+    "accepted": 7,
+    "accepted_correct": 6,
+    "accepted_wrong": 1,
+    "withheld": 3,
+    "withheld_gate": 3,
+    "withheld_flagged": 0,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.7,
+    "withheld_rate": 0.3,
+    "exact_rate_on_accepted": 0.8571,
+    "correct_and_shown_rate": 0.6,
+    "mae_all": 0.5,
+    "median_abs_all": 0.0,
+    "max_abs_all": 2,
+    "mean_signed_all": -0.3,
+    "mae_accepted": 0.286,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 2
+   },
+   "B": {
+    "n": 9,
+    "accepted": 1,
+    "accepted_correct": 1,
+    "accepted_wrong": 0,
+    "withheld": 8,
+    "withheld_gate": 4,
+    "withheld_flagged": 4,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.1111,
+    "withheld_rate": 0.8889,
+    "exact_rate_on_accepted": 1.0,
+    "correct_and_shown_rate": 0.1111,
+    "mae_all": 45.444,
+    "median_abs_all": 5,
+    "max_abs_all": 358,
+    "mean_signed_all": -40.111,
+    "mae_accepted": 0.0,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 0
+   }
+  },
+  "leak": {
+   "leak_free": {
+    "n": 5,
+    "accepted": 2,
+    "accepted_correct": 1,
+    "accepted_wrong": 1,
+    "withheld": 3,
+    "withheld_gate": 1,
+    "withheld_flagged": 2,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.4,
+    "withheld_rate": 0.6,
+    "exact_rate_on_accepted": 0.5,
+    "correct_and_shown_rate": 0.2,
+    "mae_all": 1.6,
+    "median_abs_all": 1,
+    "max_abs_all": 4,
+    "mean_signed_all": 0.0,
+    "mae_accepted": 1.0,
+    "median_abs_accepted": 1.0,
+    "max_abs_accepted": 2
+   },
+   "leaked": {
+    "n": 14,
+    "accepted": 6,
+    "accepted_correct": 6,
+    "accepted_wrong": 0,
+    "withheld": 8,
+    "withheld_gate": 6,
+    "withheld_flagged": 2,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.4286,
+    "withheld_rate": 0.5714,
+    "exact_rate_on_accepted": 1.0,
+    "correct_and_shown_rate": 0.4286,
+    "mae_all": 29.0,
+    "median_abs_all": 1.0,
+    "max_abs_all": 358,
+    "mean_signed_all": -26.0,
+    "mae_accepted": 0.0,
+    "median_abs_accepted": 0.0,
+    "max_abs_accepted": 0
+   }
+  },
+  "size": {
+   "11-60": {
+    "n": 3,
+    "accepted": 1,
+    "accepted_correct": 1,
+    "accepted_wrong": 0,
+    "withheld": 2,
+    "withheld_gate": 0,
+    "withheld_flagged": 2,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.3333,
+    "withheld_rate": 0.6667,
+    "exact_rate_on_accepted": 1.0,
+    "correct_and_shown_rate": 0.3333,
+    "mae_all": 1.667,
+    "median_abs_all": 1,
+    "max_abs_all": 4,
+    "mean_signed_all": 1.0,
+    "mae_accepted": 0.0,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 0
+   },
+   "<=10": {
+    "n": 5,
+    "accepted": 1,
+    "accepted_correct": 1,
+    "accepted_wrong": 0,
+    "withheld": 4,
+    "withheld_gate": 4,
+    "withheld_flagged": 0,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.2,
+    "withheld_rate": 0.8,
+    "exact_rate_on_accepted": 1.0,
+    "correct_and_shown_rate": 0.2,
+    "mae_all": 2.6,
+    "median_abs_all": 1,
+    "max_abs_all": 10,
+    "mean_signed_all": -2.2,
+    "mae_accepted": 0.0,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 0
+   },
+   ">60": {
+    "n": 11,
+    "accepted": 6,
+    "accepted_correct": 5,
+    "accepted_wrong": 1,
+    "withheld": 5,
+    "withheld_gate": 3,
+    "withheld_flagged": 2,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.5455,
+    "withheld_rate": 0.4545,
+    "exact_rate_on_accepted": 0.8333,
+    "correct_and_shown_rate": 0.4545,
+    "mae_all": 36.0,
+    "median_abs_all": 2,
+    "max_abs_all": 358,
+    "mean_signed_all": -32.364,
+    "mae_accepted": 0.333,
+    "median_abs_accepted": 0.0,
+    "max_abs_accepted": 2
+   }
+  },
+  "logic_dev": {
+   "not_used_in_logic_tuning": {
+    "n": 5,
+    "accepted": 1,
+    "accepted_correct": 1,
+    "accepted_wrong": 0,
+    "withheld": 4,
+    "withheld_gate": 4,
+    "withheld_flagged": 0,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.2,
+    "withheld_rate": 0.8,
+    "exact_rate_on_accepted": 1.0,
+    "correct_and_shown_rate": 0.2,
+    "mae_all": 2.6,
+    "median_abs_all": 1,
+    "max_abs_all": 10,
+    "mean_signed_all": -2.2,
+    "mae_accepted": 0.0,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 0
+   },
+   "used_in_tuning": {
+    "n": 14,
+    "accepted": 7,
+    "accepted_correct": 6,
+    "accepted_wrong": 1,
+    "withheld": 7,
+    "withheld_gate": 3,
+    "withheld_flagged": 4,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.5,
+    "withheld_rate": 0.5,
+    "exact_rate_on_accepted": 0.8571,
+    "correct_and_shown_rate": 0.4286,
+    "mae_all": 28.643,
+    "median_abs_all": 1.5,
+    "max_abs_all": 358,
+    "mean_signed_all": -25.214,
+    "mae_accepted": 0.286,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 2
+   }
+  },
+  "detector_and_logic": {
+   "touched": {
+    "n": 17,
+    "accepted": 7,
+    "accepted_correct": 6,
+    "accepted_wrong": 1,
+    "withheld": 10,
+    "withheld_gate": 6,
+    "withheld_flagged": 4,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.4118,
+    "withheld_rate": 0.5882,
+    "exact_rate_on_accepted": 0.8571,
+    "correct_and_shown_rate": 0.3529,
+    "mae_all": 24.294,
+    "median_abs_all": 1,
+    "max_abs_all": 358,
+    "mean_signed_all": -21.353,
+    "mae_accepted": 0.286,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 2
+   },
+   "untouched": {
+    "n": 2,
+    "accepted": 1,
+    "accepted_correct": 1,
+    "accepted_wrong": 0,
+    "withheld": 1,
+    "withheld_gate": 1,
+    "withheld_flagged": 0,
+    "withheld_would_be_exact": 0,
+    "completion_rate": 0.5,
+    "withheld_rate": 0.5,
+    "exact_rate_on_accepted": 1.0,
+    "correct_and_shown_rate": 0.5,
+    "mae_all": 0.5,
+    "median_abs_all": 0.5,
+    "max_abs_all": 1,
+    "mean_signed_all": -0.5,
+    "mae_accepted": 0.0,
+    "median_abs_accepted": 0,
+    "max_abs_accepted": 0
+   }
+  }
+ },
+ "raw_v2_box_count_clusters": {
+  "n": 22,
+  "accepted": 22,
+  "accepted_correct": 4,
+  "accepted_wrong": 18,
+  "withheld": 0,
+  "withheld_gate": 0,
+  "withheld_flagged": 0,
+  "withheld_would_be_exact": 0,
+  "completion_rate": 1.0,
+  "withheld_rate": 0.0,
+  "exact_rate_on_accepted": 0.1818,
+  "correct_and_shown_rate": 0.1818,
+  "mae_all": 21.045,
+  "median_abs_all": 3.0,
+  "max_abs_all": 357,
+  "mean_signed_all": -18.409,
+  "mae_accepted": 21.045,
+  "median_abs_accepted": 3.0,
+  "max_abs_accepted": 357
+ },
+ "clusters": [
+  {
+   "cluster": "ND0014",
+   "group": "G01",
+   "label_ids": [
+    1
+   ],
+   "labels": [
+    99
+   ],
+   "predicted": [
+    99
+   ],
+   "results": [
+    "accepted_correct"
+   ],
+   "members_agree": true,
+   "representative": 1
+  },
+  {
+   "cluster": "ND0141",
+   "group": "G04",
+   "label_ids": [
+    2
+   ],
+   "labels": [
+    80
+   ],
+   "predicted": [
+    80
+   ],
+   "results": [
+    "accepted_correct"
+   ],
+   "members_agree": true,
+   "representative": 2
+  },
+  {
+   "cluster": "ND0143",
+   "group": "G05",
+   "label_ids": [
+    4
+   ],
+   "labels": [
+    115
+   ],
+   "predicted": [
+    120
+   ],
+   "results": [
+    "withheld_gate"
+   ],
+   "members_agree": true,
+   "representative": 4
+  },
+  {
+   "cluster": "ND0145",
+   "group": "G06",
+   "label_ids": [
+    8,
+    23
+   ],
+   "labels": [
+    160,
+    160
+   ],
+   "predicted": [
+    160,
+    160
+   ],
+   "results": [
+    "accepted_correct",
+    "accepted_correct"
+   ],
+   "members_agree": true,
+   "representative": 8
+  },
+  {
+   "cluster": "ND0146",
+   "group": "G08",
+   "label_ids": [
+    9
+   ],
+   "labels": [
+    75
+   ],
+   "predicted": [
+    85
+   ],
+   "results": [
+    "withheld_flagged"
+   ],
+   "members_agree": true,
+   "representative": 9
+  },
+  {
+   "cluster": "ND0049",
+   "group": "G02",
+   "label_ids": [
+    19
+   ],
+   "labels": [
+    100
+   ],
+   "predicted": [
+    100
+   ],
+   "results": [
+    "accepted_correct"
+   ],
+   "members_agree": true,
+   "representative": 19
+  },
+  {
+   "cluster": "ND0071",
+   "group": "G17",
+   "label_ids": [
+    20
+   ],
+   "labels": [
+    60
+   ],
+   "predicted": [
+    60
+   ],
+   "results": [
+    "accepted_correct"
+   ],
+   "members_agree": true,
+   "representative": 20
+  },
+  {
+   "cluster": "ND0155",
+   "group": "G02",
+   "label_ids": [
+    21,
+    24
+   ],
+   "labels": [
+    100,
+    100
+   ],
+   "predicted": [
+    100,
+    100
+   ],
+   "results": [
+    "accepted_correct",
+    "accepted_correct"
+   ],
+   "members_agree": true,
+   "representative": 21
+  },
+  {
+   "cluster": "ND0160",
+   "group": "G03",
+   "label_ids": [
+    30
+   ],
+   "labels": [
+    80
+   ],
+   "predicted": [
+    78
+   ],
+   "results": [
+    "accepted_wrong"
+   ],
+   "members_agree": true,
+   "representative": 30
+  },
+  {
+   "cluster": "ND0161",
+   "group": "G03",
+   "label_ids": [
+    31
+   ],
+   "labels": [
+    80
+   ],
+   "predicted": [
+    63
+   ],
+   "results": [
+    "withheld_gate"
+   ],
+   "members_agree": true,
+   "representative": 31
+  },
+  {
+   "cluster": "ND0013",
+   "group": "G01",
+   "label_ids": [
+    32
+   ],
+   "labels": [
+    19
+   ],
+   "predicted": [
+    19
+   ],
+   "results": [
+    "accepted_correct"
+   ],
+   "members_agree": true,
+   "representative": 32
+  },
+  {
+   "cluster": "ND0162",
+   "group": "G12",
+   "label_ids": [
+    33
+   ],
+   "labels": [
+    358
+   ],
+   "predicted": [
+    0
+   ],
+   "results": [
+    "withheld_gate"
+   ],
+   "members_agree": true,
+   "representative": 33
+  },
+  {
+   "cluster": "ND0019",
+   "group": "G21",
+   "label_ids": [
+    34
+   ],
+   "labels": [
+    120
+   ],
+   "predicted": [
+    120
+   ],
+   "results": [
+    "accepted_correct"
+   ],
+   "members_agree": true,
+   "representative": 34
+  },
+  {
+   "cluster": "ND0088",
+   "group": "G22",
+   "label_ids": [
+    35
+   ],
+   "labels": [
+    1
+   ],
+   "predicted": [
+    0
+   ],
+   "results": [
+    "withheld_gate"
+   ],
+   "members_agree": true,
+   "representative": 35
+  },
+  {
+   "cluster": "ND0163",
+   "group": "G15",
+   "label_ids": [
+    36
+   ],
+   "labels": [
+    109
+   ],
+   "predicted": [
+    114
+   ],
+   "results": [
+    "withheld_flagged"
+   ],
+   "members_agree": true,
+   "representative": 36
+  },
+  {
+   "cluster": "ND0057",
+   "group": "G23",
+   "label_ids": [
+    38
+   ],
+   "labels": [
+    118
+   ],
+   "predicted": [
+    102
+   ],
+   "results": [
+    "withheld_gate"
+   ],
+   "members_agree": true,
+   "representative": 38
+  },
+  {
+   "cluster": "ND0045",
+   "group": "G24",
+   "label_ids": [
+    39
+   ],
+   "labels": [
+    2
+   ],
+   "predicted": [
+    3
+   ],
+   "results": [
+    "withheld_gate"
+   ],
+   "members_agree": true,
+   "representative": 39
+  },
+  {
+   "cluster": "ND0061",
+   "group": "G07",
+   "label_ids": [
+    40
+   ],
+   "labels": [
+    10
+   ],
+   "predicted": [
+    0
+   ],
+   "results": [
+    "withheld_gate"
+   ],
+   "members_agree": true,
+   "representative": 40
+  },
+  {
+   "cluster": "ND0168",
+   "group": "G29",
+   "label_ids": [
+    46
+   ],
+   "labels": [
+    20
+   ],
+   "predicted": [
+    19
+   ],
+   "results": [
+    "withheld_flagged"
+   ],
+   "members_agree": true,
+   "representative": 46
+  },
+  {
+   "cluster": "ND0169",
+   "group": "G30",
+   "label_ids": [
+    47
+   ],
+   "labels": [
+    7
+   ],
+   "predicted": [
+    7
+   ],
+   "results": [
+    "accepted_correct"
+   ],
+   "members_agree": true,
+   "representative": 47
+  },
+  {
+   "cluster": "ND0170",
+   "group": "G31",
+   "label_ids": [
+    49
+   ],
+   "labels": [
+    1
+   ],
+   "predicted": [
+    0
+   ],
+   "results": [
+    "withheld_gate"
+   ],
+   "members_agree": true,
+   "representative": 49
+  },
+  {
+   "cluster": "ND0010",
+   "group": "G32",
+   "label_ids": [
+    50
+   ],
+   "labels": [
+    40
+   ],
+   "predicted": [
+    44
+   ],
+   "results": [
+    "withheld_flagged"
+   ],
+   "members_agree": true,
+   "representative": 50
+  }
+ ],
+ "blocks": [
+  {
+   "group": "G01",
+   "label_ids": [
+    1,
+    32
+   ],
+   "clusters": [
+    "ND0013",
+    "ND0014"
+   ],
+   "results": [
+    "accepted_correct",
+    "accepted_correct"
+   ],
+   "members_agree": true,
+   "representative": 1
+  },
+  {
+   "group": "G04",
+   "label_ids": [
+    2
+   ],
+   "clusters": [
+    "ND0141"
+   ],
+   "results": [
+    "accepted_correct"
+   ],
+   "members_agree": true,
+   "representative": 2
+  },
+  {
+   "group": "G05",
+   "label_ids": [
+    4
+   ],
+   "clusters": [
+    "ND0143"
+   ],
+   "results": [
+    "withheld_gate"
+   ],
+   "members_agree": true,
+   "representative": 4
+  },
+  {
+   "group": "G06",
+   "label_ids": [
+    8,
+    23
+   ],
+   "clusters": [
+    "ND0145"
+   ],
+   "results": [
+    "accepted_correct",
+    "accepted_correct"
+   ],
+   "members_agree": true,
+   "representative": 8
+  },
+  {
+   "group": "G08",
+   "label_ids": [
+    9
+   ],
+   "clusters": [
+    "ND0146"
+   ],
+   "results": [
+    "withheld_flagged"
+   ],
+   "members_agree": true,
+   "representative": 9
+  },
+  {
+   "group": "G02",
+   "label_ids": [
+    19,
+    21,
+    24
+   ],
+   "clusters": [
+    "ND0049",
+    "ND0155"
+   ],
+   "results": [
+    "accepted_correct",
+    "accepted_correct",
+    "accepted_correct"
+   ],
+   "members_agree": true,
+   "representative": 19
+  },
+  {
+   "group": "G17",
+   "label_ids": [
+    20
+   ],
+   "clusters": [
+    "ND0071"
+   ],
+   "results": [
+    "accepted_correct"
+   ],
+   "members_agree": true,
+   "representative": 20
+  },
+  {
+   "group": "G03",
+   "label_ids": [
+    30,
+    31
+   ],
+   "clusters": [
+    "ND0160",
+    "ND0161"
+   ],
+   "results": [
+    "accepted_wrong",
+    "withheld_gate"
+   ],
+   "members_agree": false,
+   "representative": 30
+  },
+  {
+   "group": "G12",
+   "label_ids": [
+    33
+   ],
+   "clusters": [
+    "ND0162"
+   ],
+   "results": [
+    "withheld_gate"
+   ],
+   "members_agree": true,
+   "representative": 33
+  },
+  {
+   "group": "G21",
+   "label_ids": [
+    34
+   ],
+   "clusters": [
+    "ND0019"
+   ],
+   "results": [
+    "accepted_correct"
+   ],
+   "members_agree": true,
+   "representative": 34
+  },
+  {
+   "group": "G22",
+   "label_ids": [
+    35
+   ],
+   "clusters": [
+    "ND0088"
+   ],
+   "results": [
+    "withheld_gate"
+   ],
+   "members_agree": true,
+   "representative": 35
+  },
+  {
+   "group": "G15",
+   "label_ids": [
+    36
+   ],
+   "clusters": [
+    "ND0163"
+   ],
+   "results": [
+    "withheld_flagged"
+   ],
+   "members_agree": true,
+   "representative": 36
+  },
+  {
+   "group": "G23",
+   "label_ids": [
+    38
+   ],
+   "clusters": [
+    "ND0057"
+   ],
+   "results": [
+    "withheld_gate"
+   ],
+   "members_agree": true,
+   "representative": 38
+  },
+  {
+   "group": "G24",
+   "label_ids": [
+    39
+   ],
+   "clusters": [
+    "ND0045"
+   ],
+   "results": [
+    "withheld_gate"
+   ],
+   "members_agree": true,
+   "representative": 39
+  },
+  {
+   "group": "G07",
+   "label_ids": [
+    40
+   ],
+   "clusters": [
+    "ND0061"
+   ],
+   "results": [
+    "withheld_gate"
+   ],
+   "members_agree": true,
+   "representative": 40
+  },
+  {
+   "group": "G29",
+   "label_ids": [
+    46
+   ],
+   "clusters": [
+    "ND0168"
+   ],
+   "results": [
+    "withheld_flagged"
+   ],
+   "members_agree": true,
+   "representative": 46
+  },
+  {
+   "group": "G30",
+   "label_ids": [
+    47
+   ],
+   "clusters": [
+    "ND0169"
+   ],
+   "results": [
+    "accepted_correct"
+   ],
+   "members_agree": true,
+   "representative": 47
+  },
+  {
+   "group": "G31",
+   "label_ids": [
+    49
+   ],
+   "clusters": [
+    "ND0170"
+   ],
+   "results": [
+    "withheld_gate"
+   ],
+   "members_agree": true,
+   "representative": 49
+  },
+  {
+   "group": "G32",
+   "label_ids": [
+    50
+   ],
+   "clusters": [
+    "ND0010"
+   ],
+   "results": [
+    "withheld_flagged"
+   ],
+   "members_agree": true,
+   "representative": 50
+  }
+ ],
+ "photos": [
+  {
+   "label_id": 1,
+   "label": 99,
+   "tier": "A",
+   "cluster": "ND0014",
+   "group": "G01",
+   "detector_leak": "leaked",
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": true,
+   "in_orientation_development_photos": false,
+   "size": ">60",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-01.json",
+    "view": "left",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "accepted",
+   "gate_accepted": true,
+   "gate_reasons": [],
+   "gate_metrics": {
+    "columns": 5,
+    "model_boxes": 101,
+    "pitch_px": 20.25,
+    "pitch_frac": 0.035,
+    "height_frac": 0.716,
+    "coverage_x": 0.515,
+    "pitch_gradient": 1.012,
+    "recessed_columns": 0,
+    "min_pitch_scale": 0.982,
+    "box_aspect": 5.389,
+    "image": {
+     "width": 1280,
+     "height": 582
+    }
+   },
+   "flagged_columns": 0,
+   "flag_reasons": [],
+   "recessed_columns": 0,
+   "predicted_total": 99,
+   "predicted_total_without_recessed": 99,
+   "span_total": 100,
+   "boxes_in_columns": 101,
+   "raw_boxes": 101,
+   "walk_by_column": [
+    20,
+    20,
+    20,
+    20,
+    19
+   ],
+   "span_by_column": [
+    21,
+    20,
+    20,
+    20,
+    19
+   ],
+   "recessed_by_column": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "columns": [
+    {
+     "column": 1,
+     "x_min": 293.0,
+     "x_max": 473.0,
+     "model_boxes": 21,
+     "span_count": 21,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.357,
+     "pitch_px": 20.0,
+     "box_height_px": 20.0,
+     "box_pitch_ratio": 1.0,
+     "scale": 0.982,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 2,
+     "x_min": 435.0,
+     "x_max": 582.0,
+     "model_boxes": 19,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 1,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.386,
+     "pitch_px": 20.25,
+     "box_height_px": 20.0,
+     "box_pitch_ratio": 0.988,
+     "scale": 0.994,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 3,
+     "x_min": 569.0,
+     "x_max": 704.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.386,
+     "pitch_px": 20.5,
+     "box_height_px": 20.0,
+     "box_pitch_ratio": 0.976,
+     "scale": 1.006,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 4,
+     "x_min": 696.0,
+     "x_max": 826.0,
+     "model_boxes": 21,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.357,
+     "pitch_px": 20.25,
+     "box_height_px": 21.0,
+     "box_pitch_ratio": 1.037,
+     "scale": 0.994,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 5,
+     "x_min": 807.0,
+     "x_max": 952.0,
+     "model_boxes": 20,
+     "span_count": 19,
+     "walk_count": 19,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.357,
+     "pitch_px": 20.5,
+     "box_height_px": 19.5,
+     "box_pitch_ratio": 0.951,
+     "scale": 1.006,
+     "recessed": false,
+     "reason": null
+    }
+   ],
+   "result": "accepted_correct",
+   "accepted": true,
+   "error": 0,
+   "abs_error": 0,
+   "would_be_exact": true,
+   "raw_box_error": 2,
+   "raw_box_exact": false
+  },
+  {
+   "label_id": 2,
+   "label": 80,
+   "tier": "A",
+   "cluster": "ND0141",
+   "group": "G04",
+   "detector_leak": "leaked",
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false,
+   "size": ">60",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-01.json",
+    "view": "right",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "accepted",
+   "gate_accepted": true,
+   "gate_reasons": [],
+   "gate_metrics": {
+    "columns": 4,
+    "model_boxes": 81,
+    "pitch_px": 42.75,
+    "pitch_frac": 0.039,
+    "height_frac": 0.787,
+    "coverage_x": 0.864,
+    "pitch_gradient": 1.012,
+    "recessed_columns": 0,
+    "min_pitch_scale": 0.965,
+    "box_aspect": 6.432,
+    "image": {
+     "width": 1280,
+     "height": 1109
+    }
+   },
+   "flagged_columns": 0,
+   "flag_reasons": [],
+   "recessed_columns": 0,
+   "predicted_total": 80,
+   "predicted_total_without_recessed": 80,
+   "span_total": 81,
+   "boxes_in_columns": 81,
+   "raw_boxes": 81,
+   "walk_by_column": [
+    20,
+    20,
+    20,
+    20
+   ],
+   "span_by_column": [
+    21,
+    20,
+    20,
+    20
+   ],
+   "recessed_by_column": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "columns": [
+    {
+     "column": 1,
+     "x_min": 108.0,
+     "x_max": 399.0,
+     "model_boxes": 20,
+     "span_count": 21,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.233,
+     "pitch_px": 41.5,
+     "box_height_px": 38.0,
+     "box_pitch_ratio": 0.916,
+     "scale": 0.965,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 2,
+     "x_min": 399.0,
+     "x_max": 654.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.208,
+     "pitch_px": 43.0,
+     "box_height_px": 37.5,
+     "box_pitch_ratio": 0.872,
+     "scale": 1.0,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 3,
+     "x_min": 670.0,
+     "x_max": 930.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.188,
+     "pitch_px": 43.0,
+     "box_height_px": 38.0,
+     "box_pitch_ratio": 0.884,
+     "scale": 1.0,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 4,
+     "x_min": 931.0,
+     "x_max": 1231.0,
+     "model_boxes": 21,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.168,
+     "pitch_px": 42.5,
+     "box_height_px": 37.0,
+     "box_pitch_ratio": 0.871,
+     "scale": 0.988,
+     "recessed": false,
+     "reason": null
+    }
+   ],
+   "result": "accepted_correct",
+   "accepted": true,
+   "error": 0,
+   "abs_error": 0,
+   "would_be_exact": true,
+   "raw_box_error": 1,
+   "raw_box_exact": false
+  },
+  {
+   "label_id": 4,
+   "label": 115,
+   "tier": "B",
+   "cluster": "ND0143",
+   "group": "G05",
+   "detector_leak": "leaked",
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false,
+   "size": ">60",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-02.json",
+    "view": "left",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "withheld_gate",
+   "gate_accepted": false,
+   "gate_reasons": [
+    "stacks are too small in the frame (too far away)"
+   ],
+   "gate_metrics": {
+    "columns": 6,
+    "model_boxes": 110,
+    "pitch_px": 25.75,
+    "pitch_frac": 0.02,
+    "height_frac": 0.395,
+    "coverage_x": 0.857,
+    "pitch_gradient": 1.03,
+    "recessed_columns": 0,
+    "min_pitch_scale": 0.897,
+    "box_aspect": 4.843,
+    "image": {
+     "width": 960,
+     "height": 1280
+    }
+   },
+   "flagged_columns": 3,
+   "flag_reasons": [
+    "layer counts disagree (span 17, walk 19); retake this face",
+    "layer counts disagree (span 18, walk 15); retake this face",
+    "layer counts disagree (span 19, walk 27); retake this face"
+   ],
+   "recessed_columns": 0,
+   "predicted_total": 120,
+   "predicted_total_without_recessed": 120,
+   "span_total": 111,
+   "boxes_in_columns": 110,
+   "raw_boxes": 110,
+   "walk_by_column": [
+    19,
+    15,
+    21,
+    19,
+    19,
+    27
+   ],
+   "span_by_column": [
+    17,
+    18,
+    21,
+    18,
+    18,
+    19
+   ],
+   "recessed_by_column": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "columns": [
+    {
+     "column": 1,
+     "x_min": 63.0,
+     "x_max": 206.0,
+     "model_boxes": 18,
+     "span_count": 17,
+     "walk_count": 19,
+     "walk_filled": 3,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.025,
+     "pitch_px": 26.0,
+     "box_height_px": 26.0,
+     "box_pitch_ratio": 1.0,
+     "scale": 0.972,
+     "recessed": false,
+     "reason": "layer counts disagree (span 17, walk 19); retake this face"
+    },
+    {
+     "column": 2,
+     "x_min": 203.0,
+     "x_max": 337.0,
+     "model_boxes": 18,
+     "span_count": 18,
+     "walk_count": 15,
+     "walk_filled": 1,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 0.732,
+     "pitch_px": 24.75,
+     "box_height_px": 25.0,
+     "box_pitch_ratio": 1.01,
+     "scale": 0.925,
+     "recessed": false,
+     "reason": "layer counts disagree (span 18, walk 15); retake this face"
+    },
+    {
+     "column": 3,
+     "x_min": 334.0,
+     "x_max": 488.0,
+     "model_boxes": 22,
+     "span_count": 21,
+     "walk_count": 21,
+     "walk_filled": 1,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 0.882,
+     "pitch_px": 24.0,
+     "box_height_px": 25.5,
+     "box_pitch_ratio": 1.062,
+     "scale": 0.897,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 4,
+     "x_min": 462.0,
+     "x_max": 627.0,
+     "model_boxes": 18,
+     "span_count": 18,
+     "walk_count": 19,
+     "walk_filled": 4,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.104,
+     "pitch_px": 27.0,
+     "box_height_px": 25.5,
+     "box_pitch_ratio": 0.944,
+     "scale": 1.009,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 5,
+     "x_min": 616.0,
+     "x_max": 759.0,
+     "model_boxes": 17,
+     "span_count": 18,
+     "walk_count": 19,
+     "walk_filled": 3,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.11,
+     "pitch_px": 26.75,
+     "box_height_px": 25.0,
+     "box_pitch_ratio": 0.935,
+     "scale": 1.0,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 6,
+     "x_min": 756.0,
+     "x_max": 886.0,
+     "model_boxes": 17,
+     "span_count": 19,
+     "walk_count": 27,
+     "walk_filled": 11,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.939,
+     "pitch_px": 25.5,
+     "box_height_px": 24.0,
+     "box_pitch_ratio": 0.941,
+     "scale": 0.953,
+     "recessed": false,
+     "reason": "layer counts disagree (span 19, walk 27); retake this face"
+    }
+   ],
+   "result": "withheld_gate",
+   "accepted": false,
+   "error": 5,
+   "abs_error": 5,
+   "would_be_exact": false,
+   "raw_box_error": -5,
+   "raw_box_exact": false
+  },
+  {
+   "label_id": 8,
+   "label": 160,
+   "tier": "A",
+   "cluster": "ND0145",
+   "group": "G06",
+   "detector_leak": "leaked",
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false,
+   "size": ">60",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-03.json",
+    "view": "right",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "accepted",
+   "gate_accepted": true,
+   "gate_reasons": [],
+   "gate_metrics": {
+    "columns": 8,
+    "model_boxes": 157,
+    "pitch_px": 25.0,
+    "pitch_frac": 0.026,
+    "height_frac": 0.549,
+    "coverage_x": 0.962,
+    "pitch_gradient": 1.083,
+    "recessed_columns": 0,
+    "min_pitch_scale": 0.941,
+    "box_aspect": 6.4,
+    "image": {
+     "width": 1280,
+     "height": 960
+    }
+   },
+   "flagged_columns": 0,
+   "flag_reasons": [],
+   "recessed_columns": 0,
+   "predicted_total": 160,
+   "predicted_total_without_recessed": 160,
+   "span_total": 158,
+   "boxes_in_columns": 157,
+   "raw_boxes": 157,
+   "walk_by_column": [
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "span_by_column": [
+    20,
+    20,
+    20,
+    20,
+    20,
+    19,
+    20,
+    19
+   ],
+   "recessed_by_column": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "columns": [
+    {
+     "column": 1,
+     "x_min": 0.0,
+     "x_max": 162.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.187,
+     "pitch_px": 24.0,
+     "box_height_px": 20.0,
+     "box_pitch_ratio": 0.833,
+     "scale": 0.941,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 2,
+     "x_min": 102.0,
+     "x_max": 311.0,
+     "model_boxes": 19,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 1,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.163,
+     "pitch_px": 25.0,
+     "box_height_px": 21.0,
+     "box_pitch_ratio": 0.84,
+     "scale": 0.98,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 3,
+     "x_min": 268.0,
+     "x_max": 451.0,
+     "model_boxes": 21,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.132,
+     "pitch_px": 24.0,
+     "box_height_px": 21.0,
+     "box_pitch_ratio": 0.875,
+     "scale": 0.941,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 4,
+     "x_min": 419.0,
+     "x_max": 585.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 1,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.12,
+     "pitch_px": 24.75,
+     "box_height_px": 21.0,
+     "box_pitch_ratio": 0.848,
+     "scale": 0.971,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 5,
+     "x_min": 582.0,
+     "x_max": 728.0,
+     "model_boxes": 19,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 1,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.152,
+     "pitch_px": 25.0,
+     "box_height_px": 23.0,
+     "box_pitch_ratio": 0.92,
+     "scale": 0.98,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 6,
+     "x_min": 733.0,
+     "x_max": 888.0,
+     "model_boxes": 19,
+     "span_count": 19,
+     "walk_count": 20,
+     "walk_filled": 1,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.185,
+     "pitch_px": 26.0,
+     "box_height_px": 22.0,
+     "box_pitch_ratio": 0.846,
+     "scale": 1.02,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 7,
+     "x_min": 879.0,
+     "x_max": 1067.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.191,
+     "pitch_px": 25.5,
+     "box_height_px": 22.0,
+     "box_pitch_ratio": 0.863,
+     "scale": 1.0,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 8,
+     "x_min": 1033.0,
+     "x_max": 1236.0,
+     "model_boxes": 19,
+     "span_count": 19,
+     "walk_count": 20,
+     "walk_filled": 1,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.202,
+     "pitch_px": 27.75,
+     "box_height_px": 22.0,
+     "box_pitch_ratio": 0.793,
+     "scale": 1.088,
+     "recessed": false,
+     "reason": null
+    }
+   ],
+   "result": "accepted_correct",
+   "accepted": true,
+   "error": 0,
+   "abs_error": 0,
+   "would_be_exact": true,
+   "raw_box_error": -3,
+   "raw_box_exact": false
+  },
+  {
+   "label_id": 9,
+   "label": 75,
+   "tier": "B",
+   "cluster": "ND0146",
+   "group": "G08",
+   "detector_leak": "leaked",
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false,
+   "size": ">60",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-03.json",
+    "view": "straight",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "withheld_flagged",
+   "gate_accepted": true,
+   "gate_reasons": [],
+   "gate_metrics": {
+    "columns": 5,
+    "model_boxes": 71,
+    "pitch_px": 49.5,
+    "pitch_frac": 0.039,
+    "height_frac": 0.714,
+    "coverage_x": 1.0,
+    "pitch_gradient": 1.013,
+    "recessed_columns": 0,
+    "min_pitch_scale": 0.931,
+    "box_aspect": 3.088,
+    "image": {
+     "width": 960,
+     "height": 1280
+    }
+   },
+   "flagged_columns": 4,
+   "flag_reasons": [
+    "layer counts disagree (span 18, walk 21); retake this face",
+    "boxes are missing over several layers of this stack; retake this face",
+    "layer counts disagree (span 17, walk 20); retake this face",
+    "layer counts disagree (span 15, walk 20); retake this face"
+   ],
+   "recessed_columns": 0,
+   "predicted_total": 85,
+   "predicted_total_without_recessed": 85,
+   "span_total": 74,
+   "boxes_in_columns": 71,
+   "raw_boxes": 71,
+   "walk_by_column": [
+    21,
+    7,
+    17,
+    20,
+    20
+   ],
+   "span_by_column": [
+    18,
+    7,
+    17,
+    17,
+    15
+   ],
+   "recessed_by_column": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "columns": [
+    {
+     "column": 1,
+     "x_min": 0.0,
+     "x_max": 270.0,
+     "model_boxes": 18,
+     "span_count": 18,
+     "walk_count": 21,
+     "walk_filled": 4,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.472,
+     "pitch_px": 51.75,
+     "box_height_px": 54.5,
+     "box_pitch_ratio": 1.053,
+     "scale": 1.015,
+     "recessed": false,
+     "reason": "layer counts disagree (span 18, walk 21); retake this face"
+    },
+    {
+     "column": 2,
+     "x_min": 226.0,
+     "x_max": 464.0,
+     "model_boxes": 7,
+     "span_count": 7,
+     "walk_count": 7,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.11,
+     "pitch_px": 47.5,
+     "box_height_px": 46.0,
+     "box_pitch_ratio": 0.968,
+     "scale": 0.931,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 3,
+     "x_min": 402.0,
+     "x_max": 706.0,
+     "model_boxes": 13,
+     "span_count": 17,
+     "walk_count": 17,
+     "walk_filled": 4,
+     "walk_unresolved_gaps": 1,
+     "perspective_gradient": 1.371,
+     "pitch_px": 51.0,
+     "box_height_px": 65.0,
+     "box_pitch_ratio": 1.275,
+     "scale": 1.0,
+     "recessed": false,
+     "reason": "boxes are missing over several layers of this stack; retake this face"
+    },
+    {
+     "column": 4,
+     "x_min": 486.0,
+     "x_max": 820.0,
+     "model_boxes": 19,
+     "span_count": 17,
+     "walk_count": 20,
+     "walk_filled": 4,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.474,
+     "pitch_px": 49.5,
+     "box_height_px": 60.0,
+     "box_pitch_ratio": 1.212,
+     "scale": 0.971,
+     "recessed": false,
+     "reason": "layer counts disagree (span 17, walk 20); retake this face"
+    },
+    {
+     "column": 5,
+     "x_min": 795.0,
+     "x_max": 960.0,
+     "model_boxes": 14,
+     "span_count": 15,
+     "walk_count": 20,
+     "walk_filled": 6,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.439,
+     "pitch_px": 48.5,
+     "box_height_px": 49.0,
+     "box_pitch_ratio": 1.01,
+     "scale": 0.951,
+     "recessed": false,
+     "reason": "layer counts disagree (span 15, walk 20); retake this face"
+    }
+   ],
+   "result": "withheld_flagged",
+   "accepted": false,
+   "error": 10,
+   "abs_error": 10,
+   "would_be_exact": false,
+   "raw_box_error": -4,
+   "raw_box_exact": false
+  },
+  {
+   "label_id": 19,
+   "label": 100,
+   "tier": "A",
+   "cluster": "ND0049",
+   "group": "G02",
+   "detector_leak": "leaked",
+   "v2_tag_split_today": "train",
+   "in_gate_tuning_set": true,
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false,
+   "size": ">60",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-07.json",
+    "view": "left",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "accepted",
+   "gate_accepted": true,
+   "gate_reasons": [],
+   "gate_metrics": {
+    "columns": 5,
+    "model_boxes": 100,
+    "pitch_px": 42.0,
+    "pitch_frac": 0.035,
+    "height_frac": 0.707,
+    "coverage_x": 0.801,
+    "pitch_gradient": 1.056,
+    "recessed_columns": 0,
+    "min_pitch_scale": 0.953,
+    "box_aspect": 5.84,
+    "image": {
+     "width": 1600,
+     "height": 1200
+    }
+   },
+   "flagged_columns": 0,
+   "flag_reasons": [],
+   "recessed_columns": 0,
+   "predicted_total": 100,
+   "predicted_total_without_recessed": 100,
+   "span_total": 100,
+   "boxes_in_columns": 100,
+   "raw_boxes": 100,
+   "walk_by_column": [
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "span_by_column": [
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "recessed_by_column": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "columns": [
+    {
+     "column": 1,
+     "x_min": 38.0,
+     "x_max": 373.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.13,
+     "pitch_px": 42.5,
+     "box_height_px": 39.0,
+     "box_pitch_ratio": 0.918,
+     "scale": 1.0,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 2,
+     "x_min": 321.0,
+     "x_max": 618.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.078,
+     "pitch_px": 43.0,
+     "box_height_px": 39.0,
+     "box_pitch_ratio": 0.907,
+     "scale": 1.012,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 3,
+     "x_min": 572.0,
+     "x_max": 858.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.12,
+     "pitch_px": 42.0,
+     "box_height_px": 38.0,
+     "box_pitch_ratio": 0.905,
+     "scale": 0.988,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 4,
+     "x_min": 834.0,
+     "x_max": 1083.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.129,
+     "pitch_px": 40.5,
+     "box_height_px": 38.0,
+     "box_pitch_ratio": 0.938,
+     "scale": 0.953,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 5,
+     "x_min": 1096.0,
+     "x_max": 1333.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.099,
+     "pitch_px": 40.5,
+     "box_height_px": 37.0,
+     "box_pitch_ratio": 0.914,
+     "scale": 0.953,
+     "recessed": false,
+     "reason": null
+    }
+   ],
+   "result": "accepted_correct",
+   "accepted": true,
+   "error": 0,
+   "abs_error": 0,
+   "would_be_exact": true,
+   "raw_box_error": 0,
+   "raw_box_exact": true
+  },
+  {
+   "label_id": 20,
+   "label": 60,
+   "tier": "B",
+   "cluster": "ND0071",
+   "group": "G17",
+   "detector_leak": "leaked",
+   "v2_tag_split_today": "train",
+   "in_gate_tuning_set": true,
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false,
+   "size": "11-60",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-07.json",
+    "view": "right",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "accepted",
+   "gate_accepted": true,
+   "gate_reasons": [],
+   "gate_metrics": {
+    "columns": 3,
+    "model_boxes": 63,
+    "pitch_px": 44.0,
+    "pitch_frac": 0.028,
+    "height_frac": 0.546,
+    "coverage_x": 0.687,
+    "pitch_gradient": 1.06,
+    "recessed_columns": 0,
+    "min_pitch_scale": 0.949,
+    "box_aspect": 5.857,
+    "image": {
+     "width": 1200,
+     "height": 1600
+    }
+   },
+   "flagged_columns": 0,
+   "flag_reasons": [],
+   "recessed_columns": 0,
+   "predicted_total": 60,
+   "predicted_total_without_recessed": 60,
+   "span_total": 61,
+   "boxes_in_columns": 63,
+   "raw_boxes": 63,
+   "walk_by_column": [
+    20,
+    20,
+    20
+   ],
+   "span_by_column": [
+    20,
+    20,
+    21
+   ],
+   "recessed_by_column": [
+    false,
+    false,
+    false
+   ],
+   "columns": [
+    {
+     "column": 1,
+     "x_min": 92.0,
+     "x_max": 360.0,
+     "model_boxes": 21,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.232,
+     "pitch_px": 44.5,
+     "box_height_px": 41.0,
+     "box_pitch_ratio": 0.921,
+     "scale": 1.006,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 2,
+     "x_min": 358.0,
+     "x_max": 646.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.228,
+     "pitch_px": 44.0,
+     "box_height_px": 41.0,
+     "box_pitch_ratio": 0.932,
+     "scale": 0.994,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 3,
+     "x_min": 610.0,
+     "x_max": 916.0,
+     "model_boxes": 22,
+     "span_count": 21,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.181,
+     "pitch_px": 42.0,
+     "box_height_px": 40.0,
+     "box_pitch_ratio": 0.952,
+     "scale": 0.949,
+     "recessed": false,
+     "reason": null
+    }
+   ],
+   "result": "accepted_correct",
+   "accepted": true,
+   "error": 0,
+   "abs_error": 0,
+   "would_be_exact": true,
+   "raw_box_error": 3,
+   "raw_box_exact": false
+  },
+  {
+   "label_id": 21,
+   "label": 100,
+   "tier": "A",
+   "cluster": "ND0155",
+   "group": "G02",
+   "detector_leak": "leaked",
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false,
+   "size": ">60",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-07.json",
+    "view": "straight",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "accepted",
+   "gate_accepted": true,
+   "gate_reasons": [],
+   "gate_metrics": {
+    "columns": 5,
+    "model_boxes": 101,
+    "pitch_px": 20.0,
+    "pitch_frac": 0.034,
+    "height_frac": 0.716,
+    "coverage_x": 0.484,
+    "pitch_gradient": 1.079,
+    "recessed_columns": 0,
+    "min_pitch_scale": 0.95,
+    "box_aspect": 5.778,
+    "image": {
+     "width": 1280,
+     "height": 582
+    }
+   },
+   "flagged_columns": 0,
+   "flag_reasons": [],
+   "recessed_columns": 0,
+   "predicted_total": 100,
+   "predicted_total_without_recessed": 100,
+   "span_total": 100,
+   "boxes_in_columns": 101,
+   "raw_boxes": 101,
+   "walk_by_column": [
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "span_by_column": [
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "recessed_by_column": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "columns": [
+    {
+     "column": 1,
+     "x_min": 323.0,
+     "x_max": 454.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.179,
+     "pitch_px": 19.0,
+     "box_height_px": 17.0,
+     "box_pitch_ratio": 0.895,
+     "scale": 0.95,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 2,
+     "x_min": 439.0,
+     "x_max": 558.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.137,
+     "pitch_px": 19.0,
+     "box_height_px": 18.0,
+     "box_pitch_ratio": 0.947,
+     "scale": 0.95,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 3,
+     "x_min": 550.0,
+     "x_max": 670.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.105,
+     "pitch_px": 20.0,
+     "box_height_px": 18.5,
+     "box_pitch_ratio": 0.925,
+     "scale": 1.0,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 4,
+     "x_min": 672.0,
+     "x_max": 800.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.147,
+     "pitch_px": 20.0,
+     "box_height_px": 19.0,
+     "box_pitch_ratio": 0.95,
+     "scale": 1.0,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 5,
+     "x_min": 788.0,
+     "x_max": 945.0,
+     "model_boxes": 21,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.213,
+     "pitch_px": 21.0,
+     "box_height_px": 19.0,
+     "box_pitch_ratio": 0.905,
+     "scale": 1.05,
+     "recessed": false,
+     "reason": null
+    }
+   ],
+   "result": "accepted_correct",
+   "accepted": true,
+   "error": 0,
+   "abs_error": 0,
+   "would_be_exact": true,
+   "raw_box_error": 1,
+   "raw_box_exact": false
+  },
+  {
+   "label_id": 23,
+   "label": 160,
+   "tier": "A",
+   "cluster": "ND0145",
+   "group": "G06",
+   "detector_leak": "leaked",
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false,
+   "size": ">60",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-08.json",
+    "view": "right",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "accepted",
+   "gate_accepted": true,
+   "gate_reasons": [],
+   "gate_metrics": {
+    "columns": 8,
+    "model_boxes": 157,
+    "pitch_px": 25.0,
+    "pitch_frac": 0.026,
+    "height_frac": 0.547,
+    "coverage_x": 0.963,
+    "pitch_gradient": 1.061,
+    "recessed_columns": 0,
+    "min_pitch_scale": 0.951,
+    "box_aspect": 6.333,
+    "image": {
+     "width": 1280,
+     "height": 960
+    }
+   },
+   "flagged_columns": 0,
+   "flag_reasons": [],
+   "recessed_columns": 0,
+   "predicted_total": 160,
+   "predicted_total_without_recessed": 160,
+   "span_total": 158,
+   "boxes_in_columns": 157,
+   "raw_boxes": 157,
+   "walk_by_column": [
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "span_by_column": [
+    20,
+    20,
+    20,
+    19,
+    20,
+    19,
+    20,
+    20
+   ],
+   "recessed_by_column": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "columns": [
+    {
+     "column": 1,
+     "x_min": 0.0,
+     "x_max": 162.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.163,
+     "pitch_px": 24.5,
+     "box_height_px": 20.0,
+     "box_pitch_ratio": 0.816,
+     "scale": 0.961,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 2,
+     "x_min": 103.0,
+     "x_max": 312.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.163,
+     "pitch_px": 24.5,
+     "box_height_px": 21.0,
+     "box_pitch_ratio": 0.857,
+     "scale": 0.961,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 3,
+     "x_min": 268.0,
+     "x_max": 451.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 1,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.135,
+     "pitch_px": 24.25,
+     "box_height_px": 21.0,
+     "box_pitch_ratio": 0.866,
+     "scale": 0.951,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 4,
+     "x_min": 420.0,
+     "x_max": 585.0,
+     "model_boxes": 18,
+     "span_count": 19,
+     "walk_count": 20,
+     "walk_filled": 3,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.122,
+     "pitch_px": 25.0,
+     "box_height_px": 21.5,
+     "box_pitch_ratio": 0.86,
+     "scale": 0.98,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 5,
+     "x_min": 582.0,
+     "x_max": 729.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.151,
+     "pitch_px": 25.0,
+     "box_height_px": 23.0,
+     "box_pitch_ratio": 0.92,
+     "scale": 0.98,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 6,
+     "x_min": 733.0,
+     "x_max": 888.0,
+     "model_boxes": 19,
+     "span_count": 19,
+     "walk_count": 20,
+     "walk_filled": 1,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.14,
+     "pitch_px": 26.25,
+     "box_height_px": 22.0,
+     "box_pitch_ratio": 0.838,
+     "scale": 1.029,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 7,
+     "x_min": 879.0,
+     "x_max": 1067.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.2,
+     "pitch_px": 25.5,
+     "box_height_px": 22.5,
+     "box_pitch_ratio": 0.882,
+     "scale": 1.0,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 8,
+     "x_min": 1033.0,
+     "x_max": 1236.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.226,
+     "pitch_px": 26.0,
+     "box_height_px": 22.0,
+     "box_pitch_ratio": 0.846,
+     "scale": 1.02,
+     "recessed": false,
+     "reason": null
+    }
+   ],
+   "result": "accepted_correct",
+   "accepted": true,
+   "error": 0,
+   "abs_error": 0,
+   "would_be_exact": true,
+   "raw_box_error": -3,
+   "raw_box_exact": false
+  },
+  {
+   "label_id": 24,
+   "label": 100,
+   "tier": "A",
+   "cluster": "ND0155",
+   "group": "G02",
+   "detector_leak": "leaked",
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false,
+   "size": ">60",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-08.json",
+    "view": "straight",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "accepted",
+   "gate_accepted": true,
+   "gate_reasons": [],
+   "gate_metrics": {
+    "columns": 5,
+    "model_boxes": 101,
+    "pitch_px": 19.5,
+    "pitch_frac": 0.034,
+    "height_frac": 0.696,
+    "coverage_x": 0.477,
+    "pitch_gradient": 1.053,
+    "recessed_columns": 0,
+    "min_pitch_scale": 0.911,
+    "box_aspect": 5.737,
+    "image": {
+     "width": 1280,
+     "height": 582
+    }
+   },
+   "flagged_columns": 0,
+   "flag_reasons": [],
+   "recessed_columns": 0,
+   "predicted_total": 100,
+   "predicted_total_without_recessed": 100,
+   "span_total": 100,
+   "boxes_in_columns": 101,
+   "raw_boxes": 101,
+   "walk_by_column": [
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "span_by_column": [
+    20,
+    20,
+    19,
+    20,
+    21
+   ],
+   "recessed_by_column": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "columns": [
+    {
+     "column": 1,
+     "x_min": 328.0,
+     "x_max": 463.0,
+     "model_boxes": 21,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.197,
+     "pitch_px": 18.0,
+     "box_height_px": 17.0,
+     "box_pitch_ratio": 0.944,
+     "scale": 0.911,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 2,
+     "x_min": 441.0,
+     "x_max": 562.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.127,
+     "pitch_px": 19.5,
+     "box_height_px": 18.0,
+     "box_pitch_ratio": 0.923,
+     "scale": 0.987,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 3,
+     "x_min": 552.0,
+     "x_max": 670.0,
+     "model_boxes": 20,
+     "span_count": 19,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.093,
+     "pitch_px": 20.0,
+     "box_height_px": 18.0,
+     "box_pitch_ratio": 0.9,
+     "scale": 1.013,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 4,
+     "x_min": 673.0,
+     "x_max": 796.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.217,
+     "pitch_px": 20.0,
+     "box_height_px": 18.0,
+     "box_pitch_ratio": 0.9,
+     "scale": 1.013,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 5,
+     "x_min": 787.0,
+     "x_max": 941.0,
+     "model_boxes": 20,
+     "span_count": 21,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.187,
+     "pitch_px": 19.5,
+     "box_height_px": 19.0,
+     "box_pitch_ratio": 0.974,
+     "scale": 0.987,
+     "recessed": false,
+     "reason": null
+    }
+   ],
+   "result": "accepted_correct",
+   "accepted": true,
+   "error": 0,
+   "abs_error": 0,
+   "would_be_exact": true,
+   "raw_box_error": 1,
+   "raw_box_exact": false
+  },
+  {
+   "label_id": 30,
+   "label": 80,
+   "tier": "A",
+   "cluster": "ND0160",
+   "group": "G03",
+   "detector_leak": "leak_free",
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false,
+   "size": ">60",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-10.json",
+    "view": "straight",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "accepted",
+   "gate_accepted": true,
+   "gate_reasons": [],
+   "gate_metrics": {
+    "columns": 4,
+    "model_boxes": 81,
+    "pitch_px": 41.5,
+    "pitch_frac": 0.046,
+    "height_frac": 1.008,
+    "coverage_x": 0.677,
+    "pitch_gradient": 1.076,
+    "recessed_columns": 0,
+    "min_pitch_scale": 0.976,
+    "box_aspect": 5.0,
+    "image": {
+     "width": 1600,
+     "height": 900
+    }
+   },
+   "flagged_columns": 0,
+   "flag_reasons": [],
+   "recessed_columns": 0,
+   "predicted_total": 78,
+   "predicted_total_without_recessed": 78,
+   "span_total": 79,
+   "boxes_in_columns": 81,
+   "raw_boxes": 81,
+   "walk_by_column": [
+    20,
+    19,
+    20,
+    19
+   ],
+   "span_by_column": [
+    20,
+    19,
+    21,
+    19
+   ],
+   "recessed_by_column": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "columns": [
+    {
+     "column": 1,
+     "x_min": 105.0,
+     "x_max": 596.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.295,
+     "pitch_px": 40.5,
+     "box_height_px": 41.5,
+     "box_pitch_ratio": 1.025,
+     "scale": 0.976,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 2,
+     "x_min": 353.0,
+     "x_max": 635.0,
+     "model_boxes": 19,
+     "span_count": 19,
+     "walk_count": 19,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.302,
+     "pitch_px": 41.5,
+     "box_height_px": 43.0,
+     "box_pitch_ratio": 1.036,
+     "scale": 1.0,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 3,
+     "x_min": 611.0,
+     "x_max": 877.0,
+     "model_boxes": 22,
+     "span_count": 21,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.418,
+     "pitch_px": 41.5,
+     "box_height_px": 46.0,
+     "box_pitch_ratio": 1.108,
+     "scale": 1.0,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 4,
+     "x_min": 888.0,
+     "x_max": 1199.0,
+     "model_boxes": 20,
+     "span_count": 19,
+     "walk_count": 19,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.292,
+     "pitch_px": 46.75,
+     "box_height_px": 47.5,
+     "box_pitch_ratio": 1.016,
+     "scale": 1.127,
+     "recessed": false,
+     "reason": null
+    }
+   ],
+   "result": "accepted_wrong",
+   "accepted": true,
+   "error": -2,
+   "abs_error": 2,
+   "would_be_exact": false,
+   "raw_box_error": 1,
+   "raw_box_exact": false
+  },
+  {
+   "label_id": 31,
+   "label": 80,
+   "tier": "B",
+   "cluster": "ND0161",
+   "group": "G03",
+   "detector_leak": "leak_free",
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false,
+   "size": ">60",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-11.json",
+    "view": "left",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "withheld_gate",
+   "gate_accepted": false,
+   "gate_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "layer pitch changes across the face (angled or corner view)"
+   ],
+   "gate_metrics": {
+    "columns": 4,
+    "model_boxes": 52,
+    "pitch_px": 76.38,
+    "pitch_frac": 0.048,
+    "height_frac": 0.784,
+    "coverage_x": 0.983,
+    "pitch_gradient": 1.214,
+    "recessed_columns": 2,
+    "min_pitch_scale": 0.803,
+    "box_aspect": 2.187,
+    "image": {
+     "width": 900,
+     "height": 1600
+    }
+   },
+   "flagged_columns": 4,
+   "flag_reasons": [
+    "layer counts disagree (span 13, walk 16); retake this face",
+    "layer counts disagree (span 13, walk 19); retake this face",
+    "layer counts disagree (span 12, walk 18); retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+   ],
+   "recessed_columns": 2,
+   "predicted_total": 63,
+   "predicted_total_without_recessed": 35,
+   "span_total": 45,
+   "boxes_in_columns": 52,
+   "raw_boxes": 52,
+   "walk_by_column": [
+    16,
+    19,
+    18,
+    10
+   ],
+   "span_by_column": [
+    13,
+    13,
+    12,
+    7
+   ],
+   "recessed_by_column": [
+    false,
+    false,
+    true,
+    true
+   ],
+   "columns": [
+    {
+     "column": 1,
+     "x_min": 2.0,
+     "x_max": 368.0,
+     "model_boxes": 14,
+     "span_count": 13,
+     "walk_count": 16,
+     "walk_filled": 3,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 0.854,
+     "pitch_px": 95.0,
+     "box_height_px": 114.5,
+     "box_pitch_ratio": 1.205,
+     "scale": 1.09,
+     "recessed": false,
+     "reason": "layer counts disagree (span 13, walk 16); retake this face"
+    },
+    {
+     "column": 2,
+     "x_min": 347.0,
+     "x_max": 591.0,
+     "model_boxes": 15,
+     "span_count": 13,
+     "walk_count": 19,
+     "walk_filled": 6,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.533,
+     "pitch_px": 79.25,
+     "box_height_px": 78.0,
+     "box_pitch_ratio": 0.984,
+     "scale": 0.91,
+     "recessed": false,
+     "reason": "layer counts disagree (span 13, walk 19); retake this face"
+    },
+    {
+     "column": 3,
+     "x_min": 528.0,
+     "x_max": 787.0,
+     "model_boxes": 16,
+     "span_count": 12,
+     "walk_count": 18,
+     "walk_filled": 7,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.503,
+     "pitch_px": 70.0,
+     "box_height_px": 65.5,
+     "box_pitch_ratio": 0.936,
+     "scale": 0.803,
+     "recessed": true,
+     "reason": "layer counts disagree (span 12, walk 18); retake this face"
+    },
+    {
+     "column": 4,
+     "x_min": 694.0,
+     "x_max": 887.0,
+     "model_boxes": 7,
+     "span_count": 7,
+     "walk_count": 10,
+     "walk_filled": 3,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.202,
+     "pitch_px": 73.5,
+     "box_height_px": 48.0,
+     "box_pitch_ratio": 0.653,
+     "scale": 0.844,
+     "recessed": true,
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+    }
+   ],
+   "result": "withheld_gate",
+   "accepted": false,
+   "error": -17,
+   "abs_error": 17,
+   "would_be_exact": false,
+   "raw_box_error": -28,
+   "raw_box_exact": false
+  },
+  {
+   "label_id": 32,
+   "label": 19,
+   "tier": "A",
+   "cluster": "ND0013",
+   "group": "G01",
+   "detector_leak": "leaked",
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": false,
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": true,
+   "in_orientation_development_photos": false,
+   "size": "11-60",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-11.json",
+    "view": "right",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "accepted",
+   "gate_accepted": true,
+   "gate_reasons": [],
+   "gate_metrics": {
+    "columns": 1,
+    "model_boxes": 24,
+    "pitch_px": 39.5,
+    "pitch_frac": 0.031,
+    "height_frac": 0.581,
+    "coverage_x": 0.438,
+    "pitch_gradient": 1.0,
+    "recessed_columns": 0,
+    "min_pitch_scale": 1.0,
+    "box_aspect": 5.385,
+    "image": {
+     "width": 580,
+     "height": 1280
+    }
+   },
+   "flagged_columns": 0,
+   "flag_reasons": [],
+   "recessed_columns": 0,
+   "predicted_total": 19,
+   "predicted_total_without_recessed": 19,
+   "span_total": 19,
+   "boxes_in_columns": 24,
+   "raw_boxes": 24,
+   "walk_by_column": [
+    19
+   ],
+   "span_by_column": [
+    19
+   ],
+   "recessed_by_column": [
+    false
+   ],
+   "columns": [
+    {
+     "column": 1,
+     "x_min": 299.0,
+     "x_max": 553.0,
+     "model_boxes": 24,
+     "span_count": 19,
+     "walk_count": 19,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.132,
+     "pitch_px": 39.5,
+     "box_height_px": 40.5,
+     "box_pitch_ratio": 1.025,
+     "scale": 1.0,
+     "recessed": false,
+     "reason": null
+    }
+   ],
+   "result": "accepted_correct",
+   "accepted": true,
+   "error": 0,
+   "abs_error": 0,
+   "would_be_exact": true,
+   "raw_box_error": 5,
+   "raw_box_exact": false
+  },
+  {
+   "label_id": 33,
+   "label": 358,
+   "tier": "B",
+   "cluster": "ND0162",
+   "group": "G12",
+   "detector_leak": "leaked",
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false,
+   "size": ">60",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-11.json",
+    "view": "straight",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "withheld_gate",
+   "gate_accepted": false,
+   "gate_reasons": [
+    "no stacks detected"
+   ],
+   "gate_metrics": {
+    "columns": 0,
+    "model_boxes": 0,
+    "pitch_px": null,
+    "pitch_frac": null,
+    "height_frac": null,
+    "coverage_x": null,
+    "pitch_gradient": null,
+    "recessed_columns": 0,
+    "min_pitch_scale": null,
+    "box_aspect": 4.444,
+    "image": {
+     "width": 1280,
+     "height": 580
+    }
+   },
+   "flagged_columns": 0,
+   "flag_reasons": [],
+   "recessed_columns": 0,
+   "predicted_total": 0,
+   "predicted_total_without_recessed": 0,
+   "span_total": 0,
+   "boxes_in_columns": 0,
+   "raw_boxes": 1,
+   "walk_by_column": [],
+   "span_by_column": [],
+   "recessed_by_column": [],
+   "columns": [],
+   "result": "withheld_gate",
+   "accepted": false,
+   "error": -358,
+   "abs_error": 358,
+   "would_be_exact": false,
+   "raw_box_error": -357,
+   "raw_box_exact": false
+  },
+  {
+   "label_id": 34,
+   "label": 120,
+   "tier": "A",
+   "cluster": "ND0019",
+   "group": "G21",
+   "detector_leak": "leaked",
+   "v2_tag_split_today": "train",
+   "in_gate_tuning_set": true,
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false,
+   "size": ">60",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-12.json",
+    "view": "left",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "accepted",
+   "gate_accepted": true,
+   "gate_reasons": [],
+   "gate_metrics": {
+    "columns": 6,
+    "model_boxes": 125,
+    "pitch_px": 39.5,
+    "pitch_frac": 0.033,
+    "height_frac": 0.688,
+    "coverage_x": 0.922,
+    "pitch_gradient": 1.064,
+    "recessed_columns": 0,
+    "min_pitch_scale": 0.987,
+    "box_aspect": 4.927,
+    "image": {
+     "width": 1600,
+     "height": 1200
+    }
+   },
+   "flagged_columns": 0,
+   "flag_reasons": [],
+   "recessed_columns": 0,
+   "predicted_total": 120,
+   "predicted_total_without_recessed": 120,
+   "span_total": 121,
+   "boxes_in_columns": 125,
+   "raw_boxes": 125,
+   "walk_by_column": [
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "span_by_column": [
+    20,
+    20,
+    21,
+    20,
+    20,
+    20
+   ],
+   "recessed_by_column": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "columns": [
+    {
+     "column": 1,
+     "x_min": 52.0,
+     "x_max": 338.0,
+     "model_boxes": 21,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.197,
+     "pitch_px": 42.0,
+     "box_height_px": 40.0,
+     "box_pitch_ratio": 0.952,
+     "scale": 1.063,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 2,
+     "x_min": 323.0,
+     "x_max": 565.0,
+     "model_boxes": 22,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.135,
+     "pitch_px": 41.5,
+     "box_height_px": 40.5,
+     "box_pitch_ratio": 0.976,
+     "scale": 1.051,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 3,
+     "x_min": 578.0,
+     "x_max": 811.0,
+     "model_boxes": 20,
+     "span_count": 21,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.195,
+     "pitch_px": 39.5,
+     "box_height_px": 41.5,
+     "box_pitch_ratio": 1.051,
+     "scale": 1.0,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 4,
+     "x_min": 802.0,
+     "x_max": 1059.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.211,
+     "pitch_px": 39.5,
+     "box_height_px": 42.0,
+     "box_pitch_ratio": 1.063,
+     "scale": 1.0,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 5,
+     "x_min": 1022.0,
+     "x_max": 1298.0,
+     "model_boxes": 21,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.193,
+     "pitch_px": 39.0,
+     "box_height_px": 43.0,
+     "box_pitch_ratio": 1.103,
+     "scale": 0.987,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 6,
+     "x_min": 1235.0,
+     "x_max": 1540.0,
+     "model_boxes": 21,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.193,
+     "pitch_px": 39.5,
+     "box_height_px": 42.0,
+     "box_pitch_ratio": 1.063,
+     "scale": 1.0,
+     "recessed": false,
+     "reason": null
+    }
+   ],
+   "result": "accepted_correct",
+   "accepted": true,
+   "error": 0,
+   "abs_error": 0,
+   "would_be_exact": true,
+   "raw_box_error": 5,
+   "raw_box_exact": false
+  },
+  {
+   "label_id": 35,
+   "label": 1,
+   "tier": "A",
+   "cluster": "ND0088",
+   "group": "G22",
+   "detector_leak": "leaked",
+   "v2_tag_split_today": "valid",
+   "in_gate_tuning_set": false,
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false,
+   "size": "<=10",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-12.json",
+    "view": "right",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "withheld_gate",
+   "gate_accepted": false,
+   "gate_reasons": [
+    "no stacks detected"
+   ],
+   "gate_metrics": {
+    "columns": 0,
+    "model_boxes": 0,
+    "pitch_px": null,
+    "pitch_frac": null,
+    "height_frac": null,
+    "coverage_x": null,
+    "pitch_gradient": null,
+    "recessed_columns": 0,
+    "min_pitch_scale": null,
+    "box_aspect": 3.259,
+    "image": {
+     "width": 1280,
+     "height": 580
+    }
+   },
+   "flagged_columns": 0,
+   "flag_reasons": [],
+   "recessed_columns": 0,
+   "predicted_total": 0,
+   "predicted_total_without_recessed": 0,
+   "span_total": 0,
+   "boxes_in_columns": 0,
+   "raw_boxes": 1,
+   "walk_by_column": [],
+   "span_by_column": [],
+   "recessed_by_column": [],
+   "columns": [],
+   "result": "withheld_gate",
+   "accepted": false,
+   "error": -1,
+   "abs_error": 1,
+   "would_be_exact": false,
+   "raw_box_error": 0,
+   "raw_box_exact": true
+  },
+  {
+   "label_id": 36,
+   "label": 109,
+   "tier": "B",
+   "cluster": "ND0163",
+   "group": "G15",
+   "detector_leak": "leaked",
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false,
+   "size": ">60",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-12.json",
+    "view": "straight",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "withheld_flagged",
+   "gate_accepted": true,
+   "gate_reasons": [],
+   "gate_metrics": {
+    "columns": 6,
+    "model_boxes": 115,
+    "pitch_px": 28.0,
+    "pitch_frac": 0.029,
+    "height_frac": 0.613,
+    "coverage_x": 0.791,
+    "pitch_gradient": 1.104,
+    "recessed_columns": 0,
+    "min_pitch_scale": 0.897,
+    "box_aspect": 5.679,
+    "image": {
+     "width": 1280,
+     "height": 960
+    }
+   },
+   "flagged_columns": 1,
+   "flag_reasons": [
+    "boxes are missing over several layers of this stack; retake this face"
+   ],
+   "recessed_columns": 0,
+   "predicted_total": 114,
+   "predicted_total_without_recessed": 114,
+   "span_total": 120,
+   "boxes_in_columns": 115,
+   "raw_boxes": 117,
+   "walk_by_column": [
+    16,
+    20,
+    20,
+    18,
+    20,
+    20
+   ],
+   "span_by_column": [
+    20,
+    21,
+    21,
+    18,
+    20,
+    20
+   ],
+   "recessed_by_column": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "columns": [
+    {
+     "column": 1,
+     "x_min": 79.0,
+     "x_max": 255.0,
+     "model_boxes": 15,
+     "span_count": 20,
+     "walk_count": 16,
+     "walk_filled": 2,
+     "walk_unresolved_gaps": 1,
+     "perspective_gradient": 1.104,
+     "pitch_px": 26.0,
+     "box_height_px": 21.0,
+     "box_pitch_ratio": 0.808,
+     "scale": 0.897,
+     "recessed": false,
+     "reason": "boxes are missing over several layers of this stack; retake this face"
+    },
+    {
+     "column": 2,
+     "x_min": 186.0,
+     "x_max": 402.0,
+     "model_boxes": 22,
+     "span_count": 21,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.241,
+     "pitch_px": 27.0,
+     "box_height_px": 25.0,
+     "box_pitch_ratio": 0.926,
+     "scale": 0.931,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 3,
+     "x_min": 356.0,
+     "x_max": 552.0,
+     "model_boxes": 20,
+     "span_count": 21,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.308,
+     "pitch_px": 27.5,
+     "box_height_px": 25.0,
+     "box_pitch_ratio": 0.909,
+     "scale": 0.948,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 4,
+     "x_min": 536.0,
+     "x_max": 710.0,
+     "model_boxes": 18,
+     "span_count": 18,
+     "walk_count": 18,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.312,
+     "pitch_px": 28.5,
+     "box_height_px": 27.0,
+     "box_pitch_ratio": 0.947,
+     "scale": 0.983,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 5,
+     "x_min": 715.0,
+     "x_max": 896.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.357,
+     "pitch_px": 29.0,
+     "box_height_px": 28.0,
+     "box_pitch_ratio": 0.966,
+     "scale": 1.0,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 6,
+     "x_min": 864.0,
+     "x_max": 1096.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.356,
+     "pitch_px": 29.5,
+     "box_height_px": 27.5,
+     "box_pitch_ratio": 0.932,
+     "scale": 1.017,
+     "recessed": false,
+     "reason": null
+    }
+   ],
+   "result": "withheld_flagged",
+   "accepted": false,
+   "error": 5,
+   "abs_error": 5,
+   "would_be_exact": false,
+   "raw_box_error": 8,
+   "raw_box_exact": false
+  },
+  {
+   "label_id": 38,
+   "label": 118,
+   "tier": "B",
+   "cluster": "ND0057",
+   "group": "G23",
+   "detector_leak": "leaked",
+   "v2_tag_split_today": "valid",
+   "in_gate_tuning_set": true,
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false,
+   "size": ">60",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-13.json",
+    "view": "right",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "withheld_gate",
+   "gate_accepted": false,
+   "gate_reasons": [
+    "stacks cover too little of the frame width"
+   ],
+   "gate_metrics": {
+    "columns": 5,
+    "model_boxes": 94,
+    "pitch_px": 17.0,
+    "pitch_frac": 0.029,
+    "height_frac": 0.63,
+    "coverage_x": 0.395,
+    "pitch_gradient": 1.038,
+    "recessed_columns": 1,
+    "min_pitch_scale": 0.739,
+    "box_aspect": 5.6,
+    "image": {
+     "width": 1280,
+     "height": 582
+    }
+   },
+   "flagged_columns": 3,
+   "flag_reasons": [
+    "layer counts disagree (span 19, walk 29); retake this face",
+    "layer counts disagree (span 21, walk 23); retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+   ],
+   "recessed_columns": 1,
+   "predicted_total": 102,
+   "predicted_total_without_recessed": 79,
+   "span_total": 95,
+   "boxes_in_columns": 94,
+   "raw_boxes": 94,
+   "walk_by_column": [
+    21,
+    20,
+    29,
+    23,
+    9
+   ],
+   "span_by_column": [
+    21,
+    20,
+    19,
+    21,
+    14
+   ],
+   "recessed_by_column": [
+    false,
+    false,
+    false,
+    true,
+    false
+   ],
+   "columns": [
+    {
+     "column": 1,
+     "x_min": 359.0,
+     "x_max": 485.0,
+     "model_boxes": 21,
+     "span_count": 21,
+     "walk_count": 21,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.258,
+     "pitch_px": 17.5,
+     "box_height_px": 16.0,
+     "box_pitch_ratio": 0.914,
+     "scale": 1.014,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 2,
+     "x_min": 482.0,
+     "x_max": 584.0,
+     "model_boxes": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.254,
+     "pitch_px": 17.0,
+     "box_height_px": 15.0,
+     "box_pitch_ratio": 0.882,
+     "scale": 0.986,
+     "recessed": false,
+     "reason": null
+    },
+    {
+     "column": 3,
+     "x_min": 582.0,
+     "x_max": 700.0,
+     "model_boxes": 19,
+     "span_count": 19,
+     "walk_count": 29,
+     "walk_filled": 10,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 0.648,
+     "pitch_px": 16.0,
+     "box_height_px": 15.0,
+     "box_pitch_ratio": 0.938,
+     "scale": 0.928,
+     "recessed": false,
+     "reason": "layer counts disagree (span 19, walk 29); retake this face"
+    },
+    {
+     "column": 4,
+     "x_min": 643.0,
+     "x_max": 799.0,
+     "model_boxes": 21,
+     "span_count": 21,
+     "walk_count": 23,
+     "walk_filled": 7,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 0.931,
+     "pitch_px": 12.75,
+     "box_height_px": 11.0,
+     "box_pitch_ratio": 0.863,
+     "scale": 0.739,
+     "recessed": true,
+     "reason": "layer counts disagree (span 21, walk 23); retake this face"
+    },
+    {
+     "column": 5,
+     "x_min": 774.0,
+     "x_max": 864.0,
+     "model_boxes": 13,
+     "span_count": 14,
+     "walk_count": 9,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 0.894,
+     "pitch_px": 17.25,
+     "box_height_px": 11.0,
+     "box_pitch_ratio": 0.638,
+     "scale": 1.0,
+     "recessed": false,
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+    }
+   ],
+   "result": "withheld_gate",
+   "accepted": false,
+   "error": -16,
+   "abs_error": 16,
+   "would_be_exact": false,
+   "raw_box_error": -24,
+   "raw_box_exact": false
+  },
+  {
+   "label_id": 39,
+   "label": 2,
+   "tier": "A",
+   "cluster": "ND0045",
+   "group": "G24",
+   "detector_leak": "leaked",
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": false,
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false,
+   "size": "<=10",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-13.json",
+    "view": "straight",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "withheld_gate",
+   "gate_accepted": false,
+   "gate_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "stacks cover too little of the frame width"
+   ],
+   "gate_metrics": {
+    "columns": 1,
+    "model_boxes": 3,
+    "pitch_px": 296.0,
+    "pitch_frac": 0.231,
+    "height_frac": 0.694,
+    "coverage_x": 0.074,
+    "pitch_gradient": 1.0,
+    "recessed_columns": 0,
+    "min_pitch_scale": 1.0,
+    "box_aspect": 0.129,
+    "image": {
+     "width": 582,
+     "height": 1280
+    }
+   },
+   "flagged_columns": 0,
+   "flag_reasons": [],
+   "recessed_columns": 0,
+   "predicted_total": 3,
+   "predicted_total_without_recessed": 3,
+   "span_total": 3,
+   "boxes_in_columns": 3,
+   "raw_boxes": 5,
+   "walk_by_column": [
+    3
+   ],
+   "span_by_column": [
+    3
+   ],
+   "recessed_by_column": [
+    false
+   ],
+   "columns": [
+    {
+     "column": 1,
+     "x_min": 0.0,
+     "x_max": 43.0,
+     "model_boxes": 3,
+     "span_count": 3,
+     "walk_count": 3,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": null,
+     "pitch_px": 296.0,
+     "box_height_px": 314.0,
+     "box_pitch_ratio": 1.061,
+     "scale": 1.0,
+     "recessed": false,
+     "reason": null
+    }
+   ],
+   "result": "withheld_gate",
+   "accepted": false,
+   "error": 1,
+   "abs_error": 1,
+   "would_be_exact": false,
+   "raw_box_error": 3,
+   "raw_box_exact": false
+  },
+  {
+   "label_id": 40,
+   "label": 10,
+   "tier": "B",
+   "cluster": "ND0061",
+   "group": "G07",
+   "detector_leak": "leaked",
+   "v2_tag_split_today": "train",
+   "in_gate_tuning_set": false,
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false,
+   "size": "<=10",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-14.json",
+    "view": "left",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "withheld_gate",
+   "gate_accepted": false,
+   "gate_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "no stacks detected"
+   ],
+   "gate_metrics": {
+    "columns": 0,
+    "model_boxes": 0,
+    "pitch_px": null,
+    "pitch_frac": null,
+    "height_frac": null,
+    "coverage_x": null,
+    "pitch_gradient": null,
+    "recessed_columns": 0,
+    "min_pitch_scale": null,
+    "box_aspect": 1.281,
+    "image": {
+     "width": 960,
+     "height": 1280
+    }
+   },
+   "flagged_columns": 0,
+   "flag_reasons": [],
+   "recessed_columns": 0,
+   "predicted_total": 0,
+   "predicted_total_without_recessed": 0,
+   "span_total": 0,
+   "boxes_in_columns": 0,
+   "raw_boxes": 4,
+   "walk_by_column": [],
+   "span_by_column": [],
+   "recessed_by_column": [],
+   "columns": [],
+   "result": "withheld_gate",
+   "accepted": false,
+   "error": -10,
+   "abs_error": 10,
+   "would_be_exact": false,
+   "raw_box_error": -6,
+   "raw_box_exact": false
+  },
+  {
+   "label_id": 46,
+   "label": 20,
+   "tier": "B",
+   "cluster": "ND0168",
+   "group": "G29",
+   "detector_leak": "leak_free",
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": false,
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": true,
+   "size": "11-60",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-16.json",
+    "view": "left",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "withheld_flagged",
+   "gate_accepted": true,
+   "gate_reasons": [],
+   "gate_metrics": {
+    "columns": 1,
+    "model_boxes": 18,
+    "pitch_px": 66.5,
+    "pitch_frac": 0.052,
+    "height_frac": 0.875,
+    "coverage_x": 0.928,
+    "pitch_gradient": 1.0,
+    "recessed_columns": 0,
+    "min_pitch_scale": 1.0,
+    "box_aspect": 4.747,
+    "image": {
+     "width": 391,
+     "height": 1280
+    }
+   },
+   "flagged_columns": 1,
+   "flag_reasons": [
+    "layer counts disagree (span 17, walk 19); retake this face"
+   ],
+   "recessed_columns": 0,
+   "predicted_total": 19,
+   "predicted_total_without_recessed": 19,
+   "span_total": 17,
+   "boxes_in_columns": 18,
+   "raw_boxes": 18,
+   "walk_by_column": [
+    19
+   ],
+   "span_by_column": [
+    17
+   ],
+   "recessed_by_column": [
+    false
+   ],
+   "columns": [
+    {
+     "column": 1,
+     "x_min": 28.0,
+     "x_max": 391.0,
+     "model_boxes": 18,
+     "span_count": 17,
+     "walk_count": 19,
+     "walk_filled": 3,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.505,
+     "pitch_px": 66.5,
+     "box_height_px": 68.5,
+     "box_pitch_ratio": 1.03,
+     "scale": 1.0,
+     "recessed": false,
+     "reason": "layer counts disagree (span 17, walk 19); retake this face"
+    }
+   ],
+   "result": "withheld_flagged",
+   "accepted": false,
+   "error": -1,
+   "abs_error": 1,
+   "would_be_exact": false,
+   "raw_box_error": -2,
+   "raw_box_exact": false
+  },
+  {
+   "label_id": 47,
+   "label": 7,
+   "tier": "A",
+   "cluster": "ND0169",
+   "group": "G30",
+   "detector_leak": "leak_free",
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": false,
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false,
+   "size": "<=10",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-16.json",
+    "view": "right",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "accepted",
+   "gate_accepted": true,
+   "gate_reasons": [],
+   "gate_metrics": {
+    "columns": 1,
+    "model_boxes": 7,
+    "pitch_px": 85.25,
+    "pitch_frac": 0.089,
+    "height_frac": 0.617,
+    "coverage_x": 0.402,
+    "pitch_gradient": 1.0,
+    "recessed_columns": 0,
+    "min_pitch_scale": 1.0,
+    "box_aspect": 6.329,
+    "image": {
+     "width": 1280,
+     "height": 960
+    }
+   },
+   "flagged_columns": 0,
+   "flag_reasons": [],
+   "recessed_columns": 0,
+   "predicted_total": 7,
+   "predicted_total_without_recessed": 7,
+   "span_total": 7,
+   "boxes_in_columns": 7,
+   "raw_boxes": 7,
+   "walk_by_column": [
+    7
+   ],
+   "span_by_column": [
+    7
+   ],
+   "recessed_by_column": [
+    false
+   ],
+   "columns": [
+    {
+     "column": 1,
+     "x_min": 550.0,
+     "x_max": 1064.0,
+     "model_boxes": 7,
+     "span_count": 7,
+     "walk_count": 7,
+     "walk_filled": 0,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.205,
+     "pitch_px": 85.25,
+     "box_height_px": 71.0,
+     "box_pitch_ratio": 0.833,
+     "scale": 1.0,
+     "recessed": false,
+     "reason": null
+    }
+   ],
+   "result": "accepted_correct",
+   "accepted": true,
+   "error": 0,
+   "abs_error": 0,
+   "would_be_exact": true,
+   "raw_box_error": 0,
+   "raw_box_exact": true
+  },
+  {
+   "label_id": 49,
+   "label": 1,
+   "tier": "A",
+   "cluster": "ND0170",
+   "group": "G31",
+   "detector_leak": "leak_free",
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": false,
+   "in_walk_reference_photos": false,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false,
+   "size": "<=10",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-17.json",
+    "view": "left",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "withheld_gate",
+   "gate_accepted": false,
+   "gate_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "no stacks detected"
+   ],
+   "gate_metrics": {
+    "columns": 0,
+    "model_boxes": 0,
+    "pitch_px": null,
+    "pitch_frac": null,
+    "height_frac": null,
+    "coverage_x": null,
+    "pitch_gradient": null,
+    "recessed_columns": 0,
+    "min_pitch_scale": null,
+    "box_aspect": 1.948,
+    "image": {
+     "width": 1200,
+     "height": 1600
+    }
+   },
+   "flagged_columns": 0,
+   "flag_reasons": [],
+   "recessed_columns": 0,
+   "predicted_total": 0,
+   "predicted_total_without_recessed": 0,
+   "span_total": 0,
+   "boxes_in_columns": 0,
+   "raw_boxes": 1,
+   "walk_by_column": [],
+   "span_by_column": [],
+   "recessed_by_column": [],
+   "columns": [],
+   "result": "withheld_gate",
+   "accepted": false,
+   "error": -1,
+   "abs_error": 1,
+   "would_be_exact": false,
+   "raw_box_error": 0,
+   "raw_box_exact": true
+  },
+  {
+   "label_id": 50,
+   "label": 40,
+   "tier": "B",
+   "cluster": "ND0010",
+   "group": "G32",
+   "detector_leak": "leak_free",
+   "v2_tag_split_today": null,
+   "in_gate_tuning_set": true,
+   "in_walk_reference_photos": true,
+   "in_walk_development_photos": false,
+   "in_orientation_development_photos": false,
+   "size": "11-60",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-17.json",
+    "view": "right",
+    "model_id": "projec-mutta/2",
+    "mode": "model_spatial_v1"
+   },
+   "outcome": "withheld_flagged",
+   "gate_accepted": true,
+   "gate_reasons": [],
+   "gate_metrics": {
+    "columns": 2,
+    "model_boxes": 35,
+    "pitch_px": 71.0,
+    "pitch_frac": 0.044,
+    "height_frac": 0.781,
+    "coverage_x": 0.903,
+    "pitch_gradient": 1.051,
+    "recessed_columns": 0,
+    "min_pitch_scale": 0.952,
+    "box_aspect": 5.356,
+    "image": {
+     "width": 900,
+     "height": 1600
+    }
+   },
+   "flagged_columns": 2,
+   "flag_reasons": [
+    "layer counts disagree (span 17, walk 25); retake this face",
+    "camera looked down on the stack (spacing ratio 1.806); hold the phone level at mid-height"
+   ],
+   "recessed_columns": 0,
+   "predicted_total": 44,
+   "predicted_total_without_recessed": 44,
+   "span_total": 35,
+   "boxes_in_columns": 35,
+   "raw_boxes": 35,
+   "walk_by_column": [
+    25,
+    19
+   ],
+   "span_by_column": [
+    17,
+    18
+   ],
+   "recessed_by_column": [
+    false,
+    false
+   ],
+   "columns": [
+    {
+     "column": 1,
+     "x_min": 87.0,
+     "x_max": 587.0,
+     "model_boxes": 17,
+     "span_count": 17,
+     "walk_count": 25,
+     "walk_filled": 9,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 0.807,
+     "pitch_px": 72.75,
+     "box_height_px": 69.0,
+     "box_pitch_ratio": 0.948,
+     "scale": 1.0,
+     "recessed": false,
+     "reason": "layer counts disagree (span 17, walk 25); retake this face"
+    },
+    {
+     "column": 2,
+     "x_min": 538.0,
+     "x_max": 900.0,
+     "model_boxes": 18,
+     "span_count": 18,
+     "walk_count": 19,
+     "walk_filled": 2,
+     "walk_unresolved_gaps": 0,
+     "perspective_gradient": 1.806,
+     "pitch_px": 69.25,
+     "box_height_px": 59.5,
+     "box_pitch_ratio": 0.859,
+     "scale": 0.952,
+     "recessed": false,
+     "reason": "camera looked down on the stack (spacing ratio 1.806); hold the phone level at mid-height"
+    }
+   ],
+   "result": "withheld_flagged",
+   "accepted": false,
+   "error": 4,
+   "abs_error": 4,
+   "would_be_exact": false,
+   "raw_box_error": -5,
+   "raw_box_exact": false
+  }
+ ],
+ "not_usable_secondary": {
+  "n": 28,
+  "accepted": 2,
+  "accepted_ids": [
+   25,
+   26
+  ],
+  "accepted_equal_to_written": 0,
+  "withheld_gate": 20,
+  "withheld_flagged": 6,
+  "rows": [
+   {
+    "label_id": 3,
+    "group": "G04",
+    "cluster": "ND0142",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-01.json",
+     "view": "straight",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_gate",
+    "predicted_total": 65,
+    "walk_by_column": [
+     19,
+     18,
+     19,
+     9
+    ],
+    "gate_reasons": [
+     "layer pitch changes across the face (angled or corner view)"
+    ],
+    "flag_reasons": [
+     "layer counts disagree (span 17, walk 19); retake this face",
+     "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+    ],
+    "raw_boxes": 60,
+    "label_written": 80,
+    "region_labels": null,
+    "audit_reason_not_usable": "scope covers one face of a multi-face, multi-object frame",
+    "shown_minus_written": -15
+   },
+   {
+    "label_id": 5,
+    "group": "G05",
+    "cluster": "ND0144",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-02.json",
+     "view": "right",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_gate",
+    "predicted_total": 17,
+    "walk_by_column": [
+     17
+    ],
+    "gate_reasons": [
+     "stacks cover too little of the frame width",
+     "stacks are too small in the frame (too far away)"
+    ],
+    "flag_reasons": [],
+    "raw_boxes": 13,
+    "label_written": 235,
+    "region_labels": "120|115",
+    "audit_reason_not_usable": "region labels: need the bracket ROIs; 235 is not a whole-image count",
+    "shown_minus_written": -218
+   },
+   {
+    "label_id": 6,
+    "group": "G07",
+    "cluster": "ND0031",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-02.json",
+     "view": "straight",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_gate",
+    "predicted_total": 0,
+    "walk_by_column": [],
+    "gate_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "no stacks detected"
+    ],
+    "flag_reasons": [],
+    "raw_boxes": 4,
+    "label_written": 4,
+    "region_labels": null,
+    "audit_reason_not_usable": "region label (bracket)",
+    "shown_minus_written": -4
+   },
+   {
+    "label_id": 7,
+    "group": "G07",
+    "cluster": "ND0092",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-03.json",
+     "view": "left",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_gate",
+    "predicted_total": 3,
+    "walk_by_column": [
+     3
+    ],
+    "gate_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake"
+    ],
+    "flag_reasons": [
+     "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+    ],
+    "raw_boxes": 10,
+    "label_written": 4,
+    "region_labels": null,
+    "audit_reason_not_usable": "region label (bracket)",
+    "shown_minus_written": -1
+   },
+   {
+    "label_id": 10,
+    "group": "G09",
+    "cluster": "ND0147",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-04.json",
+     "view": "left",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_gate",
+    "predicted_total": 39,
+    "walk_by_column": [
+     8,
+     16,
+     15
+    ],
+    "gate_reasons": [
+     "layer pitch changes across the face (angled or corner view)",
+     "stacks are too small in the frame (too far away)"
+    ],
+    "flag_reasons": [
+     "layer counts disagree (span 13, walk 15); retake this face"
+    ],
+    "raw_boxes": 38,
+    "label_written": 30,
+    "region_labels": null,
+    "audit_reason_not_usable": "unit/scope unclear",
+    "shown_minus_written": 9
+   },
+   {
+    "label_id": 11,
+    "group": "G07",
+    "cluster": "ND0061",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-04.json",
+     "view": "right",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_gate",
+    "predicted_total": 0,
+    "walk_by_column": [],
+    "gate_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "no stacks detected"
+    ],
+    "flag_reasons": [],
+    "raw_boxes": 4,
+    "label_written": 8,
+    "region_labels": "2|6",
+    "audit_reason_not_usable": "same photograph as img-40 (labelled 10 for the whole scene)",
+    "shown_minus_written": -8
+   },
+   {
+    "label_id": 12,
+    "group": "G11",
+    "cluster": "ND0148",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-04.json",
+     "view": "straight",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_gate",
+    "predicted_total": 0,
+    "walk_by_column": [],
+    "gate_reasons": [
+     "no stacks detected"
+    ],
+    "flag_reasons": [],
+    "raw_boxes": 0,
+    "label_written": 205,
+    "region_labels": "100|105",
+    "audit_reason_not_usable": "labels.csv sums 205, which double-counts the shared corner column; not a visible-tray or block total",
+    "shown_minus_written": -205
+   },
+   {
+    "label_id": 13,
+    "group": "G12",
+    "cluster": "ND0149",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-05.json",
+     "view": "left",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_gate",
+    "predicted_total": 0,
+    "walk_by_column": [],
+    "gate_reasons": [
+     "no stacks detected"
+    ],
+    "flag_reasons": [],
+    "raw_boxes": 0,
+    "label_written": 204,
+    "region_labels": "84|120",
+    "audit_reason_not_usable": "region labels; probably the long block of img-33",
+    "shown_minus_written": -204
+   },
+   {
+    "label_id": 14,
+    "group": "G13",
+    "cluster": "ND0150",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-05.json",
+     "view": "right",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_gate",
+    "predicted_total": 80,
+    "walk_by_column": [
+     18,
+     15,
+     7,
+     5,
+     9,
+     26
+    ],
+    "gate_reasons": [
+     "layer pitch changes across the face (angled or corner view)"
+    ],
+    "flag_reasons": [
+     "boxes are missing over several layers of this stack; retake this face",
+     "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "layer counts disagree (span 15, walk 26); retake this face"
+    ],
+    "raw_boxes": 69,
+    "label_written": 132,
+    "region_labels": "80|52",
+    "audit_reason_not_usable": "52 + the short stack cut off = img-15's 62 for the same face",
+    "shown_minus_written": -52
+   },
+   {
+    "label_id": 15,
+    "group": "G13",
+    "cluster": "ND0151",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-05.json",
+     "view": "straight",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_gate",
+    "predicted_total": 16,
+    "walk_by_column": [
+     8,
+     5,
+     3
+    ],
+    "gate_reasons": [
+     "layer pitch changes across the face (angled or corner view)",
+     "stacks cover too little of the frame width",
+     "stacks are too small in the frame (too far away)"
+    ],
+    "flag_reasons": [
+     "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+    ],
+    "raw_boxes": 15,
+    "label_written": 62,
+    "region_labels": null,
+    "audit_reason_not_usable": "region label (bracket)",
+    "shown_minus_written": -46
+   },
+   {
+    "label_id": 16,
+    "group": "G14",
+    "cluster": "ND0152",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-06.json",
+     "view": "left",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_flagged",
+    "predicted_total": 130,
+    "walk_by_column": [
+     19,
+     20,
+     20,
+     20,
+     20,
+     20,
+     11
+    ],
+    "gate_reasons": [],
+    "flag_reasons": [
+     "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+    ],
+    "raw_boxes": 130,
+    "label_written": 119,
+    "region_labels": null,
+    "audit_reason_not_usable": "region label; same photograph as img-22",
+    "shown_minus_written": 11
+   },
+   {
+    "label_id": 17,
+    "group": "G15",
+    "cluster": "ND0153",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-06.json",
+     "view": "right",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_gate",
+    "predicted_total": 63,
+    "walk_by_column": [
+     6,
+     12,
+     19,
+     19,
+     7
+    ],
+    "gate_reasons": [
+     "layer pitch changes across the face (angled or corner view)"
+    ],
+    "flag_reasons": [
+     "boxes are missing over several layers of this stack; retake this face",
+     "layer counts disagree (span 15, walk 19); retake this face",
+     "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+    ],
+    "raw_boxes": 60,
+    "label_written": 109,
+    "region_labels": null,
+    "audit_reason_not_usable": "region label; same block as img-36",
+    "shown_minus_written": -46
+   },
+   {
+    "label_id": 18,
+    "group": "G16",
+    "cluster": "ND0154",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-06.json",
+     "view": "straight",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_flagged",
+    "predicted_total": 128,
+    "walk_by_column": [
+     10,
+     19,
+     22,
+     19,
+     20,
+     20,
+     18
+    ],
+    "gate_reasons": [],
+    "flag_reasons": [
+     "layer counts disagree (span 20, walk 18); retake this face"
+    ],
+    "raw_boxes": 126,
+    "label_written": 129,
+    "region_labels": null,
+    "audit_reason_not_usable": "region label",
+    "shown_minus_written": -1
+   },
+   {
+    "label_id": 22,
+    "group": "G14",
+    "cluster": "ND0152",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-08.json",
+     "view": "left",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_flagged",
+    "predicted_total": 124,
+    "walk_by_column": [
+     19,
+     20,
+     20,
+     20,
+     20,
+     20,
+     5
+    ],
+    "gate_reasons": [],
+    "flag_reasons": [
+     "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+    ],
+    "raw_boxes": 126,
+    "label_written": 119,
+    "region_labels": null,
+    "audit_reason_not_usable": "use img-16's scope; do not score twice",
+    "shown_minus_written": 5
+   },
+   {
+    "label_id": 25,
+    "group": "G03",
+    "cluster": "ND0156",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-09.json",
+     "view": "left",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "accepted",
+    "predicted_total": 13,
+    "walk_by_column": [
+     13
+    ],
+    "gate_reasons": [],
+    "flag_reasons": [],
+    "raw_boxes": 18,
+    "label_written": 80,
+    "region_labels": null,
+    "audit_reason_not_usable": "label covers one of two visible faces",
+    "shown_minus_written": -67
+   },
+   {
+    "label_id": 26,
+    "group": "G18",
+    "cluster": "ND0157",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-09.json",
+     "view": "right",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "accepted",
+    "predicted_total": 83,
+    "walk_by_column": [
+     22,
+     20,
+     21,
+     20
+    ],
+    "gate_reasons": [],
+    "flag_reasons": [],
+    "raw_boxes": 84,
+    "label_written": 125,
+    "region_labels": null,
+    "audit_reason_not_usable": "occluded part cannot be checked from the photo",
+    "shown_minus_written": -42
+   },
+   {
+    "label_id": 27,
+    "group": "G03",
+    "cluster": "ND0156",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-09.json",
+     "view": "straight",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_gate",
+    "predicted_total": 21,
+    "walk_by_column": [
+     4,
+     17
+    ],
+    "gate_reasons": [
+     "layer pitch changes across the face (angled or corner view)"
+    ],
+    "flag_reasons": [
+     "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "layer counts disagree (span 13, walk 17); retake this face"
+    ],
+    "raw_boxes": 20,
+    "label_written": 80,
+    "region_labels": null,
+    "audit_reason_not_usable": "label covers one of two visible faces",
+    "shown_minus_written": -59
+   },
+   {
+    "label_id": 28,
+    "group": "G19",
+    "cluster": "ND0158",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-10.json",
+     "view": "left",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_flagged",
+    "predicted_total": 104,
+    "walk_by_column": [
+     14,
+     11,
+     19,
+     20,
+     20,
+     20
+    ],
+    "gate_reasons": [],
+    "flag_reasons": [
+     "layer counts disagree (span 12, walk 14); retake this face",
+     "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "layer counts disagree (span 17, walk 19); retake this face",
+     "layer counts disagree (span 18, walk 20); retake this face",
+     "layer counts disagree (span 13, walk 20); retake this face"
+    ],
+    "raw_boxes": 86,
+    "label_written": 143,
+    "region_labels": null,
+    "audit_reason_not_usable": "same block and arrangement as img-51 labelled 262",
+    "shown_minus_written": -39
+   },
+   {
+    "label_id": 29,
+    "group": "G20",
+    "cluster": "ND0159",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-10.json",
+     "view": "right",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_gate",
+    "predicted_total": 48,
+    "walk_by_column": [
+     15,
+     15,
+     18
+    ],
+    "gate_reasons": [
+     "stacks cover too little of the frame width"
+    ],
+    "flag_reasons": [
+     "boxes are missing over several layers of this stack; retake this face",
+     "layer counts disagree (span 14, walk 18); retake this face"
+    ],
+    "raw_boxes": 51,
+    "label_written": 130,
+    "region_labels": null,
+    "audit_reason_not_usable": "scope unclear",
+    "shown_minus_written": -82
+   },
+   {
+    "label_id": 37,
+    "group": "G07",
+    "cluster": "ND0048",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-13.json",
+     "view": "left",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_gate",
+    "predicted_total": 3,
+    "walk_by_column": [
+     3
+    ],
+    "gate_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake"
+    ],
+    "flag_reasons": [
+     "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+    ],
+    "raw_boxes": 11,
+    "label_written": 4,
+    "region_labels": null,
+    "audit_reason_not_usable": "label covers a subset of the visible trays",
+    "shown_minus_written": -1
+   },
+   {
+    "label_id": 41,
+    "group": "G18",
+    "cluster": "ND0011",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-14.json",
+     "view": "right",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_flagged",
+    "predicted_total": 48,
+    "walk_by_column": [
+     4,
+     4,
+     20,
+     20
+    ],
+    "gate_reasons": [],
+    "flag_reasons": [
+     "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+    ],
+    "raw_boxes": 49,
+    "label_written": 81,
+    "region_labels": null,
+    "audit_reason_not_usable": "arithmetic of 81 does not fit the visible stacks; scope unverified",
+    "shown_minus_written": -33
+   },
+   {
+    "label_id": 42,
+    "group": "G25",
+    "cluster": "ND0164",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-14.json",
+     "view": "straight",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_gate",
+    "predicted_total": 15,
+    "walk_by_column": [
+     13,
+     2
+    ],
+    "gate_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "stacks are too small in the frame (too far away)"
+    ],
+    "flag_reasons": [
+     "layer counts disagree (span 9, walk 13); retake this face"
+    ],
+    "raw_boxes": 17,
+    "label_written": 180,
+    "region_labels": null,
+    "audit_reason_not_usable": "label exceeds what is visible: likely a block total",
+    "shown_minus_written": -165
+   },
+   {
+    "label_id": 43,
+    "group": "G26",
+    "cluster": "ND0165",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-15.json",
+     "view": "left",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_gate",
+    "predicted_total": 5,
+    "walk_by_column": [
+     5
+    ],
+    "gate_reasons": [
+     "stacks are too small in the frame (too far away)"
+    ],
+    "flag_reasons": [],
+    "raw_boxes": 7,
+    "label_written": 5,
+    "region_labels": null,
+    "audit_reason_not_usable": "stack cut by the frame",
+    "shown_minus_written": 0
+   },
+   {
+    "label_id": 44,
+    "group": "G27",
+    "cluster": "ND0166",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-15.json",
+     "view": "right",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_gate",
+    "predicted_total": 120,
+    "walk_by_column": [
+     16,
+     26,
+     24,
+     15,
+     14,
+     14,
+     11
+    ],
+    "gate_reasons": [
+     "stacks are too small in the frame (too far away)"
+    ],
+    "flag_reasons": [
+     "camera looked down on the stack (spacing ratio 1.508); hold the phone level at mid-height",
+     "layer counts disagree (span 16, walk 26); retake this face",
+     "layer counts disagree (span 16, walk 24); retake this face",
+     "camera looked down on the stack (spacing ratio 2.161); hold the phone level at mid-height"
+    ],
+    "raw_boxes": 99,
+    "label_written": 185,
+    "region_labels": null,
+    "audit_reason_not_usable": "multi-part scene; its 5-column part has per-stack truth via user-100 crop",
+    "shown_minus_written": -65
+   },
+   {
+    "label_id": 45,
+    "group": "G28",
+    "cluster": "ND0167",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-15.json",
+     "view": "straight",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_flagged",
+    "predicted_total": 28,
+    "walk_by_column": [
+     28
+    ],
+    "gate_reasons": [],
+    "flag_reasons": [
+     "boxes are missing over several layers of this stack; retake this face"
+    ],
+    "raw_boxes": 21,
+    "label_written": 107,
+    "region_labels": null,
+    "audit_reason_not_usable": "label exceeds what is visible",
+    "shown_minus_written": -79
+   },
+   {
+    "label_id": 48,
+    "group": "G25",
+    "cluster": "ND0164",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-16.json",
+     "view": "straight",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_gate",
+    "predicted_total": 13,
+    "walk_by_column": [
+     11,
+     2
+    ],
+    "gate_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "stacks are too small in the frame (too far away)"
+    ],
+    "flag_reasons": [],
+    "raw_boxes": 16,
+    "label_written": 180,
+    "region_labels": null,
+    "audit_reason_not_usable": "duplicate of img-42",
+    "shown_minus_written": -167
+   },
+   {
+    "label_id": 51,
+    "group": "G19",
+    "cluster": "ND0171",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-17.json",
+     "view": "straight",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_gate",
+    "predicted_total": 92,
+    "walk_by_column": [
+     12,
+     19,
+     20,
+     20,
+     21
+    ],
+    "gate_reasons": [
+     "layer pitch changes across the face (angled or corner view)"
+    ],
+    "flag_reasons": [
+     "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "boxes are missing over several layers of this stack; retake this face",
+     "layer counts disagree (span 18, walk 20); retake this face"
+    ],
+    "raw_boxes": 78,
+    "label_written": 262,
+    "region_labels": null,
+    "audit_reason_not_usable": "conflicts with img-28 (143)",
+    "shown_minus_written": -170
+   },
+   {
+    "label_id": 52,
+    "group": "G33",
+    "cluster": "ND0172",
+    "detections": {
+     "file": "reports/field-labelled-20261007/raw/batch-18.json",
+     "view": "left",
+     "model_id": "projec-mutta/2",
+     "mode": "model_spatial_v1"
+    },
+    "outcome": "withheld_gate",
+    "predicted_total": 22,
+    "walk_by_column": [
+     5,
+     6,
+     11
+    ],
+    "gate_reasons": [
+     "layer pitch changes across the face (angled or corner view)"
+    ],
+    "flag_reasons": [],
+    "raw_boxes": 20,
+    "label_written": 25,
+    "region_labels": null,
+    "audit_reason_not_usable": "whether empties count is unknown",
+    "shown_minus_written": -3
+   }
+  ]
+ },
+ "per_stack": [
+  {
+   "case": "img-32 free end of the 99 block",
+   "physical_stack": "S99-end",
+   "truth_source": "user-written 19 on the photo; the same 19 stack is user-confirmed in reports/two-view-20260924/README.md:5-6",
+   "truth_kind": "user-reported, not physically recounted",
+   "walk_development_photo": true,
+   "detections": {
+    "batch": "reports/field-labelled-20261007/raw/batch-11.json",
+    "view": "right"
+   },
+   "photo_outcome": "accepted",
+   "gate_reasons": [],
+   "columns_in_scope": 1,
+   "stacks": [
+    {
+     "position": 1,
+     "user_filled": 19,
+     "user_empty": null,
+     "walk": 19,
+     "span": 19,
+     "boxes": 24,
+     "walk_minus_filled": 0,
+     "walk_minus_all_trays": 0,
+     "column_reason": null,
+     "recessed": false
+    }
+   ]
+  },
+  {
+   "case": "warehouse image-4 (same 19 stack)",
+   "physical_stack": "S99-end",
+   "truth_source": "user confirmed 19 (reports/two-view-20260924/README.md:5-6); top of the stack is clipped in this photo (reports/warehouse-20260923/summary.json)",
+   "truth_kind": "user-reported, not physically recounted",
+   "walk_development_photo": true,
+   "detections": {
+    "response": "reports/staging-block-20261008/scan-99block-walk2.json",
+    "view": "left"
+   },
+   "photo_outcome": "accepted",
+   "gate_reasons": [],
+   "columns_in_scope": 1,
+   "stacks": [
+    {
+     "position": 1,
+     "user_filled": 19,
+     "user_empty": null,
+     "walk": 19,
+     "span": 19,
+     "boxes": 19,
+     "walk_minus_filled": 0,
+     "walk_minus_all_trays": 0,
+     "column_reason": null,
+     "recessed": false
+    }
+   ],
+   "detections_23sep_vs_9oct": {
+    "boxes_23sep": 19,
+    "boxes_9oct": 19,
+    "identical_boxes": true
+   }
+  },
+  {
+   "case": "img-46 single stack (391 px crop)",
+   "physical_stack": "S46",
+   "truth_source": "user-written 20 (label partly cut at the top)",
+   "truth_kind": "user-reported, not physically recounted",
+   "walk_development_photo": false,
+   "detections": {
+    "batch": "reports/field-labelled-20261007/raw/batch-16.json",
+    "view": "left"
+   },
+   "photo_outcome": "withheld_flagged",
+   "gate_reasons": [],
+   "columns_in_scope": 1,
+   "stacks": [
+    {
+     "position": 1,
+     "user_filled": 20,
+     "user_empty": null,
+     "walk": 19,
+     "span": 17,
+     "boxes": 18,
+     "walk_minus_filled": -1,
+     "walk_minus_all_trays": -1,
+     "column_reason": "layer counts disagree (span 17, walk 19); retake this face",
+     "recessed": false
+    }
+   ]
+  },
+  {
+   "case": "img-47 single stack of 7",
+   "physical_stack": "S47",
+   "truth_source": "user-written 7; empty tray stacks stand behind it",
+   "truth_kind": "user-reported, not physically recounted",
+   "walk_development_photo": false,
+   "detections": {
+    "batch": "reports/field-labelled-20261007/raw/batch-16.json",
+    "view": "right"
+   },
+   "photo_outcome": "accepted",
+   "gate_reasons": [],
+   "columns_in_scope": 1,
+   "stacks": [
+    {
+     "position": 1,
+     "user_filled": 7,
+     "user_empty": null,
+     "walk": 7,
+     "span": 7,
+     "boxes": 7,
+     "walk_minus_filled": 0,
+     "walk_minus_all_trays": 0,
+     "column_reason": null,
+     "recessed": false
+    }
+   ]
+  },
+  {
+   "case": "user-100 face inside img-44",
+   "physical_stack": "U100-1..5",
+   "truth_source": "user report, reports/user-100-tray-case-20260915/reference.json (not recounted)",
+   "truth_kind": "user-reported, not physically recounted",
+   "walk_development_photo": false,
+   "detections": {
+    "batch": "reports/field-labelled-20261007/raw/batch-15.json",
+    "view": "right"
+   },
+   "photo_outcome": "withheld_gate",
+   "gate_reasons": [
+    "stacks are too small in the frame (too far away)"
+   ],
+   "columns_in_scope": 5,
+   "stacks": [
+    {
+     "position": 1,
+     "user_filled": 20,
+     "user_empty": 0,
+     "walk": 16,
+     "span": 16,
+     "boxes": 15,
+     "walk_minus_filled": -4,
+     "walk_minus_all_trays": -4,
+     "column_reason": "camera looked down on the stack (spacing ratio 1.508); hold the phone level at mid-height",
+     "recessed": true
+    },
+    {
+     "position": 2,
+     "user_filled": 20,
+     "user_empty": 0,
+     "walk": 26,
+     "span": 16,
+     "boxes": 16,
+     "walk_minus_filled": 6,
+     "walk_minus_all_trays": 6,
+     "column_reason": "layer counts disagree (span 16, walk 26); retake this face",
+     "recessed": false
+    },
+    {
+     "position": 3,
+     "user_filled": 20,
+     "user_empty": 1,
+     "walk": 24,
+     "span": 16,
+     "boxes": 15,
+     "walk_minus_filled": 4,
+     "walk_minus_all_trays": 3,
+     "column_reason": "layer counts disagree (span 16, walk 24); retake this face",
+     "recessed": false
+    },
+    {
+     "position": 4,
+     "user_filled": 20,
+     "user_empty": 0,
+     "walk": 15,
+     "span": 16,
+     "boxes": 15,
+     "walk_minus_filled": -5,
+     "walk_minus_all_trays": -5,
+     "column_reason": null,
+     "recessed": false
+    },
+    {
+     "position": 5,
+     "user_filled": 20,
+     "user_empty": 0,
+     "walk": 14,
+     "span": 14,
+     "boxes": 14,
+     "walk_minus_filled": -6,
+     "walk_minus_all_trays": -6,
+     "column_reason": null,
+     "recessed": false
+    }
+   ]
+  }
+ ],
+ "per_stack_summary": {
+  "photos": 5,
+  "stack_observations": 9,
+  "physical_stacks": 8,
+  "walk_equals_user_filled": 3,
+  "within_1_of_user_filled": 4,
+  "accepted_observations": 3,
+  "accepted_and_equal": 3,
+  "accepted_physical_stacks": 2,
+  "accepted_from_walk_development_photos": 2,
+  "withheld_observations": 6,
+  "unassigned_cases": 0
+ },
+ "multi_view": [
+  {
+   "trio": "99-block substituted trio",
+   "r2_scans": [
+    "2a607d2d",
+    "1fdf2436",
+    "6705058b",
+    "d6d087ea",
+    "6fe33b1d",
+    "ffa2cafa",
+    "ecf634f0",
+    "17d51cb3",
+    "abe6bead"
+   ],
+   "faces": "STRAIGHT img-01 (front); LEFT warehouse image-4 and RIGHT img-32 are the SAME free end; the true left end stands against the wall",
+   "genuine": false,
+   "expected": "no exact result (a side face is substituted)",
+   "replays": [
+    {
+     "path": "reports/staging-block-20261008/scan-99block-a.json",
+     "recorded": "staging, saved 2026-10-09 08:22 IST (block model, span counter)",
+     "saved": {
+      "status": null,
+      "total_trays": null,
+      "observed_trays": 100,
+      "computed_trays": 0,
+      "width": 5,
+      "depth": 1,
+      "conflicts": 1,
+      "ambiguities": 0,
+      "capture_refused": []
+     },
+     "saved_walk_by_view": {
+      "left": [
+       null
+      ],
+      "right": [
+       null
+      ],
+      "straight": [
+       null,
+       null,
+       null,
+       null,
+       null
+      ]
+     },
+     "current_318eb04": {
+      "status": "estimated",
+      "total_trays": 99,
+      "observed_trays": 99,
+      "computed_trays": 0,
+      "width": 5,
+      "depth": 1,
+      "conflicts": 0,
+      "ambiguities": 1,
+      "capture_refused": []
+     },
+     "current_walk_by_view": {
+      "left": [
+       19
+      ],
+      "right": [
+       19
+      ],
+      "straight": [
+       20,
+       20,
+       20,
+       20,
+       19
+      ]
+     },
+     "current_conflict_reasons": [],
+     "current_ambiguities": [
+      {
+       "cell": [
+        0,
+        0
+       ],
+       "reason": "faces differ by one layer",
+       "straight_layers": 20,
+       "left_layers": 19,
+       "chosen": 20
+      }
+     ],
+     "current_recommended_view": "straight",
+     "exact_result_produced": false,
+     "total_shown": true,
+     "old_worker": {
+      "block": {
+       "status": null,
+       "total_trays": 99,
+       "observed_trays": 99,
+       "computed_trays": 0,
+       "width": 5,
+       "depth": 1,
+       "conflicts": 0,
+       "ambiguities": 0,
+       "capture_refused": []
+      },
+      "fully_observed": true,
+      "reproduces_saved": false
+     }
+    },
+    {
+     "path": "reports/staging-block-20261008/scan-99block-walk.json",
+     "recorded": "staging, saved 2026-10-09 11:30 IST (walk counter)",
+     "saved": {
+      "status": null,
+      "total_trays": null,
+      "observed_trays": 99,
+      "computed_trays": 0,
+      "width": 5,
+      "depth": 1,
+      "conflicts": 1,
+      "ambiguities": 0,
+      "capture_refused": []
+     },
+     "saved_walk_by_view": {
+      "left": [
+       19
+      ],
+      "right": [
+       23
+      ],
+      "straight": [
+       20,
+       20,
+       20,
+       20,
+       19
+      ]
+     },
+     "current_318eb04": {
+      "status": "estimated",
+      "total_trays": 99,
+      "observed_trays": 99,
+      "computed_trays": 0,
+      "width": 5,
+      "depth": 1,
+      "conflicts": 0,
+      "ambiguities": 1,
+      "capture_refused": []
+     },
+     "current_walk_by_view": {
+      "left": [
+       19
+      ],
+      "right": [
+       19
+      ],
+      "straight": [
+       20,
+       20,
+       20,
+       20,
+       19
+      ]
+     },
+     "current_conflict_reasons": [],
+     "current_ambiguities": [
+      {
+       "cell": [
+        0,
+        0
+       ],
+       "reason": "faces differ by one layer",
+       "straight_layers": 20,
+       "left_layers": 19,
+       "chosen": 20
+      }
+     ],
+     "current_recommended_view": "straight",
+     "exact_result_produced": false,
+     "total_shown": true,
+     "old_worker": {
+      "block": {
+       "status": null,
+       "total_trays": 99,
+       "observed_trays": 99,
+       "computed_trays": 0,
+       "width": 5,
+       "depth": 1,
+       "conflicts": 0,
+       "ambiguities": 0,
+       "capture_refused": []
+      },
+      "fully_observed": true,
+      "reproduces_saved": false
+     }
+    },
+    {
+     "path": "reports/staging-block-20261008/scan-99block-walk2.json",
+     "recorded": "staging, saved 2026-10-09 11:34 IST (walk counter)",
+     "saved": {
+      "status": null,
+      "total_trays": 99,
+      "observed_trays": 99,
+      "computed_trays": 0,
+      "width": 5,
+      "depth": 1,
+      "conflicts": 0,
+      "ambiguities": 0,
+      "capture_refused": []
+     },
+     "saved_walk_by_view": {
+      "left": [
+       19
+      ],
+      "right": [
+       19
+      ],
+      "straight": [
+       20,
+       20,
+       20,
+       20,
+       19
+      ]
+     },
+     "current_318eb04": {
+      "status": "estimated",
+      "total_trays": 99,
+      "observed_trays": 99,
+      "computed_trays": 0,
+      "width": 5,
+      "depth": 1,
+      "conflicts": 0,
+      "ambiguities": 1,
+      "capture_refused": []
+     },
+     "current_walk_by_view": {
+      "left": [
+       19
+      ],
+      "right": [
+       19
+      ],
+      "straight": [
+       20,
+       20,
+       20,
+       20,
+       19
+      ]
+     },
+     "current_conflict_reasons": [],
+     "current_ambiguities": [
+      {
+       "cell": [
+        0,
+        0
+       ],
+       "reason": "faces differ by one layer",
+       "straight_layers": 20,
+       "left_layers": 19,
+       "chosen": 20
+      }
+     ],
+     "current_recommended_view": "straight",
+     "exact_result_produced": false,
+     "total_shown": true,
+     "old_worker": {
+      "block": {
+       "status": null,
+       "total_trays": 99,
+       "observed_trays": 99,
+       "computed_trays": 0,
+       "width": 5,
+       "depth": 1,
+       "conflicts": 0,
+       "ambiguities": 0,
+       "capture_refused": []
+      },
+      "fully_observed": true,
+      "reproduces_saved": true
+     }
+    },
+    {
+     "path": "reports/eval-20261015/staging47-replay/6fe33b1d-4605-4b53-84f4-86bff313c1f3.json",
+     "recorded": "staging 47cb2378 (0.4.11 Worker), live replay 2026-10-14 11:51 IST of the phone scan 6fe33b1d (app re-encodes; LEFT has 22 boxes, not 19)",
+     "saved": {
+      "status": "estimated",
+      "total_trays": 99,
+      "observed_trays": 99,
+      "computed_trays": 0,
+      "width": 5,
+      "depth": 1,
+      "conflicts": 0,
+      "ambiguities": 1,
+      "capture_refused": []
+     },
+     "saved_walk_by_view": {
+      "left": [
+       19
+      ],
+      "right": [
+       19
+      ],
+      "straight": [
+       20,
+       20,
+       20,
+       20,
+       19
+      ]
+     },
+     "current_318eb04": {
+      "status": "estimated",
+      "total_trays": 99,
+      "observed_trays": 99,
+      "computed_trays": 0,
+      "width": 5,
+      "depth": 1,
+      "conflicts": 0,
+      "ambiguities": 1,
+      "capture_refused": []
+     },
+     "current_walk_by_view": {
+      "left": [
+       19
+      ],
+      "right": [
+       19
+      ],
+      "straight": [
+       20,
+       20,
+       20,
+       20,
+       19
+      ]
+     },
+     "current_conflict_reasons": [],
+     "current_ambiguities": [
+      {
+       "cell": [
+        0,
+        0
+       ],
+       "reason": "faces differ by one layer",
+       "straight_layers": 20,
+       "left_layers": 19,
+       "chosen": 20
+      }
+     ],
+     "current_recommended_view": "straight",
+     "exact_result_produced": false,
+     "total_shown": true,
+     "matches_live_47cb2378": true,
+     "old_worker": {
+      "block": {
+       "status": null,
+       "total_trays": 99,
+       "observed_trays": 99,
+       "computed_trays": 0,
+       "width": 5,
+       "depth": 1,
+       "conflicts": 0,
+       "ambiguities": 0,
+       "capture_refused": []
+      },
+      "fully_observed": true,
+      "reproduces_saved": false
+     }
+    }
+   ]
+  },
+  {
+   "trio": "mechanics trio",
+   "r2_scans": [
+    "eaa108f5",
+    "445c3010",
+    "f3dbf7c6",
+    "d6c2c77a",
+    "dfaf5f78"
+   ],
+   "faces": "STRAIGHT img-19, LEFT img-30, RIGHT img-02: three different blocks",
+   "genuine": false,
+   "expected": "no exact result (three unrelated blocks; MECH-DONE 399 is not truth)",
+   "replays": [
+    {
+     "path": "reports/staging-block-20261008/scan-img19-30-02.json",
+     "recorded": "staging a012c14e, saved 2026-10-08 21:16 IST (span counter)",
+     "saved": {
+      "status": null,
+      "total_trays": 400,
+      "observed_trays": 220,
+      "computed_trays": 180,
+      "width": 5,
+      "depth": 4,
+      "conflicts": 0,
+      "ambiguities": 0,
+      "capture_refused": []
+     },
+     "saved_walk_by_view": {
+      "left": [
+       null,
+       null,
+       null,
+       null
+      ],
+      "right": [
+       null,
+       null,
+       null,
+       null
+      ],
+      "straight": [
+       null,
+       null,
+       null,
+       null,
+       null
+      ]
+     },
+     "current_318eb04": {
+      "status": "estimated",
+      "total_trays": 399,
+      "observed_trays": 219,
+      "computed_trays": 180,
+      "width": 5,
+      "depth": 4,
+      "conflicts": 0,
+      "ambiguities": 1,
+      "capture_refused": []
+     },
+     "current_walk_by_view": {
+      "left": [
+       20,
+       19,
+       20,
+       19
+      ],
+      "right": [
+       20,
+       20,
+       20,
+       20
+      ],
+      "straight": [
+       20,
+       20,
+       20,
+       20,
+       20
+      ]
+     },
+     "current_conflict_reasons": [],
+     "current_ambiguities": [
+      {
+       "cell": [
+        0,
+        0
+       ],
+       "reason": "faces differ by one layer",
+       "straight_layers": 20,
+       "left_layers": 19,
+       "chosen": 20
+      }
+     ],
+     "current_recommended_view": "straight",
+     "exact_result_produced": false,
+     "total_shown": true,
+     "old_worker": {
+      "block": {
+       "status": null,
+       "total_trays": 399,
+       "observed_trays": 219,
+       "computed_trays": 180,
+       "width": 5,
+       "depth": 4,
+       "conflicts": 0,
+       "ambiguities": 0,
+       "capture_refused": []
+      },
+      "fully_observed": false,
+      "reproduces_saved": false
+     }
+    },
+    {
+     "path": "reports/staging-block-20261008/scan-mech-walk.json",
+     "recorded": "staging, saved 2026-10-09 11:30 IST (walk counter)",
+     "saved": {
+      "status": null,
+      "total_trays": 399,
+      "observed_trays": 219,
+      "computed_trays": 180,
+      "width": 5,
+      "depth": 4,
+      "conflicts": 0,
+      "ambiguities": 0,
+      "capture_refused": []
+     },
+     "saved_walk_by_view": {
+      "left": [
+       20,
+       19,
+       20,
+       19
+      ],
+      "right": [
+       20,
+       20,
+       20,
+       20
+      ],
+      "straight": [
+       20,
+       20,
+       20,
+       20,
+       20
+      ]
+     },
+     "current_318eb04": {
+      "status": "estimated",
+      "total_trays": 399,
+      "observed_trays": 219,
+      "computed_trays": 180,
+      "width": 5,
+      "depth": 4,
+      "conflicts": 0,
+      "ambiguities": 1,
+      "capture_refused": []
+     },
+     "current_walk_by_view": {
+      "left": [
+       20,
+       19,
+       20,
+       19
+      ],
+      "right": [
+       20,
+       20,
+       20,
+       20
+      ],
+      "straight": [
+       20,
+       20,
+       20,
+       20,
+       20
+      ]
+     },
+     "current_conflict_reasons": [],
+     "current_ambiguities": [
+      {
+       "cell": [
+        0,
+        0
+       ],
+       "reason": "faces differ by one layer",
+       "straight_layers": 20,
+       "left_layers": 19,
+       "chosen": 20
+      }
+     ],
+     "current_recommended_view": "straight",
+     "exact_result_produced": false,
+     "total_shown": true,
+     "old_worker": {
+      "block": {
+       "status": null,
+       "total_trays": 399,
+       "observed_trays": 219,
+       "computed_trays": 180,
+       "width": 5,
+       "depth": 4,
+       "conflicts": 0,
+       "ambiguities": 0,
+       "capture_refused": []
+      },
+      "fully_observed": false,
+      "reproduces_saved": true
+     }
+    }
+   ]
+  },
+  {
+   "trio": "30aca6a1 (13 Oct)",
+   "r2_scans": [
+    "30aca6a1",
+    "1d37b3d7",
+    "7a8bbb85"
+   ],
+   "faces": "three unrelated views; STRAIGHT is 9b4c783e's front from far",
+   "genuine": false,
+   "expected": "no exact result",
+   "replays": [
+    {
+     "path": "reports/field-scans-20261013/replay/30aca6a1-56da-4564-ac09-93de66c4404d.json",
+     "recorded": "staging f5776f0d (pre-0.4.11 Worker), 2026-10-14",
+     "saved": {
+      "status": null,
+      "total_trays": null,
+      "observed_trays": 76,
+      "computed_trays": 60,
+      "width": 4,
+      "depth": 3,
+      "conflicts": 3,
+      "ambiguities": 0,
+      "capture_refused": [
+       "left",
+       "right",
+       "straight"
+      ]
+     },
+     "saved_walk_by_view": {
+      "left": [
+       16,
+       27,
+       16
+      ],
+      "right": [
+       14,
+       14,
+       14
+      ],
+      "straight": [
+       16,
+       15,
+       15,
+       13
+      ]
+     },
+     "current_318eb04": {
+      "status": "needs_view",
+      "total_trays": null,
+      "observed_trays": 90,
+      "computed_trays": 60,
+      "width": 4,
+      "depth": 3,
+      "conflicts": 2,
+      "ambiguities": 0,
+      "capture_refused": [
+       "left",
+       "right",
+       "straight"
+      ]
+     },
+     "current_walk_by_view": {
+      "left": [
+       16,
+       27,
+       16
+      ],
+      "right": [
+       14,
+       14,
+       14
+      ],
+      "straight": [
+       16,
+       15,
+       15,
+       13
+      ]
+     },
+     "current_conflict_reasons": [
+      "corner stack is set back on one face only (STRAIGHT vs RIGHT)",
+      "LEFT: layer counts disagree (span 16, walk 27); retake this face"
+     ],
+     "current_ambiguities": [],
+     "current_recommended_view": "right",
+     "exact_result_produced": false,
+     "total_shown": false,
+     "old_worker": {
+      "block": {
+       "status": null,
+       "total_trays": null,
+       "observed_trays": 76,
+       "computed_trays": 60,
+       "width": 4,
+       "depth": 3,
+       "conflicts": 3,
+       "ambiguities": 0,
+       "capture_refused": [
+        "left",
+        "right",
+        "straight"
+       ]
+      },
+      "fully_observed": false,
+      "reproduces_saved": true
+     }
+    },
+    {
+     "path": "reports/eval-20261015/staging47-replay/30aca6a1-56da-4564-ac09-93de66c4404d.json",
+     "recorded": "staging 47cb2378 (0.4.11 Worker), live replay 2026-10-14 11:53 IST",
+     "saved": {
+      "status": "needs_view",
+      "total_trays": null,
+      "observed_trays": 90,
+      "computed_trays": 60,
+      "width": 4,
+      "depth": 3,
+      "conflicts": 2,
+      "ambiguities": 0,
+      "capture_refused": [
+       "left",
+       "right",
+       "straight"
+      ]
+     },
+     "saved_walk_by_view": {
+      "left": [
+       16,
+       27,
+       16
+      ],
+      "right": [
+       14,
+       14,
+       14
+      ],
+      "straight": [
+       16,
+       15,
+       15,
+       13
+      ]
+     },
+     "current_318eb04": {
+      "status": "needs_view",
+      "total_trays": null,
+      "observed_trays": 90,
+      "computed_trays": 60,
+      "width": 4,
+      "depth": 3,
+      "conflicts": 2,
+      "ambiguities": 0,
+      "capture_refused": [
+       "left",
+       "right",
+       "straight"
+      ]
+     },
+     "current_walk_by_view": {
+      "left": [
+       16,
+       27,
+       16
+      ],
+      "right": [
+       14,
+       14,
+       14
+      ],
+      "straight": [
+       16,
+       15,
+       15,
+       13
+      ]
+     },
+     "current_conflict_reasons": [
+      "corner stack is set back on one face only (STRAIGHT vs RIGHT)",
+      "LEFT: layer counts disagree (span 16, walk 27); retake this face"
+     ],
+     "current_ambiguities": [],
+     "current_recommended_view": "right",
+     "exact_result_produced": false,
+     "total_shown": false,
+     "matches_live_47cb2378": true,
+     "old_worker": {
+      "block": {
+       "status": null,
+       "total_trays": null,
+       "observed_trays": 76,
+       "computed_trays": 60,
+       "width": 4,
+       "depth": 3,
+       "conflicts": 3,
+       "ambiguities": 0,
+       "capture_refused": [
+        "left",
+        "right",
+        "straight"
+       ]
+      },
+      "fully_observed": false,
+      "reproduces_saved": false
+     }
+    }
+   ]
+  },
+  {
+   "trio": "ef823816 (13 Oct)",
+   "r2_scans": [
+    "ef823816",
+    "705b5860",
+    "a578b58d"
+   ],
+   "faces": "5 x 4 room-corner block; LEFT and RIGHT are the same right-side face",
+   "genuine": false,
+   "expected": "no exact result (duplicated side face)",
+   "replays": [
+    {
+     "path": "reports/field-scans-20261013/replay/ef823816-899d-4e97-9614-10f1ec47c25a.json",
+     "recorded": "staging f5776f0d (pre-0.4.11 Worker), 2026-10-14",
+     "saved": {
+      "status": null,
+      "total_trays": null,
+      "observed_trays": 89,
+      "computed_trays": 144,
+      "width": 5,
+      "depth": 4,
+      "conflicts": 10,
+      "ambiguities": 0,
+      "capture_refused": [
+       "left",
+       "straight"
+      ]
+     },
+     "saved_walk_by_view": {
+      "left": [
+       16,
+       22,
+       27,
+       15
+      ],
+      "right": [
+       23,
+       21,
+       19,
+       19
+      ],
+      "straight": [
+       10,
+       19,
+       18,
+       10,
+       12
+      ]
+     },
+     "current_318eb04": {
+      "status": "needs_view",
+      "total_trays": null,
+      "observed_trays": 38,
+      "computed_trays": 162,
+      "width": 5,
+      "depth": 4,
+      "conflicts": 11,
+      "ambiguities": 0,
+      "capture_refused": [
+       "left",
+       "straight"
+      ]
+     },
+     "current_walk_by_view": {
+      "left": [
+       16,
+       22,
+       27,
+       15
+      ],
+      "right": [
+       20,
+       21,
+       19,
+       19
+      ],
+      "straight": [
+       10,
+       19,
+       18,
+       10,
+       9
+      ]
+     },
+     "current_conflict_reasons": [
+      "STRAIGHT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+      "LEFT: layer counts disagree (span 18, walk 15); retake this face",
+      "STRAIGHT: layer counts disagree (span 14, walk 19); retake this face",
+      "STRAIGHT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+      "STRAIGHT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+      "STRAIGHT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+      "RIGHT: boxes are missing over several layers of this stack; retake this face",
+      "LEFT: layer counts disagree (span 16, walk 27); retake this face",
+      "LEFT: layer counts disagree (span 14, walk 22); retake this face",
+      "LEFT: layer counts disagree (span 18, walk 16); retake this face",
+      "RIGHT: camera looked down on the stack (spacing ratio 1.765); hold the phone level at mid-height"
+     ],
+     "current_ambiguities": [],
+     "current_recommended_view": "straight",
+     "exact_result_produced": false,
+     "total_shown": false,
+     "old_worker": {
+      "block": {
+       "status": null,
+       "total_trays": null,
+       "observed_trays": 89,
+       "computed_trays": 144,
+       "width": 5,
+       "depth": 4,
+       "conflicts": 10,
+       "ambiguities": 0,
+       "capture_refused": [
+        "left",
+        "straight"
+       ]
+      },
+      "fully_observed": false,
+      "reproduces_saved": true
+     }
+    },
+    {
+     "path": "reports/eval-20261015/staging47-replay/ef823816-899d-4e97-9614-10f1ec47c25a.json",
+     "recorded": "staging 47cb2378 (0.4.11 Worker), live replay 2026-10-14 11:53 IST",
+     "saved": {
+      "status": "needs_view",
+      "total_trays": null,
+      "observed_trays": 38,
+      "computed_trays": 162,
+      "width": 5,
+      "depth": 4,
+      "conflicts": 11,
+      "ambiguities": 0,
+      "capture_refused": [
+       "left",
+       "straight"
+      ]
+     },
+     "saved_walk_by_view": {
+      "left": [
+       16,
+       22,
+       27,
+       15
+      ],
+      "right": [
+       20,
+       21,
+       19,
+       19
+      ],
+      "straight": [
+       10,
+       19,
+       18,
+       10,
+       9
+      ]
+     },
+     "current_318eb04": {
+      "status": "needs_view",
+      "total_trays": null,
+      "observed_trays": 38,
+      "computed_trays": 162,
+      "width": 5,
+      "depth": 4,
+      "conflicts": 11,
+      "ambiguities": 0,
+      "capture_refused": [
+       "left",
+       "straight"
+      ]
+     },
+     "current_walk_by_view": {
+      "left": [
+       16,
+       22,
+       27,
+       15
+      ],
+      "right": [
+       20,
+       21,
+       19,
+       19
+      ],
+      "straight": [
+       10,
+       19,
+       18,
+       10,
+       9
+      ]
+     },
+     "current_conflict_reasons": [
+      "STRAIGHT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+      "LEFT: layer counts disagree (span 18, walk 15); retake this face",
+      "STRAIGHT: layer counts disagree (span 14, walk 19); retake this face",
+      "STRAIGHT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+      "STRAIGHT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+      "STRAIGHT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+      "RIGHT: boxes are missing over several layers of this stack; retake this face",
+      "LEFT: layer counts disagree (span 16, walk 27); retake this face",
+      "LEFT: layer counts disagree (span 14, walk 22); retake this face",
+      "LEFT: layer counts disagree (span 18, walk 16); retake this face",
+      "RIGHT: camera looked down on the stack (spacing ratio 1.765); hold the phone level at mid-height"
+     ],
+     "current_ambiguities": [],
+     "current_recommended_view": "straight",
+     "exact_result_produced": false,
+     "total_shown": false,
+     "matches_live_47cb2378": true,
+     "old_worker": {
+      "block": {
+       "status": null,
+       "total_trays": null,
+       "observed_trays": 89,
+       "computed_trays": 144,
+       "width": 5,
+       "depth": 4,
+       "conflicts": 10,
+       "ambiguities": 0,
+       "capture_refused": [
+        "left",
+        "straight"
+       ]
+      },
+      "fully_observed": false,
+      "reproduces_saved": false
+     }
+    }
+   ]
+  },
+  {
+   "trio": "9b4c783e (13 Oct)",
+   "r2_scans": [
+    "9b4c783e",
+    "88ec003b",
+    "2488facf"
+   ],
+   "faces": "plausible genuine three-face set of one 4 x 3 block (visual only)",
+   "genuine": true,
+   "expected": "no physical count exists; assistant hand reading from photos 164 (not physical)",
+   "replays": [
+    {
+     "path": "reports/field-scans-20261013/replay/9b4c783e-7edb-43ed-b7d2-2f8eed889f60.json",
+     "recorded": "staging f5776f0d (pre-0.4.11 Worker), 2026-10-14",
+     "saved": {
+      "status": null,
+      "total_trays": 165,
+      "observed_trays": 105,
+      "computed_trays": 60,
+      "width": 4,
+      "depth": 3,
+      "conflicts": 0,
+      "ambiguities": 0,
+      "capture_refused": []
+     },
+     "saved_walk_by_view": {
+      "left": [
+       16,
+       15,
+       16
+      ],
+      "right": [
+       15,
+       14,
+       15
+      ],
+      "straight": [
+       15,
+       15,
+       15,
+       14
+      ]
+     },
+     "current_318eb04": {
+      "status": "estimated",
+      "total_trays": 165,
+      "observed_trays": 105,
+      "computed_trays": 60,
+      "width": 4,
+      "depth": 3,
+      "conflicts": 0,
+      "ambiguities": 1,
+      "capture_refused": []
+     },
+     "current_walk_by_view": {
+      "left": [
+       16,
+       15,
+       16
+      ],
+      "right": [
+       15,
+       14,
+       15
+      ],
+      "straight": [
+       15,
+       15,
+       15,
+       14
+      ]
+     },
+     "current_conflict_reasons": [],
+     "current_ambiguities": [
+      {
+       "cell": [
+        0,
+        0
+       ],
+       "reason": "faces differ by one layer",
+       "straight_layers": 15,
+       "left_layers": 16,
+       "chosen": 15
+      }
+     ],
+     "current_recommended_view": "straight",
+     "exact_result_produced": false,
+     "total_shown": true,
+     "old_worker": {
+      "block": {
+       "status": null,
+       "total_trays": 165,
+       "observed_trays": 105,
+       "computed_trays": 60,
+       "width": 4,
+       "depth": 3,
+       "conflicts": 0,
+       "ambiguities": 0,
+       "capture_refused": []
+      },
+      "fully_observed": false,
+      "reproduces_saved": true
+     }
+    },
+    {
+     "path": "reports/eval-20261015/staging47-replay/9b4c783e-7edb-43ed-b7d2-2f8eed889f60.json",
+     "recorded": "staging 47cb2378 (0.4.11 Worker), live replay 2026-10-14 11:52 IST",
+     "saved": {
+      "status": "estimated",
+      "total_trays": 165,
+      "observed_trays": 105,
+      "computed_trays": 60,
+      "width": 4,
+      "depth": 3,
+      "conflicts": 0,
+      "ambiguities": 1,
+      "capture_refused": []
+     },
+     "saved_walk_by_view": {
+      "left": [
+       16,
+       15,
+       16
+      ],
+      "right": [
+       15,
+       14,
+       15
+      ],
+      "straight": [
+       15,
+       15,
+       15,
+       14
+      ]
+     },
+     "current_318eb04": {
+      "status": "estimated",
+      "total_trays": 165,
+      "observed_trays": 105,
+      "computed_trays": 60,
+      "width": 4,
+      "depth": 3,
+      "conflicts": 0,
+      "ambiguities": 1,
+      "capture_refused": []
+     },
+     "current_walk_by_view": {
+      "left": [
+       16,
+       15,
+       16
+      ],
+      "right": [
+       15,
+       14,
+       15
+      ],
+      "straight": [
+       15,
+       15,
+       15,
+       14
+      ]
+     },
+     "current_conflict_reasons": [],
+     "current_ambiguities": [
+      {
+       "cell": [
+        0,
+        0
+       ],
+       "reason": "faces differ by one layer",
+       "straight_layers": 15,
+       "left_layers": 16,
+       "chosen": 15
+      }
+     ],
+     "current_recommended_view": "straight",
+     "exact_result_produced": false,
+     "total_shown": true,
+     "matches_live_47cb2378": true,
+     "old_worker": {
+      "block": {
+       "status": null,
+       "total_trays": 165,
+       "observed_trays": 105,
+       "computed_trays": 60,
+       "width": 4,
+       "depth": 3,
+       "conflicts": 0,
+       "ambiguities": 0,
+       "capture_refused": []
+      },
+      "fully_observed": false,
+      "reproduces_saved": false
+     }
+    }
+   ]
+  },
+  {
+   "trio": "f81c04d7 (13 Oct)",
+   "r2_scans": [
+    "f81c04d7",
+    "7d34c100",
+    "1f668334"
+   ],
+   "faces": "WhatsApp label photos: LEFT img-50, RIGHT img-41, STRAIGHT a crop of img-41",
+   "genuine": false,
+   "expected": "no exact result",
+   "replays": [
+    {
+     "path": "reports/field-scans-20261013/replay/f81c04d7-5fec-4d64-aa8c-54098abf2415.json",
+     "recorded": "staging f5776f0d (pre-0.4.11 Worker), 2026-10-14",
+     "saved": {
+      "status": null,
+      "total_trays": null,
+      "observed_trays": 80,
+      "computed_trays": 20,
+      "width": 2,
+      "depth": 3,
+      "conflicts": 4,
+      "ambiguities": 0,
+      "capture_refused": [
+       "right"
+      ]
+     },
+     "saved_walk_by_view": {
+      "left": [
+       19,
+       20
+      ],
+      "right": [
+       4,
+       20,
+       20
+      ],
+      "straight": [
+       20,
+       20
+      ]
+     },
+     "current_318eb04": {
+      "status": "needs_view",
+      "total_trays": null,
+      "observed_trays": 40,
+      "computed_trays": 20,
+      "width": 2,
+      "depth": 3,
+      "conflicts": 4,
+      "ambiguities": 0,
+      "capture_refused": [
+       "right"
+      ]
+     },
+     "current_walk_by_view": {
+      "left": [
+       19,
+       20
+      ],
+      "right": [
+       4,
+       20,
+       20
+      ],
+      "straight": [
+       20,
+       20
+      ]
+     },
+     "current_conflict_reasons": [
+      "depth differs between LEFT and RIGHT faces",
+      "LEFT: layer counts disagree (span 18, walk 20); retake this face",
+      "RIGHT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+      "LEFT: layer counts disagree (span 16, walk 19); retake this face"
+     ],
+     "current_ambiguities": [],
+     "current_recommended_view": "right",
+     "exact_result_produced": false,
+     "total_shown": false,
+     "old_worker": {
+      "block": {
+       "status": null,
+       "total_trays": null,
+       "observed_trays": 80,
+       "computed_trays": 20,
+       "width": 2,
+       "depth": 3,
+       "conflicts": 4,
+       "ambiguities": 0,
+       "capture_refused": [
+        "right"
+       ]
+      },
+      "fully_observed": false,
+      "reproduces_saved": true
+     }
+    },
+    {
+     "path": "reports/eval-20261015/staging47-replay/f81c04d7-5fec-4d64-aa8c-54098abf2415.json",
+     "recorded": "staging 47cb2378 (0.4.11 Worker), live replay 2026-10-14 11:53 IST",
+     "saved": {
+      "status": "needs_view",
+      "total_trays": null,
+      "observed_trays": 40,
+      "computed_trays": 20,
+      "width": 2,
+      "depth": 3,
+      "conflicts": 4,
+      "ambiguities": 0,
+      "capture_refused": [
+       "right"
+      ]
+     },
+     "saved_walk_by_view": {
+      "left": [
+       19,
+       20
+      ],
+      "right": [
+       4,
+       20,
+       20
+      ],
+      "straight": [
+       20,
+       20
+      ]
+     },
+     "current_318eb04": {
+      "status": "needs_view",
+      "total_trays": null,
+      "observed_trays": 40,
+      "computed_trays": 20,
+      "width": 2,
+      "depth": 3,
+      "conflicts": 4,
+      "ambiguities": 0,
+      "capture_refused": [
+       "right"
+      ]
+     },
+     "current_walk_by_view": {
+      "left": [
+       19,
+       20
+      ],
+      "right": [
+       4,
+       20,
+       20
+      ],
+      "straight": [
+       20,
+       20
+      ]
+     },
+     "current_conflict_reasons": [
+      "depth differs between LEFT and RIGHT faces",
+      "LEFT: layer counts disagree (span 18, walk 20); retake this face",
+      "RIGHT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+      "LEFT: layer counts disagree (span 16, walk 19); retake this face"
+     ],
+     "current_ambiguities": [],
+     "current_recommended_view": "right",
+     "exact_result_produced": false,
+     "total_shown": false,
+     "matches_live_47cb2378": true,
+     "old_worker": {
+      "block": {
+       "status": null,
+       "total_trays": null,
+       "observed_trays": 80,
+       "computed_trays": 20,
+       "width": 2,
+       "depth": 3,
+       "conflicts": 4,
+       "ambiguities": 0,
+       "capture_refused": [
+        "right"
+       ]
+      },
+      "fully_observed": false,
+      "reproduces_saved": false
+     }
+    }
+   ]
+  }
+ ],
+ "multi_view_not_replayed": [
+  {
+   "trio": "warehouse/two-view pairs (R2 145e7b92, d6e19418, 77824bf2, 6c3c8e3a)",
+   "why": "no saved block-model response in the repo"
+  },
+  {
+   "trio": "production-20260918 (MUTAA image-04/02/01)",
+   "why": "no saved block-model response"
+  },
+  {
+   "trio": "manual-reference live check 2026-09-13",
+   "why": "no saved block-model response"
+  }
+ ],
+ "js_parity": {
+  "module": "index-318eb04.mjs",
+  "cases": 38,
+  "mismatches": []
+ },
+ "old_worker": {
+  "module": "index-1e8591e.mjs"
+ }
+}

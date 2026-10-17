@@ -38,7 +38,9 @@
         "MAX_VIEW_COUNT_RATIO": "1.25",
         "EGGS_PER_TRAY": "30",
         "RECONSTRUCTION_ENABLED": "true",
-        "VISION_SERVICE_URL": "https://e3mkfxljv7ja42ygklbacg3fge0cibxg.lambda-url.ap-south-1.on.aws"
+        "VISION_SERVICE_URL": "https://e3mkfxljv7ja42ygklbacg3fge0cibxg.lambda-url.ap-south-1.on.aws",
+        "AUTH_MODE": "observe",
+        "STATE_PREFIX": "state/staging/"
       }
     }
   }

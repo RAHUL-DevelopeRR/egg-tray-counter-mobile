@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'block_result.dart';
 
 /// The operator's on-site count for one stack of a scanned block.
@@ -71,15 +73,23 @@ class ManualCount {
     required this.createdAt,
     this.appTotal,
     this.submitted = false,
+    this.countId,
   });
 
   final String scanId;
   final String blockId;
   final List<ManualCountCell> cells;
   final String notes;
+
+  /// When the operator saved this count; the server keeps the newest one as
+  /// the scan's latest count, so a late retry cannot replace a correction.
   final DateTime createdAt;
   final int? appTotal;
   final bool submitted;
+
+  /// One UUID per operator save, the same on transport retries; a
+  /// correction is a new id. The server stores each id once.
+  final String? countId;
 
   int get filledTotal => cells.fold(0, (s, c) => s + c.filled);
   int get emptyTotal => cells.fold(0, (s, c) => s + c.empty);
@@ -90,17 +100,33 @@ class ManualCount {
     List<ManualCountCell>? cells,
     String? notes,
     bool? submitted,
+    String? countId,
+    DateTime? createdAt,
   }) => ManualCount(
     scanId: scanId,
     blockId: blockId ?? this.blockId,
     cells: cells ?? this.cells,
     notes: notes ?? this.notes,
-    createdAt: createdAt,
+    createdAt: createdAt ?? this.createdAt,
     appTotal: appTotal,
     submitted: submitted ?? this.submitted,
+    countId: countId ?? this.countId,
   );
 
+  /// Whether [other] records the same counts (a resend of the same save).
+  bool sameCountsAs(ManualCount other) =>
+      blockId == other.blockId &&
+      notes == other.notes &&
+      jsonEncode(cells.map((c) => c.toJson()).toList()) ==
+          jsonEncode(other.cells.map((c) => c.toJson()).toList());
+
   Map<String, dynamic> toJson({String? appVersion}) => {
+    'count_id': ?countId,
+    // Millisecond precision, the most every ISO parser accepts.
+    'created_at': DateTime.fromMillisecondsSinceEpoch(
+      createdAt.millisecondsSinceEpoch,
+      isUtc: true,
+    ).toIso8601String(),
     'block_id': blockId,
     'cells': cells.map((c) => c.toJson()).toList(growable: false),
     'notes': notes,
