@@ -1,3 +1,41 @@
+> Start with docs/WAREHOUSE_3D_ACCEPTANCE_PLAN.md and latest PROGRESS.md.
+> The 2026-09-23 task requests synthetic training, bands, calibrated 3D identity,
+> occupancy and warehouse coverage. These are not all implemented or deployed.
+> Preserve unknown totals and distinguish extrapolated from observed stock.
+
+> Historical checkpoint (2026-09-17): local candidate revision `candidate-20260917`.
+> Read `reports/candidate-20260917/README.md` and the latest PROGRESS/context entries.
+> Regional quality, structured recapture, strict schemas, shared-stack provenance
+> and stronger provisional matching implemented. Synthetic 200/180/195 pass;
+> 65 backend tests and 13 Worker tests passed, plus focused final checks.
+> 35 archived images replayed, 106 proposed faces, no new RF calls or physical truth.
+> Real correspondence/occupancy remain unresolved. Worker encoding/logging changes
+> are local only. No deployment, training or APK rebuild; APK stays 0.2.2+5.
+> Next: confirm a same-scene triplet and independent per-stack truth, then calibrate
+> geometry/occupancy/quality acceptance before hosted integration and Android work.
+
+> Latest checkpoint (2026-09-16): the active work is the **local MUTAA 3D/band
+> candidate**, documented in `docs/3D_BEAM_COUNTING_ARCHITECTURE.md` and
+> `reports/mutaa-20260916/README.md`. 35 originals have fresh V2 results and
+> automatic band/ROI evidence; real 3D identity and eligible totals remain
+> unresolved. 62 Python tests and 12 Worker tests pass. APK remains 0.2.2+5;
+> latest recorded live Worker is ab67cd59-3f4e-4628-a0fa-d085f56a3fe8.
+> No new deployment, APK or retraining. Earlier deployment/training priorities
+> below are historical and do not override the current research-only scope.
+> Read the latest PROGRESS.md and context.md entries first.
+
+# Current handover — 2026-09-18
+
+Read AGENTS.md, PROGRESS.md, context.md, previous_context.md and the
+live-capture section of docs/COUNTING_EXECUTION_PLAN.md before changing code.
+The latest committed source is the diagnostic candidate at 563fe15; there is
+no tracked live lighting/orientation/preview patch from the interrupted
+subtasks. ADB was restarted after the user reported a connected phone, but
+adb devices -l returned no serial, so no device scan or APK-log analysis is
+verified. Reconnect and authorize the phone first. Preserve the no-ID baseline
+route, do not claim exact hybrid totals, and publish tests plus exact device
+evidence before calling a staging APK or deployment complete.
+
 # AI Continuation Prompt: Egg Tray Counter
 
 Copy and paste the block below into any AI agent (Antigravity, Cursor, Claude Code, ChatGPT, or OpenAI Codex when limits reset) to resume this project seamlessly:
@@ -17,3 +55,12 @@ https://github.com/RAHUL-DevelopeRR/egg-tray-counter-mobile.git
 2. Once deployed, verify that the mobile app photo mode can communicate with the updated live endpoint.
 3. Advance the dataset expansion pipeline in model-improvement/09-data-expansion/ for warehouse stack-face retraining.
 ```
+# Latest handoff: 2026-09-23 photo uploads
+
+Read latest PROGRESS.md first. 0.3.3+9 adds native JPEG/PNG selection for LEFT,
+RIGHT and STRAIGHT alongside live camera/torch. Same backend, no verified upload
+pose, no new counting accuracy claim. Test native picker/upload on Android.
+Prior scan input images were not recovered: Worker does not archive images;
+connected Redmi private cache is inaccessible. Two gallery photos of old result
+screens were copied into ignored work/phone-photo-recovery-20260923; they are
+not original tray inputs. User must select surviving originals or capture anew.

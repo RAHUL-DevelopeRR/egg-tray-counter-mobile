@@ -1,0 +1,36 @@
+{
+  "staging": {
+    "http": 200,
+    "body": {
+      "status": "ok",
+      "scan_contract": "cell_identity_v1",
+      "scan_contracts": [
+        "cell_identity_v1",
+        "model_spatial_v1",
+        "reconstruct_v1"
+      ],
+      "hybrid_ready": false
+    }
+  },
+  "production": {
+    "http": 200,
+    "body": {
+      "status": "ok",
+      "scan_contract": "cell_identity_v1",
+      "scan_contracts": [
+        "cell_identity_v1",
+        "model_spatial_v1"
+      ],
+      "hybrid_ready": false
+    }
+  },
+  "aws": {
+    "http": 200,
+    "body": {
+      "status": "ok",
+      "mode": "diagnostic_only",
+      "inventory_verification_ready": false,
+      "reconstruction_contract": "two_view_sfm_diagnostic_v1"
+    }
+  }
+}

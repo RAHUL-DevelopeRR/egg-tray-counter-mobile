@@ -1,0 +1,90 @@
+[
+  {
+    "pair": "wide-positive",
+    "paths": [
+      "reports\\warehouse-20260923\\input\\image-1.jpg",
+      "reports\\warehouse-20260923\\input\\image-2.jpg"
+    ],
+    "sha256": [
+      "bd2ba34e77d6cda94ed982d678590d9a5a0bde5a9b684dbaec0591ffa6ca0970",
+      "c0787e5dfab960ca142539c052860a0f8b8e8814b6eb95cc9b6daa03f2c1e1c8"
+    ],
+    "worker_ms": 11627,
+    "http": 200,
+    "status": "reconstructed",
+    "matches": 175,
+    "inliers": 125,
+    "points": [
+      76,
+      94,
+      100
+    ],
+    "relay_equals_direct": true,
+    "scan_id": "5591aca5-48a6-4008-bd12-5d4f547297df"
+  },
+  {
+    "pair": "negative-control",
+    "paths": [
+      "reports\\two-view-20260924\\input-1.jpg",
+      "reports\\two-view-20260924\\input-2.jpg"
+    ],
+    "sha256": [
+      "bd2ba34e77d6cda94ed982d678590d9a5a0bde5a9b684dbaec0591ffa6ca0970",
+      "fb5bd22bfe8d1b3da1714ad9f1ef9f90330d562d6bd499bb6005446886506e66"
+    ],
+    "worker_ms": 9646,
+    "http": 200,
+    "status": "insufficient_matches",
+    "matches": 2,
+    "inliers": 0,
+    "points": [],
+    "relay_equals_direct": true,
+    "scan_id": "196bed35-9c74-4a17-8021-62a00d8683db"
+  },
+  {
+    "pair": "wide-side",
+    "paths": [
+      "reports\\warehouse-20260923\\input\\image-1.jpg",
+      "reports\\warehouse-20260923\\input\\image-3.jpg"
+    ],
+    "sha256": [
+      "bd2ba34e77d6cda94ed982d678590d9a5a0bde5a9b684dbaec0591ffa6ca0970",
+      "a63e3532c9850d20b4c2b18b3ed3404ff55f83536cfa99175c688f136999497c"
+    ],
+    "worker_ms": 9927,
+    "http": 200,
+    "status": "reconstructed",
+    "matches": 9,
+    "inliers": 9,
+    "points": [
+      8,
+      9,
+      9
+    ],
+    "relay_equals_direct": true,
+    "scan_id": "b2f90527-fce0-4470-90ec-8a8178a60663"
+  },
+  {
+    "pair": "side-close",
+    "paths": [
+      "reports\\warehouse-20260923\\input\\image-3.jpg",
+      "reports\\warehouse-20260923\\input\\image-4.jpg"
+    ],
+    "sha256": [
+      "a63e3532c9850d20b4c2b18b3ed3404ff55f83536cfa99175c688f136999497c",
+      "fb5bd22bfe8d1b3da1714ad9f1ef9f90330d562d6bd499bb6005446886506e66"
+    ],
+    "worker_ms": 9608,
+    "http": 200,
+    "status": "reconstructed",
+    "matches": 180,
+    "inliers": 129,
+    "points": [
+      76,
+      120,
+      87
+    ],
+    "relay_equals_direct": true,
+    "scan_id": "bc683950-1a07-457b-8961-22c65be24ed8"
+  }
+]

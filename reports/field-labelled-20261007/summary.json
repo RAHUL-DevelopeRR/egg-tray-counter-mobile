@@ -1,0 +1,102 @@
+{
+ "all": {
+  "n": 52,
+  "exact": 5,
+  "within_2": 12,
+  "within_5pct": 16,
+  "mae": 45.1,
+  "mean_signed": -42.3,
+  "label_sum": 5041,
+  "v2_sum": 2839
+ },
+ "scene_type=block_face": {
+  "n": 39,
+  "exact": 1,
+  "within_2": 6,
+  "within_5pct": 12,
+  "mae": 59.1,
+  "mean_signed": -56.6,
+  "label_sum": 4931,
+  "v2_sum": 2723
+ },
+ "scene_type=loose_trays": {
+  "n": 6,
+  "exact": 3,
+  "within_2": 3,
+  "within_5pct": 3,
+  "mae": 2.7,
+  "mean_signed": 2.7,
+  "label_sum": 16,
+  "v2_sum": 32
+ },
+ "scene_type=mixed": {
+  "n": 4,
+  "exact": 0,
+  "within_2": 1,
+  "within_5pct": 0,
+  "mae": 4.2,
+  "mean_signed": -3.2,
+  "label_sum": 48,
+  "v2_sum": 35
+ },
+ "scene_type=single_stack": {
+  "n": 3,
+  "exact": 1,
+  "within_2": 2,
+  "within_5pct": 1,
+  "mae": 2.3,
+  "mean_signed": 1.0,
+  "label_sum": 46,
+  "v2_sum": 49
+ },
+ "material=dark_green_plastic": {
+  "n": 2,
+  "exact": 0,
+  "within_2": 1,
+  "within_5pct": 2,
+  "mae": 3.5,
+  "mean_signed": 3.5,
+  "label_sum": 219,
+  "v2_sum": 226
+ },
+ "material=green_plastic": {
+  "n": 31,
+  "exact": 3,
+  "within_2": 8,
+  "within_5pct": 11,
+  "mae": 43.4,
+  "mean_signed": -42.4,
+  "label_sum": 3185,
+  "v2_sum": 1870
+ },
+ "material=mixed_plastic": {
+  "n": 6,
+  "exact": 1,
+  "within_2": 1,
+  "within_5pct": 1,
+  "mae": 4.7,
+  "mean_signed": -0.3,
+  "label_sum": 55,
+  "v2_sum": 53
+ },
+ "material=orange_plastic": {
+  "n": 11,
+  "exact": 0,
+  "within_2": 1,
+  "within_5pct": 1,
+  "mae": 86.9,
+  "mean_signed": -81.8,
+  "label_sum": 1551,
+  "v2_sum": 651
+ },
+ "material=paper_pulp": {
+  "n": 2,
+  "exact": 1,
+  "within_2": 1,
+  "within_5pct": 1,
+  "mae": 4.0,
+  "mean_signed": 4.0,
+  "label_sum": 31,
+  "v2_sum": 39
+ }
+}

@@ -1,25 +1,35 @@
 import 'package:flutter/material.dart';
 
 import '../../models/capture_view.dart';
+import '../../services/frame_preflight.dart';
 
+/// Framing guide whose colour is the live preflight verdict, so the operator
+/// sees the same judgement as the text banner without reading it.
+///
+/// The guide rectangle below is the bounding box the analyser measures: left
+/// and right views are trapezoids inset by 10% on one edge, and the analyser
+/// treats them as their bounding rectangle. That is deliberate, and it is why
+/// angled views rely on the ANGLE hint rather than on a hard geometry test.
 class CameraGuideOverlay extends StatelessWidget {
   const CameraGuideOverlay({
     required this.view,
-    required this.ready,
+    required this.severity,
     super.key,
   });
 
   final CaptureView view;
-  final bool ready;
+  final PreflightSeverity severity;
 
   @override
   Widget build(BuildContext context) {
+    final color = switch (severity) {
+      PreflightSeverity.blocking => Colors.redAccent,
+      PreflightSeverity.advisory => Colors.amberAccent,
+      PreflightSeverity.pass => Colors.greenAccent,
+    };
     return IgnorePointer(
       child: CustomPaint(
-        painter: _GuidePainter(
-          view,
-          ready ? Colors.greenAccent : Colors.redAccent,
-        ),
+        painter: _GuidePainter(view, color),
         child: const SizedBox.expand(),
       ),
     );
@@ -40,28 +50,10 @@ class _GuidePainter extends CustomPainter {
       size.width * 0.80,
       size.height * 0.78,
     );
-    final inset = size.width * 0.10;
-    final guidePath = Path();
-    switch (view) {
-      case CaptureView.left:
-        guidePath
-          ..moveTo(bounds.left + inset, bounds.top)
-          ..lineTo(bounds.right, bounds.top)
-          ..lineTo(bounds.right - inset, bounds.bottom)
-          ..lineTo(bounds.left, bounds.bottom)
-          ..close();
-      case CaptureView.right:
-        guidePath
-          ..moveTo(bounds.left, bounds.top)
-          ..lineTo(bounds.right - inset, bounds.top)
-          ..lineTo(bounds.right, bounds.bottom)
-          ..lineTo(bounds.left + inset, bounds.bottom)
-          ..close();
-      case CaptureView.straight:
-        guidePath.addRRect(
-          RRect.fromRectAndRadius(bounds, const Radius.circular(22)),
-        );
-    }
+    // Every face is photographed square-on, so the guide is the same
+    // rectangle for STRAIGHT, LEFT and RIGHT.
+    final guidePath = Path()
+      ..addRRect(RRect.fromRectAndRadius(bounds, const Radius.circular(22)));
     final shadow = Paint()
       ..color = Colors.black.withValues(alpha: 0.36)
       ..style = PaintingStyle.fill;

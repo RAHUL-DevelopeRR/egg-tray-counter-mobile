@@ -1,0 +1,11 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - aws ecr get-login-password --region "$AWS_DEFAULT_REGION" | docker login --username AWS --password-stdin "$ECR_REGISTRY"
+  build:
+    commands:
+      - docker build -f Dockerfile.vision-lambda -t "$ECR_REPOSITORY_URI:pilot-20261005" .
+  post_build:
+    commands:
+      - docker push "$ECR_REPOSITORY_URI:pilot-20261005"

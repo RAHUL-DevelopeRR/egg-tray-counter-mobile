@@ -1,0 +1,20 @@
+{
+  "date": "2026-09-28",
+  "backend_pytest_passed": 77,
+  "sequence_tests_included": 11,
+  "training_self_check": "passed",
+  "dataset_checks": {"passed": true, "inventory_records": 947, "faces": 7, "target_peaks": 125},
+  "real_checkpoint_http": "passed: authorization, source hash mismatch, homography, bands, null inventory",
+  "local_aws_bundle_files": 18,
+  "resume_test": {
+    "scope": "local smoke epoch1; move output best.pt aside, restore from checkpoint directory",
+    "restored_sha256": "499993284f1205fa0a95aff0705c911f122e487c6bfdc20b9b65b154f2febada",
+    "before_restore_sha256": "499993284f1205fa0a95aff0705c911f122e487c6bfdc20b9b65b154f2febada",
+    "matching": true,
+    "aws_spot_executed": false
+  },
+  "aws_resources_created": false,
+  "docker_build_tested": false,
+  "production_deployed": false,
+  "apk_rebuilt": false
+}

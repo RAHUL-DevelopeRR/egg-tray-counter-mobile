@@ -1,0 +1,187 @@
+{
+  "images": [
+    {
+      "id": "image-01",
+      "rf_count": 15,
+      "proposed_faces": 1
+    },
+    {
+      "id": "image-02",
+      "rf_count": 8,
+      "proposed_faces": 1
+    },
+    {
+      "id": "image-03",
+      "rf_count": 13,
+      "proposed_faces": 1
+    },
+    {
+      "id": "image-04",
+      "rf_count": 34,
+      "proposed_faces": 3
+    },
+    {
+      "id": "image-05",
+      "rf_count": 11,
+      "proposed_faces": 1
+    },
+    {
+      "id": "image-06",
+      "rf_count": 38,
+      "proposed_faces": 4
+    },
+    {
+      "id": "image-07",
+      "rf_count": 56,
+      "proposed_faces": 5
+    },
+    {
+      "id": "image-08",
+      "rf_count": 59,
+      "proposed_faces": 4
+    },
+    {
+      "id": "image-09",
+      "rf_count": 36,
+      "proposed_faces": 4
+    },
+    {
+      "id": "image-10",
+      "rf_count": 12,
+      "proposed_faces": 1
+    },
+    {
+      "id": "image-11",
+      "rf_count": 16,
+      "proposed_faces": 2
+    },
+    {
+      "id": "image-12",
+      "rf_count": 13,
+      "proposed_faces": 2
+    },
+    {
+      "id": "image-13",
+      "rf_count": 46,
+      "proposed_faces": 5
+    },
+    {
+      "id": "image-14",
+      "rf_count": 15,
+      "proposed_faces": 0
+    },
+    {
+      "id": "image-15",
+      "rf_count": 22,
+      "proposed_faces": 3
+    },
+    {
+      "id": "image-16",
+      "rf_count": 25,
+      "proposed_faces": 3
+    },
+    {
+      "id": "image-17",
+      "rf_count": 1,
+      "proposed_faces": 0
+    },
+    {
+      "id": "image-18",
+      "rf_count": 25,
+      "proposed_faces": 3
+    },
+    {
+      "id": "image-19",
+      "rf_count": 8,
+      "proposed_faces": 1
+    },
+    {
+      "id": "image-20",
+      "rf_count": 6,
+      "proposed_faces": 0
+    },
+    {
+      "id": "image-21",
+      "rf_count": 64,
+      "proposed_faces": 7
+    },
+    {
+      "id": "image-22",
+      "rf_count": 3,
+      "proposed_faces": 0
+    },
+    {
+      "id": "image-23",
+      "rf_count": 15,
+      "proposed_faces": 2
+    },
+    {
+      "id": "image-24",
+      "rf_count": 1,
+      "proposed_faces": 0
+    },
+    {
+      "id": "image-25",
+      "rf_count": 56,
+      "proposed_faces": 10
+    },
+    {
+      "id": "image-26",
+      "rf_count": 62,
+      "proposed_faces": 6
+    },
+    {
+      "id": "image-27",
+      "rf_count": 15,
+      "proposed_faces": 3
+    },
+    {
+      "id": "image-28",
+      "rf_count": 57,
+      "proposed_faces": 7
+    },
+    {
+      "id": "image-29",
+      "rf_count": 124,
+      "proposed_faces": 14
+    },
+    {
+      "id": "image-30",
+      "rf_count": 1,
+      "proposed_faces": 0
+    },
+    {
+      "id": "image-31",
+      "rf_count": 1,
+      "proposed_faces": 0
+    },
+    {
+      "id": "image-32",
+      "rf_count": 85,
+      "proposed_faces": 11
+    },
+    {
+      "id": "image-33",
+      "rf_count": 15,
+      "proposed_faces": 2
+    },
+    {
+      "id": "image-34",
+      "rf_count": 1,
+      "proposed_faces": 0
+    },
+    {
+      "id": "image-35",
+      "rf_count": 3,
+      "proposed_faces": 0
+    }
+  ],
+  "recommendation_counts": {
+    "BOTTOM_DARK": 1,
+    "TOP_CROPPED": 1,
+    "BASE_CROPPED": 8
+  },
+  "thresholds_validated": false,
+  "accuracy": null,
+  "new_model_calls": 0
+}

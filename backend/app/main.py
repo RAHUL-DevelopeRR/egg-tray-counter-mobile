@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app import __version__
+from app.api.candidate import router as candidate_router
 from app.api.routes import router
 from app.config import Settings
 from app.errors import EggCounterError, InferenceProviderError
@@ -45,6 +46,7 @@ def create_app(settings: Settings | None = None, provider: InferenceProvider | N
     app.state.counting_service = CountingService(resolved_settings, app.state.provider)
     app.state.repository = InMemoryScanRepository()
     app.include_router(router)
+    app.include_router(candidate_router)
 
     @app.exception_handler(InferenceProviderError)
     async def inference_error_handler(_request: Request, exc: InferenceProviderError) -> JSONResponse:

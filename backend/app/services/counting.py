@@ -8,7 +8,7 @@ from pathlib import Path
 import cv2
 
 from app.config import Settings
-from app.errors import StackAssociationError
+from app.errors import StackAssociationError, UnsupportedModelOutputError
 from app.providers.base import InferenceProvider, InferenceResult
 from app.schemas.scan import (
     ModelSchema,
@@ -60,6 +60,13 @@ class CountingService:
         )
         inference_by_view = dict(zip(VIEW_NAMES, results, strict=True))
         timings["model_inference"] = round((time.perf_counter() - inference_started) * 1000)
+
+        # A tray detection is not a whole-stack ROI, even under the experimental alias.
+        if any(p.class_name == "egg_tray" for result in results for p in result.predictions):
+            raise UnsupportedModelOutputError(
+                "Individual egg_tray boxes cannot be used as stack faces for layer counting. "
+                "Localize complete stack faces before combining tray and layer evidence."
+            )
 
         observations_started = time.perf_counter()
         observations = self._build_observations(scan_id, images, qualities, inference_by_view)

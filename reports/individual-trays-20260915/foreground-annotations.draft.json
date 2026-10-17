@@ -1,0 +1,189 @@
+{
+  "annotation_type": "manual visual reference, not inference",
+  "filled_definition": "contains at least one egg; does not mean every slot occupied",
+  "training_ready": false,
+  "images": [
+    {
+      "image_file": "image-01.jpg",
+      "image_sha256": "87329b8d8794201e88fd0806fad03c3c233213b8a15a3f7b38620b25effa8def",
+      "annotation_complete": false,
+      "scope": "selected foreground trays only; background objects deliberately not annotated",
+      "instances": [
+        {
+          "stack_id": "rear_left",
+          "tray_index": 1,
+          "bbox": [
+            230,
+            155,
+            566,
+            431
+          ],
+          "polygon": null,
+          "physical_state": "filled",
+          "visibility": "visible",
+          "geometry_status": "manual_draft",
+          "occupancy_basis": "visible intact-looking eggs; not individual egg-count audit"
+        },
+        {
+          "stack_id": "rear_right",
+          "tray_index": 1,
+          "bbox": [
+            505,
+            286,
+            851,
+            594
+          ],
+          "polygon": null,
+          "physical_state": "filled",
+          "visibility": "visible",
+          "geometry_status": "manual_draft",
+          "occupancy_basis": "visible intact-looking eggs; not individual egg-count audit"
+        },
+        {
+          "stack_id": "front_left",
+          "tray_index": 1,
+          "bbox": [
+            59,
+            384,
+            457,
+            750
+          ],
+          "polygon": null,
+          "physical_state": "filled",
+          "visibility": "visible",
+          "geometry_status": "manual_draft",
+          "occupancy_basis": "visible intact-looking eggs; not individual egg-count audit"
+        },
+        {
+          "stack_id": "front_right",
+          "tray_index": 1,
+          "bbox": [
+            356,
+            481,
+            753,
+            868
+          ],
+          "polygon": null,
+          "physical_state": "filled",
+          "visibility": "visible",
+          "geometry_status": "manual_draft",
+          "occupancy_basis": "visible intact-looking eggs; not individual egg-count audit"
+        }
+      ]
+    },
+    {
+      "image_file": "image-02.jpg",
+      "image_sha256": "a33384b4474d63a71cfcf7281de362d21b4e0ed7530801bc1ae87981962eff32",
+      "annotation_complete": false,
+      "scope": "selected foreground trays only; background objects deliberately not annotated",
+      "instances": [
+        {
+          "stack_id": "rear_left",
+          "tray_index": 1,
+          "bbox": [
+            244,
+            141,
+            609,
+            344
+          ],
+          "polygon": null,
+          "physical_state": "filled",
+          "visibility": "visible",
+          "geometry_status": "manual_draft",
+          "occupancy_basis": "visible intact-looking eggs; not individual egg-count audit"
+        },
+        {
+          "stack_id": "rear_right",
+          "tray_index": 1,
+          "bbox": [
+            628,
+            115,
+            1047,
+            334
+          ],
+          "polygon": null,
+          "physical_state": "filled",
+          "visibility": "visible",
+          "geometry_status": "manual_draft",
+          "occupancy_basis": "visible intact-looking eggs; not individual egg-count audit"
+        },
+        {
+          "stack_id": "front_left",
+          "tray_index": 1,
+          "bbox": [
+            0,
+            296,
+            579,
+            668
+          ],
+          "polygon": null,
+          "physical_state": "filled",
+          "visibility": "visible",
+          "geometry_status": "manual_draft",
+          "occupancy_basis": "visible intact-looking eggs; not individual egg-count audit"
+        },
+        {
+          "stack_id": "front_right",
+          "tray_index": 1,
+          "bbox": [
+            549,
+            246,
+            1183,
+            641
+          ],
+          "polygon": null,
+          "physical_state": "filled",
+          "visibility": "visible",
+          "geometry_status": "manual_draft",
+          "occupancy_basis": "visible intact-looking eggs; not individual egg-count audit"
+        }
+      ]
+    },
+    {
+      "image_file": "image-04.jpg",
+      "image_sha256": "9cafbe06cf8b46b969859ee1ae8bbc4a9b55666942feb847a0f42c121fb5cce8",
+      "annotation_complete": false,
+      "scope": "selected foreground trays only; background objects deliberately not annotated",
+      "instances": [
+        {
+          "stack_id": "central",
+          "tray_index": 1,
+          "bbox": [
+            423,
+            334,
+            781,
+            691
+          ],
+          "polygon": null,
+          "physical_state": "filled",
+          "visibility": "visible",
+          "geometry_status": "manual_draft",
+          "occupancy_basis": "visible intact-looking eggs; not individual egg-count audit"
+        }
+      ]
+    },
+    {
+      "image_file": "image-05.jpg",
+      "image_sha256": "b5fe4fd90b18e5c449bc43f4224b85074bf7504ba77991839ece9db564c1f2a7",
+      "annotation_complete": false,
+      "scope": "selected foreground trays only; background objects deliberately not annotated",
+      "instances": [
+        {
+          "stack_id": "central",
+          "tray_index": 1,
+          "bbox": [
+            323,
+            319,
+            685,
+            676
+          ],
+          "polygon": null,
+          "physical_state": "filled",
+          "visibility": "visible",
+          "geometry_status": "manual_draft",
+          "occupancy_basis": "visible intact-looking eggs; not individual egg-count audit"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,962 @@
+{
+  "scan_id": "6c3c8e3a-ed06-4b56-a41c-e9416f168587",
+  "status": "rescan_required",
+  "accepted": false,
+  "physical_stack_count": null,
+  "total_trays": null,
+  "total_eggs": null,
+  "eggs_per_tray": 30,
+  "cell_ids": {},
+  "model": {
+    "provider": "roboflow_serverless",
+    "model_id": "projec-mutta/2"
+  },
+  "processing": {
+    "mode": "model_spatial_v1",
+    "latency_ms": 2925,
+    "model_version": "projec-mutta/2",
+    "timings_ms": {
+      "total": 2925
+    }
+  },
+  "views": {
+    "left": {
+      "quality": 0,
+      "accepted": false,
+      "reason": "Model detections are available. Physical stack matching and egg occupancy remain unresolved; these per-photo counts are not a verified inventory total.",
+      "detections": [
+        {
+          "class": "egg_tray",
+          "confidence": 0.9053223133087158,
+          "x": 141,
+          "y": 62,
+          "width": 218,
+          "height": 38
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.9008791446685791,
+          "x": 130,
+          "y": 21.5,
+          "width": 204,
+          "height": 43
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.8966140151023865,
+          "x": 142.5,
+          "y": 131.5,
+          "width": 219,
+          "height": 39
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.879561185836792,
+          "x": 141.5,
+          "y": 95.5,
+          "width": 223,
+          "height": 37
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.8762113451957703,
+          "x": 139.5,
+          "y": 345.5,
+          "width": 223,
+          "height": 39
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.8727816939353943,
+          "x": 139.5,
+          "y": 165.5,
+          "width": 227,
+          "height": 37
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.8688268065452576,
+          "x": 140.5,
+          "y": 203,
+          "width": 223,
+          "height": 38
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.8683809638023376,
+          "x": 137.5,
+          "y": 237,
+          "width": 233,
+          "height": 38
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.83601975440979,
+          "x": 138.5,
+          "y": 273.5,
+          "width": 225,
+          "height": 39
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.8216173648834229,
+          "x": 137,
+          "y": 309,
+          "width": 234,
+          "height": 38
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.8092759251594543,
+          "x": 136,
+          "y": 381,
+          "width": 236,
+          "height": 38
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.801314651966095,
+          "x": 137,
+          "y": 417,
+          "width": 226,
+          "height": 40
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.7937461733818054,
+          "x": 140.5,
+          "y": 345,
+          "width": 223,
+          "height": 40
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.77390056848526,
+          "x": 136.5,
+          "y": 492,
+          "width": 231,
+          "height": 44
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.7453983426094055,
+          "x": 132,
+          "y": 643.5,
+          "width": 232,
+          "height": 47
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5496405959129333,
+          "x": 141,
+          "y": 202.5,
+          "width": 224,
+          "height": 37
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.43878522515296936,
+          "x": 131,
+          "y": 566.5,
+          "width": 240,
+          "height": 51
+        }
+      ],
+      "detector_mean_confidence": 0.8022515335503746
+    },
+    "right": {
+      "quality": 0,
+      "accepted": false,
+      "reason": "Model detections are available. Physical stack matching and egg occupancy remain unresolved; these per-photo counts are not a verified inventory total.",
+      "detections": [
+        {
+          "class": "egg_tray",
+          "confidence": 0.7512834072113037,
+          "x": 1004,
+          "y": 874.5,
+          "width": 246,
+          "height": 59
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.750552773475647,
+          "x": 992.5,
+          "y": 972.5,
+          "width": 239,
+          "height": 55
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.7498207092285156,
+          "x": 993.5,
+          "y": 925,
+          "width": 231,
+          "height": 58
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.7476159334182739,
+          "x": 1008.5,
+          "y": 837.5,
+          "width": 239,
+          "height": 65
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.7446563243865967,
+          "x": 985,
+          "y": 1000,
+          "width": 226,
+          "height": 54
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.7439128756523132,
+          "x": 922.5,
+          "y": 1407.5,
+          "width": 171,
+          "height": 65
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.7424216866493225,
+          "x": 759.5,
+          "y": 824.5,
+          "width": 183,
+          "height": 53
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.7233095169067383,
+          "x": 755.5,
+          "y": 899,
+          "width": 175,
+          "height": 48
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.7201715111732483,
+          "x": 750.5,
+          "y": 966.5,
+          "width": 177,
+          "height": 47
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.7170118689537048,
+          "x": 963,
+          "y": 1153,
+          "width": 222,
+          "height": 56
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.7074047327041626,
+          "x": 969,
+          "y": 1077,
+          "width": 224,
+          "height": 58
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.7057850360870361,
+          "x": 952.5,
+          "y": 1220.5,
+          "width": 201,
+          "height": 53
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.703345775604248,
+          "x": 760.5,
+          "y": 860.5,
+          "width": 185,
+          "height": 53
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6817267537117004,
+          "x": 721,
+          "y": 1334,
+          "width": 122,
+          "height": 58
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6800292134284973,
+          "x": 755.5,
+          "y": 936,
+          "width": 181,
+          "height": 50
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6766199469566345,
+          "x": 745,
+          "y": 1036,
+          "width": 172,
+          "height": 52
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6740504503250122,
+          "x": 932.5,
+          "y": 1350,
+          "width": 185,
+          "height": 62
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6671476364135742,
+          "x": 742.5,
+          "y": 1101,
+          "width": 161,
+          "height": 48
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.666279673576355,
+          "x": 735.5,
+          "y": 1166.5,
+          "width": 153,
+          "height": 49
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6610482335090637,
+          "x": 562.5,
+          "y": 847,
+          "width": 147,
+          "height": 40
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6566582322120667,
+          "x": 946.5,
+          "y": 1286,
+          "width": 195,
+          "height": 60
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6531268954277039,
+          "x": 966,
+          "y": 1118,
+          "width": 224,
+          "height": 56
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6442251205444336,
+          "x": 563,
+          "y": 917,
+          "width": 144,
+          "height": 46
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6442251205444336,
+          "x": 729,
+          "y": 1277.5,
+          "width": 144,
+          "height": 51
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6442251205444336,
+          "x": 949.5,
+          "y": 1247,
+          "width": 203,
+          "height": 56
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6442251205444336,
+          "x": 568.5,
+          "y": 707,
+          "width": 157,
+          "height": 46
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6433292627334595,
+          "x": 563.5,
+          "y": 775.5,
+          "width": 149,
+          "height": 41
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6397360563278198,
+          "x": 568,
+          "y": 741,
+          "width": 152,
+          "height": 40
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6325027346611023,
+          "x": 566,
+          "y": 812,
+          "width": 148,
+          "height": 40
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6261242032051086,
+          "x": 560,
+          "y": 1040,
+          "width": 132,
+          "height": 42
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6252092719078064,
+          "x": 398,
+          "y": 661,
+          "width": 124,
+          "height": 36
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6169357895851135,
+          "x": 733,
+          "y": 1194,
+          "width": 150,
+          "height": 46
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6160122752189636,
+          "x": 398,
+          "y": 727.5,
+          "width": 114,
+          "height": 35
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6141626238822937,
+          "x": 400.5,
+          "y": 796.5,
+          "width": 113,
+          "height": 35
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6095241904258728,
+          "x": 768,
+          "y": 747.5,
+          "width": 190,
+          "height": 59
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.6011253595352173,
+          "x": 564,
+          "y": 879.5,
+          "width": 146,
+          "height": 35
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5983121991157532,
+          "x": 766.5,
+          "y": 783.5,
+          "width": 189,
+          "height": 51
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5973730087280273,
+          "x": 400.5,
+          "y": 694.5,
+          "width": 117,
+          "height": 35
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.596433162689209,
+          "x": 258,
+          "y": 757,
+          "width": 98,
+          "height": 32
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5945512652397156,
+          "x": 559,
+          "y": 975,
+          "width": 132,
+          "height": 40
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5803520083427429,
+          "x": 406.5,
+          "y": 923.5,
+          "width": 105,
+          "height": 35
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5794004201889038,
+          "x": 254.5,
+          "y": 696.5,
+          "width": 103,
+          "height": 31
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5755879878997803,
+          "x": 562,
+          "y": 1103,
+          "width": 122,
+          "height": 40
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5698526501655579,
+          "x": 562.5,
+          "y": 1275,
+          "width": 115,
+          "height": 58
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5631377100944519,
+          "x": 403.5,
+          "y": 860,
+          "width": 105,
+          "height": 32
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5554351806640625,
+          "x": 561,
+          "y": 1218,
+          "width": 112,
+          "height": 42
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5496405959129333,
+          "x": 406.5,
+          "y": 978,
+          "width": 97,
+          "height": 34
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5448014140129089,
+          "x": 263,
+          "y": 817,
+          "width": 102,
+          "height": 32
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5389832258224487,
+          "x": 1019,
+          "y": 759,
+          "width": 240,
+          "height": 110
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5380124449729919,
+          "x": 559.5,
+          "y": 1011,
+          "width": 137,
+          "height": 40
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5360700488090515,
+          "x": 407,
+          "y": 1085,
+          "width": 92,
+          "height": 38
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5360700488090515,
+          "x": 412,
+          "y": 1197.5,
+          "width": 90,
+          "height": 51
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5350984334945679,
+          "x": 565.5,
+          "y": 1164.5,
+          "width": 113,
+          "height": 43
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5282900333404541,
+          "x": 253,
+          "y": 633.5,
+          "width": 112,
+          "height": 35
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5253688097000122,
+          "x": 405,
+          "y": 822,
+          "width": 106,
+          "height": 34
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.524394690990448,
+          "x": 748,
+          "y": 1000,
+          "width": 178,
+          "height": 48
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5204963088035583,
+          "x": 740.5,
+          "y": 1123,
+          "width": 161,
+          "height": 50
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5175709128379822,
+          "x": 404.5,
+          "y": 894,
+          "width": 105,
+          "height": 36
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5097643733024597,
+          "x": 401.5,
+          "y": 1140.5,
+          "width": 83,
+          "height": 37
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5068355202674866,
+          "x": 267,
+          "y": 875,
+          "width": 96,
+          "height": 32
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.4970703423023224,
+          "x": 254,
+          "y": 666.5,
+          "width": 106,
+          "height": 33
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.4873073995113373,
+          "x": 406,
+          "y": 1029,
+          "width": 96,
+          "height": 38
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.4863315224647522,
+          "x": 285.5,
+          "y": 1082.5,
+          "width": 81,
+          "height": 37
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.4853557348251343,
+          "x": 397.5,
+          "y": 752.5,
+          "width": 119,
+          "height": 31
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.47755420207977295,
+          "x": 275.5,
+          "y": 932.5,
+          "width": 89,
+          "height": 31
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.4756053388118744,
+          "x": 979,
+          "y": 1038.5,
+          "width": 222,
+          "height": 55
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.47268348932266235,
+          "x": 407,
+          "y": 943,
+          "width": 102,
+          "height": 34
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.4717099070549011,
+          "x": 294,
+          "y": 1136,
+          "width": 68,
+          "height": 44
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.45035937428474426,
+          "x": 731,
+          "y": 1235,
+          "width": 150,
+          "height": 48
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.43398144841194153,
+          "x": 279,
+          "y": 973.5,
+          "width": 84,
+          "height": 31
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.4311051070690155,
+          "x": 407,
+          "y": 1052,
+          "width": 94,
+          "height": 36
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.4101654887199402,
+          "x": 558,
+          "y": 1137.5,
+          "width": 132,
+          "height": 45
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.40827676653862,
+          "x": 281.5,
+          "y": 1028.5,
+          "width": 83,
+          "height": 35
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.403566837310791,
+          "x": 558,
+          "y": 1062.5,
+          "width": 132,
+          "height": 41
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.3747906982898712,
+          "x": 272.5,
+          "y": 895.5,
+          "width": 91,
+          "height": 29
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.37068089842796326,
+          "x": 260.5,
+          "y": 788.5,
+          "width": 97,
+          "height": 33
+        }
+      ],
+      "detector_mean_confidence": 0.5879462953460844
+    },
+    "straight": {
+      "quality": 0,
+      "accepted": false,
+      "reason": "Model detections are available. Physical stack matching and egg occupancy remain unresolved; these per-photo counts are not a verified inventory total.",
+      "detections": [
+        {
+          "class": "egg_tray",
+          "confidence": 0.8587185740470886,
+          "x": 580,
+          "y": 107,
+          "width": 486,
+          "height": 92
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.854884684085846,
+          "x": 576.5,
+          "y": 380,
+          "width": 457,
+          "height": 84
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.851952850818634,
+          "x": 579.5,
+          "y": 295,
+          "width": 475,
+          "height": 88
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.8474634885787964,
+          "x": 572.5,
+          "y": 469,
+          "width": 463,
+          "height": 88
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.8438951373100281,
+          "x": 570.5,
+          "y": 553.5,
+          "width": 443,
+          "height": 71
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.8413047790527344,
+          "x": 567.5,
+          "y": 939,
+          "width": 421,
+          "height": 74
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.8338664174079895,
+          "x": 567,
+          "y": 1080.5,
+          "width": 414,
+          "height": 67
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.8327813148498535,
+          "x": 571,
+          "y": 714.5,
+          "width": 436,
+          "height": 67
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.8316905498504639,
+          "x": 572.5,
+          "y": 635.5,
+          "width": 449,
+          "height": 75
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.8238958716392517,
+          "x": 575.5,
+          "y": 197,
+          "width": 467,
+          "height": 84
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.8238958716392517,
+          "x": 570.5,
+          "y": 791,
+          "width": 435,
+          "height": 74
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.818156361579895,
+          "x": 558.5,
+          "y": 1411,
+          "width": 381,
+          "height": 64
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.8104788661003113,
+          "x": 564.5,
+          "y": 1218,
+          "width": 409,
+          "height": 72
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.8092759251594543,
+          "x": 560,
+          "y": 1347,
+          "width": 390,
+          "height": 66
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.8050197958946228,
+          "x": 569.5,
+          "y": 1150,
+          "width": 395,
+          "height": 64
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.8019358515739441,
+          "x": 569,
+          "y": 865.5,
+          "width": 410,
+          "height": 67
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.7905303239822388,
+          "x": 565.5,
+          "y": 1010,
+          "width": 409,
+          "height": 60
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.7892336845397949,
+          "x": 562,
+          "y": 1284.5,
+          "width": 388,
+          "height": 57
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.532181978225708,
+          "x": 578,
+          "y": 27.5,
+          "width": 458,
+          "height": 55
+        }
+      ],
+      "detector_mean_confidence": 0.8105874908597845
+    }
+  },
+  "stacks": [
+    {
+      "physical_stack_id": "Per-photo model detections (unmatched)",
+      "counts": {
+        "left": 17,
+        "right": 76,
+        "straight": 19
+      },
+      "final_count": null,
+      "confidence": 0,
+      "accepted": false,
+      "reason": "Model detections are available. Physical stack matching and egg occupancy remain unresolved; these per-photo counts are not a verified inventory total."
+    }
+  ],
+  "rescan": {
+    "recommended_view": "straight",
+    "reason": "Model detections are available. Physical stack matching and egg occupancy remain unresolved; these per-photo counts are not a verified inventory total."
+  }
+}

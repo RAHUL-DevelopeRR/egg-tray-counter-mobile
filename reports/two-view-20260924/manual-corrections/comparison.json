@@ -1,0 +1,29 @@
+{
+  "scan_id": "77824bf2-c4d7-4c08-9714-7018f1c6d67f",
+  "model": {
+    "provider": "roboflow_serverless",
+    "model_id": "projec-mutta/2"
+  },
+  "manual_not_physical_ground_truth": true,
+  "precision_note": "Not measured: count agreement is not detection precision. Annotation extents are approximate.",
+  "results": [
+    {
+      "image": "manual-20260924-1.jpg",
+      "reference_visible_count": 99,
+      "backend_count": 76,
+      "absolute_error": 23,
+      "absolute_percentage_error": 23.232323232323232,
+      "precision": null,
+      "recall": null
+    },
+    {
+      "image": "manual-20260924-2.jpg",
+      "reference_visible_count": 19,
+      "backend_count": 19,
+      "absolute_error": 0,
+      "absolute_percentage_error": 0.0,
+      "precision": null,
+      "recall": null
+    }
+  ]
+}

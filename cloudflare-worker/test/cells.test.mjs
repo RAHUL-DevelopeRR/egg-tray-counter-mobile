@@ -8,7 +8,9 @@ const observations = (left, right, straight) => Object.fromEntries(
 
 test('health advertises the cell contract without invoking inference', async () => {
   const health = await (await worker.fetch(new Request('https://local/health'), {})).json();
-  assert.deepEqual(health, { status: 'ok', scan_contract: 'cell_identity_v1' });
+  assert.equal(health.scan_contract, 'cell_identity_v1');
+  assert.ok(health.scan_contracts.includes('model_spatial_v1'));
+  assert.equal(health.hybrid_ready, false);
 });
 
 test('40/40/100 belong to separate cells, never compare or sum them', () => {
@@ -48,7 +50,7 @@ test('cell identity is mandatory, normalized and bounded', () => {
   }
 });
 
-test('HTTP rejects legacy metadata and duplicate photos before inference; partial cells never get a total', async t => {
+test('HTTP rejects incomplete explicit cell metadata and duplicate photos; partial cells never get a total', async t => {
   let calls = 0;
   t.mock.method(globalThis, 'fetch', async () => {
     calls++;
@@ -63,7 +65,10 @@ test('HTTP rejects legacy metadata and duplicate photos before inference; partia
     });
     return new Request('https://local/v1/scans/count', { method: 'POST', body: form });
   };
-  assert.equal((await worker.fetch(request(null), env)).status, 422);
+  const explicit = request(null);
+  const explicitForm = await explicit.formData();
+  explicitForm.set('scan_contract', 'cell_identity_v1');
+  assert.equal((await worker.fetch(new Request(explicit.url, {method: 'POST', body: explicitForm}), env)).status, 422);
   assert.equal((await worker.fetch(request(['A','A','A'], true), env)).status, 422);
   assert.equal(calls, 0);
   const partial = await (await worker.fetch(request(['A','A','B']), env)).json();

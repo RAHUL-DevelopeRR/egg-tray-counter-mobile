@@ -1,0 +1,17 @@
+{
+  "view_assignment": {
+    "straight": "image-07",
+    "left": "image-10",
+    "right": "image-11"
+  },
+  "assignment_status": "tentative_manual_oblique_views",
+  "view_correspondence": [],
+  "accepted_correspondence": [],
+  "x_columns": null,
+  "y_rows": null,
+  "physical_trays": null,
+  "eligible_egg_trays": null,
+  "scene_grid": [],
+  "verified": false,
+  "reason": "No calibrated pose/shared-base verification; repeated texture cannot establish hidden inventory"
+}

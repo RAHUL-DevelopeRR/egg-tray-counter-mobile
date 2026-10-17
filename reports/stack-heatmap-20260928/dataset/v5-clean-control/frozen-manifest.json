@@ -1,0 +1,43 @@
+{
+  "status": "incomplete_reviewed_layer_presence_subset",
+  "training_release_eligible": false,
+  "occupancy_supervision_available": false,
+  "files": [
+    {
+      "path": "reports/stack-heatmap-20260928/dataset/v5-clean-control/test/_annotations.coco.json",
+      "sha256": "70d5a29973fa495b450c6376b3a09c78417edb0afcc9da2c5808a4d691154e28"
+    },
+    {
+      "path": "reports/stack-heatmap-20260928/dataset/v5-clean-control/train/_annotations.coco.json",
+      "sha256": "5fdfff4559bb6b1e41991f692d670b96e274852b47b359f849b1052b0800cfca"
+    },
+    {
+      "path": "reports/stack-heatmap-20260928/dataset/v5-clean-control/train/focused-1.jpg",
+      "sha256": "f420c77de6f19e9147f4000b95fa2c832fbb6ec67b37fbf7480aba5a1e20b60a"
+    },
+    {
+      "path": "reports/stack-heatmap-20260928/dataset/v5-clean-control/train/focused-2.jpg",
+      "sha256": "c54825d52b871e2f23b5aac611a23154a7f962cc7946a2100f3e3da54c32f87b"
+    },
+    {
+      "path": "reports/stack-heatmap-20260928/dataset/v5-clean-control/train/focused-3.jpg",
+      "sha256": "85288c848a653ab6884f505e33b5b397a4f8ef5abe1541dc0d2ceadebe0b18b2"
+    },
+    {
+      "path": "reports/stack-heatmap-20260928/dataset/v5-clean-control/train/focused-4.jpg",
+      "sha256": "c790cc14ec9ad377b53f4e867431de4682b3af00ce5920561a4638e057c0c2d7"
+    },
+    {
+      "path": "reports/stack-heatmap-20260928/dataset/v5-clean-control/train/focused-5.jpg",
+      "sha256": "662421e269cebcfda9af3582ea72538c674417e192ec4cf94b03ef1a4c35009a"
+    },
+    {
+      "path": "reports/stack-heatmap-20260928/dataset/v5-clean-control/train/side-19.jpg",
+      "sha256": "b2ba00a08b5e5e81b3df95ada1302e660fe3b9dae60eca0ef1d3e721f791fc75"
+    },
+    {
+      "path": "reports/stack-heatmap-20260928/dataset/v5-clean-control/valid/_annotations.coco.json",
+      "sha256": "70d5a29973fa495b450c6376b3a09c78417edb0afcc9da2c5808a4d691154e28"
+    }
+  ]
+}

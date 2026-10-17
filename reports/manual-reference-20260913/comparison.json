@@ -1,0 +1,132 @@
+{
+  "reference": {
+    "image": "accuracy-evaluation\\test-images\\img04.jpg",
+    "sha256": "38fac27c726aae28c7d31c177793772d0c3b4932a901bc13402848e21e4ed330",
+    "visible_trays": 32,
+    "per_column_visible_trays": [
+      16,
+      16
+    ],
+    "method": "assistant visual recount of existing benchmark photo",
+    "blind": false,
+    "physically_recounted": false,
+    "hidden_inventory_verified": false,
+    "note": "Reference is visible trays; full egg occupancy and out-of-frame stock are not certified."
+  },
+  "model": "projec-mutta/2",
+  "rf_only": {
+    "source": "historical saved predictions replay",
+    "predicted_trays": 29,
+    "signed_error": -3,
+    "absolute_error": 3,
+    "relative_error_pct": 9.375,
+    "exact_match": false,
+    "count_closeness_pct": 90.625
+  },
+  "layer_only": {
+    "source": "fresh local run, manually localized faces; not automatic localization",
+    "predicted_trays": 23,
+    "signed_error": -9,
+    "absolute_error": 9,
+    "relative_error_pct": 28.125,
+    "exact_match": false,
+    "count_closeness_pct": 71.875,
+    "faces": [
+      {
+        "face": 1,
+        "polygon": [
+          [
+            82,
+            166
+          ],
+          [
+            390,
+            157
+          ],
+          [
+            345,
+            522
+          ],
+          [
+            200,
+            547
+          ]
+        ],
+        "candidate_trays": 9,
+        "detected_layers": 9,
+        "inferred_layers": 0,
+        "pitch_px": 79.0,
+        "quality": 0.7384890662978846,
+        "reason": null
+      },
+      {
+        "face": 2,
+        "polygon": [
+          [
+            398,
+            156
+          ],
+          [
+            638,
+            151
+          ],
+          [
+            509,
+            488
+          ],
+          [
+            345,
+            522
+          ]
+        ],
+        "candidate_trays": 14,
+        "detected_layers": 14,
+        "inferred_layers": 0,
+        "pitch_px": 69.0,
+        "quality": 0.3570735716344494,
+        "reason": null
+      }
+    ]
+  },
+  "calibrated_height": {
+    "status": "unavailable",
+    "reason": "No measured height/camera profile"
+  },
+  "hybrid": {
+    "status": "not_evaluated",
+    "predicted_trays": null,
+    "absolute_error": null,
+    "relative_error_pct": null,
+    "exact_match": null,
+    "count_closeness_pct": null,
+    "reason": "No operational image-to-hybrid adapter, measured height or occupancy evidence"
+  },
+  "assisted_hybrid_candidate": {
+    "source": "Exploratory saved RF positions + fresh image layers; manually localized faces",
+    "accepted_inventory": false,
+    "predicted_trays": null,
+    "absolute_error": null,
+    "relative_error_pct": null,
+    "exact_match": null,
+    "count_closeness_pct": null,
+    "faces": [
+      {
+        "face": 1,
+        "model_anchors": 15,
+        "anchor_pitch_px": 42.64544677734375,
+        "candidate_trays": null
+      },
+      {
+        "face": 2,
+        "model_anchors": 13,
+        "anchor_pitch_px": 54.051658630371094,
+        "candidate_trays": 14
+      }
+    ],
+    "note": "Development experiment on a seen image. No measured height, occupancy or multiview matching."
+  },
+  "detection_precision": null,
+  "detection_recall": null,
+  "precision_reason": "Requires independently labelled tray instances and one-to-one IoU matching",
+  "limitations": "One previously seen photo is not a held-out three-view benchmark. Count closeness is not detection precision or a general accuracy claim."
+}

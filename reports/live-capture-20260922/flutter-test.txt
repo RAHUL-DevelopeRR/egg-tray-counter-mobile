@@ -1,0 +1,74 @@
+00:00 +0: loading C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/api_contract_test.dart
+00:00 +0: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/api_contract_test.dart: model scans require explicit optional-marker support
+00:00 +1: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/api_contract_test.dart: photo preflight rejects legacy, missing, wrong or unhealthy contracts
+00:00 +2: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/capture_frame_gate_test.dart: capture remains locked until every framing confirmation passes
+00:01 +3: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: a well-framed tray wall measures inside every accepted band
+00:01 +4: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: a dark frame reports low light instead of inventing structure
+00:01 +5: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: a softly lit but flat frame separates blur from darkness
+00:01 +6: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: tray texture running through the guide bottom is a cut base
+00:01 +7: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_preflight_test.dart: an accepted frame passes and can be captured
+00:01 +8: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_preflight_test.dart: an accepted frame passes and can be captured
+00:01 +9: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: luma sampling respects the plane stride
+00:01 +10: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_preflight_test.dart: no metrics yet means analysis has not started, not that it passed
+00:01 +11: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: metrics serialise the numbers the operator was shown
+00:01 +12: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: metrics serialise the numbers the operator was shown
+00:01 +13: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: metrics serialise the numbers the operator was shown
+00:02 +14: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: metrics serialise the numbers the operator was shown
+00:02 +15: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: metrics serialise the numbers the operator was shown
+00:02 +16: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: metrics serialise the numbers the operator was shown
+00:02 +17: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: metrics serialise the numbers the operator was shown
+00:02 +18: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: metrics serialise the numbers the operator was shown
+00:02 +19: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: metrics serialise the numbers the operator was shown
+00:02 +20: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: metrics serialise the numbers the operator was shown
+00:02 +21: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: metrics serialise the numbers the operator was shown
+00:02 +22: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: metrics serialise the numbers the operator was shown
+00:02 +23: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: metrics serialise the numbers the operator was shown
+00:02 +24: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: metrics serialise the numbers the operator was shown
+00:02 +25: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_preflight_test.dart: the audit record carries the checks the operator saw
+00:02 +26: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: rotation and pixel stride map the live plane into upright coordinates
+00:02 +27: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: a black half remains unevenly lit instead of returning ratio one
+00:02 +28: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: mapGuideToStill leaves the guide alone when both crops share an aspect ratio
+00:02 +29: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: mapGuideToStill narrows the guide when the preview crop is narrower
+00:02 +30: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/frame_evidence_test.dart: mapGuideToStill shortens the guide when the preview crop is wider
+00:04 +31: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/grid_height_screen_test.dart: fresh pilot has no fictional calibration and cannot count
+00:07 +32: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/grid_height_screen_test.dart: fresh pilot has no fictional calibration and cannot count
+00:08 +33: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/grid_height_screen_test.dart: fresh pilot has no fictional calibration and cannot count
+00:10 +34: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/grid_height_screen_test.dart: fresh pilot has no fictional calibration and cannot count
+00:10 +35: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/grid_height_screen_test.dart: fresh pilot has no fictional calibration and cannot count
+00:10 +36: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/grid_height_screen_test.dart: fresh pilot has no fictional calibration and cannot count
+00:10 +37: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/grid_height_screen_test.dart: fresh pilot has no fictional calibration and cannot count
+00:11 +38: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/grid_height_screen_test.dart: saves physical truth even when estimate is wrong; cell update never double counts
+00:13 +39: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/grid_height_screen_test.dart: saves physical truth even when estimate is wrong; cell update never double counts
+00:13 +40: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/grid_height_screen_test.dart: saves physical truth even when estimate is wrong; cell update never double counts
+00:13 +41: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/grid_height_screen_test.dart: saves physical truth even when estimate is wrong; cell update never double counts
+00:13 +42: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/grid_height_screen_test.dart: saves physical truth even when estimate is wrong; cell update never double counts
+00:13 +43: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/grid_height_screen_test.dart: saves physical truth even when estimate is wrong; cell update never double counts
+00:14 +44: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/grid_height_screen_test.dart: saves physical truth even when estimate is wrong; cell update never double counts
+00:15 +45: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/live_frame_preflight_test.dart: lumaFromJpeg reduces a large still to the analysis width
+00:15 +46: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/grid_height_screen_test.dart: write failure retains unsaved recount and reports failure
+00:15 +47: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/grid_height_screen_test.dart: write failure retains unsaved recount and reports failure
+00:15 +48: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/grid_height_screen_test.dart: write failure retains unsaved recount and reports failure
+00:15 +49: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/grid_height_screen_test.dart: write failure retains unsaved recount and reports failure
+00:15 +50: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/grid_height_screen_test.dart: write failure retains unsaved recount and reports failure
+00:21 +51: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/offline_startup_test.dart: offline pilot opens without camera setup or backend readiness
+00:21 +51: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/preflight_on_evaluation_frames_test.dart: preflight verdicts for the labelled evaluation frames
+image  trays  model  sharp  luma  cover  top   bot   border  app-guide verdict / full-frame verdict
+img01     60      9   1974   147   0.88   0.33   0.93    0.05  accept                       accept
+img02     60     12   1521   137   0.98   0.49   0.89    0.07  accept                       accept
+img03     60     93   2276   140   0.88   0.18   0.56    0.03  accept                       accept
+img04     32     29   1840   120   1.00   1.13   0.45    0.07  accept                       accept
+00:25 +52: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/preflight_on_evaluation_frames_test.dart: preflight verdicts for the labelled evaluation frames
+img05    120    124   2685   141   0.93   0.41   0.74    0.02  accept                       accept
+img06     21      9   1186   137   0.99   0.48   0.89    0.08  accept                       accept
+img07     21     21    824   137   1.00   0.79   1.07    0.07  accept                       accept
+img08     46     73   1370   128   0.92   0.72   0.74    0.07  accept                       accept
+img09     76     25   2039    66   0.75   1.11   0.30    0.09  accept                       accept
+00:27 +53: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/preflight_on_evaluation_frames_test.dart: preflight verdicts for the labelled evaluation frames
+img10      1      1    346   139   0.88   0.58   0.63    0.08  accept                       accept
+accepted 10/10 frames under the app guide (mean |error| 22.9 trays), refused 0 (mean |error| NaN trays); full-frame guide accepts 10/10
+00:29 +54: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/scan_session_test.dart: replacement and clearing never reuse previous capture evidence
+00:29 +55: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/scan_session_test.dart: capture state advances LEFT, RIGHT, STRAIGHT
+00:29 +56: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/scan_session_test.dart: retaking RIGHT preserves LEFT and STRAIGHT
+00:29 +57: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/scan_session_test.dart: optional cell ID is validated when provided; no identity is invented
+00:29 +58: C:/Users/DELL/Downloads/self-enhancing-agent-framework/egg-tray-counter-mobile/mobile/test/scan_session_test.dart: three photos are complete without painted floor IDs
+00:29 +59: All tests passed!

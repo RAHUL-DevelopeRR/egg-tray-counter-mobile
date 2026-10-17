@@ -1,0 +1,16 @@
+{
+  "image_sha256": "ee60b130d349a7107f5cc2a39deea45999e253a404fb60760b2e41b866a64182",
+  "coordinate_frame": "exif_transposed_pixels",
+  "detections": [
+    {
+      "bbox": [
+        733.0,
+        1641.0,
+        1451.0,
+        2731.0
+      ],
+      "confidence": 0.5380124449729919,
+      "class": "egg_tray"
+    }
+  ]
+}

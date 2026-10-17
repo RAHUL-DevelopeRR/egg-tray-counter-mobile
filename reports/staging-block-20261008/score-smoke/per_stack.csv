@@ -1,0 +1,6 @@
+scan_id,block_id,x,y,status,app_layers,manual_filled,manual_empty,diff
+d6d087ea-bb3f-49d4-8621-f6a6d6c37fad,WH-99,0,0,observed,21,20,0,1
+d6d087ea-bb3f-49d4-8621-f6a6d6c37fad,WH-99,1,0,observed,20,20,0,0
+d6d087ea-bb3f-49d4-8621-f6a6d6c37fad,WH-99,2,0,observed,20,20,0,0
+d6d087ea-bb3f-49d4-8621-f6a6d6c37fad,WH-99,3,0,observed,21,20,0,1
+d6d087ea-bb3f-49d4-8621-f6a6d6c37fad,WH-99,4,0,observed,19,19,0,0

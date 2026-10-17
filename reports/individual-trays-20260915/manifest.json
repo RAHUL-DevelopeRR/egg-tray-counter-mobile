@@ -1,0 +1,148 @@
+{
+  "purpose": "local annotation preparation; not inference or training",
+  "attachments": [
+    {
+      "attachment": 1,
+      "source_name": "codex-clipboard-04015031-6f5f-430a-8363-af38f8e9f480.jpg",
+      "archived_file": "image-01.jpg",
+      "sha256": "87329b8d8794201e88fd0806fad03c3c233213b8a15a3f7b38620b25effa8def",
+      "duplicate_of": null,
+      "width": 960,
+      "height": 1280,
+      "laplacian_variance": 87.19
+    },
+    {
+      "attachment": 2,
+      "source_name": "codex-clipboard-e50d952e-af75-43c6-872d-1576348fdb87.jpg",
+      "archived_file": "image-02.jpg",
+      "sha256": "a33384b4474d63a71cfcf7281de362d21b4e0ed7530801bc1ae87981962eff32",
+      "duplicate_of": null,
+      "width": 1280,
+      "height": 960,
+      "laplacian_variance": 97.76
+    },
+    {
+      "attachment": 3,
+      "source_name": "codex-clipboard-877b3c57-8f4b-411b-bdf5-2991c69a4a6e.jpg",
+      "archived_file": "image-03.jpg",
+      "sha256": "7061359c583b5a0814b89252798287f3000b12ecee7a7f963b80321c66cd3895",
+      "duplicate_of": null,
+      "width": 1280,
+      "height": 960,
+      "laplacian_variance": 10.91
+    },
+    {
+      "attachment": 4,
+      "source_name": "codex-clipboard-b5cb5a6f-66f7-4bf2-bff0-be8d5843bfb6.jpg",
+      "archived_file": "image-04.jpg",
+      "sha256": "9cafbe06cf8b46b969859ee1ae8bbc4a9b55666942feb847a0f42c121fb5cce8",
+      "duplicate_of": null,
+      "width": 1280,
+      "height": 960,
+      "laplacian_variance": 45.49
+    },
+    {
+      "attachment": 5,
+      "source_name": "codex-clipboard-79c3fda6-08b4-4fca-9991-d6de338c1193.jpg",
+      "archived_file": "image-05.jpg",
+      "sha256": "b5fe4fd90b18e5c449bc43f4224b85074bf7504ba77991839ece9db564c1f2a7",
+      "duplicate_of": null,
+      "width": 1280,
+      "height": 960,
+      "laplacian_variance": 28.08
+    },
+    {
+      "attachment": 6,
+      "source_name": "codex-clipboard-cc69f476-68da-4d2e-8948-7d257bda918f.jpg",
+      "archived_file": "image-06.jpg",
+      "sha256": "14572222f85b37e231df3d9b2402b8e10b5e5f40bb865e34495f00e1bd12d3ac",
+      "duplicate_of": null,
+      "width": 960,
+      "height": 1280,
+      "laplacian_variance": 146.35
+    },
+    {
+      "attachment": 7,
+      "source_name": "codex-clipboard-96cad030-3019-46a6-a58b-7944d8af3d6e.jpg",
+      "archived_file": "image-01.jpg",
+      "sha256": "87329b8d8794201e88fd0806fad03c3c233213b8a15a3f7b38620b25effa8def",
+      "duplicate_of": "image-01.jpg",
+      "width": 960,
+      "height": 1280,
+      "laplacian_variance": 87.19
+    },
+    {
+      "attachment": 8,
+      "source_name": "codex-clipboard-c8610fbd-afd8-40bb-acf4-63d62f3dfbd1.jpg",
+      "archived_file": "image-01.jpg",
+      "sha256": "87329b8d8794201e88fd0806fad03c3c233213b8a15a3f7b38620b25effa8def",
+      "duplicate_of": "image-01.jpg",
+      "width": 960,
+      "height": 1280,
+      "laplacian_variance": 87.19
+    },
+    {
+      "attachment": 9,
+      "source_name": "codex-clipboard-cd476494-ed0d-4029-a274-5b816f100bec.jpg",
+      "archived_file": "image-02.jpg",
+      "sha256": "a33384b4474d63a71cfcf7281de362d21b4e0ed7530801bc1ae87981962eff32",
+      "duplicate_of": "image-02.jpg",
+      "width": 1280,
+      "height": 960,
+      "laplacian_variance": 97.76
+    },
+    {
+      "attachment": 10,
+      "source_name": "codex-clipboard-3413f466-970e-4057-b30d-3157f859fa2e.jpg",
+      "archived_file": "image-03.jpg",
+      "sha256": "7061359c583b5a0814b89252798287f3000b12ecee7a7f963b80321c66cd3895",
+      "duplicate_of": "image-03.jpg",
+      "width": 1280,
+      "height": 960,
+      "laplacian_variance": 10.91
+    },
+    {
+      "attachment": 11,
+      "source_name": "codex-clipboard-ea9c3af9-dee6-4ae5-bd7a-039f886d7b72.jpg",
+      "archived_file": "image-04.jpg",
+      "sha256": "9cafbe06cf8b46b969859ee1ae8bbc4a9b55666942feb847a0f42c121fb5cce8",
+      "duplicate_of": "image-04.jpg",
+      "width": 1280,
+      "height": 960,
+      "laplacian_variance": 45.49
+    },
+    {
+      "attachment": 12,
+      "source_name": "codex-clipboard-92ef77c6-ffc7-4518-9ffb-bd12bb60891e.jpg",
+      "archived_file": "image-05.jpg",
+      "sha256": "b5fe4fd90b18e5c449bc43f4224b85074bf7504ba77991839ece9db564c1f2a7",
+      "duplicate_of": "image-05.jpg",
+      "width": 1280,
+      "height": 960,
+      "laplacian_variance": 28.08
+    },
+    {
+      "attachment": 13,
+      "source_name": "codex-clipboard-6cbfc1ee-5f75-46d0-a08d-18980de70546.jpg",
+      "archived_file": "image-06.jpg",
+      "sha256": "14572222f85b37e231df3d9b2402b8e10b5e5f40bb865e34495f00e1bd12d3ac",
+      "duplicate_of": "image-06.jpg",
+      "width": 960,
+      "height": 1280,
+      "laplacian_variance": 146.35
+    },
+    {
+      "attachment": 14,
+      "source_name": "codex-clipboard-31198eca-32b7-465a-abc2-5087ff12082a.jpg",
+      "archived_file": "image-01.jpg",
+      "sha256": "87329b8d8794201e88fd0806fad03c3c233213b8a15a3f7b38620b25effa8def",
+      "duplicate_of": "image-01.jpg",
+      "width": 960,
+      "height": 1280,
+      "laplacian_variance": 87.19
+    }
+  ],
+  "unique_files": 6,
+  "split_group": "same-user-capture-session-20260915",
+  "split": "unassigned-development-only"
+}

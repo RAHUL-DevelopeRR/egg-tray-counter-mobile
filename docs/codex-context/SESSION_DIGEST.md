@@ -1,3 +1,28 @@
+> Latest direction (2026-09-23): read docs/WAREHOUSE_3D_ACCEPTANCE_PLAN.md and
+> PROGRESS.md. Torch added to capture UI; production hybrid integration remains
+> incomplete. Fresh health: hybrid_ready=false, model projec-mutta/2.
+
+> Historical checkpoint (2026-09-17): local candidate revision `candidate-20260917`.
+> Read `reports/candidate-20260917/README.md` and the latest PROGRESS/context entries.
+> Regional quality, structured recapture, strict schemas, shared-stack provenance
+> and stronger provisional matching implemented. Synthetic 200/180/195 pass;
+> 65 backend tests and 13 Worker tests passed, plus focused final checks.
+> 35 archived images replayed, 106 proposed faces, no new RF calls or physical truth.
+> Real correspondence/occupancy remain unresolved. Worker encoding/logging changes
+> are local only. No deployment, training or APK rebuild; APK stays 0.2.2+5.
+> Next: confirm a same-scene triplet and independent per-stack truth, then calibrate
+> geometry/occupancy/quality acceptance before hosted integration and Android work.
+
+> Latest checkpoint (2026-09-16): the active work is the **local MUTAA 3D/band
+> candidate**, documented in `docs/3D_BEAM_COUNTING_ARCHITECTURE.md` and
+> `reports/mutaa-20260916/README.md`. 35 originals have fresh V2 results and
+> automatic band/ROI evidence; real 3D identity and eligible totals remain
+> unresolved. 62 Python tests and 12 Worker tests pass. APK remains 0.2.2+5;
+> latest recorded live Worker is ab67cd59-3f4e-4628-a0fa-d085f56a3fe8.
+> No new deployment, APK or retraining. Earlier deployment/training priorities
+> below are historical and do not override the current research-only scope.
+> Read the latest PROGRESS.md and context.md entries first.
+
 # Codex Session Digest: Egg Tray Counter
 
 - **Session Thread:** Build egg tray counter app
@@ -30,3 +55,11 @@
    - Built APK 0.2.0; diagnosed native CameraX cold startup crash.
    - Built APK 0.2.1; deferred camera enumeration to photo preflight, resolving startup crash.
    - Passed 14 Flutter unit tests and 3 cold-launch checks on emulator right before rate limit reached.
+# 2026-09-23 upload checkpoint
+
+Added UPLOAD PHOTOS alongside live capture; three labelled views use the same
+count API, original files remain intact, uploaded pose is explicitly unverified.
+Version 0.3.3+9 built, signature verified and installed on Redmi. Upload screen
+verified; native picker/full submission pending after phone call. No prior phone
+input uploads recovered: no Worker image archive; connected Redmi private cache
+is inaccessible. Two gallery photos of old result screens were recovered locally.

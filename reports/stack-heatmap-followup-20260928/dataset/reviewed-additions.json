@@ -1,0 +1,210 @@
+[
+  {
+    "id": "scene2-foreground-5",
+    "source_path": "reports/individual-trays-20260915/image-06.jpg",
+    "quad": [
+      [
+        491,
+        790
+      ],
+      [
+        664,
+        817
+      ],
+      [
+        635,
+        1028
+      ],
+      [
+        478,
+        1014
+      ]
+    ],
+    "manual_centres_original": [
+      [
+        560,
+        821
+      ],
+      [
+        560,
+        872
+      ],
+      [
+        560,
+        917
+      ],
+      [
+        560,
+        953
+      ],
+      [
+        560,
+        992
+      ]
+    ],
+    "review_note": "Five separate physical tray rims, top partial tray plus four side egg rows; back-to-front egg rows on top are one tray. Native source visually reviewed with coordinate grid. Moderate blur; approximate centres."
+  },
+  {
+    "id": "scene2-right-5",
+    "source_path": "reports/individual-trays-20260915/image-06.jpg",
+    "quad": [
+      [
+        732,
+        786
+      ],
+      [
+        906,
+        816
+      ],
+      [
+        860,
+        1038
+      ],
+      [
+        704,
+        1005
+      ]
+    ],
+    "manual_centres_original": [
+      [
+        803,
+        829
+      ],
+      [
+        803,
+        884
+      ],
+      [
+        803,
+        929
+      ],
+      [
+        803,
+        966
+      ],
+      [
+        803,
+        1007
+      ]
+    ],
+    "review_note": "Five separate rims with top partially occupied tray plus four side rows. Same scene as other foreground stacks; never separate splits. Moderate blur and slanted face; approximate centres."
+  },
+  {
+    "id": "green-foreground-7",
+    "source_path": "datasets/canonical_clean/train/images/3c10ced76389577195fa.jpeg",
+    "quad": [
+      [
+        151,
+        539
+      ],
+      [
+        398,
+        553
+      ],
+      [
+        372,
+        872
+      ],
+      [
+        145,
+        850
+      ]
+    ],
+    "manual_centres_original": [
+      [
+        268,
+        574
+      ],
+      [
+        268,
+        628
+      ],
+      [
+        268,
+        672
+      ],
+      [
+        268,
+        714
+      ],
+      [
+        268,
+        754
+      ],
+      [
+        268,
+        795
+      ],
+      [
+        268,
+        836
+      ]
+    ],
+    "review_note": "Seven visible tray layers in front stack, top partially occupied plus six side egg rows. Occluded background excluded. Entire parent stays in conservative historical group; not full-frame label approval."
+  },
+  {
+    "id": "orange-foreground-10",
+    "source_path": "datasets/canonical_clean/train/images/41a1e5bfcf14ef8ed43e.jpeg",
+    "quad": [
+      [
+        166,
+        366
+      ],
+      [
+        1000,
+        424
+      ],
+      [
+        834,
+        1465
+      ],
+      [
+        290,
+        1435
+      ]
+    ],
+    "manual_centres_original": [
+      [
+        580,
+        550
+      ],
+      [
+        580,
+        719
+      ],
+      [
+        580,
+        843
+      ],
+      [
+        580,
+        954
+      ],
+      [
+        580,
+        1070
+      ],
+      [
+        580,
+        1159
+      ],
+      [
+        580,
+        1240
+      ],
+      [
+        580,
+        1310
+      ],
+      [
+        580,
+        1373
+      ],
+      [
+        580,
+        1434
+      ]
+    ],
+    "review_note": "Ten distinguishable orange foreground rims/egg layers. Perspective spacing varies; top receding egg rows counted once. Bottom covered partly by empty paper tray; endpoint uncalibrated. Other stacks not approved."
+  }
+]

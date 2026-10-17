@@ -1,0 +1,10 @@
+{
+  "images": [],
+  "annotations": [],
+  "categories": [
+    {
+      "id": 1,
+      "name": "egg_tray"
+    }
+  ]
+}

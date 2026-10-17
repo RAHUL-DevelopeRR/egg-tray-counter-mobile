@@ -1,0 +1,7 @@
+{
+  "status": "blocked",
+  "groups": [
+    "session-2026-07-03"
+  ],
+  "reason": "At least two independently reviewed leakage groups required; no random image split"
+}

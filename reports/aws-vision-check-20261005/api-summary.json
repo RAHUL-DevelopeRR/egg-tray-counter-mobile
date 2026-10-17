@@ -1,0 +1,31 @@
+{
+  "health_status": 200,
+  "health": {
+    "status": "ok",
+    "mode": "diagnostic_only",
+    "inventory_verification_ready": false
+  },
+  "candidate_status": 200,
+  "source_view_assignment": {
+    "left": 1,
+    "straight": 2,
+    "right": 3
+  },
+  "source_views_are_calibrated": false,
+  "stable_scene_physically_confirmed": false,
+  "status": "recapture_required",
+  "verified": false,
+  "physical_trays": null,
+  "eligible_egg_trays": null,
+  "stack_candidates": 16,
+  "correspondences": 0,
+  "sop_unverified": [
+    "vertical_stacks",
+    "orthogonal_layout",
+    "all_positions_observed",
+    "top_base_visible",
+    "stable_arrangement",
+    "boundaries_identifiable",
+    "front_side_separation"
+  ]
+}

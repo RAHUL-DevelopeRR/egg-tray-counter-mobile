@@ -1,0 +1,22 @@
+{
+  "builder_terminated": true,
+  "temporary_builder_role_profile_security_group_removed": true,
+  "function": {
+    "FunctionName": "egg-tray-vision-pilot",
+    "FunctionArn": "arn:aws:lambda:ap-south-1:608942062000:function:egg-tray-vision-pilot",
+    "State": "Active",
+    "LastUpdateStatus": "Successful",
+    "MemorySize": 2048,
+    "Timeout": 120,
+    "CodeSha256": "f4843cebc73d1dbe15f717799cdb9361ef2deb0b5c57e82a0a92cfa3e7b9a472",
+    "ImageConfigResponse": {
+      "ImageConfig": {
+        "Command": [
+          "sh",
+          "-c",
+          "exec uvicorn app.vision_service:create_vision_app --factory --host 0.0.0.0 --port ${PORT} --workers 1"
+        ]
+      }
+    }
+  }
+}

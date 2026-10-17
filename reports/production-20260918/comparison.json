@@ -1,0 +1,57 @@
+{
+  "same_scene": false,
+  "arrangement_status": "user confirmed separate counting references; subsequently requested assigned-view demonstration",
+  "physical_truth_available": false,
+  "blindness": "Reference frozen before this new backend run; photographs also match earlier MUTAA audit and therefore this is not a genuinely unseen blind benchmark.",
+  "historical_image_matches": {
+    "right": "image-01",
+    "left": "image-02",
+    "straight": "image-04"
+  },
+  "comparison_status": "No cell-by-cell comparison possible because physical correspondence is unresolved",
+  "count_accuracy": null,
+  "precision": null,
+  "findings": [
+    {
+      "view": "right",
+      "manual_visible_estimate": 14,
+      "rf_detections": 15,
+      "band_candidate": 14,
+      "conclusion": "Agreement with tentative visual estimate does not certify geometry or occupancy."
+    },
+    {
+      "view": "left",
+      "manual_visible_range": [
+        12,
+        14
+      ],
+      "rf_detections": 8,
+      "band_candidate": 10,
+      "conclusion": "Only four of eight boxes localized into one proposed face; inspect incomplete localization/endpoints."
+    },
+    {
+      "view": "straight",
+      "manual_visible_eligible_per_column": [
+        10,
+        10,
+        10
+      ],
+      "rf_detections": 34,
+      "band_candidates": [
+        8,
+        11,
+        16
+      ],
+      "conclusion": "Bands inconsistent with tentative per-column visual estimate; ROI, endpoints and harmonics need audit."
+    }
+  ],
+  "failure_categories": [
+    "CROSS_VIEW_IDENTITY",
+    "DEPTH_RECONSTRUCTION",
+    "STACK_LOCALIZATION",
+    "BEAM_HARMONIC",
+    "BEAM_ENDPOINT",
+    "OCCUPANCY"
+  ],
+  "inference_read_reference_or_truth": false
+}

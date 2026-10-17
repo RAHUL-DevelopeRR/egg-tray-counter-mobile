@@ -1,0 +1,444 @@
+[
+  {
+    "id": "focused-1",
+    "scene_id": "session-2026-07-03",
+    "leakage_group_id": "session-2026-07-03",
+    "split": "train",
+    "image_path": "reports/two-view-20260924/focused-training/focused-face-1.jpg",
+    "source_sha256": "bd2ba34e77d6cda94ed982d678590d9a5a0bde5a9b684dbaec0591ffa6ca0970",
+    "quad": [
+      [
+        188,
+        510
+      ],
+      [
+        310,
+        541
+      ],
+      [
+        345,
+        1202
+      ],
+      [
+        218,
+        1148
+      ]
+    ],
+    "homography": [
+      [
+        1.2055814301984553,
+        -0.05668878198425344,
+        -197.73803006534033
+      ],
+      [
+        -0.2896582399658962,
+        1.1399453314786845,
+        -526.9163699405408
+      ],
+      [
+        0.0002837190260107504,
+        3.95331319778628e-05,
+        1.0
+      ]
+    ],
+    "source_path": "reports/two-view-20260924/input-1.jpg",
+    "centres_y": [
+      0.07615384615384616,
+      0.17615384615384616,
+      0.22384615384615383,
+      0.27076923076923076,
+      0.3161538461538462,
+      0.36153846153846153,
+      0.4084615384615385,
+      0.4546153846153846,
+      0.49923076923076926,
+      0.5446153846153846,
+      0.5892307692307692,
+      0.6323076923076923,
+      0.6746153846153846,
+      0.7169230769230769,
+      0.7592307692307693,
+      0.8007692307692308,
+      0.8407692307692308,
+      0.88,
+      0.9184615384615384,
+      0.9561538461538461
+    ],
+    "count": 20,
+    "annotation_status": "assistant_visual_reviewed",
+    "ground_truth_status": "visible_layer_reference_not_physical_inventory",
+    "target_path": "reports/stack-heatmap-20260928/dataset/targets/focused-1.npy",
+    "target_sigma_normalized": 0.007138461538461538,
+    "top_supported": true,
+    "base_supported": true,
+    "occupancy": "unknown"
+  },
+  {
+    "id": "focused-2",
+    "scene_id": "session-2026-07-03",
+    "leakage_group_id": "session-2026-07-03",
+    "split": "train",
+    "image_path": "reports/two-view-20260924/focused-training/focused-face-2.jpg",
+    "source_sha256": "bd2ba34e77d6cda94ed982d678590d9a5a0bde5a9b684dbaec0591ffa6ca0970",
+    "quad": [
+      [
+        310,
+        541
+      ],
+      [
+        477,
+        583
+      ],
+      [
+        490,
+        1282
+      ],
+      [
+        345,
+        1202
+      ]
+    ],
+    "homography": [
+      [
+        1.1407842653731248,
+        -0.06040461314381151,
+        -320.96422655486674
+      ],
+      [
+        -0.23495597100098878,
+        0.9342296942182107,
+        -432.5819135617454
+      ],
+      [
+        0.0005467799410802767,
+        -0.00024343276559194273,
+        1.0
+      ]
+    ],
+    "source_path": "reports/two-view-20260924/input-1.jpg",
+    "centres_y": [
+      0.05947136563876652,
+      0.14096916299559473,
+      0.18502202643171806,
+      0.2305433186490455,
+      0.27606461086637296,
+      0.3208516886930984,
+      0.3656387665198238,
+      0.4111600587371512,
+      0.45741556534508077,
+      0.5022026431718062,
+      0.5469897209985316,
+      0.5925110132158591,
+      0.6372980910425844,
+      0.6813509544787077,
+      0.724669603524229,
+      0.7679882525697503,
+      0.8120411160058737,
+      0.8568281938325991,
+      0.9001468428781204,
+      0.9434654919236417
+    ],
+    "count": 20,
+    "annotation_status": "assistant_visual_reviewed",
+    "ground_truth_status": "visible_layer_reference_not_physical_inventory",
+    "target_path": "reports/stack-heatmap-20260928/dataset/targets/focused-2.npy",
+    "target_sigma_normalized": 0.007165932452276067,
+    "top_supported": true,
+    "base_supported": true,
+    "occupancy": "unknown"
+  },
+  {
+    "id": "focused-3",
+    "scene_id": "session-2026-07-03",
+    "leakage_group_id": "session-2026-07-03",
+    "split": "train",
+    "image_path": "reports/two-view-20260924/focused-training/focused-face-3.jpg",
+    "source_sha256": "bd2ba34e77d6cda94ed982d678590d9a5a0bde5a9b684dbaec0591ffa6ca0970",
+    "quad": [
+      [
+        477,
+        583
+      ],
+      [
+        656,
+        628
+      ],
+      [
+        651,
+        1369
+      ],
+      [
+        490,
+        1282
+      ]
+    ],
+    "homography": [
+      [
+        1.2686223764112023,
+        -0.023593835326674695,
+        -591.3776675526922
+      ],
+      [
+        -0.2690633596670433,
+        1.0702742528977942,
+        -495.6266668782343
+      ],
+      [
+        0.000523196547843349,
+        -0.00017217479714936419,
+        1.0
+      ]
+    ],
+    "source_path": "reports/two-view-20260924/input-1.jpg",
+    "centres_y": [
+      0.05625,
+      0.1361111111111111,
+      0.18194444444444444,
+      0.22847222222222222,
+      0.27569444444444446,
+      0.3229166666666667,
+      0.3701388888888889,
+      0.4166666666666667,
+      0.4618055555555556,
+      0.5069444444444444,
+      0.5527777777777778,
+      0.5979166666666667,
+      0.64375,
+      0.6875,
+      0.7305555555555555,
+      0.7743055555555556,
+      0.8180555555555555,
+      0.8625,
+      0.9055555555555556,
+      0.9479166666666666
+    ],
+    "count": 20,
+    "annotation_status": "assistant_visual_reviewed",
+    "ground_truth_status": "visible_layer_reference_not_physical_inventory",
+    "target_path": "reports/stack-heatmap-20260928/dataset/targets/focused-3.npy",
+    "target_sigma_normalized": 0.007222222222222224,
+    "top_supported": true,
+    "base_supported": true,
+    "occupancy": "unknown"
+  },
+  {
+    "id": "focused-4",
+    "scene_id": "session-2026-07-03",
+    "leakage_group_id": "session-2026-07-03",
+    "split": "train",
+    "image_path": "reports/two-view-20260924/focused-training/focused-face-4.jpg",
+    "source_sha256": "bd2ba34e77d6cda94ed982d678590d9a5a0bde5a9b684dbaec0591ffa6ca0970",
+    "quad": [
+      [
+        656,
+        628
+      ],
+      [
+        881,
+        683
+      ],
+      [
+        835,
+        1448
+      ],
+      [
+        651,
+        1369
+      ]
+    ],
+    "homography": [
+      [
+        1.065837817918608,
+        0.00719188811011207,
+        -703.7061142877573
+      ],
+      [
+        -0.2169219500715254,
+        0.8874079775653312,
+        -414.9914106641073
+      ],
+      [
+        0.00032318711689662796,
+        -0.00024520702011802763,
+        1.0
+      ]
+    ],
+    "source_path": "reports/two-view-20260924/input-1.jpg",
+    "centres_y": [
+      0.038461538461538464,
+      0.10079575596816977,
+      0.14854111405835543,
+      0.19496021220159152,
+      0.23938992042440319,
+      0.28448275862068967,
+      0.3302387267904509,
+      0.3759946949602122,
+      0.42108753315649866,
+      0.4661803713527852,
+      0.5125994694960212,
+      0.5590185676392573,
+      0.6047745358090185,
+      0.649867374005305,
+      0.6949602122015915,
+      0.7407161803713528,
+      0.7858090185676393,
+      0.8309018567639257,
+      0.876657824933687,
+      0.9224137931034483
+    ],
+    "count": 20,
+    "annotation_status": "assistant_visual_reviewed",
+    "ground_truth_status": "visible_layer_reference_not_physical_inventory",
+    "target_path": "reports/stack-heatmap-20260928/dataset/targets/focused-4.npy",
+    "target_sigma_normalized": 0.007320954907161799,
+    "top_supported": true,
+    "base_supported": true,
+    "occupancy": "unknown"
+  },
+  {
+    "id": "focused-5",
+    "scene_id": "session-2026-07-03",
+    "leakage_group_id": "session-2026-07-03",
+    "split": "train",
+    "image_path": "reports/two-view-20260924/focused-training/focused-face-5.jpg",
+    "source_sha256": "bd2ba34e77d6cda94ed982d678590d9a5a0bde5a9b684dbaec0591ffa6ca0970",
+    "quad": [
+      [
+        859,
+        730
+      ],
+      [
+        1140,
+        777
+      ],
+      [
+        1010,
+        1500
+      ],
+      [
+        810,
+        1400
+      ]
+    ],
+    "homography": [
+      [
+        1.2911985108902972,
+        0.09443093587108149,
+        -1178.074104040655
+      ],
+      [
+        -0.16680985633656648,
+        0.9973099921398977,
+        -584.7466276690147
+      ],
+      [
+        0.0006834707823728664,
+        -0.00042151381621757827,
+        1.0
+      ]
+    ],
+    "source_path": "reports/two-view-20260924/input-1.jpg",
+    "centres_y": [
+      0.031294452347083924,
+      0.08819345661450925,
+      0.1379800853485064,
+      0.18776671408250356,
+      0.23897581792318634,
+      0.2901849217638691,
+      0.3413940256045519,
+      0.3940256045519203,
+      0.4480796586059744,
+      0.5021337126600285,
+      0.5561877667140825,
+      0.6088193456614509,
+      0.6600284495021337,
+      0.7126600284495022,
+      0.767425320056899,
+      0.8229018492176386,
+      0.8776671408250356,
+      0.930298719772404,
+      0.9772403982930299
+    ],
+    "count": 19,
+    "annotation_status": "assistant_visual_reviewed",
+    "ground_truth_status": "visible_layer_reference_not_physical_inventory",
+    "target_path": "reports/stack-heatmap-20260928/dataset/targets/focused-5.npy",
+    "target_sigma_normalized": 0.008421052631578942,
+    "top_supported": true,
+    "base_supported": true,
+    "occupancy": "unknown"
+  },
+  {
+    "id": "side-19",
+    "scene_id": "session-2026-07-03",
+    "leakage_group_id": "session-2026-07-03",
+    "split": "train",
+    "image_path": "reports/stack-heatmap-20260928/dataset/faces/side-19.jpg",
+    "source_sha256": "fb5bd22bfe8d1b3da1714ad9f1ef9f90330d562d6bd499bb6005446886506e66",
+    "quad": [
+      [
+        335,
+        0
+      ],
+      [
+        829,
+        0
+      ],
+      [
+        829,
+        1450
+      ],
+      [
+        335,
+        1450
+      ]
+    ],
+    "homography": [
+      [
+        1,
+        0,
+        -335
+      ],
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ],
+    "source_path": "reports/two-view-20260924/input-2.jpg",
+    "centres_y": [
+      0.02067539627842867,
+      0.0740868366643694,
+      0.13921433494141972,
+      0.2033080634045486,
+      0.26636802205375604,
+      0.326671261199173,
+      0.38456237077877325,
+      0.44176430048242593,
+      0.4968986905582357,
+      0.5499655410062027,
+      0.6016540317022743,
+      0.653342522398346,
+      0.7036526533425224,
+      0.7522398345968297,
+      0.7997932460372157,
+      0.8445899379738112,
+      0.888697450034459,
+      0.9328049620951068,
+      0.9769124741557547
+    ],
+    "count": 19,
+    "annotation_status": "assistant_visual_reviewed",
+    "ground_truth_status": "visible_layer_reference_not_physical_inventory",
+    "target_path": "reports/stack-heatmap-20260928/dataset/targets/side-19.npy",
+    "target_sigma_normalized": 0.008380427291523093,
+    "top_supported": false,
+    "base_supported": true,
+    "occupancy": "unknown"
+  }
+]

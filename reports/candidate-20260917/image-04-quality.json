@@ -1,0 +1,286 @@
+{
+  "id": "image-04",
+  "sha256": "d4c46e40ead8b6797b94d13cb90e6cf656828e566652687d35399f7f3985c7a0",
+  "ground_truth_status": "GROUND_TRUTH_UNKNOWN",
+  "view_assignment_confirmed": false,
+  "rf_count": 34,
+  "stacks": [
+    {
+      "stack_id": "image-04:candidate_1",
+      "polygon": [
+        [
+          721.876603422089,
+          466.0
+        ],
+        [
+          1523.640678043094,
+          466.0
+        ],
+        [
+          1472.8221925443363,
+          1781.0
+        ],
+        [
+          793.1557886999587,
+          1781.0
+        ]
+      ],
+      "rf_count": 11,
+      "historical_beam": {
+        "exploratory_band_count": 8,
+        "selected_count": null,
+        "tray_count_candidates": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          12,
+          13,
+          14
+        ],
+        "harmonic_ambiguity": true,
+        "reason": "Band semantics, endpoint completeness and occupancy are unverified"
+      },
+      "regional_quality": {
+        "profile": {
+          "version": "regional_quality_pilot_v1",
+          "dark_mean": 45.0,
+          "dark_fraction": 0.55,
+          "weak_rim_contrast": 12.0,
+          "min_laplacian_variance": 20.0,
+          "min_local_contrast": 18.0
+        },
+        "thresholds_validated": false,
+        "roi_completeness_verified": false,
+        "analysis_size": [
+          384,
+          631
+        ],
+        "regions": {
+          "top": {
+            "exposure_mean": 65.47954602145174,
+            "dark_fraction": 0.01652531803442255,
+            "highlight_clipping_fraction": 0.00018707907208780243,
+            "local_contrast": 92.0,
+            "laplacian_variance": 922.9170532226562,
+            "rim_contrast": 94.0,
+            "low_light": false,
+            "weak_sharpness": false,
+            "occlusion": null
+          },
+          "middle": {
+            "exposure_mean": 66.63372180451128,
+            "dark_fraction": 0.06070175438596491,
+            "highlight_clipping_fraction": 3.759398496240601e-05,
+            "local_contrast": 101.0,
+            "laplacian_variance": 1078.5357666015625,
+            "rim_contrast": 121.0,
+            "low_light": false,
+            "weak_sharpness": false,
+            "occlusion": null
+          },
+          "bottom": {
+            "exposure_mean": 68.16296992481203,
+            "dark_fraction": 0.14463659147869673,
+            "highlight_clipping_fraction": 0.0003007518796992481,
+            "local_contrast": 127.0,
+            "laplacian_variance": 980.8883056640625,
+            "rim_contrast": 146.0,
+            "low_light": false,
+            "weak_sharpness": false,
+            "occlusion": null
+          }
+        },
+        "recommendations": []
+      },
+      "full_beam_source": "../mutaa-20260916/analysis/image-04.json"
+    },
+    {
+      "stack_id": "image-04:candidate_2",
+      "polygon": [
+        [
+          1543.3954748866051,
+          352.0
+        ],
+        [
+          2218.1423777860296,
+          352.0
+        ],
+        [
+          2154.525344068623,
+          1688.0
+        ],
+        [
+          1562.5357780365996,
+          1688.0
+        ]
+      ],
+      "rf_count": 11,
+      "historical_beam": {
+        "exploratory_band_count": 11,
+        "selected_count": null,
+        "tray_count_candidates": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          11,
+          12,
+          13,
+          15
+        ],
+        "harmonic_ambiguity": true,
+        "reason": "Band semantics, endpoint completeness and occupancy are unverified"
+      },
+      "regional_quality": {
+        "profile": {
+          "version": "regional_quality_pilot_v1",
+          "dark_mean": 45.0,
+          "dark_fraction": 0.55,
+          "weak_rim_contrast": 12.0,
+          "min_laplacian_variance": 20.0,
+          "min_local_contrast": 18.0
+        },
+        "thresholds_validated": false,
+        "roi_completeness_verified": false,
+        "analysis_size": [
+          384,
+          761
+        ],
+        "regions": {
+          "top": {
+            "exposure_mean": 70.767416079569,
+            "dark_fraction": 0.02803564028180688,
+            "highlight_clipping_fraction": 0.0001346871114794861,
+            "local_contrast": 113.0,
+            "laplacian_variance": 1206.4285888671875,
+            "rim_contrast": 104.0,
+            "low_light": false,
+            "weak_sharpness": false,
+            "occlusion": null
+          },
+          "middle": {
+            "exposure_mean": 65.83734977206797,
+            "dark_fraction": 0.09014711976792375,
+            "highlight_clipping_fraction": 1.0360547036883547e-05,
+            "local_contrast": 96.0,
+            "laplacian_variance": 764.5844116210938,
+            "rim_contrast": 100.0,
+            "low_light": false,
+            "weak_sharpness": false,
+            "occlusion": null
+          },
+          "bottom": {
+            "exposure_mean": 65.12284168920324,
+            "dark_fraction": 0.19774287497399626,
+            "highlight_clipping_fraction": 0.0006864988558352403,
+            "local_contrast": 118.0,
+            "laplacian_variance": 757.6356811523438,
+            "rim_contrast": 126.0,
+            "low_light": false,
+            "weak_sharpness": false,
+            "occlusion": null
+          }
+        },
+        "recommendations": []
+      },
+      "full_beam_source": "../mutaa-20260916/analysis/image-04.json"
+    },
+    {
+      "stack_id": "image-04:candidate_3",
+      "polygon": [
+        [
+          2277.499698060618,
+          393.0
+        ],
+        [
+          2848.2814879154816,
+          393.0
+        ],
+        [
+          2704.743482551474,
+          1627.0
+        ],
+        [
+          2189.6865712227186,
+          1627.0
+        ]
+      ],
+      "rf_count": 12,
+      "historical_beam": {
+        "exploratory_band_count": 16,
+        "selected_count": null,
+        "tray_count_candidates": [
+          5,
+          8,
+          9,
+          11,
+          13,
+          14,
+          15,
+          16
+        ],
+        "harmonic_ambiguity": true,
+        "reason": "Band semantics, endpoint completeness and occupancy are unverified"
+      },
+      "regional_quality": {
+        "profile": {
+          "version": "regional_quality_pilot_v1",
+          "dark_mean": 45.0,
+          "dark_fraction": 0.55,
+          "weak_rim_contrast": 12.0,
+          "min_laplacian_variance": 20.0,
+          "min_local_contrast": 18.0
+        },
+        "thresholds_validated": false,
+        "roi_completeness_verified": false,
+        "analysis_size": [
+          353,
+          768
+        ],
+        "regions": {
+          "top": {
+            "exposure_mean": 66.0243553008596,
+            "dark_fraction": 0.03698065902578797,
+            "highlight_clipping_fraction": 0.0,
+            "local_contrast": 110.0,
+            "laplacian_variance": 520.9339599609375,
+            "rim_contrast": 80.0,
+            "low_light": false,
+            "weak_sharpness": false,
+            "occlusion": null
+          },
+          "middle": {
+            "exposure_mean": 65.35711407593124,
+            "dark_fraction": 0.06742478510028653,
+            "highlight_clipping_fraction": 0.0,
+            "local_contrast": 114.0,
+            "laplacian_variance": 524.59619140625,
+            "rim_contrast": 96.0,
+            "low_light": false,
+            "weak_sharpness": false,
+            "occlusion": null
+          },
+          "bottom": {
+            "exposure_mean": 58.85333094555874,
+            "dark_fraction": 0.1684724212034384,
+            "highlight_clipping_fraction": 0.00022385386819484242,
+            "local_contrast": 94.0,
+            "laplacian_variance": 415.91815185546875,
+            "rim_contrast": 96.0,
+            "low_light": false,
+            "weak_sharpness": false,
+            "occlusion": null
+          }
+        },
+        "recommendations": []
+      },
+      "full_beam_source": "../mutaa-20260916/analysis/image-04.json"
+    }
+  ],
+  "quality_scope": "proposed faces only; missed/partial faces remain unassessed",
+  "rf_and_beam_source": "frozen 20260916 audit; no fresh model calls"
+}

@@ -1,0 +1,332 @@
+[
+ {
+  "photo": "original 19",
+  "scan": "634ac062-a0a8-4f91-a29c-1efb10fc285c",
+  "view": "straight",
+  "boxes": 100,
+  "box_aspect": 5.84,
+  "walk": [
+   20,
+   20,
+   20,
+   20,
+   20
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20,
+   20
+  ],
+  "stacks_exact": true,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "app r90 19",
+  "scan": "634ac062-a0a8-4f91-a29c-1efb10fc285c",
+  "view": "left",
+  "boxes": 100,
+  "box_aspect": 5.474,
+  "walk": [
+   20,
+   20,
+   20,
+   20,
+   20
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20,
+   20
+  ],
+  "stacks_exact": true,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "app r270 19",
+  "scan": "634ac062-a0a8-4f91-a29c-1efb10fc285c",
+  "view": "right",
+  "boxes": 99,
+  "box_aspect": 5.467,
+  "walk": [
+   20,
+   20,
+   20,
+   20,
+   20
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20,
+   20
+  ],
+  "stacks_exact": true,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "original 01",
+  "scan": "9ff8d480-32c5-42d7-a584-a2b7458a5cef",
+  "view": "straight",
+  "boxes": 101,
+  "box_aspect": 5.389,
+  "walk": [
+   20,
+   20,
+   20,
+   20,
+   19
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20,
+   19
+  ],
+  "stacks_exact": true,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "app r90 01",
+  "scan": "9ff8d480-32c5-42d7-a584-a2b7458a5cef",
+  "view": "left",
+  "boxes": 99,
+  "box_aspect": 5.333,
+  "walk": [
+   20,
+   20,
+   20,
+   19,
+   19
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20,
+   19
+  ],
+  "stacks_exact": false,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "app r270 01",
+  "scan": "9ff8d480-32c5-42d7-a584-a2b7458a5cef",
+  "view": "right",
+  "boxes": 101,
+  "box_aspect": 5.375,
+  "walk": [
+   20,
+   20,
+   20,
+   20,
+   19
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20,
+   19
+  ],
+  "stacks_exact": true,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "original 02",
+  "scan": "3a680842-a6c1-419f-a675-cead7dd6fb0d",
+  "view": "straight",
+  "boxes": 81,
+  "box_aspect": 6.432,
+  "walk": [
+   20,
+   20,
+   20,
+   20
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20
+  ],
+  "stacks_exact": true,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "app r90 02",
+  "scan": "3a680842-a6c1-419f-a675-cead7dd6fb0d",
+  "view": "left",
+  "boxes": 78,
+  "box_aspect": 6.424,
+  "walk": [
+   19,
+   20,
+   20,
+   20
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20
+  ],
+  "stacks_exact": false,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "app r270 02",
+  "scan": "3a680842-a6c1-419f-a675-cead7dd6fb0d",
+  "view": "right",
+  "boxes": 78,
+  "box_aspect": 6.414,
+  "walk": [
+   19,
+   19,
+   20,
+   20
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20
+  ],
+  "stacks_exact": false,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "original 20",
+  "scan": "7f43b2a6-e8a1-4535-8cd3-e662d50cc117",
+  "view": "straight",
+  "boxes": 63,
+  "box_aspect": 5.857,
+  "walk": [
+   20,
+   20,
+   20
+  ],
+  "reference": [
+   20,
+   20,
+   20
+  ],
+  "stacks_exact": true,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "app r0 20",
+  "scan": "7f43b2a6-e8a1-4535-8cd3-e662d50cc117",
+  "view": "left",
+  "boxes": 55,
+  "box_aspect": 5.111,
+  "walk": [
+   18,
+   26,
+   18
+  ],
+  "reference": [
+   20,
+   20,
+   20
+  ],
+  "stacks_exact": false,
+  "accepted": false,
+  "reasons": [
+   "stacks are too small in the frame (too far away)"
+  ]
+ },
+ {
+  "photo": "OLD APP r90 19 (raw, tag 6)",
+  "scan": "7f43b2a6-e8a1-4535-8cd3-e662d50cc117",
+  "view": "right",
+  "boxes": 0,
+  "box_aspect": 2.262,
+  "walk": [],
+  "reference": [
+   20,
+   20,
+   20,
+   20,
+   20
+  ],
+  "stacks_exact": false,
+  "accepted": false,
+  "reasons": [
+   "the trays look sideways or unclear in this photo; hold the phone level and retake",
+   "no stacks detected"
+  ]
+ },
+ {
+  "photo": "app r90 46 narrow",
+  "scan": "40104561-fc63-4a40-81df-b1e8ce01c194",
+  "view": "straight",
+  "boxes": 19,
+  "box_aspect": 6.273,
+  "walk": [
+   19
+  ],
+  "reference": [
+   20
+  ],
+  "stacks_exact": false,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "original 46",
+  "scan": "40104561-fc63-4a40-81df-b1e8ce01c194",
+  "view": "left",
+  "boxes": 18,
+  "box_aspect": 4.747,
+  "walk": [
+   19
+  ],
+  "reference": [
+   20
+  ],
+  "stacks_exact": false,
+  "accepted": true,
+  "reasons": []
+ },
+ {
+  "photo": "OLD APP r270 01 (raw, tag 6)",
+  "scan": "40104561-fc63-4a40-81df-b1e8ce01c194",
+  "view": "right",
+  "boxes": 11,
+  "box_aspect": 0.77,
+  "walk": [
+   5,
+   3,
+   2
+  ],
+  "reference": [
+   20,
+   20,
+   20,
+   20,
+   19
+  ],
+  "stacks_exact": false,
+  "accepted": false,
+  "reasons": [
+   "the trays look sideways or unclear in this photo; hold the phone level and retake",
+   "layer pitch changes across the face (angled or corner view)"
+  ]
+ }
+]

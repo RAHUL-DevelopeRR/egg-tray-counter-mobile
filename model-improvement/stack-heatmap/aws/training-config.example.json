@@ -1,0 +1,29 @@
+{
+  "TrainingJobName": "egg-stack-heatmap-REPLACE-RUN-ID",
+  "RoleArn": "arn:aws:iam::REPLACE-ACCOUNT:role/REPLACE-SAGEMAKER-TRAINING-ROLE",
+  "AlgorithmSpecification": {
+    "TrainingImage": "REPLACE-ACCOUNT.dkr.ecr.ap-south-1.amazonaws.com/egg-stack-training@sha256:REPLACE-DIGEST",
+    "TrainingInputMode": "File"
+  },
+  "InputDataConfig": [{
+    "ChannelName": "training",
+    "DataSource": {"S3DataSource": {
+      "S3DataType": "S3Prefix",
+      "S3Uri": "s3://REPLACE-BUCKET/curated/REPLACE-MANIFEST-SHA/unpacked/",
+      "S3DataDistributionType": "FullyReplicated"
+    }}
+  }],
+  "OutputDataConfig": {"S3OutputPath": "s3://REPLACE-BUCKET/runs/REPLACE-RUN-ID/"},
+  "ResourceConfig": {"InstanceType": "ml.g4dn.xlarge", "InstanceCount": 1, "VolumeSizeInGB": 30},
+  "StoppingCondition": {"MaxRuntimeInSeconds": 3600, "MaxWaitTimeInSeconds": 7200},
+  "EnableManagedSpotTraining": true,
+  "CheckpointConfig": {"S3Uri": "s3://REPLACE-BUCKET/checkpoints/REPLACE-RUN-ID/", "LocalPath": "/opt/ml/checkpoints"},
+  "HyperParameters": {"epochs": "20", "mode": "loco"},
+  "Environment": {
+    "STACK_DATA_ROOT": "/opt/ml/input/data/training",
+    "DATASET_MANIFEST": "reports/stack-heatmap-20260928/dataset/faces.json",
+    "SM_CHECKPOINT_DIR": "/opt/ml/checkpoints",
+    "TRAINING_GIT_COMMIT": "REPLACE-VERIFIED-COMMIT"
+  },
+  "Tags": [{"Key": "project", "Value": "egg-tray-counter"}, {"Key": "candidate", "Value": "stack-heatmap-v1"}]
+}

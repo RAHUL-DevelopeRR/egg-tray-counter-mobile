@@ -1,0 +1,27 @@
+{
+  "view": "image-35",
+  "rf_count": 3,
+  "quality": {
+    "score": 0.9742970522515455,
+    "accepted": true,
+    "blur_score": 66.36501143971248,
+    "exposure_mean": 132.92909166666666,
+    "dark_fraction": 0.000309375,
+    "bright_fraction": 0.0064328125,
+    "width": 1200,
+    "height": 1600,
+    "reason": null
+  },
+  "stacks": [],
+  "coordinate_frame": "exif_transposed_pixels",
+  "axis_role": "Y boundary candidates",
+  "boundary_count_candidate": 0,
+  "unlocalized_detections": 3,
+  "image_sha256": "5bc4aa28346c8228bc86c00ede9f6e6fbbf29f661f70e81d5008be9c0c3841ff",
+  "baseline_response": "batch-12.json",
+  "raw_rf_count": 3,
+  "boxes_clipped_to_frame": 2,
+  "physical_ground_truth": null,
+  "eligible_egg_trays": null,
+  "baseline_status": "completed"
+}

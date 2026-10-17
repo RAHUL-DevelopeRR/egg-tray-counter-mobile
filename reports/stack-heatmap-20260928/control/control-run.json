@@ -1,0 +1,12 @@
+{
+  "candidate": "V5-CLEAN-CONTROL",
+  "architecture": "RF-DETR Medium",
+  "resolution": 640,
+  "preprocessing": "640 fit-within, frozen snapshot",
+  "threshold": 0.35,
+  "seed": 20260928,
+  "epochs": 50,
+  "status": "blocked",
+  "occupancy_supervision": "unknown; visible-layer boxes do not prove eggs in concealed layers",
+  "reason": "Frozen V5 subset is incomplete and explicitly ineligible for training release"
+}

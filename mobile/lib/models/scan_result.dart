@@ -1,3 +1,5 @@
+import 'block_result.dart';
+
 class ViewResult {
   const ViewResult({
     required this.quality,
@@ -63,9 +65,11 @@ class ScanResult {
     required this.stacks,
     this.recommendedView,
     this.rescanReason,
+    this.block,
   });
 
   final String scanId;
+  final BlockResult? block;
   final bool accepted;
   final String status;
   final int? physicalStackCount;
@@ -78,6 +82,16 @@ class ScanResult {
   final List<StackResult> stacks;
   final String? recommendedView;
   final String? rescanReason;
+
+  /// One result state for the icon, headline and history: `verified` for the
+  /// legacy painted-cell route, otherwise the block's status (exact,
+  /// estimated, conflict, needs_view), else the legacy top-level status.
+  String get resultStatus => accepted ? 'verified' : block?.status ?? status;
+
+  /// The tray total the result shows: legacy verified total or block total.
+  int? get shownTrays => accepted ? totalTrays : block?.totalTrays;
+
+  int? get shownEggs => accepted ? totalEggs : block?.totalEggs;
 
   factory ScanResult.fromJson(Map<String, dynamic> json) {
     final processing = json['processing'] as Map<String, dynamic>;
@@ -106,6 +120,9 @@ class ScanResult {
           .toList(growable: false),
       recommendedView: rescan?['recommended_view'] as String?,
       rescanReason: rescan?['reason'] as String?,
+      block: json['block'] is Map<String, dynamic>
+          ? BlockResult.fromJson(json['block'] as Map<String, dynamic>)
+          : null,
     );
   }
 }

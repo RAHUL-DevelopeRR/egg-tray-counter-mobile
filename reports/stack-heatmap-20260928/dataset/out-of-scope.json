@@ -1,0 +1,14 @@
+[
+  {
+    "source_path": "C:\\Users\\DELL\\Downloads\\WhatsApp Unknown 2026-09-22 at 6.27.37 AM\\WhatsApp Image 2026-09-22 at 6.02.12 AM.jpeg",
+    "sha256": "1c14f3764c441bb112c24084ca36b58760a72681faf62df4cb520c99283e814e",
+    "status": "out_of_scope",
+    "reason": "Visually reviewed unrelated voter UI / BookMyShow persona design."
+  },
+  {
+    "source_path": "C:\\Users\\DELL\\Downloads\\WhatsApp Unknown 2026-09-22 at 6.27.37 AM\\WhatsApp Image 2026-09-22 at 6.02.13 AM.jpeg",
+    "sha256": "ef2c4a7452600545004bc07fe28deeb9e66815d9bead2f718e736396d0ff78ec",
+    "status": "out_of_scope",
+    "reason": "Visually reviewed unrelated voter UI / BookMyShow persona design."
+  }
+]

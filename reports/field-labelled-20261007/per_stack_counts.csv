@@ -1,0 +1,67 @@
+image,label_total,col,model_boxes,span_count,assistant_count,confidence,basis
+1,99,1,21,21,20,high,retained 2026-09-24 numbered reference; one spurious model box
+1,99,2,19,20,20,high,retained reference
+1,99,3,20,20,20,high,retained reference
+1,99,4,21,20,20,high,retained reference
+1,99,5,20,19,19,high,retained reference; shorter end stack
+2,80,1,20,21,20,medium,span includes egg tops of row behind; label 80 implies 20
+2,80,2,20,20,20,medium-high,model and span agree
+2,80,3,20,20,20,medium-high,model and span agree
+2,80,4,21,20,20,medium-high,one duplicate model box
+4,115,1,18,17,,unresolved,two-depth scene: short front block merged with tall rear block by x-clustering
+4,115,2,18,18,,unresolved,two-depth scene
+4,115,3,22,21,,unresolved,two-depth scene
+4,115,4,18,18,,unresolved,two-depth scene
+4,115,5,17,18,,unresolved,two-depth scene
+4,115,6,17,19,,unresolved,two-depth scene
+8,160,1,20,20,20,medium,background tray tops above face; model span clean
+8,160,2,19,20,20,medium,
+8,160,3,21,20,20,medium,one duplicate model box
+8,160,4,20,20,20,medium,
+8,160,5,19,20,20,medium,
+8,160,6,19,19,20,medium-low,span 19; label 160 implies 20; one layer likely missed at bottom
+8,160,7,20,20,20,medium,
+8,160,8,19,19,20,medium-low,span 19; right-edge column partly cut
+9,75,1,18,18,,unresolved,three-depth scene with empty top tray on short stack
+9,75,2,7,7,,unresolved,short front stack; 1 empty top tray and nested empties at base
+9,75,3,13,17,,unresolved,merges far and near stacks
+9,75,4,19,17,,unresolved,merges far and near stacks
+9,75,5,14,15,,unresolved,merges far and near stacks
+19,100,1,20,20,20,high,model span and visual agree
+19,100,2,20,20,20,high,
+19,100,3,20,20,20,high,
+19,100,4,20,20,20,high,
+19,100,5,20,20,20,high,
+20,60,1,21,20,20,medium-high,one duplicate model box
+20,60,2,20,20,20,medium-high,
+20,60,3,22,21,20,medium,extra boxes on egg tops of block behind; label 60 implies 20
+21,100,1,20,20,20,high,
+21,100,2,20,20,20,high,
+21,100,3,20,20,20,high,
+21,100,4,20,20,20,high,
+21,100,5,21,20,20,high,one duplicate model box
+23,160,1,20,20,20,medium,near-duplicate of img08
+23,160,2,20,20,20,medium,
+23,160,3,20,20,20,medium,
+23,160,4,18,19,20,medium-low,span 19; label implies 20
+23,160,5,20,20,20,medium,
+23,160,6,19,19,20,medium-low,span 19; label implies 20
+23,160,7,20,20,20,medium,
+23,160,8,20,20,20,medium,
+24,100,1,21,20,20,high,same block as img21
+24,100,2,20,20,20,high,
+24,100,3,20,19,20,medium,span 19: top row clipped by crop; label implies 20
+24,100,4,20,20,20,high,
+24,100,5,20,21,20,medium,span 21: extra box at top
+30,80,1,20,20,20,medium-high,
+30,80,2,19,19,20,medium,bottom rows cut by crop window; label 80 implies 20
+30,80,3,22,21,20,medium,duplicate boxes
+30,80,4,20,19,20,medium,bottom rows cut by crop window
+34,120,1,21,20,20,medium-high,
+34,120,2,22,20,20,medium-high,two duplicate boxes
+34,120,3,20,21,20,medium,span 21: spurious top box
+34,120,4,20,20,20,medium-high,
+34,120,5,21,20,20,medium-high,
+34,120,6,21,20,20,medium-high,washed-out top; model span still clean
+50,40,1,17,17,,unresolved,close-up from above: lower rows perspective-compressed; model and span both 17
+50,40,2,18,18,,unresolved,same; label 40 implies 20 each; needs rectification or recount

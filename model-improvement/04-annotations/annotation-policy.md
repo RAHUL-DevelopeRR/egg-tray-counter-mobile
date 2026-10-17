@@ -1,5 +1,18 @@
 # Annotation policy
 
+## 2026-09-28 controlled-development clarification
+
+The current user task explicitly authorizes existing-data cleanup, assistant visual
+layer review, heatmap training and grouped development evaluation before collecting
+new physical acceptance truth. Such labels must say
+`assistant_visual_reviewed` and `visible_layer_reference_not_physical_inventory`;
+they do not establish egg occupancy or approve an entire source frame. The earlier
+blanket training blocker below is historical for the warehouse expansion release.
+It must not block this controlled development. Production still requires physical
+truth, reviewed occupancy, complete scope and independent acceptance. New V5
+full-frame eligibility remains separate from heatmap crop review.
+
+
 ## Active warehouse expansion contract (2026-09-08)
 
 For every warehouse image, `egg_tray` means one **individual physically distinguishable tray layer**, never a whole stack face. This supersedes the September 7 stack-face expansion experiment. Its three wh018/wh019/wh020 uploads remain isolated under `stack-face-only-20260907`; they require complete re-annotation before use in a tray-layer version. Do not rename a stack-face box and treat it as a corrected tray label. Frozen V2/V3/V4 and production are unchanged.

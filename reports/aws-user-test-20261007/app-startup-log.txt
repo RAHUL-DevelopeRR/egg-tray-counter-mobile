@@ -1,0 +1,176 @@
+--------- beginning of main
+10-07 14:00:20.277  4718  4718 I Zygote  : seccomp disabled by setenforce 0
+10-07 14:00:20.376  4718  4718 W gg_tray_counte: Unexpected CPU variant for X86 using defaults: x86_64
+10-07 14:00:21.386  4718  4752 D skia    : [SkFontMgr Android Parser] '/product/etc/fonts_customization.xml' could not be opened
+10-07 14:00:21.429  4718  4718 I flutter : [IMPORTANT:flutter/shell/common/shell.cc(528)] [Action Required]: Impeller opt-out deprecated.
+10-07 14:00:21.429  4718  4718 I flutter :     The application opted out of Impeller by either using the
+10-07 14:00:21.429  4718  4718 I flutter :     `--no-enable-impeller` flag or the
+10-07 14:00:21.429  4718  4718 I flutter :     `io.flutter.embedding.android.EnableImpeller` `AndroidManifest.xml` entry.
+10-07 14:00:21.429  4718  4718 I flutter :     These options are going to go away in an upcoming Flutter release. Remove
+10-07 14:00:21.429  4718  4718 I flutter :     the explicit opt-out. If you need to opt-out, please report a bug describing
+10-07 14:00:21.429  4718  4718 I flutter :     the issue.
+10-07 14:00:21.429  4718  4718 I flutter : 
+10-07 14:00:21.429  4718  4718 I flutter :     https://github.com/flutter/flutter/issues/new?template=02_bug.yml
+10-07 14:00:21.429  4718  4718 I flutter : 
+10-07 14:00:21.444  4718  4718 D HostConnection: createUnique: call
+10-07 14:00:21.444  4718  4718 I AGA     : hstInit: opened /dev/bstpgaipc: fd = 47
+10-07 14:00:21.444  4718  4718 I AGA     : Attempting to create new SOCKET connection pid = 4718, tid = 4718
+10-07 14:00:21.452  4718  4718 I AGA     : hstInitClientPgaIpc: Attempting to get GROUP2 cid
+10-07 14:00:21.458  4718  4718 I AGA     : hstInitClientPgaIpc: data mapped to 0x732e9d44a000 with size 4194304
+10-07 14:00:21.459  4718  4718 I AGA     : New SOCKET connection: com.dharani.eggtray.egg_tray_counter (pid 4718, tid 4718)
+10-07 14:00:21.469  4718  4718 D HostConnection: HostComposition ext ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_vulkan_batched_descriptor_set_update ANDROID_EMU_vulkan_enabled ANDROID_EMU_vulkan_initialized GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_gles_max_version_3_2 
+10-07 14:00:21.483  4718  4718 I ConfigStore: android::hardware::configstore::V1_0::ISurfaceFlingerConfigs::hasWideColorDisplay retrieved: 0
+10-07 14:00:21.483  4718  4718 I ConfigStore: android::hardware::configstore::V1_0::ISurfaceFlingerConfigs::hasHDRDisplay retrieved: 0
+10-07 14:00:21.557  4718  4718 D EGL_emulation: eglCreateContext: 0x732eb9556800: maj 3 min 2 rcv 5
+10-07 14:00:21.614  4718  4718 D EGL_emulation: eglCreateContext: 0x732eb9556e00: maj 3 min 2 rcv 5
+10-07 14:00:21.632  4718  4757 D HostConnection: createUnique: call
+10-07 14:00:21.632  4718  4757 I AGA     : hstInit: opened /dev/bstpgaipc: fd = 49
+10-07 14:00:21.632  4718  4757 I AGA     : Attempting to create new SOCKET connection pid = 4718, tid = 4757
+10-07 14:00:21.655  4718  4757 I AGA     : hstInitClientPgaIpc: Attempting to get GROUP2 cid
+10-07 14:00:21.659  4718  4757 I AGA     : hstInitClientPgaIpc: data mapped to 0x732e9cbef000 with size 4194304
+10-07 14:00:21.659  4718  4757 I AGA     : New SOCKET connection: com.dharani.eggtray.egg_tray_counter (pid 4718, tid 4757)
+10-07 14:00:21.667  4718  4757 D HostConnection: HostComposition ext ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_vulkan_batched_descriptor_set_update ANDROID_EMU_vulkan_enabled ANDROID_EMU_vulkan_initialized GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_gles_max_version_3_2 
+10-07 14:00:21.672  4718  4757 D EGL_emulation: eglMakeCurrent: 0x732eb9556e00: ver 3 2 (tinfo 0x732ebaf05360)
+10-07 14:00:21.672  4718  4757 I AGA     : The gl query need cache 0
+10-07 14:00:21.675  4718  4757 D EGL_emulation: eglMakeCurrent: 0x732eb9556e00: ver 3 2 (tinfo 0x732ebaf05360) (first time)
+10-07 14:00:21.730  4718  4757 E eglCodecCommon: glUtilsParamSize: unknow param 0x000082da
+10-07 14:00:21.730  4718  4757 E eglCodecCommon: glUtilsParamSize: unknow param 0x000082da
+10-07 14:00:21.731  4718  4757 E eglCodecCommon: glUtilsParamSize: unknow param 0x000082e5
+10-07 14:00:21.738  4718  4757 E eglCodecCommon: glUtilsParamSize: unknow param 0x000082e5
+10-07 14:00:22.255  4718  4718 D OpenGLRenderer: Skia GL Pipeline
+10-07 14:00:22.286  4718  4718 I gg_tray_counte: Rejecting re-init on previously-failed class java.lang.Class<d0>: java.lang.NoClassDefFoundError: Failed resolution of: Landroid/app/UiModeManager$ContrastChangeListener;
+10-07 14:00:22.286  4718  4718 I gg_tray_counte:   at void nz.onCreate(android.os.Bundle) (r8-map-id-6f12b93c782348bb29fce3d2f1a96fb85210a28d44b72db1d1712238ba430488:1287)
+10-07 14:00:22.286  4718  4718 I gg_tray_counte:   at void android.app.Activity.performCreate(android.os.Bundle, android.os.PersistableBundle) (Activity.java:7185)
+10-07 14:00:22.286  4718  4718 I gg_tray_counte:   at void android.app.Activity.performCreate(android.os.Bundle) (Activity.java:7176)
+10-07 14:00:22.286  4718  4718 I gg_tray_counte:   at void android.app.Instrumentation.callActivityOnCreate(android.app.Activity, android.os.Bundle) (Instrumentation.java:1285)
+10-07 14:00:22.286  4718  4718 I gg_tray_counte:   at android.app.Activity android.app.ActivityThread.performLaunchActivity(android.app.ActivityThread$ActivityClientRecord, android.content.Intent) (ActivityThread.java:2973)
+10-07 14:00:22.286  4718  4718 I gg_tray_counte:   at android.app.Activity android.app.ActivityThread.handleLaunchActivity(android.app.ActivityThread$ActivityClientRecord, android.app.servertransaction.PendingTransactionActions, android.content.Intent) (ActivityThread.java:3128)
+10-07 14:00:22.286  4718  4718 I gg_tray_counte:   at void android.app.servertransaction.LaunchActivityItem.execute(android.app.ClientTransactionHandler, android.os.IBinder, android.app.servertransaction.PendingTransactionActions) (LaunchActivityItem.java:78)
+10-07 14:00:22.286  4718  4718 I gg_tray_counte:   at void android.app.servertransaction.TransactionExecutor.executeCallbacks(android.app.servertransaction.ClientTransaction) (TransactionExecutor.java:108)
+10-07 14:00:22.286  4718  4718 I gg_tray_counte:   at void android.app.servertransaction.TransactionExecutor.execute(android.app.servertransaction.ClientTransaction) (TransactionExecutor.java:68)
+10-07 14:00:22.286  4718  4718 I gg_tray_counte:   at void android.app.ActivityThread$H.handleMessage(android.os.Message) (ActivityThread.java:1888)
+10-07 14:00:22.287  4718  4718 I gg_tray_counte:   at void android.os.Handler.dispatchMessage(android.os.Message) (Handler.java:106)
+10-07 14:00:22.287  4718  4718 I gg_tray_counte:   at void android.os.Looper.loop() (Looper.java:193)
+10-07 14:00:22.287  4718  4718 I gg_tray_counte:   at void android.app.ActivityThread.main(java.lang.String[]) (ActivityThread.java:6816)
+10-07 14:00:22.287  4718  4718 I gg_tray_counte:   at java.lang.Object java.lang.reflect.Method.invoke(java.lang.Object, java.lang.Object[]) (Method.java:-2)
+10-07 14:00:22.287  4718  4718 I gg_tray_counte:   at void com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run() (RuntimeInit.java:518)
+10-07 14:00:22.287  4718  4718 I gg_tray_counte:   at void com.android.internal.os.ZygoteInit.main(java.lang.String[]) (ZygoteInit.java:858)
+10-07 14:00:22.287  4718  4718 I gg_tray_counte: Caused by: java.lang.ClassNotFoundException: Didn't find class "android.app.UiModeManager$ContrastChangeListener" on path: DexPathList[[zip file "/data/app/com.dharani.eggtray.egg_tray_counter-lqJR78Kaylf7yoiJmWldbA==/base.apk"],nativeLibraryDirectories=[/data/app/com.dharani.eggtray.egg_tray_counter-lqJR78Kaylf7yoiJmWldbA==/lib/x86_64, /data/app/com.dharani.eggtray.egg_tray_counter-lqJR78Kaylf7yoiJmWldbA==/base.apk!/lib/x86_64, /system/lib64, /system/vendor/lib64]]
+10-07 14:00:22.287  4718  4718 I gg_tray_counte:   at java.lang.Class dalvik.system.BaseDexClassLoader.findClass(java.lang.String) (BaseDexClassLoader.java:134)
+10-07 14:00:22.287  4718  4718 I gg_tray_counte:   at java.lang.Class java.lang.ClassLoader.loadClass(java.lang.String, boolean) (ClassLoader.java:379)
+10-07 14:00:22.287  4718  4718 I gg_tray_counte:   at java.lang.Class java.lang.ClassLoader.loadClass(java.lang.String) (ClassLoader.java:312)
+10-07 14:00:22.287  4718  4718 I gg_tray_counte:   at void nz.onCreate(android.os.Bundle) (r8-map-id-6f12b93c782348bb29fce3d2f1a96fb85210a28d44b72db1d1712238ba430488:1287)
+10-07 14:00:22.287  4718  4718 I gg_tray_counte:   at void android.app.Activity.performCreate(android.os.Bundle, android.os.PersistableBundle) (Activity.java:7185)
+10-07 14:00:22.287  4718  4718 I gg_tray_counte:   at void android.app.Activity.performCreate(android.os.Bundle) (Activity.java:7176)
+10-07 14:00:22.287  4718  4718 I gg_tray_counte:   at void android.app.Instrumentation.callActivityOnCreate(android.app.Activity, android.os.Bundle) (Instrumentation.java:1285)
+10-07 14:00:22.287  4718  4718 I gg_tray_counte:   at android.app.Activity android.app.ActivityThread.performLaunchActivity(android.app.ActivityThread$ActivityClientRecord, android.content.Intent) (ActivityThread.java:2973)
+10-07 14:00:22.288  4718  4718 I gg_tray_counte:   at android.app.Activity android.app.ActivityThread.handleLaunchActivity(android.app.ActivityThread$ActivityClientRecord, android.app.servertransaction.PendingTransactionActions, android.content.Intent) (ActivityThread.java:3128)
+10-07 14:00:22.288  4718  4718 I gg_tray_counte:   at void android.app.servertransaction.LaunchActivityItem.execute(android.app.ClientTransactionHandler, android.os.IBinder, android.app.servertransaction.PendingTransactionActions) (LaunchActivityItem.java:78)
+10-07 14:00:22.288  4718  4718 I gg_tray_counte:   at void android.app.servertransaction.TransactionExecutor.executeCallbacks(android.app.servertransaction.ClientTransaction) (TransactionExecutor.java:108)
+10-07 14:00:22.288  4718  4718 I gg_tray_counte:   at void android.app.servertransaction.TransactionExecutor.execute(android.app.servertransaction.ClientTransaction) (TransactionExecutor.java:68)
+10-07 14:00:22.288  4718  4718 I gg_tray_counte:   at void android.app.ActivityThread$H.handleMessage(android.os.Message) (ActivityThread.java:1888)
+10-07 14:00:22.288  4718  4718 I gg_tray_counte:   at void android.os.Handler.dispatchMessage(android.os.Message) (Handler.java:106)
+10-07 14:00:22.288  4718  4718 I gg_tray_counte:   at void android.os.Looper.loop() (Looper.java:193)
+10-07 14:00:22.288  4718  4718 I gg_tray_counte:   at void android.app.ActivityThread.main(java.lang.String[]) (ActivityThread.java:6816)
+10-07 14:00:22.288  4718  4718 I gg_tray_counte:   at java.lang.Object java.lang.reflect.Method.invoke(java.lang.Object, java.lang.Object[]) (Method.java:-2)
+10-07 14:00:22.288  4718  4718 I gg_tray_counte:   at void com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run() (RuntimeInit.java:518)
+10-07 14:00:22.288  4718  4718 I gg_tray_counte:   at void com.android.internal.os.ZygoteInit.main(java.lang.String[]) (ZygoteInit.java:858)
+10-07 14:00:22.288  4718  4718 I gg_tray_counte: 
+10-07 14:00:22.289  4718  4718 I gg_tray_counte: Rejecting re-init on previously-failed class java.lang.Class<d0>: java.lang.NoClassDefFoundError: Failed resolution of: Landroid/app/UiModeManager$ContrastChangeListener;
+10-07 14:00:22.289  4718  4718 I gg_tray_counte:   at void nz.onCreate(android.os.Bundle) (r8-map-id-6f12b93c782348bb29fce3d2f1a96fb85210a28d44b72db1d1712238ba430488:1287)
+10-07 14:00:22.289  4718  4718 I gg_tray_counte:   at void android.app.Activity.performCreate(android.os.Bundle, android.os.PersistableBundle) (Activity.java:7185)
+10-07 14:00:22.289  4718  4718 I gg_tray_counte:   at void android.app.Activity.performCreate(android.os.Bundle) (Activity.java:7176)
+10-07 14:00:22.289  4718  4718 I gg_tray_counte:   at void android.app.Instrumentation.callActivityOnCreate(android.app.Activity, android.os.Bundle) (Instrumentation.java:1285)
+10-07 14:00:22.289  4718  4718 I gg_tray_counte:   at android.app.Activity android.app.ActivityThread.performLaunchActivity(android.app.ActivityThread$ActivityClientRecord, android.content.Intent) (ActivityThread.java:2973)
+10-07 14:00:22.289  4718  4718 I gg_tray_counte:   at android.app.Activity android.app.ActivityThread.handleLaunchActivity(android.app.ActivityThread$ActivityClientRecord, android.app.servertransaction.PendingTransactionActions, android.content.Intent) (ActivityThread.java:3128)
+10-07 14:00:22.289  4718  4718 I gg_tray_counte:   at void android.app.servertransaction.LaunchActivityItem.execute(android.app.ClientTransactionHandler, android.os.IBinder, android.app.servertransaction.PendingTransactionActions) (LaunchActivityItem.java:78)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at void android.app.servertransaction.TransactionExecutor.executeCallbacks(android.app.servertransaction.ClientTransaction) (TransactionExecutor.java:108)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at void android.app.servertransaction.TransactionExecutor.execute(android.app.servertransaction.ClientTransaction) (TransactionExecutor.java:68)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at void android.app.ActivityThread$H.handleMessage(android.os.Message) (ActivityThread.java:1888)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at void android.os.Handler.dispatchMessage(android.os.Message) (Handler.java:106)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at void android.os.Looper.loop() (Looper.java:193)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at void android.app.ActivityThread.main(java.lang.String[]) (ActivityThread.java:6816)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at java.lang.Object java.lang.reflect.Method.invoke(java.lang.Object, java.lang.Object[]) (Method.java:-2)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at void com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run() (RuntimeInit.java:518)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at void com.android.internal.os.ZygoteInit.main(java.lang.String[]) (ZygoteInit.java:858)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte: Caused by: java.lang.ClassNotFoundException: Didn't find class "android.app.UiModeManager$ContrastChangeListener" on path: DexPathList[[zip file "/data/app/com.dharani.eggtray.egg_tray_counter-lqJR78Kaylf7yoiJmWldbA==/base.apk"],nativeLibraryDirectories=[/data/app/com.dharani.eggtray.egg_tray_counter-lqJR78Kaylf7yoiJmWldbA==/lib/x86_64, /data/app/com.dharani.eggtray.egg_tray_counter-lqJR78Kaylf7yoiJmWldbA==/base.apk!/lib/x86_64, /system/lib64, /system/vendor/lib64]]
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at java.lang.Class dalvik.system.BaseDexClassLoader.findClass(java.lang.String) (BaseDexClassLoader.java:134)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at java.lang.Class java.lang.ClassLoader.loadClass(java.lang.String, boolean) (ClassLoader.java:379)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at java.lang.Class java.lang.ClassLoader.loadClass(java.lang.String) (ClassLoader.java:312)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at void nz.onCreate(android.os.Bundle) (r8-map-id-6f12b93c782348bb29fce3d2f1a96fb85210a28d44b72db1d1712238ba430488:1287)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at void android.app.Activity.performCreate(android.os.Bundle, android.os.PersistableBundle) (Activity.java:7185)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at void android.app.Activity.performCreate(android.os.Bundle) (Activity.java:7176)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at void android.app.Instrumentation.callActivityOnCreate(android.app.Activity, android.os.Bundle) (Instrumentation.java:1285)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at android.app.Activity android.app.ActivityThread.performLaunchActivity(android.app.ActivityThread$ActivityClientRecord, android.content.Intent) (ActivityThread.java:2973)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at android.app.Activity android.app.ActivityThread.handleLaunchActivity(android.app.ActivityThread$ActivityClientRecord, android.app.servertransaction.PendingTransactionActions, android.content.Intent) (ActivityThread.java:3128)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at void android.app.servertransaction.LaunchActivityItem.execute(android.app.ClientTransactionHandler, android.os.IBinder, android.app.servertransaction.PendingTransactionActions) (LaunchActivityItem.java:78)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at void android.app.servertransaction.TransactionExecutor.executeCallbacks(android.app.servertransaction.ClientTransaction) (TransactionExecutor.java:108)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at void android.app.servertransaction.TransactionExecutor.execute(android.app.servertransaction.ClientTransaction) (TransactionExecutor.java:68)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at void android.app.ActivityThread$H.handleMessage(android.os.Message) (ActivityThread.java:1888)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at void android.os.Handler.dispatchMessage(android.os.Message) (Handler.java:106)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at void android.os.Looper.loop() (Looper.java:193)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at void android.app.ActivityThread.main(java.lang.String[]) (ActivityThread.java:6816)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at java.lang.Object java.lang.reflect.Method.invoke(java.lang.Object, java.lang.Object[]) (Method.java:-2)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at void com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run() (RuntimeInit.java:518)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte:   at void com.android.internal.os.ZygoteInit.main(java.lang.String[]) (ZygoteInit.java:858)
+10-07 14:00:22.290  4718  4718 I gg_tray_counte: 
+10-07 14:00:22.411  4718  4718 I Choreographer: Skipped 96 frames!  The application may be doing too much work on its main thread.
+10-07 14:00:22.475  4718  4767 I OpenGLRenderer: Initialized EGL, version 1.4
+10-07 14:00:22.475  4718  4767 D OpenGLRenderer: Swap behavior 1
+10-07 14:00:22.476  4718  4767 D HostConnection: createUnique: call
+10-07 14:00:22.476  4718  4767 I AGA     : hstInit: opened /dev/bstpgaipc: fd = 55
+10-07 14:00:22.476  4718  4767 I AGA     : Attempting to create new SOCKET connection pid = 4718, tid = 4767
+10-07 14:00:22.481  4718  4767 I AGA     : hstInitClientPgaIpc: Attempting to get GROUP2 cid
+10-07 14:00:22.484  4718  4767 I AGA     : hstInitClientPgaIpc: data mapped to 0x732e98919000 with size 4194304
+10-07 14:00:22.485  4718  4767 I AGA     : New SOCKET connection: com.dharani.eggtray.egg_tray_counter (pid 4718, tid 4767)
+10-07 14:00:22.491  4718  4767 D HostConnection: HostComposition ext ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_vulkan_batched_descriptor_set_update ANDROID_EMU_vulkan_enabled ANDROID_EMU_vulkan_initialized GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_gles_max_version_3_2 
+10-07 14:00:22.517  4718  4754 D vndksupport: Loading /vendor/lib64/hw/android.hardware.graphics.mapper@2.0-impl.so from current namespace instead of sphal namespace.
+10-07 14:00:22.521  4718  4754 D vndksupport: Loading /vendor/lib64/hw/gralloc.default.so from current namespace instead of sphal namespace.
+10-07 14:00:22.560  4718  4754 D HostConnection: createUnique: call
+10-07 14:00:22.560  4718  4754 I AGA     : hstInit: opened /dev/bstpgaipc: fd = 63
+10-07 14:00:22.561  4718  4754 I AGA     : Attempting to create new SOCKET connection pid = 4718, tid = 4754
+10-07 14:00:22.604  4718  4767 D EGL_emulation: eglCreateContext: 0x732eb7d1b800: maj 3 min 2 rcv 5
+10-07 14:00:22.609  4718  4754 I AGA     : hstInitClientPgaIpc: Attempting to get GROUP2 cid
+10-07 14:00:22.611  4718  4754 I AGA     : hstInitClientPgaIpc: data mapped to 0x732e9844e000 with size 4194304
+10-07 14:00:22.611  4718  4754 I AGA     : New SOCKET connection: com.dharani.eggtray.egg_tray_counter (pid 4718, tid 4754)
+10-07 14:00:22.618  4718  4767 D EGL_emulation: eglMakeCurrent: 0x732eb7d1b800: ver 3 2 (tinfo 0x732eb7d6f5a0)
+10-07 14:00:22.618  4718  4767 I AGA     : The gl query need cache 0
+10-07 14:00:22.619  4718  4754 D HostConnection: HostComposition ext ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_vulkan_batched_descriptor_set_update ANDROID_EMU_vulkan_enabled ANDROID_EMU_vulkan_initialized GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_gles_max_version_3_2 
+10-07 14:00:22.619  4718  4767 D EGL_emulation: eglMakeCurrent: 0x732eb7d1b800: ver 3 2 (tinfo 0x732eb7d6f5a0) (first time)
+10-07 14:00:22.624  4718  4767 E eglCodecCommon: glUtilsParamSize: unknow param 0x000082da
+10-07 14:00:22.624  4718  4767 E eglCodecCommon: glUtilsParamSize: unknow param 0x000082da
+10-07 14:00:22.624  4718  4767 E eglCodecCommon: glUtilsParamSize: unknow param 0x000082e5
+10-07 14:00:22.624  4718  4767 E eglCodecCommon: glUtilsParamSize: unknow param 0x000082e5
+10-07 14:00:22.626  4718  4754 D HostConnection: createUnique: call
+10-07 14:00:22.626  4718  4754 I AGA     : hstInit: opened /dev/bstpgaipc: fd = 60
+10-07 14:00:22.626  4718  4754 I AGA     : Attempting to create new SOCKET connection pid = 4718, tid = 4754
+10-07 14:00:22.628  4718  4767 D emuglGLESv2_enc: check TTCDisabled with pkg[com.dharani.eggtray.egg_tray_counter] with res[0]
+10-07 14:00:22.633  4718  4754 I AGA     : hstInitClientPgaIpc: Attempting to get GROUP2 cid
+10-07 14:00:22.642  4718  4754 I AGA     : hstInitClientPgaIpc: data mapped to 0x732e97cc9000 with size 4194304
+10-07 14:00:22.642  4718  4754 I AGA     : New SOCKET connection: com.dharani.eggtray.egg_tray_counter (pid 4718, tid 4754)
+10-07 14:00:22.663  4718  4754 D HostConnection: HostComposition ext ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_vulkan_batched_descriptor_set_update ANDROID_EMU_vulkan_enabled ANDROID_EMU_vulkan_initialized GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_gles_max_version_3_2 
+10-07 14:00:22.666  4718  4767 E eglCodecCommon: glUtilsParamSize: unknow param 0x00008c29
+10-07 14:00:22.666  4718  4767 E eglCodecCommon: glUtilsParamSize: unknow param 0x00008c29
+10-07 14:00:22.776  4718  4754 D EGL_emulation: eglMakeCurrent: 0x732eb9556800: ver 3 2 (tinfo 0x732eb7c66920)
+10-07 14:00:22.776  4718  4754 I AGA     : The gl query need cache 0
+10-07 14:00:22.779  4718  4754 D EGL_emulation: eglMakeCurrent: 0x732eb9556800: ver 3 2 (tinfo 0x732eb7c66920) (first time)
+10-07 14:00:22.793  4718  4754 E eglCodecCommon: glUtilsParamSize: unknow param 0x000082da
+10-07 14:00:22.793  4718  4754 E eglCodecCommon: glUtilsParamSize: unknow param 0x000082da
+10-07 14:00:22.793  4718  4754 E eglCodecCommon: glUtilsParamSize: unknow param 0x000082e5
+10-07 14:00:22.794  4718  4754 E eglCodecCommon: glUtilsParamSize: unknow param 0x000082e5
+10-07 14:00:22.795  4718  4767 E EGL_emulation: tid 4767: eglSurfaceAttrib(1726): error 0x3009 (EGL_BAD_MATCH)
+10-07 14:00:22.795  4718  4767 W OpenGLRenderer: Failed to set EGL_SWAP_BEHAVIOR on surface 0x732eb7d19b80, error=EGL_BAD_MATCH
+10-07 14:00:22.896  4718  4754 D EGL_emulation: eglMakeCurrent: 0x732eb9556800: ver 3 2 (tinfo 0x732eb7c66920)
+10-07 14:00:23.524  4718  4718 I Choreographer: Skipped 65 frames!  The application may be doing too much work on its main thread.
+10-07 14:00:23.710  4718  4767 E EGL_emulation: tid 4767: eglSurfaceAttrib(1726): error 0x3009 (EGL_BAD_MATCH)
+10-07 14:00:23.710  4718  4767 W OpenGLRenderer: Failed to set EGL_SWAP_BEHAVIOR on surface 0x732eb7d19b80, error=EGL_BAD_MATCH
+10-07 14:00:23.783  4718  4754 D EGL_emulation: eglMakeCurrent: 0x732eb9556800: ver 3 2 (tinfo 0x732eb7c66920)
+10-07 14:00:24.025  4718  4754 D emuglGLESv2_enc: check GLMBRH with pkg[com.dharani.eggtray.egg_tray_counter] with res[0]
+10-07 14:00:24.029  4718  4754 D emuglGLESv2_enc: check GLUBPerf with pkg[com.dharani.eggtray.egg_tray_counter] with res[0]
+10-07 14:00:24.044  4718  4754 D emuglGLESv2_enc: check TTCDisabled with pkg[com.dharani.eggtray.egg_tray_counter] with res[0]
+10-07 14:00:24.075  4718  4754 D emuglGLESv2_enc: GL com.dharani.eggtray.egg_tray_counter ViewportNeedFlush 0
+10-07 14:00:24.378  4718  4767 D EGL_emulation: eglMakeCurrent: 0x732eb7d1b800: ver 3 2 (tinfo 0x732eb7d6f5a0)
+10-07 14:00:24.385  4718  4767 D emuglGLESv2_enc: check GLMBRH with pkg[com.dharani.eggtray.egg_tray_counter] with res[0]
+10-07 14:00:24.386  4718  4767 D emuglGLESv2_enc: check GLUBPerf with pkg[com.dharani.eggtray.egg_tray_counter] with res[0]
+10-07 14:00:24.393  4718  4767 D emuglGLESv2_enc: GL com.dharani.eggtray.egg_tray_counter ViewportNeedFlush 0
+10-07 14:00:27.944  4718  4781 D ProfileInstaller: Skipping profile installation for com.dharani.eggtray.egg_tray_counter

@@ -1,0 +1,767 @@
+{
+  "edges": [
+    {
+      "a": "81b51f6c69615327c149fbeb4c6f0fbf52f82ce3b70bc59a74f0e267c3c9dab6",
+      "b": "0c593a7210c8ced72b3d5b2c651d5c2c30cb123aeb31a2caa08ecf687b723b5e",
+      "dhash_distance": 7,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "a1843591fc331694b11f7b2f2a81d4705839bb08d27bb589fb82cac81c01fa57",
+      "b": "0ce435c6ceef7871bdfc151a5edf0ab819cdbdede63443c037b38a3c8341533b",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "3505ce64952cae846b38baaf8e4c6c750478720d563786163f3f9734833ca80e",
+      "b": "1a641b92752f95b017d5adecdbe37d73b13568f880d0410af00a835bf7a97623",
+      "dhash_distance": 1,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "5a97b316e66f4e774e265433178a772355de35ea9d81341ec5dec480207f8302",
+      "b": "4b062b366d4ee176d29cb64d8df164d075a6cece1ee12cf7dcfec9845d85b8d0",
+      "dhash_distance": 8,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "5aae0b69f91f8bdcbbf730447c21bec18bd6b3f434e8a4254ed31629221f6777",
+      "b": "392dd4934876e29bf6cd661aaf174a6479c3f3d0fd32ceba1cda7b6c24c1a48b",
+      "dhash_distance": 7,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "64472cf1c76cdee4bee14ce4ad5f17bbcf20454dad52252dfffcbcfc227e3c22",
+      "b": "140927627abaed6bc683554a43954acce113e22ede4dda103925fa1e5f8259bc",
+      "dhash_distance": 8,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "9a4d9df01e580da0615f32d661d188145eb2823f4169e5f5df49a5b7d38830b5",
+      "b": "108fbe48535084f658e410b9e4f4a1cf35d770ac574a24cf837af1e3e8b22177",
+      "dhash_distance": 6,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "9aa85d992c70e74dc8c90ab1c40854b5b7086e6b2a859632700b98eedaadd4ad",
+      "b": "38fac27c726aae28c7d31c177793772d0c3b4932a901bc13402848e21e4ed330",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "c0787e5dfab960ca142539c052860a0f8b8e8814b6eb95cc9b6daa03f2c1e1c8",
+      "b": "5efca2f8a28c2ffdf9cfcad789a272c2147476c5229aaf211c3fa1ea98ed40ca",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "c2a9b50ff52dd7dda14887dced9e29a561032f66881fdf1c90ee5452ea4c52fa",
+      "b": "392dd4934876e29bf6cd661aaf174a6479c3f3d0fd32ceba1cda7b6c24c1a48b",
+      "dhash_distance": 4,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "c2a9b50ff52dd7dda14887dced9e29a561032f66881fdf1c90ee5452ea4c52fa",
+      "b": "5aae0b69f91f8bdcbbf730447c21bec18bd6b3f434e8a4254ed31629221f6777",
+      "dhash_distance": 5,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "c5daf74b8fbfc8789dc677312040861be0d396cc2b5695989ddf65ff9291621a",
+      "b": "3eb351160e913c9a5aabd1c590c0e4dd4ffd4dad8ce3bc8ca45297c8a1357d76",
+      "dhash_distance": 2,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "d7c9bd5da8895bca07a0d7daf2855fc348898f094ab4c0e3ea696efb6ce9f0a6",
+      "b": "2b588d2747ad49e43c760931e49a9449eceba32bafac3938ce96b4d5a91a2ab8",
+      "dhash_distance": 4,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "dd102925d9227b62b3cbc96fd7e29cdf1a9982f37b92011a87494d99dfe97ce6",
+      "b": "140927627abaed6bc683554a43954acce113e22ede4dda103925fa1e5f8259bc",
+      "dhash_distance": 8,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "e145a7c762d70711c7beb1192e381379cc5cf36ef663ad961fd6813593b955b1",
+      "b": "92a92534a06178d3f84b4ed512cc3cc7ab72b4db49fd54e39388aef12e9537b7",
+      "dhash_distance": 1,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "fbe0d59572aabedc2e11c6306971add5252e8394fcbb9e8403c5f77bb026be36",
+      "b": "185176b841d0e5f87c5e7e9dd0479990adfd905530c8b785e37f40052f8ea10b",
+      "dhash_distance": 4,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "01297a74fd3883320f92da1863b4da5fc8dd6c88378b358af972e348926da19a",
+      "b": "e0dc76ed696457a17808f5ff847e257bb559d42555f6bf750a3f12bfbaf6fd3d",
+      "dhash_distance": 5,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "36dccd6307a7fbd801d37f516bb929017e0b0bf979539c2a248a5657079ce417",
+      "b": "185176b841d0e5f87c5e7e9dd0479990adfd905530c8b785e37f40052f8ea10b",
+      "dhash_distance": 4,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "36dccd6307a7fbd801d37f516bb929017e0b0bf979539c2a248a5657079ce417",
+      "b": "fbe0d59572aabedc2e11c6306971add5252e8394fcbb9e8403c5f77bb026be36",
+      "dhash_distance": 2,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "ebe7da7d223bbf618f0fa39f86cb7dc6a4dc3b8efb7ed4c99a1f5c3789af5e59",
+      "b": "701dc00d30011aa4d1bb07a986af5553a536d8d7c353bbf6d9c0247a3d787444",
+      "dhash_distance": 8,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "0c6115d2f4da5b7b8c58d203f8662edc799702d6c5a85244ee2848160da49eb1",
+      "b": "ccf833d6419f0aed1a4d91478e4add8044602cb95a8b5a13983e5a1d080021d5",
+      "dhash_distance": 5,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "1765eed0e21a3a7f8bc5fe3c04340b90437af8c8325b16e3505e070cce7a306d",
+      "b": "1535119bbf1711967b7548e920c66f2a64404d6e34a62435862f67c6c99427ad",
+      "dhash_distance": 8,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "1d9d169a7e53949f4a369871bee8a3c4d93d29df41cf04b31f94121c8ac13b49",
+      "b": "c8718432472b3d5059edab0bca6888cbf5cd257ac83d319d408962320e3bf3e8",
+      "dhash_distance": 6,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "33657754f7aacf0d45dcc0c57b994002a36f642bac31e405a632da8c92611a1a",
+      "b": "d840c16a733d06010b10dc14ec7ba3211d1faf9503f446a382f2feff0241be08",
+      "dhash_distance": 2,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "38bdfb44f4c272fbaf1eb0c6cde3dd4ddccdcf69897b5eb4c12285443f3ac641",
+      "b": "1535119bbf1711967b7548e920c66f2a64404d6e34a62435862f67c6c99427ad",
+      "dhash_distance": 6,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "38fc33406fdae9b5270d4f8251191a2ba9515447563bead7f8b5c389f33f92d9",
+      "b": "009aa5d607ab67ea215de0085e5b81fd5cbafe244346fd58649b43658afebf0f",
+      "dhash_distance": 4,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "7262ddbf2c58919d252a1e002976a41a5f916381ca2ecc15d06056aed48afa49",
+      "b": "3df7f65d4e7ce172e1548f3859020878ef29455521c96452c434d760f77a4b6a",
+      "dhash_distance": 6,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "731640bbe3f43acd53010d47109dd7205efeff1360c25cfd6503b1ed56a588b8",
+      "b": "ebad10b14d6ec2c6b534aecbe65dea3d9bd598bcd9845da6efd831b8ca334bfd",
+      "dhash_distance": 7,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "731640bbe3f43acd53010d47109dd7205efeff1360c25cfd6503b1ed56a588b8",
+      "b": "4ad964e327616f03704294e52e38c87558ef894058ad26cd3c4ef5414af58873",
+      "dhash_distance": 8,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "8a17be76a52e79e2ce86fb69d429800b6c704798fca4d4b30fde7dd54abedce1",
+      "b": "d840c16a733d06010b10dc14ec7ba3211d1faf9503f446a382f2feff0241be08",
+      "dhash_distance": 7,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "8a17be76a52e79e2ce86fb69d429800b6c704798fca4d4b30fde7dd54abedce1",
+      "b": "33657754f7aacf0d45dcc0c57b994002a36f642bac31e405a632da8c92611a1a",
+      "dhash_distance": 5,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "8aaf90da9ac8ecead57ff59595bbef7ac43f784994afe3d6d4ecaa33619cfdb9",
+      "b": "d840c16a733d06010b10dc14ec7ba3211d1faf9503f446a382f2feff0241be08",
+      "dhash_distance": 2,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "8aaf90da9ac8ecead57ff59595bbef7ac43f784994afe3d6d4ecaa33619cfdb9",
+      "b": "33657754f7aacf0d45dcc0c57b994002a36f642bac31e405a632da8c92611a1a",
+      "dhash_distance": 2,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "8aaf90da9ac8ecead57ff59595bbef7ac43f784994afe3d6d4ecaa33619cfdb9",
+      "b": "8a17be76a52e79e2ce86fb69d429800b6c704798fca4d4b30fde7dd54abedce1",
+      "dhash_distance": 5,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "8b763434381df6e76a85c15a7ae5c59ee1287f6c5d6913f0325cfb8c1aa16953",
+      "b": "d840c16a733d06010b10dc14ec7ba3211d1faf9503f446a382f2feff0241be08",
+      "dhash_distance": 2,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "8b763434381df6e76a85c15a7ae5c59ee1287f6c5d6913f0325cfb8c1aa16953",
+      "b": "33657754f7aacf0d45dcc0c57b994002a36f642bac31e405a632da8c92611a1a",
+      "dhash_distance": 4,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "8b763434381df6e76a85c15a7ae5c59ee1287f6c5d6913f0325cfb8c1aa16953",
+      "b": "8a17be76a52e79e2ce86fb69d429800b6c704798fca4d4b30fde7dd54abedce1",
+      "dhash_distance": 5,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "8b763434381df6e76a85c15a7ae5c59ee1287f6c5d6913f0325cfb8c1aa16953",
+      "b": "8aaf90da9ac8ecead57ff59595bbef7ac43f784994afe3d6d4ecaa33619cfdb9",
+      "dhash_distance": 2,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "a043a2585010b80ca20e17941d37f7b4169132bf39ef156b8182540606a8e6b3",
+      "b": "1742c7387f4a1eaea53b1c2ffca063000afa13cf788f42043f8cc75818ad7026",
+      "dhash_distance": 8,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "a15061373c9c17c6e1c04546fda7fab4dec9dd9e5d147b5daf977fca64a6916e",
+      "b": "d840c16a733d06010b10dc14ec7ba3211d1faf9503f446a382f2feff0241be08",
+      "dhash_distance": 3,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "a15061373c9c17c6e1c04546fda7fab4dec9dd9e5d147b5daf977fca64a6916e",
+      "b": "33657754f7aacf0d45dcc0c57b994002a36f642bac31e405a632da8c92611a1a",
+      "dhash_distance": 3,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "a15061373c9c17c6e1c04546fda7fab4dec9dd9e5d147b5daf977fca64a6916e",
+      "b": "8a17be76a52e79e2ce86fb69d429800b6c704798fca4d4b30fde7dd54abedce1",
+      "dhash_distance": 4,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "a15061373c9c17c6e1c04546fda7fab4dec9dd9e5d147b5daf977fca64a6916e",
+      "b": "8aaf90da9ac8ecead57ff59595bbef7ac43f784994afe3d6d4ecaa33619cfdb9",
+      "dhash_distance": 1,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "a15061373c9c17c6e1c04546fda7fab4dec9dd9e5d147b5daf977fca64a6916e",
+      "b": "8b763434381df6e76a85c15a7ae5c59ee1287f6c5d6913f0325cfb8c1aa16953",
+      "dhash_distance": 1,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "a32a1d86c621e69e71ad6e76dbde1d6ba018a6a8465491b27e54bb69cb1af965",
+      "b": "9787f01c06553eceb02c0b7275577fa865077569987943481dbb7233f541b74c",
+      "dhash_distance": 8,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "b0b099a2ec8a6aad5e67ee830ee9d534227dd4248ab555d362a4b3e57948c6e9",
+      "b": "14d0761160e930e05c25b36c96aee21ec82face2938807b27a65461eac27c969",
+      "dhash_distance": 8,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "c1938380524aceb1cd2c234cbb12e3dec9d3b4d502b9a2ffa5fa93c81ed69385",
+      "b": "022f0b0b4dea0d40d89194ffcbc56da8bfa211c0a958e252ffce79ef40423df6",
+      "dhash_distance": 4,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "fa34270a628c8c86d100048175b861a767c33e27cfe0ff4c274a024c391fec50",
+      "b": "d840c16a733d06010b10dc14ec7ba3211d1faf9503f446a382f2feff0241be08",
+      "dhash_distance": 5,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "fa34270a628c8c86d100048175b861a767c33e27cfe0ff4c274a024c391fec50",
+      "b": "33657754f7aacf0d45dcc0c57b994002a36f642bac31e405a632da8c92611a1a",
+      "dhash_distance": 3,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "fa34270a628c8c86d100048175b861a767c33e27cfe0ff4c274a024c391fec50",
+      "b": "8a17be76a52e79e2ce86fb69d429800b6c704798fca4d4b30fde7dd54abedce1",
+      "dhash_distance": 2,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "fa34270a628c8c86d100048175b861a767c33e27cfe0ff4c274a024c391fec50",
+      "b": "8aaf90da9ac8ecead57ff59595bbef7ac43f784994afe3d6d4ecaa33619cfdb9",
+      "dhash_distance": 3,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "fa34270a628c8c86d100048175b861a767c33e27cfe0ff4c274a024c391fec50",
+      "b": "8b763434381df6e76a85c15a7ae5c59ee1287f6c5d6913f0325cfb8c1aa16953",
+      "dhash_distance": 3,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "fa34270a628c8c86d100048175b861a767c33e27cfe0ff4c274a024c391fec50",
+      "b": "a15061373c9c17c6e1c04546fda7fab4dec9dd9e5d147b5daf977fca64a6916e",
+      "dhash_distance": 2,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "25a679eea06c4adde716264b5ad3953dcc1ed98db1753efdfc33424b5a7e46b2",
+      "b": "16685e90ac8c0dd5b226c795dce371fb1961d894f0538a61dc12ad4e87da0eff",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "7f603cea3338a205425013a4ebb89ccbd387fbd4279bc1fc591a7e42cf770cda",
+      "b": "ba00c5508b9b05251661049479988de607aca16f97adb311649b56f3a24daace",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "84f817fcbe0cb19866e6f97f5784f028977da34ab4a0326e91722a3db5310f41",
+      "b": "4b062b366d4ee176d29cb64d8df164d075a6cece1ee12cf7dcfec9845d85b8d0",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "84f817fcbe0cb19866e6f97f5784f028977da34ab4a0326e91722a3db5310f41",
+      "b": "5a97b316e66f4e774e265433178a772355de35ea9d81341ec5dec480207f8302",
+      "dhash_distance": 8,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "e9ec775f62811032a08b49932d7337008a261d060371ca5ef94cccd1ad3cfca9",
+      "b": "ad0d90b9a62635f78bcc79eaaf09f6c984a73cd0f438304c2cb51665ab5e663e",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "c1d979c88c4c6bff7e36db2cfe6f2da18fcf471c06c2e26690fcfc9256c9861a",
+      "b": "461de1ec4a17c9a3f45353f7340caed0ef4129c057d4b3e9234f4d0206b6c8c8",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "93d96852b1a7f383c0627367d39fb86553aaa08c8f03b6d43b3d2eec84dfb37c",
+      "b": "14dbc45a33c3a27279e063b833326ebff3203ccd8b085769888d147b03f6d951",
+      "dhash_distance": 1,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "a34eb7074774e7d2111e9346bf213fbfffb90aab9944552c7641cf5e58fb7536",
+      "b": "a967185b72a76fe4f4edbb338fe7455117aa84d1af5fc9bfa387028958476201",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "b018f938799f6073bde0f332175d0764bafad205c5d6ce1d34ae0aa58ff0b433",
+      "b": "5fcf798347401b5f7d9a1a68979a8979c35f04f0b29c4a1759d65bc92e76b748",
+      "dhash_distance": 1,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "f917ee1635f1cc6698d7b71315955accb43be5b1bdcf361f18e3fcc833b5f911",
+      "b": "f2d1c674f52306c0318ab5057885503ff61db06116c1826ca3a460201da02a4b",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "d3686b26e4ba93fb44238d8694ba3807bed84d7169ce848852baa0b974f98634",
+      "b": "fb5bd22bfe8d1b3da1714ad9f1ef9f90330d562d6bd499bb6005446886506e66",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "c6baad9c1b3ee52de4f476baf75c4c1775440e17d3730ed9e7f03f8570ea194b",
+      "b": "a63e3532c9850d20b4c2b18b3ed3404ff55f83536cfa99175c688f136999497c",
+      "dhash_distance": 1,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "7cf03540eece9ae455e39b14db8043e42d1e87e899c97c3137e319469dcb3784",
+      "b": "91faf9ffb18cc8964721a85754ac8b810104ed72ff9f8cbe203ab51b034595db",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "fa694c7a2aaf5497e05eb7f0c1da6e036371084f1f627120b20c46a8a85a8d19",
+      "b": "78cc2f94596b1e76295e051d62d1c5b3d02f2f8c27913c654372483192c82958",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "3668980a6aa12765dcfe8aa3f03fcd65a02c8a8b23a3896c024bcc36227a626f",
+      "b": "3569ca230ac9808eaf774e3e0a94c5069f1bae8abf4fbc243be1ca2b5fdd6a4e",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "2347fa6a77944c76be005fde79b8a348ed466417f99b47488e6e6b794069d6ad",
+      "b": "8b866324b4890646cd22ad88101f47cc5ed56058b577c0ffac02eec6e037a904",
+      "dhash_distance": 1,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "7bfb6bc76ab322295961b9d8c31dbffc36dcb7a36d4356d328308ecbe14e5936",
+      "b": "a0eaf3b3a056decfaca14aab10871e7487ea61545f6c73f66cea4036a69f25c2",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "6260f0244f8097a90895765e3fc8ed865899d7e11131f138ad3c8d25700dc19f",
+      "b": "ebad10b14d6ec2c6b534aecbe65dea3d9bd598bcd9845da6efd831b8ca334bfd",
+      "dhash_distance": 1,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "6260f0244f8097a90895765e3fc8ed865899d7e11131f138ad3c8d25700dc19f",
+      "b": "731640bbe3f43acd53010d47109dd7205efeff1360c25cfd6503b1ed56a588b8",
+      "dhash_distance": 8,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "7e3b574980bd426d8b5125fd4657003994355eb42bbe61f0363c7a8223942adc",
+      "b": "3d1b17fec0e135d3a3ff47d8090cd1b77bf8b527d5cfa4954e4e7b63e389b95c",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "e3ecc5ddd9e9d59d82ef3bf0e1a7810a2b3a276ac7196a161a924d7fbd9132c0",
+      "b": "66248568c8810c7503e42a2b6a7e6ee7f7df527f275db763ada51c2520742004",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "9c6e38626245256d38bb81bc5644d2be548863280a259dba3f8e82d9034c7ee8",
+      "b": "21fab614bf7ec2361ba2a86d860558c49382e3e2f35973082bff7b07fc890825",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "42f52d586a117e2ddc1d9448104633bae3048687d68b2716e1fdf6627ae09b56",
+      "b": "1ee2485148239d37ef1593a3c1d20770a49960e2088413670f89046ab45a8c7e",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "c67835995c9acd98aaf0967f24ac7d58eacde2c379c017f4e71595823dda95bc",
+      "b": "41a1e5bfcf14ef8ed43e48f1bd4f70fe74d1ec81c877cfd306cb27d62891977b",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "c7d59665c9aad0f20b814ab908cc42ce894c34eca22902a60183a24d2a3720ee",
+      "b": "8fa03876c20d362cde94cee1b269e336815eac53c49bc96eeadd7c44187ca4eb",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "2033dfa88e2d7c6537f8cdd71d9f7fcc1f8fbf972f44d4c5cdd6568cb11c3a83",
+      "b": "f6ab7d54c2a36c747ca86e557de7bf0d033f7336d23a18ad37da7d809575cd04",
+      "dhash_distance": 1,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "9b07bcdf1e2a1f704c4f74e65bdd0cae44f53493eb8c0df937ab459ef666f76a",
+      "b": "3eef594bf505b0f40ab1fb9c015a5c45df8ab20912f4d37457633c7c02a2f645",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "636a2078998195e0890db4eec6e37a08c367f0da77ddeca72249f626cfe41dcd",
+      "b": "26edca8a75a9d380e018712054d1853b4843fc8f8ddef946b282469e52487e93",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "b88d49d406033eaa5e8c165baecd0bd963c63d28b24274408882273ba5492a7c",
+      "b": "a2716eab9b66aa79ee0f534eeef1a0d02de1f4e194f34b0b3ab92c831e4970fb",
+      "dhash_distance": 1,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "302c81c354f5480b9dbc3bf84e62f1ff72b497a72170c60eaccb78f438b6989e",
+      "b": "d95f511f72220ec9919a3cbbde1ff99b301a61d08712c94c544dd6fafaf8ce30",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "b2853a700d914ac82dbb331e116f38f2ae655256573c7630c05484450faadac4",
+      "b": "bb2b695f926199caecaa67e3ca7ba6fabc0073237c14f1dd21c3a1dd24ca3604",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "95174131ed45c3fcbf928db0789d8382356200a1c12b488d267c155770a3f511",
+      "b": "43409f4aee1d3653f12960fd6b85f93bf6b06a3a10100760194cf9a45949defc",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "f58c708dd4a9b75612b63a1fe240665b0f8e564f4b62256947b3b88d99ad2479",
+      "b": "12be1ee147e868b1bbb19b2ca355097fc479d478f423c70a8d3932c8f70ea7b9",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "f288b2494ea08cc752f9ba25a8f0ad33f6eeceda49954e748aea71c62268858a",
+      "b": "ac61c8adecb352729427721f8794cb5f0092c5b2bce051a6516abd5ec9867cea",
+      "dhash_distance": 1,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "620e85745b316b2f9b6dec8ce7d5cc89c2137f942d4cc7be4269067562d7a1a0",
+      "b": "015c90fdb6fdfca1f073cf9ee8b75053cf5df3a7b1d386516b87e56bd3366f95",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "73d3ea059d39075f992e79ab991b21e2cc24443325c506b28c94bf0c381401d0",
+      "b": "58e3494ec16549e0f358e886e3fd365a3ca884982ad7ed8ae6e83b791a74c361",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "a42d5c6181497b4241ccc822306b2b81ea3456bf7f1b82826c3805728a31f137",
+      "b": "3c10ced76389577195fa8cf61b64ea866d3a7aa6926556a554187c6519af4616",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "4e50f0c7e069ac0447cc4a77abd50ba525507abff61f9eed7eb49d1279623e35",
+      "b": "ccf833d6419f0aed1a4d91478e4add8044602cb95a8b5a13983e5a1d080021d5",
+      "dhash_distance": 2,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "4e50f0c7e069ac0447cc4a77abd50ba525507abff61f9eed7eb49d1279623e35",
+      "b": "0c6115d2f4da5b7b8c58d203f8662edc799702d6c5a85244ee2848160da49eb1",
+      "dhash_distance": 3,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "06ba21174db035849937c6fc545c8f70ba56a52d21e6412fce1dd2c3e80ba324",
+      "b": "79864ee402436557415d3ab87d218f0f06a309af5ca7236ff311ec56f8876d5a",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "27c127b969c5e4ba6dff8156f2f8e6a57d51b1a0883d2d1f6ab81c433c7b80f4",
+      "b": "2b588d2747ad49e43c760931e49a9449eceba32bafac3938ce96b4d5a91a2ab8",
+      "dhash_distance": 5,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "27c127b969c5e4ba6dff8156f2f8e6a57d51b1a0883d2d1f6ab81c433c7b80f4",
+      "b": "d7c9bd5da8895bca07a0d7daf2855fc348898f094ab4c0e3ea696efb6ce9f0a6",
+      "dhash_distance": 1,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "a3eed9fd6fe492a4714e226309a219760725389c4eccf5fa2e20d3c559ed496d",
+      "b": "2b588d2747ad49e43c760931e49a9449eceba32bafac3938ce96b4d5a91a2ab8",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "a3eed9fd6fe492a4714e226309a219760725389c4eccf5fa2e20d3c559ed496d",
+      "b": "d7c9bd5da8895bca07a0d7daf2855fc348898f094ab4c0e3ea696efb6ce9f0a6",
+      "dhash_distance": 4,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "a3eed9fd6fe492a4714e226309a219760725389c4eccf5fa2e20d3c559ed496d",
+      "b": "27c127b969c5e4ba6dff8156f2f8e6a57d51b1a0883d2d1f6ab81c433c7b80f4",
+      "dhash_distance": 5,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "e6566561a76462f649516ab1875cbc0a888a6acf837fad4edd14472a571c3aad",
+      "b": "e23f8e171cc5742b551a417a74ae3f88bb8ea7dd0d59551c32cf02fb065a8acf",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "4303c89e46fa9b8935d892fb1b2b954e4135fe08291f16e24c7951c71f27bd70",
+      "b": "f90557f4640b942981a0e95389ccf71c0bffb632d5273692eda04dc750f44173",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "3e0ff7219a0cbf554cb73698b4b451627b44c6071809aa62cfe2cc4614d01329",
+      "b": "f2dc4416ff8058490f92777e6a9edb2bafc82445275f519960ddf2cde4730c44",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "e854149fb986bb8f83993a4eebca1432d5ae583da375eaf4f714dc96b5bd443b",
+      "b": "2a44333649367eba470b4d2af15b292aa4c6d584b3400d922d946fc80a19e40a",
+      "dhash_distance": 1,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "8ada5d4ba7f05350e234275d49dff80214d4970d366774379b861cbe45cd704a",
+      "b": "4762141635d7aa03268c82acb4d83b3487da7f8f924287117be8d33bfa40a050",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "c19c989416d63522f3f915e4156d58eaf4a8e445adbba5b9cb14f62173d6d2b8",
+      "b": "d328c4489632a61b2071150dcf5beee34d87192589e88d3b98b3932930225070",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "496b5478ef4e76b03a9aaa89e16e9827dce44611592b2129d9ee9f6e58dc5a7a",
+      "b": "4cd1abed9a60a4c45bac200b1dabc123899b856456b78237b103ecad02836e1f",
+      "dhash_distance": 1,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "da334de14bc94ec30af7abb0b3238f747e4c94f401e0b867bba1cba3f2085dac",
+      "b": "2bd09fc07625afe38c25ab44e529ed148328c001ffa2a57703e46123f6be0541",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "95a48a95d29f73047cf623afca56caaf2d73a2f8ee6894cab37b0286f3095ca9",
+      "b": "7321fbf57a2a59fbe92f23fe897888110724355c203236897a22a490395d9571",
+      "dhash_distance": 1,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "b55737bd5aa8dc8bf3efa0e2dbcf6ec98542209735c3fe00ecbe8e7cd349b04a",
+      "b": "8cf21842b7f726424ebf35580487766b800b9fd914cf80bb5d6bbb1b55b463b2",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "9c81753e457909f74b27efded529495daeb0794d1b580c6a6b95c2f5cb412b6d",
+      "b": "b7c244ddfb384f38447ef5ed7b3b6f21edc00299523061090a1de72ae215d9d8",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "b1fd8b1b64e6ce141654bd5250fabbc3a72f3647ac766d54ecb257eb95d4a3a9",
+      "b": "590d04ebc340cf3b9cb4e614a9317c37ff8ad0e224f6da71ee86b8dcad644575",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "239f251b22bdf6c4fe40f61552ef29c7882d3c2cbc42ac278ca83586ee650e74",
+      "b": "dee13c08225cdc3360afd8e9e512058a11029be5b631d983c1768e9708e4c4cf",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "d5cf0e5b5af370ef2b1a744d30ff7bb044e36589002e807b8062e59bc392ba07",
+      "b": "185176b841d0e5f87c5e7e9dd0479990adfd905530c8b785e37f40052f8ea10b",
+      "dhash_distance": 4,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "d5cf0e5b5af370ef2b1a744d30ff7bb044e36589002e807b8062e59bc392ba07",
+      "b": "fbe0d59572aabedc2e11c6306971add5252e8394fcbb9e8403c5f77bb026be36",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "d5cf0e5b5af370ef2b1a744d30ff7bb044e36589002e807b8062e59bc392ba07",
+      "b": "36dccd6307a7fbd801d37f516bb929017e0b0bf979539c2a248a5657079ce417",
+      "dhash_distance": 2,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "89ed0bd392f4e434e46a8d3614eed8e71ae6d54370b62dbc731c19e90f3dea03",
+      "b": "185176b841d0e5f87c5e7e9dd0479990adfd905530c8b785e37f40052f8ea10b",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "89ed0bd392f4e434e46a8d3614eed8e71ae6d54370b62dbc731c19e90f3dea03",
+      "b": "fbe0d59572aabedc2e11c6306971add5252e8394fcbb9e8403c5f77bb026be36",
+      "dhash_distance": 4,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "89ed0bd392f4e434e46a8d3614eed8e71ae6d54370b62dbc731c19e90f3dea03",
+      "b": "36dccd6307a7fbd801d37f516bb929017e0b0bf979539c2a248a5657079ce417",
+      "dhash_distance": 4,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "89ed0bd392f4e434e46a8d3614eed8e71ae6d54370b62dbc731c19e90f3dea03",
+      "b": "d5cf0e5b5af370ef2b1a744d30ff7bb044e36589002e807b8062e59bc392ba07",
+      "dhash_distance": 4,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "c639461b9554299f089ad3ffd20d67ec92babeb222f6e4ea10d42ff66f072ecd",
+      "b": "4b062b366d4ee176d29cb64d8df164d075a6cece1ee12cf7dcfec9845d85b8d0",
+      "dhash_distance": 8,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "c639461b9554299f089ad3ffd20d67ec92babeb222f6e4ea10d42ff66f072ecd",
+      "b": "5a97b316e66f4e774e265433178a772355de35ea9d81341ec5dec480207f8302",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "c639461b9554299f089ad3ffd20d67ec92babeb222f6e4ea10d42ff66f072ecd",
+      "b": "84f817fcbe0cb19866e6f97f5784f028977da34ab4a0326e91722a3db5310f41",
+      "dhash_distance": 8,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "1880669845659b8415fe9af3a68865a6d3018bb9d65566ca1f8aaf6b061a0124",
+      "b": "325eea7a97150b496d154116c88eb7265801c0b5686e5d834ff5ba0b4652d723",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "72a4399494962f879b1ae631c0824a6fe3d23f74ac62e7effb4d1894414b8d79",
+      "b": "97c3279e2d30b6f42ce1c9acc17bf7a8604d60343e9036b2aa8c65e83dcf07ee",
+      "dhash_distance": 1,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "81df20415b04b499cb7cd3398c0877eb7c1bc56752a7ce3f8f6715fb7485beff",
+      "b": "41538e48f52c0a7d126e1c9423e625b1e6d1e2c90d89d5c911ef612936381db2",
+      "dhash_distance": 1,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "8af4f6340ee756dd794a86e6e19e38e0faba6fdfedd90bff2bdb77b042e8a934",
+      "b": "44aa15217c629921ce5fc20b34c98a118498557b7e12079e37b510dc3b3f235e",
+      "dhash_distance": 0,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "bd2ba34e77d6cda94ed982d678590d9a5a0bde5a9b684dbaec0591ffa6ca0970",
+      "b": "13e63056568aa8a86d64b6386214ade87cd46e25ab4a6f8878087ebd4e4dc787",
+      "dhash_distance": 1,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    },
+    {
+      "a": "21b7b28fb9603ff9a65596065d3c14b4a8d92ba2fb41c979430bb71a1bf38405",
+      "b": "f40b22ae28935a8ee3c95a5131c7268ca14231c13a0c676315c5698538a8ad97",
+      "dhash_distance": 7,
+      "status": "conservative_candidate_same_split_not_confirmed_identity"
+    }
+  ],
+  "policy": "Prior barriers retained, unrelated resume contents removed; no group split adjudicated."
+}

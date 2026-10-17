@@ -31,3 +31,4 @@ work/
 datasets/stack_face_review_dense/
 gcm-diagnose.log
 model-improvement/.pytest-tmp/
+model-improvement/stack-heatmap/runs/

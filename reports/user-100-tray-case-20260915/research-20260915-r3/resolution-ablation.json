@@ -1,0 +1,80 @@
+{
+  "truth_used": false,
+  "columns": [
+    {
+      "stack_id": "1",
+      "native": {
+        "legacy_count": 40,
+        "legacy_pitch": 10.0,
+        "band_count": 19,
+        "band_pitch": 20
+      },
+      "upsampled": {
+        "legacy_count": 40,
+        "legacy_pitch": 20.0,
+        "band_count": 19,
+        "band_pitch": 40
+      }
+    },
+    {
+      "stack_id": "2",
+      "native": {
+        "legacy_count": 10,
+        "legacy_pitch": 40.0,
+        "band_count": 19,
+        "band_pitch": 20
+      },
+      "upsampled": {
+        "legacy_count": 10,
+        "legacy_pitch": 77.0,
+        "band_count": 19,
+        "band_pitch": 40
+      }
+    },
+    {
+      "stack_id": "3",
+      "native": {
+        "legacy_count": 10,
+        "legacy_pitch": 40.0,
+        "band_count": 20,
+        "band_pitch": 20
+      },
+      "upsampled": {
+        "legacy_count": 10,
+        "legacy_pitch": 74.0,
+        "band_count": 20,
+        "band_pitch": 40
+      }
+    },
+    {
+      "stack_id": "4",
+      "native": {
+        "legacy_count": 10,
+        "legacy_pitch": 40.0,
+        "band_count": 19,
+        "band_pitch": 21
+      },
+      "upsampled": {
+        "legacy_count": 11,
+        "legacy_pitch": 76.0,
+        "band_count": 19,
+        "band_pitch": 40
+      }
+    },
+    {
+      "stack_id": "5",
+      "native": {
+        "legacy_count": 12,
+        "legacy_pitch": 40.0,
+        "band_count": 19,
+        "band_pitch": 22
+      },
+      "upsampled": {
+        "legacy_count": 11,
+        "legacy_pitch": 75.0,
+        "band_count": 19,
+        "band_pitch": 40
+      }
+    }
+  ]
+}

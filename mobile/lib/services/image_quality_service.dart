@@ -38,7 +38,11 @@ class ImageQualityService {
         reason: 'The camera image could not be decoded.',
       );
     }
-    final oriented = img.bakeOrientation(decoded);
+    return inspectImage(img.bakeOrientation(decoded));
+  }
+
+  /// Same checks on an image that is already decoded and upright.
+  LocalQualityResult inspectImage(img.Image oriented) {
     if (oriented.width < minimumWidth || oriented.height < minimumHeight) {
       return LocalQualityResult(
         accepted: false,
@@ -99,4 +103,3 @@ class ImageQualityService {
     );
   }
 }
-

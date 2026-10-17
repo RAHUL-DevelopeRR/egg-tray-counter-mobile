@@ -1,0 +1,241 @@
+{
+  "predictions_sha256": "b26d226de67c5baff2b66b963d3c0d72ec8b7b46ab4b530dd839568dea07ec5f",
+  "evaluation_only": true,
+  "columns": [
+    {
+      "stack_id": "1",
+      "user_reported_physical": 20,
+      "before": 40,
+      "exploratory_bands": 19,
+      "signed_band_count_error": -1,
+      "legacy_pitch_px_at_height_768": 20,
+      "legacy_ac_at_selected_pitch": 0.45858883563479436,
+      "native_height": 403,
+      "candidate_pitch_px_native": 20,
+      "harmonic_examples": [
+        {
+          "pitch_px": 10,
+          "feature": "dark",
+          "count": 19,
+          "support": 0.01047697821891377,
+          "coverage": 0.47146401985111663,
+          "explained_bands": 1.0,
+          "regularity": 0.022222222222222365
+        },
+        {
+          "pitch_px": 20,
+          "feature": "bright",
+          "count": 19,
+          "support": 0.8722084367245657,
+          "coverage": 0.9429280397022333,
+          "explained_bands": 1.0,
+          "regularity": 0.9249999999999999
+        },
+        {
+          "pitch_px": 40,
+          "feature": "dark",
+          "count": 10,
+          "support": 0.5020823356986346,
+          "coverage": 0.9925558312655087,
+          "explained_bands": 0.5263157894736842,
+          "regularity": 0.9611111111111111
+        }
+      ],
+      "physical_count": null,
+      "filled_count": null,
+      "empty_count": null
+    },
+    {
+      "stack_id": "2",
+      "user_reported_physical": 20,
+      "before": 10,
+      "exploratory_bands": 19,
+      "signed_band_count_error": -1,
+      "legacy_pitch_px_at_height_768": 77,
+      "legacy_ac_at_selected_pitch": 0.8416907521950486,
+      "native_height": 399,
+      "candidate_pitch_px_native": 20,
+      "harmonic_examples": [
+        {
+          "pitch_px": 10,
+          "feature": "dark",
+          "count": 19,
+          "support": 0.013227513227513232,
+          "coverage": 0.47619047619047616,
+          "explained_bands": 1.0,
+          "regularity": 0.02777777777777779
+        },
+        {
+          "pitch_px": 20,
+          "feature": "bright",
+          "count": 19,
+          "support": 0.9047619047619047,
+          "coverage": 0.9523809523809523,
+          "explained_bands": 1.0,
+          "regularity": 0.95
+        },
+        {
+          "pitch_px": 40,
+          "feature": "bright",
+          "count": 10,
+          "support": 0.5233918128654971,
+          "coverage": 1.0,
+          "explained_bands": 0.5263157894736842,
+          "regularity": 0.9944444444444445
+        }
+      ],
+      "physical_count": null,
+      "filled_count": null,
+      "empty_count": null
+    },
+    {
+      "stack_id": "3",
+      "user_reported_physical": 21,
+      "before": 10,
+      "exploratory_bands": 20,
+      "signed_band_count_error": -1,
+      "legacy_pitch_px_at_height_768": 74,
+      "legacy_ac_at_selected_pitch": 0.8374092681442022,
+      "native_height": 415,
+      "candidate_pitch_px_native": 20,
+      "harmonic_examples": [
+        {
+          "pitch_px": 10,
+          "feature": "dark",
+          "count": 20,
+          "support": 0.015218769816106472,
+          "coverage": 0.4819277108433735,
+          "explained_bands": 1.0,
+          "regularity": 0.03157894736842093
+        },
+        {
+          "pitch_px": 20,
+          "feature": "bright",
+          "count": 20,
+          "support": 0.910589727330374,
+          "coverage": 0.963855421686747,
+          "explained_bands": 1.0,
+          "regularity": 0.9447368421052631
+        },
+        {
+          "pitch_px": 40,
+          "feature": "bright",
+          "count": 11,
+          "support": 0.5238750000000001,
+          "coverage": 1.0,
+          "explained_bands": 0.55,
+          "regularity": 0.9525
+        }
+      ],
+      "physical_count": null,
+      "filled_count": null,
+      "empty_count": null
+    },
+    {
+      "stack_id": "4",
+      "user_reported_physical": 20,
+      "before": 11,
+      "exploratory_bands": 19,
+      "signed_band_count_error": -1,
+      "legacy_pitch_px_at_height_768": 76,
+      "legacy_ac_at_selected_pitch": 0.7677229752508515,
+      "native_height": 400,
+      "candidate_pitch_px_native": 21,
+      "harmonic_examples": [
+        {
+          "pitch_px": 10,
+          "feature": "bright",
+          "count": 19,
+          "support": 0.007916666666666692,
+          "coverage": 0.475,
+          "explained_bands": 1.0,
+          "regularity": 0.01666666666666672
+        },
+        {
+          "pitch_px": 21,
+          "feature": "bright",
+          "count": 19,
+          "support": 0.9368055555555556,
+          "coverage": 0.9975,
+          "explained_bands": 1.0,
+          "regularity": 0.9391534391534391
+        },
+        {
+          "pitch_px": 42,
+          "feature": "dark",
+          "count": 11,
+          "support": 0.5015476190476191,
+          "coverage": 1.0,
+          "explained_bands": 0.55,
+          "regularity": 0.9119047619047619
+        }
+      ],
+      "physical_count": null,
+      "filled_count": null,
+      "empty_count": null
+    },
+    {
+      "stack_id": "5",
+      "user_reported_physical": 20,
+      "before": 11,
+      "exploratory_bands": 19,
+      "signed_band_count_error": -1,
+      "legacy_pitch_px_at_height_768": 75,
+      "legacy_ac_at_selected_pitch": 0.7888013042931674,
+      "native_height": 408,
+      "candidate_pitch_px_native": 22,
+      "harmonic_examples": [
+        {
+          "pitch_px": 11,
+          "feature": "bright",
+          "count": 19,
+          "support": 0.09055010893246188,
+          "coverage": 0.5122549019607843,
+          "explained_bands": 1.0,
+          "regularity": 0.1767676767676768
+        },
+        {
+          "pitch_px": 22,
+          "feature": "bright",
+          "count": 19,
+          "support": 0.9116161616161617,
+          "coverage": 1.0,
+          "explained_bands": 1.0,
+          "regularity": 0.9116161616161617
+        },
+        {
+          "pitch_px": 44,
+          "feature": "dark",
+          "count": 11,
+          "support": 0.48500000000000004,
+          "coverage": 1.0,
+          "explained_bands": 0.55,
+          "regularity": 0.8818181818181818
+        }
+      ],
+      "physical_count": null,
+      "filled_count": null,
+      "empty_count": null
+    }
+  ],
+  "legacy_absolute_error_sum": 59,
+  "band_absolute_error_sum": 5,
+  "band_mae": 1.0,
+  "automatic_localization": false,
+  "instance_tp": null,
+  "instance_fp": null,
+  "instance_fn": null,
+  "precision": null,
+  "recall": null,
+  "f1": null,
+  "reason": "Pending tray geometry/visibility annotation; no raw RF output for this scene",
+  "physical_total": null,
+  "eligible_total": null,
+  "regression_exact_101_physical_100_eligible": false,
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv": "4.12.0",
+    "scipy": "1.16.1"
+  },
+  "predictions_sha256_format": "UTF-8 canonical JSON: sort_keys=True, separators=(comma,colon), allow_nan=False; independent of Git line endings"
+}

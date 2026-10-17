@@ -2,17 +2,22 @@ import 'package:flutter/material.dart';
 
 import '../features/home/home_screen.dart';
 import '../services/history_database.dart';
+import '../services/pending_scans.dart';
 import '../services/settings_store.dart';
 
 class EggCounterApp extends StatelessWidget {
   const EggCounterApp({
     required this.settings,
     required this.history,
+    this.pendingScans,
     super.key,
   });
 
   final SettingsStore settings;
   final HistoryDatabase history;
+
+  /// Unfinished scans; by default kept next to [history].
+  final PendingScanStore? pendingScans;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +52,11 @@ class EggCounterApp extends StatelessWidget {
           ),
         ),
       ),
-      home: HomeScreen(settings: settings, history: history),
+      home: HomeScreen(
+        settings: settings,
+        history: history,
+        pendingScans: pendingScans ?? DiskPendingScanStore(database: history),
+      ),
     );
   }
 }

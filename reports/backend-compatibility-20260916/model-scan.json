@@ -1,0 +1,146 @@
+{
+  "scan_id": "95e97deb-e682-435f-bf95-bc0fb5d1e328",
+  "status": "rescan_required",
+  "accepted": false,
+  "physical_stack_count": null,
+  "total_trays": null,
+  "total_eggs": null,
+  "eggs_per_tray": 30,
+  "cell_ids": {},
+  "model": {
+    "provider": "roboflow_serverless",
+    "model_id": "projec-mutta/2"
+  },
+  "processing": {
+    "mode": "model_spatial_v1",
+    "latency_ms": 7997,
+    "model_version": "projec-mutta/2",
+    "timings_ms": {
+      "total": 7997
+    }
+  },
+  "views": {
+    "left": {
+      "quality": 0,
+      "accepted": false,
+      "reason": "Model detections are available. Physical stack matching and egg occupancy remain unresolved; these per-photo counts are not a verified inventory total.",
+      "detections": [
+        {
+          "class": "egg_tray",
+          "confidence": 0.939024806022644,
+          "x": 557.5,
+          "y": 672,
+          "width": 377,
+          "height": 364
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.9213575720787048,
+          "x": 680.5,
+          "y": 421.5,
+          "width": 313,
+          "height": 255
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.9210741519927979,
+          "x": 400,
+          "y": 285,
+          "width": 310,
+          "height": 252
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.9005298018455505,
+          "x": 262.5,
+          "y": 553,
+          "width": 395,
+          "height": 336
+        }
+      ],
+      "detector_mean_confidence": 0.9204965829849243
+    },
+    "right": {
+      "quality": 0,
+      "accepted": false,
+      "reason": "Model detections are available. Physical stack matching and egg occupancy remain unresolved; these per-photo counts are not a verified inventory total.",
+      "detections": [
+        {
+          "class": "egg_tray",
+          "confidence": 0.9124361872673035,
+          "x": 286.5,
+          "y": 473.5,
+          "width": 547,
+          "height": 349
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.9043130874633789,
+          "x": 857.5,
+          "y": 427.5,
+          "width": 575,
+          "height": 335
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.8300437331199646,
+          "x": 424,
+          "y": 233.5,
+          "width": 346,
+          "height": 179
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.7620701193809509,
+          "x": 838.5,
+          "y": 206.5,
+          "width": 387,
+          "height": 167
+        }
+      ],
+      "detector_mean_confidence": 0.8522157818078995
+    },
+    "straight": {
+      "quality": 0,
+      "accepted": false,
+      "reason": "Model detections are available. Physical stack matching and egg occupancy remain unresolved; these per-photo counts are not a verified inventory total.",
+      "detections": [
+        {
+          "class": "egg_tray",
+          "confidence": 0.6261242032051086,
+          "x": 990,
+          "y": 354,
+          "width": 560,
+          "height": 450
+        },
+        {
+          "class": "egg_tray",
+          "confidence": 0.5803520083427429,
+          "x": 443,
+          "y": 358,
+          "width": 514,
+          "height": 442
+        }
+      ],
+      "detector_mean_confidence": 0.6032381057739258
+    }
+  },
+  "stacks": [
+    {
+      "physical_stack_id": "Per-photo model detections (unmatched)",
+      "counts": {
+        "left": 4,
+        "right": 4,
+        "straight": 2
+      },
+      "final_count": null,
+      "confidence": 0,
+      "accepted": false,
+      "reason": "Model detections are available. Physical stack matching and egg occupancy remain unresolved; these per-photo counts are not a verified inventory total."
+    }
+  ],
+  "rescan": {
+    "recommended_view": "straight",
+    "reason": "Model detections are available. Physical stack matching and egg occupancy remain unresolved; these per-photo counts are not a verified inventory total."
+  }
+}

@@ -1,0 +1,3 @@
+recorded_at,block_id,scan_id,stacks,unreachable_stacks,app_total,manual_filled,manual_empty,manual_total_reachable,diff_app_minus_manual,app_version,notes
+2026-10-09T03:53:46.772Z,WH-99,d6d087ea-bb3f-49d4-8621-f6a6d6c37fad,5,0,,99,0,99,,0.4.0+11,
+2026-10-09T04:12:30.385Z,MECH-DONE,dfaf5f78-2ca0-469d-933c-6aef5ee0e9f1,20,0,,399,0,399,,0.4.1+12,

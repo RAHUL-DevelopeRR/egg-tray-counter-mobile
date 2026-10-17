@@ -2,6 +2,29 @@ import 'package:egg_tray_counter/services/api_client.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  test('model scans require explicit optional-marker support', () {
+    expect(
+      ApiClient.supportsModelScan({
+        'status': 'ok',
+        'scan_contract': 'cell_identity_v1',
+      }),
+      isFalse,
+    );
+    expect(
+      ApiClient.supportsModelScan({
+        'status': 'ok',
+        'scan_contracts': ['model_spatial_v1'],
+      }),
+      isTrue,
+    );
+    expect(
+      ApiClient.supportsModelScan({
+        'status': 'error',
+        'scan_contracts': ['model_spatial_v1'],
+      }),
+      isFalse,
+    );
+  });
   test(
     'photo preflight rejects legacy, missing, wrong or unhealthy contracts',
     () {

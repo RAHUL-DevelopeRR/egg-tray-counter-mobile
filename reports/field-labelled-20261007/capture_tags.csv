@@ -1,0 +1,40 @@
+id,capture,basis
+1,frontal_fill,one block face roughly square-on
+2,frontal_fill,one block face roughly square-on
+3,angled_or_multi,oblique view plus separate stack
+4,frontal_fill,one block face roughly square-on
+5,distant_or_wide,two blocks far from camera
+8,frontal_fill,one block face roughly square-on
+9,frontal_fill,close square-on face with inner short stack
+10,angled_or_multi,corner view of pulp block
+12,angled_or_multi,corner view two faces
+13,distant_or_wide,distant oblique long block
+14,angled_or_multi,corner view two faces
+15,angled_or_multi,face plus side blocks
+16,frontal_fill,one block face roughly square-on
+17,angled_or_multi,corner view
+18,frontal_fill,one block face roughly square-on
+19,frontal_fill,one block face roughly square-on
+20,frontal_fill,close square-on face
+21,frontal_fill,one block face roughly square-on
+22,frontal_fill,one block face roughly square-on
+23,frontal_fill,one block face roughly square-on
+24,frontal_fill,one block face roughly square-on
+25,angled_or_multi,steep side view
+26,angled_or_multi,two blocks at different depths
+27,angled_or_multi,steep side view
+28,frontal_fill,square-on face with loose tray in front
+29,angled_or_multi,steep oblique view
+30,frontal_fill,close square-on face
+31,angled_or_multi,oblique view
+33,distant_or_wide,very wide distant block
+34,frontal_fill,one block face roughly square-on
+36,frontal_fill,square-on face
+38,distant_or_wide,two groups small in frame
+41,angled_or_multi,two blocks at different depths
+42,angled_or_multi,L-shaped corner block
+44,distant_or_wide,face small in frame with clutter
+45,angled_or_multi,L-shaped oblique
+48,angled_or_multi,L-shaped corner block
+50,frontal_fill,two stacks close square-on
+51,angled_or_multi,L-shaped corner block wide

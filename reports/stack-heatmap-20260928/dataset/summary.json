@@ -1,0 +1,45 @@
+{
+  "inventory_records": 947,
+  "unique_contents": 527,
+  "excluded_out_of_scope": 2,
+  "near_duplicate_edges": 138,
+  "conservative_inventory_groups": 2,
+  "reviewed_faces": 7,
+  "reviewed_layer_targets": 125,
+  "reviewed_scene_groups": 2,
+  "physical_ground_truth_certified": false,
+  "unreadable_images": [],
+  "missing_reviewed_sources": [
+    {
+      "id": "wh009",
+      "source_sha256": "509b3b6f01e2a6dfef2400582abe7c185f47b3085e45b3c790f09dd07da10b3c",
+      "reason": "Source bytes unavailable; historical coordinates cannot label substitute image."
+    },
+    {
+      "id": "wh025",
+      "source_sha256": "a7b9af0cbbd5a5f86846051869ec7806ee29d3e4efabef1e68588633433abda0",
+      "reason": "Source bytes unavailable; historical coordinates cannot label substitute image."
+    },
+    {
+      "id": "wh069",
+      "source_sha256": "054d9210f3e95fc0cf26d9f19fe805fb548323ffdeb0c6ca189d58606f97f925",
+      "reason": "Source bytes unavailable; historical coordinates cannot label substitute image."
+    }
+  ],
+  "v2_overview_candidates_excluded_pending_full_resolution_QA": 72,
+  "searched_roots": [
+    "datasets",
+    "accuracy-evaluation\\test-images",
+    "reports\\mutaa-20260916\\originals",
+    "reports\\individual-trays-20260915",
+    "reports\\two-view-20260924\\manual-corrections",
+    "reports\\two-view-20260924\\focused-training",
+    "C:\\Users\\DELL\\Downloads\\MUTAA",
+    "C:\\Users\\DELL\\Downloads\\WhatsApp Unknown 2026-09-15 at 11.48.36 AM",
+    "C:\\Users\\DELL\\Downloads\\WhatsApp Unknown 2026-09-23 at 9.01.01 PM",
+    "C:\\Users\\DELL\\Downloads\\WhatsApp Unknown 2026-09-26 at 6.45.01 AM"
+  ],
+  "snapshot_status": "frozen_reviewed_subset_incomplete_valid_test_empty",
+  "snapshot_manifest_sha256": "7d376b4e79a363f6d45d82f65b908bb53ae5dcffe566b17349b31303572a30de",
+  "python": "C:\\Users\\DELL\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe"
+}

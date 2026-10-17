@@ -1,0 +1,17 @@
+{
+  "inventory_records": 915,
+  "unique_contents": 495,
+  "excluded_unrelated_resume_paths": 36,
+  "near_duplicate_edges": 127,
+  "reviewed_faces": 11,
+  "reviewed_layer_targets": 152,
+  "leakage_groups": [
+    "session-2026-07-03",
+    "session-2026-09-15"
+  ],
+  "review_manifest_sha256": "923c79955eac8c4dd80a50a785649da1b0feccad199268799e44715b3ccadecc",
+  "prior_manifest_sha256": "7d376b4e79a363f6d45d82f65b908bb53ae5dcffe566b17349b31303572a30de",
+  "physical_ground_truth_certified": false,
+  "V5_control": "unchanged_ineligible_no_complete_fullframe_QA",
+  "split_policy": "Leave one entire conservative group out. New crops inherit parent group. No acceptance images."
+}

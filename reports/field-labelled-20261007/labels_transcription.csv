@@ -1,0 +1,53 @@
+id,file,label_total,region_labels,scene_type,tray_material,same_scene_as,read_confidence,notes
+1,img-01.jpg,99,,block_face,dark_green_plastic,,high,known 20/20/20/20/19 wide scene
+2,img-02.jpeg,80,,block_face,green_plastic,3?,high,frontal close view
+3,img-03.jpeg,80,,block_face,green_plastic,2?,high,angled; separate stack at left may be outside label scope
+4,img-04.jpeg,115,,block_face,green_plastic,5?,high,
+5,img-05.jpeg,235,120|115,block_face,green_plastic,4?,high,two bracketed blocks: left 120 right 115
+6,img-06.jpeg,4,,loose_trays,mixed_plastic,7|37,high,top-down single trays
+7,img-07.jpeg,4,,loose_trays,mixed_plastic,6|37,high,top-down single trays
+8,img-08.jpeg,160,,block_face,green_plastic,23,high,
+9,img-09.jpeg,75,,block_face,green_plastic,,high,middle short stack has an empty top tray
+10,img-10.jpeg,30,,block_face,paper_pulp,,high,bracket covers front block only
+11,img-11.jpeg,8,2|6,mixed,mixed_plastic,40,high,2 loose trays bracketed plus green stack labelled 6
+12,img-12.jpeg,205,100|105,block_face,orange_plastic,,high,two bracketed faces; ink lines over trays
+13,img-13.jpeg,204,84|120,block_face,orange_plastic,,high,two bracketed faces; ink lines over trays
+14,img-14.jpeg,132,80|52,block_face,orange_plastic,,high,two bracketed faces; pulp inset in right face; ink over trays
+15,img-15.jpeg,62,,block_face,orange_plastic,,high,bracket over trays
+16,img-16.jpeg,119,,block_face,orange_plastic,22,high,bracket over trays
+17,img-17.jpeg,109,,block_face,orange_plastic,36,high,bracket over trays
+18,img-18.jpeg,129,,block_face,orange_plastic,,high,bracket over trays
+19,img-19.jpeg,100,,block_face,green_plastic,21?|24?,high,
+20,img-20.jpeg,60,,block_face,green_plastic,,high,
+21,img-21.jpeg,100,,block_face,green_plastic,24,medium,label written upside down
+22,img-22.jpeg,119,,block_face,orange_plastic,16,high,
+23,img-23.jpeg,160,,block_face,green_plastic,8,high,
+24,img-24.jpeg,100,,block_face,green_plastic,21,high,
+25,img-25.jpeg,80,,block_face,green_plastic,27|30|31,high,steep side angle
+26,img-26.jpeg,125,,block_face,green_plastic,,high,label appears to cover front block and back-left block
+27,img-27.jpeg,80,,block_face,green_plastic,25|30|31,high,steep side angle
+28,img-28.jpeg,143,,block_face,green_plastic,,medium,loose single tray on floor in front
+29,img-29.jpeg,130,,block_face,green_plastic,,high,
+30,img-30.jpeg,80,,block_face,green_plastic,25|27|31,high,
+31,img-31.jpeg,80,,block_face,green_plastic,25|27|30,high,
+32,img-32.jpeg,19,,single_stack,green_plastic,,high,earlier 19 side reference style
+33,img-33.jpeg,358,,block_face,orange_plastic,,high,very wide block; tiny layers
+34,img-34.jpeg,120,,block_face,dark_green_plastic,,high,
+35,img-35.jpeg,1,,loose_trays,green_plastic,,high,single tray
+36,img-36.jpeg,109,,block_face,orange_plastic,17,high,
+37,img-37.jpeg,4,,loose_trays,mixed_plastic,6|7,high,
+38,img-38.jpeg,118,,block_face,green_plastic,,high,
+39,img-39.jpeg,2,,loose_trays,green_plastic,,high,
+40,img-40.jpeg,10,,mixed,mixed_plastic,11,medium,loose trays plus stack; scope unclear
+41,img-41.jpeg,81,,block_face,green_plastic,,medium,label appears to cover front pair and back three stacks
+42,img-42.jpeg,180,,block_face,green_plastic,48,high,near-identical to 48
+43,img-43.jpeg,5,,mixed,orange_plastic,,medium,one loose tray plus partial stack; scope unclear
+44,img-44.jpeg,185,,block_face,green_plastic,,high,loose trays in front right
+45,img-45.jpeg,107,,block_face,green_plastic,,medium,
+46,img-46.jpeg,20,,single_stack,green_plastic,,medium,label partly cut off at top edge
+47,img-47.jpeg,7,,single_stack,green_plastic,,high,
+48,img-48.jpeg,180,,block_face,green_plastic,42,high,near-identical to 42
+49,img-49.jpeg,1,,loose_trays,paper_pulp,,high,single tray
+50,img-50.jpeg,40,,block_face,green_plastic,,high,two stacks
+51,img-51.jpeg,262,,block_face,green_plastic,,high,loose tray in front
+52,img-52.jpeg,25,,mixed,mixed_plastic,,medium,several small stacks and loose trays

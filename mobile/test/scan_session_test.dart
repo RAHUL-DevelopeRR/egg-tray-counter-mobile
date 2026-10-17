@@ -3,14 +3,24 @@ import 'package:egg_tray_counter/models/scan_session.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test('capture state advances LEFT, RIGHT, STRAIGHT', () {
+  test('replacement and clearing never reuse previous capture evidence', () {
+    final session = ScanSession(scanId: 'evidence')
+      ..setPath(CaptureView.left, 'first.jpg', evidence: '{"capture":1}');
+    expect(session.constraintEvidence['left'], '{"capture":1}');
+    session.setPath(CaptureView.left, 'second.jpg');
+    expect(session.constraintEvidence, isEmpty);
+    session.setPath(CaptureView.left, 'third.jpg', evidence: '{"capture":3}');
+    session.clear(CaptureView.left);
+    expect(session.constraintEvidence, isEmpty);
+  });
+  test('capture state advances STRAIGHT, LEFT, RIGHT', () {
     final session = ScanSession(scanId: 'scan-1');
+    expect(session.nextMissing, CaptureView.straight);
+    session.setPath(CaptureView.straight, 'straight.jpg', cellId: 'A1');
     expect(session.nextMissing, CaptureView.left);
     session.setPath(CaptureView.left, 'left.jpg', cellId: 'A1');
     expect(session.nextMissing, CaptureView.right);
     session.setPath(CaptureView.right, 'right.jpg', cellId: 'A1');
-    expect(session.nextMissing, CaptureView.straight);
-    session.setPath(CaptureView.straight, 'straight.jpg', cellId: 'A1');
     expect(session.isComplete, isTrue);
     expect(session.nextMissing, isNull);
   });
@@ -30,14 +40,12 @@ void main() {
   });
 
   test(
-    'cell ID is validated before binding a photo; no identity is inferred',
+    'optional cell ID is validated when provided; no identity is invented',
     () {
       final session = ScanSession(scanId: 'scan-3');
-      expect(
-        () => session.setPath(CaptureView.left, 'x.jpg', cellId: ''),
-        throwsFormatException,
-      );
-      expect(session.pathFor(CaptureView.left), isNull);
+      session.setPath(CaptureView.left, 'x.jpg');
+      expect(session.pathFor(CaptureView.left), 'x.jpg');
+      expect(session.cellIds, isEmpty);
       session.setPath(CaptureView.left, 'x.jpg', cellId: ' w1-a2 ');
       expect(session.cellIds, {'left': 'W1-A2'});
       expect(() => ScanSession.normalizeCellId('A/B'), throwsFormatException);
@@ -47,4 +55,32 @@ void main() {
       );
     },
   );
+
+  test('three photos are complete without painted floor IDs', () {
+    final session = ScanSession(scanId: 'no-markers')
+      ..setPath(CaptureView.left, 'left.jpg')
+      ..setPath(CaptureView.right, 'right.jpg')
+      ..setPath(CaptureView.straight, 'straight.jpg');
+    expect(session.isComplete, isTrue);
+    expect(session.cellIds, isEmpty);
+  });
+
+  test('a retake is a new scan id that keeps the other two photos', () {
+    final first = ScanSession(scanId: 'scan-a')
+      ..setPath(CaptureView.left, 'left.jpg', cellId: 'A1', evidence: '{"l":1}')
+      ..setPath(CaptureView.right, 'right.jpg', evidence: '{"r":1}')
+      ..setPath(CaptureView.straight, 'straight.jpg', evidence: '{"s":1}');
+    final retake = first.retake(CaptureView.right, scanId: 'scan-b');
+    expect(retake.scanId, 'scan-b');
+    expect(retake.scanId, isNot(first.scanId));
+    expect(retake.pathFor(CaptureView.right), isNull);
+    expect(retake.nextMissing, CaptureView.right);
+    expect(retake.pathFor(CaptureView.left), 'left.jpg');
+    expect(retake.pathFor(CaptureView.straight), 'straight.jpg');
+    expect(retake.cellIds, {'left': 'A1'});
+    expect(retake.constraintEvidence, {'left': '{"l":1}', 'straight': '{"s":1}'});
+    // The original triplet is untouched.
+    expect(first.isComplete, isTrue);
+    expect(first.constraintEvidence['right'], '{"r":1}');
+  });
 }

@@ -1,0 +1,90 @@
+# Phone end-to-end run — 9 October 2026 (Redmi Note 9 Pro, Android 12)
+
+APK 0.4.0+11 (photo picker build, SHA-256 0c48ffeada0692a3…), staging Worker
+versions 4ffa06e0 (manual-count route) then fa3a0a49 (latest.json), server
+URL set in the app's Settings to the staging Worker.
+
+Phone findings (not app bugs): the system Files picker (DocumentsUI) never
+lists files on this phone for any app. Reverting its update to the factory
+version and turning on the paused Work profile (Android Device Policy) did not
+change that. The app now uses the Android Photo Picker (`image_picker` with
+`useAndroidPhotoPicker`), which lists photos by date and works (01).
+
+Run 1 — mechanics trio (three different blocks used as faces; not a real
+block): picked from the Downloads album, uploaded, result in ~5 s (03): block
+5 × 4 drawn, observed 180 + computed 180, total withheld — stacks (2,0) and
+(0,3) flagged RESCAN because raw box count and span count disagreed by more
+than one on the app's re-encoded JPEGs (the same files sent raw from the
+laptop gave 400 with no flags: see ../scan-img19-30-02.json). Manual count
+entered (block MECH-TEST, one stack edited, one marked unreachable) and sent:
+"Sent to server: filled 399, empty 0".
+
+Run 2 — the real 99-tray block (front img-01) with its 19-layer side photo as
+RIGHT and the other 19-layer side photo as LEFT (no genuine left photo exists):
+block 5 × 1 drawn, 101 observed (21/20/20/21/19), total withheld: "corner
+height differs between STRAIGHT and LEFT (straight 21, left 19)" (04). Manual
+count entered with the verified 20/20/20/20/19 (05, 06): "Sent to server:
+filled 99, empty 0". Server object fetched back with wrangler:
+`manual-count-WH-99.json` (scan d6d087ea-…), containing both the app layers
+and the human count per stack.
+
+What this proves: picker → upload → block model → 3D render → manual count →
+server storage works on a real phone. What it does not prove: counting
+accuracy on real blocks (no same-block STRAIGHT/LEFT/RIGHT set exists on the
+laptop); that is today's field test.
+
+## 0.4.1+12 — closing the loop (09:36)
+
+After a successful send the form shows **DONE — NEXT BLOCK** (07); tapping it
+returns to a fresh upload pane with empty slots (08), so the operator goes
+block to block without hunting for Back. The send button becomes "SEND AGAIN
+(CORRECTION)". Verified on the phone with a third scan (block MECH-DONE).
+APK SHA-256 b6487aea0052bfa7…; staging Worker d70d6495 adds
+GET /v1/scans/:id/archive (key names only) used by scripts/score_field_blocks.py.
+
+## 0.4.5+16 — camera follows the phone (13:23)
+
+User feedback on 0.4.4: the rotate button was wrong; the camera must not be
+turned by a button, only the way the phone is held decides whether the
+picture is portrait or landscape, and the picture must fill the screen.
+0.4.5 removes the button. The capture screen has no app bar; the camera
+frame is scaled to cover the whole screen (12, portrait, lens covered so the
+frame is dark) with the close control, torch, view chips and the one-line
+instruction laid over the top and the verdict strip plus CAPTURE button over
+the bottom. Turning the phone past 60 degrees of roll switches the screen to
+that landscape side (back under 30 degrees returns to portrait), using the
+accelerometer, so it works with the system rotation lock on; in landscape
+the CAPTURE button sits on the right and the verdict strip bottom-left. The
+live checks are told the chosen rotation (roll measured relative to the
+rotated screen, frames rotated by sensorOrientation minus display rotation),
+so a phone held level sideways no longer reads as tilted. Landscape could
+not be exercised from the desk (the phone cannot be rotated remotely); a
+widget test at 1000x480 checks the frame covers the screen and the button
+position, and the landscape side (roll +90 = landscapeLeft) follows the
+Android accelerometer convention; if the first field try shows landscape
+upside down, the sign in `_followOrientation` is the one-line fix. APK
+SHA-256 34a0349a3e4b11d4…, installed and verified versionName 0.4.5.
+
+## 0.4.6 to 0.4.8 - the screen stays put, the photo is straightened (2026-10-09/10)
+
+User on 0.4.5 landscape: "the camera is panning". The capture-orientation lock
+(portrait) was the cause; 0.4.6 removed it. 0.4.7 (installed 15:55, SHA-256
+8f0d2e4bc95f19b7...) stops rotating the screen altogether: the viewfinder is
+fixed to the phone, the tilt sensor decides upright / turned left / turned
+right, the chips, text, verdict strip, CAPTURE button and dialogs turn to
+face the operator, and the saved photo is turned upright and uploaded without
+a rotation tag. Portrait checked on the phone (unchanged look); sideways is
+covered by widget tests only. 0.4.8 (SHA-256 2416b9d9e21f7715..., built, not
+installed) removes the 20:9 trim of the upload, measured to cost a layer on
+some stacks, and shows the whole camera frame. Server-side evidence for the
+sideways case is in reports/orientation-20261009/.
+
+## 0.4.9 - gallery scan of the 99 block on the phone (2026-10-12 16:27)
+
+Network retries, 1600 px uploads and the 8-degree tilt limit installed
+(SHA-256 d48061bc0a1fa76c...). The three archived photos of the 99 block were
+picked from the Photo Picker, the same-stacks box ticked, UPLOAD AND COUNT
+tapped: 25 s later the block screen shows 5 wide x 1 deep, 20/20/20/20/19,
+99 trays, all stacks observed (13). The warning triangle above BLOCK COUNT
+is the legacy "not a verified inventory" flag; 0.4.10 shows the verified
+icon whenever the block has a total.
