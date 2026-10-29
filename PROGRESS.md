@@ -1,5 +1,52 @@
 # Progress
 
+## 2026-10-29 - APK 0.4.12 end to end on the emulator against staging (Claude Code)
+
+Branch rollout/0.4.12-staging. Commit 3989f95 holds the signing change and the 26 Oct entries; it is not
+pushed.
+
+Emulator setup: the existing AVD abi_test (Android 16, x86_64, google_apis_playstore) on this laptop, started
+with -no-snapshot-save.
+
+Steps:
+- Installed egg-tray-counter-0.4.12-block-staging.apk (SHA-256 4da7db0a...): versionName 0.4.12,
+  versionCode 23.
+- On launch the app pointed at production (SERVER REACHABLE). The URL was changed to staging in Settings.
+- The app then registered itself: "WAITING FOR APPROVAL - device 1179-C06A".
+  `scripts/devices.py list` showed it as pending with app 0.4.12+23.
+  `approve 1179c06a-9631-4c27-8d8d-432fcab1c718` made it active, and the home card then read DEVICE APPROVED.
+  It is still active on staging; revoke it if it is no longer wanted.
+- Gallery scan of the 99-block trio:
+  - STRAIGHT img-01 (label 99).
+  - LEFT warehouse image-4 and RIGHT img-32, both photos of the same 19-tray end stack. No genuine LEFT
+    photo exists.
+  - Connection: EGGCONN ipv4, tcp 21 ms, tls 36 ms.
+  - Result screen: "BLOCK ESTIMATE / faces differ by one layer", 5 wide x 1 deep, 20/20/20/20/19, seen
+    99, computed 0, one gap-filled layer, total 99.
+  - The ambiguity is cell [0,0]: straight 20, left 19, chosen 20. This is the same outcome as the phone on
+    12 Oct and the staging replay on 14 Oct.
+- Admin GET /v1/scans/91fbaf6f-a4a2-471f-bb9f-73f62a14df8f/result returned 200 with job done, attempt 1,
+  replayed true and pipeline worker-0.4.12 (stored result, no new inference). Raw detector boxes: straight
+  101, left 22, right 24. The walk counter turns those into the per-stack layers.
+- RECORD MANUAL COUNT: the form opened pre-filled with the app's layers (the anchoring risk).
+  - Sent with block id EMU-TEST-20261029 and the note "emulator test only, not ground truth".
+  - The app showed "Sent to server: filled 99, empty 0".
+  - export_manual_counts lists it with storage state, tamper_proof true, count_id 310c503d...,
+    app_total 99, app_version 0.4.12+23 and recorded_by the emulator device.
+  - EXCLUDE EMU-TEST-* from every score.
+
+What this shows:
+- Registration, approval, upload, scan job, stored result and the manual-count path all work in 0.4.12
+  against staging.
+- It does NOT show counting accuracy: the trio is constructed, these photos are in the set the walk
+  counter was tuned on, and the app itself calls the result an estimate.
+- There are still 0 physical counts.
+- Not tested here: NETWORK TEST on the phone's Jio link, camera capture, resume after the app is killed,
+  enforce mode.
+
+Next: the phone (CSV export, uninstall 0.4.11, install, staging URL, approve), then enforce, then the
+field round with independent physical counts.
+
 ## 2026-10-26 - new machine: state re-measured, next plan (Claude Code, analysis only)
 
 No code change, deploy, build, secret or commit. This is a fresh clone of main at 1800db9 (PR #1 merge,
