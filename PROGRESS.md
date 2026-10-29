@@ -1,5 +1,166 @@
 # Progress
 
+## 2026-10-26 - new machine: state re-measured, next plan (Claude Code, analysis only)
+
+No code change, deploy, build, secret or commit. This is a fresh clone of main at 1800db9 (PR #1 merge,
+2026-10-17; tree identical to codex/hybrid-cell-counting) on a new laptop (C:\Users\rahul).
+Git-ignored assets did not come across: work/secrets (staging admin token), work/toolchains, work/vision-deps,
+node_modules, .venv and the 0.4.x APKs.
+
+Measured today:
+- Cloudflare: staging is 47cb2378 (0.4.11, 2026-10-14) and production is 4c1480e6 (2026-09-23), both 100%
+  (`wrangler deployments list`). Staging has no ADMIN_TOKEN secret (`wrangler secret list --env staging`).
+- Wrangler on this machine is already logged in to the owning account (Rahultech72216, also used for
+  kadan-kanakku-api), with workers write scope. Drop the `wrangler login` step below.
+- Worker: a fresh clone fails `npm test`/`build`/`deploy` with TS2688 because tsconfig.json:9 needs the
+  git-ignored worker-configuration.d.ts. After `npx wrangler types`: 111/111, dry runs OK.
+  `npm run deploy` (package.json:7) has no --env and so targets PRODUCTION.
+- Python (scratch venv from backend/requirements-dev.txt): backend 148 passed (4/4 runs, no OpenCV flake),
+  ml 3, scripts 75. Ruff gate: 34 findings in research modules. System Python fails backend collection
+  because a stray site-packages `tests` package shadows backend/tests, so use a venv.
+- The committed eval-20261015, walk-fill and stack-faces results all reproduce byte-identically. The walk-fill
+  results.json hash is 77f4b6d0..., not 3aa1b07c (the 3aa1b07c value in the entry below is from the
+  first revision).
+- App toolchain: Flutter 3.47.0 is at C:\Users\rahul\AppData\Local\Codex\flutter and an Android SDK (adb
+  36, build-tools 35-37) is at %LOCALAPPDATA%\Android\Sdk. Neither is on PATH. cmdline-tools are missing
+  and the licences have not been accepted. One reader ran Flutter on a scratch copy: analyze clean, tests
+  166 passed + 1 skipped.
+- Signing: this machine's ~/.android/debug.keystore is not the 27a05295 key that signed 0.2.2-0.4.11
+  (build.gradle.kts signs release with the debug key). So an APK built here cannot upgrade the phone in
+  place; uninstalling loses on-phone history, unsent counts and the staging URL. After a fresh install the
+  app defaults to the PRODUCTION URL (settings_store.dart:11).
+- Disk: C: had 0.7 to 8.5 GB free during the analysis. That is not enough for an APK build; aim for 10 GB or more.
+- Roboflow projec-mutta is public (MCP projects_get). No October photo is in any training run.
+
+Corrections to earlier wording (no data changed):
+- ef823816 "393 vs 233 (-41%)" compares assumed interiors (assistant 240 vs app 144). Only 153 trays were
+  seen, so it is not a measured detector undercount.
+- 9b4c783e "164" is a visual reading with 60 assumed.
+- The far-face undercount (n = 3 blocks) is a hypothesis.
+- Both existing manual counts are unusable as truth: MECH-DONE's total equals the app's 399 (form
+  pre-filled, manual_count.dart:25-32) and WH-99 was entered by the assistant.
+- The live exposure is staging. Its open routes let anyone list and overwrite manual counts and spend
+  inference. Production 4c1480e6 returns 404 on those routes. Promoting HEAD to production without
+  STATE_PREFIX + ADMIN_TOKEN + AUTH_MODE would open them there.
+- ADMIN_TOKEN must be set before the observe deploy. Without it adminTokenMatches (index.ts:1080) fails
+  closed and a 0.4.12 phone can never be approved.
+
+Next plan:
+- A. Agent-only, now:
+  - Make deploys explicit (deploy:staging, guarded deploy:production; pretest/prebuild `wrangler types`).
+  - Fix the field scorers (reachable-cell totals, filled-only metric, rescan/missing buckets, block_id
+    grouping).
+  - Add a hold-out registry and leak check (include the G31 twins wh074/075/077).
+  - Add an offline shadow scorer (V0/V4/C + gate) and a same-face check.
+  - Commit the Python-TS parity test.
+  - Write the field protocol and scoring spec, frozen before data.
+- B. 0.4.12 staging rollout. It needs the user's approval and runs in this order:
+  1. Confirm the existing wrangler session.
+  2. Generate ADMIN_TOKEN and set it on staging.
+  3. Deploy staging in observe mode and verify.
+  4. Free disk space and choose the signing route (recover the 27a05295 keystore, or uninstall after a CSV
+     export and use a new backed-up release key).
+  5. Build, install and approve the phone.
+  6. Run NETWORK TEST, one scan and one manual count.
+  7. Switch to enforce through wrangler.jsonc.
+  Decide 0.4.12 as-is vs 0.4.13 safeguards (staging default URL, host on the home card, count_id resend,
+  form not pre-filled).
+- C. Field round: at least 3 new blocks, STRAIGHT/LEFT/RIGHT at about 1.5/3/5 m, with independent
+  per-stack filled/empty counts, ideally two counters. Then the first held-out number, with n.
+- D. Then one detector retrain on far and cross-stacked faces, held out by block, in a private Roboflow
+  project.
+- Production promotion, custom domain, the Lambda and the heatmap/3D tracks stay parked.
+
+Track B started (same day, at the user's request):
+- Pre-flight: `npx wrangler types`, then Worker `npm test` 111/111. The staging dry run binds
+  AUTH_MODE observe, STATE_PREFIX state/staging/ and MODEL_ID projec-mutta/2 (PIPELINE_VERSION worker-0.4.12).
+- Flutter 3.47.0 (process-local PATH): `pub get --enforce-lockfile` OK, analyze clean, tests 167/167.
+- Free disk is now 42 GB.
+- Snapshot of the staging manual counts before any change: work/snapshots/staging-20261026/ (git-ignored).
+  It holds the 2 records (WH-99, MECH-DONE), 25 stack rows and the raw JSON.
+- Admin token generated into work/secrets/staging-admin-token (git-ignored; 43 chars, no newline, never
+  printed).
+- NOT set on staging yet: Claude Code's auto-mode permission check refused `wrangler secret put`. So the
+  observe deploy is held too, because without the secret no device can be approved. Staging is still
+  47cb2378.
+- Signing: the only keystore on this machine is the new debug key (SHA-256 76:39:A3:30...). The 27a05295
+  key is only on the DELL machine (probably <old checkout>\mobile\.android-home\debug.keystore or
+  C:\Users\DELL\.android\debug.keystore).
+- The SDK has a licences file but no cmdline-tools. No phone was attached (`adb devices` empty).
+- Next:
+  1. Set the secret: from cloudflare-worker, `wrangler secret put ADMIN_TOKEN --env staging` with the file
+     as stdin.
+  2. `npm run build && npx wrangler deploy --env staging` (never `npm run deploy`).
+  3. Verify: /health shows auth device_v1, auth_mode observe and scan_jobs_v1; unauthenticated GET
+     /v1/devices/me and /v1/manual-counts return 401; `scripts/devices.py list` with EGG_ADMIN_TOKEN
+     returns 200.
+  4. Then decide the signing route, attach the phone and build the APK.
+
+Staging 0.4.12 in observe mode is DEPLOYED (same day, after the user explicitly approved it):
+- `wrangler secret put ADMIN_TOKEN --env staging` from the file. Staging secrets are now ADMIN_TOKEN,
+  ROBOFLOW_API_KEY and VISION_SERVICE_TOKEN.
+- `npm run build && npx wrangler deploy --env staging`: staging version ef7c1dd3-2fd2-464b-8a99-0f27cb6deb6e
+  (100%, 2026-10-26T15:57Z). Production is still 4c1480e6 (`wrangler deployments list`).
+- Verified with no inference spent:
+  - /health returns scan_contracts [cell_identity_v1, model_spatial_v1, reconstruct_v1, scan_jobs_v1],
+    auth device_v1 and auth_mode observe.
+  - With no credentials, GET /v1/devices/me and /v1/scans/<id>/result return 401
+    device_credentials_required.
+  - GET /v1/manual-counts and /v1/admin/devices return 401 admin_auth_failed with no token or a wrong one.
+  - POST /v1/scans/count with no headers reaches the old open path (415 invalid_content_type), so 0.4.11
+    keeps working.
+  - With the admin token: /v1/admin/devices returns 200 {devices: []}; `scripts/devices.py list` says
+    "no devices"; an unknown scan's result returns 404 scan_not_found and its manual-count returns 200
+    (empty); export_manual_counts returns the same 2 records as the snapshot.
+- Note: plain Python urllib with its default User-Agent gets Cloudflare 403 "error code: 1010" (bot
+  signature) before reaching the Worker. The repo scripts are unaffected (they worked).
+- Next:
+  1. Choose the signing route (the 27a05295 keystore from the DELL machine, or a CSV export and uninstall).
+  2. Decide 0.4.12 vs 0.4.13.
+  3. Attach the Redmi, build, install, set the staging URL and approve the device by full id
+     (`scripts/devices.py approve`).
+  4. Run NETWORK TEST, then one scan with a manual count.
+  5. Set AUTH_MODE enforce in wrangler.jsonc, deploy staging and verify.
+
+New release key, and APK 0.4.12 built (same day). The user chose a new key: they export the phone's
+counts as CSV and uninstall 0.4.11 themselves.
+- Keystore: C:\Users\rahul\.egg-tray-signing\ (outside the repo and outside OneDrive). It holds:
+  - egg-tray-release.jks: PKCS12, alias egg-tray-release, RSA 4096, valid to 2054-03-13. Certificate
+    SHA-256 29013b980c183cabe7d93a0befb59cc06c0a4edd0b3baee06fb04657b4cba76f.
+  - storepass.txt (random, never printed).
+  - key.properties, plus README.txt with restore steps.
+  mobile/android/key.properties (git-ignored) is a copy of key.properties.
+- Backup: the only copy is on this laptop, which has a single drive. The user must copy the whole folder
+  offline (USB or password manager). Every later APK must be signed with this key.
+- mobile/android/app/build.gradle.kts (uncommitted): release builds sign with key.properties. A release
+  task without that file fails ("refusing to sign a release with the debug key"); debug and IDE sync still
+  use the debug key.
+- Build environment (process-local only):
+  - PATH gets the Codex Flutter bin and SDK platform-tools; ANDROID_HOME/ANDROID_SDK_ROOT point at
+    %LOCALAPPDATA%\Android\Sdk; JAVA_TOOL_OPTIONS=-Djava.net.preferIPv4Stack=true.
+  - The Gradle wrapper's own download timed out twice (Java connect timeout). Gradle 9.3.1-all was fetched
+    with `curl -4` into ~/.gradle/wrapper/dists/gradle-9.3.1-all/9ot9r568e8zfvvd4mn8rbu1j0/ and matched
+    the published SHA-256 17f27786...6e43.
+  - AGP installed Android SDK Platform 35 by itself. `flutter build apk --release` took 824 s.
+- APK: egg-tray-counter-0.4.12-block-staging.apk (repo root, git-ignored), 62,542,361 bytes, SHA-256
+  4da7db0a1c10f1e64769d84579f318053b66ce40a01c347e98e6e4509c8e596c.
+  - apksigner: verifies (v2), 1 signer, CN=Egg Tray Counter Release, digest 29013b98... (the new key).
+  - aapt: package com.dharani.eggtray.egg_tray_counter, versionName 0.4.12, versionCode 23, minSdk 24,
+    targetSdk 36.
+  - Neither the admin token nor the keystore password appears in any APK entry.
+  - The default server URL is still production (settings_store.dart:11), so set the staging URL after
+    install.
+- Not done: install. No phone is attached.
+- Next:
+  1. The user runs COPY ALL COUNTS AS CSV in 0.4.11, then uninstalls it.
+  2. Attach the phone with USB debugging and accept this laptop's RSA key.
+  3. `adb install egg-tray-counter-0.4.12-block-staging.apk`.
+  4. Settings: staging URL.
+  5. `scripts/devices.py approve <full id>`.
+  6. Run NETWORK TEST with `adb logcat | findstr EGGNET`.
+  7. One scan with RECORD MANUAL COUNT.
+  8. Enforce.
+
 ## 2026-10-15 (later) - walk-overfill experiment: label-free walk variants (Claude Code subagent)
 
 Offline only (no deploy, no inference, no commit; backend/ untouched, deployed counting unchanged in 0.4.12).

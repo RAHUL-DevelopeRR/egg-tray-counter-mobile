@@ -1,4 +1,16 @@
-> 2026-10-15: release 0.4.12 (staging only; production 4c1480e6 stays open and unchanged).
+> 2026-10-26 (later): the staging Worker is 0.4.12 in observe mode, version ef7c1dd3. ADMIN_TOKEN is set
+> from work/secrets/staging-admin-token (a new token; the old file was lost with the old machine).
+> Production is still 4c1480e6 and open. APK 0.4.12+23 is built (SHA-256 4da7db0a...) and signed with a NEW
+> release key (cert 29013b98..., kept in C:\Users\rahul\.egg-tray-signing, back it up). The key cannot upgrade
+> 0.4.11, so the phone needs a CSV export and uninstall first. Not installed yet.
+
+> 2026-10-26: new machine (C:\Users\rahul, fresh clone of main 1800db9). 0.4.12 is code-complete but NOT
+> deployed, built or installed: staging is still 47cb2378 (0.4.11), production 4c1480e6, and the phone runs 0.4.11.
+> Wrangler is already logged in here. Staging has no ADMIN_TOKEN, and the old token file did not come across.
+> The local debug key differs from the phone's 27a05295 signer, so there is no in-place upgrade without the old key.
+> There are still 0 physical counts. Plan and corrections: the 2026-10-26 PROGRESS.md entry.
+
+> 2026-10-15: release 0.4.12 code (staging only; production 4c1480e6 stays open and unchanged).
 > Contract docs/SCAN_JOBS_AND_DEVICES.md (read its "As built" section). Decisions: phones get their own
 > device id + secret (secure storage, never in the APK), approved by the admin with scripts/devices.py
 > (EGG_ADMIN_TOKEN, local file work/secrets/staging-admin-token, git-ignored); staging rolls out in
