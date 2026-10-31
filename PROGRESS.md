@@ -33,8 +33,21 @@ NETWORK TEST, measured on Jio LTE (jionet), colo SIN. Means over successful requ
 
 Devices active on staging: F39D-8C65 (the Redmi) and 1179-C06A (the laptop emulator).
 
+Phone gallery scan, same day:
+- The 99-block trio (STRAIGHT img-01, LEFT warehouse image-4, RIGHT img-32) was pushed to
+  /sdcard/Pictures/EggTest and picked by timestamp. The user's own photos were not opened, and a picker
+  screenshot showing them was deleted.
+- Result: "BLOCK ESTIMATE / faces differ by one layer", 5 x 1, 20/20/20/20/19, total 99. Identical to the
+  emulator.
+- Scan 30d9a59c-1a8a-4946-85d7-f36b1d7b80f8. Admin result: job done, attempt 1, replayed true, worker-0.4.12,
+  result_status estimated. Detector boxes: straight 101, left 22, right 24 (identical after the app's
+  1600 px re-encode).
+- Test manual count PHONE-TEST-20261031, note "phone test only, not ground truth": storage state,
+  tamper_proof, count_id 3433c645..., app_total 99, recorded_by f39d8c65.... EXCLUDE PHONE-TEST-* and
+  EMU-TEST-* from every score.
+- The test photos were deleted from the phone afterwards.
+
 Not done yet:
-- A phone scan (gallery or camera) and a manual count from the phone.
 - A hand test of portrait and sideways capture.
 - Switching staging to enforce (wrangler.jsonc AUTH_MODE "enforce", deploy --env staging, verify 401s).
 - The field round with independent physical counts.
