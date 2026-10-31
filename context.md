@@ -1,3 +1,7 @@
+> 2026-10-31: the Redmi runs APK 0.4.12+23 (new release key), pointed at staging and approved as F39D-8C65.
+> The 0.4.11 data on the phone was removed with the uninstall, at the user's choice. NETWORK TEST on Jio LTE:
+> all OK over both IPv4 and IPv6. Staging is still in observe mode. Still 0 physical counts.
+
 > 2026-10-26 (later): the staging Worker is 0.4.12 in observe mode, version ef7c1dd3. ADMIN_TOKEN is set
 > from work/secrets/staging-admin-token (a new token; the old file was lost with the old machine).
 > Production is still 4c1480e6 and open. APK 0.4.12+23 is built (SHA-256 4da7db0a...) and signed with a NEW

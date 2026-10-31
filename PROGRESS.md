@@ -1,5 +1,44 @@
 # Progress
 
+## 2026-10-31 - 0.4.12 on the Redmi, approved; NETWORK TEST on Jio LTE (Claude Code)
+
+PR #2 (rollout/0.4.12-staging -> main) is open, mergeable, and has no CI checks configured.
+
+Phone install:
+- Redmi Note 9 Pro, serial f76d5e20, Android 12. It was unlocked and had 0.4.11 build 22 (installed
+  14 Oct).
+- The user chose "uninstall and install". No counts CSV export was found in Downloads. The 0.4.11
+  history and any counts saved only on the phone are gone. Server-side counts (WH-99, MECH-DONE) are in
+  the 26 Oct snapshot.
+- `adb uninstall` then `adb install egg-tray-counter-0.4.12-block-staging.apk` (4da7db0a...): versionName
+  0.4.12, versionCode 23, first install 2026-10-31 10:53.
+- The fresh install pointed at production. The URL was set to staging in Settings.
+- The phone registered as F39D-8C65 (pending, 0.4.12+23). After `scripts/devices.py approve
+  f39d8c65-7e75-4222-aaee-29d9632db834` the home card read DEVICE APPROVED.
+
+NETWORK TEST, measured on Jio LTE (jionet), colo SIN. Means over successful requests:
+
+| test | OK | TCP | TLS | total |
+|---|---:|---:|---:|---:|
+| health ipv4 | 20/20 | 167 ms | 198 ms | 1574 ms |
+| health ipv6 | 20/20 | 272 ms | 300 ms | 868 ms |
+| trace ipv4 | 10/10 | 113 ms | 131 ms | 388 ms |
+| trace ipv6 | 10/10 | 107 ms | 131 ms | 395 ms |
+| upload auto (3 x 500 KB, IPv4) | 3/3 | 176 ms | 208 ms | 4624 ms |
+
+- Today there was no loss on either family. On 12-14 Oct IPv6 lost 40-66%. That is one sample, so keep
+  the IPv4-first connector and leave the custom-domain decision open.
+- The log lines are in reports/rollout-20261031/network-test-logcat.txt, with the phone's public IPs
+  redacted.
+
+Devices active on staging: F39D-8C65 (the Redmi) and 1179-C06A (the laptop emulator).
+
+Not done yet:
+- A phone scan (gallery or camera) and a manual count from the phone.
+- A hand test of portrait and sideways capture.
+- Switching staging to enforce (wrangler.jsonc AUTH_MODE "enforce", deploy --env staging, verify 401s).
+- The field round with independent physical counts.
+
 ## 2026-10-29 - APK 0.4.12 end to end on the emulator against staging (Claude Code)
 
 Branch rollout/0.4.12-staging. Commit 3989f95 holds the signing change and the 26 Oct entries; it is not
