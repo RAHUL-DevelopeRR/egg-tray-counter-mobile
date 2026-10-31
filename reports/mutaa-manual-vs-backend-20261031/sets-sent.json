@@ -1,0 +1,54 @@
+[
+ {
+  "set_id": "M16-NEAR",
+  "straight": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151351983.jpg.jpeg",
+  "left": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151430473.jpg.jpeg",
+  "right": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151444583.jpg.jpeg"
+ },
+ {
+  "set_id": "M16-FAR",
+  "straight": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151549592.jpg.jpeg",
+  "left": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151409127.jpg.jpeg",
+  "right": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151453724.jpg.jpeg"
+ },
+ {
+  "set_id": "M16-CORNER-STACK",
+  "straight": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151149500.jpg.jpeg",
+  "left": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151159267.jpg.jpeg",
+  "right": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151614863.jpg.jpeg",
+  "filler": "right"
+ },
+ {
+  "set_id": "W05-ORANGE",
+  "straight": "C:\\Users\\rahul\\MUTAA\\WhatsApp Image 2026-09-05 at 9.41.09 AM.jpeg",
+  "left": "C:\\Users\\rahul\\MUTAA\\WhatsApp Image 2026-09-05 at 9.40.57 AM.jpeg",
+  "right": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151614863.jpg.jpeg",
+  "filler": "right"
+ },
+ {
+  "set_id": "L-80",
+  "straight": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-30.jpeg",
+  "left": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-31.jpeg",
+  "right": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-25.jpeg"
+ },
+ {
+  "set_id": "L-109-ORANGE",
+  "straight": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-36.jpeg",
+  "left": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-17.jpeg",
+  "right": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151614863.jpg.jpeg",
+  "filler": "right"
+ },
+ {
+  "set_id": "L-115",
+  "straight": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-04.jpeg",
+  "left": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-05.jpeg",
+  "right": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151614863.jpg.jpeg",
+  "filler": "right"
+ },
+ {
+  "set_id": "L-100",
+  "straight": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-19.jpeg",
+  "left": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-21.jpeg",
+  "right": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-24.jpeg"
+ }
+]

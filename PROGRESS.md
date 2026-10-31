@@ -1,5 +1,34 @@
 # Progress
 
+## 2026-10-31 (later) - MUTAA field photos: manual 3D count vs backend (Claude Code)
+
+At the user's request: cloned github.com/RAHUL-DevelopeRR/MUTAA (a27877b) to C:\Users\rahul\MUTAA, outside
+this repo. Full write-up: reports/mutaa-manual-vs-backend-20261031/README.md.
+
+Method:
+- Two agents grouped the photos into block sets (propose, then refute) and kept 8. NONE is a genuine trio.
+- The backend run went through staging ef7c1dd3 in the app's upload format (21 detector calls). The
+  Worker refuses a repeated photo (422 duplicate_view), so the 4 two-photo sets used an unrelated filler as
+  RIGHT, and only their real faces' counts are used.
+- The manual count used 3 blind counters per set plus a reconciler. These are visual counts, not physical.
+
+Results:
+- Close square-on faces: backend per-stack equals manual on 9/10 stacks, with 1 off by 1 (CORNER 14, L-80,
+  L-100). The manual totals equal the user's written totals: L-80 80 and L-100 100.
+- Far face (M16-NEAR): the backend reads -8 to -10 per stack, but the capture check refused it.
+- L-100: LEFT and RIGHT are front photos. The block model returned 500 "estimated" for a 100-tray block.
+  Nothing checks that a side photo shows a side face.
+- Every other set: needs_view (no total).
+- Big blocks are mostly hidden interior (W05: 196 visible of about 1366; L-115: 232 of about 734).
+  Counters disagree on depth.
+
+Next:
+1. Same-face guard (Worker and app): no total when a side view repeats the front. Downgrade to
+   needs_view. In the camera path, require a heading change between captures.
+2. A genuine close trio with physical counts.
+3. A detector retrain on far faces, held out by block.
+4. An interior policy for big blocks: operator-confirmed, or estimated with the visible share shown.
+
 ## 2026-10-31 - 0.4.12 on the Redmi, approved; NETWORK TEST on Jio LTE (Claude Code)
 
 PR #2 (rollout/0.4.12-staging -> main) is open, mergeable, and has no CI checks configured.

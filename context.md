@@ -1,3 +1,11 @@
+> 2026-10-31 (later): MUTAA photos compared (reports/mutaa-manual-vs-backend-20261031).
+> - On close, square-on faces the backend per-stack equals the visual count (9/10 stacks). Manual equals
+>   the user totals for L-80 and L-100.
+> - Far faces read about half and are refused.
+> - Wrong view roles (LEFT/RIGHT = front) gave 500 "estimated" for a 100-tray block. A same-face guard is
+>   the top fix.
+> - No genuine trio exists in the field photos.
+
 > 2026-10-31: the Redmi runs APK 0.4.12+23 (new release key), pointed at staging and approved as F39D-8C65.
 > The 0.4.11 data on the phone was removed with the uninstall, at the user's choice. NETWORK TEST on Jio LTE:
 > all OK over both IPv4 and IPv6. Staging is still in observe mode. Still 0 physical counts.

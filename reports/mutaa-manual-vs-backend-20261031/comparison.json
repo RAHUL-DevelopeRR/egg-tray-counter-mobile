@@ -1,0 +1,536 @@
+[
+ {
+  "set_id": "M16-NEAR",
+  "user_label": null,
+  "manual_grid": "4x2",
+  "manual_front": [
+   17,
+   20,
+   20,
+   20,
+   20
+  ],
+  "manual_front_sum": 97,
+  "manual_visible": 127,
+  "manual_hidden": 59,
+  "manual_filled": 177,
+  "manual_empty": 9,
+  "manual_range_all": [
+   180,
+   190
+  ],
+  "counter_totals": [
+   186,
+   186,
+   186
+  ],
+  "manual_reliability": "medium",
+  "backend_front_walk": [
+   8,
+   10,
+   11,
+   12,
+   10
+  ],
+  "backend_front_sum": 51,
+  "backend_front_raw": [
+   7,
+   12,
+   13,
+   12,
+   12
+  ],
+  "backend_left_walk": [
+   9,
+   4
+  ],
+  "backend_right_walk": [
+   6,
+   5,
+   10,
+   18,
+   6
+  ],
+  "backend_gate": {
+   "straight": false,
+   "left": false,
+   "right": false
+  },
+  "backend_block": "5x5",
+  "backend_observed": 25,
+  "backend_computed": 140,
+  "backend_total": null,
+  "backend_status": "needs_view",
+  "filler_right": null,
+  "scan_id": "a5136c9e-8dd4-4354-a7ae-0df6ec3a0c8c",
+  "front_stack_diff": [
+   -9,
+   -10,
+   -9,
+   -8,
+   -10
+  ],
+  "front_exact": "0/5"
+ },
+ {
+  "set_id": "M16-FAR",
+  "user_label": null,
+  "manual_grid": "3x5",
+  "manual_front": [
+   15,
+   15,
+   15
+  ],
+  "manual_front_sum": 45,
+  "manual_visible": 188,
+  "manual_hidden": 64,
+  "manual_filled": 240,
+  "manual_empty": 12,
+  "manual_range_all": [
+   236,
+   268
+  ],
+  "counter_totals": [
+   252,
+   252,
+   240
+  ],
+  "manual_reliability": "medium",
+  "backend_front_walk": [
+   17,
+   18,
+   17,
+   19,
+   8
+  ],
+  "backend_front_sum": 79,
+  "backend_front_raw": [
+   14,
+   14,
+   12,
+   14,
+   9
+  ],
+  "backend_left_walk": [
+   15,
+   11,
+   7,
+   8
+  ],
+  "backend_right_walk": [
+   12,
+   7
+  ],
+  "backend_gate": {
+   "straight": true,
+   "left": true,
+   "right": false
+  },
+  "backend_block": "5x4",
+  "backend_observed": 0,
+  "backend_computed": 121,
+  "backend_total": null,
+  "backend_status": "needs_view",
+  "filler_right": null,
+  "scan_id": "8cb66ad3-4296-43b1-b5a8-ae0be9df06e5"
+ },
+ {
+  "set_id": "M16-CORNER-STACK",
+  "user_label": null,
+  "manual_grid": "1x1",
+  "manual_front": [
+   14
+  ],
+  "manual_front_sum": 14,
+  "manual_visible": 14,
+  "manual_hidden": 0,
+  "manual_filled": 14,
+  "manual_empty": 0,
+  "manual_range_all": [
+   14,
+   14
+  ],
+  "counter_totals": [
+   14,
+   14,
+   14
+  ],
+  "manual_reliability": "high",
+  "backend_front_walk": [
+   14
+  ],
+  "backend_front_sum": 14,
+  "backend_front_raw": [
+   16
+  ],
+  "backend_left_walk": [
+   8
+  ],
+  "backend_right_walk": [],
+  "backend_gate": {
+   "straight": true,
+   "left": true,
+   "right": false
+  },
+  "backend_block": "1x1",
+  "backend_observed": 0,
+  "backend_computed": 0,
+  "backend_total": null,
+  "backend_status": "needs_view",
+  "filler_right": "right",
+  "scan_id": "894d6d05-1835-4639-8fad-6d5635c16321",
+  "front_stack_diff": [
+   0
+  ],
+  "front_exact": "1/1"
+ },
+ {
+  "set_id": "W05-ORANGE",
+  "user_label": null,
+  "manual_grid": "10x7",
+  "manual_front": [
+   20,
+   null,
+   6,
+   20,
+   20,
+   20,
+   20,
+   20,
+   20,
+   20,
+   20
+  ],
+  "manual_front_sum": 186,
+  "manual_visible": 196,
+  "manual_hidden": 1239,
+  "manual_filled": 1366,
+  "manual_empty": 69,
+  "manual_range_all": [
+   1200,
+   1660
+  ],
+  "counter_totals": [
+   1435,
+   1366,
+   1435
+  ],
+  "manual_reliability": "low",
+  "backend_front_walk": [
+   10,
+   19,
+   19,
+   20,
+   19,
+   19,
+   19,
+   19,
+   8
+  ],
+  "backend_front_sum": 152,
+  "backend_front_raw": [
+   8,
+   16,
+   18,
+   16,
+   18,
+   18,
+   14,
+   14,
+   8
+  ],
+  "backend_left_walk": [
+   10,
+   12,
+   14,
+   14,
+   17
+  ],
+  "backend_right_walk": [],
+  "backend_gate": {
+   "straight": true,
+   "left": true,
+   "right": false
+  },
+  "backend_block": "9x5",
+  "backend_observed": 118,
+  "backend_computed": 576,
+  "backend_total": null,
+  "backend_status": "needs_view",
+  "filler_right": "right",
+  "scan_id": "7e538941-4042-423b-be1f-176a7687cfdb"
+ },
+ {
+  "set_id": "L-80",
+  "user_label": 80,
+  "manual_grid": "4x1",
+  "manual_front": [
+   20,
+   20,
+   20,
+   20
+  ],
+  "manual_front_sum": 80,
+  "manual_visible": 80,
+  "manual_hidden": 0,
+  "manual_filled": 80,
+  "manual_empty": 0,
+  "manual_range_all": [
+   79,
+   81
+  ],
+  "counter_totals": [
+   80,
+   80,
+   80
+  ],
+  "manual_reliability": "high",
+  "backend_front_walk": [
+   20,
+   20,
+   20,
+   19
+  ],
+  "backend_front_sum": 79,
+  "backend_front_raw": [
+   22,
+   20,
+   20,
+   20
+  ],
+  "backend_left_walk": [
+   16,
+   19,
+   16,
+   8
+  ],
+  "backend_right_walk": [
+   12
+  ],
+  "backend_gate": {
+   "straight": true,
+   "left": false,
+   "right": true
+  },
+  "backend_block": "4x4",
+  "backend_observed": 40,
+  "backend_computed": 171,
+  "backend_total": null,
+  "backend_status": "needs_view",
+  "filler_right": null,
+  "scan_id": "594b7d47-ae9b-4dc3-84fd-d40f0005772d",
+  "front_stack_diff": [
+   0,
+   0,
+   0,
+   -1
+  ],
+  "front_exact": "3/4"
+ },
+ {
+  "set_id": "L-109-ORANGE",
+  "user_label": 109,
+  "manual_grid": "6x3",
+  "manual_front": [
+   10,
+   20,
+   20,
+   20,
+   19,
+   20,
+   21,
+   5,
+   20
+  ],
+  "manual_front_sum": 155,
+  "manual_visible": 148,
+  "manual_hidden": 236,
+  "manual_filled": 375,
+  "manual_empty": 9,
+  "manual_range_all": [
+   250,
+   400
+  ],
+  "counter_totals": [
+   375,
+   255,
+   375
+  ],
+  "manual_reliability": "low",
+  "backend_front_walk": [
+   17,
+   20,
+   20,
+   18,
+   20,
+   20
+  ],
+  "backend_front_sum": 115,
+  "backend_front_raw": [
+   15,
+   22,
+   21,
+   19,
+   22,
+   20
+  ],
+  "backend_left_walk": [
+   6,
+   6,
+   19,
+   19,
+   6
+  ],
+  "backend_right_walk": [],
+  "backend_gate": {
+   "straight": true,
+   "left": true,
+   "right": false
+  },
+  "backend_block": "6x5",
+  "backend_observed": 123,
+  "backend_computed": 342,
+  "backend_total": null,
+  "backend_status": "needs_view",
+  "filler_right": "right",
+  "scan_id": "6c917aaa-2962-4b4f-90b3-3446d45c0283"
+ },
+ {
+  "set_id": "L-115",
+  "user_label": null,
+  "manual_grid": "6x6",
+  "manual_front": [
+   20,
+   20,
+   14,
+   20,
+   20,
+   20,
+   20
+  ],
+  "manual_front_sum": 134,
+  "manual_visible": 232,
+  "manual_hidden": 539,
+  "manual_filled": 734,
+  "manual_empty": 37,
+  "manual_range_all": [
+   645,
+   897
+  ],
+  "counter_totals": [
+   897,
+   1455,
+   771
+  ],
+  "manual_reliability": "medium",
+  "backend_front_walk": [
+   19,
+   23,
+   22,
+   19,
+   20,
+   18
+  ],
+  "backend_front_sum": 121,
+  "backend_front_raw": [
+   18,
+   16,
+   20,
+   18,
+   17,
+   19
+  ],
+  "backend_left_walk": [
+   14
+  ],
+  "backend_right_walk": [],
+  "backend_gate": {
+   "straight": false,
+   "left": false,
+   "right": false
+  },
+  "backend_block": "6x1",
+  "backend_observed": 41,
+  "backend_computed": 0,
+  "backend_total": null,
+  "backend_status": "needs_view",
+  "filler_right": "right",
+  "scan_id": "0c04da73-c562-4736-b11b-a71e8f7780b0"
+ },
+ {
+  "set_id": "L-100",
+  "user_label": 100,
+  "manual_grid": "5x1",
+  "manual_front": [
+   20,
+   20,
+   20,
+   20,
+   20
+  ],
+  "manual_front_sum": 100,
+  "manual_visible": 102,
+  "manual_hidden": 0,
+  "manual_filled": 100,
+  "manual_empty": 2,
+  "manual_range_all": [
+   101,
+   122
+  ],
+  "counter_totals": [
+   122,
+   102,
+   102
+  ],
+  "manual_reliability": "medium",
+  "backend_front_walk": [
+   20,
+   20,
+   20,
+   20,
+   20
+  ],
+  "backend_front_sum": 100,
+  "backend_front_raw": [
+   20,
+   20,
+   21,
+   19,
+   20
+  ],
+  "backend_left_walk": [
+   20,
+   20,
+   20,
+   20,
+   20
+  ],
+  "backend_right_walk": [
+   20,
+   20,
+   20,
+   20,
+   20
+  ],
+  "backend_gate": {
+   "straight": true,
+   "left": true,
+   "right": true
+  },
+  "backend_block": "5x5",
+  "backend_observed": 260,
+  "backend_computed": 240,
+  "backend_total": 500,
+  "backend_status": "estimated",
+  "filler_right": null,
+  "scan_id": "f6b9f9e6-4031-4ecd-9888-38450c97add9",
+  "front_stack_diff": [
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "front_exact": "5/5"
+ }
+]
