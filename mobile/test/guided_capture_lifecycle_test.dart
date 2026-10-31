@@ -7,9 +7,11 @@ import 'package:camera_platform_interface/camera_platform_interface.dart';
 import 'package:egg_tray_counter/features/capture/camera_guide_overlay.dart';
 import 'package:egg_tray_counter/features/capture/guided_capture_pane.dart';
 import 'package:egg_tray_counter/models/scan_session.dart';
+import 'package:egg_tray_counter/services/heading_tracker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:sensors_plus/sensors_plus.dart';
 
 class _Camera extends CameraPlatform {
   int creates = 0;
@@ -83,6 +85,7 @@ void main() {
   const sensorChannels = [
     MethodChannel('dev.fluttercommunity.plus/sensors/method'),
     MethodChannel('dev.fluttercommunity.plus/sensors/accelerometer'),
+    MethodChannel('dev.fluttercommunity.plus/sensors/gyroscope'),
   ];
   const cameras = [
     CameraDescription(
@@ -316,6 +319,57 @@ void main() {
       });
       await drainCamera(tester);
       expect(camera.disposed, [1, 2]);
+    },
+  );
+
+  testWidgets(
+    "the scan's heading session outlives a capture screen (a retake shares it)",
+    (tester) async {
+      final gyro = StreamController<GyroscopeEvent>.broadcast();
+      final accel = StreamController<AccelerometerEvent>.broadcast();
+      addTearDown(gyro.close);
+      addTearDown(accel.close);
+      final heading = HeadingTracker(
+        gyroscope: () => gyro.stream,
+        accelerometer: () => accel.stream,
+      )..start();
+      // Sensor time runs on without gaps (a gap would rightly count as lost).
+      var sensorTime = DateTime.utc(2026, 10, 31);
+      Future<void> feed() async {
+        accel.add(AccelerometerEvent(0, 9.81, 0, sensorTime));
+        for (var i = 0; i < kMinGyroSamples; i++) {
+          sensorTime = sensorTime.add(const Duration(milliseconds: 20));
+          gyro.add(GyroscopeEvent(0, 0, 0, sensorTime));
+        }
+        await tester.pump();
+      }
+
+      await feed();
+      final session = heading.current!.session;
+      tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: GuidedCapturePane(
+              cameras: cameras,
+              session: ScanSession(scanId: 'test'),
+              heading: heading,
+              onComplete: (_) {},
+            ),
+          ),
+        ),
+      );
+      await drainCamera(tester);
+      // A system dialog or the notification shade (inactive) keeps the session.
+      tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+      tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+      await drainCamera(tester);
+      await tester.pumpWidget(const SizedBox());
+      await drainCamera(tester);
+      await feed();
+      expect(heading.current?.session, session);
+      // The scan flow stops it unawaited, as here.
+      unawaited(heading.stop());
     },
   );
 

@@ -184,7 +184,7 @@ Jobs:
 - Fingerprint v2 = SHA-256 of the three photo hashes, `scan_contract` as sent and `[view, cell_id]` pairs
   sorted by view; jobs store `fingerprint_version: 2`, `scan_contract`, `cell_ids`. Older jobs without these
   fields replay for the same photos whatever metadata is sent.
-- `PIPELINE_VERSION = worker-0.4.12`. A failure after a lost lease returns the other attempt's stored
+- `PIPELINE_VERSION = worker-0.4.12` (`worker-0.4.13` from the side-face check below). A failure after a lost lease returns the other attempt's stored
   result (200) or 202 if it is still running; `job.status` says `failed` only when the failure was stored.
 - A missing `scan_id` is still minted by the server (no idempotency for such a request).
 
@@ -230,3 +230,35 @@ App (0.4.12+23):
 Open risks (staging): with no credential, observe still lets anyone spend inference, add photos under any
 scan id and write legacy `scans/` manual counts, as production does today; state records and job photo
 lists stay protected. Manual counts saved by earlier 0.4.12 test builds under `scans/` show as legacy.
+
+## Side-face check (0.4.13, 2026-10-31)
+
+Reason: MUTAA set L-100 (three FRONT photos of a 5 x 1 block uploaded as STRAIGHT/LEFT/RIGHT) gave 5 x 5,
+500 "estimated" for a 100-tray block (reports/mutaa-manual-vs-backend-20261031).
+
+- App (camera path): `HeadingTracker` integrates the gyroscope about the vertical for the whole scan, retakes
+  included, and the session restarts only for a new scan. Each view's `<view>_constraint_evidence` gains
+  `yaw_deg` and `yaw_session`.
+  - A heading exists only while gyroscope samples are arriving (at least 5, the last within 0.5 s) and with
+    no more than 2 s of lost time. Android stops the sensors in the background, so the gap marks the
+    heading untrusted.
+  - The capture screen refuses, before the shutter, a LEFT/RIGHT that turned less than 45 degrees from
+    STRAIGHT, or that is within 90 degrees of the other side.
+- Worker (`sideCheck`, `block.side_check`):
+  - Same `yaw_session` as STRAIGHT: `turned` (at least 45 degrees) or refused (`same_way_as_straight`).
+    LEFT and RIGHT in one session less than 90 degrees apart: RIGHT is refused (`same_way_as_other_side`).
+  - No usable heading: a side whose x-ordered layers match STRAIGHT's (same count, at least 2 columns,
+    each within 1) is `repeats_front`. Any other side of a block more than one stack deep is `unconfirmed`
+    and refused. A one-deep block's sides stay `unverified` and keep the total.
+  - A refused side sets status `needs_view` with the total withheld. It also removes the side-derived
+    depth, cells, observed/computed/filled trays and rescan cells, so the app draws no false grid. The
+    side's reason comes first in `conflicts`. `rescan` names that side unless the capture gate refused a
+    view, which is named first.
+  - Consequence: gallery uploads and apps before 0.4.13 get totals only for one-deep blocks.
+- Malformed or oversized evidence (over 8,000 characters) is ignored, never a refusal.
+- Known gaps:
+  - Headings are not archived with the photos and are not part of the job fingerprint. A replay from the
+    R2 originals has no heading, so a deep block counted live is withheld on replay.
+  - A heading gets about 0.1-0.5 degrees of gyroscope drift per second, so a long pause before a retake
+    weakens the 45-degree test.
+  - A block against a wall (one side cannot be photographed) cannot be scanned with the camera.

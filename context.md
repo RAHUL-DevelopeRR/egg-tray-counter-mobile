@@ -1,3 +1,8 @@
+> 2026-10-31 (latest): same-face guard built (Worker worker-0.4.13 sideCheck, app 0.4.13 heading tracker).
+> - Decision: a block more than one stack deep gets a total only when the camera heading confirms both side
+>   faces. Gallery and older-app scans count one-deep blocks only. A refusal beats a false total.
+> - Not yet deployed or installed. Docs: docs/SCAN_JOBS_AND_DEVICES.md "Side-face check".
+
 > 2026-10-31 (later): MUTAA photos compared (reports/mutaa-manual-vs-backend-20261031).
 > - On close, square-on faces the backend per-stack equals the visual count (9/10 stacks). Manual equals
 >   the user totals for L-80 and L-100.

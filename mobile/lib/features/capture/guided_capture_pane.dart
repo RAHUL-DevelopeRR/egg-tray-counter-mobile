@@ -10,6 +10,7 @@ import '../../models/scan_session.dart';
 import '../../services/captured_still.dart';
 import '../../services/frame_evidence.dart';
 import '../../services/frame_preflight.dart';
+import '../../services/heading_tracker.dart';
 import '../../services/live_frame_preflight.dart';
 import '../../services/settings_store.dart';
 import 'camera_guide_overlay.dart';
@@ -25,6 +26,7 @@ class GuidedCapturePane extends StatefulWidget {
     this.views = CaptureView.values,
     this.mainCameraOnly = false,
     this.onClose,
+    this.heading,
     super.key,
   });
 
@@ -39,6 +41,11 @@ class GuidedCapturePane extends StatefulWidget {
   /// Shown as a close control over the viewfinder (the screen has no app bar).
   final VoidCallback? onClose;
 
+  /// The scan's heading tracker, kept by the scan flow so a retake shares the
+  /// session of the photos it is compared with. Without one the pane runs its
+  /// own for as long as it is open.
+  final HeadingTracker? heading;
+
   @override
   State<GuidedCapturePane> createState() => _GuidedCapturePaneState();
 }
@@ -46,6 +53,10 @@ class GuidedCapturePane extends StatefulWidget {
 class _GuidedCapturePaneState extends State<GuidedCapturePane>
     with WidgetsBindingObserver {
   final _live = LiveFramePreflight();
+
+  /// How far the phone has turned during the scan: tells a side face from
+  /// the front photographed again.
+  late final HeadingTracker _heading = widget.heading ?? HeadingTracker();
   CameraController? _controller;
   late CaptureView _view;
   bool _capturing = false;
@@ -77,6 +88,7 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
       ..addListener(_onLiveReport)
       ..setView(_view)
       ..startSensors();
+    _heading.start();
     _loadLevelReference();
     _initializeCamera();
   }
@@ -290,6 +302,23 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
       final capturePose = _live.pose;
       // How the phone is held at the tap: the photo is turned to match.
       final rotation = _captureRotation;
+      // A side photo must face a different way from the front (and LEFT from
+      // RIGHT); refused before the shutter, so no photo is taken in vain.
+      final heading = _heading.current;
+      final headingProblem = sideHeadingProblem(_view, heading, {
+        for (final view in CaptureView.values)
+          if (view != _view)
+            view: CaptureHeading.fromEvidence(
+              widget.session.constraintEvidence[view.name],
+            ),
+      });
+      if (headingProblem != null) {
+        await _showRejection(
+          'This is not the ${_view.name.toUpperCase()} side',
+          headingProblem,
+        );
+        return;
+      }
       // Android refuses a still capture while an image stream is active.
       await _live.stopCamera();
       XFile photo;
@@ -352,6 +381,7 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
           'upright_pixels': true,
           'width': prepared.width,
           'height': prepared.height,
+          ...?heading?.toJson(),
         }),
       );
       pendingPhoto = null; // The session now owns this file.
@@ -471,6 +501,7 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
     ++_cameraGeneration;
     _live.removeListener(_onLiveReport);
     _live.dispose();
+    if (widget.heading == null) _heading.stop();
     _cameraTask = _cameraTask.then((_) async {
       await _live.stopCamera();
       await _live.stopSensors();

@@ -10,6 +10,7 @@ import '../../models/scan_result.dart';
 import '../../models/scan_session.dart';
 import '../../services/api_client.dart';
 import '../../services/device_auth.dart';
+import '../../services/heading_tracker.dart';
 import '../../services/history_database.dart';
 import '../../services/pending_scans.dart';
 import '../../services/scan_failure.dart';
@@ -67,11 +68,16 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
   bool _running = false;
   final ManualCountRepository _manualCounts = SqliteManualCountRepository();
 
+  /// One heading session per scan, kept across retakes: a retaken side is
+  /// compared with the STRAIGHT photo it will be uploaded with.
+  final HeadingTracker _heading = HeadingTracker();
+
   @override
   void initState() {
     super.initState();
     final resumed = widget.resume;
     _session = resumed ?? ScanSession(scanId: const Uuid().v4());
+    if (!widget.uploadPhotos) _heading.start();
     if (resumed != null) {
       _phase = _FlowPhase.processing;
       _stage = ScanStage.connecting;
@@ -185,6 +191,11 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
   void _newScan() {
     final previous = _session.scanId;
     unawaited(_deleteSessionPhotos());
+    // A new block: its photos are not compared with the last one's.
+    if (!widget.uploadPhotos) {
+      unawaited(_heading.stop());
+      _heading.start();
+    }
     setState(() {
       _session = ScanSession(scanId: const Uuid().v4());
       _captureView = null;
@@ -211,6 +222,7 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
     // RESUME. Only this screen's own photo files are removed.
     _client?.cancel();
     unawaited(_deleteSessionPhotos());
+    unawaited(_heading.stop());
     super.dispose();
   }
 
@@ -271,6 +283,7 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
                   session: _session,
                   initialView: _captureView,
                   settings: widget.settings,
+                  heading: _heading,
                   onComplete: _process,
                   onClose: () {
                     _client?.cancel();

@@ -72,7 +72,12 @@ test('zero detections never throw and are rejected as no stacks detected', () =>
   assert.deepEqual(captureQuality([], null, null).reasons, ['no stacks detected']);
 });
 
-async function scan(t, perView) {
+// Camera headings turned around the block (0.4.13 evidence), so these tests see the capture gate alone; without
+// them a block more than one stack deep is withheld by the side check (side_check.test.mjs).
+const TURNED = Object.fromEntries([['straight', 0], ['left', 90], ['right', -90]].map(([view, yaw]) =>
+  [view, JSON.stringify({yaw_deg: yaw, yaw_session: 'walk1'})]));
+
+async function scan(t, perView, evidence = TURNED) {
   t.mock.method(console, 'log', () => {});
   const calls = [];
   t.mock.method(globalThis, 'fetch', async () => {
@@ -84,6 +89,7 @@ async function scan(t, perView) {
   form.set('scan_contract', 'model_spatial_v1');
   ['left', 'right', 'straight'].forEach((view, i) => form.set(view,
     new File([new Uint8Array([255, 216, 255, i])], `${view}.jpg`, {type: 'image/jpeg'})));
+  for (const [view, value] of Object.entries(evidence)) form.set(`${view}_constraint_evidence`, value);
   const response = await worker.fetch(new Request('https://local/v1/scans/count', {method: 'POST', body: form}), env);
   assert.equal(response.status, 200);
   assert.deepEqual(calls, ['left', 'right', 'straight']);
@@ -122,6 +128,18 @@ test('when every view passes the gate the block total and the generic rescan adv
   assert.equal(result.rescan.recommended_view, 'straight');
   assert.ok(!result.rescan.reason.startsWith('Step closer'));
   assert.equal(result.total_trays, null);
+});
+
+test('a refused photo and an unconfirmed side: the refused photo is retaken first, both reasons are listed', async t => {
+  const good = n => ({image: FRAME, predictions: Array.from({length: n}, (_, i) => column(100 + i * 100, 20)).flat()});
+  const result = await scan(t, {left: good(4), right: {image: FRAME, predictions: []}, straight: good(5)}, {});
+  assert.equal(result.block.status, 'needs_view');
+  assert.equal(result.block.total_trays, null);
+  assert.equal(result.rescan.recommended_view, 'right');
+  assert.match(result.rescan.reason, /^Step closer/);
+  assert.equal(result.block.side_check.left.status, 'unconfirmed');
+  assert.match(result.block.conflicts[0].reason, /^LEFT: not confirmed as a side face/);
+  assert.equal(result.block.depth, null);
 });
 
 test('a single stack filling the frame height is accepted although it cannot fill the width', () => {

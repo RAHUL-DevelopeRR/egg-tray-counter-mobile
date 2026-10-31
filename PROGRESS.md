@@ -1,5 +1,61 @@
 # Progress
 
+## 2026-10-31 (later still) - same-face guard: Worker 0.4.13 side check + app heading tracker (Claude Code)
+
+Built at the user's request after the MUTAA comparison (L-100: three front photos gave 500 "estimated" for a
+100-tray block). Contract and details: docs/SCAN_JOBS_AND_DEVICES.md "Side-face check".
+
+App 0.4.13+24:
+- lib/services/heading_tracker.dart: gyroscope yaw about the accelerometer's up.
+- One session per scan, owned by ScanFlowScreen and kept across retakes; a heading exists only while the
+  gyroscope reports.
+- The capture screen refuses a side photo taken without turning, before the shutter.
+- yaw_deg and yaw_session go into each view's evidence.
+
+Worker (PIPELINE_VERSION worker-0.4.13):
+- sideCheck() reads the headings. A side in the same session must be turned at least 45 degrees, and LEFT
+  and RIGHT must be at least 90 degrees apart.
+- Without a heading, a side repeating the front's stacks is `repeats_front`, and any other side of a block
+  more than one stack deep is `unconfirmed`.
+- A refused side gives needs_view with no total, and strips the false depth, cells and tray numbers.
+
+Review:
+- A three-lens review workflow raised 9 findings, and skeptics confirmed 8.
+- Fixed:
+  - Retakes broke the session; the scan-wide session fixes this.
+  - The false grid was still drawn; the side-derived structure is now stripped.
+  - The count rule leaked on re-shots framed one stack tighter or with one stack misread (400/496
+    "estimated" in a perturbation test); fixed by the depth rule.
+  - A silent gyroscope froze the heading; fixed with the sample and freshness checks.
+  - The tracker re-rated the accelerometer; it now requests the uiInterval rate.
+  - Tests were missing for the combined cases.
+- Recorded, not done: headings are not archived and not in the job fingerprint, so a replay from R2 has no
+  heading. Gyroscope drift weakens the test over long pauses.
+
+Tests (measured):
+- Worker npm test 122/122 (11 new side-check tests plus a capture-gate combination test). The two
+  capture-gate tests now send camera headings.
+- Flutter analyze clean; flutter test 176/176 (8 heading tests, 1 pane test showing that a scan's session
+  survives a capture screen and an inactive state).
+
+Replay of saved real responses (sideCheck on stored detections):
+- Withheld: L-100 500 (wrong); mechanics trio 399 (three different blocks, also wrong); 9b4c783e 165 (a
+  genuine trio from app 0.4.9 with no headings, so it is withheld until a 0.4.13 camera scan).
+- Kept: the 99-block (one deep), in all 5 saved scans.
+
+APK built: egg-tray-counter-0.4.13-block-staging.apk (repo root, git-ignored), 62,558,741 bytes, SHA-256
+c3b50b8d07407dde7fc772399866315ba4608eeb653e262fcf960986ca1b2e63. Checks:
+- apksigner: the release key (29013b98...), the same signer as 0.4.12, so `adb install -r` upgrades the
+  Redmi in place and keeps its device key and approval.
+- aapt: 0.4.13 / 24.
+- No admin token or keystore password in any entry.
+
+Not done:
+- Worker 0.4.13 is not deployed (staging is still ef7c1dd3, 0.4.12).
+- APK 0.4.13 is not installed.
+- On-device check of the heading guard on the Redmi: walk around a block, and confirm a front re-shot is
+  refused.
+
 ## 2026-10-31 (later) - MUTAA field photos: manual 3D count vs backend (Claude Code)
 
 At the user's request: cloned github.com/RAHUL-DevelopeRR/MUTAA (a27877b) to C:\Users\rahul\MUTAA, outside

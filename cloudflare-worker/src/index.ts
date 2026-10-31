@@ -165,7 +165,27 @@ async function sha256(file: File) {
 // A validated, hashed upload: the input of both the open route and a scan job. scanContract: the form field as sent
 // (null when absent).
 type ParsedScan = { scanId: string; files: Record<string, File>; hashes: string[]; cellIds: Record<string, string>;
-  scanContract: string | null; modelScan: boolean; baselineScan: boolean; requestStarted: number; multipartMs: number };
+  scanContract: string | null; modelScan: boolean; baselineScan: boolean; requestStarted: number; multipartMs: number;
+  headings: Record<string, ViewHeading> };
+// Phone heading at capture, from the app's per-view constraint evidence: gyroscope yaw about gravity in degrees,
+// comparable only within one yaw_session (one opening of the capture screen).
+type ViewHeading = { yaw_deg: number; yaw_session: string } | null;
+const MAX_EVIDENCE_CHARS = 8000;
+
+// Evidence is additive and never refuses a scan: anything missing or malformed is simply no heading.
+function readHeading(form: FormData, view: string): ViewHeading {
+  const raw = form.get(`${view}_constraint_evidence`);
+  if (typeof raw !== "string" || !raw || raw.length > MAX_EVIDENCE_CHARS) return null;
+  try {
+    const evidence = JSON.parse(raw) as Record<string, unknown> | null;
+    const yaw = evidence?.yaw_deg, session = evidence?.yaw_session;
+    if (typeof yaw !== "number" || !Number.isFinite(yaw) || Math.abs(yaw) > 1e6) return null;
+    if (typeof session !== "string" || !/^[A-Za-z0-9_-]{1,64}$/.test(session)) return null;
+    return { yaw_deg: yaw, yaw_session: session };
+  } catch {
+    return null;
+  }
+}
 
 async function countScan(request: Request, env: Bindings) {
   const scan = await readScan(request);
@@ -218,8 +238,10 @@ async function readScan(request: Request): Promise<ParsedScan> {
   if (new Set(hashes).size !== 3) {
     throw new HttpError(422, "duplicate_view", "LEFT, RIGHT, and STRAIGHT must be distinct photographs");
   }
+  const headings = Object.fromEntries(VIEWS.map(view => [view, readHeading(form, view)]));
   return { scanId: rawScanId, files: files as Record<string, File>, hashes, cellIds,
-    scanContract: requestedContract === null ? null : String(requestedContract), modelScan, baselineScan, requestStarted, multipartMs };
+    scanContract: requestedContract === null ? null : String(requestedContract), modelScan, baselineScan, requestStarted, multipartMs,
+    headings };
 }
 
 // Private, content-addressed originals survive failed inference and retries.
@@ -253,7 +275,7 @@ async function scanPipeline(env: Bindings, scan: ParsedScan): Promise<Record<str
     const columns = Object.fromEntries(VIEWS.map(view => [view, spanColumns(results[view].detections ?? [])]));
     const rimStatus = await rimVerify(files, columns, env);
     console.log(JSON.stringify({event: "rim_verify", scan_id: rawScanId, status: rimStatus}));
-    return modelDiagnostics(rawScanId, results, cellIds, env, Date.now() - started, columns, rimStatus);
+    return modelDiagnostics(rawScanId, results, cellIds, env, Date.now() - started, columns, rimStatus, scan.headings);
   }
   if (baselineScan) return baselineResponse(rawScanId, results, env, Date.now() - started);
   const stacks = fuseCells(results, cellIds, Number(env.MAX_VIEW_COUNT_RATIO));
@@ -659,6 +681,55 @@ function captureQuality(columns: SpanColumn[], imageWidth: number | null, imageH
     min_pitch_scale: round3(Math.min(...scales)), box_aspect: round3(aspect), image } };
 }
 
+// ---- Side-face check. The block model trusts that LEFT and RIGHT show the side faces; a front photo sent again
+// as a side builds a false depth (MUTAA L-100, 2026-10-31: three front views of a 5 x 1 block gave 500
+// "estimated" for 100 trays). Camera captures carry the phone heading (one session per scan, kept across retakes):
+// a side must be turned from the front, and LEFT and RIGHT must face opposite ways. Stack counts alone cannot tell
+// a side face from the front photographed again (a square block of even height looks the same, and a re-shot framed
+// one stack tighter or with one stack misread slips past any count match), so a block more than one stack deep gets
+// no total unless the heading confirms every side face it was built from. Gallery photos and older apps therefore
+// get totals only for one-deep blocks; refusing is safer than a fivefold total.
+const SIDE_MIN_TURN_DEG = 45;      // a side face is about 90 degrees from the front
+const SIDES_MIN_APART_DEG = 90;    // LEFT and RIGHT face opposite ways, about 180 degrees apart
+type SideVerdict = { status: "turned" | "same_way_as_straight" | "same_way_as_other_side" | "repeats_front" | "unconfirmed" | "unverified";
+  turn_deg?: number; reason?: string };
+const wrap180 = (deg: number) => ((deg + 180) % 360 + 360) % 360 - 180;
+
+function sideCheck(columns: Record<string, SpanColumn[]>, headings: Record<string, ViewHeading> = {}) {
+  const layers = (cols: SpanColumn[]) => [...cols].sort((a, b) => a.x_min - b.x_min).map(c => c.walk_count ?? c.span_count);
+  const close = (a: number[], b: number[]) => a.length === b.length && a.every((v, i) => Math.abs(v - b[i]) <= 1);
+  const front = layers(columns.straight ?? []);
+  const depth = Math.max((columns.left ?? []).length, (columns.right ?? []).length);   // as buildBlock takes it
+  const straight = headings.straight ?? null;
+  const verdicts: Record<string, SideVerdict> = {};
+  for (const side of ["left", "right"]) {
+    const name = side.toUpperCase();
+    const heading = headings[side] ?? null;
+    if (straight && heading && heading.yaw_session === straight.yaw_session) {
+      const turn = Math.round(wrap180(heading.yaw_deg - straight.yaw_deg));
+      verdicts[side] = Math.abs(turn) >= SIDE_MIN_TURN_DEG ? { status: "turned", turn_deg: turn } : { status: "same_way_as_straight",
+        turn_deg: turn, reason: `${name}: taken facing the same way as STRAIGHT (phone turned only ${Math.abs(turn)} degrees); walk around the corner and photograph the ${side} side face` };
+      continue;
+    }
+    const cols = layers(columns[side] ?? []);
+    if (front.length >= 2 && (close(cols, front) || close([...cols].reverse(), front))) {
+      verdicts[side] = { status: "repeats_front", reason: `${name}: shows the same ${front.length} stacks with the same heights as STRAIGHT, so it looks like the front face again; photograph the ${side} side face with the camera after walking around the corner` };
+    } else if (cols.length && depth > 1) {
+      verdicts[side] = { status: "unconfirmed", reason: `${name}: not confirmed as a side face (no phone heading from the camera session that took STRAIGHT), and this block is ${depth} stacks deep, so its hidden stacks cannot be computed; scan it with the camera, walking around the block` };
+    } else {
+      verdicts[side] = { status: "unverified" };
+    }
+  }
+  // LEFT and RIGHT from one capture screen are compared even when the front came from another one (a retake).
+  const left = headings.left ?? null, right = headings.right ?? null;
+  if (left && right && left.yaw_session === right.yaw_session && !verdicts.left.reason && !verdicts.right.reason) {
+    const apart = Math.round(Math.abs(wrap180(left.yaw_deg - right.yaw_deg)));
+    if (apart < SIDES_MIN_APART_DEG) verdicts.right = { status: "same_way_as_other_side", turn_deg: verdicts.right.turn_deg,
+      reason: `RIGHT: taken facing the same way as LEFT (${apart} degrees apart), so both show one side; photograph the right side face` };
+  }
+  return verdicts;
+}
+
 // Worst view first: no stacks, then most reasons, then the smallest face in the frame, then LEFT/RIGHT/STRAIGHT order.
 function worstView(capture: Record<string, CaptureQuality>, views: readonly string[]) {
   const rank = (q: CaptureQuality) => (q.reasons.includes(NO_STACKS) ? 100 : 0) + q.reasons.length * 10 + (1 - (q.metrics.height_frac ?? 1));
@@ -788,12 +859,15 @@ async function listManualCounts(env: Bindings) {
 }
 
 function modelDiagnostics(scanId: string, results: Record<string, ViewInference>, cellIds: Record<string, string>, env: Bindings, latency: number,
-  precomputed?: Record<string, SpanColumn[]>, rimStatus?: Record<string, string>) {
+  precomputed?: Record<string, SpanColumn[]>, rimStatus?: Record<string, string>, headings: Record<string, ViewHeading> = {}) {
   const columns = precomputed ?? Object.fromEntries(VIEWS.map(view => [view, spanColumns(results[view].detections ?? [])]));
   const capture = Object.fromEntries(VIEWS.map(view => [view,
     captureQuality(columns[view], results[view].image?.width ?? null, results[view].image?.height ?? null,
       medianBoxAspect(results[view].detections ?? []))]));
   const rejectedView = worstView(capture, VIEWS);
+  const sides = sideCheck(columns, headings);
+  const wrongSide = (["left", "right"] as const).find(side => sides[side].reason);
+  const sideConflicts = (["left", "right"] as const).filter(side => sides[side].reason).map(side => ({ reason: sides[side].reason }));
   const assembled = buildBlock(columns.straight, columns.left, columns.right);
   // When the block model names a face in its first conflict, that is the photo to retake.
   const namedFace = (() => {
@@ -804,17 +878,25 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
     }
     return null;
   })();
-  // A face that fails the capture gate gives no usable column counts, so the block total is withheld.
-  const block = rejectedView
-    ? { ...assembled, status: "needs_view", total_trays: null, faces_consistent: false, fully_observed: false } : assembled;
+  // A face that fails the capture gate gives no usable column counts, and a side photo that is not a side face
+  // gives a false depth: either way the block total is withheld.
+  const withheld = { status: "needs_view", total_trays: null, faces_consistent: false, fully_observed: false };
+  // A side that is not a side face also makes the depth, the hidden stacks and the grid false: none of it is
+  // returned, or the app would still draw (and an operator could add up) the block the total was withheld for.
+  const block = wrongSide
+    ? { ...assembled, ...withheld, depth: null, cells: [], observed_trays: null, computed_trays: null, filled_trays: null,
+        rescan_cells: [], conflicts: [...sideConflicts, ...assembled.conflicts] }
+    : rejectedView ? { ...assembled, ...withheld } : assembled;
   // Model boxes are useful evidence, but not proof of cross-view identity or egg occupancy.
   // Do not substitute whole-photo voting for an unfinished spatial hybrid pipeline.
   const reason = "Model detections are available. Physical stack matching and egg occupancy remain unresolved; these per-photo counts are not a verified inventory total.";
   const rescan = rejectedView
     ? { recommended_view: rejectedView, reason: `${CAPTURE_ADVICE} (${rejectedView.toUpperCase()}: ${capture[rejectedView].reasons.join("; ")})` }
-    : namedFace
-      ? { recommended_view: namedFace.view, reason: namedFace.reason }
-      : { recommended_view: "straight", reason };
+    : wrongSide
+      ? { recommended_view: wrongSide, reason: sides[wrongSide].reason! }
+      : namedFace
+        ? { recommended_view: namedFace.view, reason: namedFace.reason }
+        : { recommended_view: "straight", reason };
   return {
     // Legacy top-level fields stay "not verified" for installed APKs; result_status is the block's one result state.
     scan_id: scanId, status: "rescan_required", accepted: false, result_status: block.status,
@@ -835,7 +917,7 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
       verification: { method: "rim_edges", views: rimStatus ?? Object.fromEntries(VIEWS.map(v => [v, "disabled"])) },
       // Egg occupancy is not measured: this is tray capacity if every counted tray is full.
       total_eggs: block.total_trays === null ? null : block.total_trays * Number(env.EGGS_PER_TRAY),
-      eggs_basis: "capacity_if_every_tray_full", capture },
+      eggs_basis: "capacity_if_every_tray_full", capture, side_check: sides },
     rescan,
   };
 }
@@ -924,7 +1006,7 @@ async function reconstructPair(request: Request, env: Bindings) {
 // Open mode (AUTH_MODE unset or "open") never reaches this code: jobs and idempotency are enforce-only, so the
 // installed 0.4.11 app keeps exactly today's answers until production is promoted. Observe mode reaches it for
 // every request that carries a credential.
-const PIPELINE_VERSION = "worker-0.4.12";
+const PIPELINE_VERSION = "worker-0.4.13";
 // How long a claimed job is left to its attempt before a retry may take it over. Cloudflare keeps waitUntil work alive
 // for at most 30 s after the client disconnects, so an attempt whose phone gave up (the app's 90 s receive timeout, or
 // a dropped link the edge noticed) is cancelled by about 120 s after the claim and writes nothing; one whose
@@ -1666,7 +1748,7 @@ async function routeEnforced(request: Request, env: Bindings, url: URL, mode: Au
   return json({ detail: { code: "not_found", message: "Route not found" } }, 404);
 }
 
-export { base64, buildBlock, captureQuality, fuseCounts, fuseCells, readCellIds, readOptionalCellIds, spanColumns, walkLayers };
+export { base64, buildBlock, captureQuality, fuseCounts, fuseCells, readCellIds, readOptionalCellIds, sideCheck, spanColumns, walkLayers };
 
 export default {
   async fetch(request, env, ctx): Promise<Response> {
