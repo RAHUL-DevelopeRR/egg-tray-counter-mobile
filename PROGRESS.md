@@ -1,5 +1,113 @@
 # Progress
 
+## 2026-11-01 (latest) - Plan 3 executed: release 0.5.0, phone-only X/Y/Z grid counter (Claude Code)
+
+Plan: `C:/Users/rahul/.claude/plans/spicy-growing-flame.md` (Plan 3, execution; the user's specification).
+
+**Reconciliation (read-only first).**
+- Local `rollout/0.4.12-staging` contains `origin/codex/hybrid-cell-counting` (`7971117`, 0.4.12+23) as an ancestor.
+- Commits from this session and the last are **not pushed**.
+
+**Side sessions.**
+- **K2** (on-phone layer signal) finished and its kill rule fired. Pitch within 10% on 46.8% of columns (bar 90%);
+  half or double pitch on 28.1% of faces (bar 10%). Brought in as a negative result (`a69e748`, not wired).
+- **E** stopped mid-rewrite. It was continued here.
+
+**Step 1: hand-reviewed annotations** (`benchmarks/annotations-20261101`, tier V, 11 columns).
+- The 5/6 alternation holds on every reviewed stack.
+- The end-layer parity matches every known count and contradicts all three known misses (img-30 c2 and c4, L-109 c4).
+- Empty cover trays on 6 of 11 columns; the detector did not box them where checked.
+
+**Phase E: independent rim reader** (`backend/app/vision/rim_count.py`, `reports/rim-independent-20261101`).
+- It takes only the column x-range from the detector, and its thresholds were frozen before scoring.
+- **REJECTED:**
+  - half or double readings on 3 of 14 faces (bar 10%);
+  - exact on 18 of 52 readable stacks;
+  - it contradicts a correct detector count on 33 stacks.
+- **Cause:** cross-stacked layers alternate polarity, so the pair period dominates (the same failure as K2).
+- Not wired; `RIM_VERIFY` stays off.
+
+**Phase P: 5/6 parity and occupancy** (`backend/app/vision/cross_stack.py`, `reports/cross-stack-20261101`).
+- **DISABLED:**
+  - row typing right on 3 of 7 annotated end layers (bar 95%);
+  - false unboxed-layer flags on 10 correct faces (bar 1). The egg colour mask also catches white walls and
+    neighbouring stacks.
+- **Consequence:** occupancy is unknown unless declared.
+
+**Worker 0.5.0** (`f6c2111`, `0a2c99b`; contract `docs/GRID_CONTRACT_0.5.0.md`).
+- **Q, readings:** each carries capture_id, reader (rf-walk), physical_stack_id, view, count, evidence, quality and
+  pipeline_version. A stack is verified by two different captures; copies of one photo collapse.
+- **`block.grid[y][x]`:** one physical stack per cell (corners counted once), with z / filled / partial / cover /
+  unknown layers, views, sources, status and uncertainties.
+- **`block.inventory`:** observed, computed, declared and top-view layers kept apart. Eligible egg trays are given only
+  from declared occupancy.
+- **F, `block_declaration`:** a size, missing cell or partial stack that contradicts a face gives `conflict`. A
+  measured reference height only demotes. A declaration never gives `exact`.
+- **S, CORNER:** width and depth around the nearest stack.
+- **N, ELEVATED:** operator taps (present, missing, step down, unsure); the flush-top rule is conditional.
+- **`confirmed`:** visible stacks verified, the plan agrees, and the interior is declared or seen from above. The basis
+  is shown.
+- **Manual counts** store `counted_by` and `second_counter`.
+- **A refused photo keeps `needs_view`.**
+
+**App 0.5.0+27** (`3b5c868`, built by a subagent, verified here).
+- A blind declaration pane after the three photos and before upload, asked once per block.
+- Optional CORNER and ELEVATED extras, plus a tap grid.
+- The extruded grid result, labelled "not a point cloud or measured mesh".
+- The confirmed look names its basis and never says "exact".
+- Recount name fields.
+
+**Validation tooling:** `docs/PHYSICAL_VALIDATION.md` and `benchmarks/validation-schema/*.schema.json` (recount,
+planted error, declaration freeze, result hash).
+
+**Report:** `docs/RELEASE_0.5.0.md`.
+
+**Tests (measured).**
+- Worker: 182 tests, 176 pass, 0 fail, 6 todo.
+- Backend pytest: 155 pass. The 34 ruff errors predate this work and are in other files; the new files are clean.
+- Flutter: analyze clean, test 220/220.
+- **Replay** (`reports/replay-0.5.0-20261101`):
+  - 22 saved trios: 0 wrong releases, 0 wrong `exact`;
+  - adversarial: 25 of 27 pass. The 2 failures are another block's sides with **no** declaration; with a declaration
+    (S14F, R02F) they are withheld.
+
+**Offline checks of the extras.**
+- **CORNER is not validated:** img-12 finds no stacks; img-14 splits 3 | 4 where the labels suggest 4 | 3.
+- **ELEVATED cannot be scored:** the only blocks with top photos have refused faces.
+
+**Honest limits.**
+- `confirmed` is effectively unreachable with three photos: front-middle and side-middle stacks are read by one capture,
+  and E was rejected.
+- Occupancy is not measured.
+- There are 0 physical recounts.
+
+**Staging deploy (authorized by the user's specification after the offline gates).**
+- `npx wrangler deploy --env staging` gave version `52a1d5e8-f8fa-425d-a98d-64fdfbad78d6`, observe mode. Production is
+  untouched and its /health still shows the old contract.
+- **Smoke scan on staging** (L-100 photos, declared 5 × 1, admin token not printed):
+  - `worker-0.5.0`, `conflict`, total null, "declared 1 stacks deep, the side faces show 5";
+  - a 5 × 5 grid with Q reading fields;
+  - occupancy unknown.
+
+**APK:** `egg-tray-counter-0.5.0-block-staging.apk` (repo root, git-ignored).
+- 63,738,769 bytes, SHA-256 a641bc9196fefca5d12e16e0c522875dc767ade20dc6ddc1c0497e018bd351ec.
+- aapt: versionName 0.5.0, versionCode 27.
+- apksigner: release signer 29013b98..., the same as 0.4.12 and 0.4.13, so `adb install -r` upgrades in place.
+- No admin token or keystore password strings in libapp.so.
+
+**Not done.**
+- **Phone install and field test:** no device was connected (`adb devices` empty).
+- **The physical validation pilot.**
+- **The user's blind counts (D2).**
+- **Pushing the branch.**
+- **Archiving the E/K2 side sessions** (needs the user's OK).
+
+**Next.**
+1. Connect the Redmi, run `adb install -r egg-tray-counter-0.5.0-block-staging.apk`, and run the protocol in
+   `docs/PHYSICAL_VALIDATION.md`.
+2. A second reader, or a STRAIGHT-2 capture (Phase M), so that wide blocks can reach `exact` / `confirmed`.
+3. The user decides on pushing.
+
 ## 2026-11-01 (later) - Plan 2: capture provenance and frame doubts (Worker 0.4.15, app 0.4.15+26) (Claude Code)
 
 **Plan 2** (`C:/Users/rahul/.claude/plans/spicy-growing-flame.md`, approved by the user) answers "more client-side

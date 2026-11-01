@@ -1,5 +1,34 @@
 # Previous context — 2026-09-14 checkpoint
 
+## 2026-11-01 checkpoint: release 0.5.0 (phone-only grid counter)
+
+**Branch and deploys.**
+- Continue on `rollout/0.4.12-staging`, which contains `origin/codex/hybrid-cell-counting` (`7971117`). Commits
+  since `ac2666c` are local and unpushed.
+- Staging Worker `worker-0.5.0` (version `52a1d5e8`, observe). Production `4c1480e6` untouched.
+
+**Built.**
+- Q reading fields, with capture-based verification.
+- The `block.grid` X/Y/Z model with separated inventory.
+- The blind declaration (F).
+- CORNER (S) and ELEVATED taps (N).
+- The `confirmed` status.
+- Recount name fields.
+- The physical validation protocol and schemas.
+- App 0.5.0+27.
+
+**Measured negatives** (keep; do not resurrect without new data):
+- K2, on-phone periodicity: 28% harmonics.
+- E, rim reader: 21% harmonics.
+- P, parity typing: 43% accuracy and 10 falsely flagged correct faces.
+
+The 5/6 cross-stacking rule itself holds on every hand-reviewed stack (benchmarks/annotations-20261101).
+
+**Next.**
+- Install APK 0.5.0 on the Redmi (needs the device), then run the physical pilot.
+- STRAIGHT-2 (Phase M) or a validated second reader, so that wide blocks can reach exact or confirmed.
+- No new neural network, GPU, VLM or photogrammetry until the pilot has measured the system.
+
 ## 2026-09-28 follow-up checkpoint
 
 Continue from reports/stack-heatmap-followup-20260928/README.md and current

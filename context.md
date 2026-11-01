@@ -1,3 +1,14 @@
+> 2026-11-01 (latest): release 0.5.0 built; Worker on **staging** (`52a1d5e8`); production untouched; not pushed.
+> - **Frozen product:** a phone-only physical egg-tray counter with an X/Y/Z grid model.
+>   - Eligible tray = a tray holding eggs (a partly filled tray counts); empty cover trays are layers, not eligible.
+>   - Unknown occupancy stays unknown; no inference from a habitual height.
+> - **Readers.** Only the detector walk is validated. The pixel rim reader (E) was rejected and the 5/6 parity checker
+>   (P) disabled, both measured (reports/rim-independent-20261101, reports/cross-stack-20261101).
+> - **Statuses** exact / confirmed / estimated / conflict / needs_view (docs/GRID_CONTRACT_0.5.0.md). A declaration never
+>   gives exact. confirmed is effectively unreachable with three photos.
+> - **Next:** phone install and the physical pilot (docs/PHYSICAL_VALIDATION.md); then a second front capture or
+>   reader.
+
 > 2026-11-01 (latest): Plan 2 approved (C:/Users/rahul/.claude/plans/spicy-growing-flame.md): stricter client
 > constraints and a "3D counter".
 > - "3D counter" here means an X x Y grid where every stack carries independent readings, plus an independent footprint
