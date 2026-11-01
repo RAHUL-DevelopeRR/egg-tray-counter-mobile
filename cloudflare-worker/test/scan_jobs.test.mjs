@@ -470,7 +470,9 @@ test('phone headings are part of the request: other headings are a conflict; a v
   const job = bucket.readJson(jobKey(scanId));
   assert.equal(job.fingerprint, jobIdentity(0, {headings}).fingerprint);
   // The archive keeps each photo's heading, so a replay from R2 judges the side faces as the live scan did.
-  const left = [...bucket.objects.keys()].find(k => k.startsWith(`scans/${scanId}/left/`));
+  const left = [...bucket.objects.keys()].find(k => k.startsWith(`scans/${scanId}/left/`) && !k.endsWith('/evidence.json'));
+  // The full evidence is archived beside the photo.
+  assert.equal(JSON.parse(await (await bucket.get(`scans/${scanId}/left/evidence.json`)).text()).yaw_session, 'walk1');
   assert.deepEqual([bucket.objects.get(left).customMetadata.yaw_deg, bucket.objects.get(left).customMetadata.yaw_session], ['-91.5', 'walk1']);
   assert.equal((await (await postScan(env, scanId, headers, 0, {headings})).json()).job.replayed, true);
   for (const other of [{}, {...headings, left: [-30, 'walk1']}, {...headings, right: [88, 'walk2']}]) {

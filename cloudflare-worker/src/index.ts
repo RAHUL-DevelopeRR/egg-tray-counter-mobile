@@ -166,26 +166,44 @@ async function sha256(file: File) {
 // (null when absent).
 type ParsedScan = { scanId: string; files: Record<string, File>; hashes: string[]; cellIds: Record<string, string>;
   scanContract: string | null; modelScan: boolean; baselineScan: boolean; requestStarted: number; multipartMs: number;
-  headings: Record<string, ViewHeading> };
+  headings: Record<string, ViewHeading>; captures: Record<string, ViewCapture>; evidence: Record<string, string | null> };
 // Phone heading at capture, from the app's per-view constraint evidence: gyroscope yaw about gravity in degrees,
 // comparable only within one yaw_session (one scan, kept across retakes). Positive yaw is a left (counter-clockwise)
 // turn seen from above.
 type ViewHeading = { yaw_deg: number; yaw_session: string } | null;
+// How a photo was taken, as the app reports it: source "captured_still" (the guided camera) or "uploaded_photo"
+// (the gallery), and whether the phone's live checks blocked it. Self-reported: it stops honest mistakes such as a
+// gallery photo standing in for a face, not a modified app.
+type ViewCapture = { source: string | null; blocked: boolean | null; heading: ViewHeading };
 const MAX_EVIDENCE_CHARS = 8000;
+const MAX_CAPTURE_CHARS = 1000;
+const MAX_ARCHIVED_EVIDENCE_CHARS = 64_000;
 
-// Evidence is additive and never refuses a scan: anything missing or malformed is simply no heading.
-function readHeading(form: FormData, view: string): ViewHeading {
-  const raw = form.get(`${view}_constraint_evidence`);
-  if (typeof raw !== "string" || !raw || raw.length > MAX_EVIDENCE_CHARS) return null;
-  try {
-    const evidence = JSON.parse(raw) as Record<string, unknown> | null;
-    const yaw = evidence?.yaw_deg, session = evidence?.yaw_session;
-    if (typeof yaw !== "number" || !Number.isFinite(yaw) || Math.abs(yaw) > 1e6) return null;
-    if (typeof session !== "string" || !/^[A-Za-z0-9_-]{1,64}$/.test(session)) return null;
-    return { yaw_deg: yaw, yaw_session: session };
-  } catch {
-    return null;
-  }
+function headingFrom(evidence: Record<string, unknown>): ViewHeading {
+  const yaw = evidence.yaw_deg, session = evidence.yaw_session;
+  if (typeof yaw !== "number" || !Number.isFinite(yaw) || Math.abs(yaw) > 1e6) return null;
+  if (typeof session !== "string" || !/^[A-Za-z0-9_-]{1,64}$/.test(session)) return null;
+  return { yaw_deg: yaw, yaw_session: session };
+}
+
+// Evidence is additive and never refuses a scan: anything missing or malformed is simply unknown. Apps from 0.4.15
+// send a short <view>_capture field, so the heading no longer depends on the full constraint evidence staying under
+// MAX_EVIDENCE_CHARS; older apps send only <view>_constraint_evidence.
+function readCapture(form: FormData, view: string): ViewCapture {
+  const parse = (name: string, limit: number) => {
+    const raw = form.get(name);
+    if (typeof raw !== "string" || !raw || raw.length > limit) return null;
+    try {
+      const value = JSON.parse(raw) as unknown;
+      return value && typeof value === "object" && !Array.isArray(value) ? value as Record<string, unknown> : null;
+    } catch {
+      return null;
+    }
+  };
+  const evidence = parse(`${view}_capture`, MAX_CAPTURE_CHARS) ?? parse(`${view}_constraint_evidence`, MAX_EVIDENCE_CHARS);
+  if (!evidence) return { source: null, blocked: null, heading: null };
+  const source = typeof evidence.source === "string" && evidence.source.length <= 40 ? evidence.source : null;
+  return { source, blocked: typeof evidence.blocked === "boolean" ? evidence.blocked : null, heading: headingFrom(evidence) };
 }
 
 async function countScan(request: Request, env: Bindings) {
@@ -239,25 +257,33 @@ async function readScan(request: Request): Promise<ParsedScan> {
   if (new Set(hashes).size !== 3) {
     throw new HttpError(422, "duplicate_view", "LEFT, RIGHT, and STRAIGHT must be distinct photographs");
   }
-  const headings = Object.fromEntries(VIEWS.map(view => [view, readHeading(form, view)]));
+  const captures = Object.fromEntries(VIEWS.map(view => [view, readCapture(form, view)]));
+  const evidence = Object.fromEntries(VIEWS.map(view => {
+    const raw = form.get(`${view}_constraint_evidence`);
+    return [view, typeof raw === "string" && raw && raw.length <= MAX_ARCHIVED_EVIDENCE_CHARS ? raw : null];
+  }));
   return { scanId: rawScanId, files: files as Record<string, File>, hashes, cellIds,
     scanContract: requestedContract === null ? null : String(requestedContract), modelScan, baselineScan, requestStarted, multipartMs,
-    headings };
+    headings: Object.fromEntries(VIEWS.map(view => [view, captures[view].heading])), captures, evidence };
 }
 
 // Private, content-addressed originals survive failed inference and retries.
 // No public download route: operators retrieve using authenticated R2 access.
-async function archiveScan(env: Bindings, { scanId: rawScanId, files, hashes, headings }: ParsedScan) {
+async function archiveScan(env: Bindings, { scanId: rawScanId, files, hashes, captures, evidence }: ParsedScan) {
   if (env.SCAN_ARCHIVE) {
     for (const [index, view] of VIEWS.entries()) {
       const file = files[view];
-      // The heading travels with the photo, so a replay from the archive judges the side faces as the live scan did.
-      const heading = headings[view];
+      // Provenance and heading travel with the photo, so a replay from the archive judges the faces as the live scan did.
+      const { source, blocked, heading } = captures[view];
       await env.SCAN_ARCHIVE.put(`scans/${rawScanId}/${view}/${hashes[index]}`, file.stream(), {
         httpMetadata: { contentType: file.type },
         customMetadata: { scan_id: rawScanId, view, sha256: hashes[index], received_at: new Date().toISOString(),
+          ...(source !== null ? { capture_source: source } : {}), ...(blocked !== null ? { capture_blocked: String(blocked) } : {}),
           ...(heading ? { yaw_deg: String(heading.yaw_deg), yaw_session: heading.yaw_session } : {}) },
       });
+      // The full live-check evidence (pose, frame metrics, checks) is kept beside the photo for later threshold work.
+      if (evidence[view]) await env.SCAN_ARCHIVE.put(`scans/${rawScanId}/${view}/evidence.json`, evidence[view]!, {
+        httpMetadata: { contentType: "application/json" }, customMetadata: { scan_id: rawScanId, view, sha256: hashes[index] } });
     }
     console.log(JSON.stringify({ event: "scan_archived", scan_id: rawScanId }));
   }
@@ -276,10 +302,10 @@ async function scanPipeline(env: Bindings, scan: ParsedScan): Promise<Record<str
   if (modelScan) {
     console.log(JSON.stringify({event: "scan_complete", scan_id: rawScanId, accepted: false,
       counts: Object.fromEntries(VIEWS.map(v => [v, results[v].count])), latency_ms: Date.now() - started}));
-    const columns = Object.fromEntries(VIEWS.map(view => [view, spanColumns(results[view].detections ?? [])]));
+    const columns = Object.fromEntries(VIEWS.map(view => [view, spanColumns(results[view].detections ?? [], results[view].image ?? null)]));
     const rimStatus = await rimVerify(files, columns, env);
     console.log(JSON.stringify({event: "rim_verify", scan_id: rawScanId, status: rimStatus}));
-    return modelDiagnostics(rawScanId, results, cellIds, env, Date.now() - started, columns, rimStatus, scan.headings);
+    return modelDiagnostics(rawScanId, results, cellIds, env, Date.now() - started, columns, rimStatus, scan.headings, scan.captures);
   }
   if (baselineScan) return baselineResponse(rawScanId, results, env, Date.now() - started);
   const stacks = fuseCells(results, cellIds, Number(env.MAX_VIEW_COUNT_RATIO));
@@ -394,7 +420,7 @@ type SpanColumn = { column: number; model_boxes: number; span_count: number; wal
   duplicate_boxes: number; x_min: number; x_max: number; y_first: number; y_last: number; doubts?: string[];
   rim_count?: number | null; rim_confidence?: number | null };
 type FaceColumn = { layers: number; filled: number; doubts: string[]; scale: number; recessed: boolean; count_agreement: boolean; reason: string | null; source: string };
-type CellReading = { face: string; layers: number; gap_filled: number; doubts: string[] };
+type CellReading = { face: string; layers: number; gap_filled: number; doubts: string[]; trusted: boolean };
 type Cell = { x: number; y: number; status: string; layers: number | null; source: string; filled_layers?: number; verified?: boolean;
   readings?: CellReading[] };
 const RECESS_SCALE = 0.85;
@@ -457,9 +483,18 @@ function walkLayers(ysIn: number[], height: number) {
 //   the box above, so it was merged as a duplicate (img-30 and L-80 stack 4);
 // - bottom_above_floor: the bottom tray had no box at all; the stack's last box sits over half a pitch above its
 //   neighbours' (L-109 stack 4).
+// With the image size (2026-11-01 plan Phase K1):
+// - end_at_frame_edge: the column's top or bottom box lies within one box height of the frame edge, so a tray
+//   beyond it can be cut off or missing (img-30 and L-80: 0.07 / 0.00 box heights; every correct accepted face had
+//   at least 2.0);
+// - cut_at_frame_side: the column touches the left or right frame edge, so it may be part of a stack;
+// - pitch_differs: the column's layer pitch is over 1.2x the face's, a nearer stack or another block (M16-FAR).
 // A doubt never refuses a count. It only keeps that reading from verifying a stack.
 const ODD_BOX_SCALE = 1.5;
 const SHORT_END_BOX = 0.6;
+const FRAME_MARGIN_BOXES = 1;
+const SIDE_TOUCH_FRACTION = 0.005;
+const PITCH_DIFFERS_SCALE = 1.2;
 type Box = { x: number; y: number; width: number; height: number };
 
 // Boxes grouped into stack columns by x: a box joins the last column when it lies within 0.6 x the median box width
@@ -478,7 +513,7 @@ function groupColumns(detections: Prediction[]): { groups: Box[][]; medianWidth:
   return { groups, medianWidth };
 }
 
-function spanColumns(detections: Prediction[]): SpanColumn[] {
+function spanColumns(detections: Prediction[], frame: ImageSize | null = null): SpanColumn[] {
   const { groups, medianWidth } = groupColumns(detections);
   const columns = groups.filter(c => c.length >= 3);
   // A box wider than a stack also covers the neighbouring stack's tray at that level, so every column whose centre
@@ -496,6 +531,12 @@ function spanColumns(detections: Prediction[]): SpanColumn[] {
     if (wide.some(b => column.includes(b) || Math.abs(b.x - centres[index]) < b.width / 2)) doubts.push("box_over_two_stacks");
     if (column.some(b => b.height > ODD_BOX_SCALE * height)) doubts.push("box_over_two_trays");
     if ([ordered[0], ordered[ordered.length - 1]].some(b => b.height < SHORT_END_BOX * height)) doubts.push("end_box_cut_short");
+    if (frame && frame.width > 0 && frame.height > 0) {
+      const top = Math.min(...column.map(b => b.y - b.height / 2)), bottom = Math.max(...column.map(b => b.y + b.height / 2));
+      if (top < FRAME_MARGIN_BOXES * height || frame.height - bottom < FRAME_MARGIN_BOXES * height) doubts.push("end_at_frame_edge");
+      const left = Math.min(...column.map(b => b.x - b.width / 2)), right = Math.max(...column.map(b => b.x + b.width / 2));
+      if (left <= SIDE_TOUCH_FRACTION * frame.width || right >= (1 - SIDE_TOUCH_FRACTION) * frame.width) doubts.push("cut_at_frame_side");
+    }
     return { column: index + 1, model_boxes: column.length, span_count: roundHalfEven((ys[ys.length - 1] - ys[0]) / pitch) + 1,
       walk_count: walk.count, walk_filled: walk.filled, walk_unresolved_gaps: walk.unresolved_gaps, perspective_gradient: walk.perspective_gradient,
       pitch_px: roundHalfEven(pitch * 100) / 100, box_height_px: roundHalfEven(height * 100) / 100, duplicate_boxes: column.length - real.length - 1,
@@ -508,6 +549,7 @@ function spanColumns(detections: Prediction[]): SpanColumn[] {
   // neighbour, camera tilt alone moved a correct end stack's bottom that far on 4 of 21 accepted faces (2026-11-01).
   const pitches = result.map(c => c.pitch_px);
   const reference = median(pitches.filter(p => p >= median(pitches)));
+  for (const c of result) if (c.pitch_px > PITCH_DIFFERS_SCALE * reference) c.doubts.push("pitch_differs");
   const front = result.filter(c => c.pitch_px >= RECESS_SCALE * reference);
   front.forEach((c, i) => {
     const neighbours = [front[i - 1], front[i + 1]].filter(Boolean);
@@ -576,7 +618,11 @@ function blockResult(width: number | null, depth: number | null, facesUsed: stri
     conflicts, ambiguities, rescan_cells: rescan, note: BLOCK_NOTE };
 }
 
-function buildBlock(straightCols: SpanColumn[], leftCols: SpanColumn[], rightCols: SpanColumn[], strays: Record<string, number> = {}) {
+// trusted: per face, whether its readings may verify a stack (null: all, for callers without capture provenance);
+// duplicates: a face whose photo repeats an earlier face's (see duplicateViews).
+function buildBlock(straightCols: SpanColumn[], leftCols: SpanColumn[], rightCols: SpanColumn[], strays: Record<string, number> = {},
+  trusted: Record<string, boolean> | null = null, duplicates: Record<string, string> = {}) {
+  const trust = (face: string) => trusted === null || trusted[face] === true;
   const facesUsed = [...(straightCols.length ? ["straight"] : []), ...(leftCols.length ? ["left"] : []), ...(rightCols.length ? ["right"] : [])];
   if (!straightCols.length || (!leftCols.length && !rightCols.length)) {
     return blockResult(null, null, facesUsed, null, [], [{ reason: "STRAIGHT and at least one side face must show stacks" }], [], true);
@@ -624,10 +670,10 @@ function buildBlock(straightCols: SpanColumn[], leftCols: SpanColumn[], rightCol
       Object.assign(cell, { status: "conflict", layers: null, source });
       continue;
     }
-    const asRead = readings.map(r => ({ face: r.name, layers: r.col.layers, gap_filled: r.col.filled, doubts: r.col.doubts }));
+    const asRead = readings.map(r => ({ face: r.name, layers: r.col.layers, gap_filled: r.col.filled, doubts: r.col.doubts, trusted: trust(r.name) }));
     if (readings[0].col.recessed) {
       // A gap in the front row is verified only when two photos both see it.
-      Object.assign(cell, { status: "missing", layers: 0, source, readings: asRead, verified: new Set(names).size > 1 });
+      Object.assign(cell, { status: "missing", layers: 0, source, readings: asRead, verified: new Set(names.filter(trust)).size > 1 });
       for (const r of readings) {
         if (cell.y === 0 && r.name !== "straight") continue;   // a side face looks along the front row past a missing corner
         if (cells.has(r.behind)) promotions.set(r.behind, [...(promotions.get(r.behind) ?? []),
@@ -649,7 +695,7 @@ function buildBlock(straightCols: SpanColumn[], leftCols: SpanColumn[], rightCol
     // Agreeing faces, or one layer apart: keep the reading with fewest gap-filled layers (STRAIGHT on a tie)
     // and record the ambiguity so the total is only an estimate.
     const best = [...readings].sort((a, b) => a.col.filled - b.col.filled || Number(a.name !== "straight") - Number(b.name !== "straight"))[0].col;
-    const clean = readings.filter(r => r.col.layers === best.layers && !r.col.filled && !r.col.doubts.length).map(r => r.name);
+    const clean = readings.filter(r => r.col.layers === best.layers && !r.col.filled && !r.col.doubts.length && trust(r.name)).map(r => r.name);
     Object.assign(cell, { status: "observed", layers: best.layers, filled_layers: best.filled, source, readings: asRead,
       verified: new Set(clean).size > 1 });
     if (values[high] !== values[low]) ambiguities.push({ cell: [cell.x, cell.y], reason: "faces differ by one layer", ...layerFields, chosen: best.layers });
@@ -665,6 +711,8 @@ function buildBlock(straightCols: SpanColumn[], leftCols: SpanColumn[], rightCol
       conflicts.push({ cell: [cell.x, cell.y], reason: "faces disagree about the stack behind a missing one" });
     }
   }
+  for (const face of FACE_ORDER.filter(f => duplicates[f])) ambiguities.push({ face,
+    reason: `${face.toUpperCase()}: the same capture as ${duplicates[face].toUpperCase()} (a copy or re-encode, not a second photo); it adds no reading` });
   for (const face of FACE_ORDER.filter(f => strays[f])) ambiguities.push({ face,
     reason: `${face.toUpperCase()}: ${strays[face]} group(s) of one or two boxes beside the counted stacks (a short stack, a loose tray or a stray box) are not counted` });
   return blockResult(width, depth, facesUsed, typical, [...cells.values()], conflicts, ambiguities);
@@ -940,9 +988,42 @@ async function listManualCounts(env: Bindings) {
   return json({ count: records.length, records });
 }
 
+// Two views whose boxes overlap almost exactly, in frame-relative coordinates, are one capture sent twice: a copy or a
+// re-encode has another sha256 but the same evidence. Measured 2026-11-01 on saved detections: re-encodes of one photo
+// scored 0.944-0.995 and the same photo or near-identical bursts 0.952-0.976; genuinely different captures of one
+// block scored 0-0.52. Score: the median best IoU of each box in the other view, taken both ways, the lower one.
+const DUPLICATE_VIEW_SCORE = 0.8;
+function boxOverlapScore(a: ViewInference, b: ViewInference) {
+  const frameBoxes = (v: ViewInference) => {
+    const d = (v.detections ?? []).filter(p => [p.x, p.y, p.width, p.height].every(n => Number.isFinite(n)) && p.width! > 0 && p.height! > 0);
+    const w = v.image?.width || Math.max(1, ...d.map(p => p.x! + p.width! / 2));
+    const h = v.image?.height || Math.max(1, ...d.map(p => p.y! + p.height! / 2));
+    return d.map(p => ({ x0: (p.x! - p.width! / 2) / w, x1: (p.x! + p.width! / 2) / w, y0: (p.y! - p.height! / 2) / h, y1: (p.y! + p.height! / 2) / h }));
+  };
+  type R = { x0: number; x1: number; y0: number; y1: number };
+  const iou = (p: R, q: R) => {
+    const i = Math.max(0, Math.min(p.x1, q.x1) - Math.max(p.x0, q.x0)) * Math.max(0, Math.min(p.y1, q.y1) - Math.max(p.y0, q.y0));
+    return i / ((p.x1 - p.x0) * (p.y1 - p.y0) + (q.x1 - q.x0) * (q.y1 - q.y0) - i);
+  };
+  const pa = frameBoxes(a), pb = frameBoxes(b);
+  if (!pa.length || !pb.length) return 0;
+  const oneWay = (p: R[], q: R[]) => median(p.map(x => Math.max(...q.map(y => iou(x, y)))));
+  return Math.min(oneWay(pa, pb), oneWay(pb, pa));
+}
+function duplicateViews(results: Record<string, ViewInference>) {
+  const order = ["straight", "left", "right"];
+  const duplicates: Record<string, string> = {};
+  order.forEach((view, i) => {
+    const earlier = order.slice(0, i).find(e => !duplicates[e] && boxOverlapScore(results[e], results[view]) >= DUPLICATE_VIEW_SCORE);
+    if (earlier) duplicates[view] = earlier;
+  });
+  return duplicates;
+}
+
 function modelDiagnostics(scanId: string, results: Record<string, ViewInference>, cellIds: Record<string, string>, env: Bindings, latency: number,
-  precomputed?: Record<string, SpanColumn[]>, rimStatus?: Record<string, string>, headings: Record<string, ViewHeading> = {}) {
-  const columns = precomputed ?? Object.fromEntries(VIEWS.map(view => [view, spanColumns(results[view].detections ?? [])]));
+  precomputed?: Record<string, SpanColumn[]>, rimStatus?: Record<string, string>, headings: Record<string, ViewHeading> = {},
+  captures: Record<string, ViewCapture> = {}) {
+  const columns = precomputed ?? Object.fromEntries(VIEWS.map(view => [view, spanColumns(results[view].detections ?? [], results[view].image ?? null)]));
   const capture = Object.fromEntries(VIEWS.map(view => [view,
     captureQuality(columns[view], results[view].image?.width ?? null, results[view].image?.height ?? null,
       medianBoxAspect(results[view].detections ?? []))]));
@@ -951,8 +1032,14 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
   const wrongSide = (["left", "right"] as const).find(side => sides[side].reason);
   const sideConflicts = (["left", "right"] as const).filter(side => sides[side].reason).map(side => ({ reason: sides[side].reason }));
   const strays = Object.fromEntries(VIEWS.map(view => [view, strayGroups(results[view].detections ?? [])]));
+  // A reading can verify a stack only when it comes from the guided camera with no blocked live check, a side photo is
+  // confirmed as a side face by the heading, and the photo is not a copy of a view already counted. A gallery photo
+  // skips every live check, and three copies of one photo gave `exact` before this rule (plan Phase J).
+  const duplicates = duplicateViews(results);
+  const trusted = Object.fromEntries(VIEWS.map(view => [view, captures[view]?.source === "captured_still" && captures[view]?.blocked === false
+    && (view === "straight" || sides[view].status === "turned") && !duplicates[view]]));
   const assembled = buildBlock(columns.straight, columns.left, columns.right,
-    Object.fromEntries(VIEWS.map(view => [view, strays[view].length])));
+    Object.fromEntries(VIEWS.map(view => [view, strays[view].length])), trusted, duplicates);
   // When the block model names a face in its first conflict, that is the photo to retake.
   const namedFace = (() => {
     for (const c of assembled.conflicts) {
@@ -991,6 +1078,7 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
     views: Object.fromEntries(VIEWS.map(view => [view, {
       quality: 0, accepted: false, reason, detections: results[view].detections,
       detector_mean_confidence: results[view].confidence, stack_columns: columns[view], stray_groups: strays[view],
+      capture_source: captures[view]?.source ?? null, trusted: trusted[view], duplicate_of: duplicates[view] ?? null,
       image: results[view].image ?? null,
     }])),
     stacks: [{ physical_stack_id: "Per-photo model detections (unmatched)",
@@ -1091,7 +1179,7 @@ async function reconstructPair(request: Request, env: Bindings) {
 // Open mode (AUTH_MODE unset or "open") never reaches this code: jobs and idempotency are enforce-only, so the
 // installed 0.4.11 app keeps exactly today's answers until production is promoted. Observe mode reaches it for
 // every request that carries a credential.
-const PIPELINE_VERSION = "worker-0.4.14";
+const PIPELINE_VERSION = "worker-0.4.15";
 // How long a claimed job is left to its attempt before a retry may take it over. Cloudflare keeps waitUntil work alive
 // for at most 30 s after the client disconnects, so an attempt whose phone gave up (the app's 90 s receive timeout, or
 // a dropped link the edge noticed) is cancelled by about 120 s after the claim and writes nothing; one whose
@@ -1103,8 +1191,9 @@ const PIPELINE_VERSION = "worker-0.4.14";
 // and finishJob gives both the same stored answer (one extra inference, never two answers).
 const LEASE_MS = 150_000;
 // The job fingerprint covers the photos and what the upload asked for; jobs written before it have version 1
-// (the photo hashes alone) and are matched on the photos only, as they were. Version 3 adds the phone headings,
-// which decide the side check; a version 2 job is matched on its own version's fields.
+// (the photo hashes alone) and are matched on the photos only, as they were. Version 3 adds each view's capture
+// source, blocked flag and phone heading, which decide the side check and whether a reading can verify a stack; a
+// version 2 job is matched on its own version's fields.
 const FINGERPRINT_VERSION = 3;
 const CAS_RETRIES = 5;
 // latest.json: each lost round means another save moved it, so one round per save racing on the scan is enough
@@ -1375,7 +1464,10 @@ function stillProcessing(job: JobRecord) {
 async function requestIdentity(scan: ParsedScan, version = FINGERPRINT_VERSION) {
   const cellIds = Object.fromEntries(Object.entries(scan.cellIds).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)));
   const fields: unknown[] = [version, ...scan.hashes, scan.scanContract, Object.entries(cellIds)];
-  if (version >= 3) fields.push(VIEWS.map(view => scan.headings[view] ? [scan.headings[view]!.yaw_deg, scan.headings[view]!.yaw_session] : null));
+  if (version >= 3) fields.push(VIEWS.map(view => {
+    const { source, blocked, heading } = scan.captures[view];
+    return source === null && blocked === null && !heading ? null : [source, blocked, heading?.yaw_deg ?? null, heading?.yaw_session ?? null];
+  }));
   const fingerprint = toHex(await digestText(JSON.stringify(fields)));
   return { fingerprint, fingerprint_version: version, scan_contract: scan.scanContract, cell_ids: cellIds };
 }
@@ -1839,7 +1931,7 @@ async function routeEnforced(request: Request, env: Bindings, url: URL, mode: Au
 }
 
 export { base64, buildBlock, captureQuality, faceColumns, fuseCounts, fuseCells, medianBoxAspect, modelDiagnostics, readCellIds, readOptionalCellIds,
-  strayGroups,
+  strayGroups, boxOverlapScore, duplicateViews,
   sideCheck, spanColumns, walkLayers, worstView };
 
 export default {

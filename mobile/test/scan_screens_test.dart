@@ -20,6 +20,10 @@ import 'support/fake_server.dart';
 const _base = 'https://staging.example.test';
 
 class _Settings implements SettingsStore {
+  _Settings({this.gallery = true});
+
+  final bool gallery;
+
   @override
   Future<String> getBaseUrl() async => _base;
   @override
@@ -34,6 +38,10 @@ class _Settings implements SettingsStore {
   Future<String?> getHeightPilot() async => null;
   @override
   Future<void> setHeightPilot(String json) async {}
+  @override
+  Future<bool> getGalleryUploads() async => gallery;
+  @override
+  Future<void> setGalleryUploads(bool value) async {}
 }
 
 class _History extends HistoryDatabase {
@@ -342,12 +350,12 @@ void main() {
   });
 
   group('home screen', () {
-    Future<void> openHome(WidgetTester tester, FakeServer server) async {
+    Future<void> openHome(WidgetTester tester, FakeServer server, {bool gallery = true}) async {
       tallView(tester);
       await tester.pumpWidget(
         MaterialApp(
           home: HomeScreen(
-            settings: _Settings(),
+            settings: _Settings(gallery: gallery),
             history: history,
             pendingScans: pending,
             clientFor: clientFor(server),
@@ -415,6 +423,16 @@ void main() {
       await tester.tap(find.textContaining('GALLERY'));
       await tester.pumpAndSettle();
       expect(find.text('Upload photos'), findsOneWidget);
+    });
+
+    testWidgets('the gallery scan button is shown only with the developer switch on', (tester) async {
+      final server = FakeServer({
+        'GET /health': [reply(jobsHealth)],
+        'POST /v1/devices': [dropBeforeBody()],
+      });
+      await openHome(tester, server, gallery: false);
+      expect(find.textContaining('CAMERA'), findsOneWidget);
+      expect(find.textContaining('GALLERY'), findsNothing);
     });
 
     testWidgets('a phone the server says is pending cannot start a scan', (

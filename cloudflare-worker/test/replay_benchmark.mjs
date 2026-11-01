@@ -19,7 +19,7 @@ export const responseViews = saved => saved.views ?? saved.response?.views;
 
 /** One photo on its own, the way scripts/evaluate_labelled.py scores it: capture gate, then per-column retake reasons. */
 export function faceVerdict(w, detections, image) {
-  const columns = w.spanColumns(detections);
+  const columns = w.spanColumns(detections, image ?? null);
   const capture = w.captureQuality(columns, image?.width ?? null, image?.height ?? null, w.medianBoxAspect(detections));
   const face = w.faceColumns(columns, 'face');
   const flagged = face.filter(c => c.reason);
@@ -32,11 +32,18 @@ export function faceVerdict(w, detections, image) {
 }
 
 /** Three views through modelDiagnostics, exactly as the live Worker does after inference. */
-export function replayViews(w, views, headings = {}) {
+// captures: per view {source, blocked, heading} as the Worker reads it; saved responses carry none, so their readings
+// can never verify a stack (they replay as uploads of unknown provenance).
+export function replayViews(w, views, headings = {}, captures = {}) {
   const results = Object.fromEntries(VIEWS.map(v => [v, {
     count: views[v].detections.length, confidence: 0, detections: views[v].detections, image: views[v].image ?? null,
   }]));
-  return w.modelDiagnostics('replay', results, {}, ENV, 0, undefined, undefined, headings);
+  return w.modelDiagnostics('replay', results, {}, ENV, 0, undefined, undefined, headings, captures);
+}
+
+/** Captures for a synthetic case: guided camera stills (with the case's headings) or gallery uploads. */
+export function capturesFor(source, headings = {}) {
+  return Object.fromEntries(VIEWS.map(v => [v, { source, blocked: source === 'captured_still' ? false : null, heading: headings[v] ?? null }]));
 }
 
 export function blockSummary(result) {
@@ -52,21 +59,29 @@ export function blockSummary(result) {
 // ---- Synthetic faces (tier S). Columns 100 px wide and 100 px apart, layers at pitch 40 with 36 px boxes, in a frame
 // sized so every intact face passes the capture gate; only the counting rules decide.
 const PITCH = 40;
-export function syntheticFace(heights, { drop = [], short = [], merge = null } = {}) {
+// shift: moves the face inside the frame (another capture of the same face). cutBottom: the frame ends inside the
+// bottom row, which then has no full box (the img-30 class).
+export function syntheticFace(heights, { drop = [], short = [], merge = null, shift = 0, cutBottom = false } = {}) {
   const detections = [];
+  const dx = 37 * shift, dy = 11 * shift;
   heights.forEach((layers, i) => {
-    const x = merge !== null && i === merge + 1 ? 100 + merge * 100 + 30 : 100 + i * 100;
+    const x = (merge !== null && i === merge + 1 ? 100 + merge * 100 + 30 : 100 + i * 100) + dx;
     for (let k = 0; k < layers; k++) {
       if (drop.some(([col, layer]) => col === i && layer === k)) continue;
-      detections.push({ class: 'egg_tray', confidence: 0.9, x, y: 100 + (20 - layers + k) * PITCH, width: 100, height: 36 });
+      detections.push({ class: 'egg_tray', confidence: 0.9, x, y: 100 + (20 - layers + k) * PITCH + dy, width: 100, height: 36 });
     }
   });
+  if (cutBottom) {
+    // The last box of every column sits on the frame edge and the image ends there.
+    const height = Math.max(...detections.map(b => b.y + b.height / 2));
+    return { detections, image: { width: 100 * (heights.length + short.length) + 100 + dx, height } };
+  }
   // Short stacks (fewer than 3 trays) to the right of the face, standing on the same floor.
   short.forEach((layers, j) => {
     for (let k = 0; k < layers; k++) detections.push({ class: 'egg_tray', confidence: 0.9,
       x: 100 + (heights.length + j) * 100, y: 100 + (20 - layers + k) * PITCH, width: 100, height: 36 });
   });
-  return { detections, image: { width: 100 * (heights.length + short.length) + 100, height: 1000 } };
+  return { detections, image: { width: 100 * (heights.length + short.length) + 100 + dx, height: 1000 + dy } };
 }
 
 // Camera headings for a genuine walk-around in one session. Sign: positive yaw is a left (counter-clockwise) turn
@@ -78,10 +93,12 @@ const swap = { ...CAMERA, left: { yaw_deg: 90, yaw_session: 'syn' }, right: { ya
 const backAsLeft = { ...CAMERA, left: { yaw_deg: 180, yaw_session: 'syn' } };
 
 /**
- * Adversarial library. check:
+ * Adversarial library. Cases are camera scans unless they say `source: 'uploaded_photo'`. check:
  *   no_wrong_exact  a released `exact` total must equal the truth
  *   no_wrong_total  any released total must equal the truth
  *   withheld        no total at all
+ *   not_exact       anything but `exact` (the evidence cannot support it, whatever the total)
+ *   exact_ok        `exact` and equal to the truth (exact must stay reachable)
  * fixed_by names the plan phase expected to make a case pass when it fails today (null = must pass now). stretch is a
  * stricter check the release contract does not require yet (an estimate may be wrong), with the phase meant to meet it.
  */
@@ -122,14 +139,29 @@ export function adversarialCases(registry) {
       views: { straight: S([20, 20, 20]), left: S([20, 20, 20]), right: S([20, 20, 20]) },
       headings: backAsLeft, truth: 180, check: 'withheld', fixed_by: null },
     { id: 'S12 front re-shot as LEFT, gallery (no heading), 4x2 block', views: { straight: S([20, 20, 20, 20]), left: S([20, 20, 20, 20]), right: S([20, 20]) },
-      headings: {}, truth: 160, check: 'withheld', fixed_by: null },
+      headings: {}, source: 'uploaded_photo', truth: 160, check: 'withheld', fixed_by: null },
     { id: 'S13 front re-shot as LEFT with the phone turned only 10 degrees', views: { straight: S([20, 20, 20]), left: S([20, 20, 20]), right: S([20, 20]) },
       headings: { ...CAMERA, left: { yaw_deg: -10, yaw_session: 'syn' } }, truth: 120, check: 'withheld', fixed_by: null },
     { id: 'S14 side photos of another block, phone really turned (4x1 block, 3-deep neighbour)',
       views: { straight: S([20, 20, 20, 20]), left: S([20, 20, 20]), right: S([20, 20, 20]) },
       headings: CAMERA, truth: 80, check: 'no_wrong_total', fixed_by: 'F' },
-    { id: 'R01 MUTAA L-100: three front photos, gallery', views: trioFromRaw('mutaa:L-100'), headings: {},
+    { id: 'S15 one photo sent as all three views from the camera (copies, not three captures)',
+      views: { straight: S([20]), left: S([20]), right: S([20]) }, headings: CAMERA, truth: 20, check: 'not_exact', fixed_by: null },
+    { id: 'S16 one photo sent as all three views from the gallery', views: { straight: S([20]), left: S([20]), right: S([20]) },
+      headings: {}, source: 'uploaded_photo', truth: 20, check: 'not_exact', fixed_by: null },
+    { id: 'S17 one-deep 2x1 block, gallery photos', views: { straight: S([20, 20]), left: S([20], { shift: 1 }), right: S([20], { shift: 2 }) },
+      headings: {}, source: 'uploaded_photo', truth: 40, check: 'not_exact', fixed_by: null },
+    { id: 'S18 genuine 2x1 block, camera walk-around: every stack seen by two photos',
+      views: { straight: S([20, 20]), left: S([20], { shift: 1 }), right: S([20], { shift: 2 }) },
+      headings: CAMERA, truth: 40, check: 'exact_ok', fixed_by: null },
+    { id: 'S19 bottom tray cut by the frame on a corner stack, the side photo agreeing (img-30 class)',
+      views: { straight: S([20, 20], { cutBottom: true }), left: S([20], { shift: 1 }), right: S([20], { shift: 2 }) },
+      headings: CAMERA, truth: 40, check: 'not_exact', fixed_by: null },
+    { id: 'R01 MUTAA L-100: three front photos, gallery', views: trioFromRaw('mutaa:L-100'), headings: {}, source: 'uploaded_photo',
       truth: 100, check: 'no_wrong_total', fixed_by: null },
+    { id: 'R04 MUTAA L-80 front (stack 4 bottom cut by the frame, read 19) with side photos agreeing on 20 and 19',
+      views: { ...trioFromRaw('mutaa:L-80'), left: S([20], { shift: 1 }), right: S([19], { shift: 2 }) },
+      headings: CAMERA, truth: 80, check: 'no_wrong_exact', fixed_by: null },
     { id: 'R02 MUTAA L-100 sides sent with camera headings of a real walk-around', views: trioFromRaw('mutaa:L-100'), headings: CAMERA,
       truth: 100, check: 'no_wrong_total', fixed_by: 'F' },
     { id: 'R03 MUTAA M16-FAR: neighbouring block in the front photo', views: trioFromRaw('mutaa:M16-FAR'), headings: CAMERA,
@@ -140,6 +172,8 @@ export function adversarialCases(registry) {
 export function judge(check, summary, truth) {
   const released = summary.total !== null;
   if (check === 'withheld') return !released;
+  if (check === 'not_exact') return summary.status !== 'exact';
+  if (check === 'exact_ok') return summary.status === 'exact' && summary.total === truth;
   if (check === 'no_wrong_total') return !released || summary.total === truth;
   return summary.status !== 'exact' || summary.total === truth;
 }
@@ -171,7 +205,7 @@ export function runBenchmark(w) {
   });
 
   const adversarial = adversarialCases(registry).map(c => {
-    const s = blockSummary(replayViews(w, c.views, c.headings));
+    const s = blockSummary(replayViews(w, c.views, c.headings, capturesFor(c.source ?? 'captured_still', c.headings)));
     return { id: c.id, check: c.check, fixed_by: c.fixed_by, truth: c.truth, ...s, pass: judge(c.check, s, c.truth),
       stretch: c.stretch ? { ...c.stretch, pass: judge(c.stretch.check, s, c.truth) } : null };
   });

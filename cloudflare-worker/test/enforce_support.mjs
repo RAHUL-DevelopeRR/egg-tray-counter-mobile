@@ -53,12 +53,13 @@ export const postScan = (env, scanId, headers, seed = 0, options = {}) =>
 const sha = (data) => createHash('sha256').update(data).digest('hex');
 // The job identity the Worker writes (fingerprint version 2): SHA-256 of the JSON array
 // [2, left, right, straight, scan_contract, [[view, cell id], ...] sorted by view].
-// Version 3 (0.4.14) adds the phone headings per view ([yaw, session] or null); version 2 (0.4.12-0.4.13) has none.
+// Version 3 (0.4.14) adds each view's capture [source, blocked, yaw, session] or null; version 2 (0.4.12-0.4.13) has
+// none. scanForm's headings send source 'captured_still' with no blocked flag.
 export function jobIdentity(seed = 0, {contract = 'model_spatial_v1', cells = {}, headings = {}, version = 3} = {}) {
   const [left, right, straight] = photoBytes(seed).map(sha);
   const cellIds = Object.fromEntries(Object.entries(cells).map(([view, id]) => [view, id.trim().toUpperCase()]).sort(([a], [b]) => (a < b ? -1 : 1)));
   const fields = [version, left, right, straight, contract, Object.entries(cellIds)];
-  if (version >= 3) fields.push(['left', 'right', 'straight'].map(view => headings[view] ?? null));
+  if (version >= 3) fields.push(['left', 'right', 'straight'].map(view => headings[view] ? ['captured_still', null, ...headings[view]] : null));
   return {image_hashes: {left, right, straight}, fingerprint: sha(JSON.stringify(fields)),
     fingerprint_version: version, scan_contract: contract, cell_ids: cellIds};
 }

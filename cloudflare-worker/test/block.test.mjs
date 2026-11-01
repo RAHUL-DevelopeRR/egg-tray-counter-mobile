@@ -43,17 +43,30 @@ test('left/right depth disagreement and corner conflict withhold the total', () 
   assert.equal(conflict.total_trays, null);
 });
 
-test('model path returns a block contract with a computed total for a one-stack scene', async t => {
+// Three different camera captures of one stack, each with its own framing (copies of one photo would be one capture).
+const oneStackScan = async (t, capture) => {
   t.mock.method(console, 'log', () => {});
-  t.mock.method(globalThis, 'fetch', async () => Response.json({predictions: trayShaped(column(100, 20))}));
+  let call = 0;
+  t.mock.method(globalThis, 'fetch', async () => {
+    const shift = 120 * call++;
+    return Response.json({predictions: trayShaped(column(250 + shift, 20, {pitch: 40})).map(b => ({...b, y: b.y + shift / 6})),
+      image: {width: 800, height: 1000}});
+  });
   const form = new FormData();
   form.set('scan_contract', 'model_spatial_v1');
   ['left', 'right', 'straight'].forEach((view, i) => form.set(view,
     new File([new Uint8Array([255, 216, 255, i])], `${view}.jpg`, {type: 'image/jpeg'})));
+  const yaw = {straight: 0, left: -90, right: 90};
+  if (capture) for (const view of ['left', 'right', 'straight']) form.set(`${view}_capture`,
+    JSON.stringify({source: capture, blocked: false, yaw_deg: yaw[view], yaw_session: 'walk1'}));
   const response = await worker.fetch(new Request('https://local/v1/scans/count', {method: 'POST', body: form}),
     {MODEL_ID: 'projec-mutta/2', CONFIDENCE: '35', OVERLAP: '50', EGGS_PER_TRAY: '30', ROBOFLOW_API_KEY: 'test-only'});
   assert.equal(response.status, 200);
-  const result = await response.json();
+  return response.json();
+};
+
+test('model path returns a block contract with a computed total for a one-stack scene', async t => {
+  const result = await oneStackScan(t, 'captured_still');
   assert.equal(result.block.contract, 'block_model_v1');
   assert.deepEqual([result.block.width, result.block.depth, result.block.total_trays, result.block.total_eggs], [1, 1, 20, 600]);
   assert.equal(result.block.fully_observed, true);
@@ -62,6 +75,17 @@ test('model path returns a block contract with a computed total for a one-stack 
   assert.equal(result.total_trays, null);   // legacy top-level field unchanged for the installed APK
   assert.equal(result.accepted, false);
   assert.equal(result.views.straight.stack_columns[0].span_count, 20);
+  assert.deepEqual(['straight', 'left', 'right'].map(v => [result.views[v].capture_source, result.views[v].trusted]),
+    [['captured_still', true], ['captured_still', true], ['captured_still', true]]);
+});
+
+test('only guided camera captures verify a stack: gallery photos or no provenance give an estimate, never exact', async t => {
+  for (const capture of ['uploaded_photo', null]) {
+    const result = await oneStackScan(t, capture);
+    assert.equal(result.block.total_trays, 20, String(capture));
+    assert.equal(result.block.status, 'estimated', String(capture));
+    assert.equal(result.views.straight.trusted, false);
+  }
 });
 
 test('one inflated-pitch column does not recess the rest; front-group median is the reference', () => {
@@ -248,4 +272,50 @@ test('groups of one or two boxes are reported, not counted, and keep a block fro
   const block = buildBlock(spanColumns(loose), faceOf(20), faceOf(20), {straight: 1});
   assert.equal(block.total_trays, 40); assert.equal(block.status, 'estimated');
   assert.ok(block.ambiguities[0].reason.startsWith('STRAIGHT: 1 group(s) of one or two boxes'), block.ambiguities[0].reason);
+});
+
+// ---- 2026-11-01 plan Phase K1: doubts that need the frame size.
+test('a stack ending within one box height of the frame edge, or touching its side, is not verified', () => {
+  const frame = {width: 500, height: 1000};
+  // Boxes 36 px tall from y 82 to 878: over a full box height of room at both ends.
+  const roomy = spanColumns([...tray(20, {x: 150}), ...tray(20, {x: 300})], frame);
+  assert.deepEqual(roomy.map(c => c.doubts), [[], []]);
+  // The same stacks in a frame that ends 12 px below the bottom box (img-30: 0.0 box heights).
+  const cut = spanColumns([...tray(20, {x: 150}), ...tray(20, {x: 300})], {width: 500, height: 890});
+  assert.deepEqual(cut.map(c => c.doubts), [['end_at_frame_edge'], ['end_at_frame_edge']]);
+  // A stack whose boxes reach the left edge may be part of a stack.
+  const side = spanColumns([...tray(20, {x: 40}), ...tray(20, {x: 300})], frame);
+  assert.deepEqual(side.map(c => c.doubts), [['cut_at_frame_side'], []]);
+  // Without a frame size (older callers) none of these is raised.
+  assert.deepEqual(spanColumns([...tray(20, {x: 150}), ...tray(20, {x: 300})]).map(c => c.doubts), [[], []]);
+});
+
+test('a column with a much larger layer pitch than the face is a nearer stack or another block (M16-FAR)', () => {
+  const cols = spanColumns([...tray(20), ...tray(20, {x: 200}), ...tray(14, {x: 300, pitch: 56, height: 50})]);
+  assert.deepEqual(cols.map(c => c.doubts), [[], [], ['pitch_differs']]);
+});
+
+test('the short capture field wins over oversized evidence, so a heading is never lost to the evidence limit', async t => {
+  t.mock.method(console, 'log', () => {});
+  let call = 0;
+  t.mock.method(globalThis, 'fetch', async () => {
+    const shift = 120 * call++;
+    return Response.json({predictions: trayShaped(column(250 + shift, 20, {pitch: 40})).map(b => ({...b, y: b.y + shift / 6})),
+      image: {width: 800, height: 1000}});
+  });
+  const form = new FormData();
+  form.set('scan_contract', 'model_spatial_v1');
+  const yaw = {straight: 0, left: -90, right: 90};
+  ['left', 'right', 'straight'].forEach((view, i) => {
+    form.set(view, new File([new Uint8Array([255, 216, 255, i])], `${view}.jpg`, {type: 'image/jpeg'}));
+    const evidence = {source: 'captured_still', blocked: false, yaw_deg: yaw[view], yaw_session: 'w', checks: 'x'.repeat(20000)};
+    form.set(`${view}_constraint_evidence`, JSON.stringify(evidence));
+    if (view !== 'right') form.set(`${view}_capture`, JSON.stringify({source: 'captured_still', blocked: false, yaw_deg: yaw[view], yaw_session: 'w'}));
+  });
+  const response = await worker.fetch(new Request('https://local/v1/scans/count', {method: 'POST', body: form}),
+    {MODEL_ID: 'projec-mutta/2', CONFIDENCE: '35', OVERLAP: '50', EGGS_PER_TRAY: '30', ROBOFLOW_API_KEY: 'test-only'});
+  const result = await response.json();
+  // LEFT has the short field; RIGHT has only the 20 kB evidence, which is past the limit, so it reads as unknown.
+  assert.equal(result.block.side_check.left.status, 'turned');
+  assert.deepEqual([result.views.left.trusted, result.views.right.trusted, result.views.right.capture_source], [true, false, null]);
 });

@@ -53,3 +53,21 @@ for (const c of adversarialCases(registry)) {
     assert.ok(result.stretch.pass, `got ${result.status} ${result.total}, truth ${c.truth}`);
   });
 }
+
+test('the duplicate-capture score separates re-encodes of one photo from different captures (saved detections)', () => {
+  const face = id => {
+    const f = registry.faces.find(x => x.id === id);
+    const v = responseViews(loadJson(f.detections.file))[f.detections.view];
+    return {detections: v.detections, image: v.image ?? f.image};
+  };
+  for (const f of registry.faces.filter(x => x.same_photo_as)) {
+    assert.ok(w.boxOverlapScore(face(f.id), face(f.same_photo_as)) >= 0.94, f.id);
+  }
+  // Different captures of one block (L-100: img-19, img-21, img-24; G03: img-30 and img-31) stay separate.
+  for (const [a, b] of [['img-19', 'img-21'], ['img-19', 'img-24'], ['img-21', 'img-24'], ['img-30', 'img-31']]) {
+    assert.ok(w.boxOverlapScore(face(a), face(b)) < 0.6, `${a} ${b}`);
+  }
+  const l100 = Object.fromEntries(VIEWS.map(v => [v, face({straight: 'img-19', left: 'img-21', right: 'img-24'}[v])]));
+  assert.deepEqual(w.duplicateViews(l100), {});
+  assert.deepEqual(w.duplicateViews({straight: face('img-30'), left: face('mutaa:L-80:straight'), right: face('img-31')}), {left: 'straight'});
+});

@@ -1,5 +1,68 @@
 # Progress
 
+## 2026-11-01 (later) - Plan 2: capture provenance and frame doubts (Worker 0.4.15, app 0.4.15+26) (Claude Code)
+
+**Plan 2** (`C:/Users/rahul/.claude/plans/spicy-growing-flame.md`, approved by the user) answers "more client-side
+constraints, and a real 3D counter". It came from a 10-agent workflow: 2 repo readers, 3 web researchers, 3 designs,
+a critic and a synthesis. Its key verdicts:
+- Every phone gate needs a server mirror.
+- A "3D counter" means an X x Y grid where every stack carries independent readings, plus an independent footprint
+  source.
+- ARCore on the Redmi Note 9 Pro: certified, but with no Depth API (official device list), so AR is optional.
+- No on-device detector: a 720G is too slow, YOLO is AGPL, and it would not be an independent reading.
+- No point-cloud or feed-forward 3D.
+
+Committed first: 5a71e85 (the 0.4.14 work).
+
+**J: provenance** (Worker `readCapture`, `duplicateViews` / `boxOverlapScore`, `buildBlock` `trusted`):
+- **Trust rule.** A reading verifies a stack only from a `captured_still` that was not blocked, with a `turned` side
+  for side views, and not a copy of an earlier view.
+- **Holes closed (measured).** Before this, one photo sent three times gave `exact`, from both the gallery and the
+  camera.
+- **Duplicate score on saved detections.** Re-encodes score 0.944-0.995; different captures of one block score
+  0.19-0.47. The threshold is 0.8.
+- **Capture field.** `<view>_capture` is read first, so the 8,000-character evidence limit can no longer drop the
+  heading. R2 stores `capture_source` / `capture_blocked` metadata and `evidence.json` beside each photo.
+  Fingerprint version 3 covers the capture.
+
+**K1: frame doubts** (`spanColumns(detections, frame)`), on the 82 accepted columns:
+- `end_at_frame_edge` (within one box height of the frame edge) fires only on img-30 and L-80.
+- `cut_at_frame_side` fires only on img-08's edge stack (correct count, now unverifiable).
+- `pitch_differs` (over 1.2x the face pitch) never fires.
+
+**No distance refusal yet.** Pixel pitch does not separate good faces (22.5-25 px) from W05 (26 px, wrong). The
+threshold waits for the distance ladder (plan G).
+
+**App 0.4.15+26:**
+- The gallery button is behind Settings > "Gallery scans (testing only)", off by default.
+- Resume without a camera refuses, unless a result is already kept on the phone or the switch is on.
+- The scan form adds `<view>_capture` (`ApiClient.captureField`).
+
+**Replay** (`reports/replay-phase-j-20261101`):
+- Adversarial: 22/24 pass. The 2 failures are S14 and R02 (another block's sides), which need Phase F.
+- New cases S15-S19 and R04 pass, including S18, a genuine 2x1 camera walk-around that is still `exact` 40.
+- Saved trios: 0 wrong releases.
+
+**Tests (measured).**
+- Worker: 167 tests, 161 pass, 0 fail, 6 todo (the planned E, F and H cases).
+- Flutter: 179/179 on the full run. Analyze is clean after a one-line style fix; the affected suites were re-run
+  (51/51).
+
+**Sessions proposed (cards, not started):**
+- E: a detector-independent pixel counter, offline.
+- K2: the on-phone layer signal, offline.
+
+**Not done.**
+- No deploy or install: staging is still ef7c1dd3 (0.4.12), and the phone has 0.4.12.
+- The user's blind counts (D2).
+- Phases F, G, L, M, N, H and O.
+
+**Next.**
+1. F, the blind declaration: Worker `block_declaration` reader and `confirmed` status, plus an app pane before
+   upload.
+2. With approval: deploy 0.4.15 to staging (`--env staging` only), install APK 0.4.15 on the Redmi, and check the turn
+   sign on a walk-around.
+
 ## 2026-11-01 - plan to exact counting; Phases A, B, C, D1 built and tested locally (Claude Code)
 
 **The plan.** `C:/Users/rahul/.claude/plans/spicy-growing-flame.md`, approved by the user. It came from a 12-agent

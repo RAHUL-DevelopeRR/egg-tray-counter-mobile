@@ -518,6 +518,24 @@ class ApiClient {
   static Duration _backoffAfter(int posts) =>
       _backoff[min(posts - 1, _backoff.length - 1)];
 
+  /// The fields of a view's constraint evidence that decide whether the server
+  /// may trust its reading: how it was taken, whether a live check blocked it,
+  /// and the phone heading. Null when the evidence has none of them.
+  static String? captureField(String evidence) {
+    final Object? decoded;
+    try {
+      decoded = jsonDecode(evidence);
+    } on FormatException {
+      return null;
+    }
+    if (decoded is! Map<String, dynamic>) return null;
+    final capture = {
+      for (final key in const ['source', 'blocked', 'yaw_deg', 'yaw_session'])
+        if (decoded[key] != null) key: decoded[key],
+    };
+    return capture.isEmpty ? null : jsonEncode(capture);
+  }
+
   Future<FormData> _scanForm(ScanSession session) async => FormData.fromMap({
     'scan_id': session.scanId,
     'scan_contract': 'model_spatial_v1',
@@ -527,6 +545,10 @@ class ApiClient {
     // the extra fields, so uploads stay compatible either way.
     for (final entry in session.constraintEvidence.entries)
       '${entry.key}_constraint_evidence': entry.value,
+    // The short capture record (source, blocked, heading) the server needs to
+    // trust a reading, kept apart from the full evidence and its size limit.
+    for (final entry in session.constraintEvidence.entries)
+      '${entry.key}_capture': ?captureField(entry.value),
     'left': await MultipartFile.fromFile(
       session.pathFor(CaptureView.left)!,
       filename: 'left.jpg',

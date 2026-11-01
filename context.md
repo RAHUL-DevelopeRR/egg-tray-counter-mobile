@@ -1,3 +1,17 @@
+> 2026-11-01 (latest): Plan 2 approved (C:/Users/rahul/.claude/plans/spicy-growing-flame.md): stricter client
+> constraints and a "3D counter".
+> - "3D counter" here means an X x Y grid where every stack carries independent readings, plus an independent footprint
+>   source (declaration, elevated view or AR). It does not mean point clouds: those failed on these photos.
+> - Every phone gate gets a server mirror. The server is the trust boundary.
+> - ARCore: the Redmi Note 9 Pro is ARCore-certified **without the Depth API** (official list). AR is optional, never
+>   required for `exact`.
+> - Done (local, not deployed): J (camera-only verified readings, copies count once, short capture field, evidence
+>   archived) and K1 (frame-edge, frame-side and pitch doubts); Worker 0.4.15, app 0.4.15+26 (gallery button behind a
+>   developer switch).
+> - Proposed as separate sessions: E (detector-independent pixel counter, offline) and K2 (on-phone layer signal,
+>   offline).
+> - Next here: F (blind operator declaration).
+
 > 2026-11-01 (latest): plan for "100% counting on the 3D backend" from the existing photos only
 > (C:/Users/rahul/.claude/plans/spicy-growing-flame.md, approved by the user).
 > - Decision: "100%" is a contract about what the backend releases, not a promise for every photo.

@@ -185,7 +185,7 @@ Jobs:
   sorted by view; jobs store `fingerprint_version: 2`, `scan_contract`, `cell_ids`. Older jobs without these
   fields replay for the same photos whatever metadata is sent.
 - `PIPELINE_VERSION = worker-0.4.12` (`worker-0.4.13` from the side-face check below, `worker-0.4.14` from the release
-  contract at the end). A failure after a lost lease returns the other attempt's stored
+  contract, `worker-0.4.15` from capture provenance, both at the end). A failure after a lost lease returns the other attempt's stored
   result (200) or 202 if it is still running; `job.status` says `failed` only when the failure was stored.
 - A missing `scan_id` is still minted by the server (no idempotency for such a request).
 
@@ -302,3 +302,66 @@ covered the top trays of two stacks, and the bottom tray, cut by the frame edge,
     stack must be entered.
 - **Consequence.** Until a second reading exists for front-middle stacks (plan Phase E), blocks wider than two
   stacks are `estimated`, never `exact`.
+
+## Capture provenance and frame doubts (0.4.15, 2026-11-01)
+
+Plan: `C:/Users/rahul/.claude/plans/spicy-growing-flame.md` (Plan 2, phases J and K1). Measurements are in
+`reports/replay-phase-j-20261101`.
+
+**Reason.** Two holes in 0.4.14:
+- **One photo counted three times gave `exact`.** A copy or re-encode has a new sha256, so the duplicate-photo
+  check let it through.
+- **Gallery photos skip every live check but could still verify a stack.**
+
+Separately, every frame-cut stack end (img-30, L-80) was accepted.
+
+**Trusted readings.** A reading may verify a stack only when all of these hold (`views.<view>.trusted`):
+- its capture source is `captured_still`;
+- the phone did not block it (`blocked: false`);
+- for a side, `side_check` is `turned`;
+- it is not a copy of an earlier view.
+
+Readings carry `trusted`. Untrusted readings still count trays, but they cannot verify, so the block is an estimate.
+Responses replayed from storage carry no provenance and are never `exact`.
+
+**Capture field.** `<view>_capture` is a short JSON object (`source`, `blocked`, `yaw_deg`, `yaw_session`, at most
+1,000 characters).
+- Apps from 0.4.15 send it.
+- The Worker reads it first, then falls back to `<view>_constraint_evidence`, which is limited to 8,000 characters.
+- The provenance is self-reported. It stops honest mistakes, not a modified app.
+
+**Archive.**
+- Each photo's R2 metadata adds `capture_source` and `capture_blocked`.
+- The full constraint evidence, up to 64,000 characters, is stored as `scans/<id>/<view>/evidence.json`.
+
+**Job fingerprint version 3** now covers each view's `[source, blocked, yaw, session]`. 0.4.14 never deployed, so no
+stored version 3 job uses the earlier definition.
+
+**Copies count once** (`views.<view>.duplicate_of`, plus an ambiguity entry). Two views are one capture when their
+boxes overlap almost exactly in frame-relative coordinates (score at least 0.8: the median best IoU, taken both ways,
+the lower one). Measured on saved detections:
+- re-encodes of one photo: 0.944-0.995;
+- the same photo or a near-identical burst: 0.952-0.976;
+- genuinely different captures of one block: 0-0.52.
+
+**Frame doubts** (`stack_columns[].doubts`, which need the image size):
+- **`end_at_frame_edge`:** a column's top or bottom box lies within one box height of the frame edge. img-30 and L-80
+  have 0.07 / 0.00 box heights; every correct accepted face has at least 2.0. On the 82 accepted columns it fires
+  only on img-30 and L-80.
+- **`cut_at_frame_side`:** a column touches the left or right edge. It fires only on the edge stack of img-08 (the same
+  photo as img-23), whose count is correct.
+- **`pitch_differs`:** a column's pitch is over 1.2x the face's. It never fires on an accepted face.
+
+A doubt only stops a reading from verifying a stack; it never refuses the count.
+
+**App 0.4.15.**
+- The gallery scan button is shown only when Settings > "Gallery scans (testing only)" is on.
+- Resume no longer falls back to the gallery without a camera, unless a result is already kept on the phone or the
+  switch is on.
+- The scan form adds `<view>_capture`.
+
+**Distance.** There is no distance refusal yet.
+- Pitch in pixels alone does not separate good faces from bad ones: correct faces read at 22.5-25 px, while W05 read
+  wrong at 26 px.
+- The threshold waits for the distance ladder (plan G).
+- W05 is not `exact` anyway, because its cells are gap-filled.
