@@ -1277,7 +1277,8 @@ function assembleGrid(block: ReturnType<typeof blockResult>, inputs: GridInputs)
   const total = block.total_trays === null || anyUnknown ? null : cells.reduce((s, g) => s + (g.z_layers ?? 0), 0);
   let status = block.status;
   let basis: string[] = [];
-  if (conflicts.length) status = "conflict";
+  // A refused photo stays needs_view: its faces are not measurements to compare a declaration or view with.
+  if (conflicts.length && status !== "needs_view") status = "conflict";
   else if (status === "estimated") {
     const visibleVerified = block.single_reading_cells.length === 0 && block.ambiguities.length === 0 && demoted.length === 0;
     const unresolved = cells.some(g => g.status === "computed" || g.status === "unknown");
@@ -1289,7 +1290,7 @@ function assembleGrid(block: ReturnType<typeof blockResult>, inputs: GridInputs)
   }
   if (status !== "confirmed") basis = [];
   const suggested = cells.some(g => g.status === "computed" || g.status === "unknown") && !topView ? ["elevated"] : [];
-  return { grid, conflicts, total: status === "conflict" ? null : total, status, confirmed_basis: basis,
+  return { grid, conflicts, total: status === "conflict" || status === "needs_view" ? null : total, status, confirmed_basis: basis,
     declaration_agrees: declarationAgrees, corner_agrees: cornerAgrees, top_view: topSummary, suggested_views: suggested };
 }
 

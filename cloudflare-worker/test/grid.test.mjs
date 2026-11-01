@@ -153,3 +153,10 @@ test('end to end: a camera scan with a declaration and a CORNER photo returns th
   assert.equal(block.inventory.eligible_egg_trays.basis, 'declared');
   assert.match(block.grid_note, /not a point cloud/);
 });
+
+test('a refused photo keeps needs_view: a declaration or top view is not compared with faces that are not measurements', () => {
+  const refused = {...verified3x2(), status: 'needs_view', total_trays: null};
+  const result = assembleGrid(refused, {declaration: declaration({x: 4}), topView: null, corner: null});
+  assert.equal(result.status, 'needs_view'); assert.equal(result.total, null);
+  assert.equal(result.declaration_agrees, false);   // still recorded for the operator
+});

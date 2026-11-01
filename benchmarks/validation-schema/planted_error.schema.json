@@ -1,0 +1,17 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "Planted physical error, sealed before the scan",
+ "type": "object",
+ "required": ["block_id", "planted_at", "planter", "kind", "cells", "sealed"],
+ "properties": {
+  "block_id": {"type": "string", "maxLength": 64},
+  "planted_at": {"type": "string", "format": "date-time"},
+  "planter": {"type": "string", "maxLength": 80},
+  "kind": {"enum": ["remove_top_tray_front_middle", "remove_interior_stack", "lower_interior_stack_by_one", "empty_tray_mid_stack", "other"]},
+  "cells": {"type": "array", "items": {"type": "object", "required": ["x", "y"],
+   "properties": {"x": {"type": "integer", "minimum": 0}, "y": {"type": "integer", "minimum": 0}, "trays_changed": {"type": "integer"}}}},
+  "sealed": {"const": true},
+  "opened_at": {"type": "string", "format": "date-time"},
+  "notes": {"type": "string", "maxLength": 1000}
+ }
+}
