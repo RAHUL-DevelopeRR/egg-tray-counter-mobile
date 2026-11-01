@@ -34,12 +34,16 @@ export function faceVerdict(w, detections, image) {
 /** Three views through modelDiagnostics, exactly as the live Worker does after inference. */
 // captures: per view {source, blocked, heading} as the Worker reads it; saved responses carry none, so their readings
 // can never verify a stack (they replay as uploads of unknown provenance).
-export function replayViews(w, views, headings = {}, captures = {}) {
+export function replayViews(w, views, headings = {}, captures = {}, extras = {}) {
   const results = Object.fromEntries(VIEWS.map(v => [v, {
     count: views[v].detections.length, confidence: 0, detections: views[v].detections, image: views[v].image ?? null,
   }]));
-  return w.modelDiagnostics('replay', results, {}, ENV, 0, undefined, undefined, headings, captures);
+  return w.modelDiagnostics('replay', results, {}, ENV, 0, undefined, undefined, headings, captures, extras);
 }
+
+/** A blind operator declaration for a synthetic case (docs/GRID_CONTRACT_0.5.0.md). */
+export const declared = (x, y, over = {}) => ({ declaration: { x, y, interior: 'full', missing_cells: [], partial_stacks: [],
+  cover_trays: 'unknown', occupancy: 'unknown', reference_height: null, operator: 'replay', declared_at: null, ...over } });
 
 /** Captures for a synthetic case: guided camera stills (with the case's headings) or gallery uploads. */
 export function capturesFor(source, headings = {}) {
@@ -99,6 +103,7 @@ const backAsLeft = { ...CAMERA, left: { yaw_deg: 180, yaw_session: 'syn' } };
  *   withheld        no total at all
  *   not_exact       anything but `exact` (the evidence cannot support it, whatever the total)
  *   exact_ok        `exact` and equal to the truth (exact must stay reachable)
+ *   not_confirmed   anything but `confirmed` (a declaration cannot stand in for missing photo evidence)
  * fixed_by names the plan phase expected to make a case pass when it fails today (null = must pass now). stretch is a
  * stricter check the release contract does not require yet (an estimate may be wrong), with the phase meant to meet it.
  */
@@ -144,7 +149,7 @@ export function adversarialCases(registry) {
       headings: { ...CAMERA, left: { yaw_deg: -10, yaw_session: 'syn' } }, truth: 120, check: 'withheld', fixed_by: null },
     { id: 'S14 side photos of another block, phone really turned (4x1 block, 3-deep neighbour)',
       views: { straight: S([20, 20, 20, 20]), left: S([20, 20, 20]), right: S([20, 20, 20]) },
-      headings: CAMERA, truth: 80, check: 'no_wrong_total', fixed_by: 'F' },
+      headings: CAMERA, truth: 80, check: 'no_wrong_total', fixed_by: 'F: needs the blind declaration (S14F); no photo-only fix' },
     { id: 'S15 one photo sent as all three views from the camera (copies, not three captures)',
       views: { straight: S([20]), left: S([20]), right: S([20]) }, headings: CAMERA, truth: 20, check: 'not_exact', fixed_by: null },
     { id: 'S16 one photo sent as all three views from the gallery', views: { straight: S([20]), left: S([20]), right: S([20]) },
@@ -157,13 +162,21 @@ export function adversarialCases(registry) {
     { id: 'S19 bottom tray cut by the frame on a corner stack, the side photo agreeing (img-30 class)',
       views: { straight: S([20, 20], { cutBottom: true }), left: S([20], { shift: 1 }), right: S([20], { shift: 2 }) },
       headings: CAMERA, truth: 40, check: 'not_exact', fixed_by: null },
+    { id: 'S14F S14 with the blind declaration (4 wide, 1 deep): the other block\'s sides contradict it',
+      views: { straight: S([20, 20, 20, 20]), left: S([20, 20, 20]), right: S([20, 20, 20]) },
+      headings: CAMERA, extras: declared(4, 1), truth: 80, check: 'withheld', fixed_by: null },
+    { id: 'S20 3x2 block declared interior-full: front-middle seen once, so the declaration cannot confirm',
+      views: { straight: S([20, 20, 20]), left: S([20, 20]), right: S([20, 20]) },
+      headings: CAMERA, extras: declared(3, 2), truth: 120, check: 'not_confirmed', fixed_by: null },
     { id: 'R01 MUTAA L-100: three front photos, gallery', views: trioFromRaw('mutaa:L-100'), headings: {}, source: 'uploaded_photo',
       truth: 100, check: 'no_wrong_total', fixed_by: null },
     { id: 'R04 MUTAA L-80 front (stack 4 bottom cut by the frame, read 19) with side photos agreeing on 20 and 19',
       views: { ...trioFromRaw('mutaa:L-80'), left: S([20], { shift: 1 }), right: S([19], { shift: 2 }) },
       headings: CAMERA, truth: 80, check: 'no_wrong_exact', fixed_by: null },
     { id: 'R02 MUTAA L-100 sides sent with camera headings of a real walk-around', views: trioFromRaw('mutaa:L-100'), headings: CAMERA,
-      truth: 100, check: 'no_wrong_total', fixed_by: 'F' },
+      truth: 100, check: 'no_wrong_total', fixed_by: 'F: needs the blind declaration (R02F); no photo-only fix' },
+    { id: 'R02F R02 with the blind declaration (5 wide, 1 deep): the front photos sent as sides contradict it',
+      views: trioFromRaw('mutaa:L-100'), headings: CAMERA, extras: declared(5, 1), truth: 100, check: 'withheld', fixed_by: null },
     { id: 'R03 MUTAA M16-FAR: neighbouring block in the front photo', views: trioFromRaw('mutaa:M16-FAR'), headings: CAMERA,
       truth: null, check: 'withheld', fixed_by: null },
   ];
@@ -174,6 +187,7 @@ export function judge(check, summary, truth) {
   if (check === 'withheld') return !released;
   if (check === 'not_exact') return summary.status !== 'exact';
   if (check === 'exact_ok') return summary.status === 'exact' && summary.total === truth;
+  if (check === 'not_confirmed') return summary.status !== 'confirmed';
   if (check === 'no_wrong_total') return !released || summary.total === truth;
   return summary.status !== 'exact' || summary.total === truth;
 }
@@ -205,7 +219,7 @@ export function runBenchmark(w) {
   });
 
   const adversarial = adversarialCases(registry).map(c => {
-    const s = blockSummary(replayViews(w, c.views, c.headings, capturesFor(c.source ?? 'captured_still', c.headings)));
+    const s = blockSummary(replayViews(w, c.views, c.headings, capturesFor(c.source ?? 'captured_still', c.headings), c.extras ?? {}));
     return { id: c.id, check: c.check, fixed_by: c.fixed_by, truth: c.truth, ...s, pass: judge(c.check, s, c.truth),
       stretch: c.stretch ? { ...c.stretch, pass: judge(c.stretch.check, s, c.truth) } : null };
   });

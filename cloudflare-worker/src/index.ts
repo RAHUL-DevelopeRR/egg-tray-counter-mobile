@@ -166,7 +166,12 @@ async function sha256(file: File) {
 // (null when absent).
 type ParsedScan = { scanId: string; files: Record<string, File>; hashes: string[]; cellIds: Record<string, string>;
   scanContract: string | null; modelScan: boolean; baselineScan: boolean; requestStarted: number; multipartMs: number;
-  headings: Record<string, ViewHeading>; captures: Record<string, ViewCapture>; evidence: Record<string, string | null> };
+  headings: Record<string, ViewHeading>; captures: Record<string, ViewCapture>; evidence: Record<string, string | null>;
+  extras: ScanExtras };
+// Optional evidence beyond the three faces (0.5.0): the blind declaration, a CORNER photo and an ELEVATED photo with
+// the operator's taps.
+type ScanExtras = { declaration: BlockDeclaration | null; corner: File | null; cornerHash: string | null; cornerCapture: ViewCapture;
+  cornerSide: string | null; elevated: File | null; elevatedHash: string | null; elevatedCapture: ViewCapture; topView: TopViewTaps | null };
 // Phone heading at capture, from the app's per-view constraint evidence: gyroscope yaw about gravity in degrees,
 // comparable only within one yaw_session (one scan, kept across retakes). Positive yaw is a left (counter-clockwise)
 // turn seen from above.
@@ -234,6 +239,18 @@ async function readScan(request: Request): Promise<ParsedScan> {
     throw new HttpError(422, "invalid_scan_id", "scan_id must be a UUID");
   }
   const files = Object.fromEntries(VIEWS.map((view) => [view, form.get(view)])) as Record<string, string | File | null>;
+  const checkImage = async (file: File, name: string) => {
+    if (!["image/jpeg", "image/png"].includes(file.type)) {
+      throw new HttpError(415, "invalid_mime_type", `${name} must be a JPEG or PNG image`);
+    }
+    if (!file.size || file.size > MAX_IMAGE_BYTES) {
+      throw new HttpError(413, "image_too_large", `${name} is empty or exceeds 20 MB`);
+    }
+    const signature = new Uint8Array(await file.slice(0, 8).arrayBuffer());
+    const jpeg = signature[0] === 0xff && signature[1] === 0xd8 && signature[2] === 0xff;
+    const png = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a].every((byte, i) => signature[i] === byte);
+    if (!jpeg && !png) throw new HttpError(415, "invalid_image_signature", `${name} is not a valid JPEG or PNG`);
+  };
   for (const view of VIEWS) {
     const file = files[view];
     if (!(file instanceof File)) throw new HttpError(422, "missing_view", `${view.toUpperCase()} image is required`);
@@ -258,19 +275,44 @@ async function readScan(request: Request): Promise<ParsedScan> {
     throw new HttpError(422, "duplicate_view", "LEFT, RIGHT, and STRAIGHT must be distinct photographs");
   }
   const captures = Object.fromEntries(VIEWS.map(view => [view, readCapture(form, view)]));
+  const extraFile = async (name: string) => {
+    const file = form.get(name);
+    if (!(file instanceof File)) return { file: null, hash: null };
+    await checkImage(file, name.toUpperCase());
+    const hash = await sha256(file);
+    if (hashes.includes(hash)) throw new HttpError(422, "duplicate_view", `${name.toUpperCase()} must be a photo of its own, not a copy of a face`);
+    return { file, hash };
+  };
+  const corner = await extraFile("corner"), elevated = await extraFile("elevated");
+  const cornerSide = ["front_left", "front_right"].includes(String(form.get("corner_side"))) ? String(form.get("corner_side")) : null;
+  const extras: ScanExtras = { declaration: readDeclaration(form), corner: corner.file, cornerHash: corner.hash,
+    cornerCapture: readCapture(form, "corner"), cornerSide, elevated: elevated.file, elevatedHash: elevated.hash,
+    elevatedCapture: readCapture(form, "elevated"), topView: readTopViewTaps(form) };
   const evidence = Object.fromEntries(VIEWS.map(view => {
     const raw = form.get(`${view}_constraint_evidence`);
     return [view, typeof raw === "string" && raw && raw.length <= MAX_ARCHIVED_EVIDENCE_CHARS ? raw : null];
   }));
   return { scanId: rawScanId, files: files as Record<string, File>, hashes, cellIds,
     scanContract: requestedContract === null ? null : String(requestedContract), modelScan, baselineScan, requestStarted, multipartMs,
-    headings: Object.fromEntries(VIEWS.map(view => [view, captures[view].heading])), captures, evidence };
+    headings: Object.fromEntries(VIEWS.map(view => [view, captures[view].heading])), captures, evidence, extras };
 }
 
 // Private, content-addressed originals survive failed inference and retries.
 // No public download route: operators retrieve using authenticated R2 access.
-async function archiveScan(env: Bindings, { scanId: rawScanId, files, hashes, captures, evidence }: ParsedScan) {
+async function archiveScan(env: Bindings, { scanId: rawScanId, files, hashes, captures, evidence, extras }: ParsedScan) {
   if (env.SCAN_ARCHIVE) {
+    const meta = { scan_id: rawScanId, received_at: new Date().toISOString() };
+    for (const [name, file, hash, capture] of [["corner", extras.corner, extras.cornerHash, extras.cornerCapture],
+      ["elevated", extras.elevated, extras.elevatedHash, extras.elevatedCapture]] as [string, File | null, string | null, ViewCapture][]) {
+      if (file && hash) await env.SCAN_ARCHIVE.put(`scans/${rawScanId}/${name}/${hash}`, file.stream(), {
+        httpMetadata: { contentType: file.type }, customMetadata: { ...meta, view: name, sha256: hash,
+          ...(capture.source !== null ? { capture_source: capture.source } : {}) } });
+    }
+    // The declaration and the elevated taps are their own evidence source, kept as sent (parsed).
+    if (extras.declaration || extras.topView || extras.cornerSide) {
+      await env.SCAN_ARCHIVE.put(`scans/${rawScanId}/declaration.json`, JSON.stringify({ declaration: extras.declaration,
+        elevated_taps: extras.topView, corner_side: extras.cornerSide }), { httpMetadata: { contentType: "application/json" }, customMetadata: meta });
+    }
     for (const [index, view] of VIEWS.entries()) {
       const file = files[view];
       // Provenance and heading travel with the photo, so a replay from the archive judges the faces as the live scan did.
@@ -305,7 +347,12 @@ async function scanPipeline(env: Bindings, scan: ParsedScan): Promise<Record<str
     const columns = Object.fromEntries(VIEWS.map(view => [view, spanColumns(results[view].detections ?? [], results[view].image ?? null)]));
     const rimStatus = await rimVerify(files, columns, env);
     console.log(JSON.stringify({event: "rim_verify", scan_id: rawScanId, status: rimStatus}));
-    return modelDiagnostics(rawScanId, results, cellIds, env, Date.now() - started, columns, rimStatus, scan.headings, scan.captures);
+    const extras = scan.extras;
+    const corner = extras.corner ? await infer(extras.corner, env, modelScan, {scan_id: rawScanId, view: "corner"}) : null;
+    const captureIds = Object.fromEntries(VIEWS.map((view, i) => [view, scan.hashes[i].slice(0, 16)]));
+    return modelDiagnostics(rawScanId, results, cellIds, env, Date.now() - started, columns, rimStatus, scan.headings, scan.captures,
+      { declaration: extras.declaration, topView: extras.topView, corner, cornerSide: extras.cornerSide, cornerCapture: extras.cornerCapture,
+        elevated: !!extras.elevated, captureIds });
   }
   if (baselineScan) return baselineResponse(rawScanId, results, env, Date.now() - started);
   const stacks = fuseCells(results, cellIds, Number(env.MAX_VIEW_COUNT_RATIO));
@@ -620,9 +667,13 @@ function blockResult(width: number | null, depth: number | null, facesUsed: stri
 
 // trusted: per face, whether its readings may verify a stack (null: all, for callers without capture provenance);
 // duplicates: a face whose photo repeats an earlier face's (see duplicateViews).
+// meta.captureIds: per face, the capture it came from (a copy carries the original's id, so two readings of one
+// capture never verify each other); meta.quality: per face, whether the capture gate accepted it.
 function buildBlock(straightCols: SpanColumn[], leftCols: SpanColumn[], rightCols: SpanColumn[], strays: Record<string, number> = {},
-  trusted: Record<string, boolean> | null = null, duplicates: Record<string, string> = {}) {
+  trusted: Record<string, boolean> | null = null, duplicates: Record<string, string> = {},
+  meta: { captureIds?: Record<string, string>; quality?: Record<string, string> } = {}) {
   const trust = (face: string) => trusted === null || trusted[face] === true;
+  const captureOf = (face: string): string => meta.captureIds?.[face] ?? (duplicates[face] ? captureOf(duplicates[face]) : face);
   const facesUsed = [...(straightCols.length ? ["straight"] : []), ...(leftCols.length ? ["left"] : []), ...(rightCols.length ? ["right"] : [])];
   if (!straightCols.length || (!leftCols.length && !rightCols.length)) {
     return blockResult(null, null, facesUsed, null, [], [{ reason: "STRAIGHT and at least one side face must show stacks" }], [], true);
@@ -670,10 +721,16 @@ function buildBlock(straightCols: SpanColumn[], leftCols: SpanColumn[], rightCol
       Object.assign(cell, { status: "conflict", layers: null, source });
       continue;
     }
-    const asRead = readings.map(r => ({ face: r.name, layers: r.col.layers, gap_filled: r.col.filled, doubts: r.col.doubts, trusted: trust(r.name) }));
+    // Every reading names its capture, reader and evidence (plan Phase Q). The only reader in this release is the
+    // detector walk ("rf-walk"); the rim reader was rejected (reports/rim-independent-20261101).
+    const asRead = readings.map(r => ({ face: r.name, layers: r.col.layers, gap_filled: r.col.filled, doubts: r.col.doubts, trusted: trust(r.name),
+      capture_id: captureOf(r.name), reader: "rf-walk", physical_stack_id: `S${cell.x}-${cell.y}`, view: r.name, count: r.col.layers,
+      evidence: { gap_filled: r.col.filled, doubts: r.col.doubts }, quality: meta.quality?.[r.name] ?? "unknown",
+      pipeline_version: PIPELINE_VERSION }));
     if (readings[0].col.recessed) {
       // A gap in the front row is verified only when two photos both see it.
-      Object.assign(cell, { status: "missing", layers: 0, source, readings: asRead, verified: new Set(names.filter(trust)).size > 1 });
+      Object.assign(cell, { status: "missing", layers: 0, source, readings: asRead,
+        verified: new Set(names.filter(trust).map(captureOf)).size > 1 });
       for (const r of readings) {
         if (cell.y === 0 && r.name !== "straight") continue;   // a side face looks along the front row past a missing corner
         if (cells.has(r.behind)) promotions.set(r.behind, [...(promotions.get(r.behind) ?? []),
@@ -695,7 +752,9 @@ function buildBlock(straightCols: SpanColumn[], leftCols: SpanColumn[], rightCol
     // Agreeing faces, or one layer apart: keep the reading with fewest gap-filled layers (STRAIGHT on a tie)
     // and record the ambiguity so the total is only an estimate.
     const best = [...readings].sort((a, b) => a.col.filled - b.col.filled || Number(a.name !== "straight") - Number(b.name !== "straight"))[0].col;
-    const clean = readings.filter(r => r.col.layers === best.layers && !r.col.filled && !r.col.doubts.length && trust(r.name)).map(r => r.name);
+    // Verified by two different captures: readings of one photo or its copies never count twice.
+    const clean = readings.filter(r => r.col.layers === best.layers && !r.col.filled && !r.col.doubts.length && trust(r.name))
+      .map(r => captureOf(r.name));
     Object.assign(cell, { status: "observed", layers: best.layers, filled_layers: best.filled, source, readings: asRead,
       verified: new Set(clean).size > 1 });
     if (values[high] !== values[low]) ambiguities.push({ cell: [cell.x, cell.y], reason: "faces differ by one layer", ...layerFields, chosen: best.layers });
@@ -1020,9 +1079,247 @@ function duplicateViews(results: Record<string, ViewInference>) {
   return duplicates;
 }
 
+// ---- Block grid, operator declaration and extra views (0.5.0; docs/GRID_CONTRACT_0.5.0.md).
+// The block is reconstructed as an X/Y/Z grid of physical stacks: a shared corner is one stack seen by two faces, never
+// two stacks. Inventory from photos, from the operator's declaration, from the elevated view and computed from the
+// typical height stays separate in every cell. Occupancy is not measured by any validated reader in this release
+// (Phase P was disabled, reports/cross-stack-20261101), so a layer's occupancy is known only when declared.
+type BlockDeclaration = { x: number; y: number; interior: "full" | "partial" | "unknown"; missing_cells: [number, number][];
+  partial_stacks: { x: number; y: number; layers: number | null }[]; cover_trays: "yes" | "no" | "unknown";
+  occupancy: "egg_filled" | "unknown"; reference_height: number | null; operator: string | null; declared_at: string | null };
+type TopViewTaps = { x: number; y: number; cells: { x: number; y: number; state: "present" | "missing" | "step_down" | "unsure" }[] };
+type GridCell = { physical_stack_id: string; x: number; y: number; stack_present: boolean | null; z_layers: number | null;
+  filled_layers: number | null; partial_layers: number | null; empty_cover_layers: number | null; unknown_layers: number | null;
+  observed_views: string[]; measurement_sources: string[]; status: string; uncertainties: string[];
+  readings: Record<string, unknown>[]; pair_type: string | null };
+const MAX_DECLARATION_CHARS = 4000;
+const MAX_TAPS_CHARS = 8000;
+const MAX_GRID_SIDE = 40;
+
+function parseJsonField(form: FormData, name: string, limit: number): Record<string, unknown> | null {
+  const raw = form.get(name);
+  if (typeof raw !== "string" || !raw || raw.length > limit) return null;
+  try {
+    const value = JSON.parse(raw) as unknown;
+    return value && typeof value === "object" && !Array.isArray(value) ? value as Record<string, unknown> : null;
+  } catch {
+    return null;
+  }
+}
+const gridInt = (v: unknown, lo: number, hi: number) => Number.isInteger(v) && (v as number) >= lo && (v as number) <= hi ? v as number : null;
+
+/** The operator's blind declaration; malformed input is no declaration (never a refusal). */
+function readDeclaration(form: FormData): BlockDeclaration | null {
+  const d = parseJsonField(form, "block_declaration", MAX_DECLARATION_CHARS);
+  if (!d) return null;
+  const x = gridInt(d.x, 1, MAX_GRID_SIDE), y = gridInt(d.y, 1, MAX_GRID_SIDE);
+  if (x === null || y === null) return null;
+  const cell = (c: unknown) => Array.isArray(c) && c.length === 2 && gridInt(c[0], 0, x - 1) !== null && gridInt(c[1], 0, y - 1) !== null;
+  const missing = (Array.isArray(d.missing_cells) ? d.missing_cells : []).filter(cell).slice(0, x * y) as [number, number][];
+  const partial = (Array.isArray(d.partial_stacks) ? d.partial_stacks : []).map(p => p as Record<string, unknown>)
+    .filter(p => p && gridInt(p.x, 0, x - 1) !== null && gridInt(p.y, 0, y - 1) !== null)
+    .map(p => ({ x: p.x as number, y: p.y as number, layers: gridInt(p.layers, 0, 200) })).slice(0, x * y);
+  const pick = <T extends string>(v: unknown, allowed: readonly T[], fallback: T) => allowed.includes(v as T) ? v as T : fallback;
+  const text = (v: unknown, max: number) => typeof v === "string" ? v.replace(UNSAFE_TEXT, " ").trim().slice(0, max) || null : null;
+  // A reference height counts only when the operator says it was measured; it can only demote a stack, never add one.
+  const reference = d.reference_height_measured === true ? gridInt(d.reference_height, 1, 200) : null;
+  return { x, y, interior: pick(d.interior, ["full", "partial", "unknown"] as const, "unknown"), missing_cells: missing,
+    partial_stacks: partial, cover_trays: pick(d.cover_trays, ["yes", "no", "unknown"] as const, "unknown"),
+    occupancy: pick(d.occupancy, ["egg_filled", "unknown"] as const, "unknown"), reference_height: reference,
+    operator: text(d.operator, 80), declared_at: text(d.declared_at, 40) };
+}
+
+/** The operator's reading of the elevated photo: a tap per grid position. */
+function readTopViewTaps(form: FormData): TopViewTaps | null {
+  const t = parseJsonField(form, "elevated_taps", MAX_TAPS_CHARS);
+  if (!t) return null;
+  const x = gridInt(t.x, 1, MAX_GRID_SIDE), y = gridInt(t.y, 1, MAX_GRID_SIDE);
+  if (x === null || y === null) return null;
+  const states = ["present", "missing", "step_down", "unsure"] as const;
+  const cells = (Array.isArray(t.cells) ? t.cells : []).map(c => c as Record<string, unknown>)
+    .filter(c => c && gridInt(c.x, 0, x - 1) !== null && gridInt(c.y, 0, y - 1) !== null && states.includes(c.state as typeof states[number]))
+    .map(c => ({ x: c.x as number, y: c.y as number, state: c.state as typeof states[number] })).slice(0, x * y);
+  return { x, y, cells };
+}
+
+/** Width and depth from one CORNER photo: the corner stack is the nearest, so it has the largest layer pitch; the
+ * columns on each side of it are the two faces (the corner counted in both). Columns only; no heights. */
+function cornerReading(columns: SpanColumn[], side: string | null) {
+  const ordered = [...columns].sort((a, b) => a.x_min - b.x_min);
+  if (ordered.length < 2) return { side, columns: ordered.length, x: null, y: null, corner_column: null, note: "fewer than two stacks in the CORNER photo" };
+  const corner = ordered.reduce((best, c, i) => c.pitch_px > ordered[best].pitch_px ? i : best, 0);
+  const leftFace = corner + 1, rightFace = ordered.length - corner;
+  const [x, y] = side === "front_left" ? [rightFace, leftFace] : side === "front_right" ? [leftFace, rightFace] : [null, null];
+  return { side, columns: ordered.length, x, y, corner_column: corner + 1,
+    note: x === null ? "corner side not given; width and depth cannot be told apart" : null };
+}
+
+type GridInputs = { declaration: BlockDeclaration | null; topView: TopViewTaps | null; corner: ReturnType<typeof cornerReading> | null };
+
+/** The physical grid, inventory and final status from the photo block plus the declaration and extra views. */
+function assembleGrid(block: ReturnType<typeof blockResult>, inputs: GridInputs) {
+  const { declaration, topView, corner } = inputs;
+  const conflicts: Record<string, unknown>[] = [];
+  const X = block.width, Y = block.depth;
+  const empty = { grid: [] as GridCell[][], conflicts, total: block.total_trays, status: block.status, confirmed_basis: [] as string[],
+    declaration_agrees: null as boolean | null, corner_agrees: null as boolean | null, top_view: null as Record<string, unknown> | null,
+    suggested_views: [] as string[] };
+  if (!X || !Y || !block.cells.length) return empty;
+  const occupancyDeclared = declaration?.occupancy === "egg_filled";
+  const grid: GridCell[][] = [];
+  for (let y = 0; y < Y; y++) {
+    const row: GridCell[] = [];
+    for (let x = 0; x < X; x++) {
+      const c = block.cells.find(k => k.x === x && k.y === y)!;
+      const readings = (c.readings ?? []) as unknown as Record<string, unknown>[];
+      const status = c.status === "observed" ? (c.verified ? "verified" : "observed") : c.status;
+      const uncertainties: string[] = [];
+      for (const r of readings) {
+        const doubts = ((r.evidence as Record<string, unknown> | undefined)?.doubts ?? []) as string[];
+        for (const d of doubts) uncertainties.push(`${String(r.view).toUpperCase()}: ${d}`);
+        if (((r.evidence as Record<string, unknown> | undefined)?.gap_filled as number) > 0) uncertainties.push(`${String(r.view).toUpperCase()}: gap-filled layer`);
+      }
+      if (c.status === "observed" && !c.verified) uncertainties.push("read by one capture only");
+      if (c.status === "computed") uncertainties.push("hidden: height computed from the typical stack; it can be missing or shorter");
+      row.push({ physical_stack_id: `S${x}-${y}`, x, y,
+        stack_present: c.status === "missing" ? false : c.status === "observed" ? true : null,
+        z_layers: c.status === "missing" ? 0 : c.layers, filled_layers: null, partial_layers: null, empty_cover_layers: null,
+        unknown_layers: null, observed_views: [...new Set(readings.map(r => String(r.view)))],
+        measurement_sources: c.status === "computed" ? ["computed"] : ["observed"], status, uncertainties, readings,
+        pair_type: c.verified ? "cross_photo" : null });
+    }
+    grid.push(row);
+  }
+  const hidden = (g: GridCell) => g.status === "computed";
+  // The elevated view: the operator's taps are the only look at the interior.
+  let topSummary: Record<string, unknown> | null = null;
+  if (topView) {
+    const agrees = topView.x === X && topView.y === Y;
+    if (!agrees) conflicts.push({ reason: `ELEVATED: the tapped grid is ${topView.x} x ${topView.y}, the faces measure ${X} x ${Y}` });
+    let present = 0, missing = 0, steps = 0;
+    for (const t of agrees ? topView.cells : []) {
+      const g = grid[t.y][t.x];
+      if (t.state === "missing") {
+        missing++;
+        if (g.stack_present === true && (g.z_layers ?? 0) > 0) conflicts.push({ cell: [t.x, t.y], reason: "ELEVATED shows no stack where a face shows one" });
+        else if (hidden(g)) Object.assign(g, { stack_present: false, z_layers: 0, status: "top_view", measurement_sources: ["top_view"],
+          uncertainties: ["no stack seen from above"] });
+      } else if (t.state === "present") {
+        present++;
+        // Flush-top rule, conditional: a hidden stack whose top is level with its neighbours is taken at the typical
+        // height. It shows a stack is there, not that its trays hold eggs.
+        if (hidden(g)) Object.assign(g, { stack_present: true, status: "top_view", measurement_sources: ["top_view", "computed"],
+          uncertainties: ["seen from above with a flush top: height from the typical stack (conditional)"] });
+      } else if (t.state === "step_down") {
+        steps++;
+        if (hidden(g)) Object.assign(g, { stack_present: true, z_layers: null, status: "unknown", measurement_sources: ["top_view"],
+          uncertainties: ["lower than its neighbours from above; height not measured"] });
+        else g.uncertainties.push("ELEVATED: lower than its neighbours");
+      }
+    }
+    topSummary = { cells_present: present, cells_missing: missing, steps, agrees };
+  }
+  // The blind declaration: a separate evidence source, compared with every measured face.
+  let declarationAgrees: boolean | null = null;
+  const demoted: string[] = [];
+  if (declaration) {
+    declarationAgrees = true;
+    if (declaration.x !== X) { declarationAgrees = false; conflicts.push({ reason: `declared ${declaration.x} stacks wide, STRAIGHT shows ${X}` }); }
+    if (declaration.y !== Y) { declarationAgrees = false; conflicts.push({ reason: `declared ${declaration.y} stacks deep, the side faces show ${Y}` }); }
+    if (declarationAgrees) {
+      for (const [x, y] of declaration.missing_cells) {
+        const g = grid[y][x];
+        if (g.stack_present === true && (g.z_layers ?? 0) > 0) {
+          declarationAgrees = false;
+          conflicts.push({ cell: [x, y], reason: "declared missing, but a face shows a stack there" });
+        } else if (hidden(g)) Object.assign(g, { stack_present: false, z_layers: 0, status: "declared", measurement_sources: ["declared"],
+          uncertainties: ["declared missing"] });
+      }
+      for (const p of declaration.partial_stacks) {
+        const g = grid[p.y][p.x];
+        if (g.measurement_sources.includes("observed") && p.layers !== null && g.z_layers !== null && g.z_layers !== p.layers) {
+          declarationAgrees = false;
+          conflicts.push({ cell: [p.x, p.y], reason: `declared ${p.layers} trays high, a face reads ${g.z_layers}` });
+        } else if (hidden(g) || g.status === "top_view" || g.status === "unknown") Object.assign(g, { stack_present: true,
+          z_layers: p.layers, status: p.layers === null ? "unknown" : "declared", measurement_sources: [...new Set([...g.measurement_sources, "declared"])],
+          uncertainties: [p.layers === null ? "declared partial, height not given" : "declared partial-height stack"] });
+      }
+      if (declaration.interior === "full") for (const g of grid.flat().filter(hidden)) {
+        Object.assign(g, { stack_present: true, status: "declared", measurement_sources: ["declared", "computed"],
+          uncertainties: ["declared present (interior full): height from the typical stack"] });
+      }
+      // A measured reference height only demotes: a visible stack below it (and not declared partial) loses any
+      // claim to confirmed; nothing is ever added to reach it.
+      if (declaration.reference_height !== null) for (const g of grid.flat()) {
+        const partial = declaration.partial_stacks.some(p => p.x === g.x && p.y === g.y);
+        if (g.measurement_sources.includes("observed") && g.z_layers !== null && g.z_layers > 0 && g.z_layers < declaration.reference_height && !partial) {
+          g.uncertainties.push(`below the declared reference height (${declaration.reference_height})`);
+          demoted.push(g.physical_stack_id);
+        }
+      }
+    }
+  }
+  // The CORNER photo: width and depth from one capture, so both faces are of one block by construction.
+  let cornerAgrees: boolean | null = null;
+  if (corner && corner.x !== null && corner.y !== null) {
+    cornerAgrees = corner.x === X && corner.y === Y;
+    if (!cornerAgrees) conflicts.push({ reason: `CORNER shows ${corner.x} stacks wide and ${corner.y} deep, the faces measure ${X} x ${Y}` });
+  }
+  // Occupancy: known only when declared.
+  for (const g of grid.flat()) {
+    if (g.z_layers === null) continue;
+    if (occupancyDeclared) Object.assign(g, { filled_layers: g.z_layers, unknown_layers: 0 });
+    else g.unknown_layers = g.z_layers;
+    if (!occupancyDeclared && g.z_layers > 0) g.uncertainties.push("occupancy not measured");
+  }
+  const cells = grid.flat();
+  const anyUnknown = cells.some(g => g.z_layers === null);
+  const total = block.total_trays === null || anyUnknown ? null : cells.reduce((s, g) => s + (g.z_layers ?? 0), 0);
+  let status = block.status;
+  let basis: string[] = [];
+  if (conflicts.length) status = "conflict";
+  else if (status === "estimated") {
+    const visibleVerified = block.single_reading_cells.length === 0 && block.ambiguities.length === 0 && demoted.length === 0;
+    const unresolved = cells.some(g => g.status === "computed" || g.status === "unknown");
+    if (visibleVerified && !unresolved && !anyUnknown) {
+      if (cells.some(g => g.measurement_sources.includes("declared"))) basis.push("declaration");
+      if (cells.some(g => g.measurement_sources.includes("top_view"))) basis.push("top_view");
+      if (basis.length) status = "confirmed";
+    }
+  }
+  if (status !== "confirmed") basis = [];
+  const suggested = cells.some(g => g.status === "computed" || g.status === "unknown") && !topView ? ["elevated"] : [];
+  return { grid, conflicts, total: status === "conflict" ? null : total, status, confirmed_basis: basis,
+    declaration_agrees: declarationAgrees, corner_agrees: cornerAgrees, top_view: topSummary, suggested_views: suggested };
+}
+
+/** Inventory with every source kept apart; eligible egg trays only from declared occupancy. */
+function gridInventory(grid: GridCell[][], declaration: BlockDeclaration | null, total: number | null) {
+  const cells = grid.flat();
+  const sum = (pick: (g: GridCell) => boolean) => cells.filter(pick).reduce((s, g) => s + (g.z_layers ?? 0), 0);
+  const observed = sum(g => g.measurement_sources.includes("observed"));
+  const declared = sum(g => g.status === "declared");
+  const topView = sum(g => g.status === "top_view");
+  const computed = sum(g => g.status === "computed");
+  const occupancyDeclared = declaration?.occupancy === "egg_filled";
+  return {
+    physical_layers_observed: observed, physical_layers_computed: computed, physical_layers_declared: declared,
+    physical_layers_top_view: topView,
+    eligible_egg_trays: occupancyDeclared && total !== null
+      ? { value: total, basis: "declared", note: "the operator declared that every counted tray holds eggs; occupancy is not measured" }
+      : { value: null, basis: "unknown", note: "occupancy is not measured; declare it to count eligible egg trays" },
+    empty_cover_layers: declaration?.cover_trays === "no" ? { value: 0, basis: "declared" }
+      : declaration?.cover_trays === "yes" ? { value: null, basis: "declared present, not counted" } : { value: null, basis: "unknown" },
+    unknown_occupancy_layers: occupancyDeclared ? 0 : cells.reduce((s, g) => s + (g.unknown_layers ?? 0), 0),
+    unknown_cells: cells.filter(g => g.z_layers === null).length,
+  };
+}
+
 function modelDiagnostics(scanId: string, results: Record<string, ViewInference>, cellIds: Record<string, string>, env: Bindings, latency: number,
   precomputed?: Record<string, SpanColumn[]>, rimStatus?: Record<string, string>, headings: Record<string, ViewHeading> = {},
-  captures: Record<string, ViewCapture> = {}) {
+  captures: Record<string, ViewCapture> = {},
+  extras: { declaration?: BlockDeclaration | null; topView?: TopViewTaps | null; corner?: ViewInference | null; cornerSide?: string | null;
+    cornerCapture?: ViewCapture; elevated?: boolean; captureIds?: Record<string, string> } = {}) {
   const columns = precomputed ?? Object.fromEntries(VIEWS.map(view => [view, spanColumns(results[view].detections ?? [], results[view].image ?? null)]));
   const capture = Object.fromEntries(VIEWS.map(view => [view,
     captureQuality(columns[view], results[view].image?.width ?? null, results[view].image?.height ?? null,
@@ -1038,8 +1335,11 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
   const duplicates = duplicateViews(results);
   const trusted = Object.fromEntries(VIEWS.map(view => [view, captures[view]?.source === "captured_still" && captures[view]?.blocked === false
     && (view === "straight" || sides[view].status === "turned") && !duplicates[view]]));
+  const captureIds = Object.fromEntries(VIEWS.map(view => [view, extras.captureIds?.[view] ?? view]));
+  for (const [view, original] of Object.entries(duplicates)) captureIds[view] = captureIds[original];
   const assembled = buildBlock(columns.straight, columns.left, columns.right,
-    Object.fromEntries(VIEWS.map(view => [view, strays[view].length])), trusted, duplicates);
+    Object.fromEntries(VIEWS.map(view => [view, strays[view].length])), trusted, duplicates,
+    { captureIds, quality: Object.fromEntries(VIEWS.map(view => [view, capture[view].accepted ? "accepted" : "refused"])) });
   // When the block model names a face in its first conflict, that is the photo to retake.
   const namedFace = (() => {
     for (const c of assembled.conflicts) {
@@ -1058,6 +1358,18 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
     ? { ...assembled, ...withheld, depth: null, cells: [], observed_trays: null, computed_trays: null, filled_trays: null,
         rescan_cells: [], conflicts: [...sideConflicts, ...assembled.conflicts] }
     : rejectedView ? { ...assembled, ...withheld } : assembled;
+  // The physical grid with the declaration and the extra views (0.5.0). A CORNER photo counts only from the guided
+  // camera; its columns give width and depth, never heights.
+  const cornerColumns = extras.corner ? spanColumns(extras.corner.detections ?? [], extras.corner.image ?? null) : null;
+  const corner = cornerColumns && extras.cornerCapture?.source === "captured_still" ? cornerReading(cornerColumns, extras.cornerSide ?? null) : null;
+  const assembledGrid = assembleGrid(block as ReturnType<typeof blockResult>, { declaration: extras.declaration ?? null,
+    topView: extras.topView ?? null, corner });
+  const inventory = gridInventory(assembledGrid.grid, extras.declaration ?? null, assembledGrid.total);
+  const finalStatus = assembledGrid.status;
+  const finalTotal = finalStatus === "needs_view" ? null : assembledGrid.total;
+  if (!extras.elevated && assembledGrid.suggested_views.length === 0 && finalStatus === "estimated" && block.computed_trays) {
+    assembledGrid.suggested_views.push("elevated");
+  }
   // Model boxes are useful evidence, but not proof of cross-view identity or egg occupancy.
   // Do not substitute whole-photo voting for an unfinished spatial hybrid pipeline.
   const reason = "Model detections are available. Physical stack matching and egg occupancy remain unresolved; these per-photo counts are not a verified inventory total.";
@@ -1070,7 +1382,7 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
         : { recommended_view: "straight", reason };
   return {
     // Legacy top-level fields stay "not verified" for installed APKs; result_status is the block's one result state.
-    scan_id: scanId, status: "rescan_required", accepted: false, result_status: block.status,
+    scan_id: scanId, status: "rescan_required", accepted: false, result_status: finalStatus,
     physical_stack_count: null, total_trays: null, total_eggs: null,
     eggs_per_tray: Number(env.EGGS_PER_TRAY), cell_ids: cellIds,
     model: { provider: "roboflow_serverless", model_id: env.MODEL_ID },
@@ -1086,12 +1398,18 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
       final_count: null, confidence: 0, accepted: false, reason }],
     // Block model: STRAIGHT = X face, LEFT/RIGHT = Y faces. total_trays here is X x Y x height computed
     // from observed faces; it is not a field-validated inventory until the held-out scene test passes.
-    block: { ...block, contract: "block_model_v1", eggs_per_tray: Number(env.EGGS_PER_TRAY),
+    block: { ...block, status: finalStatus, total_trays: finalTotal,
+      conflicts: [...block.conflicts, ...assembledGrid.conflicts], contract: "block_model_v1", eggs_per_tray: Number(env.EGGS_PER_TRAY),
       verification: { method: "rim_edges", views: rimStatus ?? Object.fromEntries(VIEWS.map(v => [v, "disabled"])) },
       // Egg occupancy is not measured: this is tray capacity if every counted tray is full.
-      total_eggs: block.total_trays === null ? null : block.total_trays * Number(env.EGGS_PER_TRAY),
-      eggs_basis: "capacity_if_every_tray_full", capture, side_check: sides },
-    rescan,
+      total_eggs: finalTotal === null ? null : finalTotal * Number(env.EGGS_PER_TRAY),
+      eggs_basis: "capacity_if_every_tray_full", capture, side_check: sides,
+      grid: assembledGrid.grid, inventory, confirmed_basis: assembledGrid.confirmed_basis,
+      declaration: extras.declaration ? { ...extras.declaration, agrees_with_faces: assembledGrid.declaration_agrees } : null,
+      corner: corner ? { ...corner, agrees: assembledGrid.corner_agrees } : null, top_view: assembledGrid.top_view,
+      suggested_views: assembledGrid.suggested_views, grid_note: "grid model from photos, not a point cloud or a measured mesh" },
+    rescan: assembledGrid.conflicts.length && !rejectedView && !wrongSide
+      ? { recommended_view: "straight", reason: String(assembledGrid.conflicts[0].reason) } : rescan,
   };
 }
 
@@ -1179,7 +1497,7 @@ async function reconstructPair(request: Request, env: Bindings) {
 // Open mode (AUTH_MODE unset or "open") never reaches this code: jobs and idempotency are enforce-only, so the
 // installed 0.4.11 app keeps exactly today's answers until production is promoted. Observe mode reaches it for
 // every request that carries a credential.
-const PIPELINE_VERSION = "worker-0.4.15";
+const PIPELINE_VERSION = "worker-0.5.0";
 // How long a claimed job is left to its attempt before a retry may take it over. Cloudflare keeps waitUntil work alive
 // for at most 30 s after the client disconnects, so an attempt whose phone gave up (the app's 90 s receive timeout, or
 // a dropped link the edge noticed) is cancelled by about 120 s after the claim and writes nothing; one whose
@@ -1225,6 +1543,7 @@ type DeviceCaller = { kind: "device"; device_id: string; record: DeviceRecord };
 type Caller = { kind: "admin" } | DeviceCaller;
 type Stored<T> = { value: T; etag: string };
 type ManualRecord = { scan_id: string; block_id: string; cells: unknown; notes: unknown; tray: unknown; app_version: unknown;
+  counted_by?: string | null; second_counter?: string | null;
   app_total?: unknown; created_at?: string; recorded_at?: string; count_id?: string; totals?: unknown; recorded_by?: string };
 
 type AuthMode = "open" | "observe" | "enforce";
@@ -1468,6 +1787,10 @@ async function requestIdentity(scan: ParsedScan, version = FINGERPRINT_VERSION) 
     const { source, blocked, heading } = scan.captures[view];
     return source === null && blocked === null && !heading ? null : [source, blocked, heading?.yaw_deg ?? null, heading?.yaw_session ?? null];
   }));
+  const extras = scan.extras;
+  if (version >= 3 && extras && (extras.declaration || extras.topView || extras.cornerHash || extras.elevatedHash || extras.cornerSide)) {
+    fields.push([extras.cornerHash, extras.cornerSide, extras.elevatedHash, extras.declaration, extras.topView]);
+  }
   const fingerprint = toHex(await digestText(JSON.stringify(fields)));
   return { fingerprint, fingerprint_version: version, scan_contract: scan.scanContract, cell_ids: cellIds };
 }
@@ -1620,7 +1943,8 @@ const manualMeta = (record: ManualRecord) => ({ httpMetadata: { contentType: "ap
   scan_id: record.scan_id, block_id: record.block_id, kind: "manual_count", count_id: String(record.count_id), created_at: String(record.created_at) } });
 // What the operator saved; the server's recorded_at and recorded_by are left out of the comparison.
 const manualContent = (record: ManualRecord) =>
-  JSON.stringify([record.block_id, record.cells, record.notes, record.tray, record.app_version, record.app_total ?? null, record.created_at]);
+  JSON.stringify([record.block_id, record.cells, record.notes, record.tray, record.app_version, record.app_total ?? null, record.created_at,
+    record.counted_by ?? null, record.second_counter ?? null]);
 
 async function hasArchivedPhotos(bucket: R2Bucket, scanId: string) {
   const listed = await bucket.list({ prefix: `scans/${scanId}/`, limit: 100 });
@@ -1651,8 +1975,11 @@ async function manualCountJob(request: Request, env: Bindings, caller: Caller, s
   if (appTotal !== null && !(Number.isInteger(appTotal) && (appTotal as number) >= 0 && (appTotal as number) <= 1_000_000)) {
     throw new HttpError(422, "invalid_app_total", "app_total must be a whole number of trays or null");
   }
+  // Blind two-person recounts (plan step 10): who counted, and who counted again without seeing the first count.
+  const counter = (v: unknown) => typeof v === "string" ? v.replace(UNSAFE_TEXT, " ").replace(/\s+/g, " ").trim().slice(0, 80) || null : null;
   const record = { kind: "manual_count_v1", scan_id: scanId, block_id: blockId, cells: clean, notes, tray, recorded_at: isoAt(Date.now()),
-    created_at: createdAt, count_id: countId, app_total: appTotal as number | null, app_version: appVersion, totals, recorded_by: ownerOf(caller) };
+    created_at: createdAt, count_id: countId, app_total: appTotal as number | null, app_version: appVersion, totals, recorded_by: ownerOf(caller),
+    counted_by: counter(body.counted_by), second_counter: counter(body.second_counter) };
   const key = `${manualPrefix(env, scanId)}${countId}.json`;
   const latestKey = `${manualPrefix(env, scanId)}latest.json`;
   let saved: ManualRecord = record;
@@ -1931,7 +2258,7 @@ async function routeEnforced(request: Request, env: Bindings, url: URL, mode: Au
 }
 
 export { base64, buildBlock, captureQuality, faceColumns, fuseCounts, fuseCells, medianBoxAspect, modelDiagnostics, readCellIds, readOptionalCellIds,
-  strayGroups, boxOverlapScore, duplicateViews,
+  strayGroups, boxOverlapScore, duplicateViews, assembleGrid, gridInventory, cornerReading, readDeclaration, readTopViewTaps, blockResult,
   sideCheck, spanColumns, walkLayers, worstView };
 
 export default {

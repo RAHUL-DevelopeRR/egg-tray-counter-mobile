@@ -1,0 +1,3468 @@
+{
+ "pipeline_version": "worker-0.5.0",
+ "faces": [
+  {
+   "id": "img-01",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0014",
+   "same_photo_as": null,
+   "truth": 99,
+   "outcome": "accepted",
+   "accepted": true,
+   "total": 99,
+   "walk_by_column": [
+    20,
+    20,
+    20,
+    20,
+    19
+   ],
+   "filled_layers": 1,
+   "gate_reasons": [],
+   "flag_reasons": [],
+   "correct": true,
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 99
+   }
+  },
+  {
+   "id": "img-02",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0141",
+   "same_photo_as": null,
+   "truth": 80,
+   "outcome": "accepted",
+   "accepted": true,
+   "total": 80,
+   "walk_by_column": [
+    20,
+    20,
+    20,
+    20
+   ],
+   "filled_layers": 0,
+   "gate_reasons": [],
+   "flag_reasons": [],
+   "correct": true,
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 80
+   }
+  },
+  {
+   "id": "img-04",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0143",
+   "same_photo_as": null,
+   "truth": 115,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 120,
+   "walk_by_column": [
+    19,
+    15,
+    21,
+    19,
+    19,
+    27
+   ],
+   "filled_layers": 23,
+   "gate_reasons": [
+    "stacks are too small in the frame (too far away)"
+   ],
+   "flag_reasons": [
+    "layer counts disagree (span 17, walk 19); retake this face",
+    "layer counts disagree (span 18, walk 15); retake this face",
+    "layer counts disagree (span 19, walk 27); retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 120
+   }
+  },
+  {
+   "id": "img-08",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0145",
+   "same_photo_as": null,
+   "truth": 160,
+   "outcome": "accepted",
+   "accepted": true,
+   "total": 160,
+   "walk_by_column": [
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "filled_layers": 5,
+   "gate_reasons": [],
+   "flag_reasons": [],
+   "correct": true,
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 160
+   }
+  },
+  {
+   "id": "img-09",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0146",
+   "same_photo_as": null,
+   "truth": 75,
+   "outcome": "withheld_flagged",
+   "accepted": false,
+   "total": 85,
+   "walk_by_column": [
+    21,
+    7,
+    17,
+    20,
+    20
+   ],
+   "filled_layers": 18,
+   "gate_reasons": [],
+   "flag_reasons": [
+    "layer counts disagree (span 18, walk 21); retake this face",
+    "boxes are missing over several layers of this stack; retake this face",
+    "layer counts disagree (span 17, walk 20); retake this face",
+    "layer counts disagree (span 15, walk 20); retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_flagged",
+    "predicted_total": 85
+   }
+  },
+  {
+   "id": "img-19",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0049",
+   "same_photo_as": null,
+   "truth": 100,
+   "outcome": "accepted",
+   "accepted": true,
+   "total": 100,
+   "walk_by_column": [
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "filled_layers": 0,
+   "gate_reasons": [],
+   "flag_reasons": [],
+   "correct": true,
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 100
+   }
+  },
+  {
+   "id": "img-20",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0071",
+   "same_photo_as": null,
+   "truth": 60,
+   "outcome": "accepted",
+   "accepted": true,
+   "total": 60,
+   "walk_by_column": [
+    20,
+    20,
+    20
+   ],
+   "filled_layers": 0,
+   "gate_reasons": [],
+   "flag_reasons": [],
+   "correct": true,
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 60
+   }
+  },
+  {
+   "id": "img-21",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0155",
+   "same_photo_as": null,
+   "truth": 100,
+   "outcome": "accepted",
+   "accepted": true,
+   "total": 100,
+   "walk_by_column": [
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "filled_layers": 0,
+   "gate_reasons": [],
+   "flag_reasons": [],
+   "correct": true,
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 100
+   }
+  },
+  {
+   "id": "img-23",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0145",
+   "same_photo_as": null,
+   "truth": 160,
+   "outcome": "accepted",
+   "accepted": true,
+   "total": 160,
+   "walk_by_column": [
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "filled_layers": 5,
+   "gate_reasons": [],
+   "flag_reasons": [],
+   "correct": true,
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 160
+   }
+  },
+  {
+   "id": "img-24",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0155",
+   "same_photo_as": null,
+   "truth": 100,
+   "outcome": "accepted",
+   "accepted": true,
+   "total": 100,
+   "walk_by_column": [
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "filled_layers": 0,
+   "gate_reasons": [],
+   "flag_reasons": [],
+   "correct": true,
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 100
+   }
+  },
+  {
+   "id": "img-30",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0160",
+   "same_photo_as": null,
+   "truth": 80,
+   "outcome": "accepted",
+   "accepted": true,
+   "total": 78,
+   "walk_by_column": [
+    20,
+    19,
+    20,
+    19
+   ],
+   "filled_layers": 0,
+   "gate_reasons": [],
+   "flag_reasons": [],
+   "correct": false,
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 78
+   }
+  },
+  {
+   "id": "img-31",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0161",
+   "same_photo_as": null,
+   "truth": 80,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 63,
+   "walk_by_column": [
+    16,
+    19,
+    18,
+    10
+   ],
+   "filled_layers": 19,
+   "gate_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "layer pitch changes across the face (angled or corner view)"
+   ],
+   "flag_reasons": [
+    "layer counts disagree (span 13, walk 16); retake this face",
+    "layer counts disagree (span 13, walk 19); retake this face",
+    "layer counts disagree (span 12, walk 18); retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 63
+   }
+  },
+  {
+   "id": "img-32",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0013",
+   "same_photo_as": null,
+   "truth": 19,
+   "outcome": "accepted",
+   "accepted": true,
+   "total": 19,
+   "walk_by_column": [
+    19
+   ],
+   "filled_layers": 0,
+   "gate_reasons": [],
+   "flag_reasons": [],
+   "correct": true,
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 19
+   }
+  },
+  {
+   "id": "img-33",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0162",
+   "same_photo_as": null,
+   "truth": 358,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 0,
+   "walk_by_column": [],
+   "filled_layers": 0,
+   "gate_reasons": [
+    "no stacks detected"
+   ],
+   "flag_reasons": [],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 0
+   }
+  },
+  {
+   "id": "img-34",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0019",
+   "same_photo_as": null,
+   "truth": 120,
+   "outcome": "accepted",
+   "accepted": true,
+   "total": 120,
+   "walk_by_column": [
+    20,
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "filled_layers": 0,
+   "gate_reasons": [],
+   "flag_reasons": [],
+   "correct": true,
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 120
+   }
+  },
+  {
+   "id": "img-35",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0088",
+   "same_photo_as": null,
+   "truth": 1,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 0,
+   "walk_by_column": [],
+   "filled_layers": 0,
+   "gate_reasons": [
+    "no stacks detected"
+   ],
+   "flag_reasons": [],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 0
+   }
+  },
+  {
+   "id": "img-36",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0163",
+   "same_photo_as": null,
+   "truth": 109,
+   "outcome": "withheld_flagged",
+   "accepted": false,
+   "total": 114,
+   "walk_by_column": [
+    16,
+    20,
+    20,
+    18,
+    20,
+    20
+   ],
+   "filled_layers": 2,
+   "gate_reasons": [],
+   "flag_reasons": [
+    "boxes are missing over several layers of this stack; retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_flagged",
+    "predicted_total": 114
+   }
+  },
+  {
+   "id": "img-38",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0057",
+   "same_photo_as": null,
+   "truth": 118,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 102,
+   "walk_by_column": [
+    21,
+    20,
+    29,
+    23,
+    9
+   ],
+   "filled_layers": 17,
+   "gate_reasons": [
+    "stacks cover too little of the frame width"
+   ],
+   "flag_reasons": [
+    "layer counts disagree (span 19, walk 29); retake this face",
+    "layer counts disagree (span 21, walk 23); retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 102
+   }
+  },
+  {
+   "id": "img-39",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0045",
+   "same_photo_as": null,
+   "truth": 2,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 3,
+   "walk_by_column": [
+    3
+   ],
+   "filled_layers": 0,
+   "gate_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "stacks cover too little of the frame width"
+   ],
+   "flag_reasons": [],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 3
+   }
+  },
+  {
+   "id": "img-40",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0061",
+   "same_photo_as": null,
+   "truth": 10,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 0,
+   "walk_by_column": [],
+   "filled_layers": 0,
+   "gate_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "no stacks detected"
+   ],
+   "flag_reasons": [],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 0
+   }
+  },
+  {
+   "id": "img-46",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0168",
+   "same_photo_as": null,
+   "truth": 20,
+   "outcome": "withheld_flagged",
+   "accepted": false,
+   "total": 19,
+   "walk_by_column": [
+    19
+   ],
+   "filled_layers": 3,
+   "gate_reasons": [],
+   "flag_reasons": [
+    "layer counts disagree (span 17, walk 19); retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_flagged",
+    "predicted_total": 19
+   }
+  },
+  {
+   "id": "img-47",
+   "source": "labelled",
+   "role": "face",
+   "split": "untouched",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0169",
+   "same_photo_as": null,
+   "truth": 7,
+   "outcome": "accepted",
+   "accepted": true,
+   "total": 7,
+   "walk_by_column": [
+    7
+   ],
+   "filled_layers": 0,
+   "gate_reasons": [],
+   "flag_reasons": [],
+   "correct": true,
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 7
+   }
+  },
+  {
+   "id": "img-49",
+   "source": "labelled",
+   "role": "face",
+   "split": "untouched",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0170",
+   "same_photo_as": null,
+   "truth": 1,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 0,
+   "walk_by_column": [],
+   "filled_layers": 0,
+   "gate_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "no stacks detected"
+   ],
+   "flag_reasons": [],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 0
+   }
+  },
+  {
+   "id": "img-50",
+   "source": "labelled",
+   "role": "face",
+   "split": "development",
+   "tier": "U",
+   "usable": true,
+   "cluster": "ND0010",
+   "same_photo_as": null,
+   "truth": 40,
+   "outcome": "withheld_flagged",
+   "accepted": false,
+   "total": 44,
+   "walk_by_column": [
+    25,
+    19
+   ],
+   "filled_layers": 11,
+   "gate_reasons": [],
+   "flag_reasons": [
+    "layer counts disagree (span 17, walk 25); retake this face",
+    "camera looked down on the stack (spacing ratio 1.806); hold the phone level at mid-height"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_flagged",
+    "predicted_total": 44
+   }
+  },
+  {
+   "id": "img-03",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0142",
+   "same_photo_as": null,
+   "truth": 80,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 65,
+   "walk_by_column": [
+    19,
+    18,
+    19,
+    9
+   ],
+   "filled_layers": 10,
+   "gate_reasons": [
+    "layer pitch changes across the face (angled or corner view)"
+   ],
+   "flag_reasons": [
+    "layer counts disagree (span 17, walk 19); retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 65
+   }
+  },
+  {
+   "id": "img-05",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0144",
+   "same_photo_as": null,
+   "truth": 235,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 17,
+   "walk_by_column": [
+    17
+   ],
+   "filled_layers": 5,
+   "gate_reasons": [
+    "stacks cover too little of the frame width",
+    "stacks are too small in the frame (too far away)"
+   ],
+   "flag_reasons": [],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 17
+   }
+  },
+  {
+   "id": "img-06",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0031",
+   "same_photo_as": null,
+   "truth": 4,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 0,
+   "walk_by_column": [],
+   "filled_layers": 0,
+   "gate_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "no stacks detected"
+   ],
+   "flag_reasons": [],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 0
+   }
+  },
+  {
+   "id": "img-07",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0092",
+   "same_photo_as": null,
+   "truth": 4,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 3,
+   "walk_by_column": [
+    3
+   ],
+   "filled_layers": 0,
+   "gate_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake"
+   ],
+   "flag_reasons": [
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 3
+   }
+  },
+  {
+   "id": "img-10",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0147",
+   "same_photo_as": null,
+   "truth": 30,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 39,
+   "walk_by_column": [
+    8,
+    16,
+    15
+   ],
+   "filled_layers": 5,
+   "gate_reasons": [
+    "layer pitch changes across the face (angled or corner view)",
+    "stacks are too small in the frame (too far away)"
+   ],
+   "flag_reasons": [
+    "layer counts disagree (span 13, walk 15); retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 39
+   }
+  },
+  {
+   "id": "img-11",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0061",
+   "same_photo_as": null,
+   "truth": 8,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 0,
+   "walk_by_column": [],
+   "filled_layers": 0,
+   "gate_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "no stacks detected"
+   ],
+   "flag_reasons": [],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 0
+   }
+  },
+  {
+   "id": "img-12",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0148",
+   "same_photo_as": null,
+   "truth": 205,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 0,
+   "walk_by_column": [],
+   "filled_layers": 0,
+   "gate_reasons": [
+    "no stacks detected"
+   ],
+   "flag_reasons": [],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 0
+   }
+  },
+  {
+   "id": "img-13",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0149",
+   "same_photo_as": null,
+   "truth": 204,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 0,
+   "walk_by_column": [],
+   "filled_layers": 0,
+   "gate_reasons": [
+    "no stacks detected"
+   ],
+   "flag_reasons": [],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 0
+   }
+  },
+  {
+   "id": "img-14",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0150",
+   "same_photo_as": null,
+   "truth": 132,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 80,
+   "walk_by_column": [
+    18,
+    15,
+    7,
+    5,
+    9,
+    26
+   ],
+   "filled_layers": 15,
+   "gate_reasons": [
+    "layer pitch changes across the face (angled or corner view)"
+   ],
+   "flag_reasons": [
+    "boxes are missing over several layers of this stack; retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "layer counts disagree (span 15, walk 26); retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 80
+   }
+  },
+  {
+   "id": "img-15",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0151",
+   "same_photo_as": null,
+   "truth": 62,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 16,
+   "walk_by_column": [
+    8,
+    5,
+    3
+   ],
+   "filled_layers": 3,
+   "gate_reasons": [
+    "layer pitch changes across the face (angled or corner view)",
+    "stacks cover too little of the frame width",
+    "stacks are too small in the frame (too far away)"
+   ],
+   "flag_reasons": [
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 16
+   }
+  },
+  {
+   "id": "img-16",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0152",
+   "same_photo_as": null,
+   "truth": 119,
+   "outcome": "withheld_flagged",
+   "accepted": false,
+   "total": 130,
+   "walk_by_column": [
+    19,
+    20,
+    20,
+    20,
+    20,
+    20,
+    11
+   ],
+   "filled_layers": 4,
+   "gate_reasons": [],
+   "flag_reasons": [
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_flagged",
+    "predicted_total": 130
+   }
+  },
+  {
+   "id": "img-17",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0153",
+   "same_photo_as": null,
+   "truth": 109,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 63,
+   "walk_by_column": [
+    6,
+    12,
+    19,
+    19,
+    7
+   ],
+   "filled_layers": 11,
+   "gate_reasons": [
+    "layer pitch changes across the face (angled or corner view)"
+   ],
+   "flag_reasons": [
+    "boxes are missing over several layers of this stack; retake this face",
+    "layer counts disagree (span 15, walk 19); retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 63
+   }
+  },
+  {
+   "id": "img-18",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0154",
+   "same_photo_as": null,
+   "truth": 129,
+   "outcome": "withheld_flagged",
+   "accepted": false,
+   "total": 128,
+   "walk_by_column": [
+    10,
+    19,
+    22,
+    19,
+    20,
+    20,
+    18
+   ],
+   "filled_layers": 6,
+   "gate_reasons": [],
+   "flag_reasons": [
+    "layer counts disagree (span 20, walk 18); retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_flagged",
+    "predicted_total": 128
+   }
+  },
+  {
+   "id": "img-22",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0152",
+   "same_photo_as": null,
+   "truth": 119,
+   "outcome": "withheld_flagged",
+   "accepted": false,
+   "total": 124,
+   "walk_by_column": [
+    19,
+    20,
+    20,
+    20,
+    20,
+    20,
+    5
+   ],
+   "filled_layers": 2,
+   "gate_reasons": [],
+   "flag_reasons": [
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_flagged",
+    "predicted_total": 124
+   }
+  },
+  {
+   "id": "img-25",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0156",
+   "same_photo_as": null,
+   "truth": 80,
+   "outcome": "accepted",
+   "accepted": true,
+   "total": 13,
+   "walk_by_column": [
+    13
+   ],
+   "filled_layers": 0,
+   "gate_reasons": [],
+   "flag_reasons": [],
+   "correct": false,
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 13
+   }
+  },
+  {
+   "id": "img-26",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0157",
+   "same_photo_as": null,
+   "truth": 125,
+   "outcome": "accepted",
+   "accepted": true,
+   "total": 83,
+   "walk_by_column": [
+    22,
+    20,
+    21,
+    20
+   ],
+   "filled_layers": 0,
+   "gate_reasons": [],
+   "flag_reasons": [],
+   "correct": false,
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 83
+   }
+  },
+  {
+   "id": "img-27",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0156",
+   "same_photo_as": null,
+   "truth": 80,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 21,
+   "walk_by_column": [
+    4,
+    17
+   ],
+   "filled_layers": 5,
+   "gate_reasons": [
+    "layer pitch changes across the face (angled or corner view)"
+   ],
+   "flag_reasons": [
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "layer counts disagree (span 13, walk 17); retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 21
+   }
+  },
+  {
+   "id": "img-28",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0158",
+   "same_photo_as": null,
+   "truth": 143,
+   "outcome": "withheld_flagged",
+   "accepted": false,
+   "total": 104,
+   "walk_by_column": [
+    14,
+    11,
+    19,
+    20,
+    20,
+    20
+   ],
+   "filled_layers": 23,
+   "gate_reasons": [],
+   "flag_reasons": [
+    "layer counts disagree (span 12, walk 14); retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "layer counts disagree (span 17, walk 19); retake this face",
+    "layer counts disagree (span 18, walk 20); retake this face",
+    "layer counts disagree (span 13, walk 20); retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_flagged",
+    "predicted_total": 104
+   }
+  },
+  {
+   "id": "img-29",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0159",
+   "same_photo_as": null,
+   "truth": 130,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 48,
+   "walk_by_column": [
+    15,
+    15,
+    18
+   ],
+   "filled_layers": 9,
+   "gate_reasons": [
+    "stacks cover too little of the frame width"
+   ],
+   "flag_reasons": [
+    "boxes are missing over several layers of this stack; retake this face",
+    "layer counts disagree (span 14, walk 18); retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 48
+   }
+  },
+  {
+   "id": "img-37",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0048",
+   "same_photo_as": null,
+   "truth": 4,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 3,
+   "walk_by_column": [
+    3
+   ],
+   "filled_layers": 0,
+   "gate_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake"
+   ],
+   "flag_reasons": [
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 3
+   }
+  },
+  {
+   "id": "img-41",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0011",
+   "same_photo_as": null,
+   "truth": 81,
+   "outcome": "withheld_flagged",
+   "accepted": false,
+   "total": 48,
+   "walk_by_column": [
+    4,
+    4,
+    20,
+    20
+   ],
+   "filled_layers": 2,
+   "gate_reasons": [],
+   "flag_reasons": [
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_flagged",
+    "predicted_total": 48
+   }
+  },
+  {
+   "id": "img-42",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0164",
+   "same_photo_as": null,
+   "truth": 180,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 15,
+   "walk_by_column": [
+    13,
+    2
+   ],
+   "filled_layers": 2,
+   "gate_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "stacks are too small in the frame (too far away)"
+   ],
+   "flag_reasons": [
+    "layer counts disagree (span 9, walk 13); retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 15
+   }
+  },
+  {
+   "id": "img-43",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0165",
+   "same_photo_as": null,
+   "truth": 5,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 5,
+   "walk_by_column": [
+    5
+   ],
+   "filled_layers": 0,
+   "gate_reasons": [
+    "stacks are too small in the frame (too far away)"
+   ],
+   "flag_reasons": [],
+   "correct": true,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 5
+   }
+  },
+  {
+   "id": "img-44",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0166",
+   "same_photo_as": null,
+   "truth": 185,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 120,
+   "walk_by_column": [
+    16,
+    26,
+    24,
+    15,
+    14,
+    14,
+    11
+   ],
+   "filled_layers": 26,
+   "gate_reasons": [
+    "stacks are too small in the frame (too far away)"
+   ],
+   "flag_reasons": [
+    "camera looked down on the stack (spacing ratio 1.508); hold the phone level at mid-height",
+    "layer counts disagree (span 16, walk 26); retake this face",
+    "layer counts disagree (span 16, walk 24); retake this face",
+    "camera looked down on the stack (spacing ratio 2.161); hold the phone level at mid-height"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 120
+   }
+  },
+  {
+   "id": "img-45",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0167",
+   "same_photo_as": null,
+   "truth": 107,
+   "outcome": "withheld_flagged",
+   "accepted": false,
+   "total": 28,
+   "walk_by_column": [
+    28
+   ],
+   "filled_layers": 8,
+   "gate_reasons": [],
+   "flag_reasons": [
+    "boxes are missing over several layers of this stack; retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_flagged",
+    "predicted_total": 28
+   }
+  },
+  {
+   "id": "img-48",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0164",
+   "same_photo_as": null,
+   "truth": 180,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 13,
+   "walk_by_column": [
+    11,
+    2
+   ],
+   "filled_layers": 2,
+   "gate_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "stacks are too small in the frame (too far away)"
+   ],
+   "flag_reasons": [],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 13
+   }
+  },
+  {
+   "id": "img-51",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0171",
+   "same_photo_as": null,
+   "truth": 262,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 92,
+   "walk_by_column": [
+    12,
+    19,
+    20,
+    20,
+    21
+   ],
+   "filled_layers": 18,
+   "gate_reasons": [
+    "layer pitch changes across the face (angled or corner view)"
+   ],
+   "flag_reasons": [
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "boxes are missing over several layers of this stack; retake this face",
+    "layer counts disagree (span 18, walk 20); retake this face"
+   ],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 92
+   }
+  },
+  {
+   "id": "img-52",
+   "source": "labelled",
+   "role": "face_not_usable",
+   "split": "development",
+   "tier": "U",
+   "usable": false,
+   "cluster": "ND0172",
+   "same_photo_as": null,
+   "truth": 25,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 22,
+   "walk_by_column": [
+    5,
+    6,
+    11
+   ],
+   "filled_layers": 4,
+   "gate_reasons": [
+    "layer pitch changes across the face (angled or corner view)"
+   ],
+   "flag_reasons": [],
+   "correct": false,
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 22
+   }
+  },
+  {
+   "id": "mutaa:L-100:straight",
+   "source": "labelled_reencoded",
+   "role": "face",
+   "split": "development",
+   "tier": "V",
+   "usable": true,
+   "cluster": "ND0049",
+   "same_photo_as": "img-19",
+   "truth": 101,
+   "outcome": "accepted",
+   "accepted": true,
+   "total": 100,
+   "walk_by_column": [
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "filled_layers": 1,
+   "gate_reasons": [],
+   "flag_reasons": [],
+   "correct": false,
+   "python_0411": null
+  },
+  {
+   "id": "mutaa:L-100:left",
+   "source": "labelled_reencoded",
+   "role": "face",
+   "split": "development",
+   "tier": null,
+   "usable": true,
+   "cluster": "ND0155",
+   "same_photo_as": "img-21",
+   "truth": null,
+   "outcome": "accepted",
+   "accepted": true,
+   "total": 100,
+   "walk_by_column": [
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "filled_layers": 0,
+   "gate_reasons": [],
+   "flag_reasons": [],
+   "correct": null,
+   "python_0411": null
+  },
+  {
+   "id": "mutaa:L-100:right",
+   "source": "labelled_reencoded",
+   "role": "face",
+   "split": "development",
+   "tier": null,
+   "usable": true,
+   "cluster": "ND0155",
+   "same_photo_as": "img-24",
+   "truth": null,
+   "outcome": "accepted",
+   "accepted": true,
+   "total": 100,
+   "walk_by_column": [
+    20,
+    20,
+    20,
+    20,
+    20
+   ],
+   "filled_layers": 0,
+   "gate_reasons": [],
+   "flag_reasons": [],
+   "correct": null,
+   "python_0411": null
+  },
+  {
+   "id": "mutaa:L-109-ORANGE:straight",
+   "source": "labelled_reencoded",
+   "role": "face",
+   "split": "development",
+   "tier": "V",
+   "usable": true,
+   "cluster": "ND0163",
+   "same_photo_as": "img-36",
+   "truth": 164,
+   "outcome": "withheld_flagged",
+   "accepted": false,
+   "total": 115,
+   "walk_by_column": [
+    17,
+    20,
+    20,
+    18,
+    20,
+    20
+   ],
+   "filled_layers": 2,
+   "gate_reasons": [],
+   "flag_reasons": [
+    "boxes are missing over several layers of this stack; retake this face"
+   ],
+   "correct": false,
+   "python_0411": null
+  },
+  {
+   "id": "mutaa:L-109-ORANGE:left",
+   "source": "labelled_reencoded",
+   "role": "face",
+   "split": "development",
+   "tier": null,
+   "usable": true,
+   "cluster": "ND0153",
+   "same_photo_as": "img-17",
+   "truth": null,
+   "outcome": "withheld_flagged",
+   "accepted": false,
+   "total": 56,
+   "walk_by_column": [
+    6,
+    6,
+    19,
+    19,
+    6
+   ],
+   "filled_layers": 6,
+   "gate_reasons": [],
+   "flag_reasons": [
+    "boxes are missing over several layers of this stack; retake this face",
+    "layer counts disagree (span 16, walk 19); retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+   ],
+   "correct": null,
+   "python_0411": null
+  },
+  {
+   "id": "mutaa:L-115:straight",
+   "source": "labelled_reencoded",
+   "role": "face",
+   "split": "development",
+   "tier": "V",
+   "usable": true,
+   "cluster": "ND0143",
+   "same_photo_as": "img-04",
+   "truth": 141,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 121,
+   "walk_by_column": [
+    19,
+    23,
+    22,
+    19,
+    20,
+    18
+   ],
+   "filled_layers": 24,
+   "gate_reasons": [
+    "stacks are too small in the frame (too far away)"
+   ],
+   "flag_reasons": [
+    "layer counts disagree (span 17, walk 19); retake this face",
+    "layer counts disagree (span 16, walk 23); retake this face",
+    "layer counts disagree (span 18, walk 20); retake this face",
+    "layer counts disagree (span 20, walk 18); retake this face"
+   ],
+   "correct": false,
+   "python_0411": null
+  },
+  {
+   "id": "mutaa:L-115:left",
+   "source": "labelled_reencoded",
+   "role": "face",
+   "split": "development",
+   "tier": null,
+   "usable": true,
+   "cluster": "ND0144",
+   "same_photo_as": "img-05",
+   "truth": null,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 14,
+   "walk_by_column": [
+    14
+   ],
+   "filled_layers": 2,
+   "gate_reasons": [
+    "stacks cover too little of the frame width",
+    "stacks are too small in the frame (too far away)"
+   ],
+   "flag_reasons": [
+    "boxes are missing over several layers of this stack; retake this face"
+   ],
+   "correct": null,
+   "python_0411": null
+  },
+  {
+   "id": "mutaa:L-80:straight",
+   "source": "labelled_reencoded",
+   "role": "face",
+   "split": "development",
+   "tier": "V",
+   "usable": true,
+   "cluster": "ND0160",
+   "same_photo_as": "img-30",
+   "truth": 80,
+   "outcome": "accepted",
+   "accepted": true,
+   "total": 79,
+   "walk_by_column": [
+    20,
+    20,
+    20,
+    19
+   ],
+   "filled_layers": 0,
+   "gate_reasons": [],
+   "flag_reasons": [],
+   "correct": false,
+   "python_0411": null
+  },
+  {
+   "id": "mutaa:L-80:left",
+   "source": "labelled_reencoded",
+   "role": "face",
+   "split": "development",
+   "tier": null,
+   "usable": true,
+   "cluster": "ND0161",
+   "same_photo_as": "img-31",
+   "truth": null,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 59,
+   "walk_by_column": [
+    16,
+    19,
+    16,
+    8
+   ],
+   "filled_layers": 17,
+   "gate_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "layer pitch changes across the face (angled or corner view)"
+   ],
+   "flag_reasons": [
+    "layer counts disagree (span 13, walk 16); retake this face",
+    "layer counts disagree (span 13, walk 19); retake this face",
+    "layer counts disagree (span 11, walk 16); retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+   ],
+   "correct": null,
+   "python_0411": null
+  },
+  {
+   "id": "mutaa:L-80:right",
+   "source": "labelled_reencoded",
+   "role": "face",
+   "split": "development",
+   "tier": null,
+   "usable": true,
+   "cluster": "ND0156",
+   "same_photo_as": "img-25",
+   "truth": null,
+   "outcome": "accepted",
+   "accepted": true,
+   "total": 12,
+   "walk_by_column": [
+    12
+   ],
+   "filled_layers": 1,
+   "gate_reasons": [],
+   "flag_reasons": [],
+   "correct": null,
+   "python_0411": null
+  },
+  {
+   "id": "mutaa:M16-CORNER-STACK:straight",
+   "source": "mutaa",
+   "role": "face",
+   "split": "development",
+   "tier": "V",
+   "usable": true,
+   "cluster": "MUTAA-M16-CORNER-STACK-straight",
+   "same_photo_as": null,
+   "truth": 14,
+   "outcome": "accepted",
+   "accepted": true,
+   "total": 14,
+   "walk_by_column": [
+    14
+   ],
+   "filled_layers": 0,
+   "gate_reasons": [],
+   "flag_reasons": [],
+   "correct": true,
+   "python_0411": null
+  },
+  {
+   "id": "mutaa:M16-CORNER-STACK:left",
+   "source": "mutaa",
+   "role": "face",
+   "split": "development",
+   "tier": null,
+   "usable": true,
+   "cluster": "MUTAA-M16-CORNER-STACK-left",
+   "same_photo_as": null,
+   "truth": null,
+   "outcome": "accepted",
+   "accepted": true,
+   "total": 8,
+   "walk_by_column": [
+    8
+   ],
+   "filled_layers": 1,
+   "gate_reasons": [],
+   "flag_reasons": [],
+   "correct": null,
+   "python_0411": null
+  },
+  {
+   "id": "mutaa:M16-FAR:straight",
+   "source": "mutaa",
+   "role": "face",
+   "split": "development",
+   "tier": "V",
+   "usable": true,
+   "cluster": "MUTAA-M16-FAR-straight",
+   "same_photo_as": null,
+   "truth": 45,
+   "outcome": "withheld_flagged",
+   "accepted": false,
+   "total": 79,
+   "walk_by_column": [
+    17,
+    18,
+    17,
+    19,
+    8
+   ],
+   "filled_layers": 20,
+   "gate_reasons": [],
+   "flag_reasons": [
+    "boxes are missing over several layers of this stack; retake this face",
+    "layer counts disagree (span 11, walk 18); retake this face",
+    "layer counts disagree (span 12, walk 17); retake this face",
+    "boxes are missing over several layers of this stack; retake this face"
+   ],
+   "correct": false,
+   "python_0411": null
+  },
+  {
+   "id": "mutaa:M16-FAR:left",
+   "source": "mutaa",
+   "role": "face",
+   "split": "development",
+   "tier": null,
+   "usable": true,
+   "cluster": "MUTAA-M16-FAR-left",
+   "same_photo_as": null,
+   "truth": null,
+   "outcome": "withheld_flagged",
+   "accepted": false,
+   "total": 41,
+   "walk_by_column": [
+    15,
+    11,
+    7,
+    8
+   ],
+   "filled_layers": 6,
+   "gate_reasons": [],
+   "flag_reasons": [
+    "layer counts disagree (span 11, walk 15); retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+   ],
+   "correct": null,
+   "python_0411": null
+  },
+  {
+   "id": "mutaa:M16-FAR:right",
+   "source": "mutaa",
+   "role": "face",
+   "split": "development",
+   "tier": null,
+   "usable": true,
+   "cluster": "MUTAA-M16-FAR-right",
+   "same_photo_as": null,
+   "truth": null,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 19,
+   "walk_by_column": [
+    12,
+    7
+   ],
+   "filled_layers": 3,
+   "gate_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "stacks are too small in the frame (too far away)"
+   ],
+   "flag_reasons": [
+    "layer counts disagree (span 9, walk 7); retake this face"
+   ],
+   "correct": null,
+   "python_0411": null
+  },
+  {
+   "id": "mutaa:M16-NEAR:straight",
+   "source": "mutaa",
+   "role": "face",
+   "split": "development",
+   "tier": "V",
+   "usable": true,
+   "cluster": "MUTAA-M16-NEAR-straight",
+   "same_photo_as": null,
+   "truth": null,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 51,
+   "walk_by_column": [
+    8,
+    10,
+    11,
+    12,
+    10
+   ],
+   "filled_layers": 3,
+   "gate_reasons": [
+    "stacks are too small in the frame (too far away)"
+   ],
+   "flag_reasons": [
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+   ],
+   "correct": null,
+   "python_0411": null
+  },
+  {
+   "id": "mutaa:M16-NEAR:left",
+   "source": "mutaa",
+   "role": "face",
+   "split": "development",
+   "tier": null,
+   "usable": true,
+   "cluster": "MUTAA-M16-NEAR-left",
+   "same_photo_as": null,
+   "truth": null,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 13,
+   "walk_by_column": [
+    9,
+    4
+   ],
+   "filled_layers": 2,
+   "gate_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "stacks cover too little of the frame width"
+   ],
+   "flag_reasons": [],
+   "correct": null,
+   "python_0411": null
+  },
+  {
+   "id": "mutaa:M16-NEAR:right",
+   "source": "mutaa",
+   "role": "face",
+   "split": "development",
+   "tier": null,
+   "usable": true,
+   "cluster": "MUTAA-M16-NEAR-right",
+   "same_photo_as": null,
+   "truth": null,
+   "outcome": "withheld_gate",
+   "accepted": false,
+   "total": 45,
+   "walk_by_column": [
+    6,
+    5,
+    10,
+    18,
+    6
+   ],
+   "filled_layers": 6,
+   "gate_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "layer pitch changes across the face (angled or corner view)"
+   ],
+   "flag_reasons": [
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "boxes are missing over several layers of this stack; retake this face"
+   ],
+   "correct": null,
+   "python_0411": null
+  },
+  {
+   "id": "mutaa:W05-ORANGE:straight",
+   "source": "mutaa",
+   "role": "face",
+   "split": "development",
+   "tier": "V",
+   "usable": true,
+   "cluster": "MUTAA-W05-ORANGE-straight",
+   "same_photo_as": null,
+   "truth": null,
+   "outcome": "withheld_flagged",
+   "accepted": false,
+   "total": 152,
+   "walk_by_column": [
+    10,
+    19,
+    19,
+    20,
+    19,
+    19,
+    19,
+    19,
+    8
+   ],
+   "filled_layers": 26,
+   "gate_reasons": [],
+   "flag_reasons": [
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "layer counts disagree (span 16, walk 19); retake this face",
+    "layer counts disagree (span 17, walk 19); retake this face",
+    "boxes found on only some layers (trays too small in the photo); step closer and retake this face"
+   ],
+   "correct": null,
+   "python_0411": null
+  },
+  {
+   "id": "mutaa:W05-ORANGE:left",
+   "source": "mutaa",
+   "role": "face",
+   "split": "development",
+   "tier": null,
+   "usable": true,
+   "cluster": "MUTAA-W05-ORANGE-left",
+   "same_photo_as": null,
+   "truth": null,
+   "outcome": "withheld_flagged",
+   "accepted": false,
+   "total": 67,
+   "walk_by_column": [
+    10,
+    12,
+    14,
+    14,
+    17
+   ],
+   "filled_layers": 9,
+   "gate_reasons": [],
+   "flag_reasons": [
+    "layer counts disagree (span 12, walk 14); retake this face",
+    "layer counts disagree (span 12, walk 14); retake this face",
+    "layer counts disagree (span 15, walk 17); retake this face"
+   ],
+   "correct": null,
+   "python_0411": null
+  }
+ ],
+ "trios": [
+  {
+   "id": "mutaa:L-100",
+   "group": "MUTAA L-100",
+   "genuine": false,
+   "truth": 100,
+   "recorded": {
+    "pipeline_version": "worker-0.4.12",
+    "status": "estimated",
+    "total_trays": 500
+   },
+   "status": "needs_view",
+   "total": null,
+   "width": 5,
+   "depth": null,
+   "observed": null,
+   "computed": null,
+   "filled": null,
+   "conflicts": 2,
+   "side": {
+    "left": "repeats_front",
+    "right": "repeats_front"
+   },
+   "refused": [],
+   "rescan_view": "left",
+   "released": false,
+   "wrong_release": false,
+   "wrong_exact": false
+  },
+  {
+   "id": "mutaa:L-109-ORANGE",
+   "group": "MUTAA L-109-ORANGE",
+   "genuine": false,
+   "truth": 109,
+   "recorded": {
+    "pipeline_version": "worker-0.4.12",
+    "status": "needs_view",
+    "total_trays": null
+   },
+   "status": "needs_view",
+   "total": null,
+   "width": 6,
+   "depth": null,
+   "observed": null,
+   "computed": null,
+   "filled": null,
+   "conflicts": 5,
+   "side": {
+    "left": "unconfirmed",
+    "right": "unverified"
+   },
+   "refused": [
+    "right"
+   ],
+   "rescan_view": "right",
+   "released": false,
+   "wrong_release": false,
+   "wrong_exact": false
+  },
+  {
+   "id": "mutaa:L-115",
+   "group": "MUTAA L-115",
+   "genuine": false,
+   "truth": null,
+   "recorded": {
+    "pipeline_version": "worker-0.4.12",
+    "status": "needs_view",
+    "total_trays": null
+   },
+   "status": "needs_view",
+   "total": null,
+   "width": 6,
+   "depth": 1,
+   "observed": 41,
+   "computed": 0,
+   "filled": 7,
+   "conflicts": 5,
+   "side": {
+    "left": "unverified",
+    "right": "unverified"
+   },
+   "refused": [
+    "left",
+    "right",
+    "straight"
+   ],
+   "rescan_view": "right",
+   "released": false,
+   "wrong_release": false,
+   "wrong_exact": false
+  },
+  {
+   "id": "mutaa:L-80",
+   "group": "MUTAA L-80",
+   "genuine": false,
+   "truth": 80,
+   "recorded": {
+    "pipeline_version": "worker-0.4.12",
+    "status": "needs_view",
+    "total_trays": null
+   },
+   "status": "needs_view",
+   "total": null,
+   "width": 4,
+   "depth": null,
+   "observed": null,
+   "computed": null,
+   "filled": null,
+   "conflicts": 8,
+   "side": {
+    "left": "unconfirmed",
+    "right": "unconfirmed"
+   },
+   "refused": [
+    "left"
+   ],
+   "rescan_view": "left",
+   "released": false,
+   "wrong_release": false,
+   "wrong_exact": false
+  },
+  {
+   "id": "mutaa:M16-CORNER-STACK",
+   "group": "MUTAA M16-CORNER-STACK",
+   "genuine": false,
+   "truth": null,
+   "recorded": {
+    "pipeline_version": "worker-0.4.12",
+    "status": "needs_view",
+    "total_trays": null
+   },
+   "status": "needs_view",
+   "total": null,
+   "width": 1,
+   "depth": 1,
+   "observed": 0,
+   "computed": 0,
+   "filled": 0,
+   "conflicts": 1,
+   "side": {
+    "left": "unverified",
+    "right": "unverified"
+   },
+   "refused": [
+    "right"
+   ],
+   "rescan_view": "right",
+   "released": false,
+   "wrong_release": false,
+   "wrong_exact": false
+  },
+  {
+   "id": "mutaa:M16-FAR",
+   "group": "MUTAA M16-FAR",
+   "genuine": false,
+   "truth": null,
+   "recorded": {
+    "pipeline_version": "worker-0.4.12",
+    "status": "needs_view",
+    "total_trays": null
+   },
+   "status": "needs_view",
+   "total": null,
+   "width": 5,
+   "depth": null,
+   "observed": null,
+   "computed": null,
+   "filled": null,
+   "conflicts": 13,
+   "side": {
+    "left": "unconfirmed",
+    "right": "unconfirmed"
+   },
+   "refused": [
+    "right"
+   ],
+   "rescan_view": "right",
+   "released": false,
+   "wrong_release": false,
+   "wrong_exact": false
+  },
+  {
+   "id": "mutaa:M16-NEAR",
+   "group": "MUTAA M16-NEAR",
+   "genuine": false,
+   "truth": null,
+   "recorded": {
+    "pipeline_version": "worker-0.4.12",
+    "status": "needs_view",
+    "total_trays": null
+   },
+   "status": "needs_view",
+   "total": null,
+   "width": 5,
+   "depth": null,
+   "observed": null,
+   "computed": null,
+   "filled": null,
+   "conflicts": 11,
+   "side": {
+    "left": "unconfirmed",
+    "right": "unconfirmed"
+   },
+   "refused": [
+    "left",
+    "right",
+    "straight"
+   ],
+   "rescan_view": "right",
+   "released": false,
+   "wrong_release": false,
+   "wrong_exact": false
+  },
+  {
+   "id": "mutaa:W05-ORANGE",
+   "group": "MUTAA W05-ORANGE",
+   "genuine": false,
+   "truth": null,
+   "recorded": {
+    "pipeline_version": "worker-0.4.12",
+    "status": "needs_view",
+    "total_trays": null
+   },
+   "status": "needs_view",
+   "total": null,
+   "width": 9,
+   "depth": null,
+   "observed": null,
+   "computed": null,
+   "filled": null,
+   "conflicts": 8,
+   "side": {
+    "left": "unconfirmed",
+    "right": "unverified"
+   },
+   "refused": [
+    "right"
+   ],
+   "rescan_view": "right",
+   "released": false,
+   "wrong_release": false,
+   "wrong_exact": false
+  },
+  {
+   "id": "99-block substituted trio @ reports/staging-block-20261008/scan-99block-a.json",
+   "group": "99-block substituted trio",
+   "genuine": false,
+   "truth": 99,
+   "recorded": {
+    "note": "staging, saved 2026-10-09 08:22 IST (block model, span counter)"
+   },
+   "status": "estimated",
+   "total": 99,
+   "width": 5,
+   "depth": 1,
+   "observed": 99,
+   "computed": 0,
+   "filled": 1,
+   "conflicts": 0,
+   "side": {
+    "left": "unverified",
+    "right": "unverified"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "released": true,
+   "wrong_release": false,
+   "wrong_exact": false
+  },
+  {
+   "id": "99-block substituted trio @ reports/staging-block-20261008/scan-99block-walk.json",
+   "group": "99-block substituted trio",
+   "genuine": false,
+   "truth": 99,
+   "recorded": {
+    "note": "staging, saved 2026-10-09 11:30 IST (walk counter)"
+   },
+   "status": "estimated",
+   "total": 99,
+   "width": 5,
+   "depth": 1,
+   "observed": 99,
+   "computed": 0,
+   "filled": 1,
+   "conflicts": 0,
+   "side": {
+    "left": "unverified",
+    "right": "unverified"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "released": true,
+   "wrong_release": false,
+   "wrong_exact": false
+  },
+  {
+   "id": "99-block substituted trio @ reports/staging-block-20261008/scan-99block-walk2.json",
+   "group": "99-block substituted trio",
+   "genuine": false,
+   "truth": 99,
+   "recorded": {
+    "note": "staging, saved 2026-10-09 11:34 IST (walk counter)"
+   },
+   "status": "estimated",
+   "total": 99,
+   "width": 5,
+   "depth": 1,
+   "observed": 99,
+   "computed": 0,
+   "filled": 1,
+   "conflicts": 0,
+   "side": {
+    "left": "unverified",
+    "right": "unverified"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "released": true,
+   "wrong_release": false,
+   "wrong_exact": false
+  },
+  {
+   "id": "99-block substituted trio @ reports/eval-20261015/staging47-replay/6fe33b1d-4605-4b53-84f4-86bff313c1f3.json",
+   "group": "99-block substituted trio",
+   "genuine": false,
+   "truth": 99,
+   "recorded": {
+    "note": "staging 47cb2378 (0.4.11 Worker), live replay 2026-10-14 11:51 IST of the phone scan 6fe33b1d (app re-encodes; LEFT has 22 boxes, not 19)"
+   },
+   "status": "estimated",
+   "total": 99,
+   "width": 5,
+   "depth": 1,
+   "observed": 99,
+   "computed": 0,
+   "filled": 1,
+   "conflicts": 0,
+   "side": {
+    "left": "unverified",
+    "right": "unverified"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "released": true,
+   "wrong_release": false,
+   "wrong_exact": false
+  },
+  {
+   "id": "mechanics trio @ reports/staging-block-20261008/scan-img19-30-02.json",
+   "group": "mechanics trio",
+   "genuine": false,
+   "truth": null,
+   "recorded": {
+    "note": "staging a012c14e, saved 2026-10-08 21:16 IST (span counter)"
+   },
+   "status": "needs_view",
+   "total": null,
+   "width": 5,
+   "depth": null,
+   "observed": null,
+   "computed": null,
+   "filled": null,
+   "conflicts": 2,
+   "side": {
+    "left": "unconfirmed",
+    "right": "unconfirmed"
+   },
+   "refused": [],
+   "rescan_view": "left",
+   "released": false,
+   "wrong_release": false,
+   "wrong_exact": false
+  },
+  {
+   "id": "mechanics trio @ reports/staging-block-20261008/scan-mech-walk.json",
+   "group": "mechanics trio",
+   "genuine": false,
+   "truth": null,
+   "recorded": {
+    "note": "staging, saved 2026-10-09 11:30 IST (walk counter)"
+   },
+   "status": "needs_view",
+   "total": null,
+   "width": 5,
+   "depth": null,
+   "observed": null,
+   "computed": null,
+   "filled": null,
+   "conflicts": 2,
+   "side": {
+    "left": "unconfirmed",
+    "right": "unconfirmed"
+   },
+   "refused": [],
+   "rescan_view": "left",
+   "released": false,
+   "wrong_release": false,
+   "wrong_exact": false
+  },
+  {
+   "id": "30aca6a1 (13 Oct) @ reports/field-scans-20261013/replay/30aca6a1-56da-4564-ac09-93de66c4404d.json",
+   "group": "30aca6a1 (13 Oct)",
+   "genuine": false,
+   "truth": null,
+   "recorded": {
+    "note": "staging f5776f0d (pre-0.4.11 Worker), 2026-10-14"
+   },
+   "status": "needs_view",
+   "total": null,
+   "width": 4,
+   "depth": null,
+   "observed": null,
+   "computed": null,
+   "filled": null,
+   "conflicts": 4,
+   "side": {
+    "left": "unconfirmed",
+    "right": "unconfirmed"
+   },
+   "refused": [
+    "left",
+    "right",
+    "straight"
+   ],
+   "rescan_view": "right",
+   "released": false,
+   "wrong_release": false,
+   "wrong_exact": false
+  },
+  {
+   "id": "30aca6a1 (13 Oct) @ reports/eval-20261015/staging47-replay/30aca6a1-56da-4564-ac09-93de66c4404d.json",
+   "group": "30aca6a1 (13 Oct)",
+   "genuine": false,
+   "truth": null,
+   "recorded": {
+    "note": "staging 47cb2378 (0.4.11 Worker), live replay 2026-10-14 11:53 IST"
+   },
+   "status": "needs_view",
+   "total": null,
+   "width": 4,
+   "depth": null,
+   "observed": null,
+   "computed": null,
+   "filled": null,
+   "conflicts": 4,
+   "side": {
+    "left": "unconfirmed",
+    "right": "unconfirmed"
+   },
+   "refused": [
+    "left",
+    "right",
+    "straight"
+   ],
+   "rescan_view": "right",
+   "released": false,
+   "wrong_release": false,
+   "wrong_exact": false
+  },
+  {
+   "id": "ef823816 (13 Oct) @ reports/field-scans-20261013/replay/ef823816-899d-4e97-9614-10f1ec47c25a.json",
+   "group": "ef823816 (13 Oct)",
+   "genuine": false,
+   "truth": null,
+   "recorded": {
+    "note": "staging f5776f0d (pre-0.4.11 Worker), 2026-10-14"
+   },
+   "status": "needs_view",
+   "total": null,
+   "width": 5,
+   "depth": null,
+   "observed": null,
+   "computed": null,
+   "filled": null,
+   "conflicts": 13,
+   "side": {
+    "left": "unconfirmed",
+    "right": "unconfirmed"
+   },
+   "refused": [
+    "left",
+    "straight"
+   ],
+   "rescan_view": "straight",
+   "released": false,
+   "wrong_release": false,
+   "wrong_exact": false
+  },
+  {
+   "id": "ef823816 (13 Oct) @ reports/eval-20261015/staging47-replay/ef823816-899d-4e97-9614-10f1ec47c25a.json",
+   "group": "ef823816 (13 Oct)",
+   "genuine": false,
+   "truth": null,
+   "recorded": {
+    "note": "staging 47cb2378 (0.4.11 Worker), live replay 2026-10-14 11:53 IST"
+   },
+   "status": "needs_view",
+   "total": null,
+   "width": 5,
+   "depth": null,
+   "observed": null,
+   "computed": null,
+   "filled": null,
+   "conflicts": 13,
+   "side": {
+    "left": "unconfirmed",
+    "right": "unconfirmed"
+   },
+   "refused": [
+    "left",
+    "straight"
+   ],
+   "rescan_view": "straight",
+   "released": false,
+   "wrong_release": false,
+   "wrong_exact": false
+  },
+  {
+   "id": "9b4c783e (13 Oct) @ reports/field-scans-20261013/replay/9b4c783e-7edb-43ed-b7d2-2f8eed889f60.json",
+   "group": "9b4c783e (13 Oct)",
+   "genuine": true,
+   "truth": null,
+   "recorded": {
+    "note": "staging f5776f0d (pre-0.4.11 Worker), 2026-10-14"
+   },
+   "status": "needs_view",
+   "total": null,
+   "width": 4,
+   "depth": null,
+   "observed": null,
+   "computed": null,
+   "filled": null,
+   "conflicts": 2,
+   "side": {
+    "left": "unconfirmed",
+    "right": "unconfirmed"
+   },
+   "refused": [],
+   "rescan_view": "left",
+   "released": false,
+   "wrong_release": false,
+   "wrong_exact": false
+  },
+  {
+   "id": "9b4c783e (13 Oct) @ reports/eval-20261015/staging47-replay/9b4c783e-7edb-43ed-b7d2-2f8eed889f60.json",
+   "group": "9b4c783e (13 Oct)",
+   "genuine": true,
+   "truth": null,
+   "recorded": {
+    "note": "staging 47cb2378 (0.4.11 Worker), live replay 2026-10-14 11:52 IST"
+   },
+   "status": "needs_view",
+   "total": null,
+   "width": 4,
+   "depth": null,
+   "observed": null,
+   "computed": null,
+   "filled": null,
+   "conflicts": 2,
+   "side": {
+    "left": "unconfirmed",
+    "right": "unconfirmed"
+   },
+   "refused": [],
+   "rescan_view": "left",
+   "released": false,
+   "wrong_release": false,
+   "wrong_exact": false
+  },
+  {
+   "id": "f81c04d7 (13 Oct) @ reports/field-scans-20261013/replay/f81c04d7-5fec-4d64-aa8c-54098abf2415.json",
+   "group": "f81c04d7 (13 Oct)",
+   "genuine": false,
+   "truth": null,
+   "recorded": {
+    "note": "staging f5776f0d (pre-0.4.11 Worker), 2026-10-14"
+   },
+   "status": "needs_view",
+   "total": null,
+   "width": 2,
+   "depth": null,
+   "observed": null,
+   "computed": null,
+   "filled": null,
+   "conflicts": 6,
+   "side": {
+    "left": "repeats_front",
+    "right": "unconfirmed"
+   },
+   "refused": [
+    "right"
+   ],
+   "rescan_view": "right",
+   "released": false,
+   "wrong_release": false,
+   "wrong_exact": false
+  },
+  {
+   "id": "f81c04d7 (13 Oct) @ reports/eval-20261015/staging47-replay/f81c04d7-5fec-4d64-aa8c-54098abf2415.json",
+   "group": "f81c04d7 (13 Oct)",
+   "genuine": false,
+   "truth": null,
+   "recorded": {
+    "note": "staging 47cb2378 (0.4.11 Worker), live replay 2026-10-14 11:53 IST"
+   },
+   "status": "needs_view",
+   "total": null,
+   "width": 2,
+   "depth": null,
+   "observed": null,
+   "computed": null,
+   "filled": null,
+   "conflicts": 6,
+   "side": {
+    "left": "repeats_front",
+    "right": "unconfirmed"
+   },
+   "refused": [
+    "right"
+   ],
+   "rescan_view": "right",
+   "released": false,
+   "wrong_release": false,
+   "wrong_exact": false
+  }
+ ],
+ "adversarial": [
+  {
+   "id": "S01 genuine 4x1 one-deep, all 20",
+   "check": "no_wrong_total",
+   "fixed_by": null,
+   "truth": 80,
+   "status": "estimated",
+   "total": 80,
+   "width": 4,
+   "depth": 1,
+   "observed": 80,
+   "computed": 0,
+   "filled": 0,
+   "conflicts": 0,
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "pass": true,
+   "stretch": null
+  },
+  {
+   "id": "S02 genuine 3x2, all 20 (one hidden stack computed)",
+   "check": "no_wrong_exact",
+   "fixed_by": null,
+   "truth": 120,
+   "status": "estimated",
+   "total": 120,
+   "width": 3,
+   "depth": 2,
+   "observed": 100,
+   "computed": 20,
+   "filled": 0,
+   "conflicts": 0,
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "pass": true,
+   "stretch": null
+  },
+  {
+   "id": "S03 top tray of a middle front stack missed (silent -1)",
+   "check": "no_wrong_exact",
+   "fixed_by": null,
+   "truth": 80,
+   "status": "estimated",
+   "total": 79,
+   "width": 4,
+   "depth": 1,
+   "observed": 79,
+   "computed": 0,
+   "filled": 0,
+   "conflicts": 0,
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "pass": true,
+   "stretch": {
+    "check": "no_wrong_total",
+    "fixed_by": "E",
+    "pass": false
+   }
+  },
+  {
+   "id": "S04 bottom tray of a middle front stack missed (silent -1)",
+   "check": "no_wrong_exact",
+   "fixed_by": null,
+   "truth": 80,
+   "status": "estimated",
+   "total": 79,
+   "width": 4,
+   "depth": 1,
+   "observed": 79,
+   "computed": 0,
+   "filled": 0,
+   "conflicts": 0,
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "pass": true,
+   "stretch": {
+    "check": "no_wrong_total",
+    "fixed_by": "E",
+    "pass": false
+   }
+  },
+  {
+   "id": "S05 layer inside a middle stack missed and gap-filled",
+   "check": "no_wrong_exact",
+   "fixed_by": null,
+   "truth": 80,
+   "status": "estimated",
+   "total": 80,
+   "width": 4,
+   "depth": 1,
+   "observed": 80,
+   "computed": 0,
+   "filled": 1,
+   "conflicts": 0,
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "pass": true,
+   "stretch": null
+  },
+  {
+   "id": "S06 short end stack of 2 trays dropped from the front",
+   "check": "no_wrong_exact",
+   "fixed_by": null,
+   "truth": 62,
+   "status": "needs_view",
+   "total": null,
+   "width": 3,
+   "depth": 1,
+   "observed": 60,
+   "computed": 0,
+   "filled": 0,
+   "conflicts": 0,
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   },
+   "refused": [
+    "right"
+   ],
+   "rescan_view": "right",
+   "pass": true,
+   "stretch": null
+  },
+  {
+   "id": "S07 two front stacks merged into one column",
+   "check": "no_wrong_exact",
+   "fixed_by": null,
+   "truth": 80,
+   "status": "estimated",
+   "total": 60,
+   "width": 3,
+   "depth": 1,
+   "observed": 60,
+   "computed": 0,
+   "filled": 0,
+   "conflicts": 0,
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "pass": true,
+   "stretch": {
+    "check": "no_wrong_total",
+    "fixed_by": "F",
+    "pass": false
+   }
+  },
+  {
+   "id": "S08 corner heights 1 apart",
+   "check": "no_wrong_exact",
+   "fixed_by": null,
+   "truth": 60,
+   "status": "estimated",
+   "total": 60,
+   "width": 3,
+   "depth": 1,
+   "observed": 60,
+   "computed": 0,
+   "filled": 0,
+   "conflicts": 0,
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "pass": true,
+   "stretch": null
+  },
+  {
+   "id": "S09 missing interior stack in a 3x3 block (photos identical to a full block)",
+   "check": "no_wrong_exact",
+   "fixed_by": null,
+   "truth": 160,
+   "status": "estimated",
+   "total": 180,
+   "width": 3,
+   "depth": 3,
+   "observed": 140,
+   "computed": 40,
+   "filled": 0,
+   "conflicts": 0,
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "pass": true,
+   "stretch": {
+    "check": "no_wrong_total",
+    "fixed_by": "H",
+    "pass": false
+   }
+  },
+  {
+   "id": "S10 LEFT and RIGHT photos swapped (heights differ)",
+   "check": "no_wrong_total",
+   "fixed_by": null,
+   "truth": 118,
+   "status": "conflict",
+   "total": null,
+   "width": 3,
+   "depth": 2,
+   "observed": 80,
+   "computed": 20,
+   "filled": 0,
+   "conflicts": 1,
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   },
+   "refused": [],
+   "rescan_view": "left",
+   "pass": true,
+   "stretch": null
+  },
+  {
+   "id": "S11 back face (180 degrees) sent as LEFT of a 4x2 block",
+   "check": "no_wrong_total",
+   "fixed_by": null,
+   "truth": 160,
+   "status": "needs_view",
+   "total": null,
+   "width": 4,
+   "depth": null,
+   "observed": null,
+   "computed": null,
+   "filled": null,
+   "conflicts": 2,
+   "side": {
+    "left": "faces_back",
+    "right": "turned"
+   },
+   "refused": [],
+   "rescan_view": "left",
+   "pass": true,
+   "stretch": null
+  },
+  {
+   "id": "S11b back face (180 degrees) sent as LEFT of a square 3x3 block (counts cannot tell it from a side)",
+   "check": "withheld",
+   "fixed_by": null,
+   "truth": 180,
+   "status": "needs_view",
+   "total": null,
+   "width": 3,
+   "depth": null,
+   "observed": null,
+   "computed": null,
+   "filled": null,
+   "conflicts": 1,
+   "side": {
+    "left": "faces_back",
+    "right": "turned"
+   },
+   "refused": [],
+   "rescan_view": "left",
+   "pass": true,
+   "stretch": null
+  },
+  {
+   "id": "S12 front re-shot as LEFT, gallery (no heading), 4x2 block",
+   "check": "withheld",
+   "fixed_by": null,
+   "truth": 160,
+   "status": "needs_view",
+   "total": null,
+   "width": 4,
+   "depth": null,
+   "observed": null,
+   "computed": null,
+   "filled": null,
+   "conflicts": 3,
+   "side": {
+    "left": "repeats_front",
+    "right": "unconfirmed"
+   },
+   "refused": [],
+   "rescan_view": "left",
+   "pass": true,
+   "stretch": null
+  },
+  {
+   "id": "S13 front re-shot as LEFT with the phone turned only 10 degrees",
+   "check": "withheld",
+   "fixed_by": null,
+   "truth": 120,
+   "status": "needs_view",
+   "total": null,
+   "width": 3,
+   "depth": null,
+   "observed": null,
+   "computed": null,
+   "filled": null,
+   "conflicts": 2,
+   "side": {
+    "left": "same_way_as_straight",
+    "right": "turned"
+   },
+   "refused": [],
+   "rescan_view": "left",
+   "pass": true,
+   "stretch": null
+  },
+  {
+   "id": "S14 side photos of another block, phone really turned (4x1 block, 3-deep neighbour)",
+   "check": "no_wrong_total",
+   "fixed_by": "F",
+   "truth": 80,
+   "status": "estimated",
+   "total": 240,
+   "width": 4,
+   "depth": 3,
+   "observed": 160,
+   "computed": 80,
+   "filled": 0,
+   "conflicts": 0,
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "pass": false,
+   "stretch": null
+  },
+  {
+   "id": "S15 one photo sent as all three views from the camera (copies, not three captures)",
+   "check": "not_exact",
+   "fixed_by": null,
+   "truth": 20,
+   "status": "estimated",
+   "total": 20,
+   "width": 1,
+   "depth": 1,
+   "observed": 20,
+   "computed": 0,
+   "filled": 0,
+   "conflicts": 0,
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "pass": true,
+   "stretch": null
+  },
+  {
+   "id": "S16 one photo sent as all three views from the gallery",
+   "check": "not_exact",
+   "fixed_by": null,
+   "truth": 20,
+   "status": "estimated",
+   "total": 20,
+   "width": 1,
+   "depth": 1,
+   "observed": 20,
+   "computed": 0,
+   "filled": 0,
+   "conflicts": 0,
+   "side": {
+    "left": "unverified",
+    "right": "unverified"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "pass": true,
+   "stretch": null
+  },
+  {
+   "id": "S17 one-deep 2x1 block, gallery photos",
+   "check": "not_exact",
+   "fixed_by": null,
+   "truth": 40,
+   "status": "estimated",
+   "total": 40,
+   "width": 2,
+   "depth": 1,
+   "observed": 40,
+   "computed": 0,
+   "filled": 0,
+   "conflicts": 0,
+   "side": {
+    "left": "unverified",
+    "right": "unverified"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "pass": true,
+   "stretch": null
+  },
+  {
+   "id": "S18 genuine 2x1 block, camera walk-around: every stack seen by two photos",
+   "check": "exact_ok",
+   "fixed_by": null,
+   "truth": 40,
+   "status": "exact",
+   "total": 40,
+   "width": 2,
+   "depth": 1,
+   "observed": 40,
+   "computed": 0,
+   "filled": 0,
+   "conflicts": 0,
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "pass": true,
+   "stretch": null
+  },
+  {
+   "id": "S19 bottom tray cut by the frame on a corner stack, the side photo agreeing (img-30 class)",
+   "check": "not_exact",
+   "fixed_by": null,
+   "truth": 40,
+   "status": "estimated",
+   "total": 40,
+   "width": 2,
+   "depth": 1,
+   "observed": 40,
+   "computed": 0,
+   "filled": 0,
+   "conflicts": 0,
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "pass": true,
+   "stretch": null
+  },
+  {
+   "id": "S14F S14 with the blind declaration (4 wide, 1 deep): the other block's sides contradict it",
+   "check": "withheld",
+   "fixed_by": null,
+   "truth": 80,
+   "status": "conflict",
+   "total": null,
+   "width": 4,
+   "depth": 3,
+   "observed": 160,
+   "computed": 80,
+   "filled": 0,
+   "conflicts": 1,
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "pass": true,
+   "stretch": null
+  },
+  {
+   "id": "S20 3x2 block declared interior-full: front-middle seen once, so the declaration cannot confirm",
+   "check": "not_confirmed",
+   "fixed_by": null,
+   "truth": 120,
+   "status": "estimated",
+   "total": 120,
+   "width": 3,
+   "depth": 2,
+   "observed": 100,
+   "computed": 20,
+   "filled": 0,
+   "conflicts": 0,
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "pass": true,
+   "stretch": null
+  },
+  {
+   "id": "R01 MUTAA L-100: three front photos, gallery",
+   "check": "no_wrong_total",
+   "fixed_by": null,
+   "truth": 100,
+   "status": "needs_view",
+   "total": null,
+   "width": 5,
+   "depth": null,
+   "observed": null,
+   "computed": null,
+   "filled": null,
+   "conflicts": 2,
+   "side": {
+    "left": "repeats_front",
+    "right": "repeats_front"
+   },
+   "refused": [],
+   "rescan_view": "left",
+   "pass": true,
+   "stretch": null
+  },
+  {
+   "id": "R04 MUTAA L-80 front (stack 4 bottom cut by the frame, read 19) with side photos agreeing on 20 and 19",
+   "check": "no_wrong_exact",
+   "fixed_by": null,
+   "truth": 80,
+   "status": "estimated",
+   "total": 79,
+   "width": 4,
+   "depth": 1,
+   "observed": 79,
+   "computed": 0,
+   "filled": 0,
+   "conflicts": 0,
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "pass": true,
+   "stretch": null
+  },
+  {
+   "id": "R02 MUTAA L-100 sides sent with camera headings of a real walk-around",
+   "check": "no_wrong_total",
+   "fixed_by": "F",
+   "truth": 100,
+   "status": "estimated",
+   "total": 500,
+   "width": 5,
+   "depth": 5,
+   "observed": 260,
+   "computed": 240,
+   "filled": 1,
+   "conflicts": 0,
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "pass": false,
+   "stretch": null
+  },
+  {
+   "id": "R02F R02 with the blind declaration (5 wide, 1 deep): the front photos sent as sides contradict it",
+   "check": "withheld",
+   "fixed_by": null,
+   "truth": 100,
+   "status": "conflict",
+   "total": null,
+   "width": 5,
+   "depth": 5,
+   "observed": 260,
+   "computed": 240,
+   "filled": 1,
+   "conflicts": 1,
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   },
+   "refused": [],
+   "rescan_view": "straight",
+   "pass": true,
+   "stretch": null
+  },
+  {
+   "id": "R03 MUTAA M16-FAR: neighbouring block in the front photo",
+   "check": "withheld",
+   "fixed_by": null,
+   "truth": null,
+   "status": "needs_view",
+   "total": null,
+   "width": 5,
+   "depth": 4,
+   "observed": 0,
+   "computed": 121,
+   "filled": 0,
+   "conflicts": 11,
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   },
+   "refused": [
+    "right"
+   ],
+   "rescan_view": "right",
+   "pass": true,
+   "stretch": null
+  }
+ ],
+ "reencode": [
+  {
+   "id": "mutaa:L-100:straight",
+   "original": "img-19",
+   "original_total": 100,
+   "original_outcome": "accepted",
+   "reencoded_total": 100,
+   "reencoded_outcome": "accepted",
+   "flipped": false
+  },
+  {
+   "id": "mutaa:L-100:left",
+   "original": "img-21",
+   "original_total": 100,
+   "original_outcome": "accepted",
+   "reencoded_total": 100,
+   "reencoded_outcome": "accepted",
+   "flipped": false
+  },
+  {
+   "id": "mutaa:L-100:right",
+   "original": "img-24",
+   "original_total": 100,
+   "original_outcome": "accepted",
+   "reencoded_total": 100,
+   "reencoded_outcome": "accepted",
+   "flipped": false
+  },
+  {
+   "id": "mutaa:L-109-ORANGE:straight",
+   "original": "img-36",
+   "original_total": 114,
+   "original_outcome": "withheld_flagged",
+   "reencoded_total": 115,
+   "reencoded_outcome": "withheld_flagged",
+   "flipped": true
+  },
+  {
+   "id": "mutaa:L-109-ORANGE:left",
+   "original": "img-17",
+   "original_total": 63,
+   "original_outcome": "withheld_gate",
+   "reencoded_total": 56,
+   "reencoded_outcome": "withheld_flagged",
+   "flipped": true
+  },
+  {
+   "id": "mutaa:L-115:straight",
+   "original": "img-04",
+   "original_total": 120,
+   "original_outcome": "withheld_gate",
+   "reencoded_total": 121,
+   "reencoded_outcome": "withheld_gate",
+   "flipped": true
+  },
+  {
+   "id": "mutaa:L-115:left",
+   "original": "img-05",
+   "original_total": 17,
+   "original_outcome": "withheld_gate",
+   "reencoded_total": 14,
+   "reencoded_outcome": "withheld_gate",
+   "flipped": true
+  },
+  {
+   "id": "mutaa:L-80:straight",
+   "original": "img-30",
+   "original_total": 78,
+   "original_outcome": "accepted",
+   "reencoded_total": 79,
+   "reencoded_outcome": "accepted",
+   "flipped": true
+  },
+  {
+   "id": "mutaa:L-80:left",
+   "original": "img-31",
+   "original_total": 63,
+   "original_outcome": "withheld_gate",
+   "reencoded_total": 59,
+   "reencoded_outcome": "withheld_gate",
+   "flipped": true
+  },
+  {
+   "id": "mutaa:L-80:right",
+   "original": "img-25",
+   "original_total": 13,
+   "original_outcome": "accepted",
+   "reencoded_total": 12,
+   "reencoded_outcome": "accepted",
+   "flipped": true
+  }
+ ]
+}
