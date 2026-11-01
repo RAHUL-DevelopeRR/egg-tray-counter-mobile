@@ -1,3 +1,19 @@
+> 2026-11-01 (latest): plan for "100% counting on the 3D backend" from the existing photos only
+> (C:/Users/rahul/.claude/plans/spicy-growing-flame.md, approved by the user).
+> - Decision: "100%" is a contract about what the backend releases, not a promise for every photo.
+>   - `exact`: every visible stack read the same by two photos.
+>   - `confirmed` (Phase F, not built): an operator-declared interior.
+>   - `estimated`: the parts are shown separately.
+>   - Otherwise the total is withheld.
+>   - Hidden interior stacks can never be measured from photos.
+> - Proof of 99% needs 299 of 299 blindly recounted released blocks in the field. The existing photos can prove
+>   at most about 22% (2 untouched blocks); their job is regression testing and abstention safety.
+> - Done 2026-11-01 (local, not deployed): Phases A (replay harness and registry), B (miss taxonomy), C (Worker
+>   0.4.14 release contract, app 0.4.14 blind manual count) and the D1 Worker/app part.
+> - Waiting on the user: D2, a blind per-stack count of the existing photos (reports/blind-count-20261101).
+> - Next: E (independent pixel counter), F (operator declaration), G (distance ladder, about 40 Roboflow calls,
+>   needs approval).
+
 > 2026-10-31 (latest): same-face guard built (Worker worker-0.4.13 sideCheck, app 0.4.13 heading tracker).
 > - Decision: a block more than one stack deep gets a total only when the camera heading confirms both side
 >   faces. Gallery and older-app scans count one-deep blocks only. A refusal beats a false total.

@@ -1,0 +1,154 @@
+{
+ "name": "M16-FAR-straight",
+ "response": "reports/mutaa-manual-vs-backend-20261031/raw/M16-FAR.json",
+ "view": "straight",
+ "image": [
+  1200,
+  1600
+ ],
+ "columns": [
+  {
+   "column": 1,
+   "boxes": 14,
+   "walk": 17,
+   "span": 23,
+   "filled": 3,
+   "pitch_px": 37.0,
+   "x": [
+    0.0,
+    238.0
+   ],
+   "y_first": 762,
+   "y_last": 1558.5,
+   "gaps_in_pitches": [
+    0.68,
+    0.89,
+    0.74,
+    0.76,
+    1.0,
+    0.57,
+    1.34,
+    1.26,
+    1.49,
+    0.97,
+    1.08,
+    1.19,
+    9.57
+   ],
+   "confidence_min": 0.439
+  },
+  {
+   "column": 2,
+   "boxes": 14,
+   "walk": 18,
+   "span": 11,
+   "filled": 7,
+   "pitch_px": 45.75,
+   "x": [
+    224.0,
+    381.0
+   ],
+   "y_first": 794.5,
+   "y_last": 1242,
+   "gaps_in_pitches": [
+    0.7,
+    0.69,
+    1.16,
+    0.13,
+    1.09,
+    0.01,
+    1.2,
+    1.03,
+    1.05,
+    0.83,
+    0.97,
+    0.01,
+    0.91
+   ],
+   "confidence_min": 0.368
+  },
+  {
+   "column": 3,
+   "boxes": 12,
+   "walk": 17,
+   "span": 12,
+   "filled": 5,
+   "pitch_px": 48.25,
+   "x": [
+    499.0,
+    755.0
+   ],
+   "y_first": 703.5,
+   "y_last": 1238.5,
+   "gaps_in_pitches": [
+    1.85,
+    1.55,
+    0.54,
+    0.93,
+    0.6,
+    0.79,
+    1.36,
+    0.66,
+    0.48,
+    1.25,
+    1.07
+   ],
+   "confidence_min": 0.472
+  },
+  {
+   "column": 4,
+   "boxes": 14,
+   "walk": 19,
+   "span": 18,
+   "filled": 5,
+   "pitch_px": 37.0,
+   "x": [
+    709.0,
+    957.0
+   ],
+   "y_first": 744,
+   "y_last": 1368,
+   "gaps_in_pitches": [
+    2.53,
+    1.7,
+    1.0,
+    0.69,
+    1.36,
+    0.76,
+    0.72,
+    0.65,
+    0.89,
+    0.97,
+    3.42,
+    0.65,
+    1.53
+   ],
+   "confidence_min": 0.368
+  },
+  {
+   "column": 5,
+   "boxes": 9,
+   "walk": 8,
+   "span": 9,
+   "filled": 0,
+   "pitch_px": 53.5,
+   "x": [
+    915.0,
+    1190.0
+   ],
+   "y_first": 766,
+   "y_last": 1180,
+   "gaps_in_pitches": [
+    1.4,
+    1.15,
+    0.58,
+    0.49,
+    1.2,
+    0.97,
+    0.93,
+    1.03
+   ],
+   "confidence_min": 0.507
+  }
+ ]
+}

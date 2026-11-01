@@ -149,3 +149,18 @@ test('missing or malformed evidence never refuses a scan and a real block keeps 
   assert.deepEqual([result.block.side_check.left.status, result.block.side_check.right.status], ['unverified', 'unverified']);
   assert.equal(result.block.total_trays, 99);
 });
+
+test('a side photo turned past 135 degrees faces the back of the block and is refused; the turn direction is recorded', () => {
+  const square = cols([20, 20, 20]);
+  const back = sideCheck({straight: square, left: square, right: square},
+    {straight: heading(10), left: heading(-170), right: heading(100)});
+  assert.equal(back.left.status, 'faces_back'); assert.equal(Math.abs(back.left.turn_deg), 180);
+  assert.ok(back.left.reason.startsWith('LEFT: taken facing the back of the block (phone turned 180 degrees from STRAIGHT)'), back.left.reason);
+  assert.equal(back.right.status, 'turned');
+  // Facing the left side face is a right turn (negative yaw): recorded as direction_ok, not enforced yet.
+  const genuine = sideCheck({straight: square, left: square, right: square}, {straight: heading(0), left: heading(-92), right: heading(87)});
+  assert.deepEqual([genuine.left.status, genuine.left.direction_ok, genuine.right.direction_ok], ['turned', true, true]);
+  const swapped = sideCheck({straight: square, left: square, right: square}, {straight: heading(0), left: heading(92), right: heading(-87)});
+  assert.deepEqual([swapped.left.status, swapped.left.direction_ok, swapped.right.direction_ok], ['turned', false, false]);
+  assert.equal(sideCheck({straight: square, left: square, right: square}, {straight: heading(0), left: heading(-135), right: heading(90)}).left.status, 'turned');
+});

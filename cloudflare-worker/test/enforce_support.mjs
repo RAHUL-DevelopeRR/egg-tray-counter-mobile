@@ -37,11 +37,13 @@ export async function activeDevice(env, n) {
 // Three distinct JPEG-signed photos; `seed` changes their bytes (a retake).
 export const photoBytes = (seed) => ['left', 'right', 'straight'].map((_, i) => new Uint8Array([255, 216, 255, i, seed]));
 // contract: the scan_contract field (null leaves it out); cells: {view: cell id} sent as <view>_cell_id.
-export function scanForm(scanId, seed = 0, {contract = 'model_spatial_v1', cells = {}} = {}) {
+export function scanForm(scanId, seed = 0, {contract = 'model_spatial_v1', cells = {}, headings = {}} = {}) {
   const form = new FormData();
   if (contract !== null) form.set('scan_contract', contract);
   if (scanId) form.set('scan_id', scanId);
   for (const [view, id] of Object.entries(cells)) form.set(`${view}_cell_id`, id);
+  for (const [view, [yaw, session]] of Object.entries(headings))
+    form.set(`${view}_constraint_evidence`, JSON.stringify({source: 'captured_still', yaw_deg: yaw, yaw_session: session}));
   photoBytes(seed).forEach((bytes, i) => form.set(['left', 'right', 'straight'][i], new File([bytes], `${i}.jpg`, {type: 'image/jpeg'})));
   return form;
 }
@@ -51,11 +53,14 @@ export const postScan = (env, scanId, headers, seed = 0, options = {}) =>
 const sha = (data) => createHash('sha256').update(data).digest('hex');
 // The job identity the Worker writes (fingerprint version 2): SHA-256 of the JSON array
 // [2, left, right, straight, scan_contract, [[view, cell id], ...] sorted by view].
-export function jobIdentity(seed = 0, {contract = 'model_spatial_v1', cells = {}} = {}) {
+// Version 3 (0.4.14) adds the phone headings per view ([yaw, session] or null); version 2 (0.4.12-0.4.13) has none.
+export function jobIdentity(seed = 0, {contract = 'model_spatial_v1', cells = {}, headings = {}, version = 3} = {}) {
   const [left, right, straight] = photoBytes(seed).map(sha);
   const cellIds = Object.fromEntries(Object.entries(cells).map(([view, id]) => [view, id.trim().toUpperCase()]).sort(([a], [b]) => (a < b ? -1 : 1)));
-  return {image_hashes: {left, right, straight}, fingerprint: sha(JSON.stringify([2, left, right, straight, contract, Object.entries(cellIds)])),
-    fingerprint_version: 2, scan_contract: contract, cell_ids: cellIds};
+  const fields = [version, left, right, straight, contract, Object.entries(cellIds)];
+  if (version >= 3) fields.push(['left', 'right', 'straight'].map(view => headings[view] ?? null));
+  return {image_hashes: {left, right, straight}, fingerprint: sha(JSON.stringify(fields)),
+    fingerprint_version: version, scan_contract: contract, cell_ids: cellIds};
 }
 // A job written before fingerprint version 2: SHA-256 of the ordered view hashes joined with '|', no other fields.
 export function legacyJobIdentity(seed = 0) {

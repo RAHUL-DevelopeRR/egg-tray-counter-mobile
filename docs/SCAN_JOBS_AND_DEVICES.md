@@ -184,7 +184,8 @@ Jobs:
 - Fingerprint v2 = SHA-256 of the three photo hashes, `scan_contract` as sent and `[view, cell_id]` pairs
   sorted by view; jobs store `fingerprint_version: 2`, `scan_contract`, `cell_ids`. Older jobs without these
   fields replay for the same photos whatever metadata is sent.
-- `PIPELINE_VERSION = worker-0.4.12` (`worker-0.4.13` from the side-face check below). A failure after a lost lease returns the other attempt's stored
+- `PIPELINE_VERSION = worker-0.4.12` (`worker-0.4.13` from the side-face check below, `worker-0.4.14` from the release
+  contract at the end). A failure after a lost lease returns the other attempt's stored
   result (200) or 202 if it is still running; `job.status` says `failed` only when the failure was stored.
 - A missing `scan_id` is still minted by the server (no idempotency for such a request).
 
@@ -258,7 +259,46 @@ Reason: MUTAA set L-100 (three FRONT photos of a 5 x 1 block uploaded as STRAIGH
 - Malformed or oversized evidence (over 8,000 characters) is ignored, never a refusal.
 - Known gaps:
   - Headings are not archived with the photos and are not part of the job fingerprint. A replay from the
-    R2 originals has no heading, so a deep block counted live is withheld on replay.
+    R2 originals has no heading, so a deep block counted live is withheld on replay. **Closed in 0.4.14** (below).
   - A heading gets about 0.1-0.5 degrees of gyroscope drift per second, so a long pause before a retake
     weakens the 45-degree test.
   - A block against a wall (one side cannot be photographed) cannot be scanned with the camera.
+
+## Release contract (0.4.14, 2026-11-01)
+
+Plan: `C:/Users/rahul/.claude/plans/spicy-growing-flame.md`, Phases C and D1. Measurements:
+`reports/replay-baseline-20261101` and `reports/miss-taxonomy-20261101`.
+
+**Reason.** One photo's reading of a stack can be wrong with every rule satisfied. img-30 read 78 for 80: one box
+covered the top trays of two stacks, and the bottom tray, cut by the frame edge, was merged as a duplicate.
+0.4.13 still called such a block `exact`.
+
+- **Verified stack** (`cells[].verified`, `cells[].readings`). Two different photos read it the same, neither
+  reading has a gap-filled layer, and neither has a doubt.
+  - Span = walk is *not* a second reading: both come from the same boxes.
+  - A recessed (missing) front cell is verified only when two photos see the gap.
+  - A stack seen behind a missing one is never verified.
+- **Doubts per column** (`stack_columns[].doubts`). A doubt never refuses a count:
+  - `box_over_two_stacks`: a box 1.5 x the face's median width, marked on every column whose centre it spans;
+  - `box_over_two_trays`: a box 1.5 x its column's median height;
+  - `end_box_cut_short`: the top or bottom box below 0.6 x the median height;
+  - `bottom_above_floor`: the bottom box over half a pitch above both neighbours' bottoms. Interior,
+    non-recessed stacks only.
+- **`exact`** requires no computed cells, no ambiguity, no conflict, and every observed or missing cell verified.
+  Otherwise the result is `estimated` with a total.
+  - New block fields: `visible_verified_trays`, `visible_single_reading_trays` and `single_reading_cells`.
+- **Stray groups** (`views.<view>.stray_groups`) are box groups of 1 or 2: a short stack, a loose tray or a stray
+  box. They are never counted. Any stray group adds an ambiguity, so the block is an estimate.
+- **Side check.** A side in STRAIGHT's session turned more than 135 degrees is refused as `faces_back`; the app
+  refuses it before the shutter too.
+  - `direction_ok` records whether LEFT turned right (negative yaw) and RIGHT turned left.
+  - It is **not enforced** until a phone walk-around confirms the sign.
+- **Headings archived.** Each photo's R2 object carries `yaw_deg` and `yaw_session` in its custom metadata.
+- **Job fingerprint version 3** adds the headings, so other headings on the same photos are a 409. Version 2 jobs are
+  matched on their own fields and still replay.
+- **App 0.4.14.**
+  - The result card splits seen trays into "Seen by two photos" and "Seen by one photo only".
+  - The manual count is blind. Fields start empty, the app's counts and total are hidden, and every reachable
+    stack must be entered.
+- **Consequence.** Until a second reading exists for front-middle stacks (plan Phase E), blocks wider than two
+  stacks are `estimated`, never `exact`.

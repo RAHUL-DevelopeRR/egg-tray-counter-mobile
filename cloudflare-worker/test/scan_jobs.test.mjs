@@ -41,7 +41,7 @@ test('first count processes and stores the full response; an identical retry rep
   assert.equal(job.owner, device.id);
   assert.deepEqual(job.image_hashes, jobIdentity(0).image_hashes);
   assert.equal(job.fingerprint, jobIdentity(0).fingerprint);
-  assert.equal(job.fingerprint_version, 2);
+  assert.equal(job.fingerprint_version, 3);
   assert.equal(job.scan_contract, 'model_spatial_v1');
   assert.deepEqual(job.cell_ids, {});
   assert.deepEqual(job.result, body);
@@ -409,7 +409,7 @@ test('the same photos with another scan_contract or other cell ids are a conflic
   const identity = jobIdentity(0, {cells});
   assert.equal(job.fingerprint, identity.fingerprint);
   assert.notEqual(job.fingerprint, legacyJobIdentity(0).fingerprint);
-  assert.deepEqual([job.fingerprint_version, job.scan_contract, job.cell_ids], [2, 'model_spatial_v1', cells]);
+  assert.deepEqual([job.fingerprint_version, job.scan_contract, job.cell_ids], [3, 'model_spatial_v1', cells]);
   // The same request (cell ids are trimmed and upper-cased as the Worker reads them) replays.
   const same = await postScan(env, scanId, headers, 0, {cells: {straight: 'a1', left: ' a1 ', right: 'A1'}});
   assert.equal(same.status, 200);
@@ -455,9 +455,35 @@ test('a job written before fingerprint version 2 replays for the same photos wha
   const upgraded = bucket.readJson(jobKey(interruptedId));
   const identity = jobIdentity(0, {cells: {left: 'A1'}});
   assert.deepEqual([upgraded.fingerprint, upgraded.fingerprint_version, upgraded.scan_contract, upgraded.cell_ids],
-    [identity.fingerprint, 2, 'model_spatial_v1', {left: 'A1'}]);
+    [identity.fingerprint, 3, 'model_spatial_v1', {left: 'A1'}]);
   assert.equal(upgraded.status, 'done');
   assert.equal((await postScan(env, interruptedId, headers, 0, {cells: {left: 'A1'}})).status, 200);
   assert.equal((await postScan(env, interruptedId, headers, 0)).status, 409);
+  assert.equal(inference.calls, 3);
+});
+
+test('phone headings are part of the request: other headings are a conflict; a version 2 job (0.4.13) still replays', LIMIT, async t => {
+  const {bucket, env, headers, inference, device} = await setup(t);
+  const scanId = crypto.randomUUID();
+  const headings = {straight: [0, 'walk1'], left: [-91.5, 'walk1'], right: [88, 'walk1']};
+  assert.equal((await postScan(env, scanId, headers, 0, {headings})).status, 200);
+  const job = bucket.readJson(jobKey(scanId));
+  assert.equal(job.fingerprint, jobIdentity(0, {headings}).fingerprint);
+  // The archive keeps each photo's heading, so a replay from R2 judges the side faces as the live scan did.
+  const left = [...bucket.objects.keys()].find(k => k.startsWith(`scans/${scanId}/left/`));
+  assert.deepEqual([bucket.objects.get(left).customMetadata.yaw_deg, bucket.objects.get(left).customMetadata.yaw_session], ['-91.5', 'walk1']);
+  assert.equal((await (await postScan(env, scanId, headers, 0, {headings})).json()).job.replayed, true);
+  for (const other of [{}, {...headings, left: [-30, 'walk1']}, {...headings, right: [88, 'walk2']}]) {
+    assert.equal((await postScan(env, scanId, headers, 0, {headings: other})).status, 409, JSON.stringify(other));
+  }
+  // A job a 0.4.13 Worker wrote (fingerprint version 2, no headings) replays for the same photos across the deploy.
+  const v2Id = crypto.randomUUID();
+  const now = new Date().toISOString();
+  const stored = {scan_id: v2Id, block: {total_trays: 20}, job: {scan_id: v2Id, status: 'done', attempt: 1, replayed: false, pipeline_version: 'worker-0.4.13'}};
+  await bucket.seed(jobKey(v2Id), {v: 1, scan_id: v2Id, owner: device.id, ...jobIdentity(0, {version: 2}), pipeline_version: 'worker-0.4.13',
+    status: 'done', attempt: 1, lease_until: now, created_at: now, updated_at: now, result: stored}, {status: 'done', owner: device.id});
+  const retry = await postScan(env, v2Id, headers, 0, {headings});
+  assert.equal(retry.status, 200);
+  assert.equal((await retry.json()).job.replayed, true);
   assert.equal(inference.calls, 3);
 });

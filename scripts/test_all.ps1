@@ -53,6 +53,16 @@ try {
     & $Python @PytestArgs (Join-Path $ProjectRoot 'scripts\tests')
     if ($LASTEXITCODE -ne 0) { throw 'Script tests failed.' }
 
+    # Worker: TypeScript build and node tests, including the offline replay benchmark over every saved detection
+    # set (test/replay_benchmark.test.mjs). No network, no wrangler.
+    Push-Location (Join-Path $ProjectRoot 'cloudflare-worker')
+    try {
+        & npm test
+        if ($LASTEXITCODE -ne 0) { throw 'Worker tests failed.' }
+    } finally {
+        Pop-Location
+    }
+
     if ($SkipFlutter) {
         Write-Host 'Flutter analyze/tests skipped (-SkipFlutter).'
         return

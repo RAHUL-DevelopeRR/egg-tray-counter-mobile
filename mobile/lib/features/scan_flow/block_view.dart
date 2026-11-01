@@ -152,13 +152,18 @@ class BlockPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final single = block.visibleSingleReadingTrays ?? 0;
     final (headline, color) = switch (block.status) {
-      kBlockExact => ('ALL STACKS SEEN', kObserved),
+      kBlockExact => ('EVERY STACK SEEN BY TWO PHOTOS', kObserved),
       kBlockEstimated when block.computedTrays > 0 => (
         'ESTIMATE: ${block.computedTrays} TRAYS IN HIDDEN STACKS',
         kComputed,
       ),
-      kBlockEstimated => ('ESTIMATE: FACES DIFFER BY ONE LAYER', kComputed),
+      kBlockEstimated when single > 0 => (
+        'ESTIMATE: $single TRAYS SEEN BY ONE PHOTO ONLY',
+        kComputed,
+      ),
+      kBlockEstimated => ('ESTIMATE: A READING IS UNCERTAIN', kComputed),
       'needs_view' => ('RETAKE A PHOTO', kRescan),
       _ => ('RESCAN REQUIRED', kRescan),
     };
@@ -195,7 +200,12 @@ class BlockPanel extends StatelessWidget {
               ),
               const Divider(height: 24),
               _Row('Block', '${block.width} wide × ${block.depth} deep'),
-              _Row('Seen trays', '${block.observedTrays}'),
+              if (block.visibleVerifiedTrays == null)
+                _Row('Seen trays', '${block.observedTrays}')
+              else ...[
+                _Row('Seen by two photos', '${block.visibleVerifiedTrays}'),
+                _Row('Seen by one photo only', '$single'),
+              ],
               _Row('Hidden trays (computed)', '${block.computedTrays}'),
               if (block.filledTrays > 0)
                 _Row('Layers between detected boxes', '${block.filledTrays}'),

@@ -1,0 +1,3115 @@
+{
+ "registry": "registry-20261101",
+ "built_by": "scripts/build_replay_registry.mjs",
+ "truth_tiers": {
+  "U": "the user's handwritten count on the photo (a stack-face or block total, scope from the 2026-10-15 audit)",
+  "U-blind": "the user's blind per-stack count (Phase D2; none yet)",
+  "V": "visual consensus of three agent counters, reconciled (2026-10-31); not physical, never pooled with U",
+  "S": "synthetic, known by construction (adversarial library in cloudflare-worker/test/replay_benchmark.mjs)"
+ },
+ "splits": {
+  "untouched": "img-47 and img-49 only: untouched by detector training and by counting-logic tuning",
+  "development": "everything else; figures from it are development figures, not proof"
+ },
+ "counts": {
+  "faces": 72,
+  "trios": 22
+ },
+ "faces": [
+  {
+   "id": "img-01",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-01.jpg",
+   "sha256": "803585bfe669dab28481b1b840ba50b678ce00082d1b7edc03731359992ef359",
+   "cluster": "ND0014",
+   "block_id": "G01",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-01.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 1280,
+    "height": 582
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 99,
+    "scope_tier": "A",
+    "scope": "whole visible face of a 5 x 1 block = the block total (left end against the wall)",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": true,
+    "in_walk_development_photos": true,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 99
+   }
+  },
+  {
+   "id": "img-02",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-02.jpeg",
+   "sha256": "c75d95aab77f664d35aa78e54bfdb06732b9a15e7f286d30e9294afdd9672e17",
+   "cluster": "ND0141",
+   "block_id": "G04",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-01.json",
+    "view": "right"
+   },
+   "image": {
+    "width": 1280,
+    "height": 1109
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 80,
+    "scope_tier": "A",
+    "scope": "front face, 4 stacks x 20; block is several rows deep",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": true,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 80
+   }
+  },
+  {
+   "id": "img-04",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-04.jpeg",
+   "sha256": "312737fcdbc9c1793a8bcd31ebaae18441a747f0bab525ab9b2917b530939e00",
+   "cluster": "ND0143",
+   "block_id": "G05",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-02.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 115,
+    "scope_tier": "B",
+    "scope": "visible face of a two-depth arrangement (short stack standing in front)",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": true,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 120
+   }
+  },
+  {
+   "id": "img-08",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-08.jpeg",
+   "sha256": "76db53a0a4cbb156e78be87242d9e90e1985ff83674f97d5d5872f0575fbae2a",
+   "cluster": "ND0145",
+   "block_id": "G06",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-03.json",
+    "view": "right"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 160,
+    "scope_tier": "A",
+    "scope": "front face, 8 stacks x 20, square-on",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": true,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 160
+   }
+  },
+  {
+   "id": "img-09",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-09.jpeg",
+   "sha256": "22fe8ad3370e5da9d2a582e417dd5f589c9df6cbdafa9a3939608fac6d701f7b",
+   "cluster": "ND0146",
+   "block_id": "G08",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-03.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 75,
+    "scope_tier": "B",
+    "scope": "close three-depth arrangement with a short front stack and an empty top tray",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": true,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_flagged",
+    "predicted_total": 85
+   }
+  },
+  {
+   "id": "img-19",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-19.jpeg",
+   "sha256": "581bd15c16fa868c93ef6556a6fd663907733ad2cae8c6035e945a8dae4cf971",
+   "cluster": "ND0049",
+   "block_id": "G02",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-07.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 1600,
+    "height": 1200
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 100,
+    "scope_tier": "A",
+    "scope": "front face 5 x 20, square-on",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": true,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": true
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 100
+   }
+  },
+  {
+   "id": "img-20",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-20.jpeg",
+   "sha256": "d8c8983ab7cc37b733046029040415870491779e1101257781e424afe7705041",
+   "cluster": "ND0071",
+   "block_id": "G17",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-07.json",
+    "view": "right"
+   },
+   "image": {
+    "width": 1200,
+    "height": 1600
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 60,
+    "scope_tier": "B",
+    "scope": "front face 3 x 20, close; part of another block at the left edge",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": true,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 60
+   }
+  },
+  {
+   "id": "img-21",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-21.jpeg",
+   "sha256": "0398f6c5f9016129c3f1544d7878f6ac83c39262df4f36f9c6796084e494ed83",
+   "cluster": "ND0155",
+   "block_id": "G02",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-07.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 1280,
+    "height": 582
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 100,
+    "scope_tier": "A",
+    "scope": "front face 5 x 20, wide 20:9 frame",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": true,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": true
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 100
+   }
+  },
+  {
+   "id": "img-23",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-23.jpeg",
+   "sha256": "fb4f7cca6e300aa79758eaf9b8f6c4ea8de0a17c6b309dea5fb651cb52bfb825",
+   "cluster": "ND0145",
+   "block_id": "G06",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-08.json",
+    "view": "right"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 160,
+    "scope_tier": "A",
+    "scope": "same photograph as img-08",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": true,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 160
+   }
+  },
+  {
+   "id": "img-24",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-24.jpeg",
+   "sha256": "64c7873491a23a0d57d4efb65c79e4acd9dd734ddf72f14150398b93ea5c69a7",
+   "cluster": "ND0155",
+   "block_id": "G02",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-08.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 1280,
+    "height": 582
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 100,
+    "scope_tier": "A",
+    "scope": "front face 5 x 20, wide 20:9 frame",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": true,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": true
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 100
+   }
+  },
+  {
+   "id": "img-30",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-30.jpeg",
+   "sha256": "edd3b7745b8b1e3b5367dcf0c124d3c8d420cc6f3aab19a90f11bea76533bd35",
+   "cluster": "ND0160",
+   "block_id": "G03",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-10.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 1600,
+    "height": 900
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 80,
+    "scope_tier": "A",
+    "scope": "the 80 face square-on, 4 x 20; a sliver of another stack at the left edge",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": "leak_free",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": true,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 78
+   }
+  },
+  {
+   "id": "img-31",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-31.jpeg",
+   "sha256": "936f115049c2195a3b2c74cf009061f8b3a6ba0cd5ad6d63e743310765dece74",
+   "cluster": "ND0161",
+   "block_id": "G03",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-11.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 900,
+    "height": 1600
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 80,
+    "scope_tier": "B",
+    "scope": "the same 4-column face, oblique; nearest column cut by the left edge",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": "leak_free",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 63
+   }
+  },
+  {
+   "id": "img-32",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-32.jpeg",
+   "sha256": "fc86f9d70cd37eed83bca6d6edb3eaa7379bfa8eac58a86e9cb9a566eba96b78",
+   "cluster": "ND0013",
+   "block_id": "G01",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-11.json",
+    "view": "right"
+   },
+   "image": {
+    "width": 580,
+    "height": 1280
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 19,
+    "scope_tier": "A",
+    "scope": "the free end stack of the 99 block, seen end-on",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": true,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 19
+   }
+  },
+  {
+   "id": "img-33",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-33.jpeg",
+   "sha256": "442bb4923479f9cfc6607b03538a624528d2f830768701240ef505b5504b37a7",
+   "cluster": "ND0162",
+   "block_id": "G12",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-11.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 1280,
+    "height": 580
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 358,
+    "scope_tier": "B",
+    "scope": "the long egg-filled face; empty crates and empty pulp stacks at both edges",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 0
+   }
+  },
+  {
+   "id": "img-34",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-34.jpeg",
+   "sha256": "08ece1480e197722ac86346f190e4afb41ec0dda9c0d1ef32511492138383f17",
+   "cluster": "ND0019",
+   "block_id": "G21",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-12.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 1600,
+    "height": 1200
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 120,
+    "scope_tier": "A",
+    "scope": "front face 6 x 20, square-on",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": true,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 120
+   }
+  },
+  {
+   "id": "img-35",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-35.jpeg",
+   "sha256": "18d82ecebe1d8ad79cceb4225043ab4e18258dac7eab1de2c56774beb423c9c5",
+   "cluster": "ND0088",
+   "block_id": "G22",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-12.json",
+    "view": "right"
+   },
+   "image": {
+    "width": 1280,
+    "height": 580
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 1,
+    "scope_tier": "A",
+    "scope": "single tray",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 0
+   }
+  },
+  {
+   "id": "img-36",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-36.jpeg",
+   "sha256": "a19cdbd4d34799c4cb9f25494da4febf16d910bfe062733733cea0d7b8fa4b1d",
+   "cluster": "ND0163",
+   "block_id": "G15",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-12.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 109,
+    "scope_tier": "B",
+    "scope": "front face of the img-17 block; stacks of another block at the left edge, a set-back short stack at right",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_flagged",
+    "predicted_total": 114
+   }
+  },
+  {
+   "id": "img-38",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-38.jpeg",
+   "sha256": "e31ae2fb86d912a40fae54c0c25414952379e892050ea1db631067a5880d00ba",
+   "cluster": "ND0057",
+   "block_id": "G23",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-13.json",
+    "view": "right"
+   },
+   "image": {
+    "width": 1280,
+    "height": 582
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 118,
+    "scope_tier": "B",
+    "scope": "two groups of 3 egg stacks; empty green trays and crates at right apparently not counted",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 102
+   }
+  },
+  {
+   "id": "img-39",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-39.jpeg",
+   "sha256": "2fba068084e12d457df761cb58ba4ef204852f4f973f5a23c63a679d7c608b6e",
+   "cluster": "ND0045",
+   "block_id": "G24",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-13.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 582,
+    "height": 1280
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 2,
+    "scope_tier": "A",
+    "scope": "2 trays top-down, close",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 3
+   }
+  },
+  {
+   "id": "img-40",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-40.jpeg",
+   "sha256": "aefa71273017b073fa5fc2c4bdb2d810c95be298612a4426b7393d43b04c4568",
+   "cluster": "ND0061",
+   "block_id": "G07",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-14.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 10,
+    "scope_tier": "B",
+    "scope": "whole scene: 4 loose trays + 6-tray stack",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 0
+   }
+  },
+  {
+   "id": "img-46",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-46.jpeg",
+   "sha256": "33161764bc19f6fb7df35c26a3431910596f5abe5bfac7d9435ab88f1206e74f",
+   "cluster": "ND0168",
+   "block_id": "G29",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-16.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 391,
+    "height": 1280
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 20,
+    "scope_tier": "B",
+    "scope": "single stack (391 px crop); label partly cut at top",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": "leak_free",
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": true,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_flagged",
+    "predicted_total": 19
+   }
+  },
+  {
+   "id": "img-47",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-47.jpeg",
+   "sha256": "bd1a37426ec1dbcfa4a8d500eff952ca9d072aa1a383bb3936d933e5e9d346ca",
+   "cluster": "ND0169",
+   "block_id": "G30",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-16.json",
+    "view": "right"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 7,
+    "scope_tier": "A",
+    "scope": "single stack of 7 filled trays; empty tray stacks in the background",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": "leak_free",
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "untouched",
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 7
+   }
+  },
+  {
+   "id": "img-49",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-49.jpeg",
+   "sha256": "5eb15a01f7555f571f74456b834722dd07da184e03ee59a5b682b4a71d611414",
+   "cluster": "ND0170",
+   "block_id": "G31",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-17.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 1200,
+    "height": 1600
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 1,
+    "scope_tier": "A",
+    "scope": "single pulp tray",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": "leak_free",
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "untouched",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 0
+   }
+  },
+  {
+   "id": "img-50",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-50.jpeg",
+   "sha256": "5f70e3742c0054e8e2236377681755aa97b578e24d877d90452e3c13817a01ae",
+   "cluster": "ND0010",
+   "block_id": "G32",
+   "role": "face",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-17.json",
+    "view": "right"
+   },
+   "image": {
+    "width": 900,
+    "height": 1600
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 40,
+    "scope_tier": "B",
+    "scope": "two stacks close from above",
+    "usable": true
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": "leak_free",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": true,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_flagged",
+    "predicted_total": 44
+   }
+  },
+  {
+   "id": "img-03",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-03.jpeg",
+   "sha256": "bb76ebf063aff5782db72bedcd5642c6ebaedd66f90063c6cfc23d42f6570ecd",
+   "cluster": "ND0142",
+   "block_id": "G04",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-01.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 80,
+    "usable": false,
+    "scope": "probably the img-02 face seen at an angle; a second face and a separate short stack group are also in frame",
+    "why_not_usable": "scope covers one face of a multi-face, multi-object frame"
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 65
+   }
+  },
+  {
+   "id": "img-05",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-05.jpeg",
+   "sha256": "a4392c0a9c75f3a637e4694347b94878126c24d34fb7544d5313ff35431515c2",
+   "cluster": "ND0144",
+   "block_id": "G05",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-02.json",
+    "view": "right"
+   },
+   "image": {
+    "width": 1278,
+    "height": 960
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 235,
+    "usable": false,
+    "scope": "two bracketed blocks; right one is probably the img-04 block; stacks/crates at far left outside brackets",
+    "why_not_usable": "region labels: need the bracket ROIs; 235 is not a whole-image count"
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 17
+   }
+  },
+  {
+   "id": "img-06",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-06.jpeg",
+   "sha256": "f7756b24b59c1e0a2ffe965787f05d0f1b12b998d2424c1be6885c057fb997f7",
+   "cluster": "ND0031",
+   "block_id": "G07",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-02.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 4,
+    "usable": false,
+    "scope": "4 loose trays inside a drawn polygon; stacks at top edge outside",
+    "why_not_usable": "region label (bracket)"
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 0
+   }
+  },
+  {
+   "id": "img-07",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-07.jpeg",
+   "sha256": "2a4b6816ccb870bd225b1c5d3c02cdc6e090d720e1004c693c65a40d17e2143a",
+   "cluster": "ND0092",
+   "block_id": "G07",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-03.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 4,
+    "usable": false,
+    "scope": "same 4 loose trays; stack corner at top edge outside",
+    "why_not_usable": "region label (bracket)"
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 3
+   }
+  },
+  {
+   "id": "img-10",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-10.jpeg",
+   "sha256": "c2425fd7140b9f95ab0082c9b7c92411c2290b56f02a102a67550db2866739d8",
+   "cluster": "ND0147",
+   "block_id": "G09",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-04.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 30,
+    "usable": false,
+    "scope": "bracket over a pulp-tray block whose visible layers far exceed 30",
+    "why_not_usable": "unit/scope unclear"
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 39
+   }
+  },
+  {
+   "id": "img-11",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-11.jpeg",
+   "sha256": "6803b9fe7412bd37b20a66297f9675fbb39aa72e7fbcb0f9dddb63e681233235",
+   "cluster": "ND0061",
+   "block_id": "G07",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-04.json",
+    "view": "right"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 8,
+    "usable": false,
+    "scope": "2 loose trays (bracketed) + a 6-tray stack; 2 more loose trays visible unbracketed",
+    "why_not_usable": "same photograph as img-40 (labelled 10 for the whole scene)"
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 0
+   }
+  },
+  {
+   "id": "img-12",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-12.jpeg",
+   "sha256": "b4a377c6da79c08017cd5541af90c364d771ca3c85f539ddfd491e97ef805b28",
+   "cluster": "ND0148",
+   "block_id": "G11",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-04.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 205,
+    "usable": false,
+    "scope": "two faces of ONE block meeting at a corner",
+    "why_not_usable": "labels.csv sums 205, which double-counts the shared corner column; not a visible-tray or block total"
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 0
+   }
+  },
+  {
+   "id": "img-13",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-13.jpeg",
+   "sha256": "775578bad4554674eb707a954900bb4027af02ffdf203dce0b420ff25b0e96ea",
+   "cluster": "ND0149",
+   "block_id": "G12",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-05.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 204,
+    "usable": false,
+    "scope": "short end face (84) + a bracketed part of the long face (120); the long face continues outside the bracket",
+    "why_not_usable": "region labels; probably the long block of img-33"
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 0
+   }
+  },
+  {
+   "id": "img-14",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-14.jpeg",
+   "sha256": "ece7ea5d7ef56af48af1428ac5e163e7fa20c6bc67c252ba73433912dbad13fa",
+   "cluster": "ND0150",
+   "block_id": "G13",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-05.json",
+    "view": "right"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 132,
+    "usable": false,
+    "scope": "two faces at an inside corner; the 52 face is cut by the right frame edge",
+    "why_not_usable": "52 + the short stack cut off = img-15's 62 for the same face"
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 80
+   }
+  },
+  {
+   "id": "img-15",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-15.jpeg",
+   "sha256": "cc481592c33a1d7a3ef1d6b5a200a1a675dc2a62fcfb3c7daa127a35a8105a83",
+   "cluster": "ND0151",
+   "block_id": "G13",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-05.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 62,
+    "usable": false,
+    "scope": "one face with a pulp inset, including a short front stack; neighbouring blocks outside",
+    "why_not_usable": "region label (bracket)"
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 16
+   }
+  },
+  {
+   "id": "img-16",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-16.jpeg",
+   "sha256": "4ecf35169e51f634e8bb9a572fcaedda1f96d48171a2c44130f265357d78014b",
+   "cluster": "ND0152",
+   "block_id": "G14",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-06.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 119,
+    "usable": false,
+    "scope": "front face; bracket excludes the stack at the right edge",
+    "why_not_usable": "region label; same photograph as img-22"
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_flagged",
+    "predicted_total": 130
+   }
+  },
+  {
+   "id": "img-17",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-17.jpeg",
+   "sha256": "6f69d4f3a29ba225cf6a2e22a47f1c1888f5a3b13baf2dbb9c2a917f1b7a75e3",
+   "cluster": "ND0153",
+   "block_id": "G15",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-06.json",
+    "view": "right"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 109,
+    "usable": false,
+    "scope": "front face of a corner view; side face outside the bracket",
+    "why_not_usable": "region label; same block as img-36"
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 63
+   }
+  },
+  {
+   "id": "img-18",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-18.jpeg",
+   "sha256": "f85280c8919d0556025b4eb94e11bd301cf743ed5da2fe7a6c8e6a883c15345a",
+   "cluster": "ND0154",
+   "block_id": "G16",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-06.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 129,
+    "usable": false,
+    "scope": "bracket over 7 columns; stacks at both edges outside",
+    "why_not_usable": "region label"
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_flagged",
+    "predicted_total": 128
+   }
+  },
+  {
+   "id": "img-22",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-22.jpeg",
+   "sha256": "e25f9f1a90df8fbffc69eacfe2b05b6e9bb750add804b0c62010a1a2964174f7",
+   "cluster": "ND0152",
+   "block_id": "G14",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-08.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 119,
+    "usable": false,
+    "scope": "same photograph as img-16 without the bracket; right-edge stack of another block in frame",
+    "why_not_usable": "use img-16's scope; do not score twice"
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_flagged",
+    "predicted_total": 124
+   }
+  },
+  {
+   "id": "img-25",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-25.jpeg",
+   "sha256": "6d6316ee498e287b3f54e8b40b4bb3a88117d9da2eb755fc3b0c2317afdab567",
+   "cluster": "ND0156",
+   "block_id": "G03",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-09.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 900,
+    "height": 1600
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 80,
+    "usable": false,
+    "scope": "the 80 face at a grazing angle plus the block's other face",
+    "why_not_usable": "label covers one of two visible faces"
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 13
+   }
+  },
+  {
+   "id": "img-26",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-26.jpeg",
+   "sha256": "73d16a805cab05b3b79f22f29a067d199f112087848b82aa615ba5d7f8bbeb31",
+   "cluster": "ND0157",
+   "block_id": "G18",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-09.json",
+    "view": "right"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 125,
+    "usable": false,
+    "scope": "front block (4 stacks) plus a partly occluded back-left block, no bracket",
+    "why_not_usable": "occluded part cannot be checked from the photo"
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "accepted",
+    "predicted_total": 83
+   }
+  },
+  {
+   "id": "img-27",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-27.jpeg",
+   "sha256": "5f6192d0a35fa43b0a4d5fa33cded3b59536022067cd0abbde14a4c72e88ef94",
+   "cluster": "ND0156",
+   "block_id": "G03",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-09.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 900,
+    "height": 1600
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 80,
+    "usable": false,
+    "scope": "as img-25 (near-identical capture)",
+    "why_not_usable": "label covers one of two visible faces"
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 21
+   }
+  },
+  {
+   "id": "img-28",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-28.jpeg",
+   "sha256": "8512ce101330a36ef5e0990789550d642c10674327b3084d35ba44893989dd96",
+   "cluster": "ND0158",
+   "block_id": "G19",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-10.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 1600,
+    "height": 900
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 143,
+    "usable": false,
+    "scope": "L-shaped corner block (wing + 6-column face) + 1 loose tray",
+    "why_not_usable": "same block and arrangement as img-51 labelled 262"
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_flagged",
+    "predicted_total": 104
+   }
+  },
+  {
+   "id": "img-29",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-29.jpeg",
+   "sha256": "aa8a0ab9dbb2dda58b53c21548633ec944623157f1851b5847f787849651b431",
+   "cluster": "ND0159",
+   "block_id": "G20",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-10.json",
+    "view": "right"
+   },
+   "image": {
+    "width": 1600,
+    "height": 900
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 130,
+    "usable": false,
+    "scope": "steep oblique long face plus a corner wing",
+    "why_not_usable": "scope unclear"
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 48
+   }
+  },
+  {
+   "id": "img-37",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-37.jpeg",
+   "sha256": "49b99002c7a856ba2a640a728d6023c01b44126d9439a784e78df57237568b2f",
+   "cluster": "ND0048",
+   "block_id": "G07",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-13.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 1600,
+    "height": 720
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 4,
+    "usable": false,
+    "scope": "the same 4 loose trays top-down; stacks at the top/right edges not counted",
+    "why_not_usable": "label covers a subset of the visible trays"
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 3
+   }
+  },
+  {
+   "id": "img-41",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-41.jpeg",
+   "sha256": "038d6c3a08d6db83edd24a02d9b7cdcaf36ec3a838d1cfa45183653a1754f292",
+   "cluster": "ND0011",
+   "block_id": "G18",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-14.json",
+    "view": "right"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 81,
+    "usable": false,
+    "scope": "front pair of stacks + back-left group of 3 stacks (left one cut by the frame)",
+    "why_not_usable": "arithmetic of 81 does not fit the visible stacks; scope unverified"
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_flagged",
+    "predicted_total": 48
+   }
+  },
+  {
+   "id": "img-42",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-42.jpeg",
+   "sha256": "48212a141e419f435b6aa5a3d9d716897d307cc00331330017962e9e59149993",
+   "cluster": "ND0164",
+   "block_id": "G25",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-14.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 180,
+    "usable": false,
+    "scope": "L-shaped corner block; most of it hidden",
+    "why_not_usable": "label exceeds what is visible: likely a block total"
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 15
+   }
+  },
+  {
+   "id": "img-43",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-43.jpeg",
+   "sha256": "d6e64e0a0e160f64dca44c3f29ccc9a79ef40f55ad222cb2f6e25d544f469032",
+   "cluster": "ND0165",
+   "block_id": "G26",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-15.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 1200,
+    "height": 1600
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 5,
+    "usable": false,
+    "scope": "one loose orange tray + a stack cut by the top frame edge",
+    "why_not_usable": "stack cut by the frame"
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 5
+   }
+  },
+  {
+   "id": "img-44",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-44.jpeg",
+   "sha256": "742a6ffb95890189a35d2aca0f044dd780df469df8e91f2c90271c70e14be9ac",
+   "cluster": "ND0166",
+   "block_id": "G27",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-15.json",
+    "view": "right"
+   },
+   "image": {
+    "width": 1020,
+    "height": 960
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 185,
+    "usable": false,
+    "scope": "whole frame: the 5-column user-100 face (101 incl. 1 empty) + set-back columns, wing, loose and empty trays",
+    "why_not_usable": "multi-part scene; its 5-column part has per-stack truth via user-100 crop"
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 120
+   }
+  },
+  {
+   "id": "img-45",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-45.jpeg",
+   "sha256": "6ee83d68de98f513cc4e709dff2fbdb5ed47a9dc478e2668dd56d891047db859",
+   "cluster": "ND0167",
+   "block_id": "G28",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-15.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 533,
+    "height": 1280
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 107,
+    "usable": false,
+    "scope": "533 px-wide crop of an L arrangement; most stacks hidden or cropped",
+    "why_not_usable": "label exceeds what is visible"
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_flagged",
+    "predicted_total": 28
+   }
+  },
+  {
+   "id": "img-48",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-48.jpeg",
+   "sha256": "99c15fb865843b8a6f037148ce6c26d5c98c5a2dd24e5d82c0c00dd6cc5e328d",
+   "cluster": "ND0164",
+   "block_id": "G25",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-16.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 180,
+    "usable": false,
+    "scope": "same photograph as img-42",
+    "why_not_usable": "duplicate of img-42"
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 13
+   }
+  },
+  {
+   "id": "img-51",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-51.jpeg",
+   "sha256": "b02987e3a59928291acae756f93521e93ec8cdf8dfd84c150f4208305defbf48",
+   "cluster": "ND0171",
+   "block_id": "G19",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-17.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 262,
+    "usable": false,
+    "scope": "same L-shaped block as img-28, from further back",
+    "why_not_usable": "conflicts with img-28 (143)"
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 92
+   }
+  },
+  {
+   "id": "img-52",
+   "source": "labelled",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-52.jpeg",
+   "sha256": "936611bd09e65d60b4eb951b9f8f6b228da5f4479947930955c06ead7d482f6c",
+   "cluster": "ND0172",
+   "block_id": "G33",
+   "role": "face_not_usable",
+   "detections": {
+    "file": "reports/field-labelled-20261007/raw/batch-18.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": {
+    "tier": "U",
+    "trays": 25,
+    "usable": false,
+    "scope": "several small stacks incl. a stack of empty trays, loose trays",
+    "why_not_usable": "whether empties count is unknown"
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development",
+   "python_0411": {
+    "outcome": "withheld_gate",
+    "predicted_total": 22
+   }
+  },
+  {
+   "id": "mutaa:L-100:straight",
+   "source": "labelled_reencoded",
+   "photo": "img-19.jpeg",
+   "same_photo_as": "img-19",
+   "cluster": "ND0049",
+   "block_id": "MUTAA-L-100",
+   "role": "face",
+   "detections": {
+    "file": "reports/mutaa-manual-vs-backend-20261031/raw/L-100.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 1600,
+    "height": 1200
+   },
+   "truth": {
+    "tier": "V",
+    "trays": 101,
+    "per_stack": [
+     20,
+     20,
+     20,
+     20,
+     21
+    ],
+    "user_label": 100,
+    "user_label_scope": "front face 5 x 20, square-on"
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": true,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": true
+   },
+   "split": "development"
+  },
+  {
+   "id": "mutaa:L-100:left",
+   "source": "labelled_reencoded",
+   "photo": "img-21.jpeg",
+   "same_photo_as": "img-21",
+   "cluster": "ND0155",
+   "block_id": "MUTAA-L-100",
+   "role": "face",
+   "detections": {
+    "file": "reports/mutaa-manual-vs-backend-20261031/raw/L-100.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 1280,
+    "height": 582
+   },
+   "truth": {
+    "tier": null,
+    "trays": null
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": true,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": true
+   },
+   "split": "development"
+  },
+  {
+   "id": "mutaa:L-100:right",
+   "source": "labelled_reencoded",
+   "photo": "img-24.jpeg",
+   "same_photo_as": "img-24",
+   "cluster": "ND0155",
+   "block_id": "MUTAA-L-100",
+   "role": "face",
+   "detections": {
+    "file": "reports/mutaa-manual-vs-backend-20261031/raw/L-100.json",
+    "view": "right"
+   },
+   "image": {
+    "width": 1280,
+    "height": 582
+   },
+   "truth": {
+    "tier": null,
+    "trays": null
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": true,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": true
+   },
+   "split": "development"
+  },
+  {
+   "id": "mutaa:L-109-ORANGE:straight",
+   "source": "labelled_reencoded",
+   "photo": "img-36.jpeg",
+   "same_photo_as": "img-36",
+   "cluster": "ND0163",
+   "block_id": "MUTAA-L-109-ORANGE",
+   "role": "face",
+   "detections": {
+    "file": "reports/mutaa-manual-vs-backend-20261031/raw/L-109-ORANGE.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": {
+    "tier": "V",
+    "trays": 164,
+    "per_stack": [
+     11,
+     20,
+     21,
+     20,
+     22,
+     21,
+     22,
+     6,
+     21
+    ],
+    "user_label": 109,
+    "user_label_scope": "front face of the img-17 block; stacks of another block at the left edge, a set-back short stack at right"
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development"
+  },
+  {
+   "id": "mutaa:L-109-ORANGE:left",
+   "source": "labelled_reencoded",
+   "photo": "img-17.jpeg",
+   "same_photo_as": "img-17",
+   "cluster": "ND0153",
+   "block_id": "MUTAA-L-109-ORANGE",
+   "role": "face",
+   "detections": {
+    "file": "reports/mutaa-manual-vs-backend-20261031/raw/L-109-ORANGE.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": {
+    "tier": null,
+    "trays": null
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development"
+  },
+  {
+   "id": "mutaa:L-115:straight",
+   "source": "labelled_reencoded",
+   "photo": "img-04.jpeg",
+   "same_photo_as": "img-04",
+   "cluster": "ND0143",
+   "block_id": "MUTAA-L-115",
+   "role": "face",
+   "detections": {
+    "file": "reports/mutaa-manual-vs-backend-20261031/raw/L-115.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": {
+    "tier": "V",
+    "trays": 141,
+    "per_stack": [
+     21,
+     21,
+     15,
+     21,
+     21,
+     21,
+     21
+    ],
+    "user_label": 115,
+    "user_label_scope": "visible face of a two-depth arrangement (short stack standing in front)"
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": "leaked",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": true,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development"
+  },
+  {
+   "id": "mutaa:L-115:left",
+   "source": "labelled_reencoded",
+   "photo": "img-05.jpeg",
+   "same_photo_as": "img-05",
+   "cluster": "ND0144",
+   "block_id": "MUTAA-L-115",
+   "role": "face",
+   "detections": {
+    "file": "reports/mutaa-manual-vs-backend-20261031/raw/L-115.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 1278,
+    "height": 960
+   },
+   "truth": {
+    "tier": null,
+    "trays": null
+   },
+   "provenance": {
+    "detector_pool_match": true,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development"
+  },
+  {
+   "id": "mutaa:L-80:straight",
+   "source": "labelled_reencoded",
+   "photo": "img-30.jpeg",
+   "same_photo_as": "img-30",
+   "cluster": "ND0160",
+   "block_id": "MUTAA-L-80",
+   "role": "face",
+   "detections": {
+    "file": "reports/mutaa-manual-vs-backend-20261031/raw/L-80.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 1600,
+    "height": 900
+   },
+   "truth": {
+    "tier": "V",
+    "trays": 80,
+    "per_stack": [
+     20,
+     20,
+     20,
+     20
+    ],
+    "user_label": 80,
+    "user_label_scope": "the 80 face square-on, 4 x 20; a sliver of another stack at the left edge"
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": "leak_free",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": true,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development"
+  },
+  {
+   "id": "mutaa:L-80:left",
+   "source": "labelled_reencoded",
+   "photo": "img-31.jpeg",
+   "same_photo_as": "img-31",
+   "cluster": "ND0161",
+   "block_id": "MUTAA-L-80",
+   "role": "face",
+   "detections": {
+    "file": "reports/mutaa-manual-vs-backend-20261031/raw/L-80.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 900,
+    "height": 1600
+   },
+   "truth": {
+    "tier": null,
+    "trays": null
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": "leak_free",
+    "in_gate_tuning_set": true,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development"
+  },
+  {
+   "id": "mutaa:L-80:right",
+   "source": "labelled_reencoded",
+   "photo": "img-25.jpeg",
+   "same_photo_as": "img-25",
+   "cluster": "ND0156",
+   "block_id": "MUTAA-L-80",
+   "role": "face",
+   "detections": {
+    "file": "reports/mutaa-manual-vs-backend-20261031/raw/L-80.json",
+    "view": "right"
+   },
+   "image": {
+    "width": 900,
+    "height": 1600
+   },
+   "truth": {
+    "tier": null,
+    "trays": null
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development"
+  },
+  {
+   "id": "mutaa:M16-CORNER-STACK:straight",
+   "source": "mutaa",
+   "photo": "IMG_20260916_151149500.jpg.jpeg",
+   "same_photo_as": null,
+   "cluster": "MUTAA-M16-CORNER-STACK-straight",
+   "block_id": "MUTAA-M16-CORNER-STACK",
+   "role": "face",
+   "detections": {
+    "file": "reports/mutaa-manual-vs-backend-20261031/raw/M16-CORNER-STACK.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 725,
+    "height": 1600
+   },
+   "truth": {
+    "tier": "V",
+    "trays": 14,
+    "per_stack": [
+     14
+    ],
+    "user_label": null,
+    "user_label_scope": null
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development"
+  },
+  {
+   "id": "mutaa:M16-CORNER-STACK:left",
+   "source": "mutaa",
+   "photo": "IMG_20260916_151159267.jpg.jpeg",
+   "same_photo_as": null,
+   "cluster": "MUTAA-M16-CORNER-STACK-left",
+   "block_id": "MUTAA-M16-CORNER-STACK",
+   "role": "face",
+   "detections": {
+    "file": "reports/mutaa-manual-vs-backend-20261031/raw/M16-CORNER-STACK.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 725,
+    "height": 1600
+   },
+   "truth": {
+    "tier": null,
+    "trays": null
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development"
+  },
+  {
+   "id": "mutaa:M16-FAR:straight",
+   "source": "mutaa",
+   "photo": "IMG_20260916_151549592.jpg.jpeg",
+   "same_photo_as": null,
+   "cluster": "MUTAA-M16-FAR-straight",
+   "block_id": "MUTAA-M16-FAR",
+   "role": "face",
+   "detections": {
+    "file": "reports/mutaa-manual-vs-backend-20261031/raw/M16-FAR.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 1200,
+    "height": 1600
+   },
+   "truth": {
+    "tier": "V",
+    "trays": 45,
+    "per_stack": [
+     15,
+     15,
+     15
+    ],
+    "user_label": null,
+    "user_label_scope": null
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development"
+  },
+  {
+   "id": "mutaa:M16-FAR:left",
+   "source": "mutaa",
+   "photo": "IMG_20260916_151409127.jpg.jpeg",
+   "same_photo_as": null,
+   "cluster": "MUTAA-M16-FAR-left",
+   "block_id": "MUTAA-M16-FAR",
+   "role": "face",
+   "detections": {
+    "file": "reports/mutaa-manual-vs-backend-20261031/raw/M16-FAR.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 725,
+    "height": 1600
+   },
+   "truth": {
+    "tier": null,
+    "trays": null
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development"
+  },
+  {
+   "id": "mutaa:M16-FAR:right",
+   "source": "mutaa",
+   "photo": "IMG_20260916_151453724.jpg.jpeg",
+   "same_photo_as": null,
+   "cluster": "MUTAA-M16-FAR-right",
+   "block_id": "MUTAA-M16-FAR",
+   "role": "face",
+   "detections": {
+    "file": "reports/mutaa-manual-vs-backend-20261031/raw/M16-FAR.json",
+    "view": "right"
+   },
+   "image": {
+    "width": 1200,
+    "height": 1600
+   },
+   "truth": {
+    "tier": null,
+    "trays": null
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development"
+  },
+  {
+   "id": "mutaa:M16-NEAR:straight",
+   "source": "mutaa",
+   "photo": "IMG_20260916_151351983.jpg.jpeg",
+   "same_photo_as": null,
+   "cluster": "MUTAA-M16-NEAR-straight",
+   "block_id": "MUTAA-M16-NEAR",
+   "role": "face",
+   "detections": {
+    "file": "reports/mutaa-manual-vs-backend-20261031/raw/M16-NEAR.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 725,
+    "height": 1600
+   },
+   "truth": {
+    "tier": "V",
+    "trays": null,
+    "per_stack": null,
+    "user_label": null,
+    "user_label_scope": null
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development"
+  },
+  {
+   "id": "mutaa:M16-NEAR:left",
+   "source": "mutaa",
+   "photo": "IMG_20260916_151430473.jpg.jpeg",
+   "same_photo_as": null,
+   "cluster": "MUTAA-M16-NEAR-left",
+   "block_id": "MUTAA-M16-NEAR",
+   "role": "face",
+   "detections": {
+    "file": "reports/mutaa-manual-vs-backend-20261031/raw/M16-NEAR.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 1200,
+    "height": 1600
+   },
+   "truth": {
+    "tier": null,
+    "trays": null
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development"
+  },
+  {
+   "id": "mutaa:M16-NEAR:right",
+   "source": "mutaa",
+   "photo": "IMG_20260916_151444583.jpg.jpeg",
+   "same_photo_as": null,
+   "cluster": "MUTAA-M16-NEAR-right",
+   "block_id": "MUTAA-M16-NEAR",
+   "role": "face",
+   "detections": {
+    "file": "reports/mutaa-manual-vs-backend-20261031/raw/M16-NEAR.json",
+    "view": "right"
+   },
+   "image": {
+    "width": 1200,
+    "height": 1600
+   },
+   "truth": {
+    "tier": null,
+    "trays": null
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development"
+  },
+  {
+   "id": "mutaa:W05-ORANGE:straight",
+   "source": "mutaa",
+   "photo": "WhatsApp Image 2026-09-05 at 9.41.09 AM.jpeg",
+   "same_photo_as": null,
+   "cluster": "MUTAA-W05-ORANGE-straight",
+   "block_id": "MUTAA-W05-ORANGE",
+   "role": "face",
+   "detections": {
+    "file": "reports/mutaa-manual-vs-backend-20261031/raw/W05-ORANGE.json",
+    "view": "straight"
+   },
+   "image": {
+    "width": 1600,
+    "height": 1200
+   },
+   "truth": {
+    "tier": "V",
+    "trays": null,
+    "per_stack": null,
+    "user_label": null,
+    "user_label_scope": null
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development"
+  },
+  {
+   "id": "mutaa:W05-ORANGE:left",
+   "source": "mutaa",
+   "photo": "WhatsApp Image 2026-09-05 at 9.40.57 AM.jpeg",
+   "same_photo_as": null,
+   "cluster": "MUTAA-W05-ORANGE-left",
+   "block_id": "MUTAA-W05-ORANGE",
+   "role": "face",
+   "detections": {
+    "file": "reports/mutaa-manual-vs-backend-20261031/raw/W05-ORANGE.json",
+    "view": "left"
+   },
+   "image": {
+    "width": 1600,
+    "height": 1200
+   },
+   "truth": {
+    "tier": null,
+    "trays": null
+   },
+   "provenance": {
+    "detector_pool_match": false,
+    "detector_leak": null,
+    "in_gate_tuning_set": false,
+    "in_walk_reference_photos": false,
+    "in_walk_development_photos": false,
+    "in_orientation_development_photos": false,
+    "in_sidecheck_design": false
+   },
+   "split": "development"
+  }
+ ],
+ "trios": [
+  {
+   "id": "mutaa:L-100",
+   "group": "MUTAA L-100",
+   "response": "reports/mutaa-manual-vs-backend-20261031/raw/L-100.json",
+   "filler": null,
+   "photos": {
+    "straight": "img-19.jpeg",
+    "left": "img-21.jpeg",
+    "right": "img-24.jpeg"
+   },
+   "genuine": false,
+   "recorded": {
+    "pipeline_version": "worker-0.4.12",
+    "status": "estimated",
+    "total_trays": 500
+   },
+   "truth": {
+    "user_total": 100,
+    "manual_grid": "5x1",
+    "manual_trays_v": 102,
+    "manual_reliability": "medium"
+   },
+   "expected": "no released total (not a genuine STRAIGHT/LEFT/RIGHT trio)",
+   "split": "development"
+  },
+  {
+   "id": "mutaa:L-109-ORANGE",
+   "group": "MUTAA L-109-ORANGE",
+   "response": "reports/mutaa-manual-vs-backend-20261031/raw/L-109-ORANGE.json",
+   "filler": "right",
+   "photos": {
+    "straight": "img-36.jpeg",
+    "left": "img-17.jpeg",
+    "right": "IMG_20260916_151614863.jpg.jpeg"
+   },
+   "genuine": false,
+   "recorded": {
+    "pipeline_version": "worker-0.4.12",
+    "status": "needs_view",
+    "total_trays": null
+   },
+   "truth": {
+    "user_total": 109,
+    "manual_grid": "6x3",
+    "manual_trays_v": 384,
+    "manual_reliability": "low"
+   },
+   "expected": "no released total (not a genuine STRAIGHT/LEFT/RIGHT trio)",
+   "split": "development"
+  },
+  {
+   "id": "mutaa:L-115",
+   "group": "MUTAA L-115",
+   "response": "reports/mutaa-manual-vs-backend-20261031/raw/L-115.json",
+   "filler": "right",
+   "photos": {
+    "straight": "img-04.jpeg",
+    "left": "img-05.jpeg",
+    "right": "IMG_20260916_151614863.jpg.jpeg"
+   },
+   "genuine": false,
+   "recorded": {
+    "pipeline_version": "worker-0.4.12",
+    "status": "needs_view",
+    "total_trays": null
+   },
+   "truth": {
+    "user_total": null,
+    "manual_grid": "6x6",
+    "manual_trays_v": 771,
+    "manual_reliability": "medium"
+   },
+   "expected": "no released total (not a genuine STRAIGHT/LEFT/RIGHT trio)",
+   "split": "development"
+  },
+  {
+   "id": "mutaa:L-80",
+   "group": "MUTAA L-80",
+   "response": "reports/mutaa-manual-vs-backend-20261031/raw/L-80.json",
+   "filler": null,
+   "photos": {
+    "straight": "img-30.jpeg",
+    "left": "img-31.jpeg",
+    "right": "img-25.jpeg"
+   },
+   "genuine": false,
+   "recorded": {
+    "pipeline_version": "worker-0.4.12",
+    "status": "needs_view",
+    "total_trays": null
+   },
+   "truth": {
+    "user_total": 80,
+    "manual_grid": "4x1",
+    "manual_trays_v": 80,
+    "manual_reliability": "high"
+   },
+   "expected": "no released total (not a genuine STRAIGHT/LEFT/RIGHT trio)",
+   "split": "development"
+  },
+  {
+   "id": "mutaa:M16-CORNER-STACK",
+   "group": "MUTAA M16-CORNER-STACK",
+   "response": "reports/mutaa-manual-vs-backend-20261031/raw/M16-CORNER-STACK.json",
+   "filler": "right",
+   "photos": {
+    "straight": "IMG_20260916_151149500.jpg.jpeg",
+    "left": "IMG_20260916_151159267.jpg.jpeg",
+    "right": "IMG_20260916_151614863.jpg.jpeg"
+   },
+   "genuine": false,
+   "recorded": {
+    "pipeline_version": "worker-0.4.12",
+    "status": "needs_view",
+    "total_trays": null
+   },
+   "truth": {
+    "user_total": null,
+    "manual_grid": "1x1",
+    "manual_trays_v": 14,
+    "manual_reliability": "high"
+   },
+   "expected": "no released total (not a genuine STRAIGHT/LEFT/RIGHT trio)",
+   "split": "development"
+  },
+  {
+   "id": "mutaa:M16-FAR",
+   "group": "MUTAA M16-FAR",
+   "response": "reports/mutaa-manual-vs-backend-20261031/raw/M16-FAR.json",
+   "filler": null,
+   "photos": {
+    "straight": "IMG_20260916_151549592.jpg.jpeg",
+    "left": "IMG_20260916_151409127.jpg.jpeg",
+    "right": "IMG_20260916_151453724.jpg.jpeg"
+   },
+   "genuine": false,
+   "recorded": {
+    "pipeline_version": "worker-0.4.12",
+    "status": "needs_view",
+    "total_trays": null
+   },
+   "truth": {
+    "user_total": null,
+    "manual_grid": "3x5",
+    "manual_trays_v": 252,
+    "manual_reliability": "medium"
+   },
+   "expected": "no released total (not a genuine STRAIGHT/LEFT/RIGHT trio)",
+   "split": "development"
+  },
+  {
+   "id": "mutaa:M16-NEAR",
+   "group": "MUTAA M16-NEAR",
+   "response": "reports/mutaa-manual-vs-backend-20261031/raw/M16-NEAR.json",
+   "filler": null,
+   "photos": {
+    "straight": "IMG_20260916_151351983.jpg.jpeg",
+    "left": "IMG_20260916_151430473.jpg.jpeg",
+    "right": "IMG_20260916_151444583.jpg.jpeg"
+   },
+   "genuine": false,
+   "recorded": {
+    "pipeline_version": "worker-0.4.12",
+    "status": "needs_view",
+    "total_trays": null
+   },
+   "truth": {
+    "user_total": null,
+    "manual_grid": "4x2",
+    "manual_trays_v": 186,
+    "manual_reliability": "medium"
+   },
+   "expected": "no released total (not a genuine STRAIGHT/LEFT/RIGHT trio)",
+   "split": "development"
+  },
+  {
+   "id": "mutaa:W05-ORANGE",
+   "group": "MUTAA W05-ORANGE",
+   "response": "reports/mutaa-manual-vs-backend-20261031/raw/W05-ORANGE.json",
+   "filler": "right",
+   "photos": {
+    "straight": "WhatsApp Image 2026-09-05 at 9.41.09 AM.jpeg",
+    "left": "WhatsApp Image 2026-09-05 at 9.40.57 AM.jpeg",
+    "right": "IMG_20260916_151614863.jpg.jpeg"
+   },
+   "genuine": false,
+   "recorded": {
+    "pipeline_version": "worker-0.4.12",
+    "status": "needs_view",
+    "total_trays": null
+   },
+   "truth": {
+    "user_total": null,
+    "manual_grid": "10x7",
+    "manual_trays_v": 1435,
+    "manual_reliability": "low"
+   },
+   "expected": "no released total (not a genuine STRAIGHT/LEFT/RIGHT trio)",
+   "split": "development"
+  },
+  {
+   "id": "99-block substituted trio @ reports/staging-block-20261008/scan-99block-a.json",
+   "group": "99-block substituted trio",
+   "response": "reports/staging-block-20261008/scan-99block-a.json",
+   "filler": null,
+   "photos": "STRAIGHT img-01 (front); LEFT warehouse image-4 and RIGHT img-32 are the SAME free end; the true left end stands against the wall",
+   "genuine": false,
+   "recorded": {
+    "note": "staging, saved 2026-10-09 08:22 IST (block model, span counter)"
+   },
+   "truth": {
+    "user_total": 99,
+    "note": "no exact result (a side face is substituted)"
+   },
+   "expected": "no released total",
+   "split": "development"
+  },
+  {
+   "id": "99-block substituted trio @ reports/staging-block-20261008/scan-99block-walk.json",
+   "group": "99-block substituted trio",
+   "response": "reports/staging-block-20261008/scan-99block-walk.json",
+   "filler": null,
+   "photos": "STRAIGHT img-01 (front); LEFT warehouse image-4 and RIGHT img-32 are the SAME free end; the true left end stands against the wall",
+   "genuine": false,
+   "recorded": {
+    "note": "staging, saved 2026-10-09 11:30 IST (walk counter)"
+   },
+   "truth": {
+    "user_total": 99,
+    "note": "no exact result (a side face is substituted)"
+   },
+   "expected": "no released total",
+   "split": "development"
+  },
+  {
+   "id": "99-block substituted trio @ reports/staging-block-20261008/scan-99block-walk2.json",
+   "group": "99-block substituted trio",
+   "response": "reports/staging-block-20261008/scan-99block-walk2.json",
+   "filler": null,
+   "photos": "STRAIGHT img-01 (front); LEFT warehouse image-4 and RIGHT img-32 are the SAME free end; the true left end stands against the wall",
+   "genuine": false,
+   "recorded": {
+    "note": "staging, saved 2026-10-09 11:34 IST (walk counter)"
+   },
+   "truth": {
+    "user_total": 99,
+    "note": "no exact result (a side face is substituted)"
+   },
+   "expected": "no released total",
+   "split": "development"
+  },
+  {
+   "id": "99-block substituted trio @ reports/eval-20261015/staging47-replay/6fe33b1d-4605-4b53-84f4-86bff313c1f3.json",
+   "group": "99-block substituted trio",
+   "response": "reports/eval-20261015/staging47-replay/6fe33b1d-4605-4b53-84f4-86bff313c1f3.json",
+   "filler": null,
+   "photos": "STRAIGHT img-01 (front); LEFT warehouse image-4 and RIGHT img-32 are the SAME free end; the true left end stands against the wall",
+   "genuine": false,
+   "recorded": {
+    "note": "staging 47cb2378 (0.4.11 Worker), live replay 2026-10-14 11:51 IST of the phone scan 6fe33b1d (app re-encodes; LEFT has 22 boxes, not 19)"
+   },
+   "truth": {
+    "user_total": 99,
+    "note": "no exact result (a side face is substituted)"
+   },
+   "expected": "no released total",
+   "split": "development"
+  },
+  {
+   "id": "mechanics trio @ reports/staging-block-20261008/scan-img19-30-02.json",
+   "group": "mechanics trio",
+   "response": "reports/staging-block-20261008/scan-img19-30-02.json",
+   "filler": null,
+   "photos": "STRAIGHT img-19, LEFT img-30, RIGHT img-02: three different blocks",
+   "genuine": false,
+   "recorded": {
+    "note": "staging a012c14e, saved 2026-10-08 21:16 IST (span counter)"
+   },
+   "truth": {
+    "user_total": null,
+    "note": "no exact result (three unrelated blocks; MECH-DONE 399 is not truth)"
+   },
+   "expected": "no released total",
+   "split": "development"
+  },
+  {
+   "id": "mechanics trio @ reports/staging-block-20261008/scan-mech-walk.json",
+   "group": "mechanics trio",
+   "response": "reports/staging-block-20261008/scan-mech-walk.json",
+   "filler": null,
+   "photos": "STRAIGHT img-19, LEFT img-30, RIGHT img-02: three different blocks",
+   "genuine": false,
+   "recorded": {
+    "note": "staging, saved 2026-10-09 11:30 IST (walk counter)"
+   },
+   "truth": {
+    "user_total": null,
+    "note": "no exact result (three unrelated blocks; MECH-DONE 399 is not truth)"
+   },
+   "expected": "no released total",
+   "split": "development"
+  },
+  {
+   "id": "30aca6a1 (13 Oct) @ reports/field-scans-20261013/replay/30aca6a1-56da-4564-ac09-93de66c4404d.json",
+   "group": "30aca6a1 (13 Oct)",
+   "response": "reports/field-scans-20261013/replay/30aca6a1-56da-4564-ac09-93de66c4404d.json",
+   "filler": null,
+   "photos": "three unrelated views; STRAIGHT is 9b4c783e's front from far",
+   "genuine": false,
+   "recorded": {
+    "note": "staging f5776f0d (pre-0.4.11 Worker), 2026-10-14"
+   },
+   "truth": {
+    "user_total": null,
+    "note": "no exact result"
+   },
+   "expected": "no released total",
+   "split": "development"
+  },
+  {
+   "id": "30aca6a1 (13 Oct) @ reports/eval-20261015/staging47-replay/30aca6a1-56da-4564-ac09-93de66c4404d.json",
+   "group": "30aca6a1 (13 Oct)",
+   "response": "reports/eval-20261015/staging47-replay/30aca6a1-56da-4564-ac09-93de66c4404d.json",
+   "filler": null,
+   "photos": "three unrelated views; STRAIGHT is 9b4c783e's front from far",
+   "genuine": false,
+   "recorded": {
+    "note": "staging 47cb2378 (0.4.11 Worker), live replay 2026-10-14 11:53 IST"
+   },
+   "truth": {
+    "user_total": null,
+    "note": "no exact result"
+   },
+   "expected": "no released total",
+   "split": "development"
+  },
+  {
+   "id": "ef823816 (13 Oct) @ reports/field-scans-20261013/replay/ef823816-899d-4e97-9614-10f1ec47c25a.json",
+   "group": "ef823816 (13 Oct)",
+   "response": "reports/field-scans-20261013/replay/ef823816-899d-4e97-9614-10f1ec47c25a.json",
+   "filler": null,
+   "photos": "5 x 4 room-corner block; LEFT and RIGHT are the same right-side face",
+   "genuine": false,
+   "recorded": {
+    "note": "staging f5776f0d (pre-0.4.11 Worker), 2026-10-14"
+   },
+   "truth": {
+    "user_total": null,
+    "note": "no exact result (duplicated side face)"
+   },
+   "expected": "no released total",
+   "split": "development"
+  },
+  {
+   "id": "ef823816 (13 Oct) @ reports/eval-20261015/staging47-replay/ef823816-899d-4e97-9614-10f1ec47c25a.json",
+   "group": "ef823816 (13 Oct)",
+   "response": "reports/eval-20261015/staging47-replay/ef823816-899d-4e97-9614-10f1ec47c25a.json",
+   "filler": null,
+   "photos": "5 x 4 room-corner block; LEFT and RIGHT are the same right-side face",
+   "genuine": false,
+   "recorded": {
+    "note": "staging 47cb2378 (0.4.11 Worker), live replay 2026-10-14 11:53 IST"
+   },
+   "truth": {
+    "user_total": null,
+    "note": "no exact result (duplicated side face)"
+   },
+   "expected": "no released total",
+   "split": "development"
+  },
+  {
+   "id": "9b4c783e (13 Oct) @ reports/field-scans-20261013/replay/9b4c783e-7edb-43ed-b7d2-2f8eed889f60.json",
+   "group": "9b4c783e (13 Oct)",
+   "response": "reports/field-scans-20261013/replay/9b4c783e-7edb-43ed-b7d2-2f8eed889f60.json",
+   "filler": null,
+   "photos": "plausible genuine three-face set of one 4 x 3 block (visual only)",
+   "genuine": true,
+   "recorded": {
+    "note": "staging f5776f0d (pre-0.4.11 Worker), 2026-10-14"
+   },
+   "truth": {
+    "user_total": null,
+    "note": "no physical count exists; assistant hand reading from photos 164 (not physical)"
+   },
+   "expected": "no exact result (hidden interior computed; no physical count)",
+   "split": "development"
+  },
+  {
+   "id": "9b4c783e (13 Oct) @ reports/eval-20261015/staging47-replay/9b4c783e-7edb-43ed-b7d2-2f8eed889f60.json",
+   "group": "9b4c783e (13 Oct)",
+   "response": "reports/eval-20261015/staging47-replay/9b4c783e-7edb-43ed-b7d2-2f8eed889f60.json",
+   "filler": null,
+   "photos": "plausible genuine three-face set of one 4 x 3 block (visual only)",
+   "genuine": true,
+   "recorded": {
+    "note": "staging 47cb2378 (0.4.11 Worker), live replay 2026-10-14 11:52 IST"
+   },
+   "truth": {
+    "user_total": null,
+    "note": "no physical count exists; assistant hand reading from photos 164 (not physical)"
+   },
+   "expected": "no exact result (hidden interior computed; no physical count)",
+   "split": "development"
+  },
+  {
+   "id": "f81c04d7 (13 Oct) @ reports/field-scans-20261013/replay/f81c04d7-5fec-4d64-aa8c-54098abf2415.json",
+   "group": "f81c04d7 (13 Oct)",
+   "response": "reports/field-scans-20261013/replay/f81c04d7-5fec-4d64-aa8c-54098abf2415.json",
+   "filler": null,
+   "photos": "WhatsApp label photos: LEFT img-50, RIGHT img-41, STRAIGHT a crop of img-41",
+   "genuine": false,
+   "recorded": {
+    "note": "staging f5776f0d (pre-0.4.11 Worker), 2026-10-14"
+   },
+   "truth": {
+    "user_total": null,
+    "note": "no exact result"
+   },
+   "expected": "no released total",
+   "split": "development"
+  },
+  {
+   "id": "f81c04d7 (13 Oct) @ reports/eval-20261015/staging47-replay/f81c04d7-5fec-4d64-aa8c-54098abf2415.json",
+   "group": "f81c04d7 (13 Oct)",
+   "response": "reports/eval-20261015/staging47-replay/f81c04d7-5fec-4d64-aa8c-54098abf2415.json",
+   "filler": null,
+   "photos": "WhatsApp label photos: LEFT img-50, RIGHT img-41, STRAIGHT a crop of img-41",
+   "genuine": false,
+   "recorded": {
+    "note": "staging 47cb2378 (0.4.11 Worker), live replay 2026-10-14 11:53 IST"
+   },
+   "truth": {
+    "user_total": null,
+    "note": "no exact result"
+   },
+   "expected": "no released total",
+   "split": "development"
+  }
+ ]
+}

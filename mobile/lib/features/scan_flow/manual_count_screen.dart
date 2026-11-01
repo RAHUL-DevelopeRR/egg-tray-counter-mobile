@@ -11,9 +11,10 @@ import '../../services/manual_count_store.dart';
 import 'block_view.dart';
 
 /// On-site count entry for the block the app just scanned: one row per stack,
-/// pre-filled with the app's layer count, saved on the phone and sent to the
-/// server next to the scan's photos. This is the ground truth for scoring; the
-/// app never uses it to change its own count.
+/// saved on the phone and sent to the server next to the scan's photos. This is
+/// the ground truth for scoring; the app never uses it to change its own count.
+/// The count is blind: the app's numbers are not shown and every field starts
+/// empty, because a count that starts from the app's answer tends to repeat it.
 class ManualCountScreen extends StatefulWidget {
   const ManualCountScreen({
     super.key,
@@ -69,7 +70,7 @@ class _ManualCountScreenState extends State<ManualCountScreen> {
       appTotal: block?.totalTrays,
     );
     for (final c in cells) {
-      _filled[_key(c)] = TextEditingController(text: '${c.filled}');
+      _filled[_key(c)] = TextEditingController();
       _empty[_key(c)] = TextEditingController(text: '${c.empty}');
     }
   }
@@ -117,6 +118,19 @@ class _ManualCountScreenState extends State<ManualCountScreen> {
     final collected = _collect();
     if (collected.blockId.isEmpty) {
       setState(() => _status = 'Enter the block ID first.');
+      return;
+    }
+    final uncounted = [
+      for (final c in collected.cells)
+        if (!c.unreachable && _filled[_key(c)]!.text.trim().isEmpty)
+          '(${c.x},${c.y})',
+    ];
+    if (uncounted.isNotEmpty) {
+      setState(
+        () => _status =
+            'Count every stack you can reach, or tick it as unreachable: '
+            '${uncounted.join(' ')}.',
+      );
       return;
     }
     // Each operator save is one count: a new count_id and time, unless it
@@ -268,7 +282,7 @@ class _ManualCountScreenState extends State<ManualCountScreen> {
                             const SizedBox(width: 6),
                             Expanded(
                               child: Text(
-                                'x${c.x} y${c.y}  app ${c.appLayers ?? '—'}',
+                                'x${c.x} y${c.y}',
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -289,7 +303,6 @@ class _ManualCountScreenState extends State<ManualCountScreen> {
               ],
             ),
           const Divider(height: 28),
-          _totalsRow('App total', '${_count.appTotal ?? '—'}'),
           _totalsRow('Manual filled', '${live.filledTotal}'),
           _totalsRow('Manual empty', '${live.emptyTotal}'),
           _totalsRow('Unreachable stacks', '${live.unreachableCount}'),

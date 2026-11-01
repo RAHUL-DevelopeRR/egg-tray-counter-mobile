@@ -168,7 +168,8 @@ type ParsedScan = { scanId: string; files: Record<string, File>; hashes: string[
   scanContract: string | null; modelScan: boolean; baselineScan: boolean; requestStarted: number; multipartMs: number;
   headings: Record<string, ViewHeading> };
 // Phone heading at capture, from the app's per-view constraint evidence: gyroscope yaw about gravity in degrees,
-// comparable only within one yaw_session (one opening of the capture screen).
+// comparable only within one yaw_session (one scan, kept across retakes). Positive yaw is a left (counter-clockwise)
+// turn seen from above.
 type ViewHeading = { yaw_deg: number; yaw_session: string } | null;
 const MAX_EVIDENCE_CHARS = 8000;
 
@@ -246,13 +247,16 @@ async function readScan(request: Request): Promise<ParsedScan> {
 
 // Private, content-addressed originals survive failed inference and retries.
 // No public download route: operators retrieve using authenticated R2 access.
-async function archiveScan(env: Bindings, { scanId: rawScanId, files, hashes }: ParsedScan) {
+async function archiveScan(env: Bindings, { scanId: rawScanId, files, hashes, headings }: ParsedScan) {
   if (env.SCAN_ARCHIVE) {
     for (const [index, view] of VIEWS.entries()) {
       const file = files[view];
+      // The heading travels with the photo, so a replay from the archive judges the side faces as the live scan did.
+      const heading = headings[view];
       await env.SCAN_ARCHIVE.put(`scans/${rawScanId}/${view}/${hashes[index]}`, file.stream(), {
         httpMetadata: { contentType: file.type },
-        customMetadata: { scan_id: rawScanId, view, sha256: hashes[index], received_at: new Date().toISOString() },
+        customMetadata: { scan_id: rawScanId, view, sha256: hashes[index], received_at: new Date().toISOString(),
+          ...(heading ? { yaw_deg: String(heading.yaw_deg), yaw_session: heading.yaw_session } : {}) },
       });
     }
     console.log(JSON.stringify({ event: "scan_archived", scan_id: rawScanId }));
@@ -387,10 +391,12 @@ function readOptionalCellIds(form: FormData): Record<string, string> {
 // Measured 2026-10-08 on 53 labelled stacks: span count exact 75%, within ±1 100%; raw box count exact 58%.
 type SpanColumn = { column: number; model_boxes: number; span_count: number; walk_count: number; walk_filled: number;
   walk_unresolved_gaps?: number; perspective_gradient: number | null; pitch_px: number; box_height_px?: number;
-  duplicate_boxes: number; x_min: number; x_max: number; y_first: number; y_last: number;
+  duplicate_boxes: number; x_min: number; x_max: number; y_first: number; y_last: number; doubts?: string[];
   rim_count?: number | null; rim_confidence?: number | null };
-type FaceColumn = { layers: number; filled: number; scale: number; recessed: boolean; count_agreement: boolean; reason: string | null; source: string };
-type Cell = { x: number; y: number; status: string; layers: number | null; source: string; filled_layers?: number };
+type FaceColumn = { layers: number; filled: number; doubts: string[]; scale: number; recessed: boolean; count_agreement: boolean; reason: string | null; source: string };
+type CellReading = { face: string; layers: number; gap_filled: number; doubts: string[] };
+type Cell = { x: number; y: number; status: string; layers: number | null; source: string; filled_layers?: number; verified?: boolean;
+  readings?: CellReading[] };
 const RECESS_SCALE = 0.85;
 const MAX_PERSPECTIVE_GRADIENT = 1.5;  // top-third / bottom-third layer spacing; measured frontal photos stay <= 1.42
 const MIN_RIM_CONFIDENCE = 0.5;  // rim-edge verification only vetoes when its own confidence is at least this
@@ -442,30 +448,79 @@ function walkLayers(ysIn: number[], height: number) {
   return { count, gaps, duplicates, filled, unresolved_gaps: unresolved, perspective_gradient: gradient };
 }
 
-function spanColumns(detections: Prediction[]): SpanColumn[] {
+// Doubts: a stack reading that may have lost a tray with nothing else to show for it (2026-11-01 miss taxonomy,
+// reports/miss-taxonomy-20261101). Every silent miss on a close face was at a stack end:
+// - box_over_two_stacks: a box 1.5x the face's median width covered the top trays of two stacks, and the second
+//   stack lost its top tray (img-30 stack 2);
+// - box_over_two_trays: a box 1.5x its column's median height;
+// - end_box_cut_short: the bottom tray, cut by the frame edge, got a half-height box whose centre sat 0.3 pitch from
+//   the box above, so it was merged as a duplicate (img-30 and L-80 stack 4);
+// - bottom_above_floor: the bottom tray had no box at all; the stack's last box sits over half a pitch above its
+//   neighbours' (L-109 stack 4).
+// A doubt never refuses a count. It only keeps that reading from verifying a stack.
+const ODD_BOX_SCALE = 1.5;
+const SHORT_END_BOX = 0.6;
+type Box = { x: number; y: number; width: number; height: number };
+
+// Boxes grouped into stack columns by x: a box joins the last column when it lies within 0.6 x the median box width
+// of that column's mean x.
+function groupColumns(detections: Prediction[]): { groups: Box[][]; medianWidth: number } {
   const boxes = detections.filter(d => [d.x, d.y, d.width, d.height].every(v => Number.isFinite(v)) && d.width! > 0 && d.height! > 0)
     .map(d => ({ x: d.x!, y: d.y!, width: d.width!, height: d.height! }));
-  if (!boxes.length) return [];
-  const gap = 0.6 * median(boxes.map(b => b.width));
-  const columns: typeof boxes[] = [];
+  if (!boxes.length) return { groups: [], medianWidth: 0 };
+  const medianWidth = median(boxes.map(b => b.width));
+  const groups: Box[][] = [];
   for (const box of [...boxes].sort((a, b) => a.x - b.x)) {
-    const last = columns[columns.length - 1];
-    if (last && box.x - last.reduce((s, b) => s + b.x, 0) / last.length < gap) last.push(box);
-    else columns.push([box]);
+    const last = groups[groups.length - 1];
+    if (last && box.x - last.reduce((s, b) => s + b.x, 0) / last.length < 0.6 * medianWidth) last.push(box);
+    else groups.push([box]);
   }
-  return columns.filter(c => c.length >= 3).map((column, index) => {
-    const ys = column.map(b => b.y).sort((a, b) => a - b);
+  return { groups, medianWidth };
+}
+
+function spanColumns(detections: Prediction[]): SpanColumn[] {
+  const { groups, medianWidth } = groupColumns(detections);
+  const columns = groups.filter(c => c.length >= 3);
+  // A box wider than a stack also covers the neighbouring stack's tray at that level, so every column whose centre
+  // it spans is marked, not only the one it was grouped into.
+  const centres = columns.map(c => c.reduce((s, b) => s + b.x, 0) / c.length);
+  const wide = columns.flat().filter(b => b.width > ODD_BOX_SCALE * medianWidth);
+  const result = columns.map((column, index) => {
+    const ordered = [...column].sort((a, b) => a.y - b.y);
+    const ys = ordered.map(b => b.y);
     const height = median(column.map(b => b.height));
     const real = ys.slice(1).map((y, i) => y - ys[i]).filter(g => g > 0.5 * height);
     const pitch = real.length ? median(real) : height;
     const walk = walkLayers(ys, height);
+    const doubts: string[] = [];
+    if (wide.some(b => column.includes(b) || Math.abs(b.x - centres[index]) < b.width / 2)) doubts.push("box_over_two_stacks");
+    if (column.some(b => b.height > ODD_BOX_SCALE * height)) doubts.push("box_over_two_trays");
+    if ([ordered[0], ordered[ordered.length - 1]].some(b => b.height < SHORT_END_BOX * height)) doubts.push("end_box_cut_short");
     return { column: index + 1, model_boxes: column.length, span_count: roundHalfEven((ys[ys.length - 1] - ys[0]) / pitch) + 1,
       walk_count: walk.count, walk_filled: walk.filled, walk_unresolved_gaps: walk.unresolved_gaps, perspective_gradient: walk.perspective_gradient,
       pitch_px: roundHalfEven(pitch * 100) / 100, box_height_px: roundHalfEven(height * 100) / 100, duplicate_boxes: column.length - real.length - 1,
       x_min: roundHalfEven(Math.min(...column.map(b => b.x - b.width / 2)) * 10) / 10,
       x_max: roundHalfEven(Math.max(...column.map(b => b.x + b.width / 2)) * 10) / 10,
-      y_first: roundHalfEven(ys[0] * 10) / 10, y_last: roundHalfEven(ys[ys.length - 1] * 10) / 10 };
+      y_first: roundHalfEven(ys[0] * 10) / 10, y_last: roundHalfEven(ys[ys.length - 1] * 10) / 10, doubts };
   });
+  // Floor line: stacks stand on one floor, so a bottom box over half a pitch above both neighbours' marks a lost
+  // bottom tray. Set-back stacks are left out (their bottoms sit higher), and so are the two end stacks: with one
+  // neighbour, camera tilt alone moved a correct end stack's bottom that far on 4 of 21 accepted faces (2026-11-01).
+  const pitches = result.map(c => c.pitch_px);
+  const reference = median(pitches.filter(p => p >= median(pitches)));
+  const front = result.filter(c => c.pitch_px >= RECESS_SCALE * reference);
+  front.forEach((c, i) => {
+    const neighbours = [front[i - 1], front[i + 1]].filter(Boolean);
+    if (neighbours.length === 2 && neighbours.every(n => c.y_last < n.y_last - 0.5 * c.pitch_px)) c.doubts.push("bottom_above_floor");
+  });
+  return result;
+}
+
+/** Groups of one or two boxes: a short stack, a loose tray or a stray box. Never counted, but reported. */
+function strayGroups(detections: Prediction[]) {
+  return groupColumns(detections).groups.filter(g => g.length < 3).map(g => ({ boxes: g.length,
+    x_min: roundHalfEven(Math.min(...g.map(b => b.x - b.width / 2)) * 10) / 10,
+    x_max: roundHalfEven(Math.max(...g.map(b => b.x + b.width / 2)) * 10) / 10 }));
 }
 
 function faceColumns(columns: SpanColumn[], name: string): FaceColumn[] {
@@ -486,29 +541,42 @@ function faceColumns(columns: SpanColumn[], name: string): FaceColumn[] {
     else if (rim !== null && rimConf >= MIN_RIM_CONFIDENCE && rim !== layers) reason = `rim edges count ${rim} layers but boxes count ${layers}; retake this face`;
     else if (c.perspective_gradient !== null && c.perspective_gradient > MAX_PERSPECTIVE_GRADIENT)
       reason = `camera looked down on the stack (spacing ratio ${c.perspective_gradient}); hold the phone level at mid-height`;
-    return { layers, filled: c.walk_filled ?? 0, scale, recessed: scale < RECESS_SCALE, count_agreement: reason === null, reason, source: name };
+    return { layers, filled: c.walk_filled ?? 0, doubts: c.doubts ?? [], scale, recessed: scale < RECESS_SCALE,
+      count_agreement: reason === null, reason, source: name };
   });
 }
 
-const BLOCK_NOTE = "Interior stacks are computed from the observed faces (X x Y x height); missing or shorter interior stacks are not visible from the faces.";
+const BLOCK_NOTE = "Interior stacks are computed from the observed faces (X x Y x height); missing or shorter interior stacks are not visible from the faces. " +
+  "exact means every stack was seen and read the same by two photos; a stack seen by one photo only is an estimate.";
 
-// status: exact (every stack seen, faces agree), estimated (a total, but hidden stacks computed or a reading
-// ambiguous), conflict (no total; retake the named face), needs_view (a face is missing or refused).
+// status: exact (every stack seen and verified by two photos, faces agree), estimated (a total, but hidden stacks
+// computed, a stack read by one photo only, or a reading ambiguous), conflict (no total; retake the named face),
+// needs_view (a face is missing or refused).
+// One photo's reading of a stack can be wrong with nothing to show for it: a box over two trays loses one, and an
+// end tray can have no box at all (2026-11-01 miss taxonomy: img-30 read 78 for 80 with every rule satisfied). So a
+// stack counts as verified only when two different photos read it the same, with no gap-filled layer and no doubt
+// (see spanColumns); agreement between counts from the same boxes (span and walk) is not a second reading.
 function blockResult(width: number | null, depth: number | null, facesUsed: string[], typical: number | null, cells: Cell[],
   conflicts: Record<string, unknown>[], ambiguities: Record<string, unknown>[] = [], needsView = false) {
-  const observed = cells.filter(c => c.status === "observed").reduce((s, c) => s + (c.layers ?? 0), 0);
-  const computed = cells.filter(c => c.status === "computed").reduce((s, c) => s + (c.layers ?? 0), 0);
-  const filled = cells.filter(c => c.status === "observed").reduce((s, c) => s + (c.filled_layers ?? 0), 0);
+  const sum = (list: Cell[]) => list.reduce((s, c) => s + (c.layers ?? 0), 0);
+  const observedCells = cells.filter(c => c.status === "observed");
+  const observed = sum(observedCells);
+  const computed = sum(cells.filter(c => c.status === "computed"));
+  const filled = observedCells.reduce((s, c) => s + (c.filled_layers ?? 0), 0);
+  const verified = sum(observedCells.filter(c => c.verified));
+  const single = cells.filter(c => (c.status === "observed" || c.status === "missing") && !c.verified).map(c => [c.x, c.y]);
   const rescan = cells.filter(c => c.status === "rescan" || c.status === "conflict").map(c => [c.x, c.y]);
   const consistent = !conflicts.length && !rescan.length && typical !== null;
   const total = consistent ? observed + computed : null;
-  const status = needsView ? "needs_view" : total === null ? "conflict" : computed || ambiguities.length ? "estimated" : "exact";
+  const status = needsView ? "needs_view" : total === null ? "conflict"
+    : computed || ambiguities.length || single.length ? "estimated" : "exact";
   return { status, width, depth, faces_used: facesUsed, typical_layers: typical, cells, observed_trays: observed, computed_trays: computed,
-    filled_trays: filled, total_trays: total, fully_observed: consistent && computed === 0, faces_consistent: consistent,
+    filled_trays: filled, visible_verified_trays: verified, visible_single_reading_trays: observed - verified, single_reading_cells: single,
+    total_trays: total, fully_observed: consistent && computed === 0, faces_consistent: consistent,
     conflicts, ambiguities, rescan_cells: rescan, note: BLOCK_NOTE };
 }
 
-function buildBlock(straightCols: SpanColumn[], leftCols: SpanColumn[], rightCols: SpanColumn[]) {
+function buildBlock(straightCols: SpanColumn[], leftCols: SpanColumn[], rightCols: SpanColumn[], strays: Record<string, number> = {}) {
   const facesUsed = [...(straightCols.length ? ["straight"] : []), ...(leftCols.length ? ["left"] : []), ...(rightCols.length ? ["right"] : [])];
   if (!straightCols.length || (!leftCols.length && !rightCols.length)) {
     return blockResult(null, null, facesUsed, null, [], [{ reason: "STRAIGHT and at least one side face must show stacks" }], [], true);
@@ -556,8 +624,10 @@ function buildBlock(straightCols: SpanColumn[], leftCols: SpanColumn[], rightCol
       Object.assign(cell, { status: "conflict", layers: null, source });
       continue;
     }
+    const asRead = readings.map(r => ({ face: r.name, layers: r.col.layers, gap_filled: r.col.filled, doubts: r.col.doubts }));
     if (readings[0].col.recessed) {
-      Object.assign(cell, { status: "missing", layers: 0, source });
+      // A gap in the front row is verified only when two photos both see it.
+      Object.assign(cell, { status: "missing", layers: 0, source, readings: asRead, verified: new Set(names).size > 1 });
       for (const r of readings) {
         if (cell.y === 0 && r.name !== "straight") continue;   // a side face looks along the front row past a missing corner
         if (cells.has(r.behind)) promotions.set(r.behind, [...(promotions.get(r.behind) ?? []),
@@ -579,19 +649,24 @@ function buildBlock(straightCols: SpanColumn[], leftCols: SpanColumn[], rightCol
     // Agreeing faces, or one layer apart: keep the reading with fewest gap-filled layers (STRAIGHT on a tie)
     // and record the ambiguity so the total is only an estimate.
     const best = [...readings].sort((a, b) => a.col.filled - b.col.filled || Number(a.name !== "straight") - Number(b.name !== "straight"))[0].col;
-    Object.assign(cell, { status: "observed", layers: best.layers, filled_layers: best.filled, source });
+    const clean = readings.filter(r => r.col.layers === best.layers && !r.col.filled && !r.col.doubts.length).map(r => r.name);
+    Object.assign(cell, { status: "observed", layers: best.layers, filled_layers: best.filled, source, readings: asRead,
+      verified: new Set(clean).size > 1 });
     if (values[high] !== values[low]) ambiguities.push({ cell: [cell.x, cell.y], reason: "faces differ by one layer", ...layerFields, chosen: best.layers });
   }
   for (const [key, candidates] of promotions) {
     const cell = cells.get(key)!;
     const layers = new Set(candidates.map(c => c.layers));
-    if (cell.status === "computed" && layers.size === 1) Object.assign(cell, candidates[0]);
+    // A stack seen behind a missing one is read by one photo looking past the gap: never verified.
+    if (cell.status === "computed" && layers.size === 1) Object.assign(cell, candidates[0], { verified: false });
     else if (cell.status === "observed" && layers.size === 1 && layers.has(cell.layers)) cell.source += "+" + candidates.map(c => c.source).join("+");
     else {
       Object.assign(cell, { status: "conflict", layers: null, source: candidates.map(c => c.source).join("+") });
       conflicts.push({ cell: [cell.x, cell.y], reason: "faces disagree about the stack behind a missing one" });
     }
   }
+  for (const face of FACE_ORDER.filter(f => strays[f])) ambiguities.push({ face,
+    reason: `${face.toUpperCase()}: ${strays[face]} group(s) of one or two boxes beside the counted stacks (a short stack, a loose tray or a stray box) are not counted` });
   return blockResult(width, depth, facesUsed, typical, [...cells.values()], conflicts, ambiguities);
 }
 
@@ -691,8 +766,9 @@ function captureQuality(columns: SpanColumn[], imageWidth: number | null, imageH
 // get totals only for one-deep blocks; refusing is safer than a fivefold total.
 const SIDE_MIN_TURN_DEG = 45;      // a side face is about 90 degrees from the front
 const SIDES_MIN_APART_DEG = 90;    // LEFT and RIGHT face opposite ways, about 180 degrees apart
-type SideVerdict = { status: "turned" | "same_way_as_straight" | "same_way_as_other_side" | "repeats_front" | "unconfirmed" | "unverified";
-  turn_deg?: number; reason?: string };
+const SIDE_MAX_TURN_DEG = 135;     // past this the camera faces the back face, not a side
+type SideVerdict = { status: "turned" | "faces_back" | "same_way_as_straight" | "same_way_as_other_side" | "repeats_front" | "unconfirmed" | "unverified";
+  turn_deg?: number; direction_ok?: boolean; reason?: string };
 const wrap180 = (deg: number) => ((deg + 180) % 360 + 360) % 360 - 180;
 
 function sideCheck(columns: Record<string, SpanColumn[]>, headings: Record<string, ViewHeading> = {}) {
@@ -707,8 +783,14 @@ function sideCheck(columns: Record<string, SpanColumn[]>, headings: Record<strin
     const heading = headings[side] ?? null;
     if (straight && heading && heading.yaw_session === straight.yaw_session) {
       const turn = Math.round(wrap180(heading.yaw_deg - straight.yaw_deg));
-      verdicts[side] = Math.abs(turn) >= SIDE_MIN_TURN_DEG ? { status: "turned", turn_deg: turn } : { status: "same_way_as_straight",
-        turn_deg: turn, reason: `${name}: taken facing the same way as STRAIGHT (phone turned only ${Math.abs(turn)} degrees); walk around the corner and photograph the ${side} side face` };
+      // Facing the left side face is a right turn from the front (negative yaw), the right side face a left turn.
+      // Recorded, not enforced, until a phone walk-around confirms the sign; a wrong sign would refuse every scan.
+      const direction_ok = side === "left" ? turn < 0 : turn > 0;
+      verdicts[side] = Math.abs(turn) < SIDE_MIN_TURN_DEG ? { status: "same_way_as_straight", turn_deg: turn, direction_ok,
+          reason: `${name}: taken facing the same way as STRAIGHT (phone turned only ${Math.abs(turn)} degrees); walk around the corner and photograph the ${side} side face` }
+        : Math.abs(turn) > SIDE_MAX_TURN_DEG ? { status: "faces_back", turn_deg: turn, direction_ok,
+          reason: `${name}: taken facing the back of the block (phone turned ${Math.abs(turn)} degrees from STRAIGHT); photograph the ${side} side face, about a quarter turn from the front` }
+        : { status: "turned", turn_deg: turn, direction_ok };
       continue;
     }
     const cols = layers(columns[side] ?? []);
@@ -868,7 +950,9 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
   const sides = sideCheck(columns, headings);
   const wrongSide = (["left", "right"] as const).find(side => sides[side].reason);
   const sideConflicts = (["left", "right"] as const).filter(side => sides[side].reason).map(side => ({ reason: sides[side].reason }));
-  const assembled = buildBlock(columns.straight, columns.left, columns.right);
+  const strays = Object.fromEntries(VIEWS.map(view => [view, strayGroups(results[view].detections ?? [])]));
+  const assembled = buildBlock(columns.straight, columns.left, columns.right,
+    Object.fromEntries(VIEWS.map(view => [view, strays[view].length])));
   // When the block model names a face in its first conflict, that is the photo to retake.
   const namedFace = (() => {
     for (const c of assembled.conflicts) {
@@ -906,7 +990,8 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
     processing: { mode: "model_spatial_v1", latency_ms: latency, model_version: env.MODEL_ID, timings_ms: { total: latency } },
     views: Object.fromEntries(VIEWS.map(view => [view, {
       quality: 0, accepted: false, reason, detections: results[view].detections,
-      detector_mean_confidence: results[view].confidence, stack_columns: columns[view], image: results[view].image ?? null,
+      detector_mean_confidence: results[view].confidence, stack_columns: columns[view], stray_groups: strays[view],
+      image: results[view].image ?? null,
     }])),
     stacks: [{ physical_stack_id: "Per-photo model detections (unmatched)",
       counts: Object.fromEntries(VIEWS.map(view => [view, results[view].count])),
@@ -1006,7 +1091,7 @@ async function reconstructPair(request: Request, env: Bindings) {
 // Open mode (AUTH_MODE unset or "open") never reaches this code: jobs and idempotency are enforce-only, so the
 // installed 0.4.11 app keeps exactly today's answers until production is promoted. Observe mode reaches it for
 // every request that carries a credential.
-const PIPELINE_VERSION = "worker-0.4.13";
+const PIPELINE_VERSION = "worker-0.4.14";
 // How long a claimed job is left to its attempt before a retry may take it over. Cloudflare keeps waitUntil work alive
 // for at most 30 s after the client disconnects, so an attempt whose phone gave up (the app's 90 s receive timeout, or
 // a dropped link the edge noticed) is cancelled by about 120 s after the claim and writes nothing; one whose
@@ -1018,8 +1103,9 @@ const PIPELINE_VERSION = "worker-0.4.13";
 // and finishJob gives both the same stored answer (one extra inference, never two answers).
 const LEASE_MS = 150_000;
 // The job fingerprint covers the photos and what the upload asked for; jobs written before it have version 1
-// (the photo hashes alone) and are matched on the photos only, as they were.
-const FINGERPRINT_VERSION = 2;
+// (the photo hashes alone) and are matched on the photos only, as they were. Version 3 adds the phone headings,
+// which decide the side check; a version 2 job is matched on its own version's fields.
+const FINGERPRINT_VERSION = 3;
 const CAS_RETRIES = 5;
 // latest.json: each lost round means another save moved it, so one round per save racing on the scan is enough
 // (8 saves in ascending count time need up to 8; CAS_RETRIES = 5 answered 503 to the newest ones in the tests).
@@ -1286,16 +1372,20 @@ function stillProcessing(job: JobRecord) {
 
 // What one upload asks for: the photos in view order, the scan_contract as sent and the cell ids (by view name).
 // The same photos with another contract or other cell ids are another request (409 scan_id_conflict), not a retry.
-async function requestIdentity(scan: ParsedScan) {
+async function requestIdentity(scan: ParsedScan, version = FINGERPRINT_VERSION) {
   const cellIds = Object.fromEntries(Object.entries(scan.cellIds).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)));
-  const fingerprint = toHex(await digestText(JSON.stringify([FINGERPRINT_VERSION, ...scan.hashes, scan.scanContract, Object.entries(cellIds)])));
-  return { fingerprint, fingerprint_version: FINGERPRINT_VERSION, scan_contract: scan.scanContract, cell_ids: cellIds };
+  const fields: unknown[] = [version, ...scan.hashes, scan.scanContract, Object.entries(cellIds)];
+  if (version >= 3) fields.push(VIEWS.map(view => scan.headings[view] ? [scan.headings[view]!.yaw_deg, scan.headings[view]!.yaw_session] : null));
+  const fingerprint = toHex(await digestText(JSON.stringify(fields)));
+  return { fingerprint, fingerprint_version: version, scan_contract: scan.scanContract, cell_ids: cellIds };
 }
 
 // A job written before fingerprint version 2 holds the photo hashes alone ("left|right|straight"): its missing
 // contract and cell ids match any request, as they did then, so the same photos still replay.
 async function sameRequest(job: JobRecord, scan: ParsedScan, fingerprint: string) {
-  if ((job.fingerprint_version ?? 1) === 1) return job.fingerprint === toHex(await digestText(scan.hashes.join("|")));
+  const version = job.fingerprint_version ?? 1;
+  if (version === 1) return job.fingerprint === toHex(await digestText(scan.hashes.join("|")));
+  if (version !== FINGERPRINT_VERSION) return job.fingerprint === (await requestIdentity(scan, version)).fingerprint;
   return job.fingerprint === fingerprint;
 }
 
@@ -1748,7 +1838,9 @@ async function routeEnforced(request: Request, env: Bindings, url: URL, mode: Au
   return json({ detail: { code: "not_found", message: "Route not found" } }, 404);
 }
 
-export { base64, buildBlock, captureQuality, fuseCounts, fuseCells, readCellIds, readOptionalCellIds, sideCheck, spanColumns, walkLayers };
+export { base64, buildBlock, captureQuality, faceColumns, fuseCounts, fuseCells, medianBoxAspect, modelDiagnostics, readCellIds, readOptionalCellIds,
+  strayGroups,
+  sideCheck, spanColumns, walkLayers, worstView };
 
 export default {
   async fetch(request, env, ctx): Promise<Response> {

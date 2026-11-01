@@ -73,6 +73,12 @@ void main() {
       }),
       isNull,
     );
+    expect(
+      sideHeadingProblem(CaptureView.left, const CaptureHeading(-170, 'a'), {
+        CaptureView.straight: s,
+      }),
+      contains('this is the back of the block'),
+    );
     // Heading wraps: 350 -> 80 is a 90 degree turn.
     expect(
       sideHeadingProblem(CaptureView.right, const CaptureHeading(80, 'a'), {

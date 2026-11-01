@@ -22,12 +22,14 @@ class ManualCountCell {
   final int empty;
   final bool unreachable;
 
+  /// Starts at 0, never at the app's count: a count pre-filled with the
+  /// app's answer is not an independent check of it.
   factory ManualCountCell.fromBlockCell(BlockCell cell) => ManualCountCell(
     x: cell.x,
     y: cell.y,
     appLayers: cell.layers,
     appStatus: cell.status,
-    filled: cell.status == 'missing' ? 0 : (cell.layers ?? 0),
+    filled: 0,
     empty: 0,
   );
 

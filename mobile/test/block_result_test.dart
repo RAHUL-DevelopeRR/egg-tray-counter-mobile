@@ -195,9 +195,31 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(home: Scaffold(body: SingleChildScrollView(child: BlockPanel(block: block)))),
     );
-    expect(find.text('ESTIMATE: FACES DIFFER BY ONE LAYER'), findsOneWidget);
+    expect(find.text('ESTIMATE: A READING IS UNCERTAIN'), findsOneWidget);
     expect(find.textContaining('straight_layers=20'), findsOneWidget);
     expect(find.text('Layers between detected boxes'), findsOneWidget);
     expect(find.text('Eggs if every tray is full'), findsOneWidget);
+    expect(find.text('Seen trays'), findsOneWidget); // an older server: no verified split
+  });
+
+  testWidgets('a 0.4.14 block splits seen trays into two-photo and one-photo readings', (tester) async {
+    final block = BlockResult.fromJson(
+      _block()
+        ..['status'] = 'estimated'
+        ..['visible_verified_trays'] = 40
+        ..['visible_single_reading_trays'] = 40
+        ..['cells'] = [
+          {'x': 0, 'y': 0, 'status': 'observed', 'layers': 20, 'verified': true},
+          {'x': 1, 'y': 0, 'status': 'observed', 'layers': 20, 'verified': false},
+        ],
+    );
+    expect(block.cells.map((c) => c.verified), [true, false]);
+    await tester.pumpWidget(
+      MaterialApp(home: Scaffold(body: SingleChildScrollView(child: BlockPanel(block: block)))),
+    );
+    expect(find.text('ESTIMATE: 40 TRAYS SEEN BY ONE PHOTO ONLY'), findsOneWidget);
+    expect(find.text('Seen by two photos'), findsOneWidget);
+    expect(find.text('Seen by one photo only'), findsOneWidget);
+    expect(find.text('Seen trays'), findsNothing);
   });
 }

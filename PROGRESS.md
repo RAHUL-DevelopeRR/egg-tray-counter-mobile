@@ -1,5 +1,89 @@
 # Progress
 
+## 2026-11-01 - plan to exact counting; Phases A, B, C, D1 built and tested locally (Claude Code)
+
+**The plan.** `C:/Users/rahul/.claude/plans/spicy-growing-flame.md`, approved by the user. It came from a 12-agent
+research workflow: 3 repo readers, 4 web researchers, 3 independent designs, an adversarial critic and a
+synthesizer.
+
+**Its core decision.** "100%" means zero wrong `exact` or `confirmed` totals, with coverage reported beside it.
+Hidden interior stacks cannot be measured from photos.
+
+**Phase A: replay harness and registry (measured, development data).**
+- `benchmarks/registry-20261101`: 72 faces and 22 three-view replays of 14 sets, each with truth tier and
+  provenance.
+  - Built by `scripts/registry_near_duplicates.py` and `scripts/build_replay_registry.mjs`.
+  - **dHash check.** The 18 audit-leaked labelled photos match a detector pool at distance 0-7, and the 6
+    leak-free ones at 10 or not at all. **None of the 42 MUTAA photos matches**, so they are out of sample for the
+    detector.
+  - The 8 MUTAA staging responses are now in `reports/mutaa-manual-vs-backend-20261031/raw/`.
+- `cloudflare-worker/test/replay_benchmark.mjs` and `.test.mjs` run the Worker's own functions offline.
+  - `scripts/replay_benchmark.mjs` writes the report.
+  - `scripts/test_all.ps1` now runs the Worker tests.
+- **Results:**
+  - Per-face verdicts equal the Python 0.4.11 evaluation on all 52 labelled photos (0 mismatches).
+  - Labelled clusters: 10/22 accepted, 9 correct, 1 wrong (img-30, 78 for 80).
+  - Saved trios: 0 wrong releases.
+  - The app's 1600 px re-encode changed the count in 7 of 10 views (img-30: 78 to 79).
+  - Report: `reports/replay-baseline-20261101/README.md`.
+
+**Phase B: miss taxonomy** (`reports/miss-taxonomy-20261101`, overlays from `scripts/overlay_columns.py`). Every
+silent miss on a close face is at a stack end:
+- img-30 stack 2: a box over the top trays of two stacks;
+- img-30 and L-80 stack 4: the bottom tray was cut by the frame edge, got a half-height box and was merged as a
+  duplicate;
+- L-109 stack 4: the bottom tray had no box.
+
+Far faces (W05, M16-FAR) lose layers inside the stack and are already refused.
+
+**Phase C: Worker `worker-0.4.14` release contract.**
+- A stack is `verified` only when two photos read it the same, with no gap-filled layer and no doubt.
+- `exact` needs every visible stack verified.
+- New fields:
+  - per column: `doubts` (box_over_two_stacks, box_over_two_trays, end_box_cut_short, bottom_above_floor);
+  - per cell: `verified` and `readings`;
+  - per block: `visible_verified_trays`, `visible_single_reading_trays`, `single_reading_cells`;
+  - per view: `stray_groups`, the 1-2 box groups, which make the block an estimate.
+- **Doubts on the 82 accepted columns:** all 4 known silent misses are flagged, plus 11 others (7 known correct).
+  The floor check is limited to interior stacks: on end stacks it fired on 4 correct faces.
+- **Adversarial library:**
+  - 0.4.13 failed 5 cases, including `exact` 79 for 80 (S03, S04) and `exact` 60 for 80 (two stacks merged).
+  - 0.4.14 fails 2: side photos of another block with a real turn (S14, R02). These need Phase F.
+- **Cost:** blocks wider than two stacks are `estimated` until Phase E adds a second reading for front-middle
+  stacks.
+
+**D1: side check and heading archive (Worker and app).**
+- A side turned more than 135 degrees is refused as `faces_back`, by the Worker and before the shutter.
+- The turn direction is recorded as `direction_ok` (LEFT is a right turn, negative yaw) but not enforced until a
+  phone confirms the sign.
+- Headings are archived in R2 custom metadata.
+- Job fingerprint version 3 includes the headings; version 2 jobs still replay (tested).
+
+**App 0.4.14+25.**
+- The result card shows "Seen by two photos" and "Seen by one photo only".
+- The manual count is blind: fields start empty, the app's counts and total are hidden, and every reachable stack
+  must be entered.
+- The heading check refuses back-face side photos.
+
+**Tests (measured).**
+- Worker `npm test`: 156 tests, 150 pass, 0 fail, 6 todo. The todos are the remaining planned gaps: S14 and R02
+  (Phase F), and the stretch checks S03 and S04 (E), S07 (F) and S09 (H).
+- Flutter: analyze clean, 177/177.
+
+**Not done.**
+- Python port of the new rules into `scripts/evaluate_labelled.py`. Skipped: the TypeScript harness now runs the
+  Worker's own code, and parity of the unchanged parts is asserted.
+- No deploy, no APK build, no install. Staging is still ef7c1dd3 (0.4.12); the phone has 0.4.12.
+- Phases D2 (the user's blind counts, sheet in `reports/blind-count-20261101`), E, F, G, H and I.
+
+**Next steps.**
+1. The user fills `reports/blind-count-20261101/sheet.csv`.
+2. Phase E: make `backend/app/vision/rim_count.py` independent (its own pitch and stack ends), score it against
+   the blind counts, then verify the Lambda route and `VISION_SERVICE_TOKEN` read-only.
+3. Phase F: the operator declaration (Worker `block_declaration` plus an app pane before upload).
+4. With approval: deploy 0.4.14 to staging (`--env staging` only), build and install APK 0.4.14 on the Redmi,
+   and check the turn sign on a walk-around.
+
 ## 2026-10-31 (later still) - same-face guard: Worker 0.4.13 side check + app heading tracker (Claude Code)
 
 Built at the user's request after the MUTAA comparison (L-100: three front photos gave 500 "estimated" for a

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/fake_server.dart';
+import 'support/manual_count_helpers.dart';
 
 const _route = 'POST /v1/scans/c1/manual-count';
 
@@ -42,6 +43,7 @@ void main() {
       ),
     );
     await tester.enterText(find.byType(TextField).first, 'B09');
+    await countEveryStack(tester);
     await tester.tap(find.text('SAVE AND SEND TO SERVER'));
     await tester.pumpAndSettle();
     expect(find.textContaining('sending failed'), findsOneWidget);
@@ -104,6 +106,7 @@ void main() {
       ),
     );
     await tester.enterText(find.byType(TextField).first, 'B09');
+    await countEveryStack(tester);
     return server;
   }
 

@@ -14,6 +14,10 @@ const double kSideMinTurnDeg = 45;
 /// this they show the same side. Matches SIDES_MIN_APART_DEG in the Worker.
 const double kSidesMinApartDeg = 90;
 
+/// Past this turn from STRAIGHT the camera faces the back face, not a side
+/// (Worker SIDE_MAX_TURN_DEG).
+const double kSideMaxTurnDeg = 135;
+
 /// More than this much unmeasured time and the heading is not trusted.
 const Duration kMaxLostTime = Duration(seconds: 2);
 
@@ -73,6 +77,11 @@ String? sideHeadingProblem(
       return 'The phone turned only ${turn.round()}° since the STRAIGHT '
           'photo, so this is the front face again. Walk around the corner to '
           "the block's $side side and photograph that face square-on.";
+    }
+    if (turn > kSideMaxTurnDeg) {
+      return 'The phone turned ${turn.round()}° since the STRAIGHT photo, so '
+          'this is the back of the block. The $side side face is about a '
+          'quarter turn from the front.';
     }
   }
   final otherView = view == CaptureView.left

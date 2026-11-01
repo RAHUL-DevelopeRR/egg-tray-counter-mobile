@@ -12,6 +12,7 @@ class BlockCell {
     required this.layers,
     this.source,
     this.filledLayers = 0,
+    this.verified,
   });
 
   final int x;
@@ -23,6 +24,9 @@ class BlockCell {
   /// Layers counted between detected boxes (no box of their own).
   final int filledLayers;
 
+  /// Read the same by two photos (Worker 0.4.14); null from older servers.
+  final bool? verified;
+
   factory BlockCell.fromJson(Map<String, dynamic> json) => BlockCell(
     x: json['x'] as int,
     y: json['y'] as int,
@@ -30,13 +34,14 @@ class BlockCell {
     layers: json['layers'] as int?,
     source: json['source'] as String?,
     filledLayers: json['filled_layers'] as int? ?? 0,
+    verified: json['verified'] as bool?,
   );
 }
 
 /// The block's one result state; the result icon, headline and history all
-/// use it. `exact`: every stack seen and the faces agree. `estimated`: a
-/// total exists but hidden stacks are computed or two faces differ by one
-/// layer. `conflict`: no total, retake the named face. `needs_view`: a photo
+/// use it. `exact`: every stack seen and read the same by two photos.
+/// `estimated`: a total exists, but hidden stacks are computed, a stack was
+/// read by one photo only, or two faces differ by one layer. `conflict`: no total, retake the named face. `needs_view`: a photo
 /// is missing or was refused.
 const kBlockExact = 'exact';
 const kBlockEstimated = 'estimated';
@@ -60,6 +65,8 @@ class BlockResult {
     this.filledTrays = 0,
     this.ambiguities = const [],
     this.eggsBasis,
+    this.visibleVerifiedTrays,
+    this.visibleSingleReadingTrays,
   });
 
   final String status;
@@ -79,6 +86,11 @@ class BlockResult {
   final int filledTrays;
   final List<String> ambiguities;
   final String? eggsBasis;
+
+  /// Seen trays split by how they were read (Worker 0.4.14): by two photos
+  /// that agree, or by one photo only. Null from older servers.
+  final int? visibleVerifiedTrays;
+  final int? visibleSingleReadingTrays;
 
   bool get hasGrid =>
       width != null && depth != null && width! > 0 && depth! > 0 && cells.isNotEmpty;
@@ -115,6 +127,8 @@ class BlockResult {
     filledTrays: json['filled_trays'] as int? ?? 0,
     ambiguities: _describe(json['ambiguities'], 'faces differ by one layer'),
     eggsBasis: json['eggs_basis'] as String?,
+    visibleVerifiedTrays: json['visible_verified_trays'] as int?,
+    visibleSingleReadingTrays: json['visible_single_reading_trays'] as int?,
   );
 
   static List<String> _describe(Object? entries, String fallback) =>

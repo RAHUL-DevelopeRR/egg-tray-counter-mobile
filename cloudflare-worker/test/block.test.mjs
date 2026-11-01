@@ -154,7 +154,10 @@ test('opposite side faces of a one-wide block are merged, not overwritten', () =
   assert.equal(rear.status, 'conflict'); assert.equal(rear.source, 'left+right');
   const conflict = block.conflicts.find(c => c.cell && c.cell[0] === 0 && c.cell[1] === 1);
   assert.deepEqual([conflict.left_layers, conflict.right_layers], [18, 22]);
-  const agree = buildBlock(faceOf(20), faceOf(18, 20), faceOf(20, 18));
+  // Stacks stand on one floor: a shorter stack's bottom is level with its neighbours' (its top is lower).
+  const onFloor = (...stacks) => spanColumns(stacks.flatMap((layers, i) =>
+    tray(20, {x: 100 + i * 100, skip: Array.from({length: 20 - layers}, (_, k) => k)})));
+  const agree = buildBlock(faceOf(20), onFloor(18, 20), onFloor(20, 18));
   assert.equal(agree.total_trays, 38); assert.equal(agree.status, 'exact');
 });
 
@@ -173,9 +176,15 @@ test('gap filling stops at two missed layers; longer runs are reported, not inve
   assert.ok(block.conflicts.some(c => String(c.reason).includes('missing over several layers')));
 });
 
-test('filled layers stay in the count and are reported', () => {
-  const block = buildBlock(spanColumns([...tray(20), ...tray(20, {x: 200, skip: [9]})]), faceOf(20), []);
-  assert.equal(block.total_trays, 40); assert.equal(block.status, 'exact'); assert.equal(block.filled_trays, 1);
+test('filled layers stay in the count and are reported, but a gap-filled stack is never verified', () => {
+  const block = buildBlock(spanColumns([...tray(20), ...tray(20, {x: 200, skip: [9]})]), faceOf(20), faceOf(20));
+  // The right-hand stack is read 20 by both STRAIGHT and RIGHT, but STRAIGHT filled one of its layers: the cell keeps
+  // RIGHT's unfilled reading, and one clean reading does not verify it.
+  assert.equal(block.total_trays, 40); assert.equal(block.filled_trays, 0);
+  const cell = block.cells.find(c => c.x === 1 && c.y === 0);
+  assert.deepEqual(cell.readings.map(r => [r.face, r.layers, r.gap_filled]), [['straight', 20, 1], ['right', 20, 0]]);
+  assert.equal(block.status, 'estimated'); assert.deepEqual(block.single_reading_cells, [[1, 0]]);
+  assert.deepEqual([block.visible_verified_trays, block.visible_single_reading_trays], [20, 20]);
 });
 
 test('boxes on alternate layers only send the face for a retake', () => {
@@ -186,8 +195,57 @@ test('boxes on alternate layers only send the face for a retake', () => {
 });
 
 test('status separates exact, estimated, conflict and a missing face', () => {
-  assert.equal(buildBlock(faceOf(20, 20), faceOf(20), []).status, 'exact');
+  assert.equal(buildBlock(faceOf(20, 20), faceOf(20), faceOf(20)).status, 'exact');
+  // The right-hand stack is seen by STRAIGHT only: one photo's reading is an estimate.
+  assert.equal(buildBlock(faceOf(20, 20), faceOf(20), []).status, 'estimated');
   assert.equal(buildBlock(faceOf(20, 20, 20), faceOf(20, 20, 20), faceOf(20, 20, 20)).status, 'estimated');
   assert.equal(buildBlock(faceOf(20, 20), faceOf(20, 20), faceOf(20)).status, 'conflict');
   assert.equal(buildBlock(faceOf(20, 20), [], []).status, 'needs_view');
+});
+// ---- 2026-11-01 release contract (plan Phase C): exact needs two photos reading every stack the same.
+test('a stack read by one photo only keeps the total but is never exact; corners seen twice are verified', () => {
+  const block = buildBlock(faceOf(20, 20, 20, 20), faceOf(20), faceOf(20));
+  assert.equal(block.total_trays, 80); assert.equal(block.status, 'estimated');
+  assert.deepEqual(block.single_reading_cells, [[1, 0], [2, 0]]);
+  assert.deepEqual([block.visible_verified_trays, block.visible_single_reading_trays], [40, 40]);
+  const corner = block.cells.find(c => c.x === 0 && c.y === 0);
+  assert.equal(corner.verified, true);
+  assert.deepEqual(corner.readings.map(r => [r.face, r.layers]), [['straight', 20], ['left', 20]]);
+  assert.equal(buildBlock(faceOf(20), faceOf(20), faceOf(20)).status, 'exact');   // one stack, three photos
+});
+
+test('a box over two trays marks every stack it spans, and that reading cannot verify a corner (img-30)', () => {
+  // Stack 1's top box is as wide as two stacks: it covers stack 2's top tray, so stack 2 reads one short.
+  const wideTop = {class: 'egg_tray', confidence: .9, x: 125, y: 100, width: 180, height: 36};
+  const straight = spanColumns([wideTop, ...tray(20, {skip: [0]}), ...tray(20, {x: 200, skip: [0]})]);
+  assert.deepEqual(straight.map(c => [c.walk_count, c.doubts]), [[20, ['box_over_two_stacks']], [19, ['box_over_two_stacks']]]);
+  const block = buildBlock(straight, faceOf(20), faceOf(19));
+  assert.equal(block.status, 'estimated'); assert.deepEqual(block.single_reading_cells, [[0, 0], [1, 0]]);
+});
+
+test('a bottom tray cut by the frame edge gets a short box that is merged as a duplicate: a doubt (img-30 stack 4)', () => {
+  const boxes = tray(19);
+  boxes.push({class: 'egg_tray', confidence: .9, x: 100, y: 100 + 18 * 40 + 14, width: 80, height: 16});
+  const [column] = spanColumns(boxes);
+  assert.equal(column.walk_count, 19); assert.deepEqual(column.doubts, ['end_box_cut_short']);
+  const tall = tray(20, {skip: [18, 19]});
+  tall.push({class: 'egg_tray', confidence: .9, x: 100, y: 100 + 18.5 * 40, width: 80, height: 70});
+  assert.deepEqual(spanColumns(tall)[0].doubts, ['box_over_two_trays']);
+});
+
+test('a stack whose bottom box sits over half a pitch above its neighbours lost its bottom tray (L-109 stack 4)', () => {
+  const cols = spanColumns([...tray(20), ...tray(20, {x: 200, skip: [19]}), ...tray(20, {x: 300})]);
+  assert.deepEqual(cols.map(c => c.doubts), [[], ['bottom_above_floor'], []]);
+  // A shorter stack standing on the floor (its top lower, its bottom level) raises no doubt.
+  const short = spanColumns([...tray(20), ...tray(20, {x: 200, skip: [0, 1]}), ...tray(20, {x: 300})]);
+  assert.deepEqual(short.map(c => c.doubts), [[], [], []]);
+});
+
+test('groups of one or two boxes are reported, not counted, and keep a block from being exact', async () => {
+  const { strayGroups } = await import('../dist/index.js');
+  const loose = [...tray(20), ...tray(20, {x: 200}), ...tray(2, {x: 400})];
+  assert.deepEqual(strayGroups(loose).map(g => g.boxes), [2]);
+  const block = buildBlock(spanColumns(loose), faceOf(20), faceOf(20), {straight: 1});
+  assert.equal(block.total_trays, 40); assert.equal(block.status, 'estimated');
+  assert.ok(block.ambiguities[0].reason.startsWith('STRAIGHT: 1 group(s) of one or two boxes'), block.ambiguities[0].reason);
 });

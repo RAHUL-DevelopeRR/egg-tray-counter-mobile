@@ -6,6 +6,8 @@ import 'package:egg_tray_counter/services/manual_count_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'support/manual_count_helpers.dart';
+
 ScanResult _result() => ScanResult.fromJson({
   'scan_id': '8a1b2c3d-1111-4222-8333-444455556666',
   'status': 'rescan_required',
@@ -51,10 +53,11 @@ ScanResult _result() => ScanResult.fromJson({
 });
 
 void main() {
-  test('cells are pre-filled from the block and missing stacks start at 0', () {
+  test('cells start at 0, never at the app count (a blind count)', () {
     final block = BlockResult.fromJson(_result().block!.toJsonForTest());
     final cells = block.cells.map(ManualCountCell.fromBlockCell).toList();
-    expect(cells.map((c) => c.filled), [20, 0, 19, 20]);
+    expect(cells.map((c) => c.filled), [0, 0, 0, 0]);
+    expect(cells.map((c) => c.appLayers), [20, 0, 19, 20]);
     expect(cells.every((c) => c.empty == 0), isTrue);
   });
 
@@ -139,7 +142,10 @@ void main() {
     );
     expect(find.byKey(const ValueKey('row-0,0')), findsOneWidget);
     expect(find.byKey(const ValueKey('row-1,1')), findsOneWidget);
-    expect(find.text('59'), findsNWidgets(2)); // app total and manual filled (pre-filled)
+    // Blind: neither the app's total nor its per-stack counts are on screen.
+    expect(find.text('App total'), findsNothing);
+    expect(find.textContaining('app '), findsNothing);
+    expect(find.text('59'), findsNothing);
     await tester.tap(find.text('SAVE ON PHONE ONLY'));
     await tester.pump();
     expect(find.text('Enter the block ID first.'), findsOneWidget);
@@ -147,6 +153,12 @@ void main() {
     await tester.enterText(find.byKey(const ValueKey('filled-0,1')), '18');
     await tester.tap(find.byKey(const ValueKey('unreachable-1,1')));
     await tester.pump();
+    await tester.tap(find.text('SAVE ON PHONE ONLY'));
+    await tester.pump();
+    expect(find.text('Count every stack you can reach, or tick it as unreachable: (0,0) (1,0).'), findsOneWidget);
+    expect(await repo.all(), isEmpty);
+    await tester.enterText(find.byKey(const ValueKey('filled-0,0')), '20');
+    await tester.enterText(find.byKey(const ValueKey('filled-1,0')), '0');
     await tester.tap(find.text('SAVE ON PHONE ONLY'));
     await tester.pumpAndSettle();
     final saved = await repo.all();
@@ -177,6 +189,7 @@ void main() {
       ),
     );
     await tester.enterText(find.byType(TextField).first, 'B08');
+    await countEveryStack(tester);
     await tester.tap(find.text('SAVE AND SEND TO SERVER'));
     await tester.pumpAndSettle(const Duration(seconds: 2));
     expect((await repo.all()).single.submitted, isFalse);
