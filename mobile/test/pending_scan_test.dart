@@ -1,8 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:egg_tray_counter/app/app_version.dart';
 import 'package:egg_tray_counter/features/home/home_screen.dart';
+import 'package:egg_tray_counter/models/block_declaration.dart';
 import 'package:egg_tray_counter/models/capture_view.dart';
+import 'package:egg_tray_counter/models/extra_capture.dart';
 import 'package:egg_tray_counter/models/scan_result.dart';
 import 'package:egg_tray_counter/services/api_client.dart';
 import 'package:egg_tray_counter/services/device_auth.dart';
@@ -15,6 +18,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import 'support/fake_server.dart';
+import 'support/multipart.dart';
 
 const _base = 'https://staging.example.test';
 const _count = 'POST /v1/scans/count';
@@ -499,5 +503,119 @@ void main() {
     expect(find.text('Unknown - recorded by an older app'), findsOneWidget);
     expect(find.text('UNKNOWN'), findsOneWidget);
     expect(find.text('Rescan required'), findsOneWidget);
+  });
+
+  test('the declaration and the optional extras survive a relaunch and are '
+      'uploaded again on resume', () async {
+    final session = photoSession(photos, 'p9');
+    final corner = File('${photos.path}/corner-p9.jpg')
+      ..writeAsBytesSync(List<int>.filled(1024, 7));
+    final top = File('${photos.path}/top-p9.jpg')
+      ..writeAsBytesSync(List<int>.filled(1024, 9));
+    final declaration = BlockDeclaration(
+      x: 5,
+      y: 3,
+      interior: 'full',
+      missingCells: const [
+        [2, 1],
+      ],
+      partialStacks: const [PartialStack(x: 4, y: 0, layers: 12)],
+      coverTrays: 'no',
+      occupancy: 'egg_filled',
+      referenceHeight: 20,
+      referenceHeightMeasured: true,
+      operator: 'OP7',
+      declaredAt: DateTime.utc(2026, 11, 1, 10),
+    );
+    const evidence = '{"source":"captured_still","blocked":false}';
+    final taps = const ElevatedTaps(x: 5, y: 3).tap(2, 1).tap(2, 1);
+    session
+      ..declare(declaration)
+      ..setExtra(
+        ExtraView.corner,
+        corner.path,
+        evidence: evidence,
+        side: kCornerFrontLeft,
+      )
+      ..setExtra(ExtraView.elevated, top.path, evidence: evidence)
+      ..setElevatedTaps(taps);
+    final history = openHistory();
+    final failing = FakeServer({
+      'GET /health': [reply(jobsHealth)],
+      _count: [dropBeforeBody()],
+    });
+    await expectLater(
+      runner(failing, history).run(session, onProgress: (_, _) {}),
+      throwsA(isA<ScanFailure>()),
+    );
+    for (final name in ['corner.jpg', 'elevated.jpg', 'session.json']) {
+      expect(File('${pendingRoot.path}/p9/$name').existsSync(), isTrue, reason: name);
+    }
+    await history.close();
+    // The face photos are gone with the app; the extras are restored from
+    // the pending copies (their paths below are new files in scratch).
+    for (final path in session.paths.values) {
+      File(path).deleteSync();
+    }
+
+    final relaunched = openHistory();
+    final restored = await storeFor(relaunched).restore('p9');
+    expect(restored.isComplete, isTrue);
+    // Past its blind step: never asked again, and the same declaration.
+    expect(restored.declarationAsked, isTrue);
+    expect(restored.declaration!.toJson(), declaration.toJson());
+    final keptCorner = restored.extraFor(ExtraView.corner)!;
+    expect(keptCorner.side, kCornerFrontLeft);
+    expect(keptCorner.evidence, evidence);
+    expect(keptCorner.path, startsWith(scratch.path));
+    expect(keptCorner.path, isNot(corner.path));
+    expect(File(keptCorner.path).readAsBytesSync(), List<int>.filled(1024, 7));
+    final keptTop = restored.extraFor(ExtraView.elevated)!;
+    expect(keptTop.taps!.toJson(), taps.toJson());
+    expect(keptTop.path, startsWith(scratch.path));
+    expect(File(keptTop.path).readAsBytesSync(), List<int>.filled(1024, 9));
+
+    final server = FakeServer({
+      'GET /health': [reply(jobsHealth)],
+      'GET /v1/scans/p9/result': [reply(detail('scan_not_found'), 404)],
+      _count: [reply(scanBody('p9'))],
+    });
+    await runner(
+      server,
+      relaunched,
+    ).run(restored, onProgress: (_, _) {}, resume: true);
+    final parts = multipartParts(server.calls(_count).single.body!);
+    expect(jsonDecode(parts.fields['block_declaration']!), declaration.toJson());
+    expect(parts.fields['corner_side'], 'front_left');
+    expect(jsonDecode(parts.fields['elevated_taps']!), taps.toJson());
+    expect(parts.files['corner'], 'corner.jpg');
+    expect(parts.files['elevated'], 'elevated.jpg');
+    await relaunched.close();
+  });
+
+  test('a scan kept by an app before 0.5.0 restores without a declaration '
+      'or extras and is never asked to declare after the fact', () async {
+    final session = photoSession(photos, 'p10');
+    final history = openHistory();
+    final failing = FakeServer({
+      'GET /health': [reply(jobsHealth)],
+      _count: [dropBeforeBody()],
+    });
+    await expectLater(
+      runner(failing, history).run(session, onProgress: (_, _) {}),
+      throwsA(isA<ScanFailure>()),
+    );
+    // What a 0.4.15 app wrote: no declaration, no extras.
+    final manifest = File('${pendingRoot.path}/p10/session.json');
+    final old = jsonDecode(manifest.readAsStringSync()) as Map<String, dynamic>
+      ..remove('declaration')
+      ..remove('extras');
+    manifest.writeAsStringSync(jsonEncode(old));
+    final restored = await storeFor(history).restore('p10');
+    expect(restored.isComplete, isTrue);
+    expect(restored.declaration, isNull);
+    expect(restored.declarationAsked, isTrue);
+    expect(restored.extras, isEmpty);
+    await history.close();
   });
 }

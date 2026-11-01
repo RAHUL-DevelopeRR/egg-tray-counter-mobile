@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:egg_tray_counter/app/app_version.dart';
 import 'package:egg_tray_counter/features/home/home_screen.dart';
 import 'package:egg_tray_counter/features/scan_flow/scan_flow_screen.dart';
@@ -14,8 +17,11 @@ import 'package:egg_tray_counter/services/settings_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:image/image.dart' as img;
+import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
 
 import 'support/fake_server.dart';
+import 'support/multipart.dart';
 
 const _base = 'https://staging.example.test';
 
@@ -42,6 +48,10 @@ class _Settings implements SettingsStore {
   Future<bool> getGalleryUploads() async => gallery;
   @override
   Future<void> setGalleryUploads(bool value) async {}
+  @override
+  Future<String?> getOperatorName() async => null;
+  @override
+  Future<void> setOperatorName(String value) async {}
 }
 
 class _History extends HistoryDatabase {
@@ -153,6 +163,19 @@ List<String> _buttons(WidgetTester tester) => tester
 
 String _title(WidgetTester tester) =>
     tester.widget<Text>(find.byKey(const ValueKey('failure-title'))).data!;
+
+/// The gallery picker, always choosing [path].
+class _Picker extends ImagePickerPlatform {
+  _Picker(this.path);
+
+  final String path;
+
+  @override
+  Future<XFile?> getImageFromSource({
+    required ImageSource source,
+    ImagePickerOptions options = const ImagePickerOptions(),
+  }) async => XFile(path);
+}
 
 void main() {
   late NoWait wait;
@@ -450,6 +473,223 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Upload photos'), findsNothing);
       expect(find.textContaining('waiting for approval'), findsWidgets);
+    });
+  });
+
+  group('0.5.0 result screen', () {
+    testWidgets('a confirmed result names its basis and never says exact; a '
+        'resumed scan is not asked to declare', (tester) async {
+      tallView(tester);
+      final body = scanBody('k1');
+      body['block'] = {
+        ...body['block'] as Map<String, dynamic>,
+        'status': 'confirmed',
+        'confirmed_basis': ['declaration'],
+        'note': 'Interior declared full by the operator.',
+        'grid': [
+          [
+            {
+              'x': 0,
+              'y': 0,
+              'status': 'verified',
+              'stack_present': true,
+              'z_layers': 59,
+            },
+          ],
+        ],
+        'inventory': {
+          'physical_layers_observed': 59,
+          'physical_layers_computed': 0,
+          'physical_layers_declared': 0,
+          'eligible_egg_trays': {
+            'value': 59,
+            'basis': 'declared',
+            'note': 'occupancy declared by the operator',
+          },
+          'empty_cover_layers': {'value': null, 'basis': 'unknown'},
+          'unknown_occupancy_layers': 0,
+          'unknown_cells': 0,
+        },
+      };
+      pending.add('k1', bodySent: true, kept: body);
+      await tester.pumpWidget(
+        MaterialApp(
+          home: ScanFlowScreen(
+            cameras: const [],
+            settings: _Settings(),
+            history: history,
+            pendingScans: pending,
+            uploadPhotos: true,
+            resume: pending.sessions['k1'],
+            clientFor: clientFor(
+              FakeServer({
+                'GET /health': [reply(jobsHealth)],
+              }),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Scan result'), findsOneWidget);
+      expect(find.text('DECLARE THE BLOCK'), findsNothing);
+      expect(
+        find.text('CONFIRMED: VISIBLE STACKS VERIFIED, INTERIOR DECLARED'),
+        findsOneWidget,
+      );
+      expect(find.text('INTERIOR BASIS: OPERATOR DECLARATION'), findsOneWidget);
+      expect(find.text('59 (declared)'), findsOneWidget);
+      final words = tester
+          .widgetList<Text>(find.byType(Text))
+          .map((t) => t.data ?? t.textSpan?.toPlainText() ?? '')
+          .join(' | ')
+          .toLowerCase();
+      expect(words, isNot(contains('exact')));
+      expect(words, isNot(contains('physically verified')));
+      expect(history.saved.single.resultStatus, 'confirmed');
+    });
+  });
+
+  group('blind declaration in the scan flow', () {
+    late Directory dir;
+    late ImagePickerPlatform previousPicker;
+
+    setUp(() {
+      dir = Directory.systemTemp.createTempSync('declaration_flow');
+      final image = img.Image(width: 480, height: 480);
+      for (final pixel in image) {
+        final value = ((pixel.x ~/ 8 + pixel.y ~/ 8) % 2 == 0) ? 65 : 190;
+        pixel.setRgb(value, value, value);
+      }
+      final photo = File('${dir.path}/block.png')
+        ..writeAsBytesSync(img.encodePng(image));
+      previousPicker = ImagePickerPlatform.instance;
+      ImagePickerPlatform.instance = _Picker(photo.path);
+    });
+
+    tearDown(() {
+      ImagePickerPlatform.instance = previousPicker;
+      try {
+        dir.deleteSync(recursive: true);
+      } on FileSystemException {
+        // Windows may still hold a file for a moment.
+      }
+    });
+
+    /// Answers the count with the scan id the upload carried.
+    Answer countReply() => (request) async {
+      final parts = multipartParts(await readBody(request));
+      return json(scanBody(parts.fields['scan_id']!, cellIds: const {}), 200);
+    };
+
+    /// Presses [key] on real time: the upload it starts reads the photo
+    /// files, which fake time never finishes.
+    Future<void> pressAndWaitForResult(WidgetTester tester, String key) async {
+      await tester.ensureVisible(find.byKey(ValueKey(key)));
+      final button = tester.widget<ButtonStyleButton>(find.byKey(ValueKey(key)));
+      await tester.runAsync(() async {
+        button.onPressed!();
+        for (var i = 0; i < 100 && history.saved.isEmpty; i++) {
+          await Future<void>.delayed(const Duration(milliseconds: 50));
+        }
+      });
+      await tester.pumpAndSettle();
+    }
+
+    Future<void> pickThreePhotos(WidgetTester tester) async {
+      for (final view in CaptureView.values) {
+        await tester.tap(find.text(view.title));
+        for (var i = 0; i < 20; i++) {
+          await tester.runAsync(
+            () => Future<void>.delayed(const Duration(milliseconds: 100)),
+          );
+          await tester.pump();
+          if (find.text('Selected — tap to replace').evaluate().length >
+              view.index) {
+            break;
+          }
+        }
+      }
+      expect(find.text('Selected — tap to replace'), findsNWidgets(3));
+      await tester.tap(find.byType(CheckboxListTile));
+      await tester.pump();
+      await tester.ensureVisible(find.text('UPLOAD AND COUNT'));
+      await tester.tap(find.text('UPLOAD AND COUNT'));
+      await tester.pump();
+    }
+
+    testWidgets('after the three photos the declaration is asked before '
+        'anything is sent, and the upload carries it', (tester) async {
+      tallView(tester);
+      final server = FakeServer({
+        'GET /health': [reply(jobsHealth)],
+        'POST /v1/scans/count': [countReply()],
+      });
+      await tester.pumpWidget(
+        MaterialApp(
+          home: ScanFlowScreen(
+            cameras: const [],
+            settings: _Settings(),
+            history: history,
+            pendingScans: pending,
+            uploadPhotos: true,
+            clientFor: clientFor(server),
+          ),
+        ),
+      );
+      await pickThreePhotos(tester);
+      // Blind: the declaration comes first, nothing has been uploaded.
+      expect(find.text('DECLARE THE BLOCK'), findsOneWidget);
+      expect(server.requests, isEmpty);
+      expect(history.saved, isEmpty);
+      expect(find.text('Scan result'), findsNothing);
+
+      for (final key in ['decl-x-plus', 'decl-x-plus', 'decl-interior-full']) {
+        await tester.ensureVisible(find.byKey(ValueKey(key)));
+        await tester.tap(find.byKey(ValueKey(key)));
+        await tester.pump();
+      }
+      await tester.enterText(find.byKey(const ValueKey('decl-operator')), 'OP7');
+      await pressAndWaitForResult(tester, 'declare-continue');
+
+      expect(find.text('Scan result'), findsOneWidget);
+      final parts = multipartParts(
+        server.calls('POST /v1/scans/count').single.body!,
+      );
+      final declared =
+          jsonDecode(parts.fields['block_declaration']!) as Map<String, dynamic>;
+      expect(declared['x'], 3);
+      expect(declared['y'], 1);
+      expect(declared['interior'], 'full');
+      expect(declared['occupancy'], 'unknown');
+      expect(declared['operator'], 'OP7');
+      expect(declared['declared_at'], endsWith('Z'));
+    });
+
+    testWidgets('SKIP DECLARATION uploads without one', (tester) async {
+      tallView(tester);
+      final server = FakeServer({
+        'GET /health': [reply(jobsHealth)],
+        'POST /v1/scans/count': [countReply()],
+      });
+      await tester.pumpWidget(
+        MaterialApp(
+          home: ScanFlowScreen(
+            cameras: const [],
+            settings: _Settings(),
+            history: history,
+            pendingScans: pending,
+            uploadPhotos: true,
+            clientFor: clientFor(server),
+          ),
+        ),
+      );
+      await pickThreePhotos(tester);
+      await pressAndWaitForResult(tester, 'declare-skip');
+      expect(find.text('Scan result'), findsOneWidget);
+      final parts = multipartParts(
+        server.calls('POST /v1/scans/count').single.body!,
+      );
+      expect(parts.fields.containsKey('block_declaration'), isFalse);
     });
   });
 }

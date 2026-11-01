@@ -24,6 +24,10 @@ class _BlankSettings implements SettingsStore {
   @override
   Future<void> setGalleryUploads(bool value) async {}
   @override
+  Future<String?> getOperatorName() async => null;
+  @override
+  Future<void> setOperatorName(String value) async {}
+  @override
   Future<String?> getHeightPilot() async => null;
   @override
   Future<void> setHeightPilot(String json) async {}

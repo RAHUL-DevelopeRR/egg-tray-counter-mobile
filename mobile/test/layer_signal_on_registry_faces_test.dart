@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:egg_tray_counter/services/captured_still.dart';
 import 'package:egg_tray_counter/services/frame_evidence.dart';

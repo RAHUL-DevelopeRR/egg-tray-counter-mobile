@@ -1,7 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:egg_tray_counter/app/app_version.dart';
+import 'package:egg_tray_counter/models/block_declaration.dart';
+import 'package:egg_tray_counter/models/extra_capture.dart';
 import 'package:egg_tray_counter/models/manual_count.dart';
 import 'package:egg_tray_counter/services/api_client.dart';
 import 'package:egg_tray_counter/services/device_auth.dart';
@@ -9,6 +12,7 @@ import 'package:egg_tray_counter/services/scan_failure.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/fake_server.dart';
+import 'support/multipart.dart';
 
 const _base = 'https://staging.example.test';
 const _count = 'POST /v1/scans/count';
@@ -724,6 +728,155 @@ void main() {
       expect(body['app_total'], 20);
       expect(body['app_version'], kAppVersion);
       expect(posts.last.json, body);
+    });
+  });
+
+  group('0.5.0 upload fields', () {
+    final declaration = BlockDeclaration(
+      x: 5,
+      y: 3,
+      interior: 'full',
+      missingCells: const [
+        [2, 1],
+      ],
+      partialStacks: const [PartialStack(x: 4, y: 0, layers: 12)],
+      coverTrays: 'no',
+      occupancy: 'egg_filled',
+      referenceHeight: 20,
+      referenceHeightMeasured: true,
+      operator: 'OP7',
+      declaredAt: DateTime.utc(2026, 11, 1, 10),
+    );
+    String evidence(double yaw) => jsonEncode({
+      'source': 'captured_still',
+      'blocked': false,
+      'yaw_deg': yaw,
+      'yaw_session': 'k1',
+      'extra_view': 'x',
+      'checks': [
+        for (var i = 0; i < 50; i++) {'id': 'c$i'},
+      ],
+    });
+
+    test('the declaration and the extras are sent as the contract names '
+        'them, with <view>_capture from their evidence', () async {
+      final corner = File('${dir.path}/corner.jpg')
+        ..writeAsBytesSync(List<int>.filled(512, 3));
+      final top = File('${dir.path}/top.jpg')
+        ..writeAsBytesSync(List<int>.filled(512, 5));
+      final taps = const ElevatedTaps(x: 5, y: 3).tap(0, 0).tap(2, 1).tap(2, 1);
+      final session = photoSession(dir, 'x1')
+        ..declare(declaration)
+        ..setExtra(
+          ExtraView.corner,
+          corner.path,
+          evidence: evidence(44.5),
+          side: kCornerFrontLeft,
+        )
+        ..setExtra(ExtraView.elevated, top.path, evidence: evidence(2))
+        ..setElevatedTaps(taps);
+      final server = FakeServer({
+        'GET /health': [reply(jobsHealth)],
+        _count: [reply(scanBody('x1'))],
+      });
+      await client(server).submitScan(session, onProgress: (_, _) {});
+      final parts = multipartParts(server.calls(_count).single.body!);
+      expect(jsonDecode(parts.fields['block_declaration']!), {
+        'x': 5,
+        'y': 3,
+        'interior': 'full',
+        'missing_cells': [
+          [2, 1],
+        ],
+        'partial_stacks': [
+          {'x': 4, 'y': 0, 'layers': 12},
+        ],
+        'cover_trays': 'no',
+        'occupancy': 'egg_filled',
+        'reference_height': 20,
+        'reference_height_measured': true,
+        'operator': 'OP7',
+        'declared_at': '2026-11-01T10:00:00Z',
+      });
+      expect(parts.fields['corner_side'], 'front_left');
+      expect(jsonDecode(parts.fields['corner_capture']!), {
+        'source': 'captured_still',
+        'blocked': false,
+        'yaw_deg': 44.5,
+        'yaw_session': 'k1',
+      });
+      expect(jsonDecode(parts.fields['elevated_capture']!), {
+        'source': 'captured_still',
+        'blocked': false,
+        'yaw_deg': 2,
+        'yaw_session': 'k1',
+      });
+      expect(jsonDecode(parts.fields['elevated_taps']!), {
+        'x': 5,
+        'y': 3,
+        'cells': [
+          {'x': 0, 'y': 0, 'state': 'present'},
+          {'x': 2, 'y': 1, 'state': 'missing'},
+        ],
+      });
+      expect(parts.files, {
+        'left': 'left.jpg',
+        'right': 'right.jpg',
+        'straight': 'straight.jpg',
+        'corner': 'corner.jpg',
+        'elevated': 'elevated.jpg',
+      });
+      // Only the contract's fields for the extras: no full evidence.
+      expect(
+        parts.fields.keys
+            .where((k) => k.startsWith('corner') || k.startsWith('elevated'))
+            .toSet(),
+        {'corner_capture', 'corner_side', 'elevated_capture', 'elevated_taps'},
+      );
+      // The required fields are as before.
+      expect(parts.fields['scan_contract'], 'model_spatial_v1');
+      expect(parts.fields['left_constraint_evidence'], '{"view":"left"}');
+      expect(parts.fields['left_cell_id'], 'A1');
+    });
+
+    test('a skipped declaration and no extras send none of the new fields', () async {
+      final session = photoSession(dir, 'x2')..declare(null);
+      final server = FakeServer({
+        'GET /health': [reply(jobsHealth)],
+        _count: [reply(scanBody('x2'))],
+      });
+      await client(server).submitScan(session, onProgress: (_, _) {});
+      final parts = multipartParts(server.calls(_count).single.body!);
+      for (final field in [
+        'block_declaration',
+        'corner',
+        'corner_capture',
+        'corner_side',
+        'elevated',
+        'elevated_capture',
+        'elevated_taps',
+      ]) {
+        expect(parts.fields.containsKey(field), isFalse, reason: field);
+        expect(parts.files.containsKey(field), isFalse, reason: field);
+      }
+      expect(parts.files.keys.toSet(), {'left', 'right', 'straight'});
+    });
+
+    test('an elevated photo without a top reading sends no taps', () async {
+      final top = File('${dir.path}/top3.jpg')
+        ..writeAsBytesSync(List<int>.filled(512, 5));
+      final session = photoSession(dir, 'x3')
+        ..setExtra(ExtraView.elevated, top.path, evidence: evidence(0));
+      final server = FakeServer({
+        'GET /health': [reply(jobsHealth)],
+        _count: [reply(scanBody('x3'))],
+      });
+      await client(server).submitScan(session, onProgress: (_, _) {});
+      final parts = multipartParts(server.calls(_count).single.body!);
+      expect(parts.files['elevated'], 'elevated.jpg');
+      expect(parts.fields.containsKey('elevated_capture'), isTrue);
+      expect(parts.fields.containsKey('elevated_taps'), isFalse);
+      expect(parts.fields.containsKey('block_declaration'), isFalse);
     });
   });
 }

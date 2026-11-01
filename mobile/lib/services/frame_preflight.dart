@@ -53,6 +53,14 @@ class PoseCalibration {
 
 enum PreflightSeverity { pass, advisory, blocking }
 
+/// What a photo is aimed at. `square` is the three required faces, held
+/// level and square-on. The optional extras relax only what their aim makes
+/// meaningless: a `corner` photo shows two faces at once, so the square-on
+/// hint is not given; an `elevated` photo looks down on the block top, so the
+/// pitch-down limit (and the square-on hint) does not apply. Every lighting,
+/// focus, framing and roll check still does.
+enum CaptureAim { square, corner, elevated }
+
 enum PreflightCheckId {
   calibration,
   lighting,
@@ -246,6 +254,7 @@ class FramePreflight {
     DevicePose? pose,
     required bool calibrationSet,
     DateTime? measuredAt,
+    CaptureAim aim = CaptureAim.square,
   }) {
     final checks = <PreflightCheck>[];
     if (metrics == null) {
@@ -269,8 +278,19 @@ class FramePreflight {
       ..addAll(_lightingChecks(metrics))
       ..addAll(_sharpnessChecks(metrics))
       ..addAll(_framingChecks(metrics))
-      ..addAll(_directionChecks(metrics, view))
-      ..addAll(_tiltChecks(metrics, pose, calibrationSet));
+      ..addAll(
+        aim == CaptureAim.square
+            ? _directionChecks(metrics, view)
+            : const <PreflightCheck>[],
+      )
+      ..addAll(
+        _tiltChecks(
+          metrics,
+          pose,
+          calibrationSet,
+          lookingDown: aim == CaptureAim.elevated,
+        ),
+      );
 
     return PreflightReport(
       checks: checks,
@@ -573,8 +593,9 @@ class FramePreflight {
   List<PreflightCheck> _tiltChecks(
     FrameMetrics metrics,
     DevicePose? pose,
-    bool calibrationSet,
-  ) {
+    bool calibrationSet, {
+    bool lookingDown = false,
+  }) {
     final checks = <PreflightCheck>[];
     final horizon = metrics.horizonTiltDeg;
 
@@ -620,7 +641,22 @@ class FramePreflight {
       }
 
       final pitch = pose.pitchDownDeg;
-      if (pitch < PreflightPolicy.minPitchDownDeg ||
+      if (lookingDown) {
+        // The ELEVATED photo looks down on purpose; only aiming up is wrong.
+        if (pitch < PreflightPolicy.minPitchDownDeg) {
+          checks.add(
+            PreflightCheck(
+              id: PreflightCheckId.tilt,
+              severity: PreflightSeverity.blocking,
+              headline: 'CAMERA ANGLED UP',
+              detail:
+                  'Camera pitch ${pitch.toStringAsFixed(1)}deg below '
+                  'horizontal; the elevated photo looks down on the block top.',
+              action: 'Raise the phone and point it down at the stack tops.',
+            ),
+          );
+        }
+      } else if (pitch < PreflightPolicy.minPitchDownDeg ||
           pitch > PreflightPolicy.maxPitchDownDeg) {
         checks.add(
           PreflightCheck(

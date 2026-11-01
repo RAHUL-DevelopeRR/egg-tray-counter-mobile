@@ -185,7 +185,7 @@ Jobs:
   sorted by view; jobs store `fingerprint_version: 2`, `scan_contract`, `cell_ids`. Older jobs without these
   fields replay for the same photos whatever metadata is sent.
 - `PIPELINE_VERSION = worker-0.4.12` (`worker-0.4.13` from the side-face check below, `worker-0.4.14` from the release
-  contract, `worker-0.4.15` from capture provenance, both at the end). A failure after a lost lease returns the other attempt's stored
+  contract, `worker-0.4.15` from capture provenance, `worker-0.5.0` from the grid, all at the end). A failure after a lost lease returns the other attempt's stored
   result (200) or 202 if it is still running; `job.status` says `failed` only when the failure was stored.
 - A missing `scan_id` is still minted by the server (no idempotency for such a request).
 
@@ -365,3 +365,49 @@ A doubt only stops a reading from verifying a stack; it never refuses the count.
   wrong at 26 px.
 - The threshold waits for the distance ladder (plan G).
 - W05 is not `exact` anyway, because its cells are gap-filled.
+
+## Grid, declaration and extra views (0.5.0, 2026-11-01)
+
+**Contract:** `docs/GRID_CONTRACT_0.5.0.md`. **Report:** `docs/RELEASE_0.5.0.md`. **Field protocol:**
+`docs/PHYSICAL_VALIDATION.md`.
+
+**New optional upload fields:**
+- `block_declaration`: JSON, at most 4,000 characters;
+- `corner` with `corner_capture` and `corner_side` (`front_left` or `front_right`);
+- `elevated` with `elevated_capture` and `elevated_taps` (JSON, at most 8,000 characters).
+
+**How they are handled:**
+- Malformed declarations or taps are ignored, never refused.
+- An extra photo identical to a face is `422 duplicate_view`.
+- Extras are archived under `scans/<id>/corner/<sha>` and `scans/<id>/elevated/<sha>`, with
+  `scans/<id>/declaration.json`.
+- The job fingerprint (version 3) appends `[cornerHash, cornerSide, elevatedHash, declaration, taps]` only when one of
+  them is present, so earlier version 3 fingerprints are unchanged.
+- The CORNER photo costs one more detector call.
+
+**Response additions:**
+- `block.grid[y][x]`: physical stacks with z / filled / partial / cover / unknown layers, observed views, measurement
+  sources, status, uncertainties, readings and `pair_type`;
+- `block.inventory`;
+- `block.declaration` with `agrees_with_faces`;
+- `block.corner` and `block.top_view`;
+- `block.confirmed_basis` and `block.suggested_views`;
+- `block.grid_note`.
+
+**Readings (plan Phase Q):** `capture_id` (the photo's sha256 prefix; a copy carries the original's id), `reader`
+(`rf-walk`), `physical_stack_id`, `view`, `count`, `evidence`, `quality` and `pipeline_version`. A stack is
+verified by two different captures.
+
+**Statuses:**
+- `confirmed` is new (see the contract).
+- A declaration, top view or corner that contradicts the faces gives `conflict` with no total.
+- A refused photo stays `needs_view`.
+- A declaration never gives `exact`, and a measured reference height only demotes.
+
+**Manual counts:** they also store `counted_by` and `second_counter`, both part of the replay comparison.
+
+**Readers that were built but not used:**
+- The pixel rim reader (Phase E, rejected);
+- the 5/6 parity checker (Phase P, disabled).
+
+Their reports are in `reports/rim-independent-20261101` and `reports/cross-stack-20261101`.

@@ -15,6 +15,8 @@ import 'block_view.dart';
 /// the ground truth for scoring; the app never uses it to change its own count.
 /// The count is blind: the app's numbers are not shown and every field starts
 /// empty, because a count that starts from the app's answer tends to repeat it.
+/// A two-person recount records both names; the second counter counts
+/// without seeing the first count either.
 class ManualCountScreen extends StatefulWidget {
   const ManualCountScreen({
     super.key,
@@ -40,6 +42,8 @@ class ManualCountScreen extends StatefulWidget {
 class _ManualCountScreenState extends State<ManualCountScreen> {
   late ManualCount _count;
   final _blockId = TextEditingController();
+  final _countedBy = TextEditingController();
+  final _secondCounter = TextEditingController();
   final _notes = TextEditingController();
   final Map<String, TextEditingController> _filled = {};
   final Map<String, TextEditingController> _empty = {};
@@ -58,7 +62,7 @@ class _ManualCountScreenState extends State<ManualCountScreen> {
     super.initState();
     final block = widget.result.block;
     final cells = [
-      for (final c in (block?.cells ?? const []))
+      for (final c in (block?.stackCells ?? const []))
         ManualCountCell.fromBlockCell(c),
     ]..sort((a, b) => a.y != b.y ? a.y.compareTo(b.y) : a.x.compareTo(b.x));
     _count = ManualCount(
@@ -80,6 +84,8 @@ class _ManualCountScreenState extends State<ManualCountScreen> {
   @override
   void dispose() {
     _blockId.dispose();
+    _countedBy.dispose();
+    _secondCounter.dispose();
     _notes.dispose();
     for (final c in _filled.values) {
       c.dispose();
@@ -93,6 +99,8 @@ class _ManualCountScreenState extends State<ManualCountScreen> {
   ManualCount _collect() => _count.copyWith(
     blockId: _blockId.text.trim(),
     notes: _notes.text.trim(),
+    countedBy: _countedBy.text.trim(),
+    secondCounter: _secondCounter.text.trim(),
     cells: [
       for (final c in _count.cells)
         c.copyWith(
@@ -242,6 +250,32 @@ class _ManualCountScreenState extends State<ManualCountScreen> {
               border: OutlineInputBorder(),
             ),
             textCapitalization: TextCapitalization.characters,
+          ),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  key: const ValueKey('counted-by'),
+                  controller: _countedBy,
+                  decoration: const InputDecoration(
+                    labelText: 'Counted by (optional)',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: TextField(
+                  key: const ValueKey('second-counter'),
+                  controller: _secondCounter,
+                  decoration: const InputDecoration(
+                    labelText: 'Second counter (optional)',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 12),
           if (_count.cells.isEmpty)

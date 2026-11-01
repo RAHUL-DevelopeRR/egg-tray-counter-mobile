@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 
 import '../app/app_version.dart';
 import '../models/capture_view.dart';
+import '../models/extra_capture.dart';
 import '../models/manual_count.dart';
 import '../models/reconstruction_result.dart';
 import '../models/scan_session.dart';
@@ -564,7 +565,44 @@ class ApiClient {
       filename: 'straight.jpg',
       contentType: DioMediaType.parse('image/jpeg'),
     ),
+    ...await _blockFields(session),
   });
+
+  /// The Worker 0.5.0 fields, all optional (older servers ignore them): the
+  /// declaration, entered blind before any count was shown, and the extra
+  /// photos with their capture record, corner side and elevated taps.
+  static Future<Map<String, Object>> _blockFields(ScanSession session) async {
+    final corner = session.extraFor(ExtraView.corner);
+    final elevated = session.extraFor(ExtraView.elevated);
+    final taps = elevated?.taps;
+    return {
+      'block_declaration': ?session.declaration?.encode(),
+      if (corner != null) ...{
+        'corner': await MultipartFile.fromFile(
+          corner.path,
+          filename: 'corner.jpg',
+          contentType: DioMediaType.parse('image/jpeg'),
+        ),
+        'corner_capture': ?_extraCapture(corner),
+        'corner_side': ?corner.side,
+      },
+      if (elevated != null) ...{
+        'elevated': await MultipartFile.fromFile(
+          elevated.path,
+          filename: 'elevated.jpg',
+          contentType: DioMediaType.parse('image/jpeg'),
+        ),
+        'elevated_capture': ?_extraCapture(elevated),
+        if (taps != null && taps.fitsUpload) 'elevated_taps': taps.encode(),
+      },
+    };
+  }
+
+  /// `<view>_capture` for an extra photo, from its constraint evidence.
+  static String? _extraCapture(ExtraCapture extra) {
+    final evidence = extra.evidence;
+    return evidence == null ? null : captureField(evidence);
+  }
 
   /// Asks for a stored result until it arrives (200), the server says it has
   /// none (404, or 409 for a failed job: returns null, upload again) or about
