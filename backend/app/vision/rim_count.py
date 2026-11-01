@@ -1,37 +1,59 @@
 """Rim count per stack column from the image alone: a second reading that does not count detector boxes.
 
-The walk counter (``layer_span.walk_layers``) counts detector boxes, so it inherits every detector miss: a box over
-two stacks, a tall box over two trays, an end tray with no box at all (2026-11-01 miss taxonomy). This module counts
-the stack's periodic horizontal edges instead, so that its per-stack count can act as a second reading of the same
+The walk counter (``layer_span.walk_layers``) counts detector boxes, so it inherits every detector miss: a
+box over
+two stacks, a tall box over two trays, an end tray with no box at all (2026-11-01 miss taxonomy). This
+module counts
+the stack's periodic horizontal edges instead, so that its per-stack count can act as a second reading of
+the same
 stack (plan Phase E).
 
-What it takes from the detector, and nothing more: the column's x-range (``x_centre`` and ``box_width_px``, the median
-box, when the caller sends them, otherwise ``x_min``/``x_max``). That picks the image strip and gives the scale (tray
-boxes are 3-6 times wider than tall, so the layer pitch is searched as a fraction of the strip width). The detector's
-vertical positions (``y_first``, ``y_last``) and its pitch are never used for counting; when sent they only feed the
-comparison fields (``run_extra_layers``, ``run_missing_layers``, ``agrees_with_walk``). Limitation: it still depends on
+What it takes from the detector, and nothing more: the column's x-range (``x_centre`` and ``box_width_px``,
+the median
+box, when the caller sends them, otherwise ``x_min``/``x_max``). That picks the image strip and gives the
+scale (tray
+boxes are 3-6 times wider than tall, so the layer pitch is searched as a fraction of the strip width). The
+detector's
+vertical positions (``y_first``, ``y_last``) and its pitch are never used for counting; when sent they only
+feed the
+comparison fields (``run_extra_layers``, ``run_missing_layers``, ``agrees_with_walk``). Limitation: it
+still depends on
 the detector for WHERE each stack is (the x-range), so it is not independent of stack localisation.
 
 Method per column, over the whole height of the strip:
-- edge signal: Sobel-Y of the grey image, one polarity (bright above, dark below), averaged across the strip core;
-- anchor: the band with the strongest local periodicity (autocorrelation at the strip's pitch times edge energy);
-- pitch: the band's own autocorrelation. Cross-stacked trays alternate orientation, so the signal repeats every two
-  layers and the strongest peak can be the pair (2p); while the autocorrelation at half the lag is also a period the
-  pitch is halved. The p/2, p and 2p alternatives are scored, and a reading whose half-pitch alternative is nearly as
+- edge signal: Sobel-Y of the grey image, one polarity (bright above, dark below), averaged across the
+  strip core;
+- anchor: the band with the strongest local periodicity (autocorrelation at the strip's pitch times edge
+  energy);
+- pitch: the band's own autocorrelation. Cross-stacked trays alternate orientation, so the signal repeats
+  every two
+  layers and the strongest peak can be the pair (2p); while the autocorrelation at half the lag is also a
+  period the
+  pitch is halved. The p/2, p and 2p alternatives are scored, and a reading whose half-pitch alternative is
+  nearly as
   strong as the chosen pitch is reported unreadable rather than guessed;
-- rims: from the anchor, step up and down one local pitch at a time, taking the strongest edge near the expected
-  position; the local pitch follows the last two gaps, so perspective and the long/short gap alternation are tracked;
-- stack top and floor: where the periodic energy ends. Each period is compared with the median period of its own
-  parity near the anchor; walking out, the run stops at the first period that does not look like the stack or carries
-  too little edge energy (floor, wall, an empty cover tray, another stack); one or two weak periods inside are bridged
+- rims: from the anchor, step up and down one local pitch at a time, taking the strongest edge near the
+  expected
+  position; the local pitch follows the last two gaps, so perspective and the long/short gap alternation
+  are tracked;
+- stack top and floor: where the periodic energy ends. Each period is compared with the median period of
+  its own
+  parity near the anchor; walking out, the run stops at the first period that does not look like the stack
+  or carries
+  too little edge energy (floor, wall, an empty cover tray, another stack); one or two weak periods inside
+  are bridged
   when the two after them are good again;
 - count = rims in the run.
 
-A reading is ``readable`` only when its confidence is at least ``min_confidence``, the pitch is not ambiguous and the run
-does not reach the frame edge (the stack may continue outside the photo). Unreadable readings carry ``rim_count`` None
-and the raw run in ``rim_count_raw``. Nothing here verifies a count; the Worker decides what a reading is worth.
+A reading is ``readable`` only when its confidence is at least ``min_confidence``, the pitch is not
+ambiguous and the run
+does not reach the frame edge (the stack may continue outside the photo). Unreadable readings carry
+``rim_count`` None
+and the raw run in ``rim_count_raw``. Nothing here verifies a count; the Worker decides what a reading is
+worth.
 
-Parameters frozen on 2026-11-01 on development photos (reports/rim-independent-20261101/README.md), before any blind
+Parameters frozen on 2026-11-01 on development photos (reports/rim-independent-20261101/README.md), before
+any blind
 count existed and before scoring against the hand annotations.
 """
 
@@ -53,18 +75,32 @@ class RimParams:
     """Thresholds, frozen 2026-11-01 on development photos (not validated on held-out data)."""
 
     core_fraction: float = 0.60  # central fraction of the strip width that is averaged
-    pitch_width_bounds: tuple[float, float] = (0.10, 0.45)  # layer pitch search range, as a fraction of strip width
+    pitch_width_bounds: tuple[float, float] = (
+        0.10,
+        0.45,
+    )  # layer pitch search range, as a fraction of strip width
     half_pitch_acf: float = 0.15  # halve the pitch while the autocorrelation at half the lag is at least this
-    ambiguity: float = 0.80  # unreadable when the half-pitch alternative scores at least this share of the pitch
+    ambiguity: float = (
+        0.80  # unreadable when the half-pitch alternative scores at least this share of the pitch
+    )
     anchor_layers: float = 4.0  # band, in pitches, whose local periodicity places the anchor
     local_layers: float = 6.0  # half-window, in pitches, around the anchor for the local pitch
-    smooth_fraction: float = 0.12  # gaussian sigma of the edge signal as a fraction of the pitch (at least 1 px)
-    step_window: tuple[float, float] = (0.65, 1.35)  # next rim searched this far from the last, in local pitches
-    step_sigma: float = 0.20  # closeness weight of a candidate rim around one local pitch (gaussian sigma, pitches)
+    smooth_fraction: float = (
+        0.12  # gaussian sigma of the edge signal as a fraction of the pitch (at least 1 px)
+    )
+    step_window: tuple[float, float] = (
+        0.65,
+        1.35,
+    )  # next rim searched this far from the last, in local pitches
+    step_sigma: float = (
+        0.20  # closeness weight of a candidate rim around one local pitch (gaussian sigma, pitches)
+    )
     pitch_clamp: tuple[float, float] = (0.75, 1.33)  # local pitch bounds relative to the band pitch
     template_rims: int = 3  # rims on each side of the anchor that define the stack's template periods
     end_similarity: float = 0.50  # a period correlating below this with the stack template is not the stack
-    end_energy: float = 0.60  # ... nor is a rim whose edge is below this fraction of the stack's median rim edge
+    end_energy: float = (
+        0.60  # ... nor is a rim whose edge is below this fraction of the stack's median rim edge
+    )
     max_bridge: int = 2  # weak rims inside the stack bridged when the two rims after them are good
     min_rims: int = 3  # fewer rims in the run is no reading
     min_confidence: float = 0.50  # below this the reading is reported unreadable
@@ -112,15 +148,21 @@ def _finite(value) -> bool:
 
 
 def _x_range(column: dict) -> tuple[float, float]:
-    """The median box when the caller sends it (a box over two stacks then cannot widen the strip), else the union."""
-    if _finite(column.get("x_centre")) and _finite(column.get("box_width_px")) and float(column["box_width_px"]) > 0:
+    """The median box when the caller sends it (a box over two stacks then cannot widen the strip), else
+    the union."""
+    if (
+        _finite(column.get("x_centre"))
+        and _finite(column.get("box_width_px"))
+        and float(column["box_width_px"]) > 0
+    ):
         half = float(column["box_width_px"]) / 2.0
         return float(column["x_centre"]) - half, float(column["x_centre"]) + half
     return float(column["x_min"]), float(column["x_max"])
 
 
 def edge_signal(strip_bgr: np.ndarray, params: RimParams, absolute: bool = False) -> np.ndarray | None:
-    """One raw value per image row: bright-above / dark-below edge strength (or |edge|) across the strip core."""
+    """One raw value per image row: bright-above / dark-below edge strength (or |edge|) across the strip
+    core."""
     plane = cv2.cvtColor(strip_bgr, cv2.COLOR_BGR2GRAY) if strip_bgr.ndim == 3 else strip_bgr
     height, width = plane.shape[:2]
     if height < 3 or width < 3:
@@ -135,7 +177,11 @@ def edge_signal(strip_bgr: np.ndarray, params: RimParams, absolute: bool = False
 def _autocorrelation(signal: np.ndarray) -> np.ndarray:
     centred = signal - np.mean(signal)
     correlation = np.correlate(centred, centred, mode="full")[len(centred) - 1 :]
-    return correlation / correlation[0] if correlation.size and correlation[0] > 1e-9 else np.zeros_like(correlation)
+    return (
+        correlation / correlation[0]
+        if correlation.size and correlation[0] > 1e-9
+        else np.zeros_like(correlation)
+    )
 
 
 def _acf_at(correlation: np.ndarray, lag: float) -> float:
@@ -145,12 +191,15 @@ def _acf_at(correlation: np.ndarray, lag: float) -> float:
     return float(correlation[a : b + 1].max()) if b >= a else 0.0
 
 
-def band_pitch(signed: np.ndarray, absolute: np.ndarray, lo: int, hi: int,
-               params: RimParams) -> tuple[float | None, float, dict]:
+def band_pitch(
+    signed: np.ndarray, absolute: np.ndarray, lo: int, hi: int, params: RimParams
+) -> tuple[float | None, float, dict]:
     """Layer pitch of one band and its alternatives: (pitch, strength, {half, layer, pair}).
 
-    The signed signal is tried first and the absolute one when it has no periodicity. While the autocorrelation at half
-    the lag is also a period the pitch is halved: cross-stacked layers alternate, so the pair (2p) can be the strongest
+    The signed signal is tried first and the absolute one when it has no periodicity. While the
+    autocorrelation at half
+    the lag is also a period the pitch is halved: cross-stacked layers alternate, so the pair (2p) can be
+    the strongest
     peak, and a detector that boxed alternate layers must not be imitated here."""
     smoothed = gaussian_filter1d(signed, 1.0)
     pitch, strength = estimate_pitch(smoothed, lo, hi)
@@ -169,13 +218,17 @@ def band_pitch(signed: np.ndarray, absolute: np.ndarray, lo: int, hi: int,
         a, b = max(1, int(np.floor(lag * 0.92))), min(len(correlation) - 1, int(np.ceil(lag * 1.08)))
         pitch = float(a + int(np.argmax(correlation[a : b + 1])))
         strength = half
-    alternatives = {"half": round(_acf_at(correlation, pitch / 2.0), 3), "layer": round(_acf_at(correlation, pitch), 3),
-                    "pair": round(_acf_at(correlation, 2.0 * pitch), 3)}
+    alternatives = {
+        "half": round(_acf_at(correlation, pitch / 2.0), 3),
+        "layer": round(_acf_at(correlation, pitch), 3),
+        "pair": round(_acf_at(correlation, 2.0 * pitch), 3),
+    }
     return float(pitch), float(strength), alternatives
 
 
 def _anchor(signal: np.ndarray, pitch: float, params: RimParams) -> int:
-    """Centre of the band with the strongest local periodicity at the pitch (autocorrelation times edge energy)."""
+    """Centre of the band with the strongest local periodicity at the pitch (autocorrelation times edge
+    energy)."""
     half = int(round(params.anchor_layers * pitch / 2.0))
     lag = max(1, int(round(pitch)))
     best, centre = -np.inf, len(signal) // 2
@@ -191,21 +244,24 @@ def _anchor(signal: np.ndarray, pitch: float, params: RimParams) -> int:
 
 
 def _track(signal: np.ndarray, anchor: int, pitch: float, params: RimParams) -> tuple[list[int], int]:
-    """Rims from the anchor to both ends of the signal, one local pitch per step. Returns them top to bottom and the
+    """Rims from the anchor to both ends of the signal, one local pitch per step. Returns them top to
+    bottom and the
     anchor's index."""
     low, high = params.pitch_clamp[0] * pitch, params.pitch_clamp[1] * pitch
     chains = []
     for direction in (1, -1):
         chain, gaps = [anchor], []
         while True:
-            # Mean of the last two gaps: cross-stacked trays alternate long/short gaps, and a pair spans two pitches.
+            # Mean of the last two gaps: cross-stacked trays alternate long/short gaps, and a pair spans
+            # two pitches.
             local = float(np.clip(np.mean(gaps[-2:]), low, high)) if gaps else pitch
             near = chain[-1] + direction * params.step_window[0] * local
             far = chain[-1] + direction * params.step_window[1] * local
             a, b = int(round(min(near, far))), int(round(max(near, far)))
             if a < 0 or b >= len(signal) or b - a < 1:
                 break
-            # The strongest edge, weighted by closeness to one local pitch: a stronger sub-layer edge (egg row, rim
+            # The strongest edge, weighted by closeness to one local pitch: a stronger sub-layer edge (egg
+            # row, rim
             # lip) a third of a pitch away must not pull the walk off the layer phase.
             offsets = (np.arange(a, b + 1) - chain[-1]) * direction / local - 1.0
             weight = np.exp(-0.5 * (offsets / params.step_sigma) ** 2)
@@ -218,55 +274,77 @@ def _track(signal: np.ndarray, anchor: int, pitch: float, params: RimParams) -> 
 
 
 def _period(signal: np.ndarray, a: int, b: int) -> tuple[np.ndarray | None, float]:
-    """The signal between two rims resampled to a fixed length, centred and unit-norm; and its edge energy (std)."""
+    """The signal between two rims resampled to a fixed length, centred and unit-norm; and its edge energy
+    (std)."""
     if b - a < 3:
         return None, 0.0
     segment = signal[a : b + 1]
-    resampled = np.interp(np.linspace(0, len(segment) - 1, _TEMPLATE_SAMPLES), np.arange(len(segment)), segment)
+    resampled = np.interp(
+        np.linspace(0, len(segment) - 1, _TEMPLATE_SAMPLES), np.arange(len(segment)), segment
+    )
     resampled = resampled - resampled.mean()
     norm = float(np.linalg.norm(resampled))
     return (resampled / norm if norm > 1e-9 else None), float(np.std(segment))
 
 
-def _run(chain: list[int], anchor: int, signal: np.ndarray, params: RimParams) -> tuple[int, int, list[float], int]:
-    """The periodic run around the anchor: (first rim index, last rim index, period similarities, bridged rims).
+def _run(
+    chain: list[int], anchor: int, signal: np.ndarray, params: RimParams
+) -> tuple[int, int, list[float], int]:
+    """The periodic run around the anchor: (first rim index, last rim index, period similarities, bridged
+    rims).
 
-    Walking out from the anchor, a rim joins the run when its edge is at least ``end_energy`` of the median rim edge of
-    its parity near the anchor, the period to it looks like that parity's template (``end_similarity``) and its gap is
-    about one local pitch. Cross-stacked trays alternate orientation, so odd and even layers are compared separately."""
+    Walking out from the anchor, a rim joins the run when its edge is at least ``end_energy`` of the median
+    rim edge of
+    its parity near the anchor, the period to it looks like that parity's template (``end_similarity``) and
+    its gap is
+    about one local pitch. Cross-stacked trays alternate orientation, so odd and even layers are compared
+    separately."""
     periods = [_period(signal, a, b) for a, b in zip(chain, chain[1:], strict=False)]
     near = range(max(0, anchor - params.template_rims), min(len(chain), anchor + params.template_rims + 1))
     templates, references = {}, {}
     for parity in (0, 1):
-        inside = [periods[k][0] for k in near if k < len(periods) and k % 2 == parity and periods[k][0] is not None]
+        inside = [
+            periods[k][0] for k in near if k < len(periods) and k % 2 == parity and periods[k][0] is not None
+        ]
         if inside:
             template = np.median(np.stack(inside), axis=0)
             template = template - template.mean()
             templates[parity] = template / max(float(np.linalg.norm(template)), 1e-9)
         strengths = [signal[chain[k]] for k in near if k % 2 == parity]
-        references[parity] = max(float(np.median(strengths)), 1e-9) if strengths else max(float(signal[chain[anchor]]), 1e-9)
+        references[parity] = (
+            max(float(np.median(strengths)), 1e-9) if strengths else max(float(signal[chain[anchor]]), 1e-9)
+        )
     if not templates:
         return anchor, anchor, [], 0
-    similarity = [float(p @ templates.get(k % 2, templates.get(1 - k % 2))) if p is not None else -1.0
-                  for k, (p, _) in enumerate(periods)]
+    similarity = [
+        float(p @ templates.get(k % 2, templates.get(1 - k % 2))) if p is not None else -1.0
+        for k, (p, _) in enumerate(periods)
+    ]
     gaps = np.diff(chain).astype(float)
-    pair = float(np.median([gaps[k] + gaps[k + 1] for k in range(len(gaps) - 1)])) / 2.0 if len(gaps) > 1 else (
-        float(gaps[0]) if gaps.size else 1.0)
+    pair = (
+        float(np.median([gaps[k] + gaps[k + 1] for k in range(len(gaps) - 1)])) / 2.0
+        if len(gaps) > 1
+        else (float(gaps[0]) if gaps.size else 1.0)
+    )
 
     def good(rim: int, period: int) -> bool:
-        return bool(signal[chain[rim]] >= params.end_energy * references[rim % 2]
-                    and similarity[period] >= params.end_similarity
-                    and 0.6 * pair <= gaps[period] <= 1.45 * pair)
+        return bool(
+            signal[chain[rim]] >= params.end_energy * references[rim % 2]
+            and similarity[period] >= params.end_similarity
+            and 0.6 * pair <= gaps[period] <= 1.45 * pair
+        )
 
     bridged = 0
 
     def walk(step: int) -> int:
-        """Rims taken beyond the anchor in one direction (step +1 down, -1 up). Up to ``max_bridge`` weak rims are
-        bridged when the two rims after them are good again (a dark or occluded layer inside the stack)."""
+        """Rims taken beyond the anchor in one direction (step +1 down, -1 up). Up to ``max_bridge`` weak
+        rims are bridged when the two rims after them are good again (a dark or occluded layer inside the
+        stack)."""
         nonlocal bridged
         taken, k = 0, 1
         rim = lambda j: anchor + step * j  # noqa: E731
-        period = lambda j: anchor + step * j - (1 if step > 0 else 0)  # noqa: E731 - period between rim j-1 and j
+        # period(j): the period between rim j-1 and rim j
+        period = lambda j: anchor + step * j - (1 if step > 0 else 0)  # noqa: E731
         while 0 <= rim(k) < len(chain):
             if good(rim(k), period(k)):
                 taken, k = k, k + 1
@@ -330,15 +408,21 @@ def _count_column(image: np.ndarray, column: dict, index: int, params: RimParams
     gaps = np.diff(ys)
     local = float(np.median(gaps))
     residuals = [abs((gaps[k] + gaps[k + 1]) / (2.0 * local) - 1.0) for k in range(len(gaps) - 1)]
-    # Regularity on sums of neighbouring gaps: cross-stacked trays alternate, so single gaps alternate long/short
+    # Regularity on sums of neighbouring gaps: cross-stacked trays alternate, so single gaps alternate
+    # long/short
     # while each pair still spans two pitches.
     regularity = float(np.clip(1.0 - np.mean(residuals) / 0.25, 0.0, 1.0)) if residuals else 0.0
     coherence = float(np.clip(np.median(similarity), 0.0, 1.0)) if similarity else 0.0
-    # A stack end is proven only with a full layer of room before the frame edge (the Worker's end_at_frame_edge rule);
+    # A stack end is proven only with a full layer of room before the frame edge (the Worker's
+    # end_at_frame_edge rule);
     # rims are bright-to-dark edges, so the first one can sit almost a pitch below a cut top.
     touches_frame = bool(ys[0] < 1.5 * local or ys[-1] > height - 1 - 1.5 * local)
-    ambiguous = bool(alternatives and alternatives["layer"] > 0
-                     and alternatives["half"] >= params.ambiguity * alternatives["layer"] and pitch / 2.0 >= lo)
+    ambiguous = bool(
+        alternatives
+        and alternatives["layer"] > 0
+        and alternatives["half"] >= params.ambiguity * alternatives["layer"]
+        and pitch / 2.0 >= lo
+    )
     confidence = 0.45 * coherence + 0.35 * regularity + 0.20 * min(1.0, strength / 0.3) - 0.15 * bridged
     confidence = float(np.clip(confidence, 0.0, 1.0))
     reasons = []
@@ -364,7 +448,13 @@ def _count_column(image: np.ndarray, column: dict, index: int, params: RimParams
         extra = int(max(0, round(above)) + max(0, round(below)))
         missing = int(max(0, round(-above)) + max(0, round(-below)))
         if extra:
-            extends = "both" if round(above) >= 1 and round(below) >= 1 else "top" if round(above) >= 1 else "bottom"
+            extends = (
+                "both"
+                if round(above) >= 1 and round(below) >= 1
+                else "top"
+                if round(above) >= 1
+                else "bottom"
+            )
     notes = ["periodic-edge count from the image; the detector gave the strip only; not verified"]
     if bridged:
         notes.append(f"{bridged} weak period(s) inside the stack bridged")
@@ -406,8 +496,10 @@ def rim_count(image_bgr: np.ndarray, columns: list[dict], params: RimParams | No
     columns = list(columns or [])
     image_ok = isinstance(image_bgr, np.ndarray) and image_bgr.ndim in (2, 3) and image_bgr.size > 0
     if not image_ok:
-        return [_empty(column, index, "image is empty or not a 2-D/3-D array") for index, column in
-                enumerate(columns, 1)]
+        return [
+            _empty(column, index, "image is empty or not a 2-D/3-D array")
+            for index, column in enumerate(columns, 1)
+        ]
     results = []
     for index, column in enumerate(columns, 1):
         try:

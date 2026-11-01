@@ -4,8 +4,11 @@ import pytest
 from app.vision.rim_count import RimParams, rim_count
 
 
-def _painted_stack(gaps, *, thickness=4, width=160, doubled_at=None, noise=0.0, seed=0, top_margin=40.0):
-    """Dark strip with one bright 'rim' band per layer and a lighter floor; returns (image_bgr, column dict, centres)."""
+def _painted_stack(
+    gaps, *, thickness=4, width=160, doubled_at=None, noise=0.0, seed=0, top_margin=40.0
+):
+    """Dark strip with one bright 'rim' band per layer and a lighter floor; returns (image_bgr, column
+    dict, centres)."""
     centres = []
     y = top_margin
     for gap in list(gaps) + [None]:
@@ -47,7 +50,8 @@ def test_uniform_rims_are_counted_from_the_x_range_alone():
 
 def test_detector_vertical_positions_only_feed_the_comparison_fields():
     image, column, centres = _painted_stack([30.0] * 19, noise=4.0)
-    # The detector boxed only the middle 16 layers: the count is unchanged and the comparison shows the extra layers.
+    # The detector boxed only the middle 16 layers: the count is unchanged, and the comparison
+    # fields show the extra layers.
     boxed = {**column, "y_first": centres[2], "y_last": centres[-3], "walk_count": 16, "span_count": 16}
     plain, compared = rim_count(image, [column])[0], rim_count(image, [boxed])[0]
     assert plain["rim_count"] == compared["rim_count"] == 20
@@ -108,5 +112,7 @@ def test_empty_column_list():
 
 
 def test_params_are_frozen_dataclass():
-    with pytest.raises(Exception):
+    from dataclasses import FrozenInstanceError
+
+    with pytest.raises(FrozenInstanceError):
         RimParams().min_confidence = 0.1  # type: ignore[misc]
