@@ -1,0 +1,7355 @@
+{
+ "photos": [
+  {
+   "photo_id": "M:IMG_20260916_151149500",
+   "manual_countable": true,
+   "manual_view": "Single stack of green plastic 30-egg trays standing against a wall, close range, front face roughly square-on (slightly from the left, so the left side edges of the trays show). Cross-stacked: front rows alternate 5-style rows (trapezoid posts with rectangular windows) and 6-style rows (6 eggs, posts with oval openings). Top and floor both visible.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "two blind counters agree",
+   "app": {
+    "scan": "set-M16-CORNER-STACK",
+    "view": "straight",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.47,
+     "block": "main",
+     "manual_filled": 14,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 14,
+     "app_boxes": 16,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    }
+   ],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 14,
+   "manual_all_main_scored": true,
+   "app_total": 14
+  },
+  {
+   "photo_id": "M:IMG_20260916_151159267",
+   "manual_countable": true,
+   "manual_view": "Oblique corner view of one stack of green plastic trays from slightly above and to the left. The long front face runs from x~0.23 to the front-right corner at x~0.57, and the right side face is foreshortened (x~0.57-0.72). Layers slope down to the right. Cross-stacked: the front face alternates 5-style rows (large eggs fully visible between trapezoid posts) with 6-style rows (eggs only partly visible through oval openings, darker). Top and floor visible. In the lower-left foreground, blurred green objects are very close to the lens and cut by the frame: an empty tray seen from above at the bottom edge, and a ribbed or striped green edge at x 0-0.10, y 0.72-0.91. Their layers cannot be counted, so they are not listed.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "two blind counters agree",
+   "app": {
+    "scan": "set-M16-CORNER-STACK",
+    "view": "left",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.475,
+     "block": "main",
+     "manual_filled": 14,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 8,
+     "app_boxes": 7,
+     "app_gap_fill": 1,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 14,
+   "manual_all_main_scored": true,
+   "app_total": 8
+  },
+  {
+   "photo_id": "M:IMG_20260916_151204619",
+   "manual_countable": true,
+   "manual_view": "Portrait photo, close and roughly square-on to the front face of one free-standing stack of green plastic cross-stacked trays with white eggs, standing beside a pillar. The camera is a little above the stack, so the top surface of the cover tray shows. The whole stack is in frame from the cover tray down to the feet on the floor.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "two blind counters agree",
+   "app": {
+    "scan": "mutaa-batch-01",
+    "view": "straight",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "stacks are too small in the frame (too far away)"
+    ]
+   },
+   "stacks": [
+    {
+     "x_center": 0.41,
+     "block": "main",
+     "manual_filled": 10,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 11,
+     "app_boxes": 12,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "exact"
+    }
+   ],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 10,
+   "manual_all_main_scored": true,
+   "app_total": 11
+  },
+  {
+   "photo_id": "M:IMG_20260916_151210436",
+   "manual_countable": true,
+   "manual_view": "Landscape photo, close and slightly oblique to the front of a block of 3 stacks of green plastic cross-stacked trays with brown eggs, standing side by side in a single row. The left and middle stacks are close to square-on. The right stack is a little further back and its tray ends recede to the right. All three stacks are in frame from the cover tray to the floor.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "two blind counters agree",
+   "app": {
+    "scan": "mutaa-batch-01",
+    "view": "left",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.27,
+     "block": "main",
+     "manual_filled": 10,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 10,
+     "app_boxes": 10,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.457,
+     "block": "main",
+     "manual_filled": 10,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 11,
+     "app_boxes": 11,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.615,
+     "block": "main",
+     "manual_filled": 10,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 11,
+     "app_boxes": 11,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "exact"
+    }
+   ],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 30,
+   "manual_all_main_scored": true,
+   "app_total": 32
+  },
+  {
+   "photo_id": "M:IMG_20260916_151224648",
+   "manual_countable": true,
+   "manual_view": "One block of green plastic cross-stacked trays, seen square-on from its short end from a slightly raised camera. The front stack's face is fully visible from its empty cover tray down to the floor, in dim light. The block's long left side is seen almost edge-on (x 0.27-0.37). Its top surface shows more trays further back, so the block appears to be at least one more stack deep.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "two blind counters agree",
+   "app": {
+    "scan": "mutaa-batch-01",
+    "view": "right",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "stacks are too small in the frame (too far away)"
+    ]
+   },
+   "stacks": [
+    {
+     "x_center": 0.6,
+     "block": "main",
+     "manual_filled": 10,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 10,
+     "app_boxes": 11,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    }
+   ],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 10,
+   "manual_all_main_scored": true,
+   "app_total": 10
+  },
+  {
+   "photo_id": "M:IMG_20260916_151339474",
+   "manual_countable": true,
+   "manual_view": "Portrait photo (1856x4096), oblique front-left view from slightly above. Main block of green plastic cross-stacked trays: front corner stack A seen on its front and right side faces, stack B directly behind A (only its top shows), stack C to the right seen on its front and right side faces with a row receding behind it. A left background block recedes to the right-back: S1-S4 with empty covers, then two uncovered stacks S5 and S6 whose lower parts are hidden by stacks A and B. Backlit, slightly soft.",
+   "manual_reconciled": true,
+   "manual_truth_basis": "reconciled by a third blind count",
+   "app": {
+    "scan": "mutaa-batch-02",
+    "view": "straight",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "layer pitch changes across the face (angled or corner view)"
+    ]
+   },
+   "stacks": [
+    {
+     "x_center": 0.082,
+     "block": "other",
+     "manual_filled": 15,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 5,
+     "app_boxes": 5,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "cut_at_frame_side"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.38,
+     "block": "main",
+     "manual_filled": 17,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 19,
+     "app_boxes": 18,
+     "app_gap_fill": 6,
+     "app_doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.695,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 17,
+     "app_gap_fill": 4,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.225,
+     "block": "other",
+     "manual_filled": 15,
+     "scored": true
+    },
+    {
+     "x_center": 0.326,
+     "block": "other",
+     "manual_filled": 7,
+     "scored": false
+    },
+    {
+     "x_center": 0.408,
+     "block": "other",
+     "manual_filled": 3,
+     "scored": false
+    },
+    {
+     "x_center": 0.447,
+     "block": "main",
+     "manual_filled": 3,
+     "scored": false
+    },
+    {
+     "x_center": 0.478,
+     "block": "other",
+     "manual_filled": 3,
+     "scored": false
+    },
+    {
+     "x_center": 0.534,
+     "block": "other",
+     "manual_filled": 3,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 40,
+   "manual_all_main_scored": false,
+   "app_total": 44
+  },
+  {
+   "photo_id": "M:IMG_20260916_151351983",
+   "manual_countable": true,
+   "manual_view": "Front view, slightly from the left and from above (camera higher than the stack tops), about 3 m away. Main block: one front row of 4 green plastic cross-stacked tray stacks. The left side face of the leftmost stack is visible. Behind and to the left of that stack is a shorter stack, one row further back. Further back, standing on a raised concrete step, is a row of 6 stacks: the full height of the leftmost is visible through a gap, but only the top layers of the rest show above the front row.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "two blind counters agree",
+   "app": {
+    "scan": "set-M16-NEAR",
+    "view": "straight",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "stacks are too small in the frame (too far away)"
+    ]
+   },
+   "stacks": [
+    {
+     "x_center": 0.228,
+     "block": "other",
+     "manual_filled": 17,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 8,
+     "app_boxes": 7,
+     "app_gap_fill": 1,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.394,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 10,
+     "app_boxes": 12,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.567,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 11,
+     "app_boxes": 13,
+     "app_gap_fill": 1,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.724,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 12,
+     "app_boxes": 12,
+     "app_gap_fill": 1,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.877,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 10,
+     "app_boxes": 12,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.165,
+     "block": "other",
+     "manual_filled": 15,
+     "scored": true
+    },
+    {
+     "x_center": 0.307,
+     "block": "other",
+     "manual_filled": 6,
+     "scored": false
+    },
+    {
+     "x_center": 0.437,
+     "block": "other",
+     "manual_filled": 3,
+     "scored": false
+    },
+    {
+     "x_center": 0.56,
+     "block": "other",
+     "manual_filled": 3,
+     "scored": false
+    },
+    {
+     "x_center": 0.678,
+     "block": "other",
+     "manual_filled": 3,
+     "scored": false
+    },
+    {
+     "x_center": 0.794,
+     "block": "other",
+     "manual_filled": 3,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 80,
+   "manual_all_main_scored": true,
+   "app_total": 51
+  },
+  {
+   "photo_id": "M:IMG_20260916_151353868",
+   "manual_countable": true,
+   "manual_view": "Same scene as the previous photo, taken from slightly further left: front view from the left and above. Main block: one front row of 4 green plastic cross-stacked tray stacks, with the left side face of the leftmost stack visible. Also visible: the shorter middle-left stack set one row back, and the back row of 6 stacks on a raised concrete step. Only the leftmost back stack shows down to its base; the others show only their top layers.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "two blind counters agree",
+   "app": {
+    "scan": "mutaa-batch-02",
+    "view": "left",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "stacks are too small in the frame (too far away)"
+    ]
+   },
+   "stacks": [
+    {
+     "x_center": 0.369,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 10,
+     "app_boxes": 12,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.545,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 15,
+     "app_boxes": 16,
+     "app_gap_fill": 3,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.703,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 19,
+     "app_boxes": 13,
+     "app_gap_fill": 6,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.855,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 10,
+     "app_boxes": 14,
+     "app_gap_fill": 1,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.14,
+     "block": "other",
+     "manual_filled": 15,
+     "scored": true
+    },
+    {
+     "x_center": 0.203,
+     "block": "other",
+     "manual_filled": 17,
+     "scored": true
+    },
+    {
+     "x_center": 0.282,
+     "block": "other",
+     "manual_filled": 6,
+     "scored": false
+    },
+    {
+     "x_center": 0.415,
+     "block": "other",
+     "manual_filled": 3,
+     "scored": false
+    },
+    {
+     "x_center": 0.537,
+     "block": "other",
+     "manual_filled": 3,
+     "scored": false
+    },
+    {
+     "x_center": 0.656,
+     "block": "other",
+     "manual_filled": 3,
+     "scored": false
+    },
+    {
+     "x_center": 0.773,
+     "block": "other",
+     "manual_filled": 3,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 80,
+   "manual_all_main_scored": true,
+   "app_total": 54
+  },
+  {
+   "photo_id": "M:IMG_20260916_151409127",
+   "manual_countable": true,
+   "manual_view": "Oblique view across two blocks of green plastic cross-stacked trays. The front block on the left shows the front faces of stacks A and B almost square-on. The b",
+   "manual_reconciled": false,
+   "manual_truth_basis": "partly double-counted: agreed stacks only, recount not done",
+   "app": {
+    "scan": "set-M16-FAR",
+    "view": "left",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.12,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 15,
+     "app_boxes": 12,
+     "app_gap_fill": 4,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.4,
+     "block": "other",
+     "manual_filled": 0,
+     "manual_cover": 14,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 11,
+     "app_boxes": 13,
+     "app_gap_fill": 1,
+     "app_doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.66,
+     "block": "other",
+     "manual_filled": 15,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 7,
+     "app_boxes": 8,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.92,
+     "block": "other",
+     "manual_filled": 15,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 8,
+     "app_boxes": 7,
+     "app_gap_fill": 1,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.34,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.36,
+     "block": "other",
+     "manual_filled": 5,
+     "scored": false
+    },
+    {
+     "x_center": 0.465,
+     "block": "other",
+     "manual_filled": 15,
+     "scored": false
+    },
+    {
+     "x_center": 0.835,
+     "block": "other",
+     "manual_filled": 15,
+     "scored": false
+    },
+    {
+     "x_center": 0.87,
+     "block": "other",
+     "manual_filled": 2,
+     "scored": true
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 40,
+   "manual_all_main_scored": true,
+   "app_total": 41
+  },
+  {
+   "photo_id": "M:IMG_20260916_151423979",
+   "manual_countable": true,
+   "manual_view": "High oblique corner view of the front block: green plastic trays cross-stacked in a grid at least 2 by 3. The left face runs from x 0.10 to 0.425 (stacks LA, LB and the left side of the corner stack). The right face runs from x 0.425 to 0.70 (the corner stack and stack R2). Each stack has an empty green cover on top. Behind and to the right is a second block whose top trays hold eggs, plus a small pile of trays.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "two blind counters agree",
+   "app": {
+    "scan": "mutaa-batch-02",
+    "view": "right",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "stacks cover too little of the frame width",
+     "stacks are too small in the frame (too far away)"
+    ]
+   },
+   "stacks": [
+    {
+     "x_center": 0.625,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "medium",
+     "app_walk": 4,
+     "app_boxes": 3,
+     "app_gap_fill": 1,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.82,
+     "block": "other",
+     "manual_filled": 15,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 7,
+     "app_boxes": 8,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_stacks"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.165,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": false
+    },
+    {
+     "x_center": 0.265,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": false
+    },
+    {
+     "x_center": 0.43,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.9,
+     "block": "other",
+     "manual_filled": 2,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 80,
+   "manual_all_main_scored": false,
+   "app_total": 11
+  },
+  {
+   "photo_id": "M:IMG_20260916_151430473",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "set-M16-NEAR",
+    "view": "left",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "stacks cover too little of the frame width"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [
+    {
+     "x_center": 0.579,
+     "app_walk": 9,
+     "doubts": []
+    },
+    {
+     "x_center": 0.73,
+     "app_walk": 4,
+     "doubts": []
+    }
+   ],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 13
+  },
+  {
+   "photo_id": "M:IMG_20260916_151436402",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "mutaa-batch-03",
+    "view": "straight",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "stacks cover too little of the frame width",
+     "stacks are too small in the frame (too far away)"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [
+    {
+     "x_center": 0.471,
+     "app_walk": 4,
+     "doubts": []
+    },
+    {
+     "x_center": 0.663,
+     "app_walk": 7,
+     "doubts": []
+    }
+   ],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 11
+  },
+  {
+   "photo_id": "M:IMG_20260916_151444583",
+   "manual_countable": true,
+   "manual_view": "Close oblique view of the front corner of a block of green plastic cross-stacked trays. The left face recedes to the left (x 0.14-0.49) and the right face to th",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app disagrees, second count not done",
+   "app": {
+    "scan": "set-M16-NEAR",
+    "view": "right",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "layer pitch changes across the face (angled or corner view)"
+    ]
+   },
+   "stacks": [
+    {
+     "x_center": 0.48,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 5,
+     "app_boxes": 4,
+     "app_gap_fill": 1,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.655,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 18,
+     "app_boxes": 13,
+     "app_gap_fill": 5,
+     "app_doubts": [
+      "end_box_cut_short"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.79,
+     "block": "other",
+     "manual_filled": 15,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 6,
+     "app_boxes": 8,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_stacks"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.17,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.265,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.95,
+     "block": "other",
+     "manual_filled": 2,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [
+    {
+     "x_center": 0.325,
+     "app_walk": 6,
+     "doubts": []
+    },
+    {
+     "x_center": 0.548,
+     "app_walk": 10,
+     "doubts": []
+    }
+   ],
+   "user_label": null,
+   "manual_total_main": 80,
+   "manual_all_main_scored": true,
+   "app_total": 45
+  },
+  {
+   "photo_id": "M:IMG_20260916_151447066",
+   "manual_countable": true,
+   "manual_view": "Oblique view from farther back of the same main block (green plastic cross-stacked trays). The whole block is visible: the top plateau of empty cover trays, the",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app disagrees, second count not done",
+   "app": {
+    "scan": "mutaa-batch-03",
+    "view": "left",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "stacks are too small in the frame (too far away)"
+    ]
+   },
+   "stacks": [
+    {
+     "x_center": 0.75,
+     "block": "other",
+     "manual_filled": 15,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 10,
+     "app_boxes": 11,
+     "app_gap_fill": 4,
+     "app_doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.17,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.275,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.43,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.585,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": false
+    },
+    {
+     "x_center": 0.845,
+     "block": "other",
+     "manual_filled": 2,
+     "scored": true
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 80,
+   "manual_all_main_scored": false,
+   "app_total": 10
+  },
+  {
+   "photo_id": "M:IMG_20260916_151453724",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "set-M16-FAR",
+    "view": "right",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "stacks are too small in the frame (too far away)"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [
+    {
+     "x_center": 0.461,
+     "app_walk": 12,
+     "doubts": [
+      "box_over_two_trays"
+     ]
+    },
+    {
+     "x_center": 0.664,
+     "app_walk": 7,
+     "doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays"
+     ]
+    }
+   ],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 19
+  },
+  {
+   "photo_id": "M:IMG_20260916_151506512",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "mutaa-batch-03",
+    "view": "right",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "layer pitch changes across the face (angled or corner view)",
+     "stacks cover too little of the frame width",
+     "stacks are too small in the frame (too far away)"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [
+    {
+     "x_center": 0.568,
+     "app_walk": 7,
+     "doubts": [
+      "box_over_two_stacks"
+     ]
+    },
+    {
+     "x_center": 0.681,
+     "app_walk": 6,
+     "doubts": []
+    },
+    {
+     "x_center": 0.778,
+     "app_walk": 4,
+     "doubts": []
+    }
+   ],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 17
+  },
+  {
+   "photo_id": "M:IMG_20260916_151519165",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "mutaa-batch-04",
+    "view": "straight",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "no stacks detected"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 0
+  },
+  {
+   "photo_id": "M:IMG_20260916_151529426",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "mutaa-batch-04",
+    "view": "left",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "layer pitch changes across the face (angled or corner view)"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [
+    {
+     "x_center": 0.186,
+     "app_walk": 7,
+     "doubts": [
+      "end_at_frame_edge",
+      "cut_at_frame_side"
+     ]
+    },
+    {
+     "x_center": 0.547,
+     "app_walk": 11,
+     "doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ]
+    },
+    {
+     "x_center": 0.833,
+     "app_walk": 8,
+     "doubts": [
+      "end_at_frame_edge"
+     ]
+    }
+   ],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 26
+  },
+  {
+   "photo_id": "M:IMG_20260916_151535069",
+   "manual_countable": true,
+   "manual_view": "Ground-level oblique view of green plastic trays: a 2-high loose pile of filled trays on the floor at left-centre, a tall stack behind it (centre-back, cut by the top frame edge and hidden behind the pile below y~0.40), and a tall stack at right seen on an oblique face, also cut by the top frame edge, floor visible.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "partly double-counted: agreed stacks only, recount not done",
+   "app": {
+    "scan": "mutaa-batch-04",
+    "view": "right",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.4,
+     "block": "other",
+     "manual_filled": 2,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 7,
+     "app_boxes": 6,
+     "app_gap_fill": 1,
+     "app_doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.52,
+     "block": "other",
+     "manual_filled": 5,
+     "scored": false
+    },
+    {
+     "x_center": 0.73,
+     "block": "other",
+     "manual_filled": 5,
+     "scored": false
+    },
+    {
+     "x_center": 0.84,
+     "block": "main",
+     "manual_filled": 7,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 7,
+   "manual_all_main_scored": false,
+   "app_total": 7
+  },
+  {
+   "photo_id": "M:IMG_20260916_151539277",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "mutaa-batch-05",
+    "view": "straight",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [
+    {
+     "x_center": 0.477,
+     "app_walk": 2,
+     "doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ]
+    }
+   ],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 2
+  },
+  {
+   "photo_id": "M:IMG_20260916_151549592",
+   "manual_countable": true,
+   "manual_view": "Elevated oblique view from the front-left of a floor-standing block of green plastic tray stacks (two blocks: a left block whose front row shows 2 stacks with cover trays on top, and a right block whose front row shows 3 stacks with exposed eggs on top). Camera about 2-3 m away; front-row faces run from top to floor. Back-row stacks only show their tops (cover trays) and are not countable. A short loose pile of 2 trays (top one part-filled) lies on the floor in front of the right block; a single loose tray is cut by the bottom-left frame edge.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "partly double-counted: agreed stacks only, recount not done",
+   "app": {
+    "scan": "set-M16-FAR",
+    "view": "straight",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.11,
+     "block": "main",
+     "manual_filled": 12,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 17,
+     "app_boxes": 14,
+     "app_gap_fill": 3,
+     "app_doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge",
+      "cut_at_frame_side"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.27,
+     "block": "main",
+     "manual_filled": 12,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 18,
+     "app_boxes": 14,
+     "app_gap_fill": 7,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.51,
+     "block": "main",
+     "manual_filled": 11,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 17,
+     "app_boxes": 12,
+     "app_gap_fill": 5,
+     "app_doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.7,
+     "block": "main",
+     "manual_filled": 10,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 19,
+     "app_boxes": 14,
+     "app_gap_fill": 5,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.88,
+     "block": "main",
+     "manual_filled": 10,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 8,
+     "app_boxes": 9,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.67,
+     "block": "other",
+     "manual_filled": 2,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 55,
+   "manual_all_main_scored": false,
+   "app_total": 79
+  },
+  {
+   "photo_id": "M:IMG_20260916_151607006",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "mutaa-batch-05",
+    "view": "left",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "stacks are too small in the frame (too far away)"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [
+    {
+     "x_center": 0.179,
+     "app_walk": 3,
+     "doubts": [
+      "end_at_frame_edge"
+     ]
+    }
+   ],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 3
+  },
+  {
+   "photo_id": "M:IMG_20260916_151611188",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "mutaa-batch-05",
+    "view": "right",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "stacks cover too little of the frame width",
+     "stacks are too small in the frame (too far away)"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [
+    {
+     "x_center": 0.074,
+     "app_walk": 8,
+     "doubts": [
+      "cut_at_frame_side"
+     ]
+    },
+    {
+     "x_center": 0.338,
+     "app_walk": 6,
+     "doubts": [
+      "end_at_frame_edge"
+     ]
+    }
+   ],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 14
+  },
+  {
+   "photo_id": "M:IMG_20260916_151614863",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "mutaa-batch-06",
+    "view": "straight",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "no stacks detected"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 0
+  },
+  {
+   "photo_id": "M:WA 2026-09-05 at 9.40.56 AM",
+   "manual_countable": true,
+   "manual_view": "High oblique, near top-down view over a large block of orange plastic trays taken from the front-left; only the front row of stacks shows a vertical face, in the lower ~40% of the frame, and the frame bottom cuts every stack well above the floor. No floor visible anywhere.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "partly double-counted: agreed stacks only, recount not done",
+   "app": {
+    "scan": "mutaa-batch-06",
+    "view": "left",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.155,
+     "block": "main",
+     "manual_filled": 8,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 11,
+     "app_boxes": 11,
+     "app_gap_fill": 1,
+     "app_doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.335,
+     "block": "main",
+     "manual_filled": 8,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 18,
+     "app_boxes": 11,
+     "app_gap_fill": 7,
+     "app_doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.5,
+     "block": "main",
+     "manual_filled": 7,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 12,
+     "app_boxes": 10,
+     "app_gap_fill": 2,
+     "app_doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.66,
+     "block": "main",
+     "manual_filled": 8,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 11,
+     "app_boxes": 11,
+     "app_gap_fill": 2,
+     "app_doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.805,
+     "block": "main",
+     "manual_filled": 8,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 9,
+     "app_boxes": 9,
+     "app_gap_fill": 1,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.935,
+     "block": "main",
+     "manual_filled": 7,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 4,
+     "app_boxes": 4,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "cut_at_frame_side"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.03,
+     "block": "main",
+     "manual_filled": 11,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 57,
+   "manual_all_main_scored": false,
+   "app_total": 65
+  },
+  {
+   "photo_id": "M:WA 2026-09-05 at 9.40.57 AM",
+   "manual_countable": true,
+   "manual_view": "Main block of orange plastic trays seen obliquely from above-front, camera near the left; the front face of the front row (5 stacks) is visible but the frame bottom cuts the stacks before the floor; block top surface seen from above (all top trays filled, no cover trays). One short extra column rises above the block at the right rear.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "partly double-counted: agreed stacks only, recount not done",
+   "app": {
+    "scan": "set-W05-ORANGE",
+    "view": "left",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.13,
+     "block": "main",
+     "manual_filled": 9,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 10,
+     "app_boxes": 9,
+     "app_gap_fill": 1,
+     "app_doubts": [
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.345,
+     "block": "main",
+     "manual_filled": 12,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 12,
+     "app_boxes": 12,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.52,
+     "block": "main",
+     "manual_filled": 12,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 14,
+     "app_boxes": 11,
+     "app_gap_fill": 3,
+     "app_doubts": [
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.68,
+     "block": "main",
+     "manual_filled": 13,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 14,
+     "app_boxes": 12,
+     "app_gap_fill": 2,
+     "app_doubts": [
+      "end_at_frame_edge",
+      "bottom_above_floor"
+     ],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.825,
+     "block": "main",
+     "manual_filled": 13,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 17,
+     "app_boxes": 14,
+     "app_gap_fill": 3,
+     "app_doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.79,
+     "block": "other",
+     "manual_filled": 3,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 59,
+   "manual_all_main_scored": false,
+   "app_total": 67
+  },
+  {
+   "photo_id": "M:WA 2026-09-05 at 9.41.00 AM",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "mutaa-batch-06",
+    "view": "right",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "layer pitch changes across the face (angled or corner view)",
+     "stacks are too small in the frame (too far away)"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [
+    {
+     "x_center": 0.197,
+     "app_walk": 5,
+     "doubts": [
+      "box_over_two_trays"
+     ]
+    },
+    {
+     "x_center": 0.507,
+     "app_walk": 9,
+     "doubts": [
+      "box_over_two_trays"
+     ]
+    },
+    {
+     "x_center": 0.818,
+     "app_walk": 3,
+     "doubts": [
+      "box_over_two_trays",
+      "end_box_cut_short",
+      "pitch_differs"
+     ]
+    }
+   ],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 17
+  },
+  {
+   "photo_id": "M:WA 2026-09-05 at 9.41.07 AM",
+   "manual_countable": true,
+   "manual_view": "Elevated oblique view from above of a large orange plastic-tray block; top surface of the block fills the upper half, the front face of the front row of stacks is visible in the lower half but the frame bottom (y=1.0) cuts the stacks off, so the floor/bottom trays are never visible. Five front-row stacks are countable in the visible part.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "partly double-counted: agreed stacks only, recount not done",
+   "app": {
+    "scan": "mutaa-batch-07",
+    "view": "straight",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.16,
+     "block": "main",
+     "manual_filled": 8,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 13,
+     "app_boxes": 9,
+     "app_gap_fill": 4,
+     "app_doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.36,
+     "block": "main",
+     "manual_filled": 8,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 15,
+     "app_boxes": 12,
+     "app_gap_fill": 4,
+     "app_doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.54,
+     "block": "main",
+     "manual_filled": 8,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 15,
+     "app_boxes": 12,
+     "app_gap_fill": 3,
+     "app_doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.7,
+     "block": "main",
+     "manual_filled": 8,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 17,
+     "app_boxes": 11,
+     "app_gap_fill": 6,
+     "app_doubts": [
+      "box_over_two_trays",
+      "end_box_cut_short",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.86,
+     "block": "main",
+     "manual_filled": 8,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 11,
+     "app_boxes": 10,
+     "app_gap_fill": 2,
+     "app_doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.035,
+     "block": "main",
+     "manual_filled": 11,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 51,
+   "manual_all_main_scored": false,
+   "app_total": 71
+  },
+  {
+   "photo_id": "M:WA 2026-09-05 at 9.41.09 AM",
+   "manual_countable": true,
+   "manual_view": "One large block of orange plastic trays, front face seen slightly from above and from the left (oblique, camera close, ~1.5-2 m). Front row of 10 stacks fills the width (x 0.0-0.97); the block top (y 0.33-0.52) is a top view of the rows behind and is not countable. Floor visible along the bottom (y 0.92-0.96). Far-left stack face leans right going down (wide-angle edge).",
+   "manual_reconciled": false,
+   "manual_truth_basis": "partly double-counted: agreed stacks only, recount not done",
+   "app": {
+    "scan": "set-W05-ORANGE",
+    "view": "straight",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.115,
+     "block": "main",
+     "manual_filled": 6,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 10,
+     "app_boxes": 8,
+     "app_gap_fill": 2,
+     "app_doubts": [
+      "pitch_differs"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.21,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 19,
+     "app_boxes": 16,
+     "app_gap_fill": 3,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.305,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 19,
+     "app_boxes": 18,
+     "app_gap_fill": 3,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.415,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 16,
+     "app_gap_fill": 4,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.525,
+     "block": "main",
+     "manual_filled": 21,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 19,
+     "app_boxes": 18,
+     "app_gap_fill": 2,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.635,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 19,
+     "app_boxes": 18,
+     "app_gap_fill": 2,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.74,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 19,
+     "app_boxes": 14,
+     "app_gap_fill": 5,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.84,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 19,
+     "app_boxes": 14,
+     "app_gap_fill": 5,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.93,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 8,
+     "app_boxes": 8,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "cut_at_frame_side",
+      "pitch_differs"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.045,
+     "block": "main",
+     "manual_filled": 22,
+     "scored": false
+    },
+    {
+     "x_center": 0.13,
+     "block": "main",
+     "manual_filled": 21,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 210,
+   "manual_all_main_scored": false,
+   "app_total": 152
+  },
+  {
+   "photo_id": "M:WA 2026-09-05 at 9.46.20 AM",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "mutaa-batch-07",
+    "view": "left",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "no stacks detected"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 0
+  },
+  {
+   "photo_id": "M:WA 2026-09-05 at 9.46.21 AM (1)",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "mutaa-batch-07",
+    "view": "right",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "no stacks detected"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 0
+  },
+  {
+   "photo_id": "M:WA 2026-09-05 at 9.46.21 AM (2)",
+   "manual_countable": true,
+   "manual_view": "Paper-pulp tray block, oblique view from above onto its front face. Front row of 7 stacks is fully visible from cover/top tray to floor (each sits on a coloured plastic base tray). Behind it, a taller second row shows only its upper ~5 layers above the front-row covers (y 0.40-0.52); further rows behind are seen as top surfaces only. No plastic cross-stacking; the paper trays show a large/small egg-tip alternation row to row that was used as the parity check.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "partly double-counted: agreed stacks only, recount not done",
+   "app": {
+    "scan": "mutaa-batch-08",
+    "view": "straight",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.05,
+     "block": "main",
+     "manual_filled": 11,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 11,
+     "app_boxes": 9,
+     "app_gap_fill": 3,
+     "app_doubts": [
+      "box_over_two_trays",
+      "cut_at_frame_side"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.18,
+     "block": "main",
+     "manual_filled": 12,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 21,
+     "app_boxes": 15,
+     "app_gap_fill": 6,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.32,
+     "block": "main",
+     "manual_filled": 12,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 14,
+     "app_boxes": 13,
+     "app_gap_fill": 2,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.465,
+     "block": "main",
+     "manual_filled": 12,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 12,
+     "app_boxes": 15,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.6,
+     "block": "main",
+     "manual_filled": 12,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 13,
+     "app_boxes": 12,
+     "app_gap_fill": 2,
+     "app_doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.74,
+     "block": "main",
+     "manual_filled": 11,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 18,
+     "app_boxes": 12,
+     "app_gap_fill": 6,
+     "app_doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.87,
+     "block": "main",
+     "manual_filled": 12,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 8,
+     "app_boxes": 8,
+     "app_gap_fill": 1,
+     "app_doubts": [
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.05,
+     "block": "main",
+     "manual_filled": 5,
+     "scored": false
+    },
+    {
+     "x_center": 0.18,
+     "block": "main",
+     "manual_filled": 5,
+     "scored": false
+    },
+    {
+     "x_center": 0.32,
+     "block": "main",
+     "manual_filled": 5,
+     "scored": false
+    },
+    {
+     "x_center": 0.465,
+     "block": "main",
+     "manual_filled": 5,
+     "scored": false
+    },
+    {
+     "x_center": 0.6,
+     "block": "main",
+     "manual_filled": 5,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 107,
+   "manual_all_main_scored": false,
+   "app_total": 97
+  },
+  {
+   "photo_id": "M:WA 2026-09-05 at 9.46.21 AM",
+   "manual_countable": true,
+   "manual_view": "Main subject is one loose paper-pulp tray of eggs lying on the floor in the foreground (x 0.30-0.98, y 0.35-0.65), seen obliquely from above. Behind it, two pallet stacks of paper-pulp trays (grey 30-egg trays, no cover trays) seen square-on from the front at medium distance; both are cut off by the top frame edge so their tops are not visible.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "partly double-counted: agreed stacks only, recount not done",
+   "app": {
+    "scan": "mutaa-batch-08",
+    "view": "left",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.64,
+     "block": "main",
+     "manual_filled": 1,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 7,
+     "app_boxes": 7,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.82,
+     "block": "other",
+     "manual_filled": 7,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 7,
+     "app_boxes": 8,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_stacks",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.5,
+     "block": "other",
+     "manual_filled": 6,
+     "scored": false
+    },
+    {
+     "x_center": 0.975,
+     "block": "other",
+     "manual_filled": 0,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 1,
+   "manual_all_main_scored": true,
+   "app_total": 14
+  },
+  {
+   "photo_id": "M:WA 2026-09-05 at 9.52.45 AM",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "mutaa-batch-08",
+    "view": "right",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "no stacks detected"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 0
+  },
+  {
+   "photo_id": "M:WA 2026-09-05 at 9.52.46 AM",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "mutaa-batch-09",
+    "view": "straight",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "no stacks detected"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 0
+  },
+  {
+   "photo_id": "M:WA 2026-09-15 at 3.10.04 PM",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "mutaa-batch-09",
+    "view": "left",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "no stacks detected"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 0
+  },
+  {
+   "photo_id": "M:WA 2026-09-15 at 3.12.58 PM",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "mutaa-batch-09",
+    "view": "right",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "stacks cover too little of the frame width",
+     "stacks are too small in the frame (too far away)"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [
+    {
+     "x_center": 0.578,
+     "app_walk": 10,
+     "doubts": [
+      "box_over_two_trays"
+     ]
+    },
+    {
+     "x_center": 0.845,
+     "app_walk": 6,
+     "doubts": [
+      "box_over_two_trays"
+     ]
+    }
+   ],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 16
+  },
+  {
+   "photo_id": "M:WA 2026-09-15 at 3.12.59 PM (1)",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "mutaa-batch-10",
+    "view": "straight",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "no stacks detected"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 0
+  },
+  {
+   "photo_id": "M:WA 2026-09-15 at 3.12.59 PM",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "mutaa-batch-10",
+    "view": "left",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "no stacks detected"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 0
+  },
+  {
+   "photo_id": "M:WA 2026-09-15 at 3.13.00 PM",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "mutaa-batch-10",
+    "view": "right",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "no stacks detected"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 0
+  },
+  {
+   "photo_id": "M:WA 2026-09-15 at 3.13.37 PM",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "mutaa-batch-11",
+    "view": "straight",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "no stacks detected"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 0
+  },
+  {
+   "photo_id": "M:WA 2026-09-15 at 3.13.41 PM",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "mutaa-batch-11",
+    "view": "left",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "no stacks detected"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 0
+  },
+  {
+   "photo_id": "L:img-01",
+   "manual_countable": true,
+   "manual_view": "One block of 5 green plastic cross-stacked stacks in a row, seen square-on from the front and slightly above, so the tops of the top trays show. Medium-close range, low resolution (1280x582). The rightmost stack also shows part of its right side face. I ignored the ink mark on the floor.",
+   "manual_reconciled": true,
+   "manual_truth_basis": "reconciled by a third blind count",
+   "app": {
+    "scan": "labelled-batch-01",
+    "view": "straight",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.297,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.395,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.493,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.59,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 21,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.683,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 19,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    }
+   ],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": 99,
+   "manual_total_main": 99,
+   "manual_all_main_scored": true,
+   "app_total": 99
+  },
+  {
+   "photo_id": "L:img-02",
+   "manual_countable": true,
+   "manual_view": "Front face of a block of green plastic cross-stacked trays, four stacks across the front row, nearly square-on from mid height at close range; tops of a second row of stacks behind are visible but their faces are hidden. Blue ink marks on the top of stacks B/C ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app agrees",
+   "app": {
+    "scan": "labelled-batch-01",
+    "view": "left",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.19,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.41,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.625,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.84,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    }
+   ],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": 80,
+   "manual_total_main": 80,
+   "manual_all_main_scored": true,
+   "app_total": 80
+  },
+  {
+   "photo_id": "L:img-03",
+   "manual_countable": true,
+   "manual_view": "Oblique ground-level view of the main block (green plastic trays) from its front-left corner: left face of the corner stack at x 0.30-0.49 and the front face with four stacks at x 0.49-0.93, tops at y 0.315-0.34, floor visible at y 0.74-0.69 (rising with recession). A second, shorter block of green trays stands behind-left at x 0.09-0.30 (block: other). Handwritten ink number on the wall ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app disagrees, second count not done",
+   "app": {
+    "scan": "labelled-batch-01",
+    "view": "right",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "layer pitch changes across the face (angled or corner view)",
+     "stacks are too small in the frame (too far away)"
+    ]
+   },
+   "stacks": [
+    {
+     "x_center": 0.52,
+     "block": "main",
+     "manual_filled": 21,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 19,
+     "app_boxes": 16,
+     "app_gap_fill": 4,
+     "app_doubts": [
+      "box_over_two_stacks"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.765,
+     "block": "main",
+     "manual_filled": 21,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 27,
+     "app_boxes": 18,
+     "app_gap_fill": 10,
+     "app_doubts": [
+      "box_over_two_stacks"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.875,
+     "block": "main",
+     "manual_filled": 21,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 9,
+     "app_boxes": 10,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_stacks",
+      "pitch_differs"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.13,
+     "block": "other",
+     "manual_filled": 19,
+     "scored": false
+    },
+    {
+     "x_center": 0.23,
+     "block": "other",
+     "manual_filled": 17,
+     "scored": false
+    },
+    {
+     "x_center": 0.655,
+     "block": "main",
+     "manual_filled": 21,
+     "scored": true
+    }
+   ],
+   "app_only_columns": [
+    {
+     "x_center": 0.781,
+     "app_walk": 17,
+     "doubts": [
+      "box_over_two_stacks"
+     ]
+    }
+   ],
+   "user_label": null,
+   "manual_total_main": 84,
+   "manual_all_main_scored": false,
+   "app_total": 72
+  },
+  {
+   "photo_id": "L:img-04",
+   "manual_countable": true,
+   "manual_view": "One block of green plastic cross-stacked trays seen on its front face, slightly oblique from the left, camera at about the height of the stack tops, medium distance; six front-row stacks fill x 0.07-0.92 and floor is visible along the whole base. A back-row stack is partly visible above the short front stack at x 0.35-0.46.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app disagrees, second count not done",
+   "app": {
+    "scan": "set-L-115",
+    "view": "straight",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "stacks are too small in the frame (too far away)"
+    ]
+   },
+   "stacks": [
+    {
+     "x_center": 0.14,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 19,
+     "app_boxes": 18,
+     "app_gap_fill": 4,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.28,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 23,
+     "app_boxes": 16,
+     "app_gap_fill": 8,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.425,
+     "block": "main",
+     "manual_filled": 14,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 22,
+     "app_boxes": 20,
+     "app_gap_fill": 3,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.57,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 19,
+     "app_boxes": 18,
+     "app_gap_fill": 4,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.71,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 17,
+     "app_gap_fill": 4,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.85,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 18,
+     "app_boxes": 19,
+     "app_gap_fill": 1,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.405,
+     "block": "main",
+     "manual_filled": 5,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": 115,
+   "manual_total_main": 119,
+   "manual_all_main_scored": false,
+   "app_total": 121
+  },
+  {
+   "photo_id": "L:img-05",
+   "manual_countable": true,
+   "manual_view": "Oblique view of a large block of green plastic trays seen on its corner (left face receding to the left from x 0.22 to the corner at x 0.48-0.54, right face from 0.54 to 0.66), plus a second, nearer block of green trays on the right (x 0.66-0.85) seen on its right face. Floor visible along the whole front. Far-left orange/black stacks (x 0-0.12) are too distant and partly hidden to count. Blue ink marks on the photo ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app disagrees, second count not done",
+   "app": {
+    "scan": "set-L-115",
+    "view": "left",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "stacks cover too little of the frame width",
+     "stacks are too small in the frame (too far away)"
+    ]
+   },
+   "stacks": [
+    {
+     "x_center": 0.57,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 14,
+     "app_boxes": 12,
+     "app_gap_fill": 2,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.25,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": false
+    },
+    {
+     "x_center": 0.305,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": false
+    },
+    {
+     "x_center": 0.365,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.47,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.63,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": false
+    },
+    {
+     "x_center": 0.705,
+     "block": "other",
+     "manual_filled": 17,
+     "scored": true
+    },
+    {
+     "x_center": 0.775,
+     "block": "other",
+     "manual_filled": 19,
+     "scored": false
+    },
+    {
+     "x_center": 0.825,
+     "block": "other",
+     "manual_filled": 19,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 120,
+   "manual_all_main_scored": false,
+   "app_total": 14
+  },
+  {
+   "photo_id": "L:img-06",
+   "manual_countable": true,
+   "manual_view": "Oblique top-down view of four loose plastic trays (teal, red/brown, green, dark green) laid flat on the floor, each a single layer with eggs; not a stacked block. One cross-stacked green plastic stack is visible in the background at the top of the frame, cut by the top edge, plus a loose green tray on something to its right (layers not countable).",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app found no stacks",
+   "app": {
+    "scan": "labelled-batch-02",
+    "view": "straight",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "no stacks detected"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [
+    {
+     "x_center": 0.22,
+     "block": "main",
+     "manual_filled": 1,
+     "scored": true
+    },
+    {
+     "x_center": 0.3,
+     "block": "main",
+     "manual_filled": 1,
+     "scored": true
+    },
+    {
+     "x_center": 0.62,
+     "block": "main",
+     "manual_filled": 1,
+     "scored": true
+    },
+    {
+     "x_center": 0.72,
+     "block": "main",
+     "manual_filled": 1,
+     "scored": true
+    },
+    {
+     "x_center": 0.43,
+     "block": "other",
+     "manual_filled": 5,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 4,
+   "manual_all_main_scored": true,
+   "app_total": 0
+  },
+  {
+   "photo_id": "L:img-07",
+   "manual_countable": true,
+   "manual_view": "Top view, camera looking straight down at four loose single plastic trays laid flat on the floor in a 2x2 arrangement (main block). Not vertical stacks. Top-right corner shows an oblique side of a green plastic stack of another block, cut by the top and right frame edges. Blue ink bracket and a handwritten number are present and were ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app disagrees, second count not done",
+   "app": {
+    "scan": "labelled-batch-02",
+    "view": "left",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake"
+    ]
+   },
+   "stacks": [
+    {
+     "x_center": 0.71,
+     "block": "other",
+     "manual_filled": 2,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 3,
+     "app_boxes": 7,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.38,
+     "block": "main",
+     "manual_filled": 1,
+     "scored": true
+    },
+    {
+     "x_center": 0.73,
+     "block": "main",
+     "manual_filled": 1,
+     "scored": true
+    },
+    {
+     "x_center": 0.36,
+     "block": "main",
+     "manual_filled": 1,
+     "scored": true
+    },
+    {
+     "x_center": 0.7,
+     "block": "main",
+     "manual_filled": 1,
+     "scored": true
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 4,
+   "manual_all_main_scored": true,
+   "app_total": 3
+  },
+  {
+   "photo_id": "L:img-08",
+   "manual_countable": true,
+   "manual_view": "Front face of one block of green plastic trays, 8 stacks in a row seen nearly square-on from slightly above and to the right; top cover trays and floor both visible. Handwritten ink mark on the wall ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app agrees",
+   "app": {
+    "scan": "labelled-batch-02",
+    "view": "right",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.04,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 19,
+     "app_gap_fill": 1,
+     "app_doubts": [
+      "cut_at_frame_side"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.145,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.268,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 21,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.392,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 19,
+     "app_gap_fill": 1,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.515,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.638,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 19,
+     "app_gap_fill": 1,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.76,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.885,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    }
+   ],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": 160,
+   "manual_total_main": 160,
+   "manual_all_main_scored": true,
+   "app_total": 160
+  },
+  {
+   "photo_id": "L:img-09",
+   "manual_countable": true,
+   "manual_view": "Close, slightly oblique ground-level view of a block of green plastic cross-stacked trays. Tall back-row stack at the left (x 0-0.27). Tall face starting at x~0.50 that recedes to the right: one stack 0.50-0.85, then a further stack 0.85-1.0 cut by the frame. A shorter front stack sits in the centre, seen at a corner on two faces (0.29-0.64). It hides the lower part of a rear stack (0.24-0.49) and the lower-left part of the 0.50-0.85 stack. Every top has one empty cover tray. The ink number was ignored.",
+   "manual_reconciled": true,
+   "manual_truth_basis": "reconciled by a third blind count",
+   "app": {
+    "scan": "labelled-batch-03",
+    "view": "straight",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.13,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 21,
+     "app_boxes": 19,
+     "app_gap_fill": 4,
+     "app_doubts": [
+      "box_over_two_trays",
+      "cut_at_frame_side"
+     ],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.365,
+     "block": "main",
+     "manual_filled": 6,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 7,
+     "app_boxes": 7,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "bottom_above_floor"
+     ],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.465,
+     "block": "main",
+     "manual_filled": 13,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 10,
+     "app_boxes": 12,
+     "app_gap_fill": 1,
+     "app_doubts": [
+      "box_over_two_stacks",
+      "pitch_differs"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.675,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 18,
+     "app_gap_fill": 4,
+     "app_doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.93,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 14,
+     "app_gap_fill": 6,
+     "app_doubts": [
+      "box_over_two_trays",
+      "cut_at_frame_side"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    }
+   ],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": 75,
+   "manual_total_main": 79,
+   "manual_all_main_scored": false,
+   "app_total": 78
+  },
+  {
+   "photo_id": "L:img-10",
+   "manual_countable": true,
+   "manual_view": "Oblique view of one block of paper-pulp trays on green plastic pallets, seen from slightly above the top; front (right) face shows three stacks square-ish on, left face shows the side of the block receding to the left with layers visible but stack boundaries unclear. Far left edge has a separate green/orange plastic-tray block mostly cut off. Ink '30' and bracket on the wall ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app disagrees, second count not done",
+   "app": {
+    "scan": "labelled-batch-03",
+    "view": "left",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "layer pitch changes across the face (angled or corner view)"
+    ]
+   },
+   "stacks": [
+    {
+     "x_center": 0.46,
+     "block": "main",
+     "manual_filled": 12,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 8,
+     "app_boxes": 10,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "pitch_differs"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.69,
+     "block": "main",
+     "manual_filled": 11,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 17,
+     "app_boxes": 17,
+     "app_gap_fill": 2,
+     "app_doubts": [
+      "box_over_two_stacks"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.89,
+     "block": "main",
+     "manual_filled": 11,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 15,
+     "app_boxes": 14,
+     "app_gap_fill": 2,
+     "app_doubts": [
+      "box_over_two_stacks"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.245,
+     "block": "main",
+     "manual_filled": 10,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 44,
+   "manual_all_main_scored": false,
+   "app_total": 40
+  },
+  {
+   "photo_id": "L:img-11",
+   "manual_countable": true,
+   "manual_view": "Mixed: one green plastic cross-stacked stack at top-right (oblique, close, two faces visible, top and floor visible) plus four loose single trays of eggs lying on the floor in the foreground (two green/teal trays in the centre, two trays at the right edge cut by the frame). Hen cages in the background. Blue ink marks on the photo ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app found no stacks",
+   "app": {
+    "scan": "labelled-batch-03",
+    "view": "right",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "no stacks detected"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [
+    {
+     "x_center": 0.82,
+     "block": "main",
+     "manual_filled": 6,
+     "scored": true
+    },
+    {
+     "x_center": 0.52,
+     "block": "other",
+     "manual_filled": 1,
+     "scored": true
+    },
+    {
+     "x_center": 0.47,
+     "block": "other",
+     "manual_filled": 1,
+     "scored": true
+    },
+    {
+     "x_center": 0.87,
+     "block": "other",
+     "manual_filled": 1,
+     "scored": false
+    },
+    {
+     "x_center": 0.88,
+     "block": "other",
+     "manual_filled": 1,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 6,
+   "manual_all_main_scored": true,
+   "app_total": 0
+  },
+  {
+   "photo_id": "L:img-12",
+   "manual_countable": true,
+   "manual_view": "Corner (two-face) view of a large block of orange plastic trays at medium-close range. Nearest corner stack at x 0.28-0.46 seen square-on on its right face; left face of the block recedes strongly to the left (x 0.12-0.30, very oblique); right face recedes to the right (x 0.46-0.82) with the floor line rising from y 0.80 at the corner to y 0.61 at the far end. A short stack (about 5 trays with a paper cover) stands in front of the right face at x 0.47-0.60. A pile of paper pulp trays sits on top of the right face around x 0.62-0.72. A far block at x 0.05-0.12 is overexposed/too far to count. Handwritten ink marks present and ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app found no stacks",
+   "app": {
+    "scan": "labelled-batch-04",
+    "view": "straight",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "no stacks detected"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [
+    {
+     "x_center": 0.155,
+     "block": "main",
+     "manual_filled": 18,
+     "scored": false
+    },
+    {
+     "x_center": 0.19,
+     "block": "main",
+     "manual_filled": 18,
+     "scored": false
+    },
+    {
+     "x_center": 0.23,
+     "block": "main",
+     "manual_filled": 18,
+     "scored": false
+    },
+    {
+     "x_center": 0.27,
+     "block": "main",
+     "manual_filled": 18,
+     "scored": false
+    },
+    {
+     "x_center": 0.4,
+     "block": "main",
+     "manual_filled": 19,
+     "scored": true
+    },
+    {
+     "x_center": 0.495,
+     "block": "main",
+     "manual_filled": 13,
+     "scored": false
+    },
+    {
+     "x_center": 0.535,
+     "block": "main",
+     "manual_filled": 5,
+     "scored": false
+    },
+    {
+     "x_center": 0.575,
+     "block": "main",
+     "manual_filled": 13,
+     "scored": false
+    },
+    {
+     "x_center": 0.64,
+     "block": "main",
+     "manual_filled": 18,
+     "scored": true
+    },
+    {
+     "x_center": 0.685,
+     "block": "main",
+     "manual_filled": 18,
+     "scored": false
+    },
+    {
+     "x_center": 0.725,
+     "block": "main",
+     "manual_filled": 18,
+     "scored": false
+    },
+    {
+     "x_center": 0.765,
+     "block": "main",
+     "manual_filled": 18,
+     "scored": false
+    },
+    {
+     "x_center": 0.8,
+     "block": "main",
+     "manual_filled": 18,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 212,
+   "manual_all_main_scored": false,
+   "app_total": 0
+  },
+  {
+   "photo_id": "L:img-13",
+   "manual_countable": true,
+   "manual_view": "One large block of orange plastic cross-stacked trays seen obliquely from its front-left corner at about stack-top eye level (slight camera roll). Front face spans x 0.145-0.40 (4 columns, receding to the left), right face spans x 0.40-0.78 (receding strongly, ~13 columns, far ones heavily foreshortened). A short 6-tray stack stands at the front-left end (x 0.11-0.185). Grey pulp cover trays on top of every stack. Background: jute sacks, empty green/orange tray stacks at far right (not counted).",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app found no stacks",
+   "app": {
+    "scan": "labelled-batch-04",
+    "view": "left",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "no stacks detected"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [
+    {
+     "x_center": 0.15,
+     "block": "main",
+     "manual_filled": 6,
+     "scored": true
+    },
+    {
+     "x_center": 0.18,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.25,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.31,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.37,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.43,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.485,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.53,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.57,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.605,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.635,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": false
+    },
+    {
+     "x_center": 0.66,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": false
+    },
+    {
+     "x_center": 0.69,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": false
+    },
+    {
+     "x_center": 0.71,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": false
+    },
+    {
+     "x_center": 0.728,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": false
+    },
+    {
+     "x_center": 0.743,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": false
+    },
+    {
+     "x_center": 0.758,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": false
+    },
+    {
+     "x_center": 0.773,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 346,
+   "manual_all_main_scored": false,
+   "app_total": 0
+  },
+  {
+   "photo_id": "L:img-14",
+   "manual_countable": true,
+   "manual_view": "Block of orange plastic cross-stacked trays seen obliquely from eye height: a near corner stack cut by the left/bottom frame edge, a far face of 4 stacks (x 0.27-0.62, top y 0.565, floor y 0.90 sloping to 0.86), and a nearer right-hand face of 3 stacks (x 0.645-0.92, top y 0.555, floor y 0.875-0.93) with one stack carrying paper pulp trays on top; a further partial stack at the right frame edge. Behind, a taller block of paper-pulp trays (not countable).",
+   "manual_reconciled": false,
+   "manual_truth_basis": "partly double-counted: agreed stacks only, recount not done",
+   "app": {
+    "scan": "labelled-batch-04",
+    "view": "right",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.11,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 18,
+     "app_boxes": 16,
+     "app_gap_fill": 2,
+     "app_doubts": [
+      "box_over_two_stacks",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.31,
+     "block": "main",
+     "manual_filled": 17,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 14,
+     "app_boxes": 13,
+     "app_gap_fill": 2,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.4,
+     "block": "main",
+     "manual_filled": 17,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 7,
+     "app_boxes": 8,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.48,
+     "block": "main",
+     "manual_filled": 17,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 5,
+     "app_boxes": 5,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "bottom_above_floor"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.78,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 11,
+     "app_boxes": 8,
+     "app_gap_fill": 4,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.875,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 24,
+     "app_boxes": 15,
+     "app_gap_fill": 9,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.57,
+     "block": "main",
+     "manual_filled": 17,
+     "scored": false
+    },
+    {
+     "x_center": 0.69,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": false
+    },
+    {
+     "x_center": 0.945,
+     "block": "other",
+     "manual_filled": 13,
+     "scored": false
+    },
+    {
+     "x_center": 0.98,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 168,
+   "manual_all_main_scored": false,
+   "app_total": 79
+  },
+  {
+   "photo_id": "L:img-15",
+   "manual_countable": true,
+   "manual_view": "Wide shot from the end of an aisle in a shed, source only 960x1280. Centre-right (x 0.52-0.88): a block of orange plastic cross-stacked trays seen nearly square-on from the front, top ~0.565-0.58 and floor ~0.845-0.90 (face slightly oblique, nearer at the right); this is the main block. Left (x 0.18-0.52): a second orange block seen obliquely (nearer at the left), top ~0.60-0.63, floor 0.845-0.88. Far left (x 0-0.18): a near orange stack cut by the bottom frame edge. Far right (x 0.88-1.0): another orange face farther back, not countable. Background: bundles of empty pulp trays. Blue ink bracket and number drawn over the main block were ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app disagrees, second count not done",
+   "app": {
+    "scan": "labelled-batch-05",
+    "view": "straight",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "stacks cover too little of the frame width",
+     "stacks are too small in the frame (too far away)"
+    ]
+   },
+   "stacks": [
+    {
+     "x_center": 0.105,
+     "block": "other",
+     "manual_filled": 12,
+     "manual_cover": 2,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 8,
+     "app_boxes": 8,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.255,
+     "block": "other",
+     "manual_filled": 12,
+     "scored": false
+    },
+    {
+     "x_center": 0.33,
+     "block": "other",
+     "manual_filled": 12,
+     "scored": false
+    },
+    {
+     "x_center": 0.4,
+     "block": "other",
+     "manual_filled": 12,
+     "scored": false
+    },
+    {
+     "x_center": 0.48,
+     "block": "other",
+     "manual_filled": 12,
+     "scored": false
+    },
+    {
+     "x_center": 0.557,
+     "block": "main",
+     "manual_filled": 18,
+     "scored": true
+    },
+    {
+     "x_center": 0.62,
+     "block": "main",
+     "manual_filled": 11,
+     "scored": false
+    },
+    {
+     "x_center": 0.705,
+     "block": "main",
+     "manual_filled": 19,
+     "scored": true
+    },
+    {
+     "x_center": 0.8,
+     "block": "main",
+     "manual_filled": 10,
+     "scored": true
+    },
+    {
+     "x_center": 0.775,
+     "block": "main",
+     "manual_filled": 9,
+     "scored": false
+    },
+    {
+     "x_center": 0.83,
+     "block": "main",
+     "manual_filled": 9,
+     "scored": false
+    },
+    {
+     "x_center": 0.872,
+     "block": "main",
+     "manual_filled": 19,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 95,
+   "manual_all_main_scored": false,
+   "app_total": 8
+  },
+  {
+   "photo_id": "L:img-16",
+   "manual_countable": true,
+   "manual_view": "Square-on front face of a block of 6 orange plastic cross-stacked tray stacks (x 0 to 0.86), seen from floor level a few metres back. The frame top cuts the stack tops at y=0, and grey pulp trays sit on top of stacks A, D, E and F. At the right (x 0.87 to 1.0) is a farther block, dark and cut by the right frame edge. In front of it is a small loose pile on the floor: one empty orange tray on one filled tray. The handwritten blue ink bracket and number were ignored.",
+   "manual_reconciled": true,
+   "manual_truth_basis": "reconciled by a third blind count",
+   "app": {
+    "scan": "labelled-batch-05",
+    "view": "left",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.05,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "medium",
+     "app_walk": 19,
+     "app_boxes": 16,
+     "app_gap_fill": 3,
+     "app_doubts": [
+      "end_at_frame_edge",
+      "cut_at_frame_side"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.18,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.333,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 21,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.48,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 21,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.63,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 21,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.783,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.94,
+     "block": "other",
+     "manual_filled": 18,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 11,
+     "app_boxes": 10,
+     "app_gap_fill": 3,
+     "app_doubts": [
+      "box_over_two_trays",
+      "cut_at_frame_side",
+      "pitch_differs"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.92,
+     "block": "other",
+     "manual_filled": 1,
+     "scored": true
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 119,
+   "manual_all_main_scored": false,
+   "app_total": 130
+  },
+  {
+   "photo_id": "L:img-17",
+   "manual_countable": true,
+   "manual_view": "Oblique corner view of one block of orange plastic trays, camera at about top height, slightly right of the near corner. Right face recedes to the right (corner near x 0.36, far end x 0.78), left face recedes to the left (to frame edge x 0). A short stack with pulp cover trays stands at the near corner in front of the block (x 0.14-0.36, top y 0.47, floor y 0.92). Grey pulp cover trays over the whole block top; a few green plastic trays on the far-right top. Background stacks of grey pulp trays at the top of the frame (y 0-0.08) are too far to count.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "partly double-counted: agreed stacks only, recount not done",
+   "app": {
+    "scan": "set-L-109-ORANGE",
+    "view": "left",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.235,
+     "block": "main",
+     "manual_filled": 10,
+     "manual_cover": 2,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 6,
+     "app_boxes": 6,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_stacks"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.25,
+     "block": "main",
+     "manual_filled": 9,
+     "manual_cover": 2,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 6,
+     "app_boxes": 8,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_stacks"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.42,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 2,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 19,
+     "app_boxes": 18,
+     "app_gap_fill": 1,
+     "app_doubts": [
+      "box_over_two_stacks"
+     ],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.53,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 2,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 19,
+     "app_boxes": 14,
+     "app_gap_fill": 5,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.64,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 2,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 6,
+     "app_boxes": 6,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.035,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": false
+    },
+    {
+     "x_center": 0.14,
+     "block": "main",
+     "manual_filled": 10,
+     "scored": false
+    },
+    {
+     "x_center": 0.68,
+     "block": "main",
+     "manual_filled": 19,
+     "scored": false
+    },
+    {
+     "x_center": 0.74,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 148,
+   "manual_all_main_scored": false,
+   "app_total": 56
+  },
+  {
+   "photo_id": "L:img-18",
+   "manual_countable": true,
+   "manual_view": "Square-on front view at medium distance of one block of orange plastic cross-stacked trays. Seven stacks stand side by side, the far-left one short, and the floor is visible. There is a loose two-tray pile at lower right. A second block sits further back at the right edge, cut by the frame.",
+   "manual_reconciled": true,
+   "manual_truth_basis": "reconciled by a third blind count",
+   "app": {
+    "scan": "labelled-batch-05",
+    "view": "right",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.112,
+     "block": "main",
+     "manual_filled": 10,
+     "manual_cover": 2,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 10,
+     "app_boxes": 10,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.232,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 3,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 19,
+     "app_boxes": 18,
+     "app_gap_fill": 1,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.355,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 2,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 22,
+     "app_boxes": 21,
+     "app_gap_fill": 1,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.472,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 19,
+     "app_boxes": 18,
+     "app_gap_fill": 1,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.59,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 2,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.707,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 2,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 21,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.82,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 2,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 19,
+     "app_boxes": 18,
+     "app_gap_fill": 2,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.892,
+     "block": "other",
+     "manual_filled": 1,
+     "scored": true
+    },
+    {
+     "x_center": 0.95,
+     "block": "other",
+     "manual_filled": 20,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 129,
+   "manual_all_main_scored": true,
+   "app_total": 129
+  },
+  {
+   "photo_id": "L:img-19",
+   "manual_countable": true,
+   "manual_view": "The front face of one block of green plastic cross-stacked trays: five stacks in a row, seen nearly square-on from close range and low height. The floor is visible under every stack. Tops of a rear row show behind the left stacks, but their layers cannot be counted. I ignored the handwritten ink number.",
+   "manual_reconciled": true,
+   "manual_truth_basis": "reconciled by a third blind count",
+   "app": {
+    "scan": "set-L-100",
+    "view": "straight",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.11,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.28,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.445,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 21,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.607,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 19,
+     "app_gap_fill": 1,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.757,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    }
+   ],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": 100,
+   "manual_total_main": 100,
+   "manual_all_main_scored": true,
+   "app_total": 100
+  },
+  {
+   "photo_id": "L:img-20",
+   "manual_countable": true,
+   "manual_view": "Portrait photo of one block of green plastic cross-stacked trays, front face seen nearly square-on at close range. Three main stacks (A, B, C) are visible from top to floor. On the left frame edge is a shadowed stack of another block, nearer the camera and seen obliquely. On the right frame edge is a nested pile of empty trays. I ignored the handwritten ink number on the wall.",
+   "manual_reconciled": true,
+   "manual_truth_basis": "reconciled by a third blind count",
+   "app": {
+    "scan": "labelled-batch-06",
+    "view": "straight",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.18,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 21,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.41,
+     "block": "main",
+     "manual_filled": 21,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.645,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.035,
+     "block": "other",
+     "manual_filled": 21,
+     "scored": false
+    },
+    {
+     "x_center": 0.96,
+     "block": "other",
+     "manual_filled": 0,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": 60,
+   "manual_total_main": 61,
+   "manual_all_main_scored": false,
+   "app_total": 60
+  },
+  {
+   "photo_id": "L:img-21",
+   "manual_countable": true,
+   "manual_view": "Single block of five green plastic cross-stacked stacks in one row against a wall, front face, nearly square-on from slightly above (camera roughly centred on stacks 3-4, stack 5 slightly oblique), medium distance; tops and floor visible for all five stacks. No other blocks with countable trays; cage racks and two people in the background right.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "partly double-counted: agreed stacks only, recount not done",
+   "app": {
+    "scan": "set-L-100",
+    "view": "left",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.3,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 21,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.39,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.48,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.57,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.67,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    }
+   ],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": 100,
+   "manual_total_main": 95,
+   "manual_all_main_scored": false,
+   "app_total": 100
+  },
+  {
+   "photo_id": "L:img-22",
+   "manual_countable": true,
+   "manual_view": "Front block of orange plastic trays seen square-on from a few metres, floor at y~0.695. Six tall stacks (x 0.00-0.85) run off the top of the frame at y=0 (grey paper trays visible at the very top of stacks 1, 4, 5, 6, cut by the frame). A seventh shorter stack at the right (x 0.86-0.98) shows its top at y~0.135 with ceiling above; a loose pile (1 filled tray + 1 empty tray) sits on the floor in front of it. Stack 1 is cut by the left frame edge. A handwritten ink number on the floor was ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "partly double-counted: agreed stacks only, recount not done",
+   "app": {
+    "scan": "labelled-batch-06",
+    "view": "left",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.05,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 19,
+     "app_boxes": 17,
+     "app_gap_fill": 2,
+     "app_doubts": [
+      "end_at_frame_edge",
+      "cut_at_frame_side"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.175,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.325,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 21,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.48,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.63,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 21,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.78,
+     "block": "main",
+     "manual_filled": 18,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 19,
+     "app_gap_fill": 1,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.92,
+     "block": "main",
+     "manual_filled": 16,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 10,
+     "app_boxes": 7,
+     "app_gap_fill": 3,
+     "app_doubts": [
+      "box_over_two_trays",
+      "cut_at_frame_side",
+      "pitch_differs"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.91,
+     "block": "main",
+     "manual_filled": 1,
+     "scored": true
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 132,
+   "manual_all_main_scored": false,
+   "app_total": 129
+  },
+  {
+   "photo_id": "L:img-23",
+   "manual_countable": true,
+   "manual_view": "Main block, front face, nearly square-on from slightly above top level, close range; 8 green plastic stacks across the front row; block top surface visible (green, no eggs showing) above the front row; floor visible under all stacks. Handwritten ink mark on the floor ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app agrees",
+   "app": {
+    "scan": "labelled-batch-06",
+    "view": "right",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.05,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "cut_at_frame_side"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.16,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 19,
+     "app_gap_fill": 1,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.275,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 19,
+     "app_gap_fill": 1,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.39,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 1,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.51,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.63,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 19,
+     "app_gap_fill": 1,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.75,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.885,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 19,
+     "app_gap_fill": 1,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    }
+   ],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": 160,
+   "manual_total_main": 160,
+   "manual_all_main_scored": true,
+   "app_total": 160
+  },
+  {
+   "photo_id": "L:img-24",
+   "manual_countable": true,
+   "manual_view": "Single row of five green plastic cross-stacked tray stacks seen from the front, slightly oblique from the right (camera to the right, dark gaps visible on the right side of each stack and a sliver of the rightmost stack's right face). Medium distance, whole stacks from top eggs to floor in frame. Low-resolution source (1280x582), each layer only ~18 px tall.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "partly double-counted: agreed stacks only, recount not done",
+   "app": {
+    "scan": "set-L-100",
+    "view": "right",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.3,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 21,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.39,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.48,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.57,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.665,
+     "block": "main",
+     "manual_filled": 21,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    }
+   ],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": 100,
+   "manual_total_main": 99,
+   "manual_all_main_scored": false,
+   "app_total": 100
+  },
+  {
+   "photo_id": "L:img-25",
+   "manual_countable": true,
+   "manual_view": "Oblique corner view of one block of green plastic trays, camera slightly above the top layer. The near corner stack shows its end face square-ish on the right (x 0.46-0.96) and the block's long side face recedes sharply to the left (x 0.0-0.46). A second row of stacks of the same block is visible behind the top edge on the left (tops only). Blue ink circles drawn on the floor at the bottom-left were ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "partly double-counted: agreed stacks only, recount not done",
+   "app": {
+    "scan": "set-L-80",
+    "view": "right",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.7,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 12,
+     "app_boxes": 15,
+     "app_gap_fill": 1,
+     "app_doubts": [
+      "end_box_cut_short"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.085,
+     "block": "main",
+     "manual_filled": 19,
+     "scored": false
+    },
+    {
+     "x_center": 0.235,
+     "block": "main",
+     "manual_filled": 19,
+     "scored": false
+    },
+    {
+     "x_center": 0.38,
+     "block": "main",
+     "manual_filled": 19,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 76,
+   "manual_all_main_scored": false,
+   "app_total": 12
+  },
+  {
+   "photo_id": "L:img-26",
+   "manual_countable": true,
+   "manual_view": "Main block: front face of a row of 4 green plastic stacks, near square-on from the front (slightly oblique, right stack recedes), close range, tops seen from slightly above and floor visible at y~0.83-0.85. Behind-left, a second block of green stacks (blurred, further away) with its floor visible at y~0.64; a taller rear stack directly behind the front block shows only its top layers.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "partly double-counted: agreed stacks only, recount not done",
+   "app": {
+    "scan": "labelled-batch-07",
+    "view": "straight",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.3,
+     "block": "other",
+     "manual_filled": 3,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 22,
+     "app_boxes": 26,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.42,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 34,
+     "app_boxes": 20,
+     "app_gap_fill": 14,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.55,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.675,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 21,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.05,
+     "block": "other",
+     "manual_filled": 19,
+     "scored": false
+    },
+    {
+     "x_center": 0.155,
+     "block": "other",
+     "manual_filled": 19,
+     "scored": false
+    },
+    {
+     "x_center": 0.28,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 80,
+   "manual_all_main_scored": true,
+   "app_total": 96
+  },
+  {
+   "photo_id": "L:img-27",
+   "manual_countable": true,
+   "manual_view": "Oblique corner view of a block of green plastic cross-stacked trays, camera elevated and close to the near corner stack; right face of the near stack fills x 0.58-0.95, left face of the block (three stacks in a row) runs x 0.0-0.58 receding to the left; a second row behind is visible only by its top eggs; red crates at far right are another block with no countable face. Blue ink marks on the floor ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app disagrees, second count not done",
+   "app": {
+    "scan": "labelled-batch-07",
+    "view": "left",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "layer pitch changes across the face (angled or corner view)"
+    ]
+   },
+   "stacks": [
+    {
+     "x_center": 0.29,
+     "block": "main",
+     "manual_filled": 17,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 3,
+     "app_boxes": 5,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.62,
+     "block": "main",
+     "manual_filled": 17,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 13,
+     "app_boxes": 13,
+     "app_gap_fill": 2,
+     "app_doubts": [
+      "end_box_cut_short"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.1,
+     "block": "main",
+     "manual_filled": 17,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 51,
+   "manual_all_main_scored": false,
+   "app_total": 16
+  },
+  {
+   "photo_id": "L:img-28",
+   "manual_countable": true,
+   "manual_view": "One block of green plastic trays seen slightly from the left and above, nearly square-on to its front face; the left side face of the corner stack is also visible (x 0.16-0.30). Front row runs x 0.30-0.86; stacks are staggered (bottom edge drops from 0.92 at left to 0.96 at right). A short 3-tray stack sits on the floor in front at x 0.26-0.38. A flat red object at the right edge (x 0.90-1.0) is not a tray stack. Blue ink number on the wall at left was ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "partly double-counted: agreed stacks only, recount not done",
+   "app": {
+    "scan": "labelled-batch-07",
+    "view": "right",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.225,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 10,
+     "app_boxes": 11,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_stacks"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.32,
+     "block": "other",
+     "manual_filled": 3,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 11,
+     "app_boxes": 12,
+     "app_gap_fill": 1,
+     "app_doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.41,
+     "block": "main",
+     "manual_filled": 23,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 19,
+     "app_boxes": 15,
+     "app_gap_fill": 4,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.5,
+     "block": "main",
+     "manual_filled": 23,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 17,
+     "app_gap_fill": 3,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.6,
+     "block": "main",
+     "manual_filled": 22,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 17,
+     "app_gap_fill": 4,
+     "app_doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.705,
+     "block": "main",
+     "manual_filled": 23,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 17,
+     "app_boxes": 15,
+     "app_gap_fill": 4,
+     "app_doubts": [
+      "box_over_two_stacks",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.34,
+     "block": "main",
+     "manual_filled": 23,
+     "scored": false
+    },
+    {
+     "x_center": 0.42,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": false
+    },
+    {
+     "x_center": 0.81,
+     "block": "main",
+     "manual_filled": 23,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 177,
+   "manual_all_main_scored": false,
+   "app_total": 97
+  },
+  {
+   "photo_id": "L:img-29",
+   "manual_countable": true,
+   "manual_view": "Oblique low wide-angle view of the near corner of one tall block of green plastic trays, no cover trays (eggs exposed on top). Front face roughly square-on at x 0.30-0.57; left side face receding to the left (x 0.05-0.30) and right side/second row at x 0.54-0.70. Bottom right: a tilted pile of filled trays seen from the top (x 0.72-0.84, y 0.78-1.0) and a stack of empty trays at the frame edge (x 0.88-1.0) with ribs too fine to count.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app disagrees, second count not done",
+   "app": {
+    "scan": "labelled-batch-08",
+    "view": "straight",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "stacks cover too little of the frame width"
+    ]
+   },
+   "stacks": [
+    {
+     "x_center": 0.33,
+     "block": "main",
+     "manual_filled": 21,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 15,
+     "app_boxes": 14,
+     "app_gap_fill": 2,
+     "app_doubts": [
+      "box_over_two_stacks",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.5,
+     "block": "main",
+     "manual_filled": 21,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 18,
+     "app_boxes": 14,
+     "app_gap_fill": 5,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.13,
+     "block": "main",
+     "manual_filled": 22,
+     "scored": false
+    },
+    {
+     "x_center": 0.63,
+     "block": "main",
+     "manual_filled": 19,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [
+    {
+     "x_center": 0.34,
+     "app_walk": 15,
+     "doubts": []
+    }
+   ],
+   "user_label": null,
+   "manual_total_main": 83,
+   "manual_all_main_scored": false,
+   "app_total": 48
+  },
+  {
+   "photo_id": "L:img-30",
+   "manual_countable": true,
+   "manual_view": "Front face of one block of green plastic cross-stacked trays, four stacks wide, seen nearly square-on from slightly right of centre at close range; the block fills the full frame height (top eggs touch the top frame edge, floor visible at y 0.94-0.99 sloping down to the right). A sliver of the block's left side face is visible at x 0-0.07 (same corner stack as stack 1).",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app agrees",
+   "app": {
+    "scan": "set-L-80",
+    "view": "straight",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.16,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 22,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_stacks",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.33,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_stacks",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.48,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    },
+    {
+     "x_center": 0.645,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 19,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "end_box_cut_short",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    }
+   ],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": 80,
+   "manual_total_main": 79,
+   "manual_all_main_scored": true,
+   "app_total": 79
+  },
+  {
+   "photo_id": "L:img-31",
+   "manual_countable": true,
+   "manual_view": "Oblique close-up of one face of a green plastic-tray block, camera at roughly stack-top height near the front-left stack; four stacks of this face recede left-to-right (front stack large, far stacks small and dark). Block end corner at right (~x 0.80-0.87). Floor visible under every stack. Handwritten ink marks on the floor ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app disagrees, second count not done",
+   "app": {
+    "scan": "set-L-80",
+    "view": "left",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "layer pitch changes across the face (angled or corner view)"
+    ]
+   },
+   "stacks": [
+    {
+     "x_center": 0.16,
+     "block": "main",
+     "manual_filled": 18,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 16,
+     "app_boxes": 13,
+     "app_gap_fill": 3,
+     "app_doubts": [
+      "box_over_two_stacks",
+      "end_at_frame_edge",
+      "cut_at_frame_side"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.44,
+     "block": "main",
+     "manual_filled": 17,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 19,
+     "app_boxes": 15,
+     "app_gap_fill": 6,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.77,
+     "block": "main",
+     "manual_filled": 16,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 16,
+     "app_boxes": 13,
+     "app_gap_fill": 6,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.625,
+     "block": "main",
+     "manual_filled": 16,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [
+    {
+     "x_center": 0.89,
+     "app_walk": 8,
+     "doubts": []
+    }
+   ],
+   "user_label": 80,
+   "manual_total_main": 67,
+   "manual_all_main_scored": false,
+   "app_total": 59
+  },
+  {
+   "photo_id": "L:img-32",
+   "manual_countable": true,
+   "manual_view": "Single free-standing stack of green plastic trays against a wall, seen square-on to one face from slightly above the top, mid distance; stack leans slightly right. Whole stack visible from top tray to floor.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "partly double-counted: agreed stacks only, recount not done",
+   "app": {
+    "scan": "labelled-batch-08",
+    "view": "left",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.72,
+     "block": "main",
+     "manual_filled": 18,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 31,
+     "app_boxes": 24,
+     "app_gap_fill": 11,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": 19,
+   "manual_total_main": 18,
+   "manual_all_main_scored": false,
+   "app_total": 31
+  },
+  {
+   "photo_id": "L:img-33",
+   "manual_countable": true,
+   "manual_view": "One long block of pulp (orange/red) tray stacks with white eggs, front face, nearly square-on from medium distance; block spans x 0.145-0.845, top ~0.24-0.25, floor ~0.545. 19 stacks visible on the front face; one short stack at the right end. Grey pulp cover trays on top. Handwritten ink number on the floor ignored. Low source resolution (1280x580, ~9 px per layer).",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app found no stacks",
+   "app": {
+    "scan": "labelled-batch-08",
+    "view": "right",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "no stacks detected"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [
+    {
+     "x_center": 0.162,
+     "block": "main",
+     "manual_filled": 19,
+     "scored": true
+    },
+    {
+     "x_center": 0.197,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.235,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.275,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.31,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.345,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.383,
+     "block": "main",
+     "manual_filled": 20,
+     "scored": true
+    },
+    {
+     "x_center": 0.42,
+     "block": "main",
+     "manual_filled": 19,
+     "scored": true
+    },
+    {
+     "x_center": 0.457,
+     "block": "main",
+     "manual_filled": 19,
+     "scored": true
+    },
+    {
+     "x_center": 0.494,
+     "block": "main",
+     "manual_filled": 19,
+     "scored": true
+    },
+    {
+     "x_center": 0.531,
+     "block": "main",
+     "manual_filled": 19,
+     "scored": true
+    },
+    {
+     "x_center": 0.57,
+     "block": "main",
+     "manual_filled": 19,
+     "scored": true
+    },
+    {
+     "x_center": 0.607,
+     "block": "main",
+     "manual_filled": 19,
+     "scored": true
+    },
+    {
+     "x_center": 0.645,
+     "block": "main",
+     "manual_filled": 19,
+     "scored": true
+    },
+    {
+     "x_center": 0.681,
+     "block": "main",
+     "manual_filled": 19,
+     "scored": true
+    },
+    {
+     "x_center": 0.719,
+     "block": "main",
+     "manual_filled": 19,
+     "scored": true
+    },
+    {
+     "x_center": 0.756,
+     "block": "main",
+     "manual_filled": 19,
+     "scored": true
+    },
+    {
+     "x_center": 0.795,
+     "block": "main",
+     "manual_filled": 19,
+     "scored": false
+    },
+    {
+     "x_center": 0.83,
+     "block": "main",
+     "manual_filled": 9,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": 358,
+   "manual_total_main": 357,
+   "manual_all_main_scored": false,
+   "app_total": 0
+  },
+  {
+   "photo_id": "L:img-34",
+   "manual_countable": true,
+   "manual_view": "Front face of one block of six green plastic cross-stacked columns, roughly square-on, close range; wall behind, floor visible below every column. Handwritten ink number on the wall ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "partly double-counted: agreed stacks only, recount not done",
+   "app": {
+    "scan": "labelled-batch-09",
+    "view": "straight",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.115,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.28,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 22,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.43,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.58,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.72,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.86,
+     "block": "main",
+     "manual_filled": 18,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": 120,
+   "manual_total_main": 113,
+   "manual_all_main_scored": false,
+   "app_total": 120
+  },
+  {
+   "photo_id": "L:img-35",
+   "manual_countable": true,
+   "manual_view": "Loose single tray: one green plastic tray full of eggs resting on the concrete floor, seen square-on from floor level at close range; no stacks or blocks in frame (people and crates in background, too far to count).",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app found no stacks",
+   "app": {
+    "scan": "labelled-batch-09",
+    "view": "left",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "no stacks detected"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [
+    {
+     "x_center": 0.42,
+     "block": "main",
+     "manual_filled": 1,
+     "scored": true
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": 1,
+   "manual_total_main": 1,
+   "manual_all_main_scored": true,
+   "app_total": 0
+  },
+  {
+   "photo_id": "L:img-36",
+   "manual_countable": true,
+   "manual_view": "Main block of orange plastic cross-stacked trays, front face, near square-on from slightly left, at a few metres; five tall front stacks plus a short front-left stack, a short stack at the right end, a partly hidden second-row stack at left and a frame-cut stack at the far left. Pulp cover trays on top of most stacks; one green plastic tray with eggs sits on top of the rightmost tall stack. Blue paper-tray bales far behind. Handwritten ink ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "partly double-counted: agreed stacks only, recount not done",
+   "app": {
+    "scan": "set-L-109-ORANGE",
+    "view": "straight",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.12,
+     "block": "main",
+     "manual_filled": 9,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 17,
+     "app_boxes": 15,
+     "app_gap_fill": 2,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.24,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 2,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 22,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.36,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 2,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 21,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.485,
+     "block": "main",
+     "manual_filled": 18,
+     "manual_cover": 2,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 18,
+     "app_boxes": 19,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "bottom_above_floor"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.615,
+     "block": "main",
+     "manual_filled": 19,
+     "manual_cover": 3,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 22,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.75,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 1,
+     "manual_scored": false,
+     "manual_confidence": "low",
+     "app_walk": 20,
+     "app_boxes": 20,
+     "app_gap_fill": 0,
+     "app_doubts": [],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "off_by_1"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.03,
+     "block": "other",
+     "manual_filled": 11,
+     "scored": false
+    },
+    {
+     "x_center": 0.115,
+     "block": "main",
+     "manual_filled": 9,
+     "scored": false
+    },
+    {
+     "x_center": 0.84,
+     "block": "main",
+     "manual_filled": 5,
+     "scored": false
+    },
+    {
+     "x_center": 0.85,
+     "block": "main",
+     "manual_filled": 5,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": 109,
+   "manual_total_main": 123,
+   "manual_all_main_scored": false,
+   "app_total": 115
+  },
+  {
+   "photo_id": "L:img-37",
+   "manual_countable": true,
+   "manual_view": "Top view (camera looking straight down) of four loose, single, filled plastic trays laid flat on a concrete floor in a 2x2 arrangement (grey, green, blue, red). No vertical stack faces are visible anywhere. Also in frame: at top-right (x 0.75-0.90, y 0-0.30) a tall stack of empty plastic trays seen only from above (layers not countable); along the top edge (x 0.42-0.70, y 0-0.12) two green trays with only a few eggs, cut by the frame; and at the right edge (x 0.92-1.0) a green tray with eggs, cut by the frame. A large handwritten ink mark at the left was ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app disagrees, second count not done",
+   "app": {
+    "scan": "labelled-batch-09",
+    "view": "right",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake"
+    ]
+   },
+   "stacks": [
+    {
+     "x_center": 0.365,
+     "block": "main",
+     "manual_filled": 1,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 2,
+     "app_boxes": 3,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    },
+    {
+     "x_center": 0.53,
+     "block": "main",
+     "manual_filled": 1,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 3,
+     "app_boxes": 6,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays",
+      "end_box_cut_short",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.36,
+     "block": "main",
+     "manual_filled": 1,
+     "scored": true
+    },
+    {
+     "x_center": 0.525,
+     "block": "main",
+     "manual_filled": 1,
+     "scored": true
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 4,
+   "manual_all_main_scored": true,
+   "app_total": 5
+  },
+  {
+   "photo_id": "L:img-38",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "labelled-batch-10",
+    "view": "straight",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "layer pitch changes across the face (angled or corner view)",
+     "stacks cover too little of the frame width"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [
+    {
+     "x_center": 0.33,
+     "app_walk": 21,
+     "doubts": []
+    },
+    {
+     "x_center": 0.416,
+     "app_walk": 20,
+     "doubts": []
+    },
+    {
+     "x_center": 0.499,
+     "app_walk": 34,
+     "doubts": []
+    },
+    {
+     "x_center": 0.563,
+     "app_walk": 23,
+     "doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays"
+     ]
+    },
+    {
+     "x_center": 0.64,
+     "app_walk": 19,
+     "doubts": []
+    }
+   ],
+   "user_label": 118,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 117
+  },
+  {
+   "photo_id": "L:img-39",
+   "manual_countable": true,
+   "manual_view": "Top view, camera looking straight down at two green plastic filled trays lying on the floor (photographer's feet visible at y 0.65-0.75). No vertical stack faces are visible; only the top tray of each pile is seen, with a thin rim of the near tray's edge at y 0.62-0.65 (lower tray) and y 0.26-0.29 (upper tray).",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app disagrees, second count not done",
+   "app": {
+    "scan": "labelled-batch-10",
+    "view": "left",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "stacks cover too little of the frame width"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [
+    {
+     "x_center": 0.41,
+     "block": "main",
+     "manual_filled": 1,
+     "scored": true
+    },
+    {
+     "x_center": 0.4,
+     "block": "other",
+     "manual_filled": 1,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [
+    {
+     "x_center": 0.037,
+     "app_walk": 3,
+     "doubts": [
+      "end_at_frame_edge",
+      "cut_at_frame_side"
+     ]
+    }
+   ],
+   "user_label": 2,
+   "manual_total_main": 1,
+   "manual_all_main_scored": true,
+   "app_total": 3
+  },
+  {
+   "photo_id": "L:img-40",
+   "manual_countable": true,
+   "manual_view": "Mixed scene: four loose single filled plastic trays lying on the floor in the foreground (green and red/brown), plus one green cross-stacked column of filled trays in the background top-right seen obliquely on two faces, partly cut by the right frame edge. A dark/black crate stack sits behind it at x 0.58-0.66, too dark to separate layers. Handwritten ink mark on the floor ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app found no stacks",
+   "app": {
+    "scan": "labelled-batch-10",
+    "view": "right",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "no stacks detected"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [
+    {
+     "x_center": 0.5,
+     "block": "other",
+     "manual_filled": 1,
+     "scored": true
+    },
+    {
+     "x_center": 0.52,
+     "block": "other",
+     "manual_filled": 1,
+     "scored": true
+    },
+    {
+     "x_center": 0.85,
+     "block": "main",
+     "manual_filled": 6,
+     "scored": true
+    },
+    {
+     "x_center": 0.9,
+     "block": "other",
+     "manual_filled": 1,
+     "scored": true
+    },
+    {
+     "x_center": 0.9,
+     "block": "other",
+     "manual_filled": 1,
+     "scored": true
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": 10,
+   "manual_total_main": 6,
+   "manual_all_main_scored": true,
+   "app_total": 0
+  },
+  {
+   "photo_id": "L:img-41",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "labelled-batch-11",
+    "view": "straight",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "stacks cover too little of the frame width"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [
+    {
+     "x_center": 0.171,
+     "app_walk": 4,
+     "doubts": []
+    },
+    {
+     "x_center": 0.465,
+     "app_walk": 20,
+     "doubts": []
+    },
+    {
+     "x_center": 0.631,
+     "app_walk": 20,
+     "doubts": []
+    }
+   ],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 44
+  },
+  {
+   "photo_id": "L:img-42",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "labelled-batch-11",
+    "view": "left",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "stacks are too small in the frame (too far away)"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [
+    {
+     "x_center": 0.459,
+     "app_walk": 11,
+     "doubts": [
+      "box_over_two_trays"
+     ]
+    },
+    {
+     "x_center": 0.682,
+     "app_walk": 2,
+     "doubts": [
+      "box_over_two_trays"
+     ]
+    }
+   ],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 13
+  },
+  {
+   "photo_id": "L:img-43",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "labelled-batch-11",
+    "view": "right",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "stacks are too small in the frame (too far away)"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [
+    {
+     "x_center": 0.197,
+     "app_walk": 5,
+     "doubts": [
+      "end_at_frame_edge",
+      "cut_at_frame_side"
+     ]
+    }
+   ],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 5
+  },
+  {
+   "photo_id": "L:img-44",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "labelled-batch-12",
+    "view": "straight",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "stacks are too small in the frame (too far away)"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [
+    {
+     "x_center": 0.115,
+     "app_walk": 17,
+     "doubts": []
+    },
+    {
+     "x_center": 0.212,
+     "app_walk": 17,
+     "doubts": []
+    },
+    {
+     "x_center": 0.306,
+     "app_walk": 21,
+     "doubts": []
+    },
+    {
+     "x_center": 0.401,
+     "app_walk": 14,
+     "doubts": []
+    },
+    {
+     "x_center": 0.495,
+     "app_walk": 14,
+     "doubts": []
+    },
+    {
+     "x_center": 0.607,
+     "app_walk": 14,
+     "doubts": []
+    },
+    {
+     "x_center": 0.725,
+     "app_walk": 8,
+     "doubts": []
+    }
+   ],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 105
+  },
+  {
+   "photo_id": "L:img-45",
+   "manual_countable": true,
+   "manual_view": "Oblique elevated view (camera above, looking slightly down) of green plastic cross-stacked trays on a floor in a brick-vented room. One tall stack front-left seen square-on with its top visible; a second tall stack behind it to the right (bottom visible on the floor); a short stack far right; a further stack behind the front one whose top is visible but whose face is fully hidden by the front stack. Handwritten blue ink on the wall ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "partly double-counted: agreed stacks only, recount not done",
+   "app": {
+    "scan": "labelled-batch-12",
+    "view": "left",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.285,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 26,
+     "app_boxes": 20,
+     "app_gap_fill": 6,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.59,
+     "block": "other",
+     "manual_filled": 20,
+     "scored": false
+    },
+    {
+     "x_center": 0.87,
+     "block": "other",
+     "manual_filled": 7,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": null,
+   "manual_total_main": 20,
+   "manual_all_main_scored": true,
+   "app_total": 26
+  },
+  {
+   "photo_id": "L:img-46",
+   "manual_countable": true,
+   "manual_view": "Single green plastic cross-stacked stack, one face, nearly square-on, close range, portrait frame; top of stack visible, stack runs out of the bottom of the frame (floor not visible). Blurry out-of-focus stacks behind at the top left. Blue ink number at the top ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "two blind counters agree",
+   "app": {
+    "scan": "labelled-batch-12",
+    "view": "right",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.55,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": false,
+     "manual_confidence": "medium",
+     "app_walk": 19,
+     "app_boxes": 17,
+     "app_gap_fill": 4,
+     "app_doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge",
+      "cut_at_frame_side"
+     ],
+     "grade_vs_filled": "off_by_1",
+     "grade_vs_all_layers": "off_by_1"
+    }
+   ],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": 20,
+   "manual_total_main": 20,
+   "manual_all_main_scored": false,
+   "app_total": 19
+  },
+  {
+   "photo_id": "L:img-47",
+   "manual_countable": true,
+   "manual_view": "Single free-standing short stack of green plastic trays with white eggs, seen square-on from the front at close range, floor level; tall columns of empty nested green trays on the left (cut by the top of the frame, ridges too fine and dense to separate into layers); a small stack at the far right cut by the frame edge.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "one blind count; app agrees",
+   "app": {
+    "scan": "labelled-batch-13",
+    "view": "straight",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.63,
+     "block": "main",
+     "manual_filled": 7,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "high",
+     "app_walk": 7,
+     "app_boxes": 8,
+     "app_gap_fill": 0,
+     "app_doubts": [
+      "box_over_two_trays"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    }
+   ],
+   "missed_by_app": [
+    {
+     "x_center": 0.97,
+     "block": "other",
+     "manual_filled": 2,
+     "scored": false
+    }
+   ],
+   "app_only_columns": [],
+   "user_label": 7,
+   "manual_total_main": 7,
+   "manual_all_main_scored": true,
+   "app_total": 7
+  },
+  {
+   "photo_id": "L:img-48",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "labelled-batch-13",
+    "view": "left",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "stacks are too small in the frame (too far away)"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [
+    {
+     "x_center": 0.459,
+     "app_walk": 11,
+     "doubts": [
+      "box_over_two_trays"
+     ]
+    },
+    {
+     "x_center": 0.681,
+     "app_walk": 2,
+     "doubts": [
+      "box_over_two_trays"
+     ]
+    }
+   ],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 13
+  },
+  {
+   "photo_id": "L:img-49",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "labelled-batch-13",
+    "view": "right",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "the trays look sideways or unclear in this photo; hold the phone level and retake",
+     "no stacks detected"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": 1,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 0
+  },
+  {
+   "photo_id": "L:img-50",
+   "manual_countable": true,
+   "manual_view": "Two tall green plastic cross-stacked columns side by side, seen from the front at a slightly elevated, oblique angle; the left stack's front face and the right stack's front/side face are visible from top tray to the concrete floor. Blue ink marks on the floor were ignored.",
+   "manual_reconciled": false,
+   "manual_truth_basis": "two blind counters agree",
+   "app": {
+    "scan": "labelled-batch-14",
+    "view": "straight",
+    "capture_accepted": true,
+    "capture_reasons": []
+   },
+   "stacks": [
+    {
+     "x_center": 0.36,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 17,
+     "app_boxes": 16,
+     "app_gap_fill": 2,
+     "app_doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ],
+     "grade_vs_filled": "off_by_2_plus",
+     "grade_vs_all_layers": "off_by_2_plus"
+    },
+    {
+     "x_center": 0.8,
+     "block": "main",
+     "manual_filled": 20,
+     "manual_cover": 0,
+     "manual_scored": true,
+     "manual_confidence": "medium",
+     "app_walk": 20,
+     "app_boxes": 17,
+     "app_gap_fill": 3,
+     "app_doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge",
+      "cut_at_frame_side"
+     ],
+     "grade_vs_filled": "exact",
+     "grade_vs_all_layers": "exact"
+    }
+   ],
+   "missed_by_app": [],
+   "app_only_columns": [],
+   "user_label": 40,
+   "manual_total_main": 40,
+   "manual_all_main_scored": true,
+   "app_total": 37
+  },
+  {
+   "photo_id": "L:img-51",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "labelled-batch-14",
+    "view": "left",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "layer pitch changes across the face (angled or corner view)"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [
+    {
+     "x_center": 0.31,
+     "app_walk": 11,
+     "doubts": [
+      "box_over_two_trays",
+      "pitch_differs"
+     ]
+    },
+    {
+     "x_center": 0.404,
+     "app_walk": 16,
+     "doubts": [
+      "bottom_above_floor"
+     ]
+    },
+    {
+     "x_center": 0.477,
+     "app_walk": 20,
+     "doubts": []
+    },
+    {
+     "x_center": 0.583,
+     "app_walk": 20,
+     "doubts": []
+    },
+    {
+     "x_center": 0.693,
+     "app_walk": 21,
+     "doubts": [
+      "box_over_two_trays"
+     ]
+    }
+   ],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 88
+  },
+  {
+   "photo_id": "L:img-52",
+   "manual_countable": null,
+   "manual_view": null,
+   "manual_reconciled": false,
+   "manual_truth_basis": "no manual count yet",
+   "app": {
+    "scan": "labelled-batch-14",
+    "view": "right",
+    "capture_accepted": false,
+    "capture_reasons": [
+     "layer pitch changes across the face (angled or corner view)"
+    ]
+   },
+   "stacks": [],
+   "missed_by_app": [],
+   "app_only_columns": [
+    {
+     "x_center": 0.236,
+     "app_walk": 5,
+     "doubts": []
+    },
+    {
+     "x_center": 0.392,
+     "app_walk": 5,
+     "doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays",
+      "pitch_differs"
+     ]
+    },
+    {
+     "x_center": 0.528,
+     "app_walk": 12,
+     "doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays"
+     ]
+    }
+   ],
+   "user_label": null,
+   "manual_total_main": null,
+   "manual_all_main_scored": false,
+   "app_total": 22
+  }
+ ],
+ "summary": {
+  "all photos": {
+   "photos": 94,
+   "scored_stacks": 104,
+   "vs_filled": {
+    "exact": 53,
+    "off_by_2_plus": 41,
+    "off_by_1": 10
+   },
+   "vs_all_layers": {
+    "exact": 30,
+    "off_by_2_plus": 47,
+    "off_by_1": 27
+   },
+   "clean_stacks (no doubt, no gap fill)": {
+    "n": 34,
+    "off_by_1": 2,
+    "exact": 29,
+    "off_by_2_plus": 3
+   },
+   "doubted_or_gap_filled": {
+    "n": 70,
+    "exact": 24,
+    "off_by_2_plus": 38,
+    "off_by_1": 8
+   },
+   "manual_stacks_missed_by_app": 73,
+   "app_columns_with_no_manual_stack": 55
+  },
+  "photos the capture check accepts": {
+   "photos": 37,
+   "scored_stacks": 67,
+   "vs_filled": {
+    "exact": 50,
+    "off_by_2_plus": 12,
+    "off_by_1": 5
+   },
+   "vs_all_layers": {
+    "exact": 29,
+    "off_by_2_plus": 16,
+    "off_by_1": 22
+   },
+   "clean_stacks (no doubt, no gap fill)": {
+    "n": 31,
+    "off_by_1": 2,
+    "off_by_2_plus": 1,
+    "exact": 28
+   },
+   "doubted_or_gap_filled": {
+    "n": 36,
+    "exact": 22,
+    "off_by_2_plus": 11,
+    "off_by_1": 3
+   },
+   "manual_stacks_missed_by_app": 6,
+   "app_columns_with_no_manual_stack": 0
+  },
+  "photos the capture check refuses": {
+   "photos": 57,
+   "scored_stacks": 37,
+   "vs_filled": {
+    "off_by_1": 5,
+    "exact": 3,
+    "off_by_2_plus": 29
+   },
+   "vs_all_layers": {
+    "exact": 1,
+    "off_by_1": 5,
+    "off_by_2_plus": 31
+   },
+   "clean_stacks (no doubt, no gap fill)": {
+    "n": 3,
+    "exact": 1,
+    "off_by_2_plus": 2
+   },
+   "doubted_or_gap_filled": {
+    "n": 34,
+    "off_by_1": 5,
+    "off_by_2_plus": 27,
+    "exact": 2
+   },
+   "manual_stacks_missed_by_app": 67,
+   "app_columns_with_no_manual_stack": 55
+  },
+  "scored stacks by manual truth basis (grade vs filled)": {
+   "one blind count; app agrees": {
+    "exact": 25
+   },
+   "one blind count; app disagrees, second count not done": {
+    "off_by_2_plus": 19,
+    "off_by_1": 3,
+    "exact": 1
+   },
+   "partly double-counted: agreed stacks only, recount not done": {
+    "off_by_2_plus": 8,
+    "exact": 3
+   },
+   "reconciled by a third blind count": {
+    "off_by_2_plus": 4,
+    "exact": 20,
+    "off_by_1": 3
+   },
+   "two blind counters agree": {
+    "exact": 4,
+    "off_by_2_plus": 10,
+    "off_by_1": 4
+   }
+  },
+  "accepted photos: clean app columns that disagree with the manual count": [
+   {
+    "photo": "M:IMG_20260916_151409127",
+    "x": 0.66,
+    "app": 7,
+    "manual_filled": 15,
+    "manual_cover": 0,
+    "manual_confidence": "medium",
+    "basis": "partly double-counted: agreed stacks only, recount not done"
+   }
+  ],
+  "photo totals vs the user's handwritten labels (U)": {
+   "photos": 24,
+   "manual_equals_label": 9,
+   "app_equals_label": 10,
+   "app_equals_label_and_capture_accepted": 10,
+   "capture_accepted": 16,
+   "rows": [
+    {
+     "photo": "L:img-01",
+     "label": 99,
+     "manual": 99,
+     "app": 99,
+     "accepted": true
+    },
+    {
+     "photo": "L:img-02",
+     "label": 80,
+     "manual": 80,
+     "app": 80,
+     "accepted": true
+    },
+    {
+     "photo": "L:img-04",
+     "label": 115,
+     "manual": 119,
+     "app": 121,
+     "accepted": false
+    },
+    {
+     "photo": "L:img-08",
+     "label": 160,
+     "manual": 160,
+     "app": 160,
+     "accepted": true
+    },
+    {
+     "photo": "L:img-09",
+     "label": 75,
+     "manual": 79,
+     "app": 78,
+     "accepted": true
+    },
+    {
+     "photo": "L:img-19",
+     "label": 100,
+     "manual": 100,
+     "app": 100,
+     "accepted": true
+    },
+    {
+     "photo": "L:img-20",
+     "label": 60,
+     "manual": 61,
+     "app": 60,
+     "accepted": true
+    },
+    {
+     "photo": "L:img-21",
+     "label": 100,
+     "manual": 95,
+     "app": 100,
+     "accepted": true
+    },
+    {
+     "photo": "L:img-23",
+     "label": 160,
+     "manual": 160,
+     "app": 160,
+     "accepted": true
+    },
+    {
+     "photo": "L:img-24",
+     "label": 100,
+     "manual": 99,
+     "app": 100,
+     "accepted": true
+    },
+    {
+     "photo": "L:img-30",
+     "label": 80,
+     "manual": 79,
+     "app": 79,
+     "accepted": true
+    },
+    {
+     "photo": "L:img-31",
+     "label": 80,
+     "manual": 67,
+     "app": 59,
+     "accepted": false
+    },
+    {
+     "photo": "L:img-32",
+     "label": 19,
+     "manual": 18,
+     "app": 31,
+     "accepted": true
+    },
+    {
+     "photo": "L:img-33",
+     "label": 358,
+     "manual": 357,
+     "app": 0,
+     "accepted": false
+    },
+    {
+     "photo": "L:img-34",
+     "label": 120,
+     "manual": 113,
+     "app": 120,
+     "accepted": true
+    },
+    {
+     "photo": "L:img-35",
+     "label": 1,
+     "manual": 1,
+     "app": 0,
+     "accepted": false
+    },
+    {
+     "photo": "L:img-36",
+     "label": 109,
+     "manual": 123,
+     "app": 115,
+     "accepted": true
+    },
+    {
+     "photo": "L:img-38",
+     "label": 118,
+     "manual": null,
+     "app": 117,
+     "accepted": false
+    },
+    {
+     "photo": "L:img-39",
+     "label": 2,
+     "manual": 1,
+     "app": 3,
+     "accepted": false
+    },
+    {
+     "photo": "L:img-40",
+     "label": 10,
+     "manual": 6,
+     "app": 0,
+     "accepted": false
+    },
+    {
+     "photo": "L:img-46",
+     "label": 20,
+     "manual": 20,
+     "app": 19,
+     "accepted": true
+    },
+    {
+     "photo": "L:img-47",
+     "label": 7,
+     "manual": 7,
+     "app": 7,
+     "accepted": true
+    },
+    {
+     "photo": "L:img-49",
+     "label": 1,
+     "manual": null,
+     "app": 0,
+     "accepted": false
+    },
+    {
+     "photo": "L:img-50",
+     "label": 40,
+     "manual": 40,
+     "app": 37,
+     "accepted": true
+    }
+   ]
+  }
+ },
+ "blocks": [
+  {
+   "set_id": "L-100",
+   "app_status": "needs_view",
+   "app_total": null,
+   "app_footprint": [
+    5,
+    null
+   ],
+   "app_visible_verified": 0,
+   "app_visible_single_reading": 260,
+   "app_conflicts": [
+    "LEFT: shows the same 5 stacks with the same heights as STRAIGHT, so it looks like the front face again; photograph the left side face with the camera after walking around the corner",
+    "RIGHT: shows the same 5 stacks with the same heights as STRAIGHT, so it looks like the front face again; photograph the right side face with the camera after walking around the corner"
+   ],
+   "capture": {
+    "straight": true,
+    "left": true,
+    "right": true
+   },
+   "filler": null,
+   "manual_footprint": [
+    5,
+    1
+   ],
+   "manual_total_filled": 100,
+   "manual_range": [
+    101,
+    122
+   ],
+   "manual_reliability": "medium",
+   "user_label_total": 100
+  },
+  {
+   "set_id": "L-109-ORANGE",
+   "app_status": "needs_view",
+   "app_total": null,
+   "app_footprint": [
+    6,
+    null
+   ],
+   "app_visible_verified": 0,
+   "app_visible_single_reading": 123,
+   "app_conflicts": [
+    "LEFT: not confirmed as a side face (no phone heading from the camera session that took STRAIGHT), and this block is 5 stacks deep, so its hidden stacks cannot be computed; scan it with the camera, walking around the block",
+    "STRAIGHT: boxes are missing over several layers of this stack; retake this face",
+    "LEFT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "LEFT: layer counts disagree (span 16, walk 19); retake this face",
+    "LEFT: boxes are missing over several layers of this stack; retake this face"
+   ],
+   "capture": {
+    "straight": true,
+    "left": true,
+    "right": false
+   },
+   "filler": "right",
+   "manual_footprint": [
+    6,
+    3
+   ],
+   "manual_total_filled": 375,
+   "manual_range": [
+    250,
+    400
+   ],
+   "manual_reliability": "low",
+   "user_label_total": 109
+  },
+  {
+   "set_id": "L-115",
+   "app_status": "needs_view",
+   "app_total": null,
+   "app_footprint": [
+    6,
+    1
+   ],
+   "app_visible_verified": 0,
+   "app_visible_single_reading": 41,
+   "app_conflicts": [
+    "STRAIGHT: layer counts disagree (span 17, walk 19); retake this face",
+    "LEFT: boxes are missing over several layers of this stack; retake this face",
+    "STRAIGHT: layer counts disagree (span 16, walk 23); retake this face",
+    "STRAIGHT: layer counts disagree (span 18, walk 20); retake this face",
+    "STRAIGHT: layer counts disagree (span 20, walk 18); retake this face"
+   ],
+   "capture": {
+    "straight": false,
+    "left": false,
+    "right": false
+   },
+   "filler": "right",
+   "manual_footprint": [
+    6,
+    6
+   ],
+   "manual_total_filled": 734,
+   "manual_range": [
+    645,
+    897
+   ],
+   "manual_reliability": "medium",
+   "user_label_total": null
+  },
+  {
+   "set_id": "L-80",
+   "app_status": "needs_view",
+   "app_total": null,
+   "app_footprint": [
+    4,
+    null
+   ],
+   "app_visible_verified": 0,
+   "app_visible_single_reading": 40,
+   "app_conflicts": [
+    "LEFT: not confirmed as a side face (no phone heading from the camera session that took STRAIGHT), and this block is 4 stacks deep, so its hidden stacks cannot be computed; scan it with the camera, walking around the block",
+    "RIGHT: not confirmed as a side face (no phone heading from the camera session that took STRAIGHT), and this block is 4 stacks deep, so its hidden stacks cannot be computed; scan it with the camera, walking around the block",
+    "depth differs between LEFT and RIGHT faces",
+    "LEFT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "corner height differs between STRAIGHT and RIGHT",
+    "LEFT: layer counts disagree (span 11, walk 16); retake this face",
+    "LEFT: layer counts disagree (span 13, walk 19); retake this face",
+    "LEFT: layer counts disagree (span 13, walk 16); retake this face"
+   ],
+   "capture": {
+    "straight": true,
+    "left": false,
+    "right": true
+   },
+   "filler": null,
+   "manual_footprint": [
+    4,
+    1
+   ],
+   "manual_total_filled": 80,
+   "manual_range": [
+    79,
+    81
+   ],
+   "manual_reliability": "high",
+   "user_label_total": 80
+  },
+  {
+   "set_id": "M16-CORNER-STACK",
+   "app_status": "needs_view",
+   "app_total": null,
+   "app_footprint": [
+    1,
+    1
+   ],
+   "app_visible_verified": 0,
+   "app_visible_single_reading": 0,
+   "app_conflicts": [
+    "corner height differs between STRAIGHT and LEFT"
+   ],
+   "capture": {
+    "straight": true,
+    "left": true,
+    "right": false
+   },
+   "filler": "right",
+   "manual_footprint": [
+    1,
+    1
+   ],
+   "manual_total_filled": 14,
+   "manual_range": [
+    14,
+    14
+   ],
+   "manual_reliability": "high",
+   "user_label_total": null
+  },
+  {
+   "set_id": "M16-FAR",
+   "app_status": "needs_view",
+   "app_total": null,
+   "app_footprint": [
+    5,
+    null
+   ],
+   "app_visible_verified": 0,
+   "app_visible_single_reading": 0,
+   "app_conflicts": [
+    "LEFT: not confirmed as a side face (no phone heading from the camera session that took STRAIGHT), and this block is 4 stacks deep, so its hidden stacks cannot be computed; scan it with the camera, walking around the block",
+    "RIGHT: not confirmed as a side face (no phone heading from the camera session that took STRAIGHT), and this block is 4 stacks deep, so its hidden stacks cannot be computed; scan it with the camera, walking around the block",
+    "depth differs between LEFT and RIGHT faces",
+    "STRAIGHT: boxes are missing over several layers of this stack; retake this face",
+    "LEFT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "STRAIGHT: layer counts disagree (span 11, walk 18); retake this face",
+    "STRAIGHT: layer counts disagree (span 12, walk 17); retake this face",
+    "STRAIGHT: boxes are missing over several layers of this stack; retake this face",
+    "corner height differs between STRAIGHT and RIGHT",
+    "LEFT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "LEFT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "LEFT: layer counts disagree (span 11, walk 15); retake this face",
+    "RIGHT: layer counts disagree (span 9, walk 7); retake this face"
+   ],
+   "capture": {
+    "straight": true,
+    "left": true,
+    "right": false
+   },
+   "filler": null,
+   "manual_footprint": [
+    3,
+    5
+   ],
+   "manual_total_filled": 240,
+   "manual_range": [
+    236,
+    268
+   ],
+   "manual_reliability": "medium",
+   "user_label_total": null
+  },
+  {
+   "set_id": "M16-NEAR",
+   "app_status": "needs_view",
+   "app_total": null,
+   "app_footprint": [
+    5,
+    null
+   ],
+   "app_visible_verified": 0,
+   "app_visible_single_reading": 25,
+   "app_conflicts": [
+    "LEFT: not confirmed as a side face (no phone heading from the camera session that took STRAIGHT), and this block is 5 stacks deep, so its hidden stacks cannot be computed; scan it with the camera, walking around the block",
+    "RIGHT: not confirmed as a side face (no phone heading from the camera session that took STRAIGHT), and this block is 5 stacks deep, so its hidden stacks cannot be computed; scan it with the camera, walking around the block",
+    "depth differs between LEFT and RIGHT faces",
+    "STRAIGHT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "STRAIGHT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "STRAIGHT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "STRAIGHT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "STRAIGHT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "RIGHT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "RIGHT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "RIGHT: boxes are missing over several layers of this stack; retake this face"
+   ],
+   "capture": {
+    "straight": false,
+    "left": false,
+    "right": false
+   },
+   "filler": null,
+   "manual_footprint": [
+    4,
+    2
+   ],
+   "manual_total_filled": 177,
+   "manual_range": [
+    180,
+    190
+   ],
+   "manual_reliability": "medium",
+   "user_label_total": null
+  },
+  {
+   "set_id": "W05-ORANGE",
+   "app_status": "needs_view",
+   "app_total": null,
+   "app_footprint": [
+    9,
+    null
+   ],
+   "app_visible_verified": 0,
+   "app_visible_single_reading": 118,
+   "app_conflicts": [
+    "LEFT: not confirmed as a side face (no phone heading from the camera session that took STRAIGHT), and this block is 5 stacks deep, so its hidden stacks cannot be computed; scan it with the camera, walking around the block",
+    "STRAIGHT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "LEFT: layer counts disagree (span 15, walk 17); retake this face",
+    "STRAIGHT: layer counts disagree (span 16, walk 19); retake this face",
+    "STRAIGHT: layer counts disagree (span 17, walk 19); retake this face",
+    "STRAIGHT: boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+    "LEFT: layer counts disagree (span 12, walk 14); retake this face",
+    "LEFT: layer counts disagree (span 12, walk 14); retake this face"
+   ],
+   "capture": {
+    "straight": true,
+    "left": true,
+    "right": false
+   },
+   "filler": "right",
+   "manual_footprint": [
+    10,
+    7
+   ],
+   "manual_total_filled": 1366,
+   "manual_range": [
+    1200,
+    1660
+   ],
+   "manual_reliability": "low",
+   "user_label_total": null
+  }
+ ]
+}
