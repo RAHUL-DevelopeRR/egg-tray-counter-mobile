@@ -70,3 +70,12 @@ Recorded in PROGRESS.md for the final commit: Worker `npm test`, backend pytest,
 - Production `4c1480e6` is untouched.
 - The phone install and field test need the Redmi connected.
 - The Lambda (rim route) is not redeployed: E is rejected.
+
+## 0.5.1 addendum (2026-11-02): sides that repeat the front
+
+The "2 fails" in the adversarial row above (S14, R02: side photos with a real turn) are closed in Worker 0.5.1 for
+sides that repeat the front. Such a side gets its depth only from a guided-camera CORNER photo that reads the same
+width and depth; otherwise the block is `needs_view`. This also closes the L-100 false 500 found by the MUTAA
+validation, and a lone stack whose side photos show a stack behind it (0.5.0: `exact` 40 for 20). The adversarial
+library goes to 32 of 33, with 0 wrong releases. The open case S25 (rows standing behind a row, sides not repeating the
+front) needs a product decision. Details: `docs/SCAN_JOBS_AND_DEVICES.md`, "Sides that repeat the front (0.5.1)".

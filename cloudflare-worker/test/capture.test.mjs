@@ -96,16 +96,21 @@ async function scan(t, perView, evidence = TURNED) {
   return response.json();
 }
 
+// Side faces of the 5 x 4 test block: corner stacks of 20 like the front, two middle stacks of 18 standing on the same
+// floor. Since 0.5.1 sides that repeat the front (an even-height block) wait for a CORNER or ELEVATED view, so these
+// gate tests use sides that cannot be the front again.
+const sideFace = () => ({image: FRAME, predictions: [20, 18, 18, 20].map((h, i) => column(100 + i * 100, h, {y0: 100 + (20 - h) * 40})).flat()});
+
 test('a view that fails the capture gate withholds the block total and names that view for rescan', async t => {
   const good = n => ({image: FRAME, predictions: Array.from({length: n}, (_, i) => column(100 + i * 100, 20)).flat()});
-  const result = await scan(t, {left: good(4), right: {image: FRAME, predictions: []}, straight: good(5)});
+  const result = await scan(t, {left: sideFace(), right: {image: FRAME, predictions: []}, straight: good(5)});
   assert.equal(result.block.contract, 'block_model_v1');
   assert.equal(result.block.total_trays, null);
   assert.equal(result.block.total_eggs, null);
   assert.equal(result.block.status, 'needs_view'); assert.equal(result.result_status, 'needs_view');
   assert.equal(result.block.faces_consistent, false);
   assert.equal(result.block.fully_observed, false);
-  assert.equal(result.block.observed_trays, 160);           // 5 front + 3 LEFT-side cells x 20: geometry is still reported, only the total is withheld
+  assert.equal(result.block.observed_trays, 156);           // 5 front x 20 + 3 LEFT-side cells (20 + 18 + 18): geometry is still reported, only the total is withheld
   assert.equal(result.block.capture.right.accepted, false);
   assert.deepEqual(result.block.capture.right.reasons, ['no stacks detected']);
   assert.equal(result.block.capture.left.accepted, true);
@@ -121,8 +126,8 @@ test('a view that fails the capture gate withholds the block total and names tha
 
 test('when every view passes the gate the block total and the generic rescan advice are unchanged', async t => {
   const good = n => ({image: FRAME, predictions: Array.from({length: n}, (_, i) => column(100 + i * 100, 20)).flat()});
-  const result = await scan(t, {left: good(4), right: good(4), straight: good(5)});
-  assert.equal(result.block.total_trays, 400);
+  const result = await scan(t, {left: sideFace(), right: sideFace(), straight: good(5)});
+  assert.equal(result.block.total_trays, 392);              // 212 observed (100 front + 56 per side) + 9 hidden stacks x 20
   assert.equal(result.block.faces_consistent, true);
   assert.ok(['left', 'right', 'straight'].every(v => result.block.capture[v].accepted));
   assert.equal(result.rescan.recommended_view, 'straight');

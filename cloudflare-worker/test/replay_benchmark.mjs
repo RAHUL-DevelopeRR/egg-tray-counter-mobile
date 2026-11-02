@@ -88,6 +88,18 @@ export function syntheticFace(heights, { drop = [], short = [], merge = null, sh
   return { detections, image: { width: 100 * (heights.length + short.length) + 100 + dx, height: 1000 + dy } };
 }
 
+/** A guided-camera CORNER photo of a width x depth block seen from the front-left: width + depth - 1 columns, the
+ * nearest (corner) stack drawn with the largest layer pitch, `depth` columns from the left (Worker cornerReading). */
+export function syntheticCorner(width, depth) {
+  const n = width + depth - 1, detections = [];
+  for (let i = 0; i < n; i++) {
+    const pitch = i === depth - 1 ? 52 : PITCH;
+    for (let k = 0; k < 20; k++) detections.push({ class: 'egg_tray', confidence: 0.9, x: 100 + i * 100, y: 100 + k * pitch, width: 100, height: Math.round(pitch * 0.9) });
+  }
+  return { corner: { detections, image: { width: 100 * n + 200, height: 1200 } }, cornerSide: 'front_left',
+    cornerCapture: { source: 'captured_still', blocked: false, heading: null } };
+}
+
 // Camera headings for a genuine walk-around in one session. Sign: positive yaw is a left (counter-clockwise) turn
 // seen from above; to face the block's left side face the operator turns right (-90). Only the magnitude matters to
 // the 0.4.13 side check; the direction is used by the Phase D1 rule.
@@ -104,6 +116,7 @@ const backAsLeft = { ...CAMERA, left: { yaw_deg: 180, yaw_session: 'syn' } };
  *   not_exact       anything but `exact` (the evidence cannot support it, whatever the total)
  *   exact_ok        `exact` and equal to the truth (exact must stay reachable)
  *   not_confirmed   anything but `confirmed` (a declaration cannot stand in for missing photo evidence)
+ *   total_ok        a total is released and equals the truth (coverage the witness views must restore)
  * fixed_by names the plan phase expected to make a case pass when it fails today (null = must pass now). stretch is a
  * stricter check the release contract does not require yet (an estimate may be wrong), with the phase meant to meet it.
  */
@@ -149,7 +162,7 @@ export function adversarialCases(registry) {
       headings: { ...CAMERA, left: { yaw_deg: -10, yaw_session: 'syn' } }, truth: 120, check: 'withheld', fixed_by: null },
     { id: 'S14 side photos of another block, phone really turned (4x1 block, 3-deep neighbour)',
       views: { straight: S([20, 20, 20, 20]), left: S([20, 20, 20]), right: S([20, 20, 20]) },
-      headings: CAMERA, truth: 80, check: 'no_wrong_total', fixed_by: 'F: needs the blind declaration (S14F); no photo-only fix' },
+      headings: CAMERA, truth: 80, check: 'no_wrong_total', fixed_by: null },   // 0.5.1: sides repeat the front, withheld
     { id: 'S15 one photo sent as all three views from the camera (copies, not three captures)',
       views: { straight: S([20]), left: S([20]), right: S([20]) }, headings: CAMERA, truth: 20, check: 'not_exact', fixed_by: null },
     { id: 'S16 one photo sent as all three views from the gallery', views: { straight: S([20]), left: S([20]), right: S([20]) },
@@ -174,11 +187,30 @@ export function adversarialCases(registry) {
       views: { ...trioFromRaw('mutaa:L-80'), left: S([20], { shift: 1 }), right: S([19], { shift: 2 }) },
       headings: CAMERA, truth: 80, check: 'no_wrong_exact', fixed_by: null },
     { id: 'R02 MUTAA L-100 sides sent with camera headings of a real walk-around', views: trioFromRaw('mutaa:L-100'), headings: CAMERA,
-      truth: 100, check: 'no_wrong_total', fixed_by: 'F: needs the blind declaration (R02F); no photo-only fix' },
+      truth: 100, check: 'no_wrong_total', fixed_by: null },   // 0.5.1: was estimated 500; sides repeat the front, withheld
     { id: 'R02F R02 with the blind declaration (5 wide, 1 deep): the front photos sent as sides contradict it',
       views: trioFromRaw('mutaa:L-100'), headings: CAMERA, extras: declared(5, 1), truth: 100, check: 'withheld', fixed_by: null },
     { id: 'R03 MUTAA M16-FAR: neighbouring block in the front photo', views: trioFromRaw('mutaa:M16-FAR'), headings: CAMERA,
       truth: null, check: 'withheld', fixed_by: null },
+    // 0.5.1: sides that repeat the front need a guided-camera CORNER photo that sees the depth directly.
+    { id: 'S21 square 3x3 block, camera walk-around, CORNER photo agreeing (3 wide, 3 deep)',
+      views: { straight: S([20, 20, 20]), left: S([20, 20, 20]), right: S([20, 20, 20]) },
+      headings: CAMERA, extras: syntheticCorner(3, 3), truth: 180, check: 'total_ok', fixed_by: null },
+    { id: 'S22 genuine 3x2 block, camera walk-around, ELEVATED taps only: taps are not a depth witness (sized from the declaration)',
+      views: { straight: S([20, 20, 20]), left: S([20, 20]), right: S([20, 20]) },
+      headings: CAMERA, extras: { topView: { x: 3, y: 2, cells: [] }, elevated: true }, truth: 120, check: 'withheld', fixed_by: null },
+    { id: 'R02C R02 with a CORNER photo of the real block (5 wide, 1 deep): the sides are the front again',
+      views: trioFromRaw('mutaa:L-100'), headings: CAMERA, extras: syntheticCorner(5, 1), truth: 100, check: 'withheld', fixed_by: null },
+    { id: 'S23 lone stack, side photos show it and one stack behind (0.5.0: exact 40)',
+      views: { straight: S([20]), left: S([20, 20], { shift: 1 }), right: S([20, 20], { shift: 2 }) },
+      headings: CAMERA, truth: 20, check: 'no_wrong_total', fixed_by: null },
+    { id: 'S24 5x5 block, back rows 15, RIGHT is the front again, front-left CORNER photo (cannot vouch for RIGHT)',
+      views: { straight: S([20, 20, 20, 20, 20]), left: S([15, 15, 15, 15, 20], { shift: 1 }), right: S([20, 20, 20, 20, 20], { shift: 2 }) },
+      headings: CAMERA, extras: syntheticCorner(5, 5), truth: 400, check: 'no_wrong_total', fixed_by: null },
+    { id: 'S25 5x1 row, real turn, side photos show the row end and two rows standing behind it (three 20s)',
+      views: { straight: S([20, 20, 20, 20, 20]), left: S([20, 20, 20], { shift: 1 }), right: S([20, 20, 20], { shift: 2 }) },
+      headings: CAMERA, truth: 100, check: 'no_wrong_total',
+      fixed_by: 'decision asked 2 Nov: a depth over one stack needs a CORNER photo or an agreeing declaration; photos alone cannot tell rows behind from the block' },
   ];
 }
 
@@ -188,6 +220,7 @@ export function judge(check, summary, truth) {
   if (check === 'not_exact') return summary.status !== 'exact';
   if (check === 'exact_ok') return summary.status === 'exact' && summary.total === truth;
   if (check === 'not_confirmed') return summary.status !== 'confirmed';
+  if (check === 'total_ok') return summary.total === truth;
   if (check === 'no_wrong_total') return !released || summary.total === truth;
   return summary.status !== 'exact' || summary.total === truth;
 }

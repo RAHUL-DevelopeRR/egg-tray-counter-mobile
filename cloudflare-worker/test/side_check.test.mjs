@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import worker, { sideCheck, spanColumns } from '../dist/index.js';
+import worker, { modelDiagnostics, sideCheck, spanColumns } from '../dist/index.js';
 
 // Same synthetic faces as capture.test.mjs: 100 px wide columns 100 px apart, 20 layers at pitch 40 in a
 // 800 x 1000 frame, so every face passes the capture gate and only the side check can withhold a total.
@@ -36,26 +36,75 @@ test('without a heading only a one-deep block keeps its sides; deeper sides are 
   assert.equal(sideCheck({straight: cols([14]), left: cols([14]), right: cols([14])}).left.status, 'unverified');
 });
 
-test('a phone heading from one capture screen decides, whatever the counts say', () => {
+test('a phone heading settles which way the camera faced, but not that a side repeating the front is a side (0.5.1)', () => {
   const square = cols([20, 20, 20]);
-  const turned = sideCheck({straight: square, left: square, right: square},
-    {straight: heading(0), left: heading(88), right: heading(-92)});
-  assert.deepEqual([turned.left.status, turned.left.turn_deg, turned.right.status, turned.right.turn_deg], ['turned', 88, 'turned', -92]);
-  assert.equal(turned.left.reason, undefined);
+  const walk = {straight: heading(0), left: heading(88), right: heading(-92)};
+  const turned = sideCheck({straight: square, left: square, right: square}, walk);
+  assert.deepEqual([turned.left.status, turned.left.turn_deg, turned.right.status, turned.right.turn_deg],
+    ['turned_repeats_front', 88, 'turned_repeats_front', -92]);
+  assert.match(turned.left.reason, /^LEFT: this photo shows the same stacks with the same heights as STRAIGHT, so it may be the front face again/);
+  assert.match(turned.right.reason, /add a CORNER photo from the front-right corner, with the corner stack and both faces in frame, to count the depth$/);
+  // A CORNER photo reading 3 wide and 3 deep settles the side it sees, and the other side when it repeats the front too.
+  const seen = sideCheck({straight: square, left: square, right: square}, walk, {x: 3, y: 3, side: 'left', problem: null});
+  for (const s of ['left', 'right'])
+    assert.deepEqual([seen[s].status, seen[s].repeats_front, seen[s].depth_witness, seen[s].reason], ['turned', true, 'corner', undefined], s);
+  // Sides that differ from the front are side faces on the heading alone.
+  const side = cols([12, 12]);
+  const deep = sideCheck({straight: square, left: side, right: side}, walk);
+  assert.deepEqual([deep.left.status, deep.left.reason, deep.left.repeats_front], ['turned', undefined, undefined]);
   // Heading wraps around: 350 -> 80 is a 90 degree turn, 10 -> -340 is no turn at all.
-  assert.equal(sideCheck({straight: square, left: square, right: square},
+  assert.equal(sideCheck({straight: square, left: side, right: side},
     {straight: heading(350), left: heading(80), right: heading(260)}).left.turn_deg, 90);
-  const same = sideCheck({straight: square, left: square, right: square},
+  const same = sideCheck({straight: square, left: square, right: side},
     {straight: heading(10), left: heading(-340), right: heading(-80)});
   assert.equal(same.left.status, 'same_way_as_straight');
   assert.match(same.left.reason, /^LEFT: taken facing the same way as STRAIGHT \(phone turned only 10 degrees\)/);
   assert.equal(same.right.status, 'turned');
 });
 
+test('a turned side repeats the front with one stack more or fewer, reversed, or one misread height from four stacks up', () => {
+  const walk = {straight: heading(0), left: heading(-90), right: heading(90)};
+  const verdict = (front, side) => sideCheck({straight: cols(front), left: cols(side), right: cols([9])}, walk).left.status;
+  assert.equal(verdict([20, 20, 20, 20, 20], [20, 20, 20, 20]), 'turned_repeats_front');      // framed one stack tighter
+  assert.equal(verdict([20, 20, 20], [20, 20, 20, 20]), 'turned_repeats_front');              // or one wider
+  assert.equal(verdict([20, 18, 15], [15, 18, 20]), 'turned_repeats_front');                  // seen from the other end
+  assert.equal(verdict([20, 20, 20, 20], [20, 20, 14, 20]), 'turned_repeats_front');          // one stack misread
+  assert.equal(verdict([20, 20, 20, 20], [20, 14, 14, 20]), 'turned');                        // two differ: another face
+  assert.equal(verdict([20, 20, 20], [20, 14, 20]), 'turned');                                // three stacks: no misread allowed
+  assert.equal(verdict([20, 20, 20, 20], [20, 20]), 'turned');                                // two stacks fewer
+  assert.equal(verdict([20, 20, 20], [20]), 'turned');                                        // a one-deep side has no depth to fake
+  // Behind a one-stack front any deeper side could be the stack plus stacks standing behind it (0.5.0 gave exact 40 for 20).
+  assert.equal(verdict([20], [20, 20]), 'turned_repeats_front');
+  assert.equal(verdict([20], [20, 14, 9]), 'turned_repeats_front');
+  assert.equal(verdict([20], [20]), 'turned');
+  assert.match(sideCheck({straight: cols([20]), left: cols([20, 20]), right: cols([20])}, walk).left.reason,
+    /^LEFT: STRAIGHT shows one stack, so this side cannot be told from stacks standing behind it; add a CORNER photo/);
+});
+
+test('a CORNER photo settles only the side it sees, at the depth it reads, and says what is wrong when it does not', () => {
+  const walk = {straight: heading(0), left: heading(-90), right: heading(90)};
+  const front = cols([20, 20, 20, 20]);
+  const check = (left, right, corner) => sideCheck({straight: front, left: cols(left), right: cols(right)}, walk, corner);
+  // LEFT is a real side (back rows lower), RIGHT the front again: a front-left CORNER photo cannot vouch for RIGHT.
+  const scoped = check([15, 15, 20], [20, 20, 20], {x: 4, y: 3, side: 'left', problem: null});
+  assert.deepEqual([scoped.left.status, scoped.right.status], ['turned', 'turned_repeats_front']);
+  assert.match(scoped.right.reason, /and the CORNER photo sees the left side, not this one; add a CORNER photo from the front-right corner/);
+  // The CORNER photo reads 1 deep: the 4-deep side is not the side face.
+  const wrong = check([20, 20, 20, 20], [20, 20, 20, 20], {x: 4, y: 1, side: 'left', problem: null});
+  assert.match(wrong.left.reason, /^LEFT: the CORNER photo shows 4 stacks wide and 1 deep, but this side shows 4 stacks and STRAIGHT 4: it is not the left side face/);
+  // Width and depth the other way round: probably taken from the other corner.
+  const swapped = check([20, 20, 20], [20, 20, 20], {x: 3, y: 4, side: 'left', problem: null});
+  assert.match(swapped.left.reason, /reads 3 wide and 4 deep, the other way round; was it taken from the other front corner\?$/);
+  // A CORNER photo that cannot be used says why.
+  const blocked = check([20, 20, 20], [20, 20, 20], {x: 4, y: 3, side: 'left', problem: "the phone's live checks blocked the CORNER photo"});
+  assert.match(blocked.left.reason, /and the phone's live checks blocked the CORNER photo; retake the CORNER photo$/);
+});
+
 test('LEFT and RIGHT facing the same way are one side photographed twice (13 Oct corner block)', () => {
   const verdicts = sideCheck({straight: cols([20, 20, 20, 20]), left: cols([20, 20, 20]), right: cols([20, 20, 20])},
     {straight: heading(0), left: heading(90), right: heading(95)});
-  assert.equal(verdicts.left.status, 'turned');
+  // 0.5.1: an even-height block's sides also repeat the front, so LEFT waits for a CORNER or ELEVATED view as well.
+  assert.equal(verdicts.left.status, 'turned_repeats_front');
   assert.equal(verdicts.right.status, 'same_way_as_other_side');
   assert.match(verdicts.right.reason, /^RIGHT: taken facing the same way as LEFT \(5 degrees apart\)/);
 });
@@ -120,15 +169,81 @@ test('a real deep block uploaded without headings (gallery, older app) is withhe
   assert.match(result.rescan.reason, /scan it with the camera, walking around the block$/);
 });
 
-test('the same photos with camera headings turned around the block are a square block and keep their total', async t => {
+test('the same photos with camera headings turned around the block no longer give 500: they ask for a CORNER photo (0.5.1)', async t => {
   const face = boxes([20, 20, 20, 20, 20]);
   const evidence = Object.fromEntries([['straight', 0], ['left', 91], ['right', -87]].map(([view, yaw]) =>
     [view, JSON.stringify({source: 'captured_still', yaw_deg: yaw, yaw_session: 'k3x9'})]));
   const result = await scan(t, {left: face, right: face, straight: face}, evidence);
-  assert.deepEqual([result.block.side_check.left.status, result.block.side_check.right.status], ['turned', 'turned']);
-  assert.equal(result.block.width, 5); assert.equal(result.block.depth, 5);
-  assert.equal(result.block.total_trays, 500);
-  assert.equal(result.block.status, 'estimated');
+  assert.deepEqual([result.block.side_check.left.status, result.block.side_check.right.status], ['turned_repeats_front', 'turned_repeats_front']);
+  assert.equal(result.block.status, 'needs_view');
+  assert.equal(result.result_status, 'needs_view');
+  assert.equal(result.block.total_trays, null);
+  assert.equal(result.block.depth, null);
+  assert.deepEqual(result.block.cells, []);
+  assert.deepEqual(result.block.suggested_views, ['corner']);
+  assert.equal(result.rescan.recommended_view, 'left');
+  assert.match(result.rescan.reason, /^LEFT: this photo shows the same stacks with the same heights as STRAIGHT/);
+  // Nothing from the false 5 x 5 build is left for a client to add up.
+  assert.deepEqual([result.block.single_reading_cells, result.block.visible_single_reading_trays, result.block.grid], [[], null, []]);
+});
+
+// The same five-stack faces from a camera walk-around, with a CORNER photo or ELEVATED taps (modelDiagnostics, as the
+// Worker runs it after inference). A CORNER photo of n stacks whose nearest stack (largest pitch) is the k-th from the
+// left shows k stacks on the left face and n - k + 1 on the right (front_left: width = right face, depth = left face).
+const cornerPhoto = (n, k) => ({detections: Array.from({length: n}, (_, i) => column(100 + i * 100, 20, {pitch: i === k - 1 ? 52 : 40})).flat(),
+  image: {width: 100 * n + 200, height: 1200}});
+function walkAround(extras) {
+  const face = boxes([20, 20, 20, 20, 20]);
+  const walk = {straight: heading(0, 'k3x9'), left: heading(-90, 'k3x9'), right: heading(90, 'k3x9')};
+  const results = Object.fromEntries(['left', 'right', 'straight'].map(v => [v, {count: 0, confidence: 0, detections: face, image: FRAME}]));
+  const stills = Object.fromEntries(['left', 'right', 'straight'].map(v => [v, {source: 'captured_still', blocked: false, heading: walk[v]}]));
+  return modelDiagnostics('t', results, {}, env, 0, undefined, undefined, walk, stills, extras);
+}
+const still = {source: 'captured_still', blocked: false, heading: null};
+
+test('a CORNER photo that sees a 5 x 5 block settles the depth of sides that repeat the front; they still verify nothing', () => {
+  const result = walkAround({corner: cornerPhoto(9, 5), cornerCapture: still, cornerSide: 'front_left'});
+  assert.deepEqual([result.block.side_check.left.status, result.block.side_check.left.depth_witness], ['turned', 'corner']);
+  assert.deepEqual([result.block.corner.x, result.block.corner.y, result.block.corner.agrees], [5, 5, true]);
+  assert.deepEqual([result.block.status, result.block.total_trays], ['estimated', 500]);
+  assert.deepEqual([result.views.left.trusted, result.views.right.trusted, result.views.straight.trusted], [false, false, true]);
+});
+
+test('a CORNER photo of the real 5 x 1 block (MUTAA L-100) withholds the false 5 x 5 and names the side to retake', () => {
+  const result = walkAround({corner: cornerPhoto(5, 1), cornerCapture: still, cornerSide: 'front_left'});
+  assert.deepEqual([result.block.corner.x, result.block.corner.y], [5, 1]);
+  assert.deepEqual([result.block.status, result.block.total_trays, result.block.depth], ['needs_view', null, null]);
+  assert.deepEqual([result.block.cells, result.block.grid], [[], []]);
+  assert.equal(result.rescan.recommended_view, 'left');
+  assert.match(result.rescan.reason, /^LEFT: the CORNER photo shows 5 stacks wide and 1 deep, but this side shows 5 stacks and STRAIGHT 5: it is not the left side face/);
+  assert.deepEqual(result.block.suggested_views, []);
+});
+
+test('ELEVATED taps, a gallery or blocked CORNER photo, or one without its side do not settle the depth', () => {
+  // The app sizes the tap grid from the declaration and an empty grid reads nothing (0.5.1 review): never a witness.
+  for (const topView of [{x: 5, y: 5, cells: []}, {x: 5, y: 5, cells: [{x: 2, y: 4, state: 'present'}]}]) {
+    const r = walkAround({topView, elevated: true});
+    assert.deepEqual([r.block.status, r.block.total_trays, r.block.side_check.left.status], ['needs_view', null, 'turned_repeats_front']);
+  }
+  const gallery = walkAround({corner: cornerPhoto(9, 5), cornerCapture: {source: 'uploaded_photo', blocked: null, heading: null}, cornerSide: 'front_left'});
+  assert.match(gallery.block.side_check.left.reason, /and the CORNER photo is not from the guided camera; retake the CORNER photo$/);
+  const blocked = walkAround({corner: cornerPhoto(9, 5), cornerCapture: {...still, blocked: true}, cornerSide: 'front_left'});
+  assert.deepEqual([blocked.block.status, blocked.block.total_trays], ['needs_view', null]);
+  const sideless = walkAround({corner: cornerPhoto(9, 5), cornerCapture: still, cornerSide: null});
+  assert.match(sideless.block.side_check.left.reason, /the CORNER photo could not be read \(corner side not given/);
+  const unreadable = walkAround({corner: cornerPhoto(1, 1), cornerCapture: still, cornerSide: 'front_left'});
+  assert.match(unreadable.block.side_check.left.reason, /the CORNER photo could not be read \(fewer than two stacks in the CORNER photo\)/);
+});
+
+test('a wrong-way side is retaken before a side that only needs a CORNER photo, and only then is a CORNER photo suggested', () => {
+  const face = boxes([20, 20, 20, 20, 20]);
+  const walk = {straight: heading(0, 'k'), left: heading(-90, 'k'), right: heading(-85, 'k')};
+  const results = Object.fromEntries(['left', 'right', 'straight'].map(v => [v, {count: 0, confidence: 0, detections: face, image: FRAME}]));
+  const r = modelDiagnostics('t', results, {}, env, 0, undefined, undefined, walk, {}, {});
+  assert.deepEqual([r.block.side_check.left.status, r.block.side_check.right.status], ['turned_repeats_front', 'same_way_as_other_side']);
+  assert.equal(r.rescan.recommended_view, 'right');
+  assert.match(r.block.conflicts[0].reason, /^RIGHT: taken facing the same way as LEFT/);
+  assert.deepEqual(r.block.suggested_views, []);
 });
 
 test('a camera side taken without turning is refused with the turn it measured', async t => {
@@ -151,16 +266,16 @@ test('missing or malformed evidence never refuses a scan and a real block keeps 
 });
 
 test('a side photo turned past 135 degrees faces the back of the block and is refused; the turn direction is recorded', () => {
-  const square = cols([20, 20, 20]);
-  const back = sideCheck({straight: square, left: square, right: square},
+  const square = cols([20, 20, 20]), side = cols([12, 12]);
+  const back = sideCheck({straight: square, left: square, right: side},
     {straight: heading(10), left: heading(-170), right: heading(100)});
   assert.equal(back.left.status, 'faces_back'); assert.equal(Math.abs(back.left.turn_deg), 180);
   assert.ok(back.left.reason.startsWith('LEFT: taken facing the back of the block (phone turned 180 degrees from STRAIGHT)'), back.left.reason);
   assert.equal(back.right.status, 'turned');
   // Facing the left side face is a right turn (negative yaw): recorded as direction_ok, not enforced yet.
-  const genuine = sideCheck({straight: square, left: square, right: square}, {straight: heading(0), left: heading(-92), right: heading(87)});
+  const genuine = sideCheck({straight: square, left: side, right: side}, {straight: heading(0), left: heading(-92), right: heading(87)});
   assert.deepEqual([genuine.left.status, genuine.left.direction_ok, genuine.right.direction_ok], ['turned', true, true]);
-  const swapped = sideCheck({straight: square, left: square, right: square}, {straight: heading(0), left: heading(92), right: heading(-87)});
+  const swapped = sideCheck({straight: square, left: side, right: side}, {straight: heading(0), left: heading(92), right: heading(-87)});
   assert.deepEqual([swapped.left.status, swapped.left.direction_ok, swapped.right.direction_ok], ['turned', false, false]);
-  assert.equal(sideCheck({straight: square, left: square, right: square}, {straight: heading(0), left: heading(-135), right: heading(90)}).left.status, 'turned');
+  assert.equal(sideCheck({straight: square, left: side, right: side}, {straight: heading(0), left: heading(-135), right: heading(90)}).left.status, 'turned');
 });

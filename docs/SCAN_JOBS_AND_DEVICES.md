@@ -411,3 +411,55 @@ verified by two different captures.
 - the 5/6 parity checker (Phase P, disabled).
 
 Their reports are in `reports/rim-independent-20261101` and `reports/cross-stack-20261101`.
+
+## Sides that repeat the front (0.5.1, 2026-11-02)
+
+**Reason.** The MUTAA validation (`reports/mutaa-validation-0.5.0-20261101`) replayed the L-100 front photos as guided-camera
+captures with a quarter turn each way. 0.5.0 gave **`estimated` 500 for a 100-tray block**, because a heading from
+STRAIGHT's session made a side trusted whatever it showed. With a declaration the result was `conflict`, but the
+declaration can be skipped. A heading proves the phone turned, not that the photo shows another face: an oblique
+re-shot of the front, the stacks behind a lone stack, or a sensor glitch all pass it.
+
+**Rule (`sideCheck`, `mirrorsFront`).**
+- **When a side repeats the front.** A side in STRAIGHT's session, turned 45-135 degrees, *repeats the front* when its
+  x-ordered heights match STRAIGHT's within one layer:
+  - in the same or reversed order;
+  - with one stack more or fewer at an edge;
+  - from four stacks up, with one misread height.
+  - Behind a one-stack front, any side of two or more stacks repeats it.
+- **No CORNER photo that settles it.** The side becomes `turned_repeats_front` with a reason, and the block is withheld
+  as for any refused side: `needs_view`, no total, no depth, cells, grid or single-reading cells.
+  `suggested_views: ["corner"]`, and `rescan` names the side.
+- **What settles it.** A guided-camera CORNER photo (`captured_still`, `blocked: false`, `corner_side` given) whose
+  reading equals STRAIGHT's width and that side's depth. It must see that side (`front_left` sees LEFT), or see the
+  other side while that side also repeats the front at the same depth (an even block). The side is then `turned`, with
+  `repeats_front: true` and `depth_witness: "corner"`.
+- **A settled side still verifies nothing** (`trusted: false`). It may yet be the front again, with only the depth right.
+- **When the CORNER photo cannot settle it**, the reason says why, and `retake` says which photo to retake:
+  - it is unreadable, from the gallery, blocked, or has no side (`retake: "corner"`);
+  - its width and depth are the other way round, probably the other corner (`retake: "corner"`);
+  - it sees only the other side (`retake: "corner"`);
+  - it disagrees with the side's stack count, so the side is not the side face (`retake: "side"`). In that case no
+    CORNER photo is suggested.
+- **Not witnesses:**
+  - a declaration: a habitual "5 x 5" would turn the same 500 into a confirmed total;
+  - ELEVATED taps: the app sizes the tap grid from the declaration, and an empty grid reads nothing.
+- **Retake order:** wrong-way sides (`same_way_as_straight`, `faces_back`, `same_way_as_other_side`), then
+  `repeats_front` and `unconfirmed`, and last a side that only needs a CORNER photo.
+
+**Cost.** Even-height blocks whose depth is within one stack of their width (2x2, 3x2, 3x3, 4x3, 4x4, 5x4, 5x5, 6x5)
+get no total from three faces alone; they need the CORNER photo. One-deep rows and clearly different sides are
+unaffected. Replay: `reports/replay-0.5.1-20261102`. The adversarial cases go from 25 of 27 to 32 of 33, with 0 wrong
+releases and 0 wrong `exact`. Two correct synthetic estimates (S02, S20) are withheld until a CORNER photo is added.
+
+**Open.**
+- **S25, a product decision.** With a real turn, a side photo of a row end plus rows standing behind it (three stacks
+  behind a five-wide row that does not repeat the front) still gives `estimated` 300 for 100. Photos alone cannot
+  tell rows behind a block from the block. Options: require a CORNER photo or an agreeing declaration for any depth
+  over one stack.
+- **CORNER photos count stacks, not block membership.** A CORNER photo that also sees rows behind can agree with a
+  false depth.
+- **No CORNER photo has been tested on a real block**, and `cornerReading` relies on the corner stack having the
+  largest layer pitch.
+- **App 0.5.0+27 cannot add the CORNER photo from the result screen.** RETAKE re-shoots the side, and only NEW SCAN
+  reaches the extras pane, which still calls the CORNER photo optional.

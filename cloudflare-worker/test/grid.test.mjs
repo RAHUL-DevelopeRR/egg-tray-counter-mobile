@@ -22,7 +22,7 @@ test('every reading names its capture, reader and evidence; one capture never ve
   const corner = block.cells.find(c => c.x === 0 && c.y === 0);
   assert.deepEqual(Object.keys(corner.readings[0]).sort(), ['capture_id', 'count', 'doubts', 'evidence', 'face', 'gap_filled', 'layers',
     'physical_stack_id', 'pipeline_version', 'quality', 'reader', 'trusted', 'view'].sort());
-  assert.deepEqual([corner.readings[0].reader, corner.readings[0].physical_stack_id, corner.readings[0].pipeline_version], ['rf-walk', 'S0-0', 'worker-0.5.0']);
+  assert.deepEqual([corner.readings[0].reader, corner.readings[0].physical_stack_id, corner.readings[0].pipeline_version], ['rf-walk', 'S0-0', 'worker-0.5.1']);
   assert.equal(corner.verified, true);                       // STRAIGHT (c1) and LEFT (c2)
   assert.equal(block.cells.find(c => c.x === 1).verified, false);  // STRAIGHT and RIGHT are the same capture (c1)
 });

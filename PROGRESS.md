@@ -1,6 +1,66 @@
 # Progress
 
-## 2026-11-01 (latest) - Plan 3 executed: release 0.5.0, phone-only X/Y/Z grid counter (Claude Code)
+## 2026-11-02 (latest) - MUTAA validation of build 0.5.0 on staging: app vs blind manual counts (Claude Code, in progress)
+
+**Done (measured).**
+- All 94 MUTAA/labelled photos went through staging Worker 0.5.0 (52a1d5e8) exactly as the app prepares them
+  (`scripts/validate_build_staging.py`; 33 scans, answers in `reports/mutaa-validation-0.5.0-20261101/raw/`).
+  Every scan returned `needs_view` with no total, which is the 0.5.0 contract for gallery photos.
+- The photo check accepted 37 photos and refused 57. The app read 261 columns, 135 of them with doubts.
+- Offline what-if (`scripts/replay_mutaa_validation.mjs`, `replay-what-if.json`): L-100 replayed as guided-camera
+  captures with a 90-degree turn gives **`estimated` 500 for a block counted at 100** (with a declaration: `conflict`).
+  This false total is the main blocker found.
+- Blind visual counts by subagents (tier V, not physical): `manual-blind.json` assembled from three runs
+  (`scratchpad/validate/assemble_blind.py`); `scripts/compare_mutaa_validation.py` → `comparison.json`.
+  - Accepted photos, stacks with double-counted manual truth: 29 of 42 match (cover tray either way), 2 off by 1,
+    11 off by 2 or more. 10 of the 11 big misses carry a doubt or gap fill. Clean columns: 20 of 21 match.
+  - One clean wrong column on an accepted photo: IMG_20260916_151409127, back-block stack at x 0.66, app 7 vs 15.
+  - The two blind counters disagreed on 21 of 29 double-counted accepted photos, so the manual truth itself is noisy.
+
+**Not done.** 31 refused photos have no manual count; 21 accepted photos lack the third (recount) pass; 13 refused
+photos lack a second count. Report README written (partial).
+Usage limits stopped the counting runs four times (see memory notes on cost and resume). The validation files, the 0.5.1 fix and the 14 earlier commits are pushed with this entry (the user asked on 2 Nov).
+
+**Worker 0.5.1 (local, not deployed): the L-100 false 500 fixed.**
+- A turned side whose heights repeat the front gets its depth only from a guided-camera CORNER photo that reads the
+  same width and depth and sees that side. Otherwise the block is `needs_view` with `suggested_views: ["corner"]`.
+- Neither a declaration nor ELEVATED taps settle it. A settled side never verifies a stack.
+- A one-stack front with deeper sides is treated the same way.
+- Docs: `docs/SCAN_JOBS_AND_DEVICES.md` "Sides that repeat the front (0.5.1)", the addendum in `docs/RELEASE_0.5.0.md`,
+  and `context.md`.
+- **Independent review** (3 reviewers: correctness, bypass, field). Fixed after it:
+  - ELEVATED taps were effectively the declaration;
+  - a disagreeing CORNER photo leaked the false grid;
+  - a front-left CORNER photo vouched for RIGHT;
+  - a blocked CORNER photo counted;
+  - lone-stack sides gave `exact` 40 for 20;
+  - the retake order;
+  - leaked single-reading cells.
+- **Verification (measured):**
+  - Worker `npm test`: 189 pass, 0 fail, 5 todo; `tsc --noEmit` clean.
+  - Replay `reports/replay-0.5.1-20261102`: adversarial 32 of 33 (0.5.0: 25 of 27); 0 wrong releases and 0 wrong
+    `exact` on 22 trios; labelled faces unchanged.
+  - MUTAA what-if: every set and mode is `needs_view`, L-100 included.
+  - Cost: S02 and S20 (correct estimates, even 3x2 blocks) are withheld until a CORNER photo is added.
+
+**Open.**
+- **S25 (user decision asked):** rows standing behind a row, with a real turn, give 300 for 100.
+- **App:** needs an "add CORNER photo" action on the result screen; the copy still calls CORNER optional.
+- **CORNER photos are untested on real blocks.**
+- **Staging is still Worker 0.5.0.** Redeploying 0.5.1 needs approval.
+
+**Production readiness: no.** The L-100 blocker is fixed in code. Still blocking:
+- S25;
+- the app flow for the CORNER photo;
+- no guided-camera scan of a real block validated;
+- APK 0.5.0+27 never installed on the phone;
+- the physical pilot (`docs/PHYSICAL_VALIDATION.md`) not run.
+
+**Next.** The user's decision on S25; then the app CORNER action (0.5.1+28) and a staging deploy (approval); then the
+field pilot on the Redmi with physical blind counts. The remaining manual counts can be finished in one or two usage
+windows (`scratchpad/validate/assemble_blind.py` merges the runs).
+
+## 2026-11-01 - Plan 3 executed: release 0.5.0, phone-only X/Y/Z grid counter (Claude Code)
 
 Plan: `C:/Users/rahul/.claude/plans/spicy-growing-flame.md` (Plan 3, execution; the user's specification).
 

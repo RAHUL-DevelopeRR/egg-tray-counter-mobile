@@ -1,3 +1,16 @@
+> 2026-11-02 (latest): MUTAA validation of 0.5.0 and Worker 0.5.1 (local, not deployed).
+> - **Validation** (reports/mutaa-validation-0.5.0-20261101, partial): staging released no wrong total on 33 scans.
+>   On accepted photos, the app matches double-counted manual stacks 29 of 42; undoubted columns match 20 of 21.
+>   The manual counts are tier V (Claude visual counts) and incomplete.
+> - **Decision (0.5.1):** a turned side that repeats the front gets its depth only from a guided-camera CORNER photo
+>   that reads the same width and depth. Not from the heading alone, a declaration, or ELEVATED taps. Fixes the L-100
+>   false 500. Cost: even near-square blocks need a CORNER photo for a total.
+> - **Open, the user's call:** S25 (rows behind a row, real turn) still gives 300 for 100. The option is a CORNER photo
+>   or an agreeing declaration for any depth over one stack.
+> - **App follow-up needed:** an "add CORNER photo" action on the result screen, and copy that stops calling CORNER
+>   optional.
+> - **Not production ready:** no field pilot and no real CORNER photo yet; the staging Worker is still 0.5.0.
+
 > 2026-11-01 (latest): release 0.5.0 built; Worker on **staging** (`52a1d5e8`); production untouched; not pushed.
 > - **Frozen product:** a phone-only physical egg-tray counter with an X/Y/Z grid model.
 >   - Eligible tray = a tray holding eggs (a partly filled tray counts); empty cover trays are layers, not eligible.

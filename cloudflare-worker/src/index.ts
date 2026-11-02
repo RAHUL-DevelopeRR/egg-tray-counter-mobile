@@ -871,19 +871,73 @@ function captureQuality(columns: SpanColumn[], imageWidth: number | null, imageH
 // one stack tighter or with one stack misread slips past any count match), so a block more than one stack deep gets
 // no total unless the heading confirms every side face it was built from. Gallery photos and older apps therefore
 // get totals only for one-deep blocks; refusing is safer than a fivefold total.
+// 0.5.1: the heading alone no longer settles a side that repeats the front. Replayed as camera captures with a
+// quarter turn each way, the L-100 front photos still gave 500 "estimated" (and a neighbouring block's sides gave 240
+// for 80): a heading says the phone turned, not that the photo shows another face (an oblique re-shot of the front,
+// a neighbouring block, a sensor glitch). When a turned side shows the front's stacks again, its depth must come from
+// a guided-camera CORNER photo that sees that side and the front at once, read as the same width and depth. Without
+// one the total, depth and grid are withheld and a CORNER photo is asked for. Not witnesses: a declaration (a
+// habitual "5 x 5" would turn the same 500 into a confirmed total) and ELEVATED taps (the app sizes the tap grid from
+// the declaration, and an empty grid reads nothing). A side let through by a CORNER photo still never verifies a
+// stack: it may yet be the front again, with the depth right.
 const SIDE_MIN_TURN_DEG = 45;      // a side face is about 90 degrees from the front
 const SIDES_MIN_APART_DEG = 90;    // LEFT and RIGHT face opposite ways, about 180 degrees apart
 const SIDE_MAX_TURN_DEG = 135;     // past this the camera faces the back face, not a side
-type SideVerdict = { status: "turned" | "faces_back" | "same_way_as_straight" | "same_way_as_other_side" | "repeats_front" | "unconfirmed" | "unverified";
-  turn_deg?: number; direction_ok?: boolean; reason?: string };
+type SideStatus = "turned" | "turned_repeats_front" | "faces_back" | "same_way_as_straight" | "same_way_as_other_side" | "repeats_front"
+  | "unconfirmed" | "unverified";
+type SideVerdict = { status: SideStatus; turn_deg?: number; direction_ok?: boolean; reason?: string; repeats_front?: boolean;
+  depth_witness?: "corner"; retake?: "corner" | "side" };
+/** What the CORNER photo read: width and depth (null when unreadable), the side face it sees, and why it cannot be used. */
+type CornerWitness = { x: number | null; y: number | null; side: "left" | "right" | null; problem: string | null };
+// The side to retake first: wrong-way photos before the ones that only need a CORNER photo.
+const SIDE_FAULT_ORDER: SideStatus[] = ["same_way_as_straight", "faces_back", "same_way_as_other_side", "repeats_front", "unconfirmed",
+  "turned_repeats_front"];
 const wrap180 = (deg: number) => ((deg + 180) % 360 + 360) % 360 - 180;
 
-function sideCheck(columns: Record<string, SpanColumn[]>, headings: Record<string, ViewHeading> = {}) {
+/** A turned side that could be the front again (or the front plus stacks behind it): the same heights (within one
+ * layer) in the same or reversed order, allowing one stack more or fewer at an edge (a re-shot framed wider or
+ * tighter) and, from four stacks up, one misread height. A square block of even height matches too: that is the
+ * case a heading cannot settle. Behind a one-stack front any deeper side matches: the stack's own side and the
+ * stacks standing behind it look alike. */
+function mirrorsFront(side: number[], front: number[]) {
+  if (front.length === 1) return side.length >= 2;
+  const [short, long] = side.length <= front.length ? [side, front] : [front, side];
+  if (short.length < 2 || long.length - short.length > 1) return false;
+  const fits = (run: number[]) => {
+    for (let off = 0; off <= long.length - run.length; off++) {
+      const misses = run.filter((v, i) => Math.abs(v - long[off + i]) > 1).length;
+      if (misses === 0 || (misses === 1 && run.length >= 4)) return true;
+    }
+    return false;
+  };
+  return fits(short) || fits([...short].reverse());
+}
+
+function sideCheck(columns: Record<string, SpanColumn[]>, headings: Record<string, ViewHeading> = {}, corner: CornerWitness | null = null) {
   const layers = (cols: SpanColumn[]) => [...cols].sort((a, b) => a.x_min - b.x_min).map(c => c.walk_count ?? c.span_count);
   const close = (a: number[], b: number[]) => a.length === b.length && a.every((v, i) => Math.abs(v - b[i]) <= 1);
   const front = layers(columns.straight ?? []);
   const depth = Math.max((columns.left ?? []).length, (columns.right ?? []).length);   // as buildBlock takes it
   const straight = headings.straight ?? null;
+  const repeats: Record<string, boolean> = Object.fromEntries(["left", "right"].map(side => [side, mirrorsFront(layers(columns[side] ?? []), front)]));
+  // A CORNER photo settles a repeating side when it reads this block's width and that side's depth, and it sees that
+  // side, or sees the other side and that side repeats the front too with the same depth (an even block: the photo
+  // that is not seen then adds no depth of its own).
+  const settles = (side: string, n: number) => corner !== null && corner.problem === null && corner.side !== null
+    && corner.x === front.length && corner.y === n
+    && (corner.side === side || (repeats[corner.side] && (columns[corner.side] ?? []).length === n));
+  const unsettled = (side: string, n: number): [string, "corner" | "side"] => {
+    const name = side.toUpperCase(), ask = `add a CORNER photo from the front-${side} corner, with the corner stack and both faces in frame, to count the depth`;
+    const what = front.length === 1 ? "STRAIGHT shows one stack, so this side cannot be told from stacks standing behind it"
+      : "this photo shows the same stacks with the same heights as STRAIGHT, so it may be the front face again";
+    if (corner === null) return [`${name}: ${what}; ${ask}`, "corner"];
+    if (corner.problem !== null) return [`${name}: ${what}, and ${corner.problem}; retake the CORNER photo`, "corner"];
+    if (corner.side !== null && corner.x === n && corner.y === front.length && corner.x !== corner.y)
+      return [`${name}: ${what}, and the CORNER photo reads ${corner.x} wide and ${corner.y} deep, the other way round; was it taken from the other front corner?`, "corner"];
+    if (corner.x !== front.length || corner.y !== n)
+      return [`${name}: the CORNER photo shows ${corner.x} stacks wide and ${corner.y} deep, but this side shows ${n} stacks and STRAIGHT ${front.length}: it is not the ${side} side face; walk around the corner and retake it`, "side"];
+    return [`${name}: ${what}, and the CORNER photo sees the ${corner.side} side, not this one; ${ask}`, "corner"];
+  };
   const verdicts: Record<string, SideVerdict> = {};
   for (const side of ["left", "right"]) {
     const name = side.toUpperCase();
@@ -893,11 +947,14 @@ function sideCheck(columns: Record<string, SpanColumn[]>, headings: Record<strin
       // Facing the left side face is a right turn from the front (negative yaw), the right side face a left turn.
       // Recorded, not enforced, until a phone walk-around confirms the sign; a wrong sign would refuse every scan.
       const direction_ok = side === "left" ? turn < 0 : turn > 0;
+      const n = (columns[side] ?? []).length;
       verdicts[side] = Math.abs(turn) < SIDE_MIN_TURN_DEG ? { status: "same_way_as_straight", turn_deg: turn, direction_ok,
           reason: `${name}: taken facing the same way as STRAIGHT (phone turned only ${Math.abs(turn)} degrees); walk around the corner and photograph the ${side} side face` }
         : Math.abs(turn) > SIDE_MAX_TURN_DEG ? { status: "faces_back", turn_deg: turn, direction_ok,
           reason: `${name}: taken facing the back of the block (phone turned ${Math.abs(turn)} degrees from STRAIGHT); photograph the ${side} side face, about a quarter turn from the front` }
-        : { status: "turned", turn_deg: turn, direction_ok };
+        : !repeats[side] ? { status: "turned", turn_deg: turn, direction_ok }
+        : settles(side, n) ? { status: "turned", turn_deg: turn, direction_ok, repeats_front: true, depth_witness: "corner" }
+        : (([reason, retake]) => ({ status: "turned_repeats_front" as const, turn_deg: turn, direction_ok, repeats_front: true, reason, retake }))(unsettled(side, n));
       continue;
     }
     const cols = layers(columns[side] ?? []);
@@ -909,9 +966,11 @@ function sideCheck(columns: Record<string, SpanColumn[]>, headings: Record<strin
       verdicts[side] = { status: "unverified" };
     }
   }
-  // LEFT and RIGHT from one capture screen are compared even when the front came from another one (a retake).
+  // LEFT and RIGHT from one capture screen are compared even when the front came from another one (a retake). A side
+  // held back only for repeating the front still faced the way its heading says, so it is compared too.
   const left = headings.left ?? null, right = headings.right ?? null;
-  if (left && right && left.yaw_session === right.yaw_session && !verdicts.left.reason && !verdicts.right.reason) {
+  const headingOk = (v: SideVerdict) => !v.reason || v.status === "turned_repeats_front";
+  if (left && right && left.yaw_session === right.yaw_session && headingOk(verdicts.left) && headingOk(verdicts.right)) {
     const apart = Math.round(Math.abs(wrap180(left.yaw_deg - right.yaw_deg)));
     if (apart < SIDES_MIN_APART_DEG) verdicts.right = { status: "same_way_as_other_side", turn_deg: verdicts.right.turn_deg,
       reason: `RIGHT: taken facing the same way as LEFT (${apart} degrees apart), so both show one side; photograph the right side face` };
@@ -1326,16 +1385,30 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
     captureQuality(columns[view], results[view].image?.width ?? null, results[view].image?.height ?? null,
       medianBoxAspect(results[view].detections ?? []))]));
   const rejectedView = worstView(capture, VIEWS);
-  const sides = sideCheck(columns, headings);
-  const wrongSide = (["left", "right"] as const).find(side => sides[side].reason);
-  const sideConflicts = (["left", "right"] as const).filter(side => sides[side].reason).map(side => ({ reason: sides[side].reason }));
+  // A CORNER photo counts only from the guided camera; its columns give width and depth, never heights. It is the only
+  // evidence that settles the depth of a block whose sides look like its front, and only when the phone did not block it.
+  const cornerColumns = extras.corner ? spanColumns(extras.corner.detections ?? [], extras.corner.image ?? null) : null;
+  const corner = cornerColumns && extras.cornerCapture?.source === "captured_still" ? cornerReading(cornerColumns, extras.cornerSide ?? null) : null;
+  const witness: CornerWitness | null = !extras.corner ? null : {
+    x: corner?.x ?? null, y: corner?.y ?? null,
+    side: extras.cornerSide === "front_left" ? "left" : extras.cornerSide === "front_right" ? "right" : null,
+    problem: extras.cornerCapture?.source !== "captured_still" ? "the CORNER photo is not from the guided camera"
+      : extras.cornerCapture?.blocked !== false ? "the phone's live checks blocked the CORNER photo"
+      : corner?.x === null || corner?.y === null ? `the CORNER photo could not be read (${corner?.note ?? "no stacks"})` : null };
+  const sides = sideCheck(columns, headings, witness);
+  // Wrong-way photos are retaken before a side that only needs a CORNER photo.
+  const faulty = (["left", "right"] as const).filter(side => sides[side].reason)
+    .sort((a, b) => SIDE_FAULT_ORDER.indexOf(sides[a].status) - SIDE_FAULT_ORDER.indexOf(sides[b].status));
+  const wrongSide = faulty[0];
+  const sideConflicts = faulty.map(side => ({ reason: sides[side].reason }));
   const strays = Object.fromEntries(VIEWS.map(view => [view, strayGroups(results[view].detections ?? [])]));
   // A reading can verify a stack only when it comes from the guided camera with no blocked live check, a side photo is
-  // confirmed as a side face by the heading, and the photo is not a copy of a view already counted. A gallery photo
+  // confirmed as a side face by the heading (and does not repeat the front: a CORNER photo settles its depth, not that
+  // it is another photo of other stacks), and the photo is not a copy of a view already counted. A gallery photo
   // skips every live check, and three copies of one photo gave `exact` before this rule (plan Phase J).
   const duplicates = duplicateViews(results);
   const trusted = Object.fromEntries(VIEWS.map(view => [view, captures[view]?.source === "captured_still" && captures[view]?.blocked === false
-    && (view === "straight" || sides[view].status === "turned") && !duplicates[view]]));
+    && (view === "straight" || (sides[view].status === "turned" && !sides[view].repeats_front)) && !duplicates[view]]));
   const captureIds = Object.fromEntries(VIEWS.map(view => [view, extras.captureIds?.[view] ?? view]));
   for (const [view, original] of Object.entries(duplicates)) captureIds[view] = captureIds[original];
   const assembled = buildBlock(columns.straight, columns.left, columns.right,
@@ -1357,12 +1430,10 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
   // returned, or the app would still draw (and an operator could add up) the block the total was withheld for.
   const block = wrongSide
     ? { ...assembled, ...withheld, depth: null, cells: [], observed_trays: null, computed_trays: null, filled_trays: null,
-        rescan_cells: [], conflicts: [...sideConflicts, ...assembled.conflicts] }
+        rescan_cells: [], single_reading_cells: [], visible_verified_trays: null, visible_single_reading_trays: null,
+        conflicts: [...sideConflicts, ...assembled.conflicts] }
     : rejectedView ? { ...assembled, ...withheld } : assembled;
-  // The physical grid with the declaration and the extra views (0.5.0). A CORNER photo counts only from the guided
-  // camera; its columns give width and depth, never heights.
-  const cornerColumns = extras.corner ? spanColumns(extras.corner.detections ?? [], extras.corner.image ?? null) : null;
-  const corner = cornerColumns && extras.cornerCapture?.source === "captured_still" ? cornerReading(cornerColumns, extras.cornerSide ?? null) : null;
+  // The physical grid with the declaration and the extra views (0.5.0).
   const assembledGrid = assembleGrid(block as ReturnType<typeof blockResult>, { declaration: extras.declaration ?? null,
     topView: extras.topView ?? null, corner });
   const inventory = gridInventory(assembledGrid.grid, extras.declaration ?? null, assembledGrid.total);
@@ -1371,6 +1442,8 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
   if (!extras.elevated && assembledGrid.suggested_views.length === 0 && finalStatus === "estimated" && block.computed_trays) {
     assembledGrid.suggested_views.push("elevated");
   }
+  // A CORNER photo is the next step only when nothing but a CORNER photo is missing; a wrong-way side is retaken first.
+  if (faulty.length && faulty.every(side => sides[side].retake === "corner")) assembledGrid.suggested_views = ["corner"];
   // Model boxes are useful evidence, but not proof of cross-view identity or egg occupancy.
   // Do not substitute whole-photo voting for an unfinished spatial hybrid pipeline.
   const reason = "Model detections are available. Physical stack matching and egg occupancy remain unresolved; these per-photo counts are not a verified inventory total.";
@@ -1498,7 +1571,7 @@ async function reconstructPair(request: Request, env: Bindings) {
 // Open mode (AUTH_MODE unset or "open") never reaches this code: jobs and idempotency are enforce-only, so the
 // installed 0.4.11 app keeps exactly today's answers until production is promoted. Observe mode reaches it for
 // every request that carries a credential.
-const PIPELINE_VERSION = "worker-0.5.0";
+const PIPELINE_VERSION = "worker-0.5.1";
 // How long a claimed job is left to its attempt before a retry may take it over. Cloudflare keeps waitUntil work alive
 // for at most 30 s after the client disconnects, so an attempt whose phone gave up (the app's 90 s receive timeout, or
 // a dropped link the edge noticed) is cancelled by about 120 s after the claim and writes nothing; one whose
