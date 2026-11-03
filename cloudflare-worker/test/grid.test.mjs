@@ -22,7 +22,7 @@ test('every reading names its capture, reader and evidence; one capture never ve
   const corner = block.cells.find(c => c.x === 0 && c.y === 0);
   assert.deepEqual(Object.keys(corner.readings[0]).sort(), ['capture_id', 'count', 'doubts', 'evidence', 'face', 'gap_filled', 'layers',
     'physical_stack_id', 'pipeline_version', 'quality', 'reader', 'trusted', 'view'].sort());
-  assert.deepEqual([corner.readings[0].reader, corner.readings[0].physical_stack_id, corner.readings[0].pipeline_version], ['rf-walk', 'S0-0', 'worker-0.5.1']);
+  assert.deepEqual([corner.readings[0].reader, corner.readings[0].physical_stack_id, corner.readings[0].pipeline_version], ['rf-walk', 'S0-0', 'worker-0.6.0']);
   assert.equal(corner.verified, true);                       // STRAIGHT (c1) and LEFT (c2)
   assert.equal(block.cells.find(c => c.x === 1).verified, false);  // STRAIGHT and RIGHT are the same capture (c1)
 });
@@ -41,14 +41,14 @@ test('the grid holds one physical stack per cell: a corner seen by two faces is 
   assert.deepEqual(inventory.eligible_egg_trays.value, null); assert.equal(inventory.unknown_occupancy_layers, 120);
 });
 
-test('a declaration that agrees with every face and declares the interior full confirms, and says so', () => {
+test('a declaration that agrees with every face and declares the interior full stays an estimate (0.6.0: never confirmed)', () => {
   const result = assembleGrid(verified3x2(), {declaration: declaration(), topView: null, corner: null});
-  assert.equal(result.status, 'confirmed'); assert.deepEqual(result.confirmed_basis, ['declaration']);
+  assert.equal(result.status, 'estimated'); assert.deepEqual(result.confirmed_basis, []);
   assert.equal(result.declaration_agrees, true);
-  assert.deepEqual(result.grid[1][1].measurement_sources, ['declared', 'computed']);
+  assert.deepEqual(result.grid[1][1].measurement_sources, ['computed', 'declared']);
+  // The hidden stack is assumed, so its trays are not counted as egg trays even with occupancy declared.
   const inventory = gridInventory(result.grid, declaration({occupancy: 'egg_filled'}), result.total);
-  assert.deepEqual(inventory.eligible_egg_trays, {value: 120, basis: 'declared',
-    note: 'the operator declared that every counted tray holds eggs; occupancy is not measured'});
+  assert.equal(inventory.eligible_egg_trays.value, null); assert.match(inventory.eligible_egg_trays.note, /assumed/);
 });
 
 test('a declaration never makes a result exact, and cannot confirm stacks read by one photo only', () => {
@@ -82,10 +82,10 @@ test('a measured reference height only demotes: a visible stack below it blocks 
   assert.ok(result.grid[0][1].uncertainties.some(u => u.includes('reference height')));
 });
 
-test('elevated taps: a flush hidden stack confirms on the top view; a step makes it unknown; a wrong grid is a conflict', () => {
+test('elevated taps: a flush hidden stack is present, still assumed; a step makes it unknown; a wrong grid is a conflict', () => {
   const present = assembleGrid(verified3x2(), {declaration: null, topView: {x: 3, y: 2, cells: [{x: 1, y: 1, state: 'present'}]}, corner: null});
-  assert.equal(present.status, 'confirmed'); assert.deepEqual(present.confirmed_basis, ['top_view']);
-  assert.ok(present.grid[1][1].uncertainties[0].includes('conditional'));
+  assert.equal(present.status, 'estimated'); assert.deepEqual(present.confirmed_basis, []);
+  assert.ok(present.grid[1][1].uncertainties.every(u => !u.includes('conditional')));
   const step = assembleGrid(verified3x2(), {declaration: null, topView: {x: 3, y: 2, cells: [{x: 1, y: 1, state: 'step_down'}]}, corner: null});
   assert.deepEqual([step.status, step.total, step.grid[1][1].z_layers], ['estimated', null, null]);
   const missing = assembleGrid(verified3x2(), {declaration: null, topView: {x: 3, y: 2, cells: [{x: 1, y: 1, state: 'missing'}]}, corner: null});
@@ -148,9 +148,10 @@ test('end to end: a camera scan with a declaration and a CORNER photo returns th
   assert.equal(block.grid.length, 2); assert.equal(block.grid[0].length, 3);
   assert.deepEqual([block.corner.x, block.corner.y, block.corner.agrees], [3, 2, true]);
   assert.equal(block.declaration.agrees_with_faces, true); assert.equal(block.declaration.operator, 'op1');
-  // The front-middle stack is seen by STRAIGHT only, so the interior declaration cannot confirm: an estimate.
-  assert.equal(block.status, 'estimated');
-  assert.equal(block.inventory.eligible_egg_trays.basis, 'declared');
+  // The CORNER photo and the 3 x 2 declaration prove the depth; the hidden stack is assumed: an estimate, and its
+  // trays are not counted as egg trays.
+  assert.equal(block.status, 'estimated'); assert.equal(block.depth_basis, 'corner_and_declaration');
+  assert.equal(block.inventory.eligible_egg_trays.value, null);
   assert.match(block.grid_note, /not a point cloud/);
 });
 

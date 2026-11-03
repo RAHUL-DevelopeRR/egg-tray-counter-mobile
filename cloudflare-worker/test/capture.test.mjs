@@ -77,7 +77,7 @@ test('zero detections never throw and are rejected as no stacks detected', () =>
 const TURNED = Object.fromEntries([['straight', 0], ['left', 90], ['right', -90]].map(([view, yaw]) =>
   [view, JSON.stringify({yaw_deg: yaw, yaw_session: 'walk1'})]));
 
-async function scan(t, perView, evidence = TURNED) {
+async function scan(t, perView, evidence = TURNED, declaration = null) {
   t.mock.method(console, 'log', () => {});
   const calls = [];
   t.mock.method(globalThis, 'fetch', async () => {
@@ -90,6 +90,7 @@ async function scan(t, perView, evidence = TURNED) {
   ['left', 'right', 'straight'].forEach((view, i) => form.set(view,
     new File([new Uint8Array([255, 216, 255, i])], `${view}.jpg`, {type: 'image/jpeg'})));
   for (const [view, value] of Object.entries(evidence)) form.set(`${view}_constraint_evidence`, value);
+  if (declaration) form.set('block_declaration', JSON.stringify(declaration));
   const response = await worker.fetch(new Request('https://local/v1/scans/count', {method: 'POST', body: form}), env);
   assert.equal(response.status, 200);
   assert.deepEqual(calls, ['left', 'right', 'straight']);
@@ -98,12 +99,14 @@ async function scan(t, perView, evidence = TURNED) {
 
 // Side faces of the 5 x 4 test block: corner stacks of 20 like the front, two middle stacks of 18 standing on the same
 // floor. Since 0.5.1 sides that repeat the front (an even-height block) wait for a CORNER or ELEVATED view, so these
-// gate tests use sides that cannot be the front again.
+// gate tests use sides that cannot be the front again. Since 0.6.0 a depth over one stack rests on the declared block
+// size, so they also send the 5 x 4 declaration.
+const DECLARED_5x4 = {x: 5, y: 4, interior: 'unknown', cover_trays: 'unknown', occupancy: 'unknown'};
 const sideFace = () => ({image: FRAME, predictions: [20, 18, 18, 20].map((h, i) => column(100 + i * 100, h, {y0: 100 + (20 - h) * 40})).flat()});
 
 test('a view that fails the capture gate withholds the block total and names that view for rescan', async t => {
   const good = n => ({image: FRAME, predictions: Array.from({length: n}, (_, i) => column(100 + i * 100, 20)).flat()});
-  const result = await scan(t, {left: sideFace(), right: {image: FRAME, predictions: []}, straight: good(5)});
+  const result = await scan(t, {left: sideFace(), right: {image: FRAME, predictions: []}, straight: good(5)}, TURNED, DECLARED_5x4);
   assert.equal(result.block.contract, 'block_model_v1');
   assert.equal(result.block.total_trays, null);
   assert.equal(result.block.total_eggs, null);
@@ -126,8 +129,11 @@ test('a view that fails the capture gate withholds the block total and names tha
 
 test('when every view passes the gate the block total and the generic rescan advice are unchanged', async t => {
   const good = n => ({image: FRAME, predictions: Array.from({length: n}, (_, i) => column(100 + i * 100, 20)).flat()});
-  const result = await scan(t, {left: sideFace(), right: sideFace(), straight: good(5)});
-  assert.equal(result.block.total_trays, 392);              // 212 observed (100 front + 56 per side) + 9 hidden stacks x 20
+  const result = await scan(t, {left: sideFace(), right: sideFace(), straight: good(5)}, TURNED, DECLARED_5x4);
+  // 212 counted (100 front + 56 per side) + 9 hidden stacks assumed from their line of sight: rows 1 and 2 at 18 (their
+  // 18-high row ends and the 20-high front: median 18), row 3 at 20.
+  assert.equal(result.block.total_trays, 380);
+  assert.deepEqual([result.block.inventory.counted_trays, result.block.inventory.assumed_trays], [212, 168]);
   assert.equal(result.block.faces_consistent, true);
   assert.ok(['left', 'right', 'straight'].every(v => result.block.capture[v].accepted));
   assert.equal(result.rescan.recommended_view, 'straight');

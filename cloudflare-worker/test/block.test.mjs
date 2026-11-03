@@ -26,13 +26,16 @@ test('block from three faces keeps observed and computed trays separate', () => 
   assert.equal(block.total_trays, 400); assert.equal(block.faces_consistent, true); assert.equal(block.fully_observed, false);
 });
 
-test('recessed front column becomes missing and the stack behind is observed', () => {
+test('recessed front column becomes missing; the trays seen behind it are a hint, never a reading (0.6.0)', () => {
   const straight = spanColumns([...column(100, 20), ...column(200, 18, {pitch: 30, width: 60}), ...column(300, 20)]);
   const side = spanColumns([...column(100, 20), ...column(200, 20)]);
   const block = buildBlock(straight, side, []);
   const by = Object.fromEntries(block.cells.map(c => [`${c.x},${c.y}`, c]));
-  assert.equal(by['1,0'].status, 'missing'); assert.equal(by['1,1'].status, 'observed'); assert.equal(by['1,1'].layers, 18);
-  assert.equal(block.total_trays, 4 * 20 + 18);
+  assert.equal(by['1,0'].status, 'missing');
+  // The stack behind the gap stays hidden: assumed from its one measured neighbour (LEFT's 20), its range open to 0.
+  assert.deepEqual([by['1,1'].status, by['1,1'].layers, by['1,1'].past_gap_layers, by['1,1'].past_gap_scale], ['computed', 20, 18, 0.75]);
+  assert.deepEqual([by['1,1'].assumed_range, by['1,1'].flags], [[0, 20], ['line_of_sight_past_gap', 'single_neighbour']]);
+  assert.equal(block.total_trays, 5 * 20);
 });
 
 test('left/right depth disagreement and corner conflict withhold the total', () => {
@@ -95,11 +98,11 @@ test('one inflated-pitch column does not recess the rest; front-group median is 
   assert.equal(block.total_trays, 80);
 });
 
-test('recessed stack with no room behind is a conflict, not a silent loss', () => {
+test('trays seen behind a gap with no room for a stack are noted, never counted: an estimate (0.6.0)', () => {
   const straight = spanColumns([...column(100, 20), ...column(200, 18, {pitch: 30, width: 60}), ...column(300, 20)]);
   const block = buildBlock(straight, spanColumns(column(100, 20)), []);   // faces say depth 1
-  assert.equal(block.total_trays, null);
-  assert.ok(block.conflicts.some(c => String(c.reason).includes('no room')));
+  assert.deepEqual([block.total_trays, block.status], [40, 'estimated']);
+  assert.ok(block.ambiguities.some(c => String(c.reason).includes('no room')));
 });
 
 test('corner set back on one face only is a conflict', () => {
@@ -119,11 +122,14 @@ test('a stack one face sees but another calls missing is a conflict', () => {
   assert.ok(block.conflicts.some(c => /disagree|set back on one face only/.test(String(c.reason))));
 });
 
-test('two faces promoting the same height agree; different heights conflict', () => {
+test('two faces seeing the same trays through gaps agree on the hint; different heights conflict', () => {
   const straight = spanColumns([...column(100, 20), ...column(200, 18, {pitch: 30, width: 60}), ...column(300, 20)]);
   const agree = buildBlock(straight, spanColumns([...column(100, 18, {pitch: 30, width: 60}), ...column(200, 20)]), []);
   const byA = Object.fromEntries(agree.cells.map(c => [`${c.x},${c.y}`, c]));
-  assert.equal(byA['1,1'].status, 'observed'); assert.equal(byA['1,1'].layers, 18); assert.equal(agree.total_trays, 40 + 18 + 20);
+  // No measured neighbour in line of sight (both are gaps): the typical face height, 20.
+  assert.deepEqual([byA['1,1'].status, byA['1,1'].layers, byA['1,1'].past_gap_layers], ['computed', 20, 18]);
+  assert.deepEqual([byA['1,1'].assumed_from, byA['1,1'].flags], ['face_typical', ['line_of_sight_past_gap', 'no_neighbour']]);
+  assert.equal(agree.total_trays, 40 + 20 + 20);
   const differ = buildBlock(straight, spanColumns([...column(100, 16, {pitch: 30, width: 60}), ...column(200, 20)]), []);
   const byD = Object.fromEntries(differ.cells.map(c => [`${c.x},${c.y}`, c]));
   assert.equal(byD['1,1'].status, 'conflict'); assert.equal(differ.total_trays, null);
@@ -135,7 +141,7 @@ test('exact half spans round half-to-even like the Python reference', () => {
   boxes[18].y = 100 + 18.5 * 40;
   assert.equal(spanColumns(boxes)[0].span_count, 19);
   const typical = buildBlock(spanColumns([...column(100, 19), ...column(200, 20)]), spanColumns([...column(100, 20), ...column(200, 19)]), []).typical_layers;
-  assert.equal(typical, 20);   // median 19.5 -> 20
+  assert.equal(typical, 20);   // mode of 19, 20, 20
 });
 
 test('walk count fixes the perspective rounding and merges duplicates', () => {
