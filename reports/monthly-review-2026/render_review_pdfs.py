@@ -20,19 +20,24 @@ HERE = Path(__file__).resolve().parent
 WIDTH, HEIGHT = A4
 
 
-def para_image(paragraph, doc):
+def para_image(paragraph, doc, compact=False, in_table=False):
     blips = paragraph._p.xpath('.//a:blip')
     if not blips:
         return None
     rid = blips[0].get(qn('r:embed'))
     blob = doc.part.related_parts[rid].blob
     size = PILImage.open(BytesIO(blob)).size
-    max_w, max_h = (295, 625) if size[1] > size[0] * 1.5 else (232, 235)
+    tall = size[1] > size[0] * 1.5
+    if not compact:
+        max_w, max_h = (295, 625) if tall else (232, 235)
+    else:
+        # October onwards: images keep inside a 238 pt table column, and a standalone photo may be wider.
+        max_w, max_h = (230, 250) if in_table else (230, 500) if tall else (420, 290)
     scale = min(max_w / size[0], max_h / size[1])
     return Image(BytesIO(blob), width=size[0] * scale, height=size[1] * scale)
 
 
-def render(src):
+def render(src, compact=False):
     doc = Document(src)
     styles = {
         'Title': ParagraphStyle('Title', fontName='Times-Bold', fontSize=22, leading=26, alignment=1, spaceAfter=16),
@@ -49,7 +54,7 @@ def render(src):
             if any(br.get(qn('w:type')) == 'page' for br in p._p.xpath('.//w:br')):
                 story.append(PageBreak())
                 continue
-            img = para_image(p, doc)
+            img = para_image(p, doc, compact)
             if img:
                 story.append(img)
                 continue
@@ -70,7 +75,7 @@ def render(src):
             for row in t.rows:
                 cells = []
                 for c in row.cells:
-                    image = next((para_image(p, doc) for p in c.paragraphs if para_image(p, doc)), None)
+                    image = next((para_image(p, doc, compact, True) for p in c.paragraphs if para_image(p, doc)), None)
                     if image:
                         cells.append(image)
                         has_image = True
@@ -98,7 +103,9 @@ def render(src):
         canvas.drawCentredString(WIDTH / 2, HEIGHT - 29, 'M. Kumarasamy College of Engineering  |  Department of Computer Science and Business Systems')
         canvas.setStrokeColor(colors.grey)
         canvas.line(48, HEIGHT - 35, WIDTH - 48, HEIGHT - 35)
-        canvas.drawCentredString(WIDTH / 2, 29, f'EG-Counter  •  {src.stem.split("_")[0]} 2026  •  Page {document.page}')
+        parts = src.stem.split("_")
+        period = f'{parts[0]} 2026' + (f'  •  Week {parts[3]}' if len(parts) > 3 and parts[2] == 'Week' else '')
+        canvas.drawCentredString(WIDTH / 2, 29, f'EG-Counter  •  {period}  •  Page {document.page}')
         canvas.restoreState()
     pdf = BaseDocTemplate(str(out), pagesize=A4, leftMargin=48, rightMargin=48, topMargin=48, bottomMargin=48)
     pdf.addPageTemplates(PageTemplate(id='report', frames=[Frame(48, 48, WIDTH - 96, HEIGHT - 96, leftPadding=0, rightPadding=0, topPadding=0, bottomPadding=0)], onPage=frame))
@@ -107,5 +114,11 @@ def render(src):
 
 
 if __name__ == '__main__':
-    for month in ('August', 'September'):
-        print(render(HERE / f'{month}_2026_Monthly_Progress_Review.docx'))
+    import sys
+    # With file names: render those, with the compact image sizes used from October. Without: the original two.
+    if sys.argv[1:]:
+        for name in sys.argv[1:]:
+            print(render(HERE / name, compact=True))
+    else:
+        for month in ('August', 'September'):
+            print(render(HERE / f'{month}_2026_Monthly_Progress_Review.docx'))

@@ -10,6 +10,9 @@
 > - **App follow-up needed:** an "add CORNER photo" action on the result screen, and copy that stops calling CORNER
 >   optional.
 > - **Not production ready:** no field pilot and no real CORNER photo yet; the staging Worker is still 0.5.0.
+> - **Plan 4 draft 2** (docs/PLAN_4_EVIDENCE_GRID.md) awaits Decision 0: what the count is for, acceptable error,
+>   coverage floor, minutes per block. Physics (critique): a level top proves presence and steps, never a count, so deep
+>   blocks top out at a labelled estimate unless Phase 0 shows otherwise.
 
 > 2026-11-01 (latest): release 0.5.0 built; Worker on **staging** (`52a1d5e8`); production untouched; not pushed.
 > - **Frozen product:** a phone-only physical egg-tray counter with an X/Y/Z grid model.

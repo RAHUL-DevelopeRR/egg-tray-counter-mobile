@@ -1,5 +1,22 @@
 # Progress
 
+## 2026-11-03 (latest) - pitch deck and October weekly/monthly reports (Claude Code)
+
+- **Pitch deck** (13 slides, plain language) for the user and the faculty guides: https://claude.ai/artifact/A5wetZ31tYgQLLdVgVkZLm
+  (private until shared). It covers what the app does, the statuses, what was measured, the hidden-stack limit, the
+  journey from August to November, Plan 4 and what is needed next.
+- **October reports** in `reports/monthly-review-2026/`, each as DOCX and PDF, in the August/September format:
+  - `October_2026_Monthly_Progress_Review` (5 pages);
+  - `October_2026_Week_1..5_Progress_Report` (4–5 pages each; weeks 1–7, 8–14, 15–21, 22–28 and 29–31 October).
+- **How they were built:**
+  - The facts come from `october-2026-weeks.json`: five agents read PROGRESS.md, git history and the linked reports,
+    and every number names its source.
+  - Built by `build_october.py`. `build_reviews.py` `base()` gained keyword arguments; the defaults keep August and
+    September unchanged.
+  - Rendered by `render_review_pdfs.py <files>`, with compact image sizes only for the files named.
+  - Verified: text with no lost characters; pages inspected in the browser.
+- **Committed and pushed** on 2026-11-03 to `rollout/0.4.12-staging`, with the Plan 4 draft.
+
 ## 2026-11-02 (latest) - MUTAA validation of build 0.5.0 on staging: app vs blind manual counts (Claude Code, in progress)
 
 **Done (measured).**
@@ -56,9 +73,15 @@ Usage limits stopped the counting runs four times (see memory notes on cost and 
 - APK 0.5.0+27 never installed on the phone;
 - the physical pilot (`docs/PHYSICAL_VALIDATION.md`) not run.
 
-**Next.** The user's decision on S25; then the app CORNER action (0.5.1+28) and a staging deploy (approval); then the
-field pilot on the Redmi with physical blind counts. The remaining manual counts can be finished in one or two usage
-windows (`scratchpad/validate/assemble_blind.py` merges the runs).
+**Plan 4 drafted** (`docs/PLAN_4_EVIDENCE_GRID.md`, draft 2, not approved; committed 2026-11-03).
+- Draft 1 was critiqued by three independent reviewers. They found that a level top does not prove a count, that a
+  handheld top photo works only up to about 4x4, that the hidden-stack truth was circular, and that there was no
+  statement of what the farm needs.
+- Draft 2 starts with the user's Decision 0, then a field decision pilot (truth from lift, load-out or built blocks)
+  that picks product A (faces plus declared layout) or B (faces plus a trained top reader).
+
+**Next.** The user: Decision 0 and Decisions 1–2 of Plan 4, and a farm day. Me: the truth protocol, the scorer and the
+protocol card before the farm day. The remaining Claude visual counts are dropped (Plan 4 §7).
 
 ## 2026-11-01 - Plan 3 executed: release 0.5.0, phone-only X/Y/Z grid counter (Claude Code)
 
