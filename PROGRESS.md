@@ -1,6 +1,45 @@
 # Progress
 
-## 2026-11-03 (latest) - pitch deck and October weekly/monthly reports (Claude Code)
+## 2026-11-04 (latest) - Worker 0.6.0: evidence grid and hidden-tray calculation (Claude Code, branch `real/worker-0.6.0`)
+
+Plan 4 Phase 3, Worker side, run in parallel with the offline demo (main checkout). Built from `10f2c3d` in the
+worktree `.claude/worktrees/real-worker`. **Local only: not deployed, not pushed, not merged.**
+
+**Done.**
+- **Hidden stacks are assumed, never counted.** A stack no face photo sees gets the median of its line-of-sight
+  neighbours (the front stack in its column, the side end stacks in its row); with none, the block's most common
+  face height. The range is the neighbours' spread, not a bound. Each grid cell names its `evidence_class`.
+- **`block.inventory`** splits counted and assumed trays: `counted_trays`, `assumed_trays`, `estimated_total`,
+  `estimated_range` ("if every hidden stack is there at its neighbours' heights"), `hidden_stacks`,
+  `unchecked_hidden_stacks`, missing stacks by kind, `released`/`withheld_reason`, and `provisional`.
+- **Top view:** presence, holes and step-ups only (`step_up` tap added). A `missing` tap is the only way a top view
+  lowers a total; a step down makes the height unknown and withholds the total.
+- **Depth proof (Decision 1, corrected):** a CORNER photo cannot prove depth (it sees the same touching rows: S25C).
+  A depth over one stack needs the declared block size; a side that repeats the front also needs the CORNER photo.
+  Withheld blocks get provisional figures (front row counted, and the what-if total when only the depth is in doubt).
+- **Statuses:** `confirmed` is never returned; `exact` only for one-deep blocks. Trays seen through a gap are hints.
+- Contract `docs/GRID_CONTRACT_0.6.0.md` (includes the top view's purpose); `PIPELINE_VERSION` `worker-0.6.0`.
+- Scripts: `scripts/replay_saved_scans.mjs`, `scripts/compare_replay_versions.mjs`.
+
+**Verification (measured, offline).**
+- `npm test` (tsc, then node --test): 213 tests, 208 pass, 0 fail, 5 todo. New: `test/hidden.test.mjs` (H1–H9),
+  H10–H13 in `test/side_check.test.mjs`.
+- Replay `reports/evidence-grid-0.6.0-20261104`: adversarial 38 of 38; Worker 0.5.1 on the same library 36 of 38
+  (S25 and S25C: `estimated` 300 for 100). 0 wrong `exact`/`confirmed`. Trios (4 of 22 released, 0 wrong) and all
+  face verdicts unchanged. Right releases 11 in both; 0.6.0 drops the 2 wrong ones.
+- Saved scans: the 99-block stays `estimated` 99. The 4 x 3 field block (9b4c783e) is withheld as sent; with
+  counterfactual camera headings, a synthetic CORNER photo and the 4 x 3 declaration it is **165 = 105 counted + 60
+  assumed (range 163–167)**; the visual reading is 164 (tier V). L-100 stays withheld.
+- **Cost:** a square block with a CORNER photo but no declaration (S21 as in 0.5.1, right at 180) is now withheld.
+
+**Not done.** App 4b (`mobile/`, on 0.5.1+28) was not touched. No staging deploy (needs approval). No physical count.
+**Disk:** C: reached 0 MB free during this session. I removed only my worktree's copies of the root APKs and
+`datasets/` (marked skip-worktree in that worktree's index); the main checkout was not touched.
+
+**Next.** App 4b (evidence-class colours, split rows, provisional panel, `step_up` tap, "declare the block size"
+prompt); the user's call on the open points in the contract §6; staging deploy of 0.6.0 with approval.
+
+## 2026-11-03 - pitch deck and October weekly/monthly reports (Claude Code)
 
 - **Pitch deck** (13 slides, plain language) for the user and the faculty guides: https://claude.ai/artifact/A5wetZ31tYgQLLdVgVkZLm
   (private until shared). It covers what the app does, the statuses, what was measured, the hidden-stack limit, the

@@ -1,0 +1,299 @@
+{
+ "pipeline_version": "worker-0.6.0",
+ "faces": {
+  "development/U/labelled": {
+   "n": 22,
+   "accepted": 11,
+   "accepted_correct": 10,
+   "accepted_wrong": [
+    "img-30 78/80"
+   ],
+   "withheld": 11,
+   "withheld_would_be_exact": 0,
+   "coverage": 0.5
+  },
+  "development/U/labelled_reencoded": {
+   "n": 7,
+   "accepted": 4,
+   "accepted_correct": 3,
+   "accepted_wrong": [
+    "mutaa:L-80:straight 79/80"
+   ],
+   "withheld": 3,
+   "withheld_would_be_exact": 0,
+   "coverage": 0.571
+  },
+  "development/V/labelled_reencoded": {
+   "n": 4,
+   "accepted": 2,
+   "accepted_correct": 0,
+   "accepted_wrong": [
+    "mutaa:L-100:straight 100/101",
+    "mutaa:L-80:straight 79/80"
+   ],
+   "withheld": 2,
+   "withheld_would_be_exact": 0,
+   "coverage": 0.5
+  },
+  "development/V/mutaa": {
+   "n": 2,
+   "accepted": 1,
+   "accepted_correct": 1,
+   "accepted_wrong": [],
+   "withheld": 1,
+   "withheld_would_be_exact": 0,
+   "coverage": 0.5
+  },
+  "untouched/U/labelled": {
+   "n": 2,
+   "accepted": 1,
+   "accepted_correct": 1,
+   "accepted_wrong": [],
+   "withheld": 1,
+   "withheld_would_be_exact": 0,
+   "coverage": 0.5
+  }
+ },
+ "labelled_clusters": {
+  "n": 22,
+  "accepted": 10,
+  "accepted_correct": 9,
+  "accepted_wrong": [
+   "img-30 78/80"
+  ],
+  "withheld": 12,
+  "withheld_would_be_exact": 0,
+  "coverage": 0.455
+ },
+ "trios": {
+  "records": 22,
+  "groups": 14,
+  "released": [
+   "99-block substituted trio @ reports/staging-block-20261008/scan-99block-a.json: estimated 99",
+   "99-block substituted trio @ reports/staging-block-20261008/scan-99block-walk.json: estimated 99",
+   "99-block substituted trio @ reports/staging-block-20261008/scan-99block-walk2.json: estimated 99",
+   "99-block substituted trio @ reports/eval-20261015/staging47-replay/6fe33b1d-4605-4b53-84f4-86bff313c1f3.json: estimated 99"
+  ],
+  "wrong_releases": [],
+  "wrong_exact": []
+ },
+ "adversarial": {
+  "n": 38,
+  "pass": 38,
+  "failing": [],
+  "stretch_failing": [
+   "S03 top tray of a middle front stack missed (silent -1) [no_wrong_total: estimated 79, truth 80; phase E]",
+   "S04 bottom tray of a middle front stack missed (silent -1) [no_wrong_total: estimated 79, truth 80; phase E]",
+   "S07 two front stacks merged into one column [no_wrong_total: estimated 60, truth 80; phase F]",
+   "S29 S09 (3x3, interior stack missing) with a CORNER photo and declared 3 x 3, no top view [no_wrong_total: estimated 180, truth 160; phase top view: an unchecked hole overcounts 20]"
+  ]
+ },
+ "reencode": {
+  "n": 10,
+  "flipped": [
+   "mutaa:L-109-ORANGE:straight 114->115",
+   "mutaa:L-109-ORANGE:left 63->56",
+   "mutaa:L-115:straight 120->121",
+   "mutaa:L-115:left 17->14",
+   "mutaa:L-80:straight 78->79",
+   "mutaa:L-80:left 63->59",
+   "mutaa:L-80:right 13->12"
+  ]
+ },
+ "comparison_with_worker_0_5_1": {
+  "source": "compare-0.5.1.json (worker-0.5.1 transpiled from 10f2c3d, run on this library)",
+  "worker-0.5.1": {
+   "cases": 38,
+   "pass": 36,
+   "released": 18,
+   "wrong_releases": [
+    "S03: estimated 79 for 80",
+    "S04: estimated 79 for 80",
+    "S07: estimated 60 for 80",
+    "R04: estimated 79 for 80",
+    "S25: estimated 300 for 100",
+    "S25C: estimated 300 for 100",
+    "S29: estimated 180 for 160"
+   ],
+   "wrong_exact_or_confirmed": [],
+   "confirmed": 0,
+   "exact": 1,
+   "trios_released": 4,
+   "trios_wrong_releases": 0,
+   "trios_wrong_exact": 0,
+   "trios": 22,
+   "labelled_clusters_accepted": "10/22"
+  },
+  "worker-0.6.0": {
+   "cases": 38,
+   "pass": 38,
+   "released": 16,
+   "wrong_releases": [
+    "S03: estimated 79 for 80",
+    "S04: estimated 79 for 80",
+    "S07: estimated 60 for 80",
+    "R04: estimated 79 for 80",
+    "S29: estimated 180 for 160"
+   ],
+   "wrong_exact_or_confirmed": [],
+   "confirmed": 0,
+   "exact": 1,
+   "trios_released": 4,
+   "trios_wrong_releases": 0,
+   "trios_wrong_exact": 0,
+   "trios": 22,
+   "labelled_clusters_accepted": "10/22"
+  },
+  "face_verdicts_changed": 0,
+  "trios_changed": 0,
+  "declared_size_cost": {
+   "id": "S21 without a declaration (the 0.5.1 library case)",
+   "truth": 180,
+   "worker-0.5.1": {
+    "status": "estimated",
+    "total": 180
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null
+   }
+  }
+ },
+ "saved_scans": [
+  {
+   "scan": "99-block-6fe33b1d",
+   "mode": "as-sent",
+   "status": "estimated",
+   "total_trays": 99,
+   "counted_trays": 99,
+   "assumed_trays": 0,
+   "estimated_range": [
+    99,
+    99
+   ],
+   "withheld_reason": null
+  },
+  {
+   "scan": "99-block-6fe33b1d",
+   "mode": "camera",
+   "status": "estimated",
+   "total_trays": 99,
+   "counted_trays": 99,
+   "assumed_trays": 0,
+   "estimated_range": [
+    99,
+    99
+   ],
+   "withheld_reason": null
+  },
+  {
+   "scan": "99-block-6fe33b1d",
+   "mode": "camera-declared",
+   "status": "estimated",
+   "total_trays": 99,
+   "counted_trays": 99,
+   "assumed_trays": 0,
+   "estimated_range": [
+    99,
+    99
+   ],
+   "withheld_reason": null
+  },
+  {
+   "scan": "99-block-6fe33b1d",
+   "mode": "camera-corner-declared",
+   "status": "estimated",
+   "total_trays": 99,
+   "counted_trays": 99,
+   "assumed_trays": 0,
+   "estimated_range": [
+    99,
+    99
+   ],
+   "withheld_reason": null
+  },
+  {
+   "scan": "field-4x3-9b4c783e",
+   "mode": "as-sent",
+   "status": "needs_view",
+   "total_trays": null,
+   "counted_trays": null,
+   "assumed_trays": null,
+   "estimated_range": null,
+   "withheld_reason": "needs_view"
+  },
+  {
+   "scan": "field-4x3-9b4c783e",
+   "mode": "camera",
+   "status": "needs_view",
+   "total_trays": null,
+   "counted_trays": null,
+   "assumed_trays": null,
+   "estimated_range": null,
+   "withheld_reason": "side_repeats_front"
+  },
+  {
+   "scan": "field-4x3-9b4c783e",
+   "mode": "camera-declared",
+   "status": "needs_view",
+   "total_trays": null,
+   "counted_trays": null,
+   "assumed_trays": null,
+   "estimated_range": null,
+   "withheld_reason": "side_repeats_front"
+  },
+  {
+   "scan": "field-4x3-9b4c783e",
+   "mode": "camera-corner-declared",
+   "status": "estimated",
+   "total_trays": 165,
+   "counted_trays": 105,
+   "assumed_trays": 60,
+   "estimated_range": [
+    163,
+    167
+   ],
+   "withheld_reason": null
+  },
+  {
+   "scan": "mutaa-L-100",
+   "mode": "as-sent",
+   "status": "needs_view",
+   "total_trays": null,
+   "counted_trays": null,
+   "assumed_trays": null,
+   "estimated_range": null,
+   "withheld_reason": "needs_view"
+  },
+  {
+   "scan": "mutaa-L-100",
+   "mode": "camera",
+   "status": "needs_view",
+   "total_trays": null,
+   "counted_trays": null,
+   "assumed_trays": null,
+   "estimated_range": null,
+   "withheld_reason": "side_repeats_front"
+  },
+  {
+   "scan": "mutaa-L-100",
+   "mode": "camera-declared",
+   "status": "needs_view",
+   "total_trays": null,
+   "counted_trays": null,
+   "assumed_trays": null,
+   "estimated_range": null,
+   "withheld_reason": "side_repeats_front"
+  },
+  {
+   "scan": "mutaa-L-100",
+   "mode": "camera-corner-declared",
+   "status": "needs_view",
+   "total_trays": null,
+   "counted_trays": null,
+   "assumed_trays": null,
+   "estimated_range": null,
+   "withheld_reason": "side_repeats_front"
+  }
+ ]
+}

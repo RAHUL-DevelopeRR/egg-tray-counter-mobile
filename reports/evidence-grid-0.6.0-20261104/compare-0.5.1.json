@@ -1,0 +1,692 @@
+{
+ "library": "cloudflare-worker/test/replay_benchmark.mjs (current)",
+ "registry": "registry-20261101",
+ "summary": {
+  "worker-0.5.1": {
+   "cases": 38,
+   "pass": 36,
+   "released": 18,
+   "wrong_releases": [
+    "S03: estimated 79 for 80",
+    "S04: estimated 79 for 80",
+    "S07: estimated 60 for 80",
+    "R04: estimated 79 for 80",
+    "S25: estimated 300 for 100",
+    "S25C: estimated 300 for 100",
+    "S29: estimated 180 for 160"
+   ],
+   "wrong_exact_or_confirmed": [],
+   "confirmed": 0,
+   "exact": 1,
+   "trios_released": 4,
+   "trios_wrong_releases": 0,
+   "trios_wrong_exact": 0,
+   "trios": 22,
+   "labelled_clusters_accepted": "10/22"
+  },
+  "worker-0.6.0": {
+   "cases": 38,
+   "pass": 38,
+   "released": 16,
+   "wrong_releases": [
+    "S03: estimated 79 for 80",
+    "S04: estimated 79 for 80",
+    "S07: estimated 60 for 80",
+    "R04: estimated 79 for 80",
+    "S29: estimated 180 for 160"
+   ],
+   "wrong_exact_or_confirmed": [],
+   "confirmed": 0,
+   "exact": 1,
+   "trios_released": 4,
+   "trios_wrong_releases": 0,
+   "trios_wrong_exact": 0,
+   "trios": 22,
+   "labelled_clusters_accepted": "10/22"
+  }
+ },
+ "face_verdicts_changed": 0,
+ "trios_changed": [],
+ "declared_size_cost": {
+  "id": "S21 without a declaration (the 0.5.1 library case)",
+  "truth": 180,
+  "worker-0.5.1": {
+   "status": "estimated",
+   "total": 180
+  },
+  "worker-0.6.0": {
+   "status": "needs_view",
+   "total": null
+  }
+ },
+ "cases": [
+  {
+   "id": "S01 genuine 4x1 one-deep, all 20",
+   "check": "no_wrong_total",
+   "truth": 80,
+   "worker-0.5.1": {
+    "status": "estimated",
+    "total": 80,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 80,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S02 genuine 3x2, all 20 (one hidden stack computed)",
+   "check": "no_wrong_exact",
+   "truth": 120,
+   "worker-0.5.1": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S03 top tray of a middle front stack missed (silent -1)",
+   "check": "no_wrong_exact",
+   "truth": 80,
+   "worker-0.5.1": {
+    "status": "estimated",
+    "total": 79,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 79,
+    "pass": true
+   },
+   "stretch": {
+    "check": "no_wrong_total",
+    "worker-0.5.1": false,
+    "worker-0.6.0": false
+   }
+  },
+  {
+   "id": "S04 bottom tray of a middle front stack missed (silent -1)",
+   "check": "no_wrong_exact",
+   "truth": 80,
+   "worker-0.5.1": {
+    "status": "estimated",
+    "total": 79,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 79,
+    "pass": true
+   },
+   "stretch": {
+    "check": "no_wrong_total",
+    "worker-0.5.1": false,
+    "worker-0.6.0": false
+   }
+  },
+  {
+   "id": "S05 layer inside a middle stack missed and gap-filled",
+   "check": "no_wrong_exact",
+   "truth": 80,
+   "worker-0.5.1": {
+    "status": "estimated",
+    "total": 80,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 80,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S06 short end stack of 2 trays dropped from the front",
+   "check": "no_wrong_exact",
+   "truth": 62,
+   "worker-0.5.1": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S07 two front stacks merged into one column",
+   "check": "no_wrong_exact",
+   "truth": 80,
+   "worker-0.5.1": {
+    "status": "estimated",
+    "total": 60,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 60,
+    "pass": true
+   },
+   "stretch": {
+    "check": "no_wrong_total",
+    "worker-0.5.1": false,
+    "worker-0.6.0": false
+   }
+  },
+  {
+   "id": "S08 corner heights 1 apart",
+   "check": "no_wrong_exact",
+   "truth": 60,
+   "worker-0.5.1": {
+    "status": "estimated",
+    "total": 60,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 60,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S09 missing interior stack in a 3x3 block (photos identical to a full block)",
+   "check": "no_wrong_exact",
+   "truth": 160,
+   "worker-0.5.1": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": {
+    "check": "no_wrong_total",
+    "worker-0.5.1": true,
+    "worker-0.6.0": true
+   }
+  },
+  {
+   "id": "S10 LEFT and RIGHT photos swapped (heights differ)",
+   "check": "no_wrong_total",
+   "truth": 118,
+   "worker-0.5.1": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S11 back face (180 degrees) sent as LEFT of a 4x2 block",
+   "check": "no_wrong_total",
+   "truth": 160,
+   "worker-0.5.1": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S11b back face (180 degrees) sent as LEFT of a square 3x3 block (counts cannot tell it from a side)",
+   "check": "withheld",
+   "truth": 180,
+   "worker-0.5.1": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S12 front re-shot as LEFT, gallery (no heading), 4x2 block",
+   "check": "withheld",
+   "truth": 160,
+   "worker-0.5.1": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S13 front re-shot as LEFT with the phone turned only 10 degrees",
+   "check": "withheld",
+   "truth": 120,
+   "worker-0.5.1": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S14 side photos of another block, phone really turned (4x1 block, 3-deep neighbour)",
+   "check": "no_wrong_total",
+   "truth": 80,
+   "worker-0.5.1": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S15 one photo sent as all three views from the camera (copies, not three captures)",
+   "check": "not_exact",
+   "truth": 20,
+   "worker-0.5.1": {
+    "status": "estimated",
+    "total": 20,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 20,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S16 one photo sent as all three views from the gallery",
+   "check": "not_exact",
+   "truth": 20,
+   "worker-0.5.1": {
+    "status": "estimated",
+    "total": 20,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 20,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S17 one-deep 2x1 block, gallery photos",
+   "check": "not_exact",
+   "truth": 40,
+   "worker-0.5.1": {
+    "status": "estimated",
+    "total": 40,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 40,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S18 genuine 2x1 block, camera walk-around: every stack seen by two photos",
+   "check": "exact_ok",
+   "truth": 40,
+   "worker-0.5.1": {
+    "status": "exact",
+    "total": 40,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "exact",
+    "total": 40,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S19 bottom tray cut by the frame on a corner stack, the side photo agreeing (img-30 class)",
+   "check": "not_exact",
+   "truth": 40,
+   "worker-0.5.1": {
+    "status": "estimated",
+    "total": 40,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 40,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S14F S14 with the blind declaration (4 wide, 1 deep): the other block's sides contradict it",
+   "check": "withheld",
+   "truth": 80,
+   "worker-0.5.1": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S20 3x2 block declared interior-full: front-middle seen once, so the declaration cannot confirm",
+   "check": "not_confirmed",
+   "truth": 120,
+   "worker-0.5.1": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "R01 MUTAA L-100: three front photos, gallery",
+   "check": "no_wrong_total",
+   "truth": 100,
+   "worker-0.5.1": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "R04 MUTAA L-80 front (stack 4 bottom cut by the frame, read 19) with side photos agreeing on 20 and 19",
+   "check": "no_wrong_exact",
+   "truth": 80,
+   "worker-0.5.1": {
+    "status": "estimated",
+    "total": 79,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 79,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "R02 MUTAA L-100 sides sent with camera headings of a real walk-around",
+   "check": "no_wrong_total",
+   "truth": 100,
+   "worker-0.5.1": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "R02F R02 with the blind declaration (5 wide, 1 deep): the front photos sent as sides contradict it",
+   "check": "withheld",
+   "truth": 100,
+   "worker-0.5.1": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "R03 MUTAA M16-FAR: neighbouring block in the front photo",
+   "check": "withheld",
+   "truth": null,
+   "worker-0.5.1": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S21 square 3x3 block, camera walk-around, CORNER photo agreeing (3 wide, 3 deep), declared 3 x 3",
+   "check": "total_ok",
+   "truth": 180,
+   "worker-0.5.1": {
+    "status": "estimated",
+    "total": 180,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 180,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S22 genuine 3x2 block, camera walk-around, ELEVATED taps only: taps are not a depth witness (sized from the declaration)",
+   "check": "withheld",
+   "truth": 120,
+   "worker-0.5.1": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "R02C R02 with a CORNER photo of the real block (5 wide, 1 deep): the sides are the front again",
+   "check": "withheld",
+   "truth": 100,
+   "worker-0.5.1": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S23 lone stack, side photos show it and one stack behind (0.5.0: exact 40)",
+   "check": "no_wrong_total",
+   "truth": 20,
+   "worker-0.5.1": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S24 5x5 block, back rows 15, RIGHT is the front again, front-left CORNER photo (cannot vouch for RIGHT)",
+   "check": "no_wrong_total",
+   "truth": 400,
+   "worker-0.5.1": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S25 5x1 row, real turn, side photos show the row end and two rows standing behind it (three 20s)",
+   "check": "no_wrong_total",
+   "truth": 100,
+   "worker-0.5.1": {
+    "status": "estimated",
+    "total": 300,
+    "pass": false
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S25C S25 with a CORNER photo reading 5 x 3 (it sees the same touching rows): a CORNER photo cannot prove a depth",
+   "check": "withheld",
+   "truth": 100,
+   "worker-0.5.1": {
+    "status": "estimated",
+    "total": 300,
+    "pass": false
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S26 4x3 block of 15s, sides repeat the front, CORNER photo (4 x 3) and declared 4 x 3: four hidden stacks assumed at 15",
+   "check": "total_ok",
+   "truth": 180,
+   "worker-0.5.1": {
+    "status": "estimated",
+    "total": 180,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 180,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S27 S25 with the honest declaration (5 wide, 1 deep): the sides show touching rows, withheld",
+   "check": "withheld",
+   "truth": 100,
+   "worker-0.5.1": {
+    "status": "conflict",
+    "total": null,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S28 3x2 block with the hidden stack absent: CORNER photo, declared 3 x 2, ELEVATED tap missing",
+   "check": "total_ok",
+   "truth": 100,
+   "worker-0.5.1": {
+    "status": "estimated",
+    "total": 100,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 100,
+    "pass": true
+   },
+   "stretch": null
+  },
+  {
+   "id": "S29 S09 (3x3, interior stack missing) with a CORNER photo and declared 3 x 3, no top view",
+   "check": "not_exact",
+   "truth": 160,
+   "worker-0.5.1": {
+    "status": "estimated",
+    "total": 180,
+    "pass": true
+   },
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 180,
+    "pass": true
+   },
+   "stretch": {
+    "check": "no_wrong_total",
+    "worker-0.5.1": false,
+    "worker-0.6.0": false
+   }
+  }
+ ]
+}

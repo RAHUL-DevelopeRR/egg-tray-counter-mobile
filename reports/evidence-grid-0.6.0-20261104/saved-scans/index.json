@@ -1,0 +1,324 @@
+[
+ {
+  "scan": "99-block-6fe33b1d",
+  "mode": "as-sent",
+  "file": "99-block-6fe33b1d.as-sent.json",
+  "status": "estimated",
+  "total_trays": 99,
+  "width": 5,
+  "depth": 1,
+  "depth_basis": "one_deep",
+  "side_check": {
+   "left": "unverified",
+   "right": "unverified"
+  },
+  "counted_trays": 99,
+  "assumed_trays": 0,
+  "assumed_stacks": 0,
+  "estimated_range": [
+   99,
+   99
+  ],
+  "withheld_reason": null,
+  "provisional": null,
+  "suggested_views": [],
+  "suggested_inputs": []
+ },
+ {
+  "scan": "99-block-6fe33b1d",
+  "mode": "camera",
+  "file": "99-block-6fe33b1d.camera.json",
+  "status": "estimated",
+  "total_trays": 99,
+  "width": 5,
+  "depth": 1,
+  "depth_basis": "one_deep",
+  "side_check": {
+   "left": "turned",
+   "right": "turned"
+  },
+  "counted_trays": 99,
+  "assumed_trays": 0,
+  "assumed_stacks": 0,
+  "estimated_range": [
+   99,
+   99
+  ],
+  "withheld_reason": null,
+  "provisional": null,
+  "suggested_views": [],
+  "suggested_inputs": []
+ },
+ {
+  "scan": "99-block-6fe33b1d",
+  "mode": "camera-declared",
+  "file": "99-block-6fe33b1d.camera-declared.json",
+  "status": "estimated",
+  "total_trays": 99,
+  "width": 5,
+  "depth": 1,
+  "depth_basis": "one_deep",
+  "side_check": {
+   "left": "turned",
+   "right": "turned"
+  },
+  "counted_trays": 99,
+  "assumed_trays": 0,
+  "assumed_stacks": 0,
+  "estimated_range": [
+   99,
+   99
+  ],
+  "withheld_reason": null,
+  "provisional": null,
+  "suggested_views": [],
+  "suggested_inputs": []
+ },
+ {
+  "scan": "99-block-6fe33b1d",
+  "mode": "camera-corner-declared",
+  "file": "99-block-6fe33b1d.camera-corner-declared.json",
+  "status": "estimated",
+  "total_trays": 99,
+  "width": 5,
+  "depth": 1,
+  "depth_basis": "one_deep",
+  "side_check": {
+   "left": "turned",
+   "right": "turned"
+  },
+  "counted_trays": 99,
+  "assumed_trays": 0,
+  "assumed_stacks": 0,
+  "estimated_range": [
+   99,
+   99
+  ],
+  "withheld_reason": null,
+  "provisional": null,
+  "suggested_views": [],
+  "suggested_inputs": []
+ },
+ {
+  "scan": "field-4x3-9b4c783e",
+  "mode": "as-sent",
+  "file": "field-4x3-9b4c783e.as-sent.json",
+  "status": "needs_view",
+  "total_trays": null,
+  "width": 4,
+  "depth": null,
+  "depth_basis": null,
+  "side_check": {
+   "left": "unconfirmed",
+   "right": "unconfirmed"
+  },
+  "counted_trays": null,
+  "assumed_trays": null,
+  "assumed_stacks": null,
+  "estimated_range": null,
+  "withheld_reason": "needs_view",
+  "provisional": null,
+  "suggested_views": [],
+  "suggested_inputs": []
+ },
+ {
+  "scan": "field-4x3-9b4c783e",
+  "mode": "camera",
+  "file": "field-4x3-9b4c783e.camera.json",
+  "status": "needs_view",
+  "total_trays": null,
+  "width": 4,
+  "depth": null,
+  "depth_basis": null,
+  "side_check": {
+   "left": "turned_repeats_front",
+   "right": "turned_repeats_front"
+  },
+  "counted_trays": null,
+  "assumed_trays": null,
+  "assumed_stacks": null,
+  "estimated_range": null,
+  "withheld_reason": "side_repeats_front",
+  "provisional": {
+   "kind": "side_repeats_front",
+   "reason": "LEFT: this photo shows the same stacks with the same heights as STRAIGHT, so it may be the front face again; add a CORNER photo from the front-left corner, with the corner stack and both faces in frame, to count the depth",
+   "if_depth": null,
+   "front_row_counted": 45
+  },
+  "suggested_views": [
+   "corner"
+  ],
+  "suggested_inputs": [
+   "declaration"
+  ]
+ },
+ {
+  "scan": "field-4x3-9b4c783e",
+  "mode": "camera-declared",
+  "file": "field-4x3-9b4c783e.camera-declared.json",
+  "status": "needs_view",
+  "total_trays": null,
+  "width": 4,
+  "depth": null,
+  "depth_basis": null,
+  "side_check": {
+   "left": "turned_repeats_front",
+   "right": "turned_repeats_front"
+  },
+  "counted_trays": null,
+  "assumed_trays": null,
+  "assumed_stacks": null,
+  "estimated_range": null,
+  "withheld_reason": "side_repeats_front",
+  "provisional": {
+   "kind": "side_repeats_front",
+   "reason": "LEFT: this photo shows the same stacks with the same heights as STRAIGHT, so it may be the front face again; add a CORNER photo from the front-left corner, with the corner stack and both faces in frame, to count the depth",
+   "if_depth": null,
+   "front_row_counted": 45
+  },
+  "suggested_views": [
+   "corner"
+  ],
+  "suggested_inputs": []
+ },
+ {
+  "scan": "field-4x3-9b4c783e",
+  "mode": "camera-corner-declared",
+  "file": "field-4x3-9b4c783e.camera-corner-declared.json",
+  "status": "estimated",
+  "total_trays": 165,
+  "width": 4,
+  "depth": 3,
+  "depth_basis": "corner_and_declaration",
+  "side_check": {
+   "left": "turned",
+   "right": "turned"
+  },
+  "counted_trays": 105,
+  "assumed_trays": 60,
+  "assumed_stacks": 4,
+  "estimated_range": [
+   163,
+   167
+  ],
+  "withheld_reason": null,
+  "provisional": null,
+  "suggested_views": [
+   "elevated"
+  ],
+  "suggested_inputs": []
+ },
+ {
+  "scan": "mutaa-L-100",
+  "mode": "as-sent",
+  "file": "mutaa-L-100.as-sent.json",
+  "status": "needs_view",
+  "total_trays": null,
+  "width": 5,
+  "depth": null,
+  "depth_basis": null,
+  "side_check": {
+   "left": "repeats_front",
+   "right": "repeats_front"
+  },
+  "counted_trays": null,
+  "assumed_trays": null,
+  "assumed_stacks": null,
+  "estimated_range": null,
+  "withheld_reason": "needs_view",
+  "provisional": null,
+  "suggested_views": [],
+  "suggested_inputs": []
+ },
+ {
+  "scan": "mutaa-L-100",
+  "mode": "camera",
+  "file": "mutaa-L-100.camera.json",
+  "status": "needs_view",
+  "total_trays": null,
+  "width": 5,
+  "depth": null,
+  "depth_basis": null,
+  "side_check": {
+   "left": "turned_repeats_front",
+   "right": "turned_repeats_front"
+  },
+  "counted_trays": null,
+  "assumed_trays": null,
+  "assumed_stacks": null,
+  "estimated_range": null,
+  "withheld_reason": "side_repeats_front",
+  "provisional": {
+   "kind": "side_repeats_front",
+   "reason": "LEFT: this photo shows the same stacks with the same heights as STRAIGHT, so it may be the front face again; add a CORNER photo from the front-left corner, with the corner stack and both faces in frame, to count the depth",
+   "if_depth": null,
+   "front_row_counted": 100
+  },
+  "suggested_views": [
+   "corner"
+  ],
+  "suggested_inputs": [
+   "declaration"
+  ]
+ },
+ {
+  "scan": "mutaa-L-100",
+  "mode": "camera-declared",
+  "file": "mutaa-L-100.camera-declared.json",
+  "status": "needs_view",
+  "total_trays": null,
+  "width": 5,
+  "depth": null,
+  "depth_basis": null,
+  "side_check": {
+   "left": "turned_repeats_front",
+   "right": "turned_repeats_front"
+  },
+  "counted_trays": null,
+  "assumed_trays": null,
+  "assumed_stacks": null,
+  "estimated_range": null,
+  "withheld_reason": "side_repeats_front",
+  "provisional": {
+   "kind": "side_repeats_front",
+   "reason": "LEFT: this photo shows the same stacks with the same heights as STRAIGHT, so it may be the front face again; add a CORNER photo from the front-left corner, with the corner stack and both faces in frame, to count the depth",
+   "if_depth": null,
+   "front_row_counted": 100
+  },
+  "suggested_views": [
+   "corner"
+  ],
+  "suggested_inputs": [
+   "declaration"
+  ]
+ },
+ {
+  "scan": "mutaa-L-100",
+  "mode": "camera-corner-declared",
+  "file": "mutaa-L-100.camera-corner-declared.json",
+  "status": "needs_view",
+  "total_trays": null,
+  "width": 5,
+  "depth": null,
+  "depth_basis": null,
+  "side_check": {
+   "left": "turned_repeats_front",
+   "right": "turned_repeats_front"
+  },
+  "counted_trays": null,
+  "assumed_trays": null,
+  "assumed_stacks": null,
+  "estimated_range": null,
+  "withheld_reason": "side_repeats_front",
+  "provisional": {
+   "kind": "side_repeats_front",
+   "reason": "LEFT: the CORNER photo shows 5 stacks wide and 1 deep, but this side shows 5 stacks and STRAIGHT 5: it is not the left side face; walk around the corner and retake it",
+   "if_depth": null,
+   "front_row_counted": 100
+  },
+  "suggested_views": [],
+  "suggested_inputs": [
+   "declaration"
+  ]
+ }
+]
