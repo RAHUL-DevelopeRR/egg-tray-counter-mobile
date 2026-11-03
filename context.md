@@ -1,4 +1,9 @@
-> 2026-11-02 (latest): MUTAA validation of 0.5.0 and Worker 0.5.1 (local, not deployed).
+> 2026-11-03 (latest): app 4b on branch real/app-evidence-grid (not built, not merged). The result shows counted
+> (read on faces) and assumed (hidden stacks at their neighbours' height) trays apart, in tray layers; an older
+> server's `confirmed` is shown as an estimate. Follows the user's 3 Nov defaults: deep-block totals are estimates,
+> never confirmed.
+
+> 2026-11-02: MUTAA validation of 0.5.0 and Worker 0.5.1 (local, not deployed).
 > - **Validation** (reports/mutaa-validation-0.5.0-20261101, partial): staging released no wrong total on 33 scans.
 >   On accepted photos, the app matches double-counted manual stacks 29 of 42; undoubted columns match 20 of 21.
 >   The manual counts are tier V (Claude visual counts) and incomplete.

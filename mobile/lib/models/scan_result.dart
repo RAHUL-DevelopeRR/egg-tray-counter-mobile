@@ -85,8 +85,10 @@ class ScanResult {
 
   /// One result state for the icon, headline and history: `verified` for the
   /// legacy painted-cell route, otherwise the block's status (exact,
-  /// estimated, conflict, needs_view), else the legacy top-level status.
-  String get resultStatus => accepted ? 'verified' : block?.status ?? status;
+  /// estimated, conflict, needs_view; exact only when nothing in the total is
+  /// assumed), else the legacy top-level status.
+  String get resultStatus =>
+      accepted ? 'verified' : block?.displayStatus ?? status;
 
   /// The tray total the result shows: legacy verified total or block total.
   int? get shownTrays => accepted ? totalTrays : block?.totalTrays;
