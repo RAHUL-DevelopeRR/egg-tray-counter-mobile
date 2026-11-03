@@ -2970,7 +2970,7 @@
    "pass": true,
    "stretch": {
     "check": "no_wrong_total",
-    "fixed_by": "H",
+    "fixed_by": null,
     "pass": true
    }
   },

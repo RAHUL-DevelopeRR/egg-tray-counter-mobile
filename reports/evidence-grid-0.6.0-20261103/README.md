@@ -1,4 +1,4 @@
-# Worker 0.6.0 evidence grid: offline replay, 0.5.1 vs 0.6.0 (4 Nov 2026)
+# Worker 0.6.0 evidence grid: offline replay, 0.5.1 vs 0.6.0 (3 Nov 2026)
 
 Contract: `docs/GRID_CONTRACT_0.6.0.md`. Local build on branch `real/worker-0.6.0`; **not deployed**. Everything here
 is offline: saved detections and synthetic faces through the Worker's own functions. No detector call, no network.
@@ -10,10 +10,15 @@ trios. No physical count exists for any block here; the 4 x 3 field block's "164
 
 ```
 cd cloudflare-worker && npm test                                   # tsc build, then node --test
-node scripts/replay_benchmark.mjs --out reports/evidence-grid-0.6.0-20261104
-node scripts/compare_replay_versions.mjs <0.5.1 build> worker-0.5.1 reports/evidence-grid-0.6.0-20261104/compare-0.5.1.json
-node scripts/replay_saved_scans.mjs reports/evidence-grid-0.6.0-20261104/saved-scans
+node scripts/replay_benchmark.mjs --out reports/evidence-grid-0.6.0-20261103
+node scripts/compare_replay_versions.mjs <0.5.1 build> worker-0.5.1 reports/evidence-grid-0.6.0-20261103/compare-0.5.1.json \
+  reports/evidence-grid-0.6.0-20261103/summary.json 10f2c3d
+node scripts/replay_saved_scans.mjs reports/evidence-grid-0.6.0-20261103/saved-scans reports/evidence-grid-0.6.0-20261103/summary.json
 ```
+Run in this order: `replay_benchmark.mjs` rewrites `summary.json`, and the other two add `comparison_with_worker_0_5_1`
+and `saved_scans` to it. Re-run after the review fixes of 3 Nov: `summary.json` and `compare-0.5.1.json` came out
+byte for byte the same; `details.json` changed only in S09's stretch (`fixed_by` null: a guard now), and the 4 x 3
+`camera-corner-declared` response only in `block.total_eggs` (null: no capacity figure when trays are assumed).
 The 0.5.1 build is `cloudflare-worker/src/index.ts` at `10f2c3d`, transpiled with the repo's TypeScript; both builds
 run the **same** library (the 0.6.0 one, 38 cases), so the rows compare like for like.
 

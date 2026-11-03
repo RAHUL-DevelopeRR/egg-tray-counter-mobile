@@ -4,6 +4,11 @@ Plan 4 Phase 3 (`docs/PLAN_4_EVIDENCE_GRID.md`) and the Worker side of app work 
 `docs/GRID_CONTRACT_0.5.0.md`: every field app 0.5.0 parses stays, with the same meaning. Local build only; not
 deployed.
 
+**Deploy gate.** Do not deploy Worker 0.6.0 (staging included) before an app that reads `suggested_inputs` ships
+(app work 4b). App 0.5.x shows "RETAKE <SIDE>" for a `depth_unproven` side (`rescan.recommended_view` is the side's
+name); retaking the photo can never release such a block, only declaring the block size can. App 0.5.x does show the
+rescan reason, which says to declare the size.
+
 **The idea.**
 - A stack whose face was photographed gets a **counted** height, read top to floor. This is the only real count.
 - A stack that no face photo sees gets an **assumed** height: the median of its line-of-sight neighbours. Assumed
@@ -200,13 +205,15 @@ not `yes`, `assumed_stacks` is 0, no height is unknown, and the block is release
 - `missing_cells`: `declared_missing`, z 0. On a cell already `top_missing`, it only adds `"declared"`. On a measured
   stack, a conflict.
 - `partial_stacks`: assumed height `p.layers`, range `[p, p]`, `assumed_from: declared_partial`. With no height: z
-  null, range `[1, max neighbour]` (or the step's range).
+  null, range `[1, max neighbour]` (or the step's range). A partial stack of 0 trays is read as a declared missing stack.
+  Repeated identical entries are dropped.
 - `interior: "full"`: flag `declared_present` and source `"declared"` on present hidden cells. It never resolves a cell.
 - `interior: "partial"`: hidden cells with no tap (or `unsure`) and no declared partial get lower bound 0; `top_present`
   cells get lower bound 1.
 - **Conflicts:** declared missing against a `present` or step tap; declared partial against a `missing` tap; a declared
   partial height below a step-up lower bound or above a step-down maximum; `interior: full` against a `missing` tap on
-  a cell not declared missing.
+  a cell not declared missing; two different declared partial heights for one stack; a declared partial stack (with or
+  without a height) where a face shows a gap.
 
 **Worked example (H2).** 4 x 3, front 20/19/20/20, LEFT 20/20/18, RIGHT 20/20/20. Hidden (1,1): neighbours 19, 20, 20 →
 20 [19, 20]; (2,1) → 20 [20, 20]; (1,2): 19, 18, 20 → 19 [18, 20]; (2,2): 20, 18, 20 → 20 [18, 20]. Counted 157,
@@ -216,7 +223,7 @@ assumed 79, estimate 236, "if every hidden stack is there at its neighbours' hei
 
 ## 5. Depth proof and statuses
 
-**Depth proof** (Plan 4 Decision 1, corrected). `DEPTH_PROOF = "declaration"`. A CORNER photo cannot prove depth:
+**Depth proof** (Plan 4 Decision 1, corrected: a design default awaiting the user's call, section 6). `DEPTH_PROOF = "declaration"`. A CORNER photo cannot prove depth:
 `cornerReading` counts the columns on each side of the largest-pitch stack, so a CORNER photo of a 5x1 row with two
 rows standing behind it (S25) sees the same three-deep end the side photo saw and reads 5 x 3 (0.5.1: `estimated` 300;
 truth 100). For a turned side more than one stack deep, when the other side has no stacks or the same depth:
@@ -227,7 +234,9 @@ truth 100). For a turned side more than one stack deep, when the other side has 
 | repeats the front, CORNER photo settles it | `depth_unproven`, `corner_settles` | `turned`, `depth_witness: corner_and_declaration` |
 | repeats the front, not settled | `turned_repeats_front` (0.5.1) | `turned_repeats_front` (0.5.1) |
 
-LEFT and RIGHT of different depths stay `turned`; the block's depth conflict names the retake. A `depth_unproven`
+LEFT and RIGHT of different depths stay `turned`; the block is a conflict ("depth differs between LEFT and RIGHT
+faces"). The photos cannot tell which side is wrong, so `rescan` names no side: `recommended_view: "straight"` with the
+general reason, as in 0.5.1. A `depth_unproven`
 side's reason tells the operator to declare the block size (X x Y) before the scan, and names a declaration that
 disagrees. `rescan.recommended_view` stays the side's name. A side shot twice (LEFT and RIGHT facing one way) is still
 caught and retaken first.
@@ -252,5 +261,13 @@ Older history rows that say `confirmed` are still valid JSON; clients show them 
 - **`exact` is for one-deep blocks only.** Plan 4 Phase 3 allowed one-wide deep blocks; the 3 Nov default overrides it.
 - **Trays seen through a gap are hints.** This changed three block tests and turned one "no room" conflict into a
   released estimate.
+- **Two different through-gap heights on one hidden cell are still a conflict** (as designed, section 4 step 3). By the
+  rule that trays seen through a gap are never readings, they could instead be an ambiguity that keeps only the hint: no
+  rescan can resolve the conflict.
+- **A declared size can confirm the depth the side photos read, never shorten it.** An honest 5 x 1 declaration for a
+  row with two rows touching it (S27) is withheld for good, with only `provisional.front_row_counted`. The option: when
+  the declared X matches and the declared Y is smaller than the side depth, count the first Y side columns.
+- **`block.total_eggs`** (tray capacity, kept for app 0.5.0) is null whenever any tray is assumed. Clients built on this
+  contract never show it: everything is in tray layers.
 
-Measured on the offline replay library: `reports/evidence-grid-0.6.0-20261104/README.md`.
+Measured on the offline replay library: `reports/evidence-grid-0.6.0-20261103/README.md`.

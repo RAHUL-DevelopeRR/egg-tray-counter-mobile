@@ -3,13 +3,16 @@
 // The older build is a transpiled copy of its src/index.ts, for example worker 0.5.1 at 10f2c3d:
 //   git show 10f2c3d:cloudflare-worker/src/index.ts > <scratch>/index.ts
 //   node -e "<ts.transpileModule to ES2022 ESM>"  (cloudflare-worker/node_modules/typescript)  -> <scratch>/index.mjs
-//   node scripts/compare_replay_versions.mjs <scratch>/index.mjs worker-0.5.1 reports/<report>/compare-0.5.1.json
+//   node scripts/compare_replay_versions.mjs <scratch>/index.mjs worker-0.5.1 reports/<report>/compare-0.5.1.json \
+//     reports/<report>/summary.json 10f2c3d
+// The optional last two arguments add the tallies to the report's summary.json (written by scripts/replay_benchmark.mjs,
+// so run that first) as comparison_with_<older build>, naming the commit the older build came from.
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { REPO, runBenchmark, replayViews, capturesFor, syntheticFace, syntheticCorner, CAMERA } from '../cloudflare-worker/test/replay_benchmark.mjs';
 
-const [oldDist, oldName, outFile] = process.argv.slice(2);
+const [oldDist, oldName, outFile, summaryFile, fromCommit] = process.argv.slice(2);
 const older = await import(pathToFileURL(path.resolve(oldDist)).href);
 const current = await import(pathToFileURL(path.join(REPO, 'cloudflare-worker', 'dist', 'index.js')).href);
 const pipeline = /const PIPELINE_VERSION = "([^"]+)"/.exec(fs.readFileSync(path.join(REPO, 'cloudflare-worker', 'src', 'index.ts'), 'utf8'))?.[1];
@@ -43,6 +46,14 @@ const result = { library: 'cloudflare-worker/test/replay_benchmark.mjs (current)
   trios_changed: b.trios.filter(t => { const o = a.trios.find(x => x.id === t.id); return o.status !== t.status || o.total !== t.total; }).map(t => t.id),
   declared_size_cost: cost, cases };
 fs.writeFileSync(path.resolve(outFile), JSON.stringify(result, null, 1) + '\n');
+if (summaryFile) {
+  const summary = JSON.parse(fs.readFileSync(path.resolve(summaryFile), 'utf8'));
+  summary[`comparison_with_${oldName.replace(/[^A-Za-z0-9]/g, '_')}`] = {
+    source: `${path.basename(outFile)} (${oldName} transpiled from ${fromCommit ?? 'an older commit'}, run on this library)`,
+    ...result.summary, face_verdicts_changed: result.face_verdicts_changed, trios_changed: result.trios_changed.length,
+    declared_size_cost: cost };
+  fs.writeFileSync(path.resolve(summaryFile), JSON.stringify(summary, null, 1) + '\n');
+}
 console.log(JSON.stringify(result.summary, null, 1));
 console.log('face verdicts changed', result.face_verdicts_changed, '; trios changed', result.trios_changed.length);
 console.log(JSON.stringify(cost));

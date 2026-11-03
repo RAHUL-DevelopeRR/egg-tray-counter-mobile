@@ -7,7 +7,8 @@
 //                     size (test/replay_benchmark.mjs syntheticCorner); a side that repeats the front needs one
 // The camera rows assume sensor data these photos never had; they show what the counting logic would release, not what
 // the app shows for these photos. Keys starting with "_" and local paths are removed from every output.
-//   node scripts/replay_saved_scans.mjs reports/evidence-grid-0.6.0-20261104/saved-scans
+//   node scripts/replay_saved_scans.mjs reports/evidence-grid-0.6.0-20261103/saved-scans reports/evidence-grid-0.6.0-20261103/summary.json
+// The optional second argument adds the short rows to the report's summary.json as saved_scans.
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -56,3 +57,10 @@ for (const scan of SCANS) {
   }
 }
 fs.writeFileSync(path.join(out, 'index.json'), JSON.stringify(index, null, 1) + '\n');
+if (process.argv[3]) {
+  const file = path.resolve(REPO, process.argv[3]);
+  const summary = JSON.parse(fs.readFileSync(file, 'utf8'));
+  summary.saved_scans = index.map(r => ({ scan: r.scan, mode: r.mode, status: r.status, total_trays: r.total_trays,
+    counted_trays: r.counted_trays, assumed_trays: r.assumed_trays, estimated_range: r.estimated_range, withheld_reason: r.withheld_reason }));
+  fs.writeFileSync(file, JSON.stringify(summary, null, 1) + '\n');
+}

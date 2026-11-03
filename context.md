@@ -1,14 +1,16 @@
-> 2026-11-04 (latest): Worker 0.6.0 evidence grid (branch `real/worker-0.6.0`, local, not deployed);
-> contract docs/GRID_CONTRACT_0.6.0.md.
+> 2026-11-03 (latest): Worker 0.6.0 evidence grid (branch `real/worker-0.6.0`, local, not deployed);
+> contract docs/GRID_CONTRACT_0.6.0.md. Do not deploy it before an app that reads `suggested_inputs` (app 4b).
 > - **Decisions (user defaults of 3 Nov):** deep-block totals are estimates, never `confirmed`; hidden stacks are shown
 >   as assumed at their neighbours' face height, kept apart from counted ones; tray layers, never eggs or rupees.
-> - **Decision 1, corrected:** a CORNER photo cannot prove a depth (it sees the same touching rows). Any depth over one
->   stack needs the declared block size; a side that repeats the front also needs the CORNER photo. `exact` is for
->   one-deep blocks only.
+> - **Design defaults awaiting the user's call (not user decisions; contract §6):** Decision 1, corrected: a CORNER
+>   photo cannot prove a depth (it sees the same touching rows), so any depth over one stack needs the declared block
+>   size, and a side that repeats the front also needs the CORNER photo. `exact` is for one-deep blocks only. Also
+>   open: an honest 5 x 1 declaration for a row with rows touching it is withheld for good (S27); through-gap heights
+>   that disagree are a conflict.
 > - **Top view:** presence, holes and step-ups only; never a count, never a depth witness.
-> - **Measured (offline replay, synthetic library):** 38 of 38 adversarial cases pass, 0 wrong exact; S25 (300 for
->   100 in 0.5.1) is withheld. The 4 x 3 field block reads 105 counted + 60 assumed = 165 in a counterfactual replay
->   (tier V reading 164). No physical count exists.
+> - **Measured (offline replay, synthetic library, reports/evidence-grid-0.6.0-20261103):** 38 of 38 adversarial
+>   cases pass, 0 wrong exact; S25 (300 for 100 in 0.5.1) is withheld. The 4 x 3 field block reads 105 counted + 60
+>   assumed = 165 in a counterfactual replay (tier V reading 164). No physical count exists.
 
 > 2026-11-02: MUTAA validation of 0.5.0 and Worker 0.5.1 (local, not deployed).
 > - **Validation** (reports/mutaa-validation-0.5.0-20261101, partial): staging released no wrong total on 33 scans.

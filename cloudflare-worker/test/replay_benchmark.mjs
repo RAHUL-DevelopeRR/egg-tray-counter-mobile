@@ -118,7 +118,8 @@ const backAsLeft = { ...CAMERA, left: { yaw_deg: 180, yaw_session: 'syn' } };
  *   not_confirmed   anything but `confirmed` (a declaration cannot stand in for missing photo evidence)
  *   total_ok        a total is released and equals the truth (coverage the witness views must restore)
  * fixed_by names the plan phase expected to make a case pass when it fails today (null = must pass now). stretch is a
- * stricter check the release contract does not require yet (an estimate may be wrong), with the phase meant to meet it.
+ * stricter check the release contract does not require yet (an estimate may be wrong), with the phase meant to meet it
+ * (fixed_by null: a stretch that passes now and must keep passing).
  */
 export function adversarialCases(registry) {
   const S = syntheticFace;
@@ -148,7 +149,8 @@ export function adversarialCases(registry) {
       headings: CAMERA, truth: 60, check: 'no_wrong_exact', fixed_by: null },
     { id: 'S09 missing interior stack in a 3x3 block (photos identical to a full block)',
       views: { straight: S([20, 20, 20]), left: S([20, 20, 20]), right: S([20, 20, 20]) },
-      headings: CAMERA, truth: 160, check: 'no_wrong_exact', fixed_by: null, stretch: { check: 'no_wrong_total', fixed_by: 'H' } },
+      // 0.6.0: withheld until the block size is declared, so it releases no wrong total (a guard); declared, it is S29.
+      headings: CAMERA, truth: 160, check: 'no_wrong_exact', fixed_by: null, stretch: { check: 'no_wrong_total', fixed_by: null } },
     { id: 'S10 LEFT and RIGHT photos swapped (heights differ)', views: { straight: S([20, 20, 20]), left: S([20, 18]), right: S([20, 20]) },
       headings: swap, truth: 118, check: 'no_wrong_total', fixed_by: null },
     { id: 'S11 back face (180 degrees) sent as LEFT of a 4x2 block', views: { straight: S([20, 20, 20, 20]), left: S([20, 20, 20, 20]), right: S([20, 20]) },

@@ -2030,7 +2030,7 @@
     "straight": "disabled"
    }
   },
-  "total_eggs": 4950,
+  "total_eggs": null,
   "eggs_basis": "capacity_if_every_tray_full",
   "capture": {
    "left": {

@@ -1001,8 +1001,9 @@ function sideCheck(columns: Record<string, SpanColumn[]>, headings: Record<strin
   const unproven = (side: string, n: number, settled: boolean) =>
     `${side.toUpperCase()}: ${settled ? `the CORNER photo shows this is a side face ${n} deep` : `the block reads ${n} deep here`}, but rows standing against a block look the same in every photo; declare the block size (X x Y) before the scan to say where the block ends`
     + (declared ? `; the declaration says ${declared.x} x ${declared.y}` : "");
-  // A turned side: its depth needs proof only when this side sets it (the other side has no stacks or the same depth; a
-  // side of another depth is a conflict in buildBlock, which names the retake).
+  // A turned side: its depth needs proof only when this side sets it (the other side has no stacks or the same depth). A
+  // side of another depth is buildBlock's "depth differs" conflict; the photos cannot tell which side is wrong, so the
+  // rescan names no side (STRAIGHT with the general reason, as in 0.5.1).
   const turnedSide = (side: string, n: number, base: { turn_deg: number; direction_ok: boolean }): SideVerdict => {
     const other = (columns[side === "left" ? "right" : "left"] ?? []).length;
     const settled = repeats[side] && settles(side, n);
@@ -1260,10 +1261,14 @@ function readDeclaration(form: FormData): BlockDeclaration | null {
   const x = gridInt(d.x, 1, MAX_GRID_SIDE), y = gridInt(d.y, 1, MAX_GRID_SIDE);
   if (x === null || y === null) return null;
   const cell = (c: unknown) => Array.isArray(c) && c.length === 2 && gridInt(c[0], 0, x - 1) !== null && gridInt(c[1], 0, y - 1) !== null;
-  const missing = (Array.isArray(d.missing_cells) ? d.missing_cells : []).filter(cell).slice(0, x * y) as [number, number][];
-  const partial = (Array.isArray(d.partial_stacks) ? d.partial_stacks : []).map(p => p as Record<string, unknown>)
+  const stacks = (Array.isArray(d.partial_stacks) ? d.partial_stacks : []).map(p => p as Record<string, unknown>)
     .filter(p => p && gridInt(p.x, 0, x - 1) !== null && gridInt(p.y, 0, y - 1) !== null)
     .map(p => ({ x: p.x as number, y: p.y as number, layers: gridInt(p.layers, 0, 200) })).slice(0, x * y);
+  // A partial stack of 0 trays is a missing stack; a cell listed twice as missing is one missing stack.
+  const missing = [...(Array.isArray(d.missing_cells) ? d.missing_cells : []).filter(cell) as [number, number][],
+    ...stacks.filter(p => p.layers === 0).map(p => [p.x, p.y] as [number, number])]
+    .filter(([cx, cy], i, all) => all.findIndex(([ox, oy]) => ox === cx && oy === cy) === i).slice(0, x * y);
+  const partial = stacks.filter(p => p.layers !== 0);
   const pick = <T extends string>(v: unknown, allowed: readonly T[], fallback: T) => allowed.includes(v as T) ? v as T : fallback;
   const text = (v: unknown, max: number) => typeof v === "string" ? v.replace(UNSAFE_TEXT, " ").trim().slice(0, max) || null : null;
   // A reference height counts only when the operator says it was measured; it can only demote a stack, never add one.
@@ -1442,10 +1447,28 @@ function assembleGrid(block: ReturnType<typeof blockResult>, inputs: GridInputs)
         else Object.assign(g, { stack_present: false, z_layers: 0, evidence_class: "declared_missing", status: "declared",
           measurement_sources: ["declared"], assumed_layers: null, assumed_range: null, assumed_from: null, uncertainties: note(g, "declared missing") });
       }
+      // One declared height per stack: a repeated entry is dropped; two different heights on one stack disagree.
+      const partials = new Map<string, BlockDeclaration["partial_stacks"][number] | null>();
       for (const p of declaration.partial_stacks) {
+        const key = `${p.x},${p.y}`, earlier = partials.get(key);
+        if (earlier === undefined) partials.set(key, p);
+        else if (earlier !== null && earlier.layers !== p.layers) {
+          conflicts.push({ cell: [p.x, p.y], reason: `declared two partial heights for one stack (${earlier.layers ?? "not given"} and ${p.layers ?? "not given"})` });
+          partials.set(key, null);
+          const g = grid[p.y][p.x];
+          if (g.hidden && g.evidence_class !== "conflict") Object.assign(g, { evidence_class: "conflict", status: "conflict", z_layers: null,
+            assumed_layers: null, assumed_range: null, uncertainties: note(g, "the declared heights of this stack disagree") });
+        }
+      }
+      for (const p of [...partials.values()]) {
+        if (p === null) continue;
         const g = grid[p.y][p.x];
         if (!g.hidden) {
-          if (p.layers !== null && g.z_layers !== null && g.z_layers !== p.layers) {
+          // A face that shows a gap disagrees with any declared stack, with or without a height.
+          if (g.evidence_class === "seen_empty") {
+            declarationAgrees = false;
+            conflicts.push({ cell: [p.x, p.y], reason: "declared a partial stack, but a face shows a gap there" });
+          } else if (p.layers !== null && g.z_layers !== null && g.z_layers !== p.layers) {
             declarationAgrees = false;
             conflicts.push({ cell: [p.x, p.y], reason: `declared ${p.layers} trays high, a face reads ${g.z_layers}` });
           }
@@ -1513,7 +1536,7 @@ function assembleGrid(block: ReturnType<typeof blockResult>, inputs: GridInputs)
   // A refused photo stays needs_view: its faces are not measurements to compare a declaration or view with.
   if (conflicts.length && status !== "needs_view") status = "conflict";
   // exact is for one-deep blocks with every stack seen: a depth over one stack rests on the declared size.
-  if (status === "exact" && (depthBasis !== "one_deep" || cells.some(g => g.hidden))) status = "estimated";
+  if (status === "exact" && (depthBasis !== "one_deep" || Y > 1 || cells.some(g => g.hidden))) status = "estimated";
   const unchecked = cells.filter(g => g.hidden && g.stack_present !== false && g.evidence_class !== "conflict"
     && (g.top_tap === null || g.top_tap === "unsure")).length;
   // An ELEVATED photo is suggested while hidden stacks are unchecked; it is never required for a total.
@@ -1731,8 +1754,9 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
       ...(assembledGrid.grid.length ? { cells: assembledGrid.cells, computed_trays: assembledGrid.computed_trays } : {}),
       conflicts: [...block.conflicts, ...assembledGrid.conflicts], contract: "block_model_v1", eggs_per_tray: Number(env.EGGS_PER_TRAY),
       verification: { method: "rim_edges", views: rimStatus ?? Object.fromEntries(VIEWS.map(v => [v, "disabled"])) },
-      // Egg occupancy is not measured: this is tray capacity if every counted tray is full.
-      total_eggs: finalTotal === null ? null : finalTotal * Number(env.EGGS_PER_TRAY),
+      // Egg occupancy is not measured: this is tray capacity if every counted tray is full. Kept for app 0.5.0 (shown only
+      // without a grid); null when any tray is assumed, since assumed trays are not counted.
+      total_eggs: finalTotal === null || inventory.assumed_stacks ? null : finalTotal * Number(env.EGGS_PER_TRAY),
       eggs_basis: "capacity_if_every_tray_full", capture, side_check: sides,
       grid: assembledGrid.grid, inventory, confirmed_basis: [], depth_basis: assembledGrid.depth_basis,
       declaration: declaration ? { ...declaration, agrees_with_faces: assembledGrid.declaration_agrees } : null,

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { assembleGrid, blockResult, buildBlock, gridInventory, mode, spanColumns } from '../dist/index.js';
+import { assembleGrid, blockResult, buildBlock, gridInventory, mode, readDeclaration, spanColumns } from '../dist/index.js';
 
 // ---- 0.6.0 hidden-tray calculation (docs/GRID_CONTRACT_0.6.0.md): a stack no face photo counts gets an assumed
 // height from its line-of-sight neighbours, kept apart from the counted trays; a top-view tap changes presence and steps
@@ -197,4 +197,33 @@ test('H9: a block with hidden stacks is never confirmed or exact, whatever the d
   const deep = buildBlock(front(20), left(20, 18), right(20, 18));
   assert.equal(deep.status, 'exact');
   assert.equal(grid(deep).status, 'estimated');
+  // Even when a caller says one_deep: a block more than one stack deep is never exact.
+  assert.equal(grid(deep, {depthBasis: 'one_deep'}).status, 'estimated');
+});
+
+test('H14: a declared partial stack of 0 trays is a missing stack; declared heights that disagree are a conflict', () => {
+  const read = (d) => { const f = new FormData(); f.set('block_declaration', JSON.stringify({x: 3, y: 2, ...d})); return readDeclaration(f); };
+  const zero = read({partial_stacks: [{x: 1, y: 1, layers: 0}], missing_cells: [[1, 1]]});
+  assert.deepEqual([zero.missing_cells, zero.partial_stacks], [[[1, 1]], []]);
+  const gone = grid(verified3x2(), {declaration: read({partial_stacks: [{x: 1, y: 1, layers: 0}]})});
+  assert.deepEqual([gone.status, gone.total, cellAt(gone, 1, 1).evidence_class, gone.inventory.assumed_stacks, gone.inventory.missing_stacks.declared_missing],
+    ['estimated', 100, 'declared_missing', 0, 1]);
+  // Declared missing where the top view shows a hole, listed twice: the source is named once.
+  const twiceMissing = grid(verified3x2(), {declaration: read({missing_cells: [[1, 1], [1, 1]]}), topView: tap('missing')});
+  assert.deepEqual(cellAt(twiceMissing, 1, 1).measurement_sources, ['top_view', 'declared']);
+  // Two different heights for one stack disagree; the same height twice is one entry.
+  const differ = grid(verified3x2(), {declaration: declaration({partial_stacks: [{x: 1, y: 1, layers: 12}, {x: 1, y: 1, layers: 5}]})});
+  assert.deepEqual([differ.status, differ.total, cellAt(differ, 1, 1).evidence_class], ['conflict', null, 'conflict']);
+  assert.match(differ.conflicts[0].reason, /^declared two partial heights for one stack \(12 and 5\)/);
+  const same = grid(verified3x2(), {declaration: declaration({partial_stacks: [{x: 1, y: 1, layers: 12}, {x: 1, y: 1, layers: 12}]})});
+  assert.deepEqual([same.status, same.total], ['estimated', 112]);
+  // A face that shows a gap disagrees with any declared stack there, with or without a height.
+  const gap = verified3x2(['missing', 0]);
+  for (const layers of [null, 12]) {
+    const r = grid(gap, {declaration: declaration({partial_stacks: [{x: 1, y: 0, layers}]})});
+    assert.deepEqual([r.status, r.declaration_agrees], ['conflict', false], String(layers));
+    assert.match(r.conflicts[0].reason, /^declared a partial stack, but a face shows a gap there/);
+  }
+  // On a face that shows a stack, a partial with no height is presence only and agrees.
+  assert.equal(grid(verified3x2(), {declaration: declaration({partial_stacks: [{x: 0, y: 0, layers: null}]})}).status, 'estimated');
 });

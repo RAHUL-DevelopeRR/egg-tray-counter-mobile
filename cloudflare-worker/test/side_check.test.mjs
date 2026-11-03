@@ -331,6 +331,8 @@ test('H10: S25, a 5x1 row with two rows standing behind it, is withheld until th
   const deep = walkScan(S25, declare(5, 3));
   assert.deepEqual([deep.block.status, deep.block.total_trays, deep.block.depth_basis], ['estimated', 300, 'declaration']);
   assert.deepEqual([deep.block.inventory.provisional, deep.block.suggested_inputs], [null, []]);
+  // Tray capacity is never given for assumed trays (tray layers, never eggs).
+  assert.equal(deep.block.total_eggs, null);
   const row = walkScan(S25, declare(5, 1));
   assert.deepEqual([row.block.status, row.block.total_trays], ['needs_view', null]);
   assert.match(row.block.side_check.left.reason, /; the declaration says 5 x 1$/);
@@ -385,6 +387,7 @@ test('H12: earlier cases keep their answers; provisional figures appear only for
   const s18 = walkScan({straight: [20, 20], left: [20], right: [20]});
   assert.deepEqual([s18.block.status, s18.block.total_trays, s18.block.depth_basis], ['exact', 40, 'one_deep']);
   assert.deepEqual([s18.block.inventory.counted_trays, s18.block.inventory.hidden_stacks, s18.block.inventory.released], [40, 0, true]);
+  assert.equal(s18.block.total_eggs, 1200);
   // A refused photo is retaken first: no provisional figures while a face is not a measurement.
   const refused = walkScan({straight: S25.straight, left: [20, 20, 20], right: []});
   assert.deepEqual([refused.block.side_check.left.status, refused.block.status, refused.block.inventory.provisional, refused.rescan.recommended_view],
