@@ -7,6 +7,7 @@ import '../../services/device_auth.dart';
 import '../../services/history_database.dart';
 import '../../services/pending_scans.dart';
 import '../../services/settings_store.dart';
+import '../demo/demo_screen.dart';
 import '../scan_flow/result_look.dart';
 import '../scan_flow/scan_flow_screen.dart';
 import '../settings/settings_screen.dart';
@@ -357,6 +358,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   label: const Text('SCAN A BLOCK — GALLERY (TESTING)'),
                 ),
               ],
+              const SizedBox(height: 12),
+              OutlinedButton.icon(
+                key: const ValueKey('open-demo'),
+                onPressed: () => Navigator.of(context).push<void>(
+                  MaterialPageRoute(builder: (_) => const DemoScreen()),
+                ),
+                icon: const Icon(Icons.slideshow_outlined),
+                label: const Text('DEMO — SAVED RESULTS (NOT A LIVE SCAN)'),
+              ),
               const SizedBox(height: 12),
               const Text(
                 'One block at a time: photograph its front face (STRAIGHT), then its LEFT and RIGHT side faces, square-on, phone level at mid-height. Then record your count.',
