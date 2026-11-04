@@ -28,7 +28,13 @@ For the faculty demo on the morning of 4 Nov. **Local only: nothing pushed or de
 - **Redmi (f76d5e20), 09:16 IST, with the user's OK:** `adb install -r` upgraded 0.4.12 (23) to 0.6.0 (29) in place
   (data kept). The app opens with the demo button; Settings show the staging base URL and "DEVICE APPROVED" (nothing
   changed or saved).
-- **Next:** push after the demo, with the user's OK. Then: the user's call on Decision 1 (corrected) and contract §6; staging deploy of Worker 0.6.0 with
+- **Pushed** to `origin/rollout/0.4.12-staging` (`10f2c3d..59fb8d1`) with the user's OK.
+- **Phone test** (`reports/phone-test-20261104/`, measured, staging 0.5.0, 6 detector calls): laptop photos pushed
+  to the Redmi and scanned through the gallery path. L-100 (img-19/21/24): RETAKE NEEDED, no total (sides repeat the
+  front), per-photo detections 103/100/101. 99-tray row (img-01, warehouse image-4, img-32): BLOCK ESTIMATE 99 with the
+  3D grid 20/20/20/20/19. Both repeat earlier answers for the same photos; the 99 trio is a worked example. Gallery
+  scans switched back off; the test photos stay in `/sdcard/Pictures/EggTrayTest/`.
+- **Next:** the user's call on Decision 1 (corrected) and contract §6; staging deploy of Worker 0.6.0 with
   approval; the farm day with physical counts.
 - **Open review notes (not fixed, not on the demo data):** the old-format fallback split does not check that counted
   + assumed adds up to the total; `traySplitLine` prints "Assumed 0" when the assumed part is unknown; taller/shorter
