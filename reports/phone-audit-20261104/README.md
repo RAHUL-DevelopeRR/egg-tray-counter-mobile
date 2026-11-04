@@ -3,14 +3,14 @@
 **Request:** new 3D examples from MUTAA images that were not tested before, no worked examples; move them to the
 phone and audit the 3D scan.
 
-**What "untested" can mean here (measured).** The MUTAA repository (`C:\Users\rahul\MUTAA`) has 41 photos. 11 were
-used in the 8 block sets of 31 Oct (`reports/mutaa-manual-vs-backend-20261031/sets-sent.json`). The other 30 were
+**What "untested" can mean here (measured).** The MUTAA repository (`C:\Users\rahul\MUTAA`) has 42 photos (24 `IMG_`, 18 WhatsApp). 11 were
+used in the 8 block sets of 31 Oct (`reports/mutaa-manual-vs-backend-20261031/sets-sent.json`). The other 31 were
 never sent as a STRAIGHT/LEFT/RIGHT block set, but every one of them went to staging once on 1–2 Nov in arbitrary
 groups of three in file order (`scripts/validate_build_staging.py`, `mutaa-batch-*`). So these photos are new as block
 scans, not new to the server. None of them was used to tune the counter.
 
-**How the sets were chosen.** A random pick of three of the 30 would mix different blocks, which the server must
-refuse and which tests nothing. The 30 photos were sorted into scenes (contact sheet), and every scene with a front
+**How the sets were chosen.** A random pick of three of the 31 would mix different blocks, which the server must
+refuse and which tests nothing. The 31 photos were sorted into scenes (contact sheet), and every scene with a front
 view plus at least one other view of the same block was used:
 - **A, a row of 3 stacks** (16 Sep 15:12): front `IMG_20260916_151210436`, right end `IMG_20260916_151224648`. No
   photo shows the left end, so `IMG_20260916_151204619` (a separate single stack nearby, same height) is a stand-in
@@ -57,16 +57,15 @@ Screens: `B-00-50mp-refused.png` (first RIGHT choice refused in the app), `B-01-
 ## Findings
 
 1. **The app refuses photos over 40 MP from the gallery** ("Photo not selected: FormatException: Choose a valid JPEG
-   or PNG of at most 40 megapixels", `mobile/lib/features/capture/photo_upload_pane.dart:27`). 4 of the 23 MUTAA
+   or PNG of at most 40 megapixels", `mobile/lib/features/capture/photo_upload_pane.dart:27`). 4 of the 24 MUTAA
    `IMG_` photos are 8192 × 6144 (50.3 MP; `151444583`, `151447066`, `151453724`, `151506512`). The validation script
-   resized them before sending, so this limit was never hit before. The camera path is not affected.
+   resized them before sending, so this limit was never hit before. The camera path captures at `ResolutionPreset.veryHigh` (`guided_capture_pane.dart:193`) and does not go through this check.
 2. **No new 3D total from gallery photos on Worker 0.5.0.** Of 2 new sets, the 1-deep row drew its 3D model but was
    withheld for a refused photo; the deep block got no model, because gallery side photos cannot prove a depth.
    Neither showed a wrong total (0 wrong of 2).
 3. **The cover tray is read inconsistently** on the row: 10, 10, 11 for three stacks that each carry 10 filled trays
    and 1 empty cover tray.
-4. **The MUTAA repository has no complete new block set left.** Every scene with a front and both true side views was
-   used on 31 Oct. A genuine new 3D example needs new photos: a camera scan on the farm (which records the phone
+4. **The MUTAA repository has no complete new block set left.** Among the 31 unused photos, no scene has a front view plus both true side views. A genuine new 3D example needs new photos: a camera scan on the farm (which records the phone
    heading), with a hand count of the same block.
 
 Cost: 2 scans, 6 detector calls (the refused 50 MP photo never left the phone).
