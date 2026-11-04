@@ -24,10 +24,11 @@ For the faculty demo on the morning of 4 Nov. **Local only: nothing pushed or de
   a8320338f21a54f9, versionName 0.6.0 / versionCode 29, signer SHA-256 29013b98…, 0 hits for the staging admin token
   or the keystore password in the APK or its unpacked files. Installed on the emulator (emulator-5554); the demo's
   three tabs render (screenshots in `reports/demo-20261104/`, replaced with the 0.6.0+29 view): the 4 x 3 block shows
-  4 see-through "~15" stacks, the eggs row is gone. **Not installed on the Redmi** (needs the user's OK).
-- **Next:** with the user's OK, `adb install -r egg-tray-counter-0.6.0-demo-staging.apk` on the Redmi and check
-  Settings points at the staging URL before any live scan (the default is production). Push after the demo, with the
-  user's OK. Then: the user's call on Decision 1 (corrected) and contract §6; staging deploy of Worker 0.6.0 with
+  4 see-through "~15" stacks, the eggs row is gone.
+- **Redmi (f76d5e20), 09:16 IST, with the user's OK:** `adb install -r` upgraded 0.4.12 (23) to 0.6.0 (29) in place
+  (data kept). The app opens with the demo button; Settings show the staging base URL and "DEVICE APPROVED" (nothing
+  changed or saved).
+- **Next:** push after the demo, with the user's OK. Then: the user's call on Decision 1 (corrected) and contract §6; staging deploy of Worker 0.6.0 with
   approval; the farm day with physical counts.
 - **Open review notes (not fixed, not on the demo data):** the old-format fallback split does not check that counted
   + assumed adds up to the total; `traySplitLine` prints "Assumed 0" when the assumed part is unknown; taller/shorter
