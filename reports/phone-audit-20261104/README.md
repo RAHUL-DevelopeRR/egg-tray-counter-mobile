@@ -69,3 +69,21 @@ Screens: `B-00-50mp-refused.png` (first RIGHT choice refused in the app), `B-01-
    heading), with a hand count of the same block.
 
 Cost: 2 scans, 6 detector calls (the refused 50 MP photo never left the phone).
+
+## Fix for finding 1 (app 0.6.1+30, same day)
+
+- A gallery photo over 40 MP is no longer refused. `prepareGalleryPhoto` catches `OversizedPhotoException` and has the
+  platform decoder (`ui.ImageDescriptor`, which samples the JPEG and applies the EXIF orientation) shrink it to the
+  upload long side, 1600 px; the copy then takes the same checks and re-encode as any other photo. Photos up to 40 MP
+  take the old path unchanged.
+- The size check now reads the JPEG frame header or PNG IHDR directly (`encodedPixelSize`). The image package's
+  `startDecode` allocated every DCT block before reporting the size, about 300 MB for a 50 MP JPEG, which is why the
+  refusal took so long on the phone.
+- Verified (measured): `flutter test` 255 of 255 before the last one-character fix, then the upload and scan-screen
+  tests again (23 of 23); 3 new tests (header size, the shrink path with the exception crossing the isolate, and a
+  real platform decode of a rotated 3200 × 1600 JPEG that comes out upright at 800 × 1600). `dart analyze` clean.
+- On the laptop emulator with APK 0.6.1+30, `IMG_20260916_151506512` (8192 × 6144) is accepted in about 6 s
+  (`D-50mp-accepted-0.6.1-emulator.png`); nothing was uploaded. **Not yet on the Redmi**: it was unplugged before the
+  install, so it still runs 0.6.0+29.
+- Still refused: files over 20 MB (a 108 MP photo would hit this), and photos over 40 MP in the experimental point-cloud
+  tool (`reconstruction_photos.dart`), which needs the originals.

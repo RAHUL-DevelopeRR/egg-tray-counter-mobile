@@ -40,7 +40,13 @@ For the faculty demo on the morning of 4 Nov. **Local only: nothing pushed or de
   B, the M16 block from new angles (`151353868`/`151339474`/`151436402`): RETAKE NEEDED, no model (gallery sides cannot
   prove depth; LEFT read 3 deep against manual 2). 0 wrong totals. **Finding:** the app's gallery path refuses photos
   over 40 MP (`photo_upload_pane.dart:27`); 4 MUTAA photos are 50 MP. No complete new block set is left in MUTAA.
-- **Next:** the user's call on Decision 1 (corrected) and contract §6; staging deploy of Worker 0.6.0 with
+- **App 0.6.1+30: gallery photos over 40 MP are shrunk, not refused** (`photo_upload_pane.dart`:
+  `encodedPixelSize`, `OversizedPhotoException`, `shrinkWithPlatformDecoder`, `prepareGalleryPhoto`). The size check
+  no longer runs the image package's `startDecode`, which allocated about 300 MB for a 50 MP JPEG. Verified: 3 new tests,
+  `flutter test` 255/255, `dart analyze` clean; on the emulator the 8192 x 6144 MUTAA photo is accepted in about 6 s.
+  APK `egg-tray-counter-0.6.1-staging.apk` (git-ignored): 64,019,756 bytes, SHA-256 prefix 2e3651e5ddc991f6, signer
+  29013b98…, 0 secret hits. **Redmi still on 0.6.0+29** (unplugged before the install).
+- **Next:** install 0.6.1+30 on the Redmi when it is plugged in (with the user's OK); the user's call on Decision 1 (corrected) and contract §6; staging deploy of Worker 0.6.0 with
   approval; the farm day with physical counts.
 - **Open review notes (not fixed, not on the demo data):** the old-format fallback split does not check that counted
   + assumed adds up to the total; `traySplitLine` prints "Assumed 0" when the assumed part is unknown; taller/shorter
