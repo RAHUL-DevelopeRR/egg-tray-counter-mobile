@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 /// shared by the result screen and the scan history so they never disagree.
 typedef ResultLook = ({IconData icon, Color color, String headline, String label});
 
-/// [basis] is the block's `confirmed_basis`; it is only read for
-/// `confirmed`, which always names what it rests on. History rows do not
-/// keep the basis: a confirmed block always rests on a declaration that
-/// agreed with the faces, so their label says so.
+/// [basis] is a 0.5 block's `confirmed_basis`; it is no longer shown. A
+/// `confirmed` block (0.5 servers only) rests on hidden stacks that were
+/// never counted, so it is shown as the estimate it is, for history rows too.
 ResultLook resultLook(String status, {List<String> basis = const []}) =>
     switch (status) {
       'verified' => const (
@@ -23,22 +22,20 @@ ResultLook resultLook(String status, {List<String> basis = const []}) =>
         headline: 'BLOCK COUNTED',
         label: 'COUNTED',
       ),
-      // Visible stacks verified; the interior rests on the declaration or
-      // the top view. Never called exact or physically verified.
-      'confirmed' => (
-        icon: Icons.fact_check_outlined,
-        color: const Color(0xFFB39DDB),
-        headline: confirmedHeadline(basis),
-        label: basis.contains('top_view') && !basis.contains('declaration')
-            ? 'CONFIRMED (TOP VIEW)'
-            : 'CONFIRMED (DECLARED)',
-      ),
-      // A total, but hidden stacks are computed or two faces differ by a layer.
+      // A total, but hidden stacks are assumed or two faces differ by a layer.
       'estimated' => const (
         icon: Icons.calculate_outlined,
         color: Color(0xFF8AB4F8),
         headline: 'BLOCK ESTIMATE',
         label: 'ESTIMATE',
+      ),
+      // An older server's stronger label for a block with a declared or
+      // top-view interior: never exact, never physically verified.
+      'confirmed' => const (
+        icon: Icons.calculate_outlined,
+        color: Color(0xFF8AB4F8),
+        headline: 'BLOCK ESTIMATE',
+        label: 'ESTIMATE (OLDER SERVER)',
       ),
       _ => const (
         icon: Icons.warning_amber_rounded,
@@ -47,20 +44,6 @@ ResultLook resultLook(String status, {List<String> basis = const []}) =>
         label: 'RETAKE',
       ),
     };
-
-/// The `confirmed` headline, naming its basis, for example "CONFIRMED:
-/// VISIBLE STACKS VERIFIED, INTERIOR DECLARED".
-String confirmedHeadline(List<String> basis) {
-  final declared = basis.contains('declaration');
-  final topView = basis.contains('top_view');
-  final interior = switch ((declared, topView)) {
-    (true, true) => 'INTERIOR DECLARED AND SEEN FROM ABOVE',
-    (true, false) => 'INTERIOR DECLARED',
-    (false, true) => 'INTERIOR SEEN FROM ABOVE',
-    (false, false) => 'INTERIOR BASIS NOT REPORTED',
-  };
-  return 'CONFIRMED: VISIBLE STACKS VERIFIED, $interior';
-}
 
 /// A history row whose stored status says nothing about the scan (saved by
 /// an app before 0.4.12, see `ScanHistoryEntry.recordedByOlderApp`).

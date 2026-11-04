@@ -11,6 +11,11 @@
 > - **Measured (offline replay, synthetic library, reports/evidence-grid-0.6.0-20261103):** 38 of 38 adversarial
 >   cases pass, 0 wrong exact; S25 (300 for 100 in 0.5.1) is withheld. The 4 x 3 field block reads 105 counted + 60
 >   assumed = 165 in a counterfactual replay (tier V reading 164). No physical count exists.
+>
+> 2026-11-03: app 4b (branch real/app-evidence-grid). The result shows counted
+> (read on faces) and assumed (hidden stacks at their neighbours' height) trays apart, in tray layers; an older
+> server's `confirmed` is shown as an estimate. Follows the user's 3 Nov defaults: deep-block totals are estimates,
+> never confirmed.
 
 > 2026-11-02: MUTAA validation of 0.5.0 and Worker 0.5.1 (local, not deployed).
 > - **Validation** (reports/mutaa-validation-0.5.0-20261101, partial): staging released no wrong total on 33 scans.

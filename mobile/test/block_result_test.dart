@@ -97,6 +97,9 @@ Map<String, dynamic> _gridBlock({
 }) => {
   ..._block(),
   'status': status,
+  'observed_trays': 40,
+  'computed_trays': 20,
+  'total_trays': 60,
   'cells': <Object>[],
   'grid': [
     [
@@ -198,19 +201,37 @@ void main() {
     expect(block.rescanCells.single, [1, 0]);
   });
 
-  testWidgets('block panel renders the computed headline and grid', (
+  testWidgets('block panel renders the counted + assumed headline and grid', (
     tester,
   ) async {
+    _tall(tester);
     final block = BlockResult.fromJson(
       _block()
         ..['fully_observed'] = false
         ..['computed_trays'] = 20
-        ..['observed_trays'] = 60,
+        ..['observed_trays'] = 60
+        ..['cells'] = [
+          ...(_block()['cells'] as List).take(3),
+          {'x': 1, 'y': 1, 'status': 'computed', 'layers': 20, 'source': 'faces'},
+        ],
     );
     await tester.pumpWidget(
-      MaterialApp(home: Scaffold(body: BlockPanel(block: block))),
+      MaterialApp(
+        home: Scaffold(
+          body: SingleChildScrollView(child: BlockPanel(block: block)),
+        ),
+      ),
     );
-    expect(find.text('ESTIMATE: 20 TRAYS IN HIDDEN STACKS'), findsOneWidget);
+    expect(
+      find.text('ESTIMATE: 60 COUNTED + 20 ASSUMED IN 1 HIDDEN STACK'),
+      findsOneWidget,
+    );
+    expect(
+      find.text(
+        'Counted 60 + Assumed 20 (range not given) = Estimated 80 tray layers',
+      ),
+      findsOneWidget,
+    );
     expect(find.text('2 wide × 2 deep'), findsOneWidget);
     expect(find.byType(CustomPaint), findsWidgets);
   });
@@ -314,7 +335,9 @@ void main() {
     expect(find.textContaining('straight_layers=20'), findsOneWidget);
     expect(find.text('Layers between detected boxes'), findsOneWidget);
     expect(find.text('Eggs if every tray is full'), findsOneWidget);
-    expect(find.text('Seen trays'), findsOneWidget); // an older server: no verified split
+    // An older server: no two-photo split, the counted row instead.
+    expect(find.text('Counted on faces'), findsOneWidget);
+    expect(find.text('Seen by two photos'), findsNothing);
   });
 
   testWidgets('a 0.4.14 block splits seen trays into two-photo and one-photo readings', (tester) async {
@@ -467,8 +490,14 @@ void main() {
           ),
         ),
       );
-      expect(find.text('seen'), findsOneWidget);
-      expect(find.text('Total trays'), findsOneWidget);
+      // Before 0.4.14 nothing was read twice: counted, read once.
+      expect(find.text('counted, read once'), findsOneWidget);
+      expect(find.text('Total'), findsOneWidget);
+      expect(
+        find.text('Counted 80 + Assumed 0 = Total 80 tray layers'),
+        findsOneWidget,
+      );
+      expect(find.text('Egg-filled trays: not checked'), findsOneWidget);
       expect(find.byKey(const ValueKey('grid-model-caption')), findsNothing);
       expect(find.text('Physical layers observed'), findsNothing);
     });
@@ -491,22 +520,25 @@ void main() {
         findsOneWidget,
       );
       for (final label in [
-        'verified (two captures)',
-        'seen by one capture',
-        'computed',
-        'declared',
-        'top view',
-        'no stack',
-        'conflict / rescan',
-        'unknown',
+        'counted, two photos agree',
+        'counted, read once',
+        '~ assumed, not counted',
+        'no stack (seen on a face)',
       ]) {
-        expect(find.text(label), findsWidgets, reason: label);
+        expect(find.text(label), findsOneWidget, reason: label);
       }
       expect(find.text('2 wide × 2 deep'), findsOneWidget);
-      expect(find.text('Physical layers observed'), findsOneWidget);
-      expect(find.text('Physical layers computed'), findsOneWidget);
-      expect(find.text('Physical layers declared'), findsOneWidget);
-      expect(find.text('60 (declared)'), findsOneWidget);
+      expect(find.text('Counted on faces'), findsOneWidget);
+      expect(find.text('40 (at least)'), findsOneWidget);
+      expect(find.text('Assumed in 1 hidden stack'), findsOneWidget);
+      expect(
+        find.text(
+          'Counted 40 + Assumed 20 (range not given) = Estimated 60 tray '
+          'layers',
+        ),
+        findsOneWidget,
+      );
+      expect(find.text('Egg-filled trays: 60 (declared)'), findsOneWidget);
       expect(find.text('occupancy declared by the operator'), findsOneWidget);
       expect(find.text('Unknown-occupancy layers'), findsOneWidget);
       expect(find.text('Declaration (2 × 2)'), findsOneWidget);
@@ -547,25 +579,8 @@ void main() {
     });
   });
 
-  group('confirmed', () {
-    test('the look names its basis and is never called exact', () {
-      expect(
-        resultLook('confirmed', basis: ['declaration']).headline,
-        'CONFIRMED: VISIBLE STACKS VERIFIED, INTERIOR DECLARED',
-      );
-      expect(
-        resultLook('confirmed', basis: ['declaration', 'top_view']).headline,
-        'CONFIRMED: VISIBLE STACKS VERIFIED, INTERIOR DECLARED AND SEEN FROM '
-        'ABOVE',
-      );
-      expect(
-        resultLook('confirmed', basis: ['top_view']).label,
-        'CONFIRMED (TOP VIEW)',
-      );
-      // History rows keep no basis; a confirmed block always rests on a
-      // declaration.
-      expect(resultLook('confirmed').label, 'CONFIRMED (DECLARED)');
-      expect(resultLook('confirmed').headline, contains('BASIS NOT REPORTED'));
+  group("an older server's confirmed", () {
+    test('the look is an estimate: never exact, confirmed or verified', () {
       for (final basis in [
         <String>[],
         ['declaration'],
@@ -573,20 +588,24 @@ void main() {
         ['declaration', 'top_view'],
       ]) {
         final look = resultLook('confirmed', basis: basis);
+        expect(look.headline, 'BLOCK ESTIMATE');
+        expect(look.label, 'ESTIMATE (OLDER SERVER)');
         for (final words in [look.headline, look.label]) {
           expect(words.toLowerCase(), isNot(contains('exact')));
-          expect(words.toLowerCase(), isNot(contains('physically verified')));
+          expect(words.toLowerCase(), isNot(contains('confirmed')));
+          expect(words.toLowerCase(), isNot(contains('verified')));
         }
       }
       expect(resultLook('confirmed').color, isNot(resultLook('exact').color));
       final result = ScanResult.fromJson(
         _scan(block: _gridBlock(status: 'confirmed', basis: ['declaration'])),
       );
+      // History keeps what the server said; the look shows an estimate.
       expect(result.resultStatus, kBlockConfirmed);
     });
 
-    testWidgets('the panel shows the basis and no "exact" anywhere for a '
-        'declared basis', (tester) async {
+    testWidgets('the panel shows counted and assumed apart and no "exact", '
+        '"confirmed" or "verified" anywhere', (tester) async {
       _tall(tester);
       final block = BlockResult.fromJson(
         _gridBlock(status: 'confirmed', basis: ['declaration']),
@@ -598,10 +617,15 @@ void main() {
           ),
         ),
       );
-      expect(find.text('INTERIOR BASIS: OPERATOR DECLARATION'), findsOneWidget);
+      expect(
+        find.text('ESTIMATE: 40 COUNTED + 20 ASSUMED IN 1 HIDDEN STACK'),
+        findsOneWidget,
+      );
+      expect(find.byKey(const ValueKey('older-label-note')), findsOneWidget);
       final text = _allText(tester).toLowerCase();
       expect(text, isNot(contains('exact')));
-      expect(text, isNot(contains('physically verified')));
+      expect(text, isNot(contains('confirmed')));
+      expect(text, isNot(contains('verified')));
       expect(text, isNot(contains('every stack seen by two photos')));
     });
   });

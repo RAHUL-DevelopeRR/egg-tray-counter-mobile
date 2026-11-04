@@ -1,6 +1,38 @@
 # Progress
 
-## 2026-11-03 (latest) - Worker 0.6.0: review fixes (Claude Code, branch `real/worker-0.6.0`)
+## 2026-11-03 - app 4b: evidence classes and the counted/assumed split (Claude Code, branch real/app-evidence-grid)
+
+Plan 4 app work 4b, built from the 0.6.0 final design in parallel with the offline demo. App code only: no Worker
+change, no APK, no version bump, nothing deployed or pushed.
+
+- **Parsing** (`mobile/lib/models/block_result.dart`): the 0.6.0 cell fields (`evidence_class`, `hidden`,
+  `assumed_layers`, `assumed_range`, `assumed_from`, `neighbours`, `top_tap`, `flags`, `past_gap_*`), the 0.6.0
+  inventory (counted/assumed/estimated, ranges, hidden and top-checked stacks, missing stacks, `released`,
+  `withheld_reason`, `provisional` with `if_depth`) and `depth_basis`, `grid_contract`, `suggested_inputs`.
+- **Older answers** get a derived class (`evidenceClassOf`, `evidenceClassOfBlockCell`) by the design's table. A stack
+  whose every reading looked through a gap (`*-recessed` source) is assumed, never counted. The split for older
+  answers comes from the stacks, not `computed_trays`; 0.4.x cells that do not cover the block fall back to
+  `observed_trays`/`computed_trays`. An older `exact` with such a stack is shown as an estimate (`displayStatus`).
+- **Drawing** (`block_view.dart`): counted stacks solid with layer ticks; assumed stacks see-through, hatched, "~N",
+  no ticks; top-view present with a blue top outline; step up "▲ ≥N" with a "taller" badge; step down "▼ ?";
+  seen-empty a dashed red footprint; top-missing and declared-missing a footprint plus a "0" outline on the block's
+  top; conflict orange. The legend lists the classes in the block.
+- **Panel** (also on the result screen): headline "ESTIMATE: N COUNTED + M ASSUMED IN K HIDDEN STACKS"; the split
+  line "Counted N + Assumed M (range lo–hi) = Estimated T tray layers" ("range not given" for older servers); an
+  assumption line; "Egg-filled trays: not checked" unless declared; "TOTAL WITHHELD" with the reason; a grey
+  "NOT RELEASED" panel for provisional figures (never a headline, history total or app total); "DECLARE THE BLOCK SIZE
+  AND SCAN AGAIN" when the server asks for it.
+- **Wording:** a 0.5 `confirmed` is shown as "BLOCK ESTIMATE" / "ESTIMATE (OLDER SERVER)"; the panel never says
+  exact, confirmed or verified for a total with assumed stacks. `BlockPanel` and the `BlockResult` API are
+  unchanged for the demo screen (checked locally against its three saved answers; the demo's own strings do not
+  collide).
+- **Verified (measured):** `flutter analyze` no issues; `flutter test` 247 of 247 in 4 of 5 full runs. One full run had
+  one failure that did not repeat in four reruns; not identified. New: `test/evidence_grid_test.dart` (25 tests),
+  `test/support/grid_06_fixtures.dart`, 2 result-screen tests.
+- **Not done:** the tap cycle with `step_up` (`elevated_tap_grid.dart`), the per-cell detail ("neighbours read
+  19–20"), export changes, the Worker 0.6.0 side. The app was not run on a device or emulator.
+
+## 2026-11-03 - Worker 0.6.0: review fixes (Claude Code, branch `real/worker-0.6.0`)
 
 A review of the two 0.6.0 commits below; fixes in one more commit on the same branch. **Local only: not deployed, not
 pushed, not merged.**

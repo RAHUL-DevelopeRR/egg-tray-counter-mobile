@@ -21,6 +21,7 @@ import 'package:image/image.dart' as img;
 import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
 
 import 'support/fake_server.dart';
+import 'support/grid_06_fixtures.dart';
 import 'support/multipart.dart';
 
 const _base = 'https://staging.example.test';
@@ -477,8 +478,9 @@ void main() {
   });
 
   group('0.5.0 result screen', () {
-    testWidgets('a confirmed result names its basis and never says exact; a '
-        'resumed scan is not asked to declare', (tester) async {
+    testWidgets("an older server's confirmed result is shown as an estimate "
+        'and never says exact or confirmed; a resumed scan is not asked to '
+        'declare', (tester) async {
       tallView(tester);
       final body = scanBody('k1');
       body['block'] = {
@@ -532,20 +534,82 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Scan result'), findsOneWidget);
       expect(find.text('DECLARE THE BLOCK'), findsNothing);
+      expect(find.text('BLOCK ESTIMATE'), findsOneWidget);
+      expect(find.text('ESTIMATE (OLDER SERVER)'), findsOneWidget);
       expect(
-        find.text('CONFIRMED: VISIBLE STACKS VERIFIED, INTERIOR DECLARED'),
+        find.text('Counted 59 + Assumed 0 = Estimated 59 tray layers'),
         findsOneWidget,
       );
-      expect(find.text('INTERIOR BASIS: OPERATOR DECLARATION'), findsOneWidget);
-      expect(find.text('59 (declared)'), findsOneWidget);
+      expect(find.text('Egg-filled trays: 59 (declared)'), findsOneWidget);
       final words = tester
           .widgetList<Text>(find.byType(Text))
           .map((t) => t.data ?? t.textSpan?.toPlainText() ?? '')
           .join(' | ')
           .toLowerCase();
       expect(words, isNot(contains('exact')));
+      expect(words, isNot(contains('confirmed')));
       expect(words, isNot(contains('physically verified')));
       expect(history.saved.single.resultStatus, 'confirmed');
+    });
+
+    Future<void> showResumed(
+      WidgetTester tester,
+      String scanId,
+      Map<String, dynamic> block,
+    ) async {
+      tallView(tester);
+      final body = scanBody(scanId)..['block'] = block;
+      pending.add(scanId, bodySent: true, kept: body);
+      await tester.pumpWidget(
+        MaterialApp(
+          home: ScanFlowScreen(
+            cameras: const [],
+            settings: _Settings(),
+            history: history,
+            pendingScans: pending,
+            uploadPhotos: true,
+            resume: pending.sessions[scanId],
+            clientFor: clientFor(
+              FakeServer({
+                'GET /health': [reply(jobsHealth)],
+              }),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('a 0.6.0 estimate shows counted + assumed on the result '
+        'screen and saves the estimate', (tester) async {
+      await showResumed(tester, 'g6', h2Block06());
+      expect(find.text('BLOCK ESTIMATE'), findsOneWidget);
+      expect(
+        find.text(
+          'Counted 157 + Assumed 79 (range 75–80) = Estimated 236 tray layers',
+        ),
+        findsOneWidget,
+      );
+      expect(find.byKey(const ValueKey('assumption-line')), findsOneWidget);
+      expect(find.text('Egg-filled trays: not checked'), findsOneWidget);
+      final saved = history.saved.single;
+      expect(saved.resultStatus, 'estimated');
+      expect(saved.shownTrays, 236);
+    });
+
+    testWidgets('a 0.6.0 block withheld for depth shows the provisional '
+        'figures but saves no total', (tester) async {
+      await showResumed(tester, 'g7', s25Block06());
+      expect(find.text('RETAKE NEEDED'), findsOneWidget);
+      expect(find.text('NOT RELEASED: DEPTH NOT PROVEN'), findsOneWidget);
+      expect(
+        find.text('DECLARE THE BLOCK SIZE AND SCAN AGAIN'),
+        findsOneWidget,
+      );
+      final saved = history.saved.single;
+      expect(saved.resultStatus, 'needs_view');
+      expect(saved.shownTrays, isNull);
+      expect(saved.block!.totalTrays, isNull);
     });
   });
 
