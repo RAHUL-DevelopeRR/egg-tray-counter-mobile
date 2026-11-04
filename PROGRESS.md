@@ -1,6 +1,71 @@
 # Progress
 
-## 2026-11-03 (latest) - pitch deck and October weekly/monthly reports (Claude Code)
+## 2026-11-03 (latest) - Worker 0.6.0: review fixes (Claude Code, branch `real/worker-0.6.0`)
+
+A review of the two 0.6.0 commits below; fixes in one more commit on the same branch. **Local only: not deployed, not
+pushed, not merged.**
+- **Declaration:** a partial stack of 0 trays is a declared missing stack (it used to be a present stack of 0 that
+  blocked eligible trays); a cell listed twice as missing counts once; two different declared heights for one stack are
+  a conflict; a declared partial stack where a face shows a gap is a conflict with or without a height.
+- **`exact`** also needs Y = 1 in `assembleGrid`, whatever `depthBasis` a caller passes.
+- **`block.total_eggs`** is null whenever any tray is assumed (kept for app 0.5.0, which shows it only without a grid).
+- **Replay:** S09's stretch is a guard now (it passes: withheld without a declared size); the runner reports a stretch
+  with `fixed_by` null as a test, not a todo. `scripts/compare_replay_versions.mjs` and `scripts/replay_saved_scans.mjs`
+  write `comparison_with_worker_0_5_1` and `saved_scans` into `summary.json`, which now regenerates byte for byte.
+- **Texts:** the report folder is `reports/evidence-grid-0.6.0-20261103` (the work was done on 3 Nov, not 4 Nov); the
+  "depth differs ... names the retake" comment and contract text corrected (the rescan names no side, as in 0.5.1);
+  context.md marks Decision 1 (corrected) and "exact for one-deep only" as design defaults awaiting the user's call.
+- **Deploy gate** (contract, top): no deploy of 0.6.0 before an app that reads `suggested_inputs`. App 0.5.x shows
+  "RETAKE LEFT" for a `depth_unproven` side, and retaking can never release the block; only declaring the size can.
+- **Worktree:** the skip-worktree bits are cleared and the root APKs and `datasets/` restored in this worktree.
+- **Verified:** `npm test` 214 tests, 210 pass, 0 fail, 4 todo (S03, S04, S07 and S29 stretches). Replay re-run:
+  adversarial 38 of 38, 0 wrong `exact`/`confirmed`, trios and face verdicts unchanged.
+- **Open for the user** (contract §6): through-gap heights that disagree are still a conflict; an honest 5 x 1
+  declaration for a row with rows touching it (S27) is withheld for good; Decision 1 (corrected) and "exact for
+  one-deep only" await the user's call.
+- **Not done:** app 4b is on the parallel branch `real/app-evidence-grid` (worktree `.claude/worktrees/real-app`).
+
+## 2026-11-03 - Worker 0.6.0: evidence grid and hidden-tray calculation (Claude Code, branch `real/worker-0.6.0`)
+
+Plan 4 Phase 3, Worker side, run in parallel with the offline demo (main checkout). Built from `10f2c3d` in the
+worktree `.claude/worktrees/real-worker`. **Local only: not deployed, not pushed, not merged.**
+
+**Done.**
+- **Hidden stacks are assumed, never counted.** A stack no face photo sees gets the median of its line-of-sight
+  neighbours (the front stack in its column, the side end stacks in its row); with none, the block's most common
+  face height. The range is the neighbours' spread, not a bound. Each grid cell names its `evidence_class`.
+- **`block.inventory`** splits counted and assumed trays: `counted_trays`, `assumed_trays`, `estimated_total`,
+  `estimated_range` ("if every hidden stack is there at its neighbours' heights"), `hidden_stacks`,
+  `unchecked_hidden_stacks`, missing stacks by kind, `released`/`withheld_reason`, and `provisional`.
+- **Top view:** presence, holes and step-ups only (`step_up` tap added). A `missing` tap is the only way a top view
+  lowers a total; a step down makes the height unknown and withholds the total.
+- **Depth proof (Decision 1, corrected):** a CORNER photo cannot prove depth (it sees the same touching rows: S25C).
+  A depth over one stack needs the declared block size; a side that repeats the front also needs the CORNER photo.
+  Withheld blocks get provisional figures (front row counted, and the what-if total when only the depth is in doubt).
+- **Statuses:** `confirmed` is never returned; `exact` only for one-deep blocks. Trays seen through a gap are hints.
+- Contract `docs/GRID_CONTRACT_0.6.0.md` (includes the top view's purpose); `PIPELINE_VERSION` `worker-0.6.0`.
+- Scripts: `scripts/replay_saved_scans.mjs`, `scripts/compare_replay_versions.mjs`.
+
+**Verification (measured, offline).**
+- `npm test` (tsc, then node --test): 213 tests, 208 pass, 0 fail, 5 todo. New: `test/hidden.test.mjs` (H1–H9),
+  H10–H13 in `test/side_check.test.mjs`.
+- Replay `reports/evidence-grid-0.6.0-20261103`: adversarial 38 of 38; Worker 0.5.1 on the same library 36 of 38
+  (S25 and S25C: `estimated` 300 for 100). 0 wrong `exact`/`confirmed`. Trios (4 of 22 released, 0 wrong) and all
+  face verdicts unchanged. Right releases 11 in both; 0.6.0 drops the 2 wrong ones.
+- Saved scans: the 99-block stays `estimated` 99. The 4 x 3 field block (9b4c783e) is withheld as sent; with
+  counterfactual camera headings, a synthetic CORNER photo and the 4 x 3 declaration it is **165 = 105 counted + 60
+  assumed (range 163–167)**; the visual reading is 164 (tier V). L-100 stays withheld.
+- **Cost:** a square block with a CORNER photo but no declaration (S21 as in 0.5.1, right at 180) is now withheld.
+
+**Not done.** App 4b (`mobile/`, on 0.5.1+28) was not touched. No staging deploy (needs approval). No physical count.
+**Disk:** C: reached 0 MB free during this session. I removed only my worktree's copies of the root APKs and
+`datasets/` (marked skip-worktree in that worktree's index); the main checkout was not touched. (Restored and the
+bits cleared in the review pass above.)
+
+**Next.** App 4b (evidence-class colours, split rows, provisional panel, `step_up` tap, "declare the block size"
+prompt); the user's call on the open points in the contract §6; staging deploy of 0.6.0 with approval.
+
+## 2026-11-03 - pitch deck and October weekly/monthly reports (Claude Code)
 
 - **Pitch deck** (13 slides, plain language) for the user and the faculty guides: https://claude.ai/artifact/A5wetZ31tYgQLLdVgVkZLm
   (private until shared). It covers what the app does, the statuses, what was measured, the hidden-stack limit, the

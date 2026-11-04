@@ -118,7 +118,8 @@ const backAsLeft = { ...CAMERA, left: { yaw_deg: 180, yaw_session: 'syn' } };
  *   not_confirmed   anything but `confirmed` (a declaration cannot stand in for missing photo evidence)
  *   total_ok        a total is released and equals the truth (coverage the witness views must restore)
  * fixed_by names the plan phase expected to make a case pass when it fails today (null = must pass now). stretch is a
- * stricter check the release contract does not require yet (an estimate may be wrong), with the phase meant to meet it.
+ * stricter check the release contract does not require yet (an estimate may be wrong), with the phase meant to meet it
+ * (fixed_by null: a stretch that passes now and must keep passing).
  */
 export function adversarialCases(registry) {
   const S = syntheticFace;
@@ -148,7 +149,8 @@ export function adversarialCases(registry) {
       headings: CAMERA, truth: 60, check: 'no_wrong_exact', fixed_by: null },
     { id: 'S09 missing interior stack in a 3x3 block (photos identical to a full block)',
       views: { straight: S([20, 20, 20]), left: S([20, 20, 20]), right: S([20, 20, 20]) },
-      headings: CAMERA, truth: 160, check: 'no_wrong_exact', fixed_by: null, stretch: { check: 'no_wrong_total', fixed_by: 'H' } },
+      // 0.6.0: withheld until the block size is declared, so it releases no wrong total (a guard); declared, it is S29.
+      headings: CAMERA, truth: 160, check: 'no_wrong_exact', fixed_by: null, stretch: { check: 'no_wrong_total', fixed_by: null } },
     { id: 'S10 LEFT and RIGHT photos swapped (heights differ)', views: { straight: S([20, 20, 20]), left: S([20, 18]), right: S([20, 20]) },
       headings: swap, truth: 118, check: 'no_wrong_total', fixed_by: null },
     { id: 'S11 back face (180 degrees) sent as LEFT of a 4x2 block', views: { straight: S([20, 20, 20, 20]), left: S([20, 20, 20, 20]), right: S([20, 20]) },
@@ -193,9 +195,11 @@ export function adversarialCases(registry) {
     { id: 'R03 MUTAA M16-FAR: neighbouring block in the front photo', views: trioFromRaw('mutaa:M16-FAR'), headings: CAMERA,
       truth: null, check: 'withheld', fixed_by: null },
     // 0.5.1: sides that repeat the front need a guided-camera CORNER photo that sees the depth directly.
-    { id: 'S21 square 3x3 block, camera walk-around, CORNER photo agreeing (3 wide, 3 deep)',
+    // 0.6.0: a depth over one stack also needs the declared block size (rows standing against a block look the same in
+    // every photo, the CORNER photo included).
+    { id: 'S21 square 3x3 block, camera walk-around, CORNER photo agreeing (3 wide, 3 deep), declared 3 x 3',
       views: { straight: S([20, 20, 20]), left: S([20, 20, 20]), right: S([20, 20, 20]) },
-      headings: CAMERA, extras: syntheticCorner(3, 3), truth: 180, check: 'total_ok', fixed_by: null },
+      headings: CAMERA, extras: { ...syntheticCorner(3, 3), ...declared(3, 3, { interior: 'unknown' }) }, truth: 180, check: 'total_ok', fixed_by: null },
     { id: 'S22 genuine 3x2 block, camera walk-around, ELEVATED taps only: taps are not a depth witness (sized from the declaration)',
       views: { straight: S([20, 20, 20]), left: S([20, 20]), right: S([20, 20]) },
       headings: CAMERA, extras: { topView: { x: 3, y: 2, cells: [] }, elevated: true }, truth: 120, check: 'withheld', fixed_by: null },
@@ -209,8 +213,24 @@ export function adversarialCases(registry) {
       headings: CAMERA, extras: syntheticCorner(5, 5), truth: 400, check: 'no_wrong_total', fixed_by: null },
     { id: 'S25 5x1 row, real turn, side photos show the row end and two rows standing behind it (three 20s)',
       views: { straight: S([20, 20, 20, 20, 20]), left: S([20, 20, 20], { shift: 1 }), right: S([20, 20, 20], { shift: 2 }) },
-      headings: CAMERA, truth: 100, check: 'no_wrong_total',
-      fixed_by: 'decision asked 2 Nov: a depth over one stack needs a CORNER photo or an agreeing declaration; photos alone cannot tell rows behind from the block' },
+      headings: CAMERA, truth: 100, check: 'no_wrong_total', fixed_by: null },   // 0.6.0: depth_unproven without a declaration, withheld
+    { id: 'S25C S25 with a CORNER photo reading 5 x 3 (it sees the same touching rows): a CORNER photo cannot prove a depth',
+      views: { straight: S([20, 20, 20, 20, 20]), left: S([20, 20, 20], { shift: 1 }), right: S([20, 20, 20], { shift: 2 }) },
+      headings: CAMERA, extras: syntheticCorner(5, 3), truth: 100, check: 'withheld', fixed_by: null },
+    { id: 'S26 4x3 block of 15s, sides repeat the front, CORNER photo (4 x 3) and declared 4 x 3: four hidden stacks assumed at 15',
+      views: { straight: S([15, 15, 15, 15]), left: S([15, 15, 15], { shift: 1 }), right: S([15, 15, 15], { shift: 2 }) },
+      headings: CAMERA, extras: { ...syntheticCorner(4, 3), ...declared(4, 3, { interior: 'unknown' }) }, truth: 180, check: 'total_ok', fixed_by: null },
+    { id: 'S27 S25 with the honest declaration (5 wide, 1 deep): the sides show touching rows, withheld',
+      views: { straight: S([20, 20, 20, 20, 20]), left: S([20, 20, 20], { shift: 1 }), right: S([20, 20, 20], { shift: 2 }) },
+      headings: CAMERA, extras: declared(5, 1), truth: 100, check: 'withheld', fixed_by: null },
+    { id: 'S28 3x2 block with the hidden stack absent: CORNER photo, declared 3 x 2, ELEVATED tap missing',
+      views: { straight: S([20, 20, 20]), left: S([20, 20], { shift: 1 }), right: S([20, 20], { shift: 2 }) },
+      headings: CAMERA, extras: { ...syntheticCorner(3, 2), ...declared(3, 2, { interior: 'unknown' }),
+        topView: { x: 3, y: 2, cells: [{ x: 1, y: 1, state: 'missing' }] }, elevated: true }, truth: 100, check: 'total_ok', fixed_by: null },
+    { id: 'S29 S09 (3x3, interior stack missing) with a CORNER photo and declared 3 x 3, no top view',
+      views: { straight: S([20, 20, 20]), left: S([20, 20, 20], { shift: 1 }), right: S([20, 20, 20], { shift: 2 }) },
+      headings: CAMERA, extras: { ...syntheticCorner(3, 3), ...declared(3, 3, { interior: 'unknown' }) }, truth: 160, check: 'not_exact',
+      fixed_by: null, stretch: { check: 'no_wrong_total', fixed_by: 'top view: an unchecked hole overcounts 20' } },
   ];
 }
 

@@ -44,14 +44,24 @@ test('a phone heading settles which way the camera faced, but not that a side re
     ['turned_repeats_front', 88, 'turned_repeats_front', -92]);
   assert.match(turned.left.reason, /^LEFT: this photo shows the same stacks with the same heights as STRAIGHT, so it may be the front face again/);
   assert.match(turned.right.reason, /add a CORNER photo from the front-right corner, with the corner stack and both faces in frame, to count the depth$/);
-  // A CORNER photo reading 3 wide and 3 deep settles the side it sees, and the other side when it repeats the front too.
-  const seen = sideCheck({straight: square, left: square, right: square}, walk, {x: 3, y: 3, side: 'left', problem: null});
+  // A CORNER photo reading 3 wide and 3 deep settles the side it sees, and the other side when it repeats the front too;
+  // since 0.6.0 the depth still needs the declared size (rows standing against a block look the same in every photo).
+  const corner = {x: 3, y: 3, side: 'left', problem: null};
+  const seen = sideCheck({straight: square, left: square, right: square}, walk, corner);
+  for (const s of ['left', 'right']) {
+    assert.deepEqual([seen[s].status, seen[s].repeats_front, seen[s].corner_settles, seen[s].retake], ['depth_unproven', true, true, 'declaration'], s);
+    assert.match(seen[s].reason, /: the CORNER photo shows this is a side face 3 deep, but rows standing against a block look the same in every photo; declare the block size/);
+  }
+  const both = sideCheck({straight: square, left: square, right: square}, walk, corner, {x: 3, y: 3});
   for (const s of ['left', 'right'])
-    assert.deepEqual([seen[s].status, seen[s].repeats_front, seen[s].depth_witness, seen[s].reason], ['turned', true, 'corner', undefined], s);
-  // Sides that differ from the front are side faces on the heading alone.
+    assert.deepEqual([both[s].status, both[s].repeats_front, both[s].depth_witness, both[s].reason], ['turned', true, 'corner_and_declaration', undefined], s);
+  // Sides that differ from the front are side faces on the heading alone, but their depth rests on the declared size.
   const side = cols([12, 12]);
   const deep = sideCheck({straight: square, left: side, right: side}, walk);
-  assert.deepEqual([deep.left.status, deep.left.reason, deep.left.repeats_front], ['turned', undefined, undefined]);
+  assert.deepEqual([deep.left.status, deep.left.retake, deep.left.repeats_front], ['depth_unproven', 'declaration', undefined]);
+  assert.match(deep.left.reason, /^LEFT: the block reads 2 deep here, but rows standing against a block look the same in every photo; declare the block size \(X x Y\) before the scan to say where the block ends$/);
+  const declaredDeep = sideCheck({straight: square, left: side, right: side}, walk, null, {x: 3, y: 2});
+  assert.deepEqual([declaredDeep.left.status, declaredDeep.left.depth_witness, declaredDeep.left.reason], ['turned', 'declaration', undefined]);
   // Heading wraps around: 350 -> 80 is a 90 degree turn, 10 -> -340 is no turn at all.
   assert.equal(sideCheck({straight: square, left: side, right: side},
     {straight: heading(350), left: heading(80), right: heading(260)}).left.turn_deg, 90);
@@ -87,7 +97,7 @@ test('a CORNER photo settles only the side it sees, at the depth it reads, and s
   const check = (left, right, corner) => sideCheck({straight: front, left: cols(left), right: cols(right)}, walk, corner);
   // LEFT is a real side (back rows lower), RIGHT the front again: a front-left CORNER photo cannot vouch for RIGHT.
   const scoped = check([15, 15, 20], [20, 20, 20], {x: 4, y: 3, side: 'left', problem: null});
-  assert.deepEqual([scoped.left.status, scoped.right.status], ['turned', 'turned_repeats_front']);
+  assert.deepEqual([scoped.left.status, scoped.right.status], ['depth_unproven', 'turned_repeats_front']);
   assert.match(scoped.right.reason, /and the CORNER photo sees the left side, not this one; add a CORNER photo from the front-right corner/);
   // The CORNER photo reads 1 deep: the 4-deep side is not the side face.
   const wrong = check([20, 20, 20, 20], [20, 20, 20, 20], {x: 4, y: 1, side: 'left', problem: null});
@@ -201,11 +211,16 @@ function walkAround(extras) {
 }
 const still = {source: 'captured_still', blocked: false, heading: null};
 
-test('a CORNER photo that sees a 5 x 5 block settles the depth of sides that repeat the front; they still verify nothing', () => {
-  const result = walkAround({corner: cornerPhoto(9, 5), cornerCapture: still, cornerSide: 'front_left'});
-  assert.deepEqual([result.block.side_check.left.status, result.block.side_check.left.depth_witness], ['turned', 'corner']);
+test('a CORNER photo that sees a 5 x 5 block settles sides that repeat the front; the depth also needs the declared size', () => {
+  const alone = walkAround({corner: cornerPhoto(9, 5), cornerCapture: still, cornerSide: 'front_left'});
+  assert.deepEqual([alone.block.side_check.left.status, alone.block.side_check.left.corner_settles], ['depth_unproven', true]);
+  assert.deepEqual([alone.block.status, alone.block.total_trays], ['needs_view', null]);
+  const decl = {x: 5, y: 5, interior: 'unknown', missing_cells: [], partial_stacks: [], cover_trays: 'unknown', occupancy: 'unknown',
+    reference_height: null, operator: null, declared_at: null};
+  const result = walkAround({corner: cornerPhoto(9, 5), cornerCapture: still, cornerSide: 'front_left', declaration: decl});
+  assert.deepEqual([result.block.side_check.left.status, result.block.side_check.left.depth_witness], ['turned', 'corner_and_declaration']);
   assert.deepEqual([result.block.corner.x, result.block.corner.y, result.block.corner.agrees], [5, 5, true]);
-  assert.deepEqual([result.block.status, result.block.total_trays], ['estimated', 500]);
+  assert.deepEqual([result.block.status, result.block.total_trays, result.block.depth_basis], ['estimated', 500, 'corner_and_declaration']);
   assert.deepEqual([result.views.left.trusted, result.views.right.trusted, result.views.straight.trusted], [false, false, true]);
 });
 
@@ -274,8 +289,138 @@ test('a side photo turned past 135 degrees faces the back of the block and is re
   assert.equal(back.right.status, 'turned');
   // Facing the left side face is a right turn (negative yaw): recorded as direction_ok, not enforced yet.
   const genuine = sideCheck({straight: square, left: side, right: side}, {straight: heading(0), left: heading(-92), right: heading(87)});
-  assert.deepEqual([genuine.left.status, genuine.left.direction_ok, genuine.right.direction_ok], ['turned', true, true]);
+  assert.deepEqual([genuine.left.status, genuine.left.direction_ok, genuine.right.direction_ok], ['depth_unproven', true, true]);
   const swapped = sideCheck({straight: square, left: side, right: side}, {straight: heading(0), left: heading(92), right: heading(-87)});
-  assert.deepEqual([swapped.left.status, swapped.left.direction_ok, swapped.right.direction_ok], ['turned', false, false]);
-  assert.equal(sideCheck({straight: square, left: side, right: side}, {straight: heading(0), left: heading(-135), right: heading(90)}).left.status, 'turned');
+  assert.deepEqual([swapped.left.status, swapped.left.direction_ok, swapped.right.direction_ok], ['depth_unproven', false, false]);
+  assert.equal(sideCheck({straight: square, left: side, right: side}, {straight: heading(0), left: heading(-135), right: heading(90)}).left.status, 'depth_unproven');
+});
+
+// ---- 0.6.0 depth proof (docs/GRID_CONTRACT_0.6.0.md): rows standing against a block look the same in every photo, a
+// CORNER photo included, so a depth over one stack rests on the declared block size. Camera walk-arounds through
+// modelDiagnostics; each face's frame is sized to its stacks so every face passes the capture gate.
+const faceView = (heights, {x0 = 100, y0 = 100} = {}) => ({count: 0, confidence: 0,
+  detections: heights.map((layers, i) => column(x0 + i * 100, layers, {y0})).flat(), image: {width: 100 * heights.length + x0, height: 1000}});
+const WALK = {straight: heading(0, 'k'), left: heading(-90, 'k'), right: heading(90, 'k')};
+function walkScan(faces, extras = {}, walk = WALK) {
+  // Each side framed a little differently: separate captures, not copies of one photo.
+  const results = {straight: faceView(faces.straight), left: faceView(faces.left, {x0: 130, y0: 110}), right: faceView(faces.right, {x0: 160, y0: 120})};
+  if (!faces.right.length) results.right = {count: 0, confidence: 0, detections: [], image: FRAME};
+  const stills = Object.fromEntries(['left', 'right', 'straight'].map(v => [v, {source: 'captured_still', blocked: false, heading: walk[v]}]));
+  return modelDiagnostics('t', results, {}, env, 0, undefined, undefined, walk, stills, extras);
+}
+const declare = (x, y) => ({declaration: {x, y, interior: 'unknown', missing_cells: [], partial_stacks: [], cover_trays: 'unknown',
+  occupancy: 'unknown', reference_height: null, operator: null, declared_at: null}});
+const cornerReads = (x, y) => ({corner: cornerPhoto(x + y - 1, y), cornerCapture: still, cornerSide: 'front_left'});
+const NEW_NUMBERS = ['counted_trays', 'counted_stacks', 'assumed_trays', 'assumed_range', 'assumed_stacks', 'estimated_total', 'estimated_range',
+  'hidden_stacks', 'hidden_stacks_top_checked', 'unchecked_hidden_stacks', 'missing_stacks'];
+const S25 = {straight: [20, 20, 20, 20, 20], left: [20, 20, 20], right: [20, 20, 20]};
+
+test('H10: S25, a 5x1 row with two rows standing behind it, is withheld until the operator declares the block size', () => {
+  const r = walkScan(S25);
+  assert.deepEqual([r.block.side_check.left.status, r.block.side_check.right.status], ['depth_unproven', 'depth_unproven']);
+  assert.deepEqual([r.block.status, r.block.total_trays, r.block.grid, r.block.cells], ['needs_view', null, [], []]);
+  assert.deepEqual([r.block.suggested_views, r.block.suggested_inputs, r.block.depth_basis], [[], ['declaration'], null]);
+  assert.equal(r.rescan.recommended_view, 'left');
+  assert.match(r.rescan.reason, /^LEFT: the block reads 3 deep here, but rows standing against a block look the same in every photo; declare the block size/);
+  const inv = r.block.inventory;
+  assert.deepEqual([inv.released, inv.withheld_reason], [false, 'depth_unproven']);
+  for (const k of NEW_NUMBERS) assert.equal(inv[k], null, k);
+  assert.deepEqual(inv.provisional, {kind: 'depth_unproven', reason: r.block.side_check.left.reason, front_row_counted: 100,
+    if_depth: {y: 3, counted_trays: 180, assumed_trays: 120, assumed_stacks: 6, estimated_total: 300}});
+  // The operator says where the block ends: 5 x 3 releases the estimate, 5 x 1 (the truth) keeps it withheld.
+  const deep = walkScan(S25, declare(5, 3));
+  assert.deepEqual([deep.block.status, deep.block.total_trays, deep.block.depth_basis], ['estimated', 300, 'declaration']);
+  assert.deepEqual([deep.block.inventory.provisional, deep.block.suggested_inputs], [null, []]);
+  // Tray capacity is never given for assumed trays (tray layers, never eggs).
+  assert.equal(deep.block.total_eggs, null);
+  const row = walkScan(S25, declare(5, 1));
+  assert.deepEqual([row.block.status, row.block.total_trays], ['needs_view', null]);
+  assert.match(row.block.side_check.left.reason, /; the declaration says 5 x 1$/);
+  assert.deepEqual(row.block.suggested_inputs, ['declaration']);
+  // A CORNER photo sees the same touching rows (5 x 3): alone it proves nothing; with the declaration it agrees.
+  const corner = walkScan(S25, cornerReads(5, 3));
+  assert.deepEqual([corner.block.status, corner.block.total_trays, corner.block.suggested_views], ['needs_view', null, []]);
+  const both = walkScan(S25, {...cornerReads(5, 3), ...declare(5, 3)});
+  assert.deepEqual([both.block.status, both.block.total_trays, both.block.corner.agrees], ['estimated', 300, true]);
+  // A side shot twice is still caught and retaken first.
+  const twice = walkScan(S25, {}, {...WALK, right: heading(-85, 'k')});
+  assert.deepEqual([twice.block.side_check.right.status, twice.rescan.recommended_view], ['same_way_as_other_side', 'right']);
+  // Sides of different depths need no proof of their own: the block model's depth conflict names the retake.
+  const uneven = walkScan({straight: S25.straight, left: [20, 20, 20], right: [12, 12]});
+  assert.deepEqual([uneven.block.side_check.left.status, uneven.block.side_check.right.status, uneven.block.status], ['turned', 'turned', 'conflict']);
+});
+
+test('H11: sides that repeat the front need the CORNER photo and the declared size; the what-if waits for the CORNER photo', () => {
+  const H1 = {straight: [15, 15, 15, 15], left: [15, 15, 15], right: [15, 15, 15]};
+  const r = walkScan(H1);
+  assert.deepEqual([r.block.side_check.left.status, r.block.status, r.block.suggested_views, r.block.suggested_inputs],
+    ['turned_repeats_front', 'needs_view', ['corner'], ['declaration']]);
+  assert.deepEqual(r.block.inventory.provisional, {kind: 'side_repeats_front', reason: r.block.side_check.left.reason, front_row_counted: 60, if_depth: null});
+  assert.equal(r.block.inventory.withheld_reason, 'side_repeats_front');
+  const declared = walkScan(H1, declare(4, 3));
+  assert.deepEqual([declared.block.status, declared.block.suggested_views, declared.block.suggested_inputs], ['needs_view', ['corner'], []]);
+  const corner = walkScan(H1, cornerReads(4, 3));
+  assert.deepEqual([corner.block.side_check.left.status, corner.block.side_check.left.corner_settles, corner.block.status],
+    ['depth_unproven', true, 'needs_view']);
+  assert.match(corner.block.side_check.left.reason, /^LEFT: the CORNER photo shows this is a side face 3 deep, but rows standing against a block/);
+  assert.equal(corner.block.inventory.provisional.kind, 'depth_unproven');
+  assert.equal(corner.block.inventory.provisional.if_depth.estimated_total, 180);
+  assert.deepEqual([corner.block.suggested_views, corner.block.suggested_inputs], [[], ['declaration']]);
+  const both = walkScan(H1, {...cornerReads(4, 3), ...declare(4, 3)});
+  assert.deepEqual([both.block.status, both.block.total_trays, both.block.depth_basis], ['estimated', 180, 'corner_and_declaration']);
+  assert.deepEqual([both.views.left.trusted, both.views.right.trusted], [false, false]);
+  assert.deepEqual([both.block.inventory.counted_trays, both.block.inventory.assumed_trays, both.block.inventory.unchecked_hidden_stacks], [120, 60, 4]);
+  assert.deepEqual(both.block.suggested_views, ['elevated']);
+});
+
+test('H12: earlier cases keep their answers; provisional figures appear only for a block withheld for its depth', () => {
+  // MUTAA L-100 as a camera walk-around: withheld as in 0.5.1, with the front row counted and no what-if.
+  const l100 = walkAround({});
+  assert.deepEqual([l100.block.status, l100.block.inventory.provisional.front_row_counted, l100.block.inventory.provisional.if_depth],
+    ['needs_view', 100, null]);
+  // A gallery 3-deep block (no headings): unconfirmed sides, no provisional figures, no new numbers.
+  const gallery = modelDiagnostics('t', Object.fromEntries(['left', 'right', 'straight'].map(v =>
+    [v, faceView(v === 'straight' ? [20, 20, 20, 20] : [20, 20, 20])])), {}, env, 0);
+  assert.deepEqual([gallery.block.side_check.left.status, gallery.block.inventory.provisional], ['unconfirmed', null]);
+  for (const k of NEW_NUMBERS) assert.equal(gallery.block.inventory[k], null, k);
+  // S18: a one-deep 2 x 1 block, every stack read by two captures: exact, resting on its one-stack depth.
+  const s18 = walkScan({straight: [20, 20], left: [20], right: [20]});
+  assert.deepEqual([s18.block.status, s18.block.total_trays, s18.block.depth_basis], ['exact', 40, 'one_deep']);
+  assert.deepEqual([s18.block.inventory.counted_trays, s18.block.inventory.hidden_stacks, s18.block.inventory.released], [40, 0, true]);
+  assert.equal(s18.block.total_eggs, 1200);
+  // A refused photo is retaken first: no provisional figures while a face is not a measurement.
+  const refused = walkScan({straight: S25.straight, left: [20, 20, 20], right: []});
+  assert.deepEqual([refused.block.side_check.left.status, refused.block.status, refused.block.inventory.provisional, refused.rescan.recommended_view],
+    ['depth_unproven', 'needs_view', null, 'right']);
+});
+
+test('H13: every 0.5.0 key stays, and the legacy cells, computed_trays and totals agree with the grid', () => {
+  const CELL_KEYS = ['physical_stack_id', 'x', 'y', 'stack_present', 'z_layers', 'filled_layers', 'partial_layers', 'empty_cover_layers',
+    'unknown_layers', 'observed_views', 'measurement_sources', 'status', 'uncertainties', 'readings', 'pair_type'];
+  const BLOCK_KEYS = ['status', 'width', 'depth', 'faces_used', 'typical_layers', 'cells', 'observed_trays', 'computed_trays', 'filled_trays',
+    'visible_verified_trays', 'visible_single_reading_trays', 'single_reading_cells', 'total_trays', 'fully_observed', 'faces_consistent',
+    'conflicts', 'ambiguities', 'rescan_cells', 'note', 'contract', 'eggs_per_tray', 'verification', 'total_eggs', 'eggs_basis', 'capture',
+    'side_check', 'grid', 'inventory', 'confirmed_basis', 'declaration', 'corner', 'top_view', 'suggested_views', 'grid_note'];
+  const INVENTORY_KEYS = ['physical_layers_observed', 'physical_layers_computed', 'physical_layers_declared', 'physical_layers_top_view',
+    'eligible_egg_trays', 'empty_cover_layers', 'unknown_occupancy_layers', 'unknown_cells'];
+  const hole = {topView: {x: 5, y: 3, cells: [{x: 2, y: 1, state: 'missing'}, {x: 1, y: 2, state: 'step_up'}]}, elevated: true};
+  for (const extras of [declare(5, 3), {...declare(5, 3), ...hole}]) {
+    const {block} = walkScan(S25, extras);
+    for (const k of BLOCK_KEYS) assert.ok(k in block, k);
+    for (const k of INVENTORY_KEYS) assert.ok(k in block.inventory, k);
+    for (const g of block.grid.flat()) for (const k of CELL_KEYS) assert.ok(k in g, k);
+    assert.deepEqual([block.grid_contract, block.confirmed_basis], ['0.6.0', []]);
+    const hidden = block.grid.flat().filter(g => g.hidden);
+    assert.equal(block.computed_trays, hidden.filter(g => g.stack_present !== false).reduce((s, g) => s + (g.z_layers ?? 0), 0));
+    assert.equal(block.inventory.released, true);
+    assert.deepEqual([block.observed_trays, block.total_trays], [block.inventory.counted_trays, block.inventory.estimated_total]);
+    for (const g of hidden) {
+      const legacy = block.cells.find(c => c.x === g.x && c.y === g.y);
+      assert.equal(legacy.layers, g.z_layers, `${g.x},${g.y}`);
+      if (g.stack_present === false) assert.equal(legacy.status, 'missing');
+    }
+  }
+  const {block} = walkScan(S25, {...declare(5, 3), ...hole});
+  assert.deepEqual([block.total_trays, block.computed_trays, block.inventory.estimated_range], [281, 101, [281, null]]);
+  assert.deepEqual([block.cells.find(c => c.x === 2 && c.y === 1).status, block.top_view.steps_up], ['missing', 1]);
 });

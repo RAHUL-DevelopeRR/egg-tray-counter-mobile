@@ -49,7 +49,7 @@ for (const c of adversarialCases(registry)) {
   test(`adversarial ${c.id}`, c.fixed_by ? {todo: `plan phase ${c.fixed_by}`} : {}, () => {
     assert.ok(result.pass, `${c.check}: got ${result.status} ${result.total}, truth ${c.truth}`);
   });
-  if (c.stretch) test(`adversarial ${c.id}, stretch: ${c.stretch.check}`, {todo: `plan phase ${c.stretch.fixed_by}`}, () => {
+  if (c.stretch) test(`adversarial ${c.id}, stretch: ${c.stretch.check}`, c.stretch.fixed_by ? {todo: `plan phase ${c.stretch.fixed_by}`} : {}, () => {
     assert.ok(result.stretch.pass, `got ${result.status} ${result.total}, truth ${c.truth}`);
   });
 }
