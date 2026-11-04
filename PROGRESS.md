@@ -34,6 +34,12 @@ For the faculty demo on the morning of 4 Nov. **Local only: nothing pushed or de
   front), per-photo detections 103/100/101. 99-tray row (img-01, warehouse image-4, img-32): BLOCK ESTIMATE 99 with the
   3D grid 20/20/20/20/19. Both repeat earlier answers for the same photos; the 99 trio is a worked example. Gallery
   scans switched back off; the test photos stay in `/sdcard/Pictures/EggTrayTest/`.
+- **Phone audit** (`reports/phone-audit-20261104/`, measured, staging 0.5.0, 6 detector calls): MUTAA photos never
+  used as a block set. A, a 3-stack row (front `151210436`, right end `151224648`, stand-in left `151204619`): 3D grid
+  3 × 1 at 10/10/11 against a blind manual 10 filled + 1 cover each, total withheld (stand-in LEFT refused as too far).
+  B, the M16 block from new angles (`151353868`/`151339474`/`151436402`): RETAKE NEEDED, no model (gallery sides cannot
+  prove depth; LEFT read 3 deep against manual 2). 0 wrong totals. **Finding:** the app's gallery path refuses photos
+  over 40 MP (`photo_upload_pane.dart:27`); 4 MUTAA photos are 50 MP. No complete new block set is left in MUTAA.
 - **Next:** the user's call on Decision 1 (corrected) and contract §6; staging deploy of Worker 0.6.0 with
   approval; the farm day with physical counts.
 - **Open review notes (not fixed, not on the demo data):** the old-format fallback split does not check that counted
