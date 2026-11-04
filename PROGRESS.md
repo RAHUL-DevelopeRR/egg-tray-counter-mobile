@@ -1,5 +1,38 @@
 # Progress
 
+## 2026-11-04 (latest) - offline demo, real work merged, app 0.6.0+29 (Claude Code, `rollout/0.4.12-staging`)
+
+For the faculty demo on the morning of 4 Nov. **Local only: nothing pushed or deployed. Staging still runs 0.5.0
+(52a1d5e8); production 4c1480e6 untouched.**
+- **Offline demo** (`db66925`, app 0.5.1+28): home button "DEMO — SAVED RESULTS (NOT A LIVE SCAN)" opens
+  `mobile/lib/features/demo/demo_screen.dart`, three saved test-server answers bundled in `mobile/assets/demo/`
+  (99-tray row, 4 x 3 field block 105 counted + 60 assumed = 165, L-100 refused). Nothing is sent or saved.
+  Cheat sheet `docs/DEMO_CHEAT_SHEET_20261104.md`; screenshots `reports/demo-20261104/`.
+- **Merged** `real/worker-0.6.0` (`c63f497`) and `real/app-evidence-grid` (`8ad17f4`); conflicts only in PROGRESS.md
+  and context.md, both entries kept. Worker 0.6.0 stays undeployed (its deploy gate needs an app that reads
+  `suggested_inputs`: app 0.6.0+29 now does).
+- **Fixes after an independent review of the app branch** (no crash and no arithmetic error on the 12 saved 0.6.0
+  answers or the 3 demo answers): removed "Eggs if every tray is full" from the block panel (it showed 4950 on the
+  4 x 3 demo, capacity on 60 assumed trays); the "if every hidden stack is there" range is hidden on a withheld block;
+  the assumed row no longer says "(N checked from the top)" (that count includes stacks tapped missing); the
+  declaration pane no longer says "can never be CONFIRMED".
+- **Version** 0.6.0+29 (`pubspec.yaml`, `app_version.dart`).
+- **Verified (measured):** Worker `npm test` 214 tests, 210 pass, 0 fail, 4 todo; `dart analyze` no issues;
+  `flutter test` 252 of 252 (one earlier full run had one failure in `pending_scan_test.dart` that passed alone and on
+  the next full run: the intermittent failure the app branch also saw, still not identified).
+- **APK** `egg-tray-counter-0.6.0-demo-staging.apk` (repo root, git-ignored): 63,888,684 bytes, SHA-256 prefix
+  a8320338f21a54f9, versionName 0.6.0 / versionCode 29, signer SHA-256 29013b98…, 0 hits for the staging admin token
+  or the keystore password in the APK or its unpacked files. Installed on the emulator (emulator-5554); the demo's
+  three tabs render (screenshots in `reports/demo-20261104/`, replaced with the 0.6.0+29 view): the 4 x 3 block shows
+  4 see-through "~15" stacks, the eggs row is gone. **Not installed on the Redmi** (needs the user's OK).
+- **Next:** with the user's OK, `adb install -r egg-tray-counter-0.6.0-demo-staging.apk` on the Redmi and check
+  Settings points at the staging URL before any live scan (the default is production). Push after the demo, with the
+  user's OK. Then: the user's call on Decision 1 (corrected) and contract §6; staging deploy of Worker 0.6.0 with
+  approval; the farm day with physical counts.
+- **Open review notes (not fixed, not on the demo data):** the old-format fallback split does not check that counted
+  + assumed adds up to the total; `traySplitLine` prints "Assumed 0" when the assumed part is unknown; taller/shorter
+  badges of neighbouring hidden stacks can overlap; the demo header uses the raw status, not `displayStatus`.
+
 ## 2026-11-03 - app 4b: evidence classes and the counted/assumed split (Claude Code, branch real/app-evidence-grid)
 
 Plan 4 app work 4b, built from the 0.6.0 final design in parallel with the offline demo. App code only: no Worker

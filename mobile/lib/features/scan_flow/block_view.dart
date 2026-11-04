@@ -721,12 +721,10 @@ class BlockPanel extends StatelessWidget {
                 _Row('Seen by one photo only', '$single'),
               ],
               ..._countRows(split),
-              if (!gridModel) ...[
-                if (block.filledTrays > 0)
-                  _Row('Layers between detected boxes', '${block.filledTrays}'),
-                // Egg occupancy is not measured: 30 per tray is capacity.
-                _Row('Eggs if every tray is full', '${block.totalEggs ?? '—'}'),
-              ],
+              // No eggs row: occupancy is not measured, and a block is reported
+              // in tray layers only (user decision, 3 Nov 2026).
+              if (!gridModel && block.filledTrays > 0)
+                _Row('Layers between detected boxes', '${block.filledTrays}'),
               if (gridModel && inventory != null) ..._inventoryRows(inventory),
             ],
             ..._evidenceRows(small),
@@ -814,7 +812,6 @@ class BlockPanel extends StatelessWidget {
     final stacks = split.assumedStacks;
     final hasAssumed = assumed == null || assumed > 0 || (stacks ?? 0) > 0;
     final range = split.estimatedRange;
-    final checked = split.topChecked;
     final exact = block.displayStatus == kBlockExact;
     return [
       _Row(
@@ -827,8 +824,9 @@ class BlockPanel extends StatelessWidget {
           stacks == null
               ? 'Assumed in hidden stacks'
               : 'Assumed in ${_plural(stacks, 'hidden stack', 'hidden stacks')}',
-          '${assumed ?? 'unknown'}'
-          '${checked == null ? '' : ' ($checked checked from the top)'}',
+          // The top-checked count also covers stacks tapped missing, so it is
+          // stated against all hidden stacks in the assumption line instead.
+          '${assumed ?? 'unknown'}',
           key: const ValueKey('assumed-row'),
         ),
       if (split.released)
@@ -837,7 +835,8 @@ class BlockPanel extends StatelessWidget {
           '${split.estimated}',
           key: const ValueKey('estimate-row'),
         ),
-      if (range != null && hasAssumed)
+      // A withheld block shows no whole-block figure, the range included.
+      if (range != null && hasAssumed && split.released)
         _Row(
           "If every hidden stack is there at its neighbours' heights",
           rangeWords(range),

@@ -357,7 +357,7 @@ class _DeclarationPaneState extends State<DeclarationPane> {
           child: const Text('SKIP DECLARATION'),
         ),
         Text(
-          'Without a declaration the result can never be CONFIRMED.',
+          'A declaration lets the app check the block size against the photos.',
           textAlign: TextAlign.center,
           style: theme.textTheme.bodySmall,
         ),

@@ -809,7 +809,7 @@ void main() {
       expect(find.text('Counted on faces'), findsOneWidget);
       expect(find.text('157 (at least)'), findsOneWidget);
       expect(find.text('Assumed in 4 hidden stacks'), findsOneWidget);
-      expect(find.text('79 (0 checked from the top)'), findsOneWidget);
+      expect(find.text('79'), findsOneWidget);
       expect(find.text('Estimate'), findsOneWidget);
       expect(
         find.text("If every hidden stack is there at its neighbours' heights"),
@@ -861,7 +861,9 @@ void main() {
         ),
         findsOneWidget,
       );
-      expect(find.text('101–120'), findsOneWidget);
+      // No whole-block figure on a withheld block, the range included.
+      expect(find.text('101–120'), findsNothing);
+      expect(find.byKey(const ValueKey('range-row')), findsNothing);
       expect(find.byKey(const ValueKey('estimate-row')), findsNothing);
     });
 

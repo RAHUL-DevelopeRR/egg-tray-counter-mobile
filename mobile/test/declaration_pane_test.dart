@@ -103,7 +103,7 @@ void main() {
       expect(skipped, [true]);
       expect(declared, isEmpty);
       expect(
-        find.text('Without a declaration the result can never be CONFIRMED.'),
+        find.text('A declaration lets the app check the block size against the photos.'),
         findsOneWidget,
       );
     });

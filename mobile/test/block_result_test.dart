@@ -334,7 +334,8 @@ void main() {
     expect(find.text('ESTIMATE: A READING IS UNCERTAIN'), findsOneWidget);
     expect(find.textContaining('straight_layers=20'), findsOneWidget);
     expect(find.text('Layers between detected boxes'), findsOneWidget);
-    expect(find.text('Eggs if every tray is full'), findsOneWidget);
+    // Tray layers only: no egg figure for a block.
+    expect(find.textContaining('Eggs'), findsNothing);
     // An older server: no two-photo split, the counted row instead.
     expect(find.text('Counted on faces'), findsOneWidget);
     expect(find.text('Seen by two photos'), findsNothing);

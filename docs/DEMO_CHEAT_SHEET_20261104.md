@@ -1,4 +1,4 @@
-# Demo cheat sheet, 4 Nov 2026 (app 0.5.1+28, "DEMO — SAVED RESULTS")
+# Demo cheat sheet, 4 Nov 2026 (app 0.6.0+29, "DEMO — SAVED RESULTS")
 
 The demo screen shows three answers the **test server** gave earlier. They are bundled in the app
 (`mobile/assets/demo/`), shown offline, never sent and never saved to history. It is not a live scan.
@@ -13,6 +13,14 @@ The demo screen shows three answers the **test server** gave earlier. They are b
 
 The 4 × 3 answer came from an older server (f5776f0d). Today's server holds that block back until a
 CORNER photo confirms its depth.
+
+**In the drawing (app 0.6.0+29):** stacks read on a face are solid with one tick per tray; stacks no photo saw
+are see-through ("~15", no ticks); the empty spot is a dashed outline. Solid = counted, see-through = assumed.
+
+**The next server (Worker 0.6.0, built and tested offline, not deployed):** replaying the same 4 × 3 photos with
+the block size declared as 4 × 3 and a CORNER photo gives the same split, **105 counted + 60 assumed = 165**, and
+adds a range of **163–167** (the spread of the neighbouring faces). This replay used made-up camera headings and a
+synthetic CORNER photo, so it shows the rule, not a new measurement.
 
 ## How the hidden trays are worked out (the 4 × 3 screen, step by step)
 

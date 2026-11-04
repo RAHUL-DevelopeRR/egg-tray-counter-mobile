@@ -1,4 +1,8 @@
-> 2026-11-03 (latest): Worker 0.6.0 evidence grid (branch `real/worker-0.6.0`, local, not deployed);
+> 2026-11-04 (latest): Worker 0.6.0 and app 4b merged into `rollout/0.4.12-staging` (local, not pushed, not
+> deployed); app 0.6.0+29 with the offline demo ("DEMO — SAVED RESULTS (NOT A LIVE SCAN)"). Staging still runs 0.5.0.
+> Block results are in tray layers only: the "Eggs if every tray is full" row is removed from the block panel.
+>
+> 2026-11-03: Worker 0.6.0 evidence grid (branch `real/worker-0.6.0`, local, not deployed);
 > contract docs/GRID_CONTRACT_0.6.0.md. Do not deploy it before an app that reads `suggested_inputs` (app 4b).
 > - **Decisions (user defaults of 3 Nov):** deep-block totals are estimates, never `confirmed`; hidden stacks are shown
 >   as assumed at their neighbours' face height, kept apart from counted ones; tray layers, never eggs or rupees.
