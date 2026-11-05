@@ -1,8 +1,8 @@
-# Plan 5 (draft 2, 5 Nov 2026): count the outer ring, fill the inside by the stacking rule, check it with more photos
+# Plan 5 (draft 3, 5 Nov 2026): count the outer ring, fill the inside by the stacking rule, check it with more photos
 
 **Photos only show the outside of a block. On 5 Nov the user stated the farm's stacking rules: half-filled stacks stand only on the photographed faces, the back row is always full, and no inside position is ever empty. Plan 5 counts every face stack from the photos. It sets every hidden stack to the block's full height H by that rule, and the app says so plainly. Extra photos (a repeat of a face, a long face in parts, a close photo of one stack) measure the outer ring and H better. A scan stays 3 photos by default; a deep block also needs a CORNER photo and the typed block size, as in 0.6.0. The first step changes only the server and is tested offline, with no new photo and no paid detector call.**
 
-- **Status:** draft 2, 2026-11-05, **not approved**: draft 1 corrected the same day after a code-accuracy review and a physics-and-honesty review. Nothing in it is built. Until it is approved, Plan 4 (draft 2, not approved), `docs/GRID_CONTRACT_0.6.0.md` and Worker 0.6.0 (merged locally, not deployed) stay as they are. Staging runs Worker 0.5.0 (`52a1d5e8`). No step of this plan touches production (`4c1480e6`).
+- **Status:** draft 3, 2026-11-05, **not approved**: draft 1 corrected the same day after a code-accuracy review and a physics-and-honesty review; draft 3 adds the user's answer on cover trays (Decision 4: sometimes, §4.6). Nothing in it is built. Until it is approved, Plan 4 (draft 2, not approved), `docs/GRID_CONTRACT_0.6.0.md` and Worker 0.6.0 (merged locally, not deployed) stay as they are. Staging runs Worker 0.5.0 (`52a1d5e8`). No step of this plan touches production (`4c1480e6`).
 - **Sources of this draft:** two drafts (one ordered by build steps, one by risks) and three read-only maps of the Worker, the app and the evidence, all made on 5 Nov, then two reviews checked against the code. §2.3 lists where it departs from the starting design. Draft 2 adds Decisions 17–19.
 - **The farm rules are requirements, not measured facts.** No block has been opened to check them. **Physical counts so far: zero.**
 
@@ -47,8 +47,9 @@
 |---|---|---|---|
 | Hidden stacks | H by the stacking rule; replaces the 3 Nov default "neighbours' face height" (Contract lines 22–24) | keep 0.6.0 | 1 |
 | `RULE_MIN_STACKS`, `RULE_MIN_FACES` | 2 distinct clean face stacks at H, read on 2 different faces (a side settled by CORNER and declaration counts as its face; a repeat, part or close photo counts as its face); a back corner among them when Y ≥ 2 (§4.1) | strict trust (a side that repeats the front never counts); any photo; doubted readings allowed | 3 |
-| `RULE_PLURALITY` | withhold when more clean face stacks read H − 1 than H | off | 3 |
-| `RULE_TALLER` | withhold until a second capture of that stack reads the same; then count it as read, keep H, show a note | release at H with a note | 5 |
+| `RULE_PLURALITY` | **off**: covers are "sometimes" (Decision 4, §4.6), so H and H − 1 together are expected | withhold when more clean face stacks read H − 1 than H | 3, 4 |
+| `RULE_COVER_RANGE` | **on** (Decision 4 answered "sometimes"): hidden stacks reported K × H with a range across the two full heights (§4.6) | off, if covers prove to be always or never used | 4 |
+| `RULE_TALLER` | beyond the full-height pair only (§4.6): withhold until a second capture of that stack reads the same; then count it as read, keep H, show a note | release at H with a note | 5 |
 | `RULE_BACK_CORNER` | a back corner below H withholds; a second capture reading the same releases the total, noted "rule broken at back corner" | warn only | 6 |
 | `RULE_ONE_SIDE` | withhold a deep block with one side photographed | wall-side column full by the rule | 7 |
 | `RULE_INSIDE_EXCEPTIONS` | honour operator-reported holes and partials with a height; withhold when no height is given | every exception is a conflict | 8 |
@@ -132,7 +133,7 @@ H       = hidden stack, set to the block's full height by the stacking rule (nev
    - those readings come from photos of **at least two different faces**; a repeat, part or close photo of a face counts as that face;
    - when Y ≥ 2, one of the two is a **back corner** (the rule says the back row is full);
    - two readings of one stack never count twice; a corner stack counts once, for one face whose clean reading equals h.
-3. **Plurality guard:** if more clean face stacks read exactly H − 1 than read H, the total is withheld (`rule_height_ambiguous`); H may rest on two over-reads or two covers.
+3. **Plurality guard:** if more clean face stacks read exactly H − 1 than read H, the total is withheld (`rule_height_ambiguous`); H may rest on two over-reads or two covers. **Off while covers are "sometimes"** (Decision 4): the cover range of §4.6 replaces it.
 4. **No qualifying height:** no H, the total is withheld (`no_rule_height`), and the server asks for a close photo of a back corner (Phase 5; until then, a retake of the side with the most doubts).
 5. **K = 0** (one-deep rows, blocks at most 2 wide): the rule is not used and the block reads `rule.applied: false`. One-deep answers and `typical_layers` stay as in 0.6.0.
 
@@ -146,7 +147,7 @@ Each failed check withholds the total and names a face or stack. Two parts are n
 | Check | Fires when | Result |
 |---|---|---|
 | Taller | a face stack reads above H (clean or not) | `stack_taller_than_rule_height`; provisional totals at H and at the taller value; retake that face, or a close photo of that stack (Phase 5). If a second clean capture reads the same height, the stack is counted as read, H is unchanged, and the result says "one stack taller than the block's full height". |
-| Plurality | more clean face stacks read H − 1 than H | `rule_height_ambiguous`; a close photo of a back corner |
+| Plurality (off while covers are "sometimes", §4.6) | more clean face stacks read H − 1 than H | `rule_height_ambiguous`; a close photo of a back corner |
 | Back corner (Y ≥ 2) | a clean back-corner reading differs from H | below H: `back_corner_below_rule_height`, retake that side or a close photo of that corner. If a second capture reads the same, the corner is counted as read and the total is released with "rule broken at back corner" (Decision 6). Above H: the taller check. |
 | Inside hint | a stack glimpsed through a gap on a hidden cell (a hint, `index.ts:771-783`) reads below H | `inside_hint_below_rule` (it may be a short interior stack or another block) |
 | Reference height | the declared, measured `reference_height` (`index.ts:1274-1275`) differs from H | `reference_height_differs` |
@@ -194,6 +195,39 @@ One interior rule break costs +H for an empty place and +(H − h) for a partial
 | Phone audit A, 3 × 1 [AUD] | 10 / 10 / 11 [M] | 0.5.0: withheld (stand-in side refused) [M]; 0.6.0 not run | K = 0. The 11 is "taller" only if K > 0. A repeat reading 10/10/11 again stays `estimated` (Decision 17), not `exact` 31 for 33. | 10 filled + 1 cover each = 33 [V] |
 
 **Counterfactual inputs:** the `camera*` replay modes use made-up headings, and `camera-corner-declared` adds a synthetic CORNER photo and the declared size (`scripts/replay_saved_scans.mjs`). **The back corners fail the check on both deep examples** (4 × 3: 16 vs 15; H2: 18). That is why cover trays (Decision 4) and back corners (Decision 6) must be settled before the check runs in the field.
+
+### 4.6 Cover trays: "sometimes" (Decision 4, answered by the user on 5 Nov) [U]
+
+A full stack holds F filled trays, and sometimes an empty cover tray on top, inside the block too. So a full stack is
+F or F + 1 tray layers, and the photos cannot tell which hidden stacks carry a cover. The unit stays tray layers,
+covers included. Consequences for §4.1–4.2:
+
+1. **Two adjacent heights are both "full".** After H is found as in §4.1, the block's full heights are H and its
+   partner one away: H − 1 if a clean face stack reads H − 1, otherwise H + 1 if one reads H + 1. A face stack at the
+   partner height is a full stack, with or without its cover, and is counted as read. It is not a partial and not
+   "taller".
+2. **The hidden stacks get a range, not one value.** Point estimate: K × H, as before. Range: K × the lower full height
+   to K × the higher one when the faces show both heights; K × (H − 1) to K × (H + 1) when the faces show only H,
+   because then nobody knows whether H includes a cover. The result line adds: "Cover trays are sometimes used: the
+   hidden stacks hold A to B tray layers."
+3. **The plurality guard is off** (`RULE_PLURALITY`): a mix of H and H − 1 is now expected. Two over-reads that lift H
+   by one stay inside the range, which is printed.
+4. **The taller check fires only beyond the pair:** a clean face stack two or more above H, or one above H when the
+   faces already show H − 1 (three full heights cannot be explained by covers). Then it withholds as in §4.2.
+5. **Back corners** pass at either full height; below the lower one, the back-corner check of §4.2 applies.
+6. **Examples [math on R readings, rule outcomes E]:**
+   - Field 4 × 3, if doubted readings were allowed (Decision 3(c)): H = 15. The back-left 16 is its cover partner (FS
+     saw 15 + 1 cover there [V]), not a taller stack, so the block is no longer withheld for it. The hidden stacks
+     come to 60, with a range of 60–64, so the total is 165, with a range of 165–169. Under the default (a) it is still
+     withheld, with only one clean reading (§4.5).
+   - Contract H2 [S]: H = 20; the front 19 is the partner, so the hidden range is 76–80. The back-left 18 is below the
+     pair and still withholds.
+   - W05-size block (K = 48) with only H seen on the faces: the range is ±48 trays, which is 3.5% of about 1,366.
+7. **How to narrow it later.**
+   - Telling a cover from a filled top tray on the face stacks (Plan 3 Phase P occupancy; not active today) would
+     fix F on the faces. The range would then be K × F to K × (F + 1) and could not be narrowed further from photos.
+   - Farm day A records cover use on face and hidden stacks (§8.2). If covers turn out to be on nearly every full
+     stack, or on almost none, the user can move the point estimate to that side.
 
 ## 5. Multi-photo capture
 
@@ -248,7 +282,7 @@ The existing rule (`index.ts:798-801`) is kept: a stack is read twice when clean
 **Response.** Locked key lists only gain keys (H13, `side_check.test.mjs:397-426`).
 - Hidden cells: `evidence_class: "assumed"` (known to app 0.6.x), `assumed_from: "stacking_rule"`, `assumed_range [H, H]` (the app uses a cell's range only to draw a ghost with no height, `block_view.dart:103-106`); exceptions carry `rule_exception`.
 - `block.rule`: `applied`, `height`, `basis` (stack and capture ids), `taller` (with the kept reading), `back_corners`, `plurality`, `exceptions`, `affirmed_by_operator`. `typical_layers` holds H when the rule applies; when K = 0 it keeps 0.6.0's mode. Null there still withholds (`index.ts:700-702`).
-- Inventory keeps `counted_trays`, `assumed_trays` (= K × H), `estimated_total`; adds `rule_stacks`, `rule_height`, `rule_trays`, `two_photo_stacks` (M), `sensitivity_per_layer` (K), `rule_exceptions`, `doubted_low_up_to` (D, Decision 9).
+- Inventory keeps `counted_trays`, `assumed_trays` (= K × H), `estimated_total`; adds `rule_stacks`, `rule_height`, `rule_trays`, `two_photo_stacks` (M), `sensitivity_per_layer` (K), `rule_exceptions`, `doubted_low_up_to` (D, Decision 9), `rule_trays_range` and `rule_full_heights` (the cover range and the full-height pair, §4.6; new fields, so 0.6.x apps ignore them).
 - For a rule-based block, inventory `assumed_range` and `estimated_range` are **null**. App 0.6.x then prints "(range not given)" in its split line (`block_view.dart:505-516`) and hides its range row, whose label "If every hidden stack is there at its neighbours' heights" would be false and whose "291–291" would look certain (`block_view.dart:839-844`).
 - `block.total_eggs` is unchanged: null whenever a stack is assumed (`index.ts:1759`), so null for every rule-based block. One-deep blocks keep the legacy capacity figure for app 0.5.0; removing it is a separate compatibility choice.
 - New withheld reasons in `WITHHELD_NOTE` (`index.ts:1556-1561, 1592`): the ones named in §4 and §5.
@@ -293,13 +327,13 @@ Phases 1–2 and the offline parts of 4–6 can be built while farm day A is arr
 | FR13 | front x=1: 8 trays at scale 1.0 with 12 boxes above (the full stack behind), swept over scales 0.80–0.97. With trays about 0.3 m deep, the row behind is at about 0.91 from 3 m and 0.87 from 2 m [math, tray depth and standoff unmeasured]. | `no_wrong_total` at every scale; if any fails, Phase 1b |
 | FR13-side / -corner / -outside | the FR13 column on a side face / a corner partial misread the same way by STRAIGHT and the side / a partial standing in front of the face row, declared X × Y | `no_wrong_total`; the corner is never "read twice" at the wrong value; the outside partial is withheld or flagged |
 | FR14 | hidden hole, no tap | stretch: released 20 high (S29's twin) |
-| FR15 / FR17 | every reading `end_at_frame_edge` / cover trays on 3 of 8 full face stacks | `no_rule_height` / `rule_height_ambiguous` when the covered stacks span two faces and include a back corner, otherwise taller and withheld |
-| FR18 | FR01 with front x=1 and the LEFT back corner at 21 (one over-read on each of two faces) | `rule_height_ambiguous` (more clean stacks at 20 than at 21), no wrong total |
+| FR15 / FR17 | every reading `end_at_frame_edge` / cover trays on 3 of 8 full face stacks | `no_rule_height` / released with the cover range of §4.6: the covered stacks are the partner height, never "taller"; the true total lies inside the printed range |
+| FR18 | FR01 with front x=1 and the LEFT back corner at 21 (one over-read on each of two faces) | with covers "sometimes" (§4.6): H = 21, 20 is its partner, hidden range 120–126; the point is 6 too high, the true total is inside the printed range. With the plurality guard on (covers never used): `rule_height_ambiguous`, withheld |
 | FR20 | FR01 with front x=3 (19) doubted | 291, "up to 292" |
 
 - **Phase 1b (only if an FR13 case fails):** split a column where box scale or pitch steps down (`index.ts:475, 635`); the upper part becomes a hint for the stack behind, never a count. With `RECESS_SCALE` 0.85 a stack 0.3 m behind is told apart only from within about 1.7 m [math], so Phase 1b needs its own step threshold, set from the FR13 sweep and farm day A photos. The error changes sign with distance [E]: far away the mixed column reads as full (+(H − h)); close up it can be marked recessed or missing (−h). The 52 labelled faces and MUTAA columns must not change (`replay_benchmark.test.mjs:17-35`).
 - **Replay:** `scripts/replay_saved_scans.mjs` and `compare_replay_versions.mjs` (0.6.0 vs 0.7.0) into `reports/stacking-rule-0.7.0-<date>/`.
-- **Gate (offline):** (1) `npm test` 0 failures; (2) 38 old + new cases, 0 wrong `exact`/`confirmed`; (3) no case 0.6.0 got right or withheld becomes a wrong released total; the 5 known wrong 0.6.0 estimates (S03, S04, S07, R04, S29 [R, EG]) and the rule-break cases reported one by one; (4) registry 22 trios 0 wrong, 72 faces unchanged; (5) 99-block 99 in all modes, L-100 withheld in all modes, 4 × 3 as §4.5 or explained; (6) a released-case table, 0.6.0 vs 0.7.0 (0.6.0 released 16 [R]), each newly withheld case with its reason; (7) fingerprint v3; H13 key lists only gain keys, and its step-up case becomes withheld (`inside_step_up`); (8) one new `mobile/test` feeds three 0.7.0 answers to the 0.6.1 parser: no error, rule cells drawn as assumed, the split line says "(range not given)" and no range row is shown; (9) two replay runs give identical hashes; (10) no deploy, no push, 0 paid calls.
+- **Gate (offline):** (1) `npm test` 0 failures; (2) 38 old + new cases, 0 wrong `exact`/`confirmed`; (3) no case 0.6.0 got right or withheld becomes a wrong released total (wrong = the true total lies outside the printed range; point errors inside the cover range of §4.6 are listed one by one); the 5 known wrong 0.6.0 estimates (S03, S04, S07, R04, S29 [R, EG]) and the rule-break cases reported one by one; (4) registry 22 trios 0 wrong, 72 faces unchanged; (5) 99-block 99 in all modes, L-100 withheld in all modes, 4 × 3 as §4.5 or explained; (6) a released-case table, 0.6.0 vs 0.7.0 (0.6.0 released 16 [R]), each newly withheld case with its reason; (7) fingerprint v3; H13 key lists only gain keys, and its step-up case becomes withheld (`inside_step_up`); (8) one new `mobile/test` feeds three 0.7.0 answers to the 0.6.1 parser: no error, rule cells drawn as assumed, the split line says "(range not given)" and no range row is shown; (9) two replay runs give identical hashes; (10) no deploy, no push, 0 paid calls.
 - **Approvals:** building starts after the user approves this plan (Decision 1) and answers Decision 4 (covers); a push only if asked.
 
 ### Phase 2: the app shows the rule (app 0.7.0+31)
@@ -406,7 +440,7 @@ The farm days can catch a common rule break. They cannot make the interior exact
 | # | Risk | Size | Measured today | Handled by | What remains |
 |---|---|---|---|---|---|
 | R1 | Rule broken inside the block | +H per hole, +(H−h) per partial | No. W05 tops "a layer lower in places" [V, Plan 4 §1] | operator exceptions; farm day A | **main residual risk**; stated on every result |
-| R2 | H off by one | ±K | W05 H 19 vs 20 = 48 [M vs V]; covers read 10/10/11 [M vs V, AUD] | clean basis on two faces with a back corner, plurality guard, back-corner check, close photo, reference height when K ≥ 8, range | a bias shared by every H stack |
+| R2 | H off by one | ±K | W05 H 19 vs 20 = 48 [M vs V]; covers read 10/10/11 [M vs V, AUD] | clean basis on two faces with a back corner, back-corner check, close photo, reference height when K ≥ 8, range; with covers "sometimes" the hidden range of §4.6 is printed (the plurality guard is off) | a bias shared by every H stack; the point estimate can be off by up to K inside the printed range |
 | R3 | One over-read or covered stack | +1–3 | 4 × 3 16 among 15s [R]; L-115 23, 22 among 19–20 [M], next to the short 14 (maybe a mixed column, R6) | cannot set H; withheld until a second capture | a real cover tray (Decision 4) |
 | R4 | Under-read face stack taken as a partial | missed trays on one stack | 1 of 21 undoubted columns (7 for 15); doubted ones 9 of 21 matched [M vs V, VAL] | repeats; doubted lows shown with their range up to H (Decision 9) | undoubted under-reads |
 | R5 | Short partial dropped as a stray | −(Y−1)·H | code only [C] | stray at column spacing → declared X must match | undeclared blocks |
@@ -452,7 +486,7 @@ The farm days can catch a common rule break. They cannot make the interior exact
    - (a′) As (a), but with the code's strict `trusted`: a side that repeats the front never counts. S21, S26, S28 and S29 and the 4 × 3 are withheld (right answers in the library 11 → 8), and so is every near-square block of near-equal heights until a close photo (Phase 5) adds a second face.
    - (b) Two distinct stacks, any photo: one photo can set H (ef823816: H = 10, but the 18 and 12 are taller, so only a provisional 120 inside, for about 240).
    - (c) As (a), doubted readings allowed: the 4 × 3 gives H = 15 (S, L, R), and the back-left 16 still withholds it as taller.
-4. **Cover trays.** Does every full stack carry a cover, inside too: always, never, sometimes, or unknown? **Needed before Phase 1 is built:** AUD read covers 10/10/11 on three stacks of 10 + 1 [M vs V], and FS saw covers on most full stacks [V]. Farm day A checks the answer. With "sometimes", H is uncertain by one and the app prints ±K.
+4. **Cover trays. Answered 5 Nov: sometimes** [U]. A full stack may carry an empty cover tray, inside too. Handled in §4.6: two adjacent full heights, a printed range of up to K for the hidden stacks, the plurality guard off, and the taller check only beyond the pair. Farm day A measures how often covers are used.
 5. **A face stack taller than H.** (a) Withhold until a second capture **(recommended)**; (b) release at H with a note.
 6. **Back corners.** Is a partial ever placed at a back corner? Never: the check withholds, and a second capture reading the same releases the total with "rule broken at back corner" **(default)**. Sometimes: it only warns.
 7. **Wall side.** Can partials stand on a side against a wall? (a) Never: that column is full by the rule, K = (X−1)(Y−1); (b) yes or unknown: withhold **(default until farm day A)**.

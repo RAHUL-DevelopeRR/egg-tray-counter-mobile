@@ -5,6 +5,9 @@
 > - Full stack height varies per block; the tallest normal stacks on the block's faces show it.
 > - The back side of a block is usually against a wall, so a BACK photo is rarely possible.
 > - Photos from above or below are impractical for operators; the top view is not part of the default scan.
+> - Cover trays (user answer to Plan 5 Decision 4): **sometimes**. A full stack may or may not carry an empty cover
+>   tray on top, inside the block too. So a full stack is F or F + 1 layers, and the hidden interior is uncertain by
+>   up to one layer per hidden stack (K layers in all).
 > - Consequence for the model: every hidden stack is a full stack at the block's full height, "full by the stacking
 >   rule", not the median of its face neighbours (Worker 0.6.0, `index.ts:657-670`, would under-read hidden stacks
 >   behind a partial face stack). Not implemented yet. The rule is only as reliable as its enforcement; the farm day

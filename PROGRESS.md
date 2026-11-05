@@ -19,8 +19,11 @@ app 0.6.1+30 is built (`egg-tray-counter-0.6.1-staging.apk`) and pushed as `aa6e
   key code citations spot-checked by hand.
 - **Measured cost of the default H rule** [R, offline replay on worker-0.6.0]: the only real deep block (field 4 × 3,
   counterfactual inputs) has one clean face reading, so it is withheld until a close photo (Phase 5).
-- **Next:** the user's answers to the plan's open decisions, first Decision 1 (adopt the rule) and Decision 4 (cover
-  trays), before Phase 1 is built; the Redmi install of 0.6.1+30 when it is plugged in.
+- **Decision 4 answered (user, 5 Nov): cover trays are used "sometimes".** Plan 5 draft 3 adds §4.6: a full stack is F or
+  F + 1 layers; H and its neighbour are both "full"; the hidden stacks are reported as K × H with a range of up to K;
+  the plurality guard is off and the taller check fires only beyond the pair.
+- **Next:** the user's answer to Decision 1 (adopt the rule and build Phase 1 offline), then Decision 3 (how strict H
+  is); the Redmi install of 0.6.1+30 when it is plugged in.
 
 ## 2026-11-04 - offline demo, real work merged, app 0.6.0+29 (Claude Code, `rollout/0.4.12-staging`)
 
