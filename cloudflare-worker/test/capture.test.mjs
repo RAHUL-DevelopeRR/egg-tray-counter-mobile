@@ -102,7 +102,9 @@ async function scan(t, perView, evidence = TURNED, declaration = null) {
 // gate tests use sides that cannot be the front again. Since 0.6.0 a depth over one stack rests on the declared block
 // size, so they also send the 5 x 4 declaration.
 const DECLARED_5x4 = {x: 5, y: 4, interior: 'unknown', cover_trays: 'unknown', occupancy: 'unknown'};
-const sideFace = () => ({image: FRAME, predictions: [20, 18, 18, 20].map((h, i) => column(100 + i * 100, h, {y0: 100 + (20 - h) * 40})).flat()});
+// x0: each side framed a little differently, so the two sides are separate captures, not copies of one photo (a copy
+// never sets the full height of the stacking rule).
+const sideFace = (x0 = 100) => ({image: FRAME, predictions: [20, 18, 18, 20].map((h, i) => column(x0 + i * 100, h, {y0: 100 + (20 - h) * 40})).flat()});
 
 test('a view that fails the capture gate withholds the block total and names that view for rescan', async t => {
   const good = n => ({image: FRAME, predictions: Array.from({length: n}, (_, i) => column(100 + i * 100, 20)).flat()});
@@ -129,11 +131,15 @@ test('a view that fails the capture gate withholds the block total and names tha
 
 test('when every view passes the gate the block total and the generic rescan advice are unchanged', async t => {
   const good = n => ({image: FRAME, predictions: Array.from({length: n}, (_, i) => column(100 + i * 100, 20)).flat()});
-  const result = await scan(t, {left: sideFace(), right: sideFace(), straight: good(5)}, TURNED, DECLARED_5x4);
-  // 212 counted (100 front + 56 per side) + 9 hidden stacks assumed from their line of sight: rows 1 and 2 at 18 (their
-  // 18-high row ends and the 20-high front: median 18), row 3 at 20.
-  assert.equal(result.block.total_trays, 380);
-  assert.deepEqual([result.block.inventory.counted_trays, result.block.inventory.assumed_trays], [212, 168]);
+  // 0.7.0: guided-camera stills (source and blocked flag sent), since a photo of unknown origin never sets the stacking
+  // rule's full height (it only ever lost the right to verify a stack before).
+  const stills = Object.fromEntries(Object.entries(TURNED).map(([v, e]) => [v, JSON.stringify({...JSON.parse(e), source: 'captured_still', blocked: false})]));
+  const result = await scan(t, {left: sideFace(130), right: sideFace(160), straight: good(5)}, stills, DECLARED_5x4);
+  // 212 counted (100 front + 56 per side) + 9 hidden stacks full by the stacking rule at 20 (the back corners and the
+  // front read 20; the 18s are partial stacks on the side faces). 0.6.0 gave 380: it put rows 1 and 2 at 18, the median
+  // of their 18-high row ends and the 20-high front, the under-read Plan 5 corrects.
+  assert.equal(result.block.total_trays, 392);
+  assert.deepEqual([result.block.inventory.counted_trays, result.block.inventory.assumed_trays, result.block.rule.height], [212, 180, 20]);
   assert.equal(result.block.faces_consistent, true);
   assert.ok(['left', 'right', 'straight'].every(v => result.block.capture[v].accepted));
   assert.equal(result.rescan.recommended_view, 'straight');

@@ -2,6 +2,10 @@
 
 **Photos only show the outside of a block. On 5 Nov the user stated the farm's stacking rules: half-filled stacks stand only on the photographed faces, the back row is always full, and no inside position is ever empty. Plan 5 counts every face stack from the photos. It sets every hidden stack to the block's full height H by that rule, and the app says so plainly. Extra photos (a repeat of a face, a long face in parts, a close photo of one stack) measure the outer ring and H better. A scan stays 3 photos by default; a deep block also needs a CORNER photo and the typed block size, as in 0.6.0. The first step changes only the server and is tested offline, with no new photo and no paid detector call.**
 
+- **Update, 5 Nov evening:** the user answered **Decision 1: yes**. Phase 1 is built offline as Worker 0.7.0
+  (`docs/GRID_CONTRACT_0.7.0.md`; results in `reports/stacking-rule-0.7.0-20261105/README.md`, which also corrects three
+  expectations below: S21 is withheld because its sides are copies, FR18's printed range misses the truth by 2, and
+  §4.6's option (c) example missed RIGHT's 14). Decision 3 stays open; the build uses default (a).
 - **Status:** draft 3, 2026-11-05, **not approved**: draft 1 corrected the same day after a code-accuracy review and a physics-and-honesty review; draft 3 adds the user's answer on cover trays (Decision 4: sometimes, §4.6). Nothing in it is built. Until it is approved, Plan 4 (draft 2, not approved), `docs/GRID_CONTRACT_0.6.0.md` and Worker 0.6.0 (merged locally, not deployed) stay as they are. Staging runs Worker 0.5.0 (`52a1d5e8`). No step of this plan touches production (`4c1480e6`).
 - **Sources of this draft:** two drafts (one ordered by build steps, one by risks) and three read-only maps of the Worker, the app and the evidence, all made on 5 Nov, then two reviews checked against the code. §2.3 lists where it departs from the starting design. Draft 2 adds Decisions 17–19.
 - **The farm rules are requirements, not measured facts.** No block has been opened to check them. **Physical counts so far: zero.**

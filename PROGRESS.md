@@ -1,6 +1,48 @@
 # Progress
 
-## 2026-11-05 (latest) - HANDOVER: project state and where to start (Claude Code, `rollout/0.4.12-staging`)
+## 2026-11-05 (latest, evening) - Plan 5 Phase 1 built offline: Worker 0.7.0 stacking rule (Claude Code, `rollout/0.4.12-staging`)
+
+**Local only: not committed, not pushed, not deployed, 0 detector calls.** Staging still runs Worker 0.5.0 (`52a1d5e8`);
+production `4c1480e6` untouched; the Redmi still runs app 0.6.0+29 (not plugged in, no install). App code unchanged
+(only a new test and fixtures).
+- **User decisions:** Decision 1 answered **yes** (hidden stacks = full height H by the stacking rule). Decision 3
+  (how strict H is) **still open**: the user said they were confused; it was explained in plain terms, and the build
+  uses the recommended default (a) behind one switch (`RULE_DEFAULTS.basis`).
+- **Worker 0.7.0** (`cloudflare-worker/src/index.ts`): `stackingRule()` (H: two clean stacks on two faces, a back
+  corner among them; the cover partner H ± 1; checks taller / back corner / inside hint / one side / plurality off /
+  range off), `assumeHidden()` sets H (`assumed_from: "stacking_rule"`, range [H, H], no neighbours), `assembleGrid()`
+  exceptions (`rule_exception`, `inside_step_up`, `inside_declared_partial`, `reference_height_differs`),
+  `ruleProvisional()` (in `block.rule.provisional`, never in the inventory), the inventory fields `rule_*`,
+  `two_photo_stacks`, `doubted_low_up_to`, the neighbour ranges null for rule blocks, no `elevated` suggestion,
+  `grid_contract` 0.7.0, `worker-0.7.0`. Rule-eligible photos: camera stills, not blocked, not copies; a side
+  `turned` or `depth_unproven`. Request and fingerprint v3 unchanged. Contract: `docs/GRID_CONTRACT_0.7.0.md`.
+- **Tests changed on purpose, each with its reason in a comment:** `hidden.test.mjs` H1–H6, H8 (plus new H3b);
+  `block.test.mjs` (2 gap tests: one side photographed is now withheld); `capture.test.mjs` 5 x 4 (sides framed apart
+  and sent as camera stills; 380 → 392, the under-read Plan 5 fixes); `grid.test.mjs` version; `side_check.test.mjs`
+  5 x 5 (sides framed apart), H11 (no `elevated`), H13 (step-up case withheld, as the plan says); library S21 check
+  `total_ok` → `no_wrong_total` (its sides are copies of the front). New: `test/rule_cases.mjs`, `test/rule.test.mjs`
+  (FR01–FR21, 43 cases with the FR13 sweeps), a `withheld:<reason>` judge in `replay_benchmark.mjs`.
+- **Verified (measured, local):** Worker `npm test` 270 tests, 238 pass, 0 fail, 32 todo (4 old stretch + 28 known rule
+  failures). App `flutter test` 258/258 on two full runs (new `worker_070_compat_test.dart`: the 0.6.1 parser and panel
+  read three real 0.7.0 answers; "(range not given)", no range row, no "depth not proven" panel); `dart analyze` clean.
+- **Replay** (`reports/stacking-rule-0.7.0-20261105/README.md`, offline, 0.6.0 dist from `c4b0360`): all 10 Phase 1
+  gates met except gate 3 on two new rule cases. Library 38/38, 15 released (0.6.0: 16), the same 5 known wrong
+  estimates; only S21 changed (withheld). 0 face verdicts and 0 of 22 trios changed. 99-block 99 and L-100 withheld in
+  every mode; field 4 x 3 (counterfactual) 165 → withheld `no_rule_height`, provisional 165. Two runs, identical hashes.
+- **Findings (the user should see these):** (1) FR18, one over-read on each of two faces: 0.7.0 releases 299 for 291
+  (0.6.0: 294); the printed range covers the hidden stacks, not the over-read faces. (2) FR13: a short partial with the
+  full stack behind showing above it reads as one full column from scale 0.87 (+12), as in 0.6.0: Plan 5 Phase 1b,
+  not attempted (its threshold needs farm-day photos). (3) A partial standing in front of a block is missed (Decision
+  18). (4) Option (c) on the 4 x 3 is withheld as taller, not released as §4.6 expected (RIGHT's 14 is a third height).
+  (5) Option (b) releases 299 for 291 when two over-reads sit in one photo; (a′) loses S26 and S28.
+- **Next steps, in order:** (1) the user's call on Decision 3, with the options table in the report; (2) commit this work
+  (asked, not done); (3) Phase 2 (app 0.7.0: "=H" ghosts, the rule split line, withheld-reason texts); (4) FR18 is the
+  case the plurality guard caught, and the guard is off because covers are "sometimes" (Decision 4). Turned on, it also
+  withholds FR17, a genuine block with covers on 3 of 8 face stacks. Farm day A's cover count should settle it;
+  (5) the Redmi install of 0.6.1+30 or straight to 0.7.0 when it is plugged in, with the
+  user's OK; (6) staging 0.7.0 only after app 0.7.0 is on the phones.
+
+## 2026-11-05 - HANDOVER: project state and where to start (Claude Code, `rollout/0.4.12-staging`)
 
 The project is handed to another coding agent (the Claude weekly limit was reached). Project path:
 `C:\Users\rahul\egg-tray-counter-mobile`. Branch `rollout/0.4.12-staging`, pushed to `origin` at the commit that

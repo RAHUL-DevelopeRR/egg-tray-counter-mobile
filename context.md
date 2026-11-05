@@ -1,4 +1,16 @@
-> 2026-11-05 (latest): **Farm stacking rules, stated by the user** (requirements, not yet measured or audited):
+> 2026-11-05 (latest, evening): **Plan 5 Decision 1 answered by the user: yes.** Hidden stacks are the block's full
+> height H "by the stacking rule", replacing the 3 Nov default (neighbours' face height). Phase 1 is built offline as
+> Worker 0.7.0 (local, not pushed, not deployed; staging still 0.5.0): docs/GRID_CONTRACT_0.7.0.md,
+> reports/stacking-rule-0.7.0-20261105.
+> - **Decision 3 (how strict H is) is still open.** The user was unsure what it meant; it was explained, and the build
+>   uses the recommended default (a) (two stacks read cleanly at one height on two faces, a back corner among them), one
+>   switch in `RULE_DEFAULTS`. The replay compares all four options so the user can choose with numbers.
+> - Measured offline [S, R]: library 38/38, the same 5 known wrong estimates as 0.6.0; S21 now withheld (its sides are
+>   copies of the front). New wrong totals the rule cannot catch: a short partial with the full stack behind it reads as
+>   one full column (FR13, Phase 1b), a partial standing in front of a block (Decision 18), and over-reads on two faces
+>   (FR18: 299 for 291, worse than 0.6.0's 294). Physical counts: still zero.
+>
+> 2026-11-05: **Farm stacking rules, stated by the user** (requirements, not yet measured or audited):
 > - Half-filled (partial) stacks are placed only on the faces a scan photographs: STRAIGHT, LEFT or RIGHT. Workers are
 >   strictly instructed never to put them in the hidden interior. The back row is always full.
 > - No interior position is ever empty: the interior is always complete.

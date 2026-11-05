@@ -57,6 +57,7 @@ export function blockSummary(result) {
     computed: b.computed_trays, filled: b.filled_trays, conflicts: b.conflicts.length,
     side: Object.fromEntries(['left', 'right'].map(s => [s, b.side_check[s].status])),
     refused: VIEWS.filter(v => !b.capture[v].accepted), rescan_view: result.rescan.recommended_view,
+    withheld_reason: b.inventory?.withheld_reason ?? null,
   };
 }
 
@@ -199,7 +200,10 @@ export function adversarialCases(registry) {
     // every photo, the CORNER photo included).
     { id: 'S21 square 3x3 block, camera walk-around, CORNER photo agreeing (3 wide, 3 deep), declared 3 x 3',
       views: { straight: S([20, 20, 20]), left: S([20, 20, 20]), right: S([20, 20, 20]) },
-      headings: CAMERA, extras: { ...syntheticCorner(3, 3), ...declared(3, 3, { interior: 'unknown' }) }, truth: 180, check: 'total_ok', fixed_by: null },
+      // 0.7.0: its LEFT and RIGHT detections are identical to STRAIGHT's, so the Worker takes them as copies of the front
+      // photo, and a copy never sets the stacking rule's full height: withheld (no_rule_height), not released (0.6.0: 180).
+      // The same block with the sides framed differently (separate captures) is FR21 in test/rule_cases.mjs: 180.
+      headings: CAMERA, extras: { ...syntheticCorner(3, 3), ...declared(3, 3, { interior: 'unknown' }) }, truth: 180, check: 'no_wrong_total', fixed_by: null },
     { id: 'S22 genuine 3x2 block, camera walk-around, ELEVATED taps only: taps are not a depth witness (sized from the declaration)',
       views: { straight: S([20, 20, 20]), left: S([20, 20]), right: S([20, 20]) },
       headings: CAMERA, extras: { topView: { x: 3, y: 2, cells: [] }, elevated: true }, truth: 120, check: 'withheld', fixed_by: null },
@@ -237,6 +241,8 @@ export function adversarialCases(registry) {
 export function judge(check, summary, truth) {
   const released = summary.total !== null;
   if (check === 'withheld') return !released;
+  // 0.7.0 (Plan 5 Phase 1): withheld for the named reason (inventory.withheld_reason).
+  if (check.startsWith('withheld:')) return !released && summary.withheld_reason === check.slice('withheld:'.length);
   if (check === 'not_exact') return summary.status !== 'exact';
   if (check === 'exact_ok') return summary.status === 'exact' && summary.total === truth;
   if (check === 'not_confirmed') return summary.status !== 'confirmed';

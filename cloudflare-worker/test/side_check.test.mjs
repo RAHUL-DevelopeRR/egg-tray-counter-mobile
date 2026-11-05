@@ -202,10 +202,14 @@ test('the same photos with camera headings turned around the block no longer giv
 // left shows k stacks on the left face and n - k + 1 on the right (front_left: width = right face, depth = left face).
 const cornerPhoto = (n, k) => ({detections: Array.from({length: n}, (_, i) => column(100 + i * 100, 20, {pitch: i === k - 1 ? 52 : 40})).flat(),
   image: {width: 100 * n + 200, height: 1200}});
-function walkAround(extras) {
+// separate: each side framed a little differently (separate captures, not copies of the front photo). 0.7.0: a copy never
+// sets the stacking rule's full height, so a released deep total needs the sides to be separate captures.
+function walkAround(extras, {separate = false} = {}) {
   const face = boxes([20, 20, 20, 20, 20]);
   const walk = {straight: heading(0, 'k3x9'), left: heading(-90, 'k3x9'), right: heading(90, 'k3x9')};
-  const results = Object.fromEntries(['left', 'right', 'straight'].map(v => [v, {count: 0, confidence: 0, detections: face, image: FRAME}]));
+  const shifted = dx => face.map(b => ({...b, x: b.x + dx, y: b.y + dx / 3}));
+  const results = Object.fromEntries(['left', 'right', 'straight'].map(v => [v, {count: 0, confidence: 0,
+    detections: separate && v !== 'straight' ? shifted(v === 'left' ? 30 : 60) : face, image: separate && v !== 'straight' ? {width: 700, height: 1000} : FRAME}]));
   const stills = Object.fromEntries(['left', 'right', 'straight'].map(v => [v, {source: 'captured_still', blocked: false, heading: walk[v]}]));
   return modelDiagnostics('t', results, {}, env, 0, undefined, undefined, walk, stills, extras);
 }
@@ -217,7 +221,7 @@ test('a CORNER photo that sees a 5 x 5 block settles sides that repeat the front
   assert.deepEqual([alone.block.status, alone.block.total_trays], ['needs_view', null]);
   const decl = {x: 5, y: 5, interior: 'unknown', missing_cells: [], partial_stacks: [], cover_trays: 'unknown', occupancy: 'unknown',
     reference_height: null, operator: null, declared_at: null};
-  const result = walkAround({corner: cornerPhoto(9, 5), cornerCapture: still, cornerSide: 'front_left', declaration: decl});
+  const result = walkAround({corner: cornerPhoto(9, 5), cornerCapture: still, cornerSide: 'front_left', declaration: decl}, {separate: true});
   assert.deepEqual([result.block.side_check.left.status, result.block.side_check.left.depth_witness], ['turned', 'corner_and_declaration']);
   assert.deepEqual([result.block.corner.x, result.block.corner.y, result.block.corner.agrees], [5, 5, true]);
   assert.deepEqual([result.block.status, result.block.total_trays, result.block.depth_basis], ['estimated', 500, 'corner_and_declaration']);
@@ -370,7 +374,9 @@ test('H11: sides that repeat the front need the CORNER photo and the declared si
   assert.deepEqual([both.block.status, both.block.total_trays, both.block.depth_basis], ['estimated', 180, 'corner_and_declaration']);
   assert.deepEqual([both.views.left.trusted, both.views.right.trusted], [false, false]);
   assert.deepEqual([both.block.inventory.counted_trays, both.block.inventory.assumed_trays, both.block.inventory.unchecked_hidden_stacks], [120, 60, 4]);
-  assert.deepEqual(both.block.suggested_views, ['elevated']);
+  // 0.7.0: the sides, settled by the CORNER photo and the declaration, set the full height 15 (Decision 3 (a)); an
+  // ELEVATED photo is no longer suggested.
+  assert.deepEqual([both.block.rule.height, both.block.suggested_views], [15, []]);
 });
 
 test('H12: earlier cases keep their answers; provisional figures appear only for a block withheld for its depth', () => {
@@ -409,11 +415,13 @@ test('H13: every 0.5.0 key stays, and the legacy cells, computed_trays and total
     for (const k of BLOCK_KEYS) assert.ok(k in block, k);
     for (const k of INVENTORY_KEYS) assert.ok(k in block.inventory, k);
     for (const g of block.grid.flat()) for (const k of CELL_KEYS) assert.ok(k in g, k);
-    assert.deepEqual([block.grid_contract, block.confirmed_basis], ['0.6.0', []]);
+    assert.deepEqual([block.grid_contract, block.confirmed_basis], ['0.7.0', []]);
     const hidden = block.grid.flat().filter(g => g.hidden);
     assert.equal(block.computed_trays, hidden.filter(g => g.stack_present !== false).reduce((s, g) => s + (g.z_layers ?? 0), 0));
-    assert.equal(block.inventory.released, true);
-    assert.deepEqual([block.observed_trays, block.total_trays], [block.inventory.counted_trays, block.inventory.estimated_total]);
+    // 0.7.0: the step-up tap withholds the second case (a hidden stack taller than its neighbours: H may be too low).
+    const stepUp = 'topView' in extras;
+    assert.deepEqual([block.inventory.released, block.inventory.withheld_reason], stepUp ? [false, 'inside_step_up'] : [true, null]);
+    if (!stepUp) assert.deepEqual([block.observed_trays, block.total_trays], [block.inventory.counted_trays, block.inventory.estimated_total]);
     for (const g of hidden) {
       const legacy = block.cells.find(c => c.x === g.x && c.y === g.y);
       assert.equal(legacy.layers, g.z_layers, `${g.x},${g.y}`);
@@ -421,6 +429,7 @@ test('H13: every 0.5.0 key stays, and the legacy cells, computed_trays and total
     }
   }
   const {block} = walkScan(S25, {...declare(5, 3), ...hole});
-  assert.deepEqual([block.total_trays, block.computed_trays, block.inventory.estimated_range], [281, 101, [281, null]]);
+  // 0.6.0 released 281; 0.7.0 withholds it (inside_step_up). The legacy cells still follow the grid.
+  assert.deepEqual([block.total_trays, block.computed_trays, block.inventory.estimated_range], [null, 101, null]);
   assert.deepEqual([block.cells.find(c => c.x === 2 && c.y === 1).status, block.top_view.steps_up], ['missing', 1]);
 });

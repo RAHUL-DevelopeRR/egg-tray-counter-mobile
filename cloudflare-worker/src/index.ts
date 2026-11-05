@@ -471,7 +471,7 @@ type CellReading = { face: string; layers: number; gap_filled: number; doubts: s
 type Cell = { x: number; y: number; status: string; layers: number | null; source: string; filled_layers?: number; verified?: boolean;
   readings?: CellReading[]; hidden?: boolean; assumed_layers?: number | null; assumed_range?: [number, number | null] | null;
   assumed_from?: string | null; neighbours?: { x: number; y: number; layers: number }[]; flags?: string[];
-  past_gap_layers?: number | null; past_gap_scale?: number | null };
+  past_gap_layers?: number | null; past_gap_scale?: number | null; past_gap_face?: string | null };
 const RECESS_SCALE = 0.85;
 const MAX_PERSPECTIVE_GRADIENT = 1.5;  // top-third / bottom-third layer spacing; measured frontal photos stay <= 1.42
 const MIN_RIM_CONFIDENCE = 0.5;  // rim-edge verification only vetoes when its own confidence is at least this
@@ -637,8 +637,9 @@ function faceColumns(columns: SpanColumn[], name: string): FaceColumn[] {
   });
 }
 
-const BLOCK_NOTE = "Counted trays are read top to floor on photographed faces. Hidden stacks are assumed at their neighbours' face height and are not counted. " +
-  "A top view checks holes and step-ups, never counts. A depth over one stack rests on the declared block size.";
+const BLOCK_NOTE = "Counted trays are read top to floor on photographed faces. Hidden stacks are set to the block's full height by the farm's " +
+  "stacking rule (partial stacks stand only on the photographed faces, the back row is full, no inside place is empty); they are not seen " +
+  "and not counted. A top view checks holes and step-ups, never counts. A depth over one stack rests on the declared block size.";
 
 /** The most common value, ties to the lower; null for an empty list. */
 function mode(values: number[]) {
@@ -653,31 +654,184 @@ function mode(values: number[]) {
  * a gap are not. */
 const measuredCell = (c: Cell | undefined): c is Cell => !!c && c.status === "observed" && !c.hidden && (c.layers ?? 0) > 0;
 
-// Hidden stacks (0.6.0, docs/GRID_CONTRACT_0.6.0.md): a stack no face photo counts gets an assumed height, the median
-// (rounded down) of its line-of-sight neighbours' measured heights: the front stack in its column and the side end stacks
-// in its row. With none, the block's typical face height. The range is the neighbours' spread, not a bound on the truth.
-// A stack seen through a gap in front of it may be shorter (or another block), so its range starts at 0. Idempotent:
-// it reads only measured cells and rewrites only hidden ones.
-function assumeHidden(cells: Cell[], X: number, Y: number, typical: number | null) {
-  const at = (x: number, y: number) => cells.find(c => c.x === x && c.y === y);
-  const all = cells.filter(measuredCell).map(c => c.layers!).sort((a, b) => a - b);
+// Hidden stacks (0.7.0, docs/GRID_CONTRACT_0.7.0.md; Plan 5 Decision 1, answered "yes" on 5 Nov 2026): a stack no face
+// photo counts is the block's full height H "by the stacking rule" (stackingRule below), never seen and never counted.
+// This replaces 0.6.0's median of the line-of-sight neighbours, which took half-filled face stacks as neighbours and so
+// under-read the hidden stacks behind them (contract case H2: 236 where the rule gives 237). The cell's range is [H, H]:
+// the cover-tray range of the hidden stacks is reported once, on the block (rule.range_heights). Idempotent: it rewrites
+// only hidden cells.
+function assumeHidden(cells: Cell[], X: number, Y: number, height: number | null) {
   for (const g of cells.filter(c => c.status === "computed" && c.x < X && c.y < Y)) {
-    const nb = [...new Set([at(g.x, 0), at(0, g.y), at(X - 1, g.y)])].filter((c): c is Cell => c !== g && measuredCell(c));
     const flags: string[] = (g.flags ?? []).filter(f => f === "line_of_sight_past_gap");
-    let assumed: number | null, range: [number, number | null] | null, from: string;
-    if (nb.length) {
-      const v = nb.map(c => c.layers!).sort((a, b) => a - b);
-      assumed = Math.floor(median(v)); range = [v[0], v[v.length - 1]]; from = "neighbours";
-      if (nb.length === 1) flags.push("single_neighbour");
-    } else {
-      assumed = typical; range = all.length ? [all[0], all[all.length - 1]] : null; from = "face_typical";
-      flags.push("no_neighbour");
-    }
-    if (g.past_gap_layers !== null && g.past_gap_layers !== undefined && range) range = [0, range[1]];
-    Object.assign(g, { hidden: true, layers: assumed, assumed_layers: assumed, assumed_range: range, assumed_from: from,
-      neighbours: nb.map(c => ({ x: c.x, y: c.y, layers: c.layers! })), flags });
+    Object.assign(g, { hidden: true, layers: height, assumed_layers: height, assumed_range: height === null ? null : [height, height],
+      assumed_from: "stacking_rule", neighbours: [], flags });
   }
   return cells;
+}
+
+// ---- 0.7.0 stacking rule (docs/PLAN_5_MULTI_PHOTO.md §4). The farm's rules, stated by the user on 5 Nov 2026 and not yet
+// audited on a farm day: partial stacks stand only on the photographed faces (STRAIGHT, LEFT, RIGHT), the back row is
+// always full, and no inside place is ever empty. So every hidden stack is the block's full height H. H is read from the
+// faces: the largest height that two different stacks read cleanly on two different faces, one of them a back corner
+// (the back row is full, so a back corner is a full stack). Cover trays are used "sometimes" (Decision 4), so a full
+// stack is F or F + 1 layers: H and the height one away are both full, and the hidden stacks get a range. Each check
+// that fails withholds the total and names the face to retake. A rule value is never "counted", "measured", "exact" or
+// "confirmed": every block that uses the rule is at most estimated.
+type RuleBasis = "two_faces" | "strict_sides" | "doubted_allowed" | "any_photo";
+type RuleOptions = { basis: RuleBasis; plurality: boolean; coverRange: boolean; taller: "withhold" | "note";
+  backCorner: "withhold" | "warn"; oneSide: "withhold" | "wall_full"; heightRange: [number, number] | null };
+// Decision 3 (open; default (a)): basis "two_faces" = (a), "strict_sides" = (a') a side that repeats the front never
+// counts, "any_photo" = (b) two stacks in any photo, no back corner needed, "doubted_allowed" = (c) as (a) with doubted and
+// gap-filled readings. Decision 4 (answered "sometimes"): coverRange on, plurality guard off. Decisions 5 (taller), 6
+// (back corner), 7 (one side) and 10 (height range) at the plan's defaults.
+const RULE_DEFAULTS: Readonly<RuleOptions> = Object.freeze({ basis: "two_faces", plurality: false, coverRange: true, taller: "withhold",
+  backCorner: "withhold", oneSide: "withhold", heightRange: null } as RuleOptions);
+const RULE_FACE_ORDER = ["straight", "left", "right"];
+type RuleStack = { x: number; y: number; face: string; layers: number };
+type RuleSummary = {
+  applied: boolean; options: RuleOptions; height: number | null; partner: number | null; full_heights: number[];
+  range_heights: [number, number] | null; hidden_stacks: number; basis: RuleStack[]; stacks_at_height: number;
+  taller: (RuleStack & { released: boolean })[]; back_corners: (RuleStack & { check: string })[];
+  plurality: { at_height: number; one_below: number; withheld: boolean } | null;
+  hints_below: { x: number; y: number; face: string | null; layers: number }[]; doubted_low: RuleStack[];
+  kept_readings: RuleStack[]; one_side: string | null; withheld_reason: string | null; notes: string[];
+  exceptions?: { x: number; y: number; kind: string; layers: number | null }[]; affirmed_by_operator?: boolean;
+  provisional?: Record<string, unknown> | null };
+
+function emptyRule(options: RuleOptions, hidden: number): RuleSummary {
+  return { applied: hidden > 0, options, height: null, partner: null, full_heights: [], range_heights: null, hidden_stacks: hidden,
+    basis: [], stacks_at_height: 0, taller: [], back_corners: [], plurality: null, hints_below: [], doubted_low: [], kept_readings: [],
+    one_side: null, withheld_reason: null, notes: [] };
+}
+
+/** The heights a full stack may have once H is known: [H-1, H+1] while the faces show only H (nobody knows whether H
+ * includes a cover tray), the pair the faces show otherwise; [H, H] with the cover range off. */
+function ruleRange(height: number, partner: number | null, coverRange: boolean): [number, number] {
+  if (!coverRange) return [height, height];
+  return partner === null ? [height - 1, height + 1] : [Math.min(height, partner), Math.max(height, partner)];
+}
+
+// cells: buildBlock's merged cells (hidden ones flagged); sidesSeen: the side faces that show stacks; eligible: per face,
+// whether its readings may set H (a guided-camera still, not blocked, not a copy, a side confirmed as a side face; a side
+// that repeats the front counts once a CORNER photo and the declaration settle it). A failed check pushes a conflict
+// tagged `check` and, for a named stack, sets that cell to conflict (its reading is kept in kept_readings).
+function stackingRule(cells: Cell[], X: number, Y: number, sidesSeen: string[], eligible: (face: string) => boolean,
+  opts: RuleOptions, conflicts: Record<string, unknown>[]): RuleSummary {
+  const hidden = cells.filter(c => c.hidden);
+  const rule = emptyRule(opts, hidden.length);
+  if (!hidden.length) return rule;
+  const withhold = (check: string, conflict: Record<string, unknown>) => {
+    conflicts.push({ ...conflict, check });
+    rule.withheld_reason ??= check;
+  };
+  const readings = (c: Cell) => (c.readings ?? []) as CellReading[];
+  const isFace = (c: Cell) => !c.hidden && c.status === "observed";
+  const unDoubted = (r: CellReading) => !r.gap_filled && !r.doubts.length;
+  const candidate = (r: CellReading) => (opts.basis === "doubted_allowed" || unDoubted(r)) && eligible(r.face);
+  const isBackCorner = (c: Cell) => c.y === Y - 1 && (c.x === 0 || c.x === X - 1);
+  const faceOrder = (faces: Set<string>) => RULE_FACE_ORDER.filter(f => faces.has(f));
+  const where = (c: { x: number; y: number }) => `(${c.x}, ${c.y})`;
+  // Clean readings by height: for each height, the stacks read at it and the faces that read them.
+  const at = new Map<number, Map<Cell, Set<string>>>();
+  for (const c of cells.filter(isFace)) for (const r of readings(c).filter(candidate)) {
+    const stacks = at.get(r.layers) ?? new Map<Cell, Set<string>>();
+    at.set(r.layers, stacks);
+    stacks.set(c, new Set([...(stacks.get(c) ?? []), r.face]));
+  }
+  if (sidesSeen.length < 2) {
+    const missing = ["left", "right"].find(s => !sidesSeen.includes(s))!;
+    rule.one_side = missing;
+    if (opts.oneSide === "withhold") withhold("one_side_only", { reason: `${missing.toUpperCase()}: only one side face was photographed; ` +
+      `partial stacks may stand on the side not seen, so the stacking rule cannot set the hidden stacks; photograph the ${missing} side face` });
+  }
+  // Two distinct stacks at h on two different faces, one of them a back corner; a stack counts once, for one face.
+  const basisAt = (h: number): RuleStack[] | null => {
+    const stacks = [...(at.get(h) ?? new Map<Cell, Set<string>>()).entries()].sort(([a], [b]) => b.y - a.y || a.x - b.x);
+    if (opts.basis === "any_photo") return stacks.length >= 2
+      ? stacks.slice(0, 2).map(([c, f]) => ({ x: c.x, y: c.y, face: faceOrder(f)[0], layers: h })) : null;
+    for (const [a, fa] of stacks) {
+      if (!isBackCorner(a)) continue;
+      for (const [b, fb] of stacks) {
+        if (b === a) continue;
+        for (const f1 of faceOrder(fa)) for (const f2 of faceOrder(fb)) if (f1 !== f2)
+          return [{ x: a.x, y: a.y, face: f1, layers: h }, { x: b.x, y: b.y, face: f2, layers: h }];
+      }
+    }
+    return null;
+  };
+  let H: number | null = null;
+  for (const h of [...at.keys()].sort((a, b) => b - a)) {
+    const basis = basisAt(h);
+    if (basis) { H = h; rule.basis = basis; break; }
+  }
+  if (H === null) {
+    // Until a close photo of a back corner can be asked for (Plan 5 Phase 5): retake the side with the most doubts.
+    const doubted = (side: string) => cells.filter(isFace).flatMap(readings).filter(r => r.face === side && !unDoubted(r)).length;
+    const side = [...sidesSeen].sort((a, b) => doubted(b) - doubted(a))[0] ?? "straight";
+    withhold("no_rule_height", { reason: `${side.toUpperCase()}: no full height for the hidden stacks: the stacking rule needs two stacks ` +
+      `read cleanly at one height on two different faces, one of them a back corner; retake this side closer, with the back corner stack whole in the frame` });
+    return rule;
+  }
+  rule.height = H;
+  rule.stacks_at_height = at.get(H)!.size;
+  const partner = !opts.coverRange ? null : at.has(H - 1) ? H - 1 : at.has(H + 1) ? H + 1 : null;
+  rule.partner = partner;
+  rule.full_heights = partner === null ? [H] : [Math.min(H, partner), Math.max(H, partner)];
+  const [lo, hi] = rule.range_heights = ruleRange(H, partner, opts.coverRange);
+  const fullText = partner === null ? `${H}` : `${lo} or ${hi}, with or without a cover tray`;
+  if (opts.heightRange && (H < opts.heightRange[0] || H > opts.heightRange[1]))
+    withhold("rule_height_out_of_range", { reason: `${rule.basis[0].face.toUpperCase()}: the block's full height ${H} is outside the farm's ` +
+      `normal range ${opts.heightRange[0]}-${opts.heightRange[1]}; retake this face` });
+  const oneBelow = at.get(H - 1)?.size ?? 0;
+  rule.plurality = { at_height: rule.stacks_at_height, one_below: oneBelow, withheld: opts.plurality && oneBelow > rule.stacks_at_height };
+  if (rule.plurality.withheld) withhold("rule_height_ambiguous", { reason: `${rule.basis[0].face.toUpperCase()}: more face stacks read ` +
+    `${H - 1} than ${H}, so the full height may rest on two over-read stacks or two cover trays; retake this face` });
+  // A face stack above the full heights: H may be too low, or the stack was over-read. A second capture reading the same
+  // height releases it (counted as read, H unchanged).
+  for (const c of cells.filter(isFace)) {
+    if ((c.layers ?? 0) <= hi) continue;
+    const face = readings(c).find(r => r.layers === c.layers)?.face ?? "straight";
+    const released = opts.taller === "note" || c.verified === true;
+    rule.taller.push({ x: c.x, y: c.y, face, layers: c.layers!, released });
+    if (released) { rule.notes.push(`one stack taller than the block's full height: ${where(c)} reads ${c.layers}`); continue; }
+    rule.kept_readings.push({ x: c.x, y: c.y, face, layers: c.layers! });
+    withhold("stack_taller_than_rule_height", { cell: [c.x, c.y], layers: c.layers, rule_height: H,
+      reason: `${face.toUpperCase()}: the stack at ${where(c)} reads ${c.layers} trays, above the block's full height (${fullText}); retake this face so a second photo reads it` });
+    Object.assign(c, { status: "conflict", layers: null });
+  }
+  // The back row is full by the rule, so a back corner read cleanly below the full heights breaks it (a doubted low
+  // reading is kept at its reading and shows how far it could rise, Decision 9).
+  for (const c of cells.filter(c => isBackCorner(c))) {
+    const side = c.x === 0 ? "left" : "right";
+    if (c.hidden) { rule.back_corners.push({ x: c.x, y: c.y, face: side, layers: 0, check: "not_seen" }); continue; }
+    if (c.status !== "observed" && c.status !== "missing") continue;
+    const layers = c.status === "missing" ? 0 : c.layers!;
+    const face = readings(c).find(r => r.layers === c.layers)?.face ?? side;
+    const clean = c.status === "missing" || readings(c).some(r => r.layers === c.layers && candidate(r));
+    if (layers >= lo) { rule.back_corners.push({ x: c.x, y: c.y, face, layers, check: "full" }); continue; }
+    if (!clean) { rule.back_corners.push({ x: c.x, y: c.y, face, layers, check: "doubted_low" }); continue; }
+    const released = opts.backCorner === "warn" || c.verified === true;
+    rule.back_corners.push({ x: c.x, y: c.y, face, layers, check: released ? "rule_broken" : "below" });
+    if (released) { rule.notes.push(`rule broken at back corner ${where(c)}: it reads ${layers}`); continue; }
+    rule.kept_readings.push({ x: c.x, y: c.y, face, layers });
+    withhold("back_corner_below_rule_height", { cell: [c.x, c.y], layers, rule_height: H,
+      reason: `${face.toUpperCase()}: the back corner stack at ${where(c)} reads ${layers}, below the block's full height (${fullText}); ` +
+        `the stacking rule says the back row is full: retake this side` });
+    Object.assign(c, { status: "conflict", layers: null });
+  }
+  // Trays glimpsed through a gap on a hidden cell, below the full heights: a short hidden stack, or another block behind.
+  for (const c of hidden.filter(c => c.status === "computed" && c.past_gap_layers !== null && c.past_gap_layers !== undefined && c.past_gap_layers < lo)) {
+    const face = c.past_gap_face ?? null;
+    rule.hints_below.push({ x: c.x, y: c.y, face, layers: c.past_gap_layers! });
+    withhold("inside_hint_below_rule", { cell: [c.x, c.y], past_gap_layers: c.past_gap_layers, rule_height: H,
+      reason: `${(face ?? "straight").toUpperCase()}: trays seen through a gap in front of the hidden stack at ${where(c)} read ${c.past_gap_layers}, ` +
+        `below the block's full height (${fullText}): it may be a short hidden stack or another block behind; retake this face` });
+    Object.assign(c, { status: "conflict", layers: null });
+  }
+  // Decision 9: a doubted or gap-filled face reading below H stays at its reading; the result says how far it could rise.
+  for (const c of cells.filter(isFace)) if ((c.layers ?? 0) > 0 && c.layers! < H && !readings(c).some(r => r.layers === c.layers && unDoubted(r)))
+    rule.doubted_low.push({ x: c.x, y: c.y, face: readings(c)[0]?.face ?? "straight", layers: c.layers! });
+  return rule;
 }
 
 // status: exact (every stack seen and verified by two photos, faces agree), estimated (a total, but hidden stacks
@@ -688,7 +842,7 @@ function assumeHidden(cells: Cell[], X: number, Y: number, typical: number | nul
 // stack counts as verified only when two different photos read it the same, with no gap-filled layer and no doubt
 // (see spanColumns); agreement between counts from the same boxes (span and walk) is not a second reading.
 function blockResult(width: number | null, depth: number | null, facesUsed: string[], typical: number | null, cells: Cell[],
-  conflicts: Record<string, unknown>[], ambiguities: Record<string, unknown>[] = [], needsView = false) {
+  conflicts: Record<string, unknown>[], ambiguities: Record<string, unknown>[] = [], needsView = false, rule: RuleSummary | null = null) {
   const sum = (list: Cell[]) => list.reduce((s, c) => s + (c.layers ?? 0), 0);
   const observedCells = cells.filter(c => c.status === "observed");
   const observed = sum(observedCells);
@@ -704,7 +858,7 @@ function blockResult(width: number | null, depth: number | null, facesUsed: stri
   return { status, width, depth, faces_used: facesUsed, typical_layers: typical, cells, observed_trays: observed, computed_trays: computed,
     filled_trays: filled, visible_verified_trays: verified, visible_single_reading_trays: observed - verified, single_reading_cells: single,
     total_trays: total, fully_observed: consistent && computed === 0, faces_consistent: consistent,
-    conflicts, ambiguities, rescan_cells: rescan, note: BLOCK_NOTE };
+    conflicts, ambiguities, rescan_cells: rescan, note: BLOCK_NOTE, rule };
 }
 
 // trusted: per face, whether its readings may verify a stack (null: all, for callers without capture provenance);
@@ -713,8 +867,11 @@ function blockResult(width: number | null, depth: number | null, facesUsed: stri
 // capture never verify each other); meta.quality: per face, whether the capture gate accepted it.
 function buildBlock(straightCols: SpanColumn[], leftCols: SpanColumn[], rightCols: SpanColumn[], strays: Record<string, number> = {},
   trusted: Record<string, boolean> | null = null, duplicates: Record<string, string> = {},
-  meta: { captureIds?: Record<string, string>; quality?: Record<string, string> } = {}) {
+  meta: { captureIds?: Record<string, string>; quality?: Record<string, string>; eligible?: Record<string, boolean>; rule?: Partial<RuleOptions> } = {}) {
   const trust = (face: string) => trusted === null || trusted[face] === true;
+  // Which faces may set the full height H (stackingRule); without provenance (trusted null) every face may.
+  const eligible = (face: string) => meta.eligible ? meta.eligible[face] === true : trust(face);
+  const ruleOptions: RuleOptions = { ...RULE_DEFAULTS, ...(meta.rule ?? {}) };
   const captureOf = (face: string): string => meta.captureIds?.[face] ?? (duplicates[face] ? captureOf(duplicates[face]) : face);
   const facesUsed = [...(straightCols.length ? ["straight"] : []), ...(leftCols.length ? ["left"] : []), ...(rightCols.length ? ["right"] : [])];
   if (!straightCols.length || (!leftCols.length && !rightCols.length)) {
@@ -807,7 +964,8 @@ function buildBlock(straightCols: SpanColumn[], leftCols: SpanColumn[], rightCol
     const layers = new Set(candidates.map(c => c.layers));
     // A cell no face counts stays hidden: the trays seen past the gap are a hint (they may be another block behind).
     if (cell.hidden && cell.status === "computed" && layers.size === 1) {
-      Object.assign(cell, { past_gap_layers: candidates[0].layers, past_gap_scale: candidates[0].scale, flags: ["line_of_sight_past_gap"] });
+      Object.assign(cell, { past_gap_layers: candidates[0].layers, past_gap_scale: candidates[0].scale,
+        past_gap_face: candidates[0].source.replace(/-recessed$/, ""), flags: ["line_of_sight_past_gap"] });
     } else if (cell.hidden) {
       Object.assign(cell, { status: "conflict", layers: null, source: candidates.map(c => c.source).join("+"), flags: ["line_of_sight_past_gap"] });
       conflicts.push({ cell: [cell.x, cell.y], reason: "faces disagree about the stack behind a missing one" });
@@ -816,14 +974,16 @@ function buildBlock(straightCols: SpanColumn[], leftCols: SpanColumn[], rightCol
         past_gap_layers: [...layers], chosen: cell.layers });
     }
   }
-  // The block's typical face height: the most common measured stack (each physical stack once), ties to the lower.
-  const typical = mode([...cells.values()].filter(measuredCell).map(c => c.layers!));
+  // Hidden stacks are the full height H by the stacking rule (0.7.0). A block with none keeps its typical face height:
+  // the most common measured stack (each physical stack once), ties to the lower.
+  const rule = stackingRule([...cells.values()], width, depth, sides.map(([n]) => n), eligible, ruleOptions, conflicts);
+  const typical = rule.applied ? rule.height : mode([...cells.values()].filter(measuredCell).map(c => c.layers!));
   assumeHidden([...cells.values()], width, depth, typical);
   for (const face of FACE_ORDER.filter(f => duplicates[f])) ambiguities.push({ face,
     reason: `${face.toUpperCase()}: the same capture as ${duplicates[face].toUpperCase()} (a copy or re-encode, not a second photo); it adds no reading` });
   for (const face of FACE_ORDER.filter(f => strays[f])) ambiguities.push({ face,
     reason: `${face.toUpperCase()}: ${strays[face]} group(s) of one or two boxes beside the counted stacks (a short stack, a loose tray or a stray box) are not counted` });
-  return blockResult(width, depth, facesUsed, typical, [...cells.values()], conflicts, ambiguities);
+  return blockResult(width, depth, facesUsed, typical, [...cells.values()], conflicts, ambiguities, false, rule);
 }
 
 // ---- Capture-quality gate for the model_spatial_v1 path.
@@ -1305,8 +1465,8 @@ function cornerReading(columns: SpanColumn[], side: string | null) {
 }
 
 type GridInputs = { declaration: BlockDeclaration | null; topView: TopViewTaps | null; corner: ReturnType<typeof cornerReading> | null;
-  depthBasis?: DepthBasis | null };
-const HIDDEN_NOTE = "hidden: height assumed from its neighbours' face heights; it can be missing, shorter or taller";
+  depthBasis?: DepthBasis | null; ruleOptions?: Partial<RuleOptions> };
+const HIDDEN_NOTE = "hidden: full by the stacking rule, not seen; if the rule was broken here, this stack can be missing or shorter";
 
 /** The physical grid, inventory and final status from the photo block plus the declaration and extra views. */
 // 0.6.0: a top-view tap changes only presence (a hole is 0) and a step (the lower bound); it never counts. The declaration
@@ -1320,8 +1480,27 @@ function assembleGrid(block: ReturnType<typeof blockResult>, inputs: GridInputs)
   const depthBasis: DepthBasis | null = inputs.depthBasis !== undefined ? inputs.depthBasis : Y === 1 ? "one_deep" : null;
   const empty = { grid: [] as GridCell[][], conflicts, total: block.total_trays, status: block.status, confirmed_basis: [] as string[],
     declaration_agrees: null as boolean | null, corner_agrees: null as boolean | null, top_view: null as Record<string, unknown> | null,
-    suggested_views: [] as string[], depth_basis: depthBasis, cells: block.cells, computed_trays: block.computed_trays as number | null };
+    suggested_views: [] as string[], depth_basis: depthBasis, cells: block.cells, computed_trays: block.computed_trays as number | null,
+    rule: null as RuleSummary | null };
   if (!X || !Y || !block.cells.length) return empty;
+  // The stacking rule as buildBlock applied it; a block built by blockResult alone (test fixtures) takes its typical
+  // height as H, with no basis recorded.
+  const ruleOptions: RuleOptions = { ...RULE_DEFAULTS, ...(block.rule?.options ?? {}), ...(inputs.ruleOptions ?? {}) };
+  const hiddenCount = block.cells.filter(c => c.hidden ?? c.status === "computed").length;
+  const rule: RuleSummary = block.rule ? { ...block.rule, exceptions: [], notes: [...block.rule.notes] } : (() => {
+    const r: RuleSummary = { ...emptyRule(ruleOptions, hiddenCount), exceptions: [] };
+    if (r.applied && block.typical_layers !== null) Object.assign(r, { height: block.typical_layers, full_heights: [block.typical_layers],
+      range_heights: ruleRange(block.typical_layers, null, ruleOptions.coverRange) });
+    return r;
+  })();
+  const ruled = rule.applied && rule.height !== null;
+  const [ruleLo, ruleHi] = rule.range_heights ?? [null, null];
+  const exception = (g: GridCell, kind: string) => {
+    if (!ruled || !g.hidden) return;
+    if (!g.flags.includes("rule_exception")) g.flags.push("rule_exception");
+    rule.exceptions = [...(rule.exceptions ?? []).filter(e => e.x !== g.x || e.y !== g.y), { x: g.x, y: g.y, kind, layers: g.z_layers }];
+  };
+  const ruleConflict = (check: string, conflict: Record<string, unknown>) => conflicts.push({ ...conflict, check });
   // A block built by blockResult alone (test fixtures, older callers) has no assumed heights yet; assumeHidden is idempotent.
   const source = block.cells.map(c => ({ ...c, flags: [...(c.flags ?? [])] }));
   if (source.some(c => c.status === "computed" && !c.assumed_from)) assumeHidden(source, X, Y, block.typical_layers);
@@ -1405,19 +1584,25 @@ function assembleGrid(block: ReturnType<typeof blockResult>, inputs: GridInputs)
       }
       if (g.evidence_class === "conflict") continue;
       const nb = spread(g);
-      if (state === "missing") Object.assign(g, { stack_present: false, z_layers: 0, evidence_class: "top_missing", status: "top_view",
-        measurement_sources: ["top_view"], assumed_layers: null, assumed_range: null, assumed_from: null,
-        uncertainties: note(g, "no stack seen from above") });
+      if (state === "missing") {
+        Object.assign(g, { stack_present: false, z_layers: 0, evidence_class: "top_missing", status: "top_view",
+          measurement_sources: ["top_view"], assumed_layers: null, assumed_range: null, assumed_from: null,
+          uncertainties: note(g, "no stack seen from above") });
+        exception(g, "top_missing");
+      }
       else if (state === "present") Object.assign(g, { stack_present: true, evidence_class: "top_present", status: "top_view",
         measurement_sources: ["top_view", "computed"],
         assumed_range: g.assumed_range ? [Math.max(1, g.assumed_range[0]), g.assumed_range[1]] : null,
-        uncertainties: note(g, "seen from above: presence only; height assumed from neighbours") });
+        uncertainties: note(g, ruled ? "seen from above: presence only; height full by the stacking rule" : "seen from above: presence only; height assumed") });
       else if (state === "step_up") {
         // Taller than its neighbours: at least one tray more than the lowest, how many more is not seen.
         const height = g.assumed_layers === null ? null : g.assumed_layers + 1;
         Object.assign(g, { stack_present: true, evidence_class: "top_step", status: "top_view", measurement_sources: ["top_view", "computed"],
           assumed_layers: height, z_layers: height, assumed_range: nb ? [nb[0] + 1, null] : null, flags: [...g.flags, "step_up_count_unknown"],
           uncertainties: note(g, "taller than its neighbours from above: height assumed one tray over them; how many more is not seen") });
+        // Under the stacking rule a hidden stack taller than its neighbours means the full height may be too low.
+        if (ruled) ruleConflict("inside_step_up", { cell: [x, y], reason: "ELEVATED: a hidden stack is taller than its neighbours from above, " +
+          "so the block's full height read on the faces may be too low; the stacking rule cannot set the hidden stacks" });
       } else if (state === "step_down") Object.assign(g, { stack_present: true, evidence_class: "top_step", status: "unknown",
         measurement_sources: ["top_view"], assumed_layers: null, z_layers: null, assumed_range: nb ? [1, nb[1]] : null,
         flags: [...g.flags, "step_down_count_unknown"], uncertainties: note(g, "lower than its neighbours from above; height not measured") });
@@ -1444,8 +1629,11 @@ function assembleGrid(block: ReturnType<typeof blockResult>, inputs: GridInputs)
         } else if (!g.hidden || g.evidence_class === "conflict") continue;
         else if (g.top_tap === "present" || stepped(g)) conflicts.push({ cell: [x, y], reason: "declared missing, but ELEVATED shows a stack there" });
         else if (g.evidence_class === "top_missing") g.measurement_sources = [...g.measurement_sources, "declared"];
-        else Object.assign(g, { stack_present: false, z_layers: 0, evidence_class: "declared_missing", status: "declared",
-          measurement_sources: ["declared"], assumed_layers: null, assumed_range: null, assumed_from: null, uncertainties: note(g, "declared missing") });
+        else {
+          Object.assign(g, { stack_present: false, z_layers: 0, evidence_class: "declared_missing", status: "declared",
+            measurement_sources: ["declared"], assumed_layers: null, assumed_range: null, assumed_from: null, uncertainties: note(g, "declared missing") });
+          exception(g, "declared_missing");
+        }
       }
       // One declared height per stack: a repeated entry is dropped; two different heights on one stack disagree.
       const partials = new Map<string, BlockDeclaration["partial_stacks"][number] | null>();
@@ -1489,6 +1677,7 @@ function assembleGrid(block: ReturnType<typeof blockResult>, inputs: GridInputs)
             assumed_range: p.layers !== null ? [p.layers, p.layers] : stepped(g) ? g.assumed_range : nb ? [1, nb[1]] : null,
             measurement_sources: [...new Set([...g.measurement_sources, "declared"])],
             uncertainties: note(g, p.layers === null ? "declared partial, height not given" : "declared partial-height stack") });
+          if (p.layers !== null) exception(g, "declared_partial");
         }
       }
       if (declaration.interior === "full") for (const g of grid.flat().filter(g => g.hidden && g.evidence_class !== "conflict")) {
@@ -1501,12 +1690,12 @@ function assembleGrid(block: ReturnType<typeof blockResult>, inputs: GridInputs)
         g.flags.push("declared_present");
         g.measurement_sources = [...new Set([...g.measurement_sources, "declared"])];
       }
-      // Declared partly empty: a hidden stack nobody checked from the top may be missing, so its range starts at 0.
-      if (declaration.interior === "partial") for (const g of grid.flat().filter(g => g.hidden && g.stack_present !== false && g.assumed_range)) {
-        if (declaredPartial(g) || g.evidence_class === "conflict") continue;
-        if (g.top_tap === null || g.top_tap === "unsure") g.assumed_range = [0, g.assumed_range![1]];
-        else if (g.top_tap === "present") g.assumed_range = [1, g.assumed_range![1]];
-        g.uncertainties.push("the interior is declared partly empty");
+      // Declared partly empty without naming the stacks: under the stacking rule nothing tells which hidden stack is short.
+      if (declaration.interior === "partial") {
+        for (const g of grid.flat().filter(g => g.hidden && g.stack_present !== false && g.evidence_class !== "conflict" && !declaredPartial(g)))
+          g.uncertainties.push("the interior is declared partly empty");
+        if (ruled && grid.flat().some(g => g.hidden)) ruleConflict("inside_declared_partial", { reason: "the interior is declared partly empty, " +
+          "so the stacking rule cannot set the hidden stacks; declare which stacks are missing or short, with their heights" });
       }
       // A measured reference height only demotes: a visible stack below it (and not declared partial) is noted;
       // nothing is ever added to reach it.
@@ -1514,6 +1703,12 @@ function assembleGrid(block: ReturnType<typeof blockResult>, inputs: GridInputs)
         if (g.measurement_sources.includes("observed") && g.z_layers !== null && g.z_layers > 0 && g.z_layers < declaration.reference_height && !declaredPartial(g))
           g.uncertainties.push(`below the declared reference height (${declaration.reference_height})`);
       }
+      // A measured reference height cross-checks H (it never sets it): it must be one of the full heights.
+      const ref = declaration.reference_height;
+      if (ruled && ref !== null && (ref < ruleLo! || ref > ruleHi!))
+        ruleConflict("reference_height_differs", { reason: `the declared measured reference height ${ref} differs from the block's full height ` +
+          `${rule.height}${ruleLo !== ruleHi ? ` (${ruleLo}-${ruleHi} with or without a cover tray)` : ""} read on the faces; recount one full face stack by hand` });
+      if (declaration.interior === "full") rule.affirmed_by_operator = true;
     }
   }
   // The CORNER photo: width and depth from one capture, so both faces are of one block by construction.
@@ -1537,27 +1732,66 @@ function assembleGrid(block: ReturnType<typeof blockResult>, inputs: GridInputs)
   if (conflicts.length && status !== "needs_view") status = "conflict";
   // exact is for one-deep blocks with every stack seen: a depth over one stack rests on the declared size.
   if (status === "exact" && (depthBasis !== "one_deep" || Y > 1 || cells.some(g => g.hidden))) status = "estimated";
-  const unchecked = cells.filter(g => g.hidden && g.stack_present !== false && g.evidence_class !== "conflict"
-    && (g.top_tap === null || g.top_tap === "unsure")).length;
-  // An ELEVATED photo is suggested while hidden stacks are unchecked; it is never required for a total.
-  const suggested = status === "estimated" && unchecked && !topView ? ["elevated"] : [];
+  // 0.7.0: an ELEVATED photo is never suggested (farm rule 5: photos from above are impractical); it stays optional.
+  const suggested: string[] = [];
   // The legacy cells (app 0.5.0's manual-count screen) carry the same per-stack values the total uses.
   const legacyCells = source.map(c => {
     const g = grid[c.y]?.[c.x];
     return g && g.hidden ? { ...c, layers: g.z_layers, status: g.stack_present === false ? "missing" : c.status } : c;
   });
   const computed = cells.filter(g => g.hidden && g.stack_present !== false).reduce((s, g) => s + (g.z_layers ?? 0), 0);
+  // Why the rule withholds: the first failed check, when every conflict comes from a rule check (any other conflict is
+  // the generic "conflict"). Provisional figures are never a total: they stay out of total_trays and the inventory.
+  const allConflicts = [...block.conflicts, ...conflicts];
+  const ruleChecks = allConflicts.filter(c => c.check);
+  rule.withheld_reason = rule.applied && ruleChecks.length && ruleChecks.length === allConflicts.length ? String(ruleChecks[0].check) : null;
+  rule.provisional = rule.withheld_reason && status !== "needs_view" ? ruleProvisional(grid, rule, String(ruleChecks[0].reason)) : null;
   return { grid, conflicts, total: status === "conflict" || status === "needs_view" ? null : total, status, confirmed_basis: [] as string[],
     declaration_agrees: declarationAgrees, corner_agrees: cornerAgrees, top_view: topSummary, suggested_views: suggested,
-    depth_basis: depthBasis, cells: legacyCells, computed_trays: computed as number | null };
+    depth_basis: depthBasis, cells: legacyCells, computed_trays: computed as number | null, rule: rule.applied ? rule : null };
 }
 
-type InventoryOptions = { status?: string; provisional?: Record<string, unknown> | null; withheld_reason?: string | null };
+/** What a block withheld only by a rule check would hold: the face stacks as read (a stack the check set aside at its
+ * reading), the operator's exceptions, and every other hidden stack at the full height (or the taller reading, or the
+ * typical face height when no full height was found). Never a total. */
+function ruleProvisional(grid: GridCell[][], rule: RuleSummary, reason: string) {
+  const cells = grid.flat();
+  const faces = cells.filter(g => !g.hidden && g.evidence_class === "measured").reduce((s, g) => s + (g.z_layers ?? 0), 0)
+    + rule.kept_readings.reduce((s, r) => s + r.layers, 0);
+  const hidden = cells.filter(g => g.hidden && g.stack_present !== false);
+  const fixed = hidden.filter(g => g.assumed_from === "declared_partial");
+  const atRule = hidden.length - fixed.length;
+  const base = { kind: rule.withheld_reason, reason, counted_on_faces: faces, rule_height: rule.height, hidden_stacks_at_rule: atRule };
+  if (fixed.some(g => g.z_layers === null))
+    return { ...base, at_rule_height: null, at_rule_range: null, at_taller: null, at_typical_face_height: null };
+  const at = (h: number) => faces + fixed.reduce((s, g) => s + g.z_layers!, 0) + atRule * h;
+  const tallest = rule.taller.filter(t => !t.released).reduce((m, t) => Math.max(m, t.layers), 0);
+  const measured = cells.filter(g => g.evidence_class === "measured" && (g.z_layers ?? 0) > 0).map(g => g.z_layers!);
+  const typical = rule.height === null ? mode(measured) : null;
+  return { ...base, at_rule_height: rule.height === null ? null : at(rule.height),
+    at_rule_range: rule.range_heights ? [at(rule.range_heights[0]), at(rule.range_heights[1])] : null,
+    at_taller: tallest ? { height: tallest, estimated_total: at(tallest) } : null,
+    at_typical_face_height: typical === null ? null : { height: typical, estimated_total: at(typical) } };
+}
+
+type InventoryOptions = { status?: string; provisional?: Record<string, unknown> | null; withheld_reason?: string | null;
+  rule?: RuleSummary | null };
 const WITHHELD_NOTE: Record<string, string> = {
   conflict: "no inventory: the readings disagree (see conflicts)",
   needs_view: "no inventory: a photo is needed (see rescan)",
   depth_unproven: "no inventory: the depth over one stack is not proven; declare the block size",
   side_repeats_front: "no inventory: a side photo repeats the front; add a CORNER photo and declare the block size",
+  // 0.7.0 stacking rule (stackingRule, assembleGrid).
+  no_rule_height: "no inventory: no full height for the hidden stacks (two stacks read cleanly at one height on two faces, one a back corner); retake the named side",
+  one_side_only: "no inventory: only one side face was photographed, so the stacking rule cannot set the hidden stacks",
+  stack_taller_than_rule_height: "no inventory: a face stack reads above the block's full height; retake the named face",
+  back_corner_below_rule_height: "no inventory: a back corner reads below the block's full height, against the stacking rule; retake the named side",
+  inside_hint_below_rule: "no inventory: trays seen through a gap read below the block's full height; retake the named face",
+  rule_height_ambiguous: "no inventory: more face stacks read one below the full height than at it; retake the named face",
+  rule_height_out_of_range: "no inventory: the full height is outside the farm's normal range",
+  inside_step_up: "no inventory: ELEVATED shows a hidden stack taller than its neighbours, so the full height may be too low",
+  inside_declared_partial: "no inventory: the interior is declared partly empty; declare which stacks are missing or short",
+  reference_height_differs: "no inventory: the declared reference height differs from the full height read on the faces",
 };
 
 /** Inventory with every source kept apart: trays counted on faces, trays assumed in hidden stacks (never counted), and
@@ -1597,7 +1831,26 @@ function gridInventory(grid: GridCell[][], declaration: BlockDeclaration | null,
     : null;
   const stacks = (n: number) => `${n} hidden stack${n === 1 ? "" : "s"}`;
   const removed = byClass("top_missing") + byClass("declared_missing");
+  // 0.7.0: hidden stacks at the full height H by the stacking rule. Their range is the cover-tray range (Decision 4),
+  // reported in rule_trays_range; the 0.6.0 neighbour ranges are null, so an app that prints them prints nothing false.
+  const rule = opts.rule ?? null;
+  const ruled = numbers && !!rule?.applied && rule.height !== null;
+  const ruleCells = ruled ? assumedCells.filter(g => g.assumed_from === "stacking_rule") : [];
+  const H = ruled ? rule!.height! : null;
+  const [ruleLo, ruleHi] = ruled ? rule!.range_heights ?? [H!, H!] : [null, null];
+  const ruleTrays = ruled ? ruleCells.length * H! : null;
+  const ruleRangeTrays: [number, number] | null = ruled ? [ruleCells.length * ruleLo!, ruleCells.length * ruleHi!] : null;
+  const declaredHeights = ruled ? assumedCells.filter(g => g.assumed_from === "declared_partial") : [];
+  const doubtedLow = ruled ? rule!.doubted_low.reduce((s, d) => s + Math.max(0, H! - d.layers), 0) : 0;
+  const ruleNote = !ruled ? "" : [`${counted} counted on faces`,
+    ...(ruleCells.length ? [`${stacks(ruleCells.length)} x ${H} = ${ruleTrays} full by the stacking rule (not seen)`] : []),
+    ...(declaredHeights.length ? [`${stacks(declaredHeights.length)} at the declared height`] : []),
+    ...(removed ? [`${stacks(removed)} reported missing`] : []),
+    ...(ruleRangeTrays && ruleRangeTrays[0] !== ruleRangeTrays[1] && ruleCells.length
+      ? [`cover trays are sometimes used: the hidden stacks hold ${ruleRangeTrays[0]} to ${ruleRangeTrays[1]} tray layers`] : []),
+    ...(assumed === null ? ["a hidden stack's height is unknown, so no total"] : [])].join("; ");
   const note = !numbers ? WITHHELD_NOTE[withheld ?? "needs_view"] ?? WITHHELD_NOTE.needs_view
+    : ruled ? ruleNote
     : `${counted} counted on faces; ` + (assumedCells.length
       ? `${assumed ?? "an unknown number"} assumed in ${stacks(assumedCells.length)}, ${assumedCells.length - unchecked || "none"} checked from the top`
       : "nothing assumed") + (removed ? `; ${stacks(removed)} missing` : "") + (assumed === null ? "; a hidden stack's height is unknown, so no total" : "");
@@ -1612,10 +1865,17 @@ function gridInventory(grid: GridCell[][], declaration: BlockDeclaration | null,
     unknown_cells: cells.filter(g => g.z_layers === null).length,
     unit: "tray_layers", released, withheld_reason: withheld, provisional: opts.provisional ?? null,
     counted_trays: numbers ? counted : null, counted_stacks: numbers ? measured.length : null,
-    assumed_trays: numbers ? assumed : null, assumed_range: numbers && lo !== null ? [lo, hi] as [number, number | null] : null,
+    assumed_trays: numbers ? assumed : null, assumed_range: numbers && !ruled && lo !== null ? [lo, hi] as [number, number | null] : null,
     assumed_stacks: numbers ? assumedCells.length : null,
     estimated_total: numbers && assumed !== null ? counted + assumed : null,
-    estimated_range: numbers && lo !== null ? [counted + lo, hi === null ? null : counted + hi] as [number, number | null] : null,
+    estimated_range: numbers && !ruled && lo !== null ? [counted + lo, hi === null ? null : counted + hi] as [number, number | null] : null,
+    // 0.7.0 stacking rule. two_photo_stacks: face stacks read the same, cleanly, by two captures (M, in stacks).
+    rule_stacks: ruled ? ruleCells.length : null, rule_height: H, rule_trays: ruleTrays, rule_trays_range: ruleRangeTrays,
+    rule_full_heights: ruled ? rule!.full_heights : null, sensitivity_per_layer: ruled ? ruleCells.length : null,
+    rule_exceptions: ruled ? cells.filter(g => g.flags.includes("rule_exception")).length : null,
+    doubted_low_stacks: ruled ? rule!.doubted_low.length : null,
+    doubted_low_up_to: ruled && doubtedLow && assumed !== null ? counted + assumed + doubtedLow : null,
+    two_photo_stacks: numbers ? cells.filter(g => g.status === "verified").length : null,
     hidden_stacks: numbers ? hidden.length : null, hidden_stacks_top_checked: numbers ? checked : null,
     unchecked_hidden_stacks: numbers ? unchecked : null,
     missing_stacks: numbers ? { seen_empty: byClass("seen_empty"), top_missing: byClass("top_missing"), declared_missing: byClass("declared_missing") } : null,
@@ -1627,7 +1887,7 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
   precomputed?: Record<string, SpanColumn[]>, rimStatus?: Record<string, string>, headings: Record<string, ViewHeading> = {},
   captures: Record<string, ViewCapture> = {},
   extras: { declaration?: BlockDeclaration | null; topView?: TopViewTaps | null; corner?: ViewInference | null; cornerSide?: string | null;
-    cornerCapture?: ViewCapture; elevated?: boolean; captureIds?: Record<string, string> } = {}) {
+    cornerCapture?: ViewCapture; elevated?: boolean; captureIds?: Record<string, string>; rule?: Partial<RuleOptions> } = {}) {
   const columns = precomputed ?? Object.fromEntries(VIEWS.map(view => [view, spanColumns(results[view].detections ?? [], results[view].image ?? null)]));
   const capture = Object.fromEntries(VIEWS.map(view => [view,
     captureQuality(columns[view], results[view].image?.width ?? null, results[view].image?.height ?? null,
@@ -1660,9 +1920,18 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
     && (view === "straight" || (sides[view].status === "turned" && !sides[view].repeats_front)) && !duplicates[view]]));
   const captureIds = Object.fromEntries(VIEWS.map(view => [view, extras.captureIds?.[view] ?? view]));
   for (const [view, original] of Object.entries(duplicates)) captureIds[view] = captureIds[original];
+  // 0.7.0: which photos may set the full height H. As trusted, except that a side repeating the front counts once a
+  // CORNER photo and the declared size settle it (Plan 5 Decision 3 (a)); "strict_sides" (a') uses trusted itself. A
+  // side the heading confirms but whose depth is not yet declared (depth_unproven) counts too: the block is withheld for
+  // its depth anyway, and its provisional "if the block is this deep" figures need H.
+  const ruleOptions: RuleOptions = { ...RULE_DEFAULTS, ...(extras.rule ?? {}) };
+  const eligible = ruleOptions.basis === "strict_sides" ? trusted
+    : Object.fromEntries(VIEWS.map(view => [view, captures[view]?.source === "captured_still" && captures[view]?.blocked === false
+      && (view === "straight" || sides[view].status === "turned" || sides[view].status === "depth_unproven") && !duplicates[view]]));
   const assembled = buildBlock(columns.straight, columns.left, columns.right,
     Object.fromEntries(VIEWS.map(view => [view, strays[view].length])), trusted, duplicates,
-    { captureIds, quality: Object.fromEntries(VIEWS.map(view => [view, capture[view].accepted ? "accepted" : "refused"])) });
+    { captureIds, quality: Object.fromEntries(VIEWS.map(view => [view, capture[view].accepted ? "accepted" : "refused"])), eligible,
+      rule: ruleOptions });
   // When the block model names a face in its first conflict, that is the photo to retake.
   const namedFace = (() => {
     for (const c of assembled.conflicts) {
@@ -1709,8 +1978,12 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
     provisional = { kind, reason: sides[faulty[0]].reason, if_depth: ifDepth,
       front_row_counted: front.every(c => c.count_agreement) ? front.filter(c => !c.recessed).reduce((s, c) => s + c.layers, 0) : null };
   }
-  const withheldReason = rejectedView ? "needs_view" : wrongSide ? String(provisional?.kind ?? "needs_view") : null;
-  const inventory = gridInventory(assembledGrid.grid, declaration, assembledGrid.total, { status: finalStatus, provisional, withheld_reason: withheldReason });
+  // A rule check names its own reason; its provisional figures stay in block.rule (app 0.6.x would title any inventory
+  // provisional "DEPTH NOT PROVEN").
+  const ruleSummary = wrongSide ? null : assembledGrid.rule;
+  const withheldReason = rejectedView ? "needs_view" : wrongSide ? String(provisional?.kind ?? "needs_view") : ruleSummary?.withheld_reason ?? null;
+  const inventory = gridInventory(assembledGrid.grid, declaration, assembledGrid.total, { status: finalStatus, provisional, withheld_reason: withheldReason,
+    rule: ruleSummary });
   // An ELEVATED photo is suggested while hidden stacks are unchecked and none was sent; a total never needs one.
   let suggestedViews = extras.elevated ? [] : assembledGrid.suggested_views;
   // A CORNER photo is the next step only when nothing but a CORNER photo or the declared size is missing; a wrong-way
@@ -1761,8 +2034,8 @@ function modelDiagnostics(scanId: string, results: Record<string, ViewInference>
       grid: assembledGrid.grid, inventory, confirmed_basis: [], depth_basis: assembledGrid.depth_basis,
       declaration: declaration ? { ...declaration, agrees_with_faces: assembledGrid.declaration_agrees } : null,
       corner: corner ? { ...corner, agrees: assembledGrid.corner_agrees } : null, top_view: assembledGrid.top_view,
-      suggested_views: suggestedViews, suggested_inputs: suggestedInputs, grid_contract: "0.6.0",
-      grid_note: "grid model from photos, not a point cloud or a measured mesh" },
+      suggested_views: suggestedViews, suggested_inputs: suggestedInputs, grid_contract: "0.7.0",
+      grid_note: "grid model from photos, not a point cloud or a measured mesh", rule: ruleSummary },
     rescan: assembledGrid.conflicts.length && !rejectedView && !wrongSide
       ? { recommended_view: "straight", reason: String(assembledGrid.conflicts[0].reason) } : rescan,
   };
@@ -1852,7 +2125,7 @@ async function reconstructPair(request: Request, env: Bindings) {
 // Open mode (AUTH_MODE unset or "open") never reaches this code: jobs and idempotency are enforce-only, so the
 // installed 0.4.11 app keeps exactly today's answers until production is promoted. Observe mode reaches it for
 // every request that carries a credential.
-const PIPELINE_VERSION = "worker-0.6.0";
+const PIPELINE_VERSION = "worker-0.7.0";
 // How long a claimed job is left to its attempt before a retry may take it over. Cloudflare keeps waitUntil work alive
 // for at most 30 s after the client disconnects, so an attempt whose phone gave up (the app's 90 s receive timeout, or
 // a dropped link the edge noticed) is cancelled by about 120 s after the claim and writes nothing; one whose
@@ -2614,7 +2887,7 @@ async function routeEnforced(request: Request, env: Bindings, url: URL, mode: Au
 
 export { base64, buildBlock, captureQuality, faceColumns, fuseCounts, fuseCells, medianBoxAspect, modelDiagnostics, readCellIds, readOptionalCellIds,
   strayGroups, boxOverlapScore, duplicateViews, assembleGrid, assumeHidden, gridInventory, cornerReading, readDeclaration, readTopViewTaps, blockResult,
-  sideCheck, spanColumns, walkLayers, worstView, mode };
+  sideCheck, spanColumns, walkLayers, worstView, mode, stackingRule, RULE_DEFAULTS };
 
 export default {
   async fetch(request, env, ctx): Promise<Response> {

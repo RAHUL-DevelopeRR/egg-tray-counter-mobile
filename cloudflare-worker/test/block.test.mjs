@@ -32,10 +32,11 @@ test('recessed front column becomes missing; the trays seen behind it are a hint
   const block = buildBlock(straight, side, []);
   const by = Object.fromEntries(block.cells.map(c => [`${c.x},${c.y}`, c]));
   assert.equal(by['1,0'].status, 'missing');
-  // The stack behind the gap stays hidden: assumed from its one measured neighbour (LEFT's 20), its range open to 0.
-  assert.deepEqual([by['1,1'].status, by['1,1'].layers, by['1,1'].past_gap_layers, by['1,1'].past_gap_scale], ['computed', 20, 18, 0.75]);
-  assert.deepEqual([by['1,1'].assumed_range, by['1,1'].flags], [[0, 20], ['line_of_sight_past_gap', 'single_neighbour']]);
-  assert.equal(block.total_trays, 5 * 20);
+  assert.deepEqual([by['1,1'].hidden, by['1,1'].past_gap_layers, by['1,1'].past_gap_scale, by['1,1'].flags], [true, 18, 0.75, ['line_of_sight_past_gap']]);
+  // 0.7.0 (0.6.0 released 100 with the stack behind the gap at 20, range open to 0): one side is photographed, and the
+  // 18 trays seen through the gap read below the full height 20, so the stacking rule withholds the total twice over.
+  assert.deepEqual([block.total_trays, block.rule.height, block.conflicts.map(c => c.check)], [null, 20, ['one_side_only', 'inside_hint_below_rule']]);
+  assert.equal(by['1,1'].status, 'conflict');
 });
 
 test('left/right depth disagreement and corner conflict withhold the total', () => {
@@ -126,10 +127,12 @@ test('two faces seeing the same trays through gaps agree on the hint; different 
   const straight = spanColumns([...column(100, 20), ...column(200, 18, {pitch: 30, width: 60}), ...column(300, 20)]);
   const agree = buildBlock(straight, spanColumns([...column(100, 18, {pitch: 30, width: 60}), ...column(200, 20)]), []);
   const byA = Object.fromEntries(agree.cells.map(c => [`${c.x},${c.y}`, c]));
-  // No measured neighbour in line of sight (both are gaps): the typical face height, 20.
-  assert.deepEqual([byA['1,1'].status, byA['1,1'].layers, byA['1,1'].past_gap_layers], ['computed', 20, 18]);
-  assert.deepEqual([byA['1,1'].assumed_from, byA['1,1'].flags], ['face_typical', ['line_of_sight_past_gap', 'no_neighbour']]);
-  assert.equal(agree.total_trays, 40 + 20 + 20);
+  // Both faces see 18 trays through their gaps: one hint, no conflict. 0.7.0 (0.6.0 released 80 at the typical face
+  // height): the back corner is a gap and one side is photographed, so no full height is found and the total is withheld.
+  assert.deepEqual([byA['1,1'].status, byA['1,1'].layers, byA['1,1'].past_gap_layers], ['computed', null, 18]);
+  assert.deepEqual([byA['1,1'].assumed_from, byA['1,1'].flags], ['stacking_rule', ['line_of_sight_past_gap']]);
+  assert.deepEqual([agree.total_trays, agree.rule.withheld_reason], [null, 'one_side_only']);
+  assert.ok(agree.conflicts.some(c => c.check === 'no_rule_height'));
   const differ = buildBlock(straight, spanColumns([...column(100, 16, {pitch: 30, width: 60}), ...column(200, 20)]), []);
   const byD = Object.fromEntries(differ.cells.map(c => [`${c.x},${c.y}`, c]));
   assert.equal(byD['1,1'].status, 'conflict'); assert.equal(differ.total_trays, null);

@@ -1,0 +1,5193 @@
+{
+ "pipeline": "worker-0.7.0",
+ "older": "worker-0.6.0",
+ "options": {
+  "a_two_faces": {
+   "basis": "two_faces"
+  },
+  "a_prime_strict_sides": {
+   "basis": "strict_sides"
+  },
+  "b_any_photo": {
+   "basis": "any_photo"
+  },
+  "c_doubted_allowed": {
+   "basis": "doubted_allowed"
+  }
+ },
+ "rule_cases": {
+  "n": 43,
+  "worker-0.6.0": {
+   "released": 33,
+   "wrong_releases": [
+    "FR02: 292 for 291",
+    "FR03: 293 for 291",
+    "FR04: 261 for 291",
+    "FR13 0.87: 291 for 279",
+    "FR13 0.90: 291 for 279",
+    "FR13 0.93: 291 for 279",
+    "FR13 0.95: 291 for 279",
+    "FR13 0.97: 291 for 279",
+    "FR13-side 0.87: 291 for 279",
+    "FR13-side 0.90: 291 for 279",
+    "FR13-side 0.93: 291 for 279",
+    "FR13-side 0.95: 291 for 279",
+    "FR13-side 0.97: 291 for 279",
+    "FR13-corner 0.87: 291 for 279",
+    "FR13-corner 0.90: 291 for 279",
+    "FR13-corner 0.93: 291 for 279",
+    "FR13-corner 0.95: 291 for 279",
+    "FR13-corner 0.97: 291 for 279",
+    "FR13-outside: 291 for 299",
+    "FR14: 291 for 271",
+    "FR17: 296 for 297",
+    "FR18: 294 for 291"
+   ]
+  },
+  "worker-0.7.0": {
+   "pass": 24,
+   "released": 25,
+   "wrong_releases": [
+    "FR04: 261 for 291",
+    "FR13 0.87: 291 for 279",
+    "FR13 0.90: 291 for 279",
+    "FR13 0.93: 291 for 279",
+    "FR13 0.95: 291 for 279",
+    "FR13 0.97: 291 for 279",
+    "FR13-side 0.87: 291 for 279",
+    "FR13-side 0.90: 291 for 279",
+    "FR13-side 0.93: 291 for 279",
+    "FR13-side 0.95: 291 for 279",
+    "FR13-side 0.97: 291 for 279",
+    "FR13-corner 0.87: 291 for 279",
+    "FR13-corner 0.90: 291 for 279",
+    "FR13-corner 0.93: 291 for 279",
+    "FR13-corner 0.95: 291 for 279",
+    "FR13-corner 0.97: 291 for 279",
+    "FR13-outside: 291 for 299",
+    "FR14: 291 for 271",
+    "FR18: 299 for 291"
+   ]
+  },
+  "by_option": {
+   "a_two_faces": {
+    "pass": 24,
+    "of": 43,
+    "released": 25,
+    "wrong_releases": [
+     "FR04",
+     "FR13 0.87",
+     "FR13 0.90",
+     "FR13 0.93",
+     "FR13 0.95",
+     "FR13 0.97",
+     "FR13-side 0.87",
+     "FR13-side 0.90",
+     "FR13-side 0.93",
+     "FR13-side 0.95",
+     "FR13-side 0.97",
+     "FR13-corner 0.87",
+     "FR13-corner 0.90",
+     "FR13-corner 0.93",
+     "FR13-corner 0.95",
+     "FR13-corner 0.97",
+     "FR13-outside",
+     "FR14",
+     "FR18"
+    ]
+   },
+   "a_prime_strict_sides": {
+    "pass": 23,
+    "of": 43,
+    "released": 24,
+    "wrong_releases": [
+     "FR04",
+     "FR13 0.87",
+     "FR13 0.90",
+     "FR13 0.93",
+     "FR13 0.95",
+     "FR13 0.97",
+     "FR13-side 0.87",
+     "FR13-side 0.90",
+     "FR13-side 0.93",
+     "FR13-side 0.95",
+     "FR13-side 0.97",
+     "FR13-corner 0.87",
+     "FR13-corner 0.90",
+     "FR13-corner 0.93",
+     "FR13-corner 0.95",
+     "FR13-corner 0.97",
+     "FR13-outside",
+     "FR14",
+     "FR18"
+    ]
+   },
+   "b_any_photo": {
+    "pass": 23,
+    "of": 43,
+    "released": 26,
+    "wrong_releases": [
+     "FR03",
+     "FR04",
+     "FR13 0.87",
+     "FR13 0.90",
+     "FR13 0.93",
+     "FR13 0.95",
+     "FR13 0.97",
+     "FR13-side 0.87",
+     "FR13-side 0.90",
+     "FR13-side 0.93",
+     "FR13-side 0.95",
+     "FR13-side 0.97",
+     "FR13-corner 0.87",
+     "FR13-corner 0.90",
+     "FR13-corner 0.93",
+     "FR13-corner 0.95",
+     "FR13-corner 0.97",
+     "FR13-outside",
+     "FR14",
+     "FR18"
+    ]
+   },
+   "c_doubted_allowed": {
+    "pass": 23,
+    "of": 43,
+    "released": 26,
+    "wrong_releases": [
+     "FR04",
+     "FR13 0.87",
+     "FR13 0.90",
+     "FR13 0.93",
+     "FR13 0.95",
+     "FR13 0.97",
+     "FR13-side 0.87",
+     "FR13-side 0.90",
+     "FR13-side 0.93",
+     "FR13-side 0.95",
+     "FR13-side 0.97",
+     "FR13-corner 0.87",
+     "FR13-corner 0.90",
+     "FR13-corner 0.93",
+     "FR13-corner 0.95",
+     "FR13-corner 0.97",
+     "FR13-outside",
+     "FR14",
+     "FR18"
+    ]
+   }
+  }
+ },
+ "library": {
+  "n": 38,
+  "by_option": {
+   "a_two_faces": {
+    "pass": 38,
+    "of": 38,
+    "released": 15,
+    "wrong_releases": [
+     "S03",
+     "S04",
+     "S07",
+     "R04",
+     "S29"
+    ]
+   },
+   "a_prime_strict_sides": {
+    "pass": 36,
+    "of": 38,
+    "released": 12,
+    "wrong_releases": [
+     "S03",
+     "S04",
+     "S07",
+     "R04"
+    ]
+   },
+   "b_any_photo": {
+    "pass": 38,
+    "of": 38,
+    "released": 16,
+    "wrong_releases": [
+     "S03",
+     "S04",
+     "S07",
+     "R04",
+     "S29"
+    ]
+   },
+   "c_doubted_allowed": {
+    "pass": 38,
+    "of": 38,
+    "released": 15,
+    "wrong_releases": [
+     "S03",
+     "S04",
+     "S07",
+     "R04",
+     "S29"
+    ]
+   }
+  }
+ },
+ "saved_scans": [
+  {
+   "scan": "99-block-6fe33b1d",
+   "mode": "as-sent",
+   "truth": 99,
+   "note": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 99,
+    "withheld_reason": null
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 99,
+    "withheld_reason": null,
+    "counted": 99,
+    "assumed": 0,
+    "rule_height": null,
+    "rule_trays_range": null,
+    "provisional": null,
+    "rescan_view": "straight"
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 99,
+     "withheld_reason": null,
+     "rule_height": null
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 99,
+     "withheld_reason": null,
+     "rule_height": null
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 99,
+     "withheld_reason": null,
+     "rule_height": null
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 99,
+     "withheld_reason": null,
+     "rule_height": null
+    }
+   }
+  },
+  {
+   "scan": "99-block-6fe33b1d",
+   "mode": "camera",
+   "truth": 99,
+   "note": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 99,
+    "withheld_reason": null
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 99,
+    "withheld_reason": null,
+    "counted": 99,
+    "assumed": 0,
+    "rule_height": null,
+    "rule_trays_range": null,
+    "provisional": null,
+    "rescan_view": "straight"
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 99,
+     "withheld_reason": null,
+     "rule_height": null
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 99,
+     "withheld_reason": null,
+     "rule_height": null
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 99,
+     "withheld_reason": null,
+     "rule_height": null
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 99,
+     "withheld_reason": null,
+     "rule_height": null
+    }
+   }
+  },
+  {
+   "scan": "99-block-6fe33b1d",
+   "mode": "camera-declared",
+   "truth": 99,
+   "note": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 99,
+    "withheld_reason": null
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 99,
+    "withheld_reason": null,
+    "counted": 99,
+    "assumed": 0,
+    "rule_height": null,
+    "rule_trays_range": null,
+    "provisional": null,
+    "rescan_view": "straight"
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 99,
+     "withheld_reason": null,
+     "rule_height": null
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 99,
+     "withheld_reason": null,
+     "rule_height": null
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 99,
+     "withheld_reason": null,
+     "rule_height": null
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 99,
+     "withheld_reason": null,
+     "rule_height": null
+    }
+   }
+  },
+  {
+   "scan": "99-block-6fe33b1d",
+   "mode": "camera-corner-declared",
+   "truth": 99,
+   "note": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 99,
+    "withheld_reason": null
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 99,
+    "withheld_reason": null,
+    "counted": 99,
+    "assumed": 0,
+    "rule_height": null,
+    "rule_trays_range": null,
+    "provisional": null,
+    "rescan_view": "straight"
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 99,
+     "withheld_reason": null,
+     "rule_height": null
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 99,
+     "withheld_reason": null,
+     "rule_height": null
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 99,
+     "withheld_reason": null,
+     "rule_height": null
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 99,
+     "withheld_reason": null,
+     "rule_height": null
+    }
+   }
+  },
+  {
+   "scan": "field-4x3-9b4c783e",
+   "mode": "as-sent",
+   "truth": null,
+   "note": "tier V reading 164 filled (+ covers); no physical count",
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "withheld_reason": "needs_view"
+   },
+   "worker-0.7.0": {
+    "status": "needs_view",
+    "total": null,
+    "withheld_reason": "needs_view",
+    "counted": null,
+    "assumed": null,
+    "rule_height": null,
+    "rule_trays_range": null,
+    "provisional": null,
+    "rescan_view": "left"
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "rule_height": null
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "rule_height": null
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "rule_height": null
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "rule_height": null
+    }
+   }
+  },
+  {
+   "scan": "field-4x3-9b4c783e",
+   "mode": "camera",
+   "truth": null,
+   "note": "tier V reading 164 filled (+ covers); no physical count",
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "withheld_reason": "side_repeats_front"
+   },
+   "worker-0.7.0": {
+    "status": "needs_view",
+    "total": null,
+    "withheld_reason": "side_repeats_front",
+    "counted": null,
+    "assumed": null,
+    "rule_height": null,
+    "rule_trays_range": null,
+    "provisional": {
+     "kind": "side_repeats_front",
+     "reason": "LEFT: this photo shows the same stacks with the same heights as STRAIGHT, so it may be the front face again; add a CORNER photo from the front-left corner, with the corner stack and both faces in frame, to count the depth",
+     "if_depth": null,
+     "front_row_counted": 45
+    },
+    "rescan_view": "left"
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null
+    }
+   }
+  },
+  {
+   "scan": "field-4x3-9b4c783e",
+   "mode": "camera-declared",
+   "truth": null,
+   "note": "tier V reading 164 filled (+ covers); no physical count",
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "withheld_reason": "side_repeats_front"
+   },
+   "worker-0.7.0": {
+    "status": "needs_view",
+    "total": null,
+    "withheld_reason": "side_repeats_front",
+    "counted": null,
+    "assumed": null,
+    "rule_height": null,
+    "rule_trays_range": null,
+    "provisional": {
+     "kind": "side_repeats_front",
+     "reason": "LEFT: this photo shows the same stacks with the same heights as STRAIGHT, so it may be the front face again; add a CORNER photo from the front-left corner, with the corner stack and both faces in frame, to count the depth",
+     "if_depth": null,
+     "front_row_counted": 45
+    },
+    "rescan_view": "left"
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null
+    }
+   }
+  },
+  {
+   "scan": "field-4x3-9b4c783e",
+   "mode": "camera-corner-declared",
+   "truth": null,
+   "note": "tier V reading 164 filled (+ covers); no physical count",
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 165,
+    "withheld_reason": null
+   },
+   "worker-0.7.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "no_rule_height",
+    "counted": null,
+    "assumed": null,
+    "rule_height": null,
+    "rule_trays_range": null,
+    "provisional": {
+     "kind": "no_rule_height",
+     "reason": "LEFT: no full height for the hidden stacks: the stacking rule needs two stacks read cleanly at one height on two different faces, one of them a back corner; retake this side closer, with the back corner stack whole in the frame",
+     "counted_on_faces": 105,
+     "rule_height": null,
+     "hidden_stacks_at_rule": 4,
+     "at_rule_height": null,
+     "at_rule_range": null,
+     "at_taller": null,
+     "at_typical_face_height": {
+      "height": 15,
+      "estimated_total": 165
+     }
+    },
+    "rescan_view": "left"
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "no_rule_height",
+     "rule_height": null
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "no_rule_height",
+     "rule_height": null
+    },
+    "b_any_photo": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "no_rule_height",
+     "rule_height": null
+    },
+    "c_doubted_allowed": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "stack_taller_than_rule_height",
+     "rule_height": 15
+    }
+   }
+  },
+  {
+   "scan": "mutaa-L-100",
+   "mode": "as-sent",
+   "truth": 100,
+   "note": null,
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "withheld_reason": "needs_view"
+   },
+   "worker-0.7.0": {
+    "status": "needs_view",
+    "total": null,
+    "withheld_reason": "needs_view",
+    "counted": null,
+    "assumed": null,
+    "rule_height": null,
+    "rule_trays_range": null,
+    "provisional": null,
+    "rescan_view": "left"
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "rule_height": null
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "rule_height": null
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "rule_height": null
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "rule_height": null
+    }
+   }
+  },
+  {
+   "scan": "mutaa-L-100",
+   "mode": "camera",
+   "truth": 100,
+   "note": null,
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "withheld_reason": "side_repeats_front"
+   },
+   "worker-0.7.0": {
+    "status": "needs_view",
+    "total": null,
+    "withheld_reason": "side_repeats_front",
+    "counted": null,
+    "assumed": null,
+    "rule_height": null,
+    "rule_trays_range": null,
+    "provisional": {
+     "kind": "side_repeats_front",
+     "reason": "LEFT: this photo shows the same stacks with the same heights as STRAIGHT, so it may be the front face again; add a CORNER photo from the front-left corner, with the corner stack and both faces in frame, to count the depth",
+     "if_depth": null,
+     "front_row_counted": 100
+    },
+    "rescan_view": "left"
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null
+    }
+   }
+  },
+  {
+   "scan": "mutaa-L-100",
+   "mode": "camera-declared",
+   "truth": 100,
+   "note": null,
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "withheld_reason": "side_repeats_front"
+   },
+   "worker-0.7.0": {
+    "status": "needs_view",
+    "total": null,
+    "withheld_reason": "side_repeats_front",
+    "counted": null,
+    "assumed": null,
+    "rule_height": null,
+    "rule_trays_range": null,
+    "provisional": {
+     "kind": "side_repeats_front",
+     "reason": "LEFT: this photo shows the same stacks with the same heights as STRAIGHT, so it may be the front face again; add a CORNER photo from the front-left corner, with the corner stack and both faces in frame, to count the depth",
+     "if_depth": null,
+     "front_row_counted": 100
+    },
+    "rescan_view": "left"
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null
+    }
+   }
+  },
+  {
+   "scan": "mutaa-L-100",
+   "mode": "camera-corner-declared",
+   "truth": 100,
+   "note": null,
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "withheld_reason": "side_repeats_front"
+   },
+   "worker-0.7.0": {
+    "status": "needs_view",
+    "total": null,
+    "withheld_reason": "side_repeats_front",
+    "counted": null,
+    "assumed": null,
+    "rule_height": null,
+    "rule_trays_range": null,
+    "provisional": {
+     "kind": "side_repeats_front",
+     "reason": "LEFT: the CORNER photo shows 5 stacks wide and 1 deep, but this side shows 5 stacks and STRAIGHT 5: it is not the left side face; walk around the corner and retake it",
+     "if_depth": null,
+     "front_row_counted": 100
+    },
+    "rescan_view": "left"
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null
+    }
+   }
+  }
+ ],
+ "cases": [
+  {
+   "id": "FR01 5x3: front 20 20 20 19 12, LEFT 20 20 20, RIGHT 12 20 20",
+   "truth": 291,
+   "check": "total_ok",
+   "expect": "291 = 171 counted + 6 x 20",
+   "residual": false,
+   "sweep": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": false
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": 171,
+    "assumed": 120,
+    "rule_trays_range": [
+     114,
+     120
+    ],
+    "estimated_range_by_rule": [
+     285,
+     291
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR02 FR01 with front x=2 at 21",
+   "truth": 291,
+   "check": "withheld:stack_taller_than_rule_height",
+   "expect": "withheld, retake straight, provisional 292 at H 20 or 298 at 21",
+   "residual": false,
+   "sweep": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 292,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "stack_taller_than_rule_height",
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": null,
+    "assumed": null,
+    "rule_trays_range": null,
+    "estimated_range_by_rule": null,
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": {
+     "kind": "stack_taller_than_rule_height",
+     "reason": "STRAIGHT: the stack at (2, 0) reads 21 trays, above the block's full height (19 or 20, with or without a cover tray); retake this face so a second photo reads it",
+     "counted_on_faces": 172,
+     "rule_height": 20,
+     "hidden_stacks_at_rule": 6,
+     "at_rule_height": 292,
+     "at_rule_range": [
+      286,
+      292
+     ],
+     "at_taller": {
+      "height": 21,
+      "estimated_total": 298
+     },
+     "at_typical_face_height": null
+    },
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "stack_taller_than_rule_height",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "stack_taller_than_rule_height",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "stack_taller_than_rule_height",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "stack_taller_than_rule_height",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR03 FR01 with front 21 21 20 19 12 (two over-reads in one photo)",
+   "truth": 291,
+   "check": "withheld:stack_taller_than_rule_height",
+   "expect": "H = 20 (the 21s are on one face), the 21s are taller, withheld",
+   "residual": false,
+   "sweep": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 293,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "stack_taller_than_rule_height",
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": null,
+    "assumed": null,
+    "rule_trays_range": null,
+    "estimated_range_by_rule": null,
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": {
+     "kind": "stack_taller_than_rule_height",
+     "reason": "STRAIGHT: the stack at (0, 0) reads 21 trays, above the block's full height (19 or 20, with or without a cover tray); retake this face so a second photo reads it",
+     "counted_on_faces": 173,
+     "rule_height": 20,
+     "hidden_stacks_at_rule": 6,
+     "at_rule_height": 293,
+     "at_rule_range": [
+      287,
+      293
+     ],
+     "at_taller": {
+      "height": 21,
+      "estimated_total": 299
+     },
+     "at_typical_face_height": null
+    },
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "stack_taller_than_rule_height",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "stack_taller_than_rule_height",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 299,
+     "withheld_reason": null,
+     "rule_height": 21,
+     "pass": false,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "stack_taller_than_rule_height",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR04 every face under-read by 2",
+   "truth": 291,
+   "check": "no_wrong_total",
+   "expect": "stretch: documents the residual risk (two faces agreeing on an under-read)",
+   "residual": true,
+   "sweep": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 261,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 261,
+    "withheld_reason": null,
+    "rule_height": 18,
+    "rule_partner": 17,
+    "counted": 153,
+    "assumed": 108,
+    "rule_trays_range": [
+     102,
+     108
+    ],
+    "estimated_range_by_rule": [
+     255,
+     261
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": false,
+    "wrong_release": true
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 261,
+     "withheld_reason": null,
+     "rule_height": 18,
+     "pass": false,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 261,
+     "withheld_reason": null,
+     "rule_height": 18,
+     "pass": false,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 261,
+     "withheld_reason": null,
+     "rule_height": 18,
+     "pass": false,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 261,
+     "withheld_reason": null,
+     "rule_height": 18,
+     "pass": false,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "FR05 FR01 with the LEFT back corner at 18",
+   "truth": null,
+   "check": "withheld:back_corner_below_rule_height",
+   "expect": "back_corner_below_rule_height, retake left",
+   "residual": false,
+   "sweep": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 288,
+    "withheld_reason": null,
+    "wrong_release": false
+   },
+   "worker-0.7.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "back_corner_below_rule_height",
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": null,
+    "assumed": null,
+    "rule_trays_range": null,
+    "estimated_range_by_rule": null,
+    "doubted_low_up_to": null,
+    "rescan_view": "left",
+    "provisional": {
+     "kind": "back_corner_below_rule_height",
+     "reason": "LEFT: the back corner stack at (0, 2) reads 18, below the block's full height (19 or 20, with or without a cover tray); the stacking rule says the back row is full: retake this side",
+     "counted_on_faces": 169,
+     "rule_height": 20,
+     "hidden_stacks_at_rule": 6,
+     "at_rule_height": 289,
+     "at_rule_range": [
+      283,
+      289
+     ],
+     "at_taller": null,
+     "at_typical_face_height": null
+    },
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "back_corner_below_rule_height",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "back_corner_below_rule_height",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "back_corner_below_rule_height",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "back_corner_below_rule_height",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR06 5x1 row 20 20 20 20 19",
+   "truth": 99,
+   "check": "total_ok",
+   "expect": "the same answer as 0.6.0 (no hidden stack: the rule is not used)",
+   "residual": false,
+   "sweep": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 99,
+    "withheld_reason": null,
+    "wrong_release": false
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 99,
+    "withheld_reason": null,
+    "rule_height": null,
+    "rule_partner": null,
+    "counted": 99,
+    "assumed": 0,
+    "rule_trays_range": null,
+    "estimated_range_by_rule": null,
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 99,
+     "withheld_reason": null,
+     "rule_height": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 99,
+     "withheld_reason": null,
+     "rule_height": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 99,
+     "withheld_reason": null,
+     "rule_height": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 99,
+     "withheld_reason": null,
+     "rule_height": null,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR08 FR01, declared missing (2,1)",
+   "truth": 271,
+   "check": "total_ok",
+   "expect": "271 with rule_exception",
+   "residual": false,
+   "sweep": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 271,
+    "withheld_reason": null,
+    "wrong_release": false
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 271,
+    "withheld_reason": null,
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": 171,
+    "assumed": 100,
+    "rule_trays_range": [
+     95,
+     100
+    ],
+    "estimated_range_by_rule": [
+     266,
+     271
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 271,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 271,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 271,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 271,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR09 FR01, interior declared partly empty",
+   "truth": null,
+   "check": "withheld:inside_declared_partial",
+   "expect": "withheld",
+   "residual": false,
+   "sweep": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": false
+   },
+   "worker-0.7.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "inside_declared_partial",
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": null,
+    "assumed": null,
+    "rule_trays_range": null,
+    "estimated_range_by_rule": null,
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": {
+     "kind": "inside_declared_partial",
+     "reason": "the interior is declared partly empty, so the stacking rule cannot set the hidden stacks; declare which stacks are missing or short, with their heights",
+     "counted_on_faces": 171,
+     "rule_height": 20,
+     "hidden_stacks_at_rule": 6,
+     "at_rule_height": 291,
+     "at_rule_range": [
+      285,
+      291
+     ],
+     "at_taller": null,
+     "at_typical_face_height": null
+    },
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "inside_declared_partial",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "inside_declared_partial",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "inside_declared_partial",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "inside_declared_partial",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR10 FR01, ELEVATED step_up tap at (2,2)",
+   "truth": null,
+   "check": "withheld:inside_step_up",
+   "expect": "withheld",
+   "residual": false,
+   "sweep": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 292,
+    "withheld_reason": null,
+    "wrong_release": false
+   },
+   "worker-0.7.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "inside_step_up",
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": null,
+    "assumed": null,
+    "rule_trays_range": null,
+    "estimated_range_by_rule": null,
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": {
+     "kind": "inside_step_up",
+     "reason": "ELEVATED: a hidden stack is taller than its neighbours from above, so the block's full height read on the faces may be too low; the stacking rule cannot set the hidden stacks",
+     "counted_on_faces": 171,
+     "rule_height": 20,
+     "hidden_stacks_at_rule": 6,
+     "at_rule_height": 291,
+     "at_rule_range": [
+      285,
+      291
+     ],
+     "at_taller": null,
+     "at_typical_face_height": null
+    },
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "inside_step_up",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "inside_step_up",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "inside_step_up",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "inside_step_up",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR11 FR01 with front x=2 a gap, 14 trays seen through it on hidden (2,1)",
+   "truth": null,
+   "check": "withheld:inside_hint_below_rule",
+   "expect": "withheld",
+   "residual": false,
+   "sweep": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 271,
+    "withheld_reason": null,
+    "wrong_release": false
+   },
+   "worker-0.7.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "inside_hint_below_rule",
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": null,
+    "assumed": null,
+    "rule_trays_range": null,
+    "estimated_range_by_rule": null,
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": {
+     "kind": "inside_hint_below_rule",
+     "reason": "STRAIGHT: trays seen through a gap in front of the hidden stack at (2, 1) read 14, below the block's full height (19 or 20, with or without a cover tray): it may be a short hidden stack or another block behind; retake this face",
+     "counted_on_faces": 151,
+     "rule_height": 20,
+     "hidden_stacks_at_rule": 6,
+     "at_rule_height": 271,
+     "at_rule_range": [
+      265,
+      271
+     ],
+     "at_taller": null,
+     "at_typical_face_height": null
+    },
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "inside_hint_below_rule",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "inside_hint_below_rule",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "inside_hint_below_rule",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "inside_hint_below_rule",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR12 a 2-tray stack at front x=2, declared 5 x 3",
+   "truth": 273,
+   "check": "withheld",
+   "expect": "withheld (width 4 vs 5), never wrong",
+   "residual": false,
+   "sweep": null,
+   "worker-0.6.0": {
+    "status": "needs_view",
+    "total": null,
+    "withheld_reason": "side_repeats_front",
+    "wrong_release": false
+   },
+   "worker-0.7.0": {
+    "status": "needs_view",
+    "total": null,
+    "withheld_reason": "side_repeats_front",
+    "rule_height": null,
+    "rule_partner": null,
+    "counted": null,
+    "assumed": null,
+    "rule_trays_range": null,
+    "estimated_range_by_rule": null,
+    "doubted_low_up_to": null,
+    "rescan_view": "left",
+    "provisional": {
+     "kind": "side_repeats_front",
+     "reason": "LEFT: this photo shows the same stacks with the same heights as STRAIGHT, so it may be the front face again; add a CORNER photo from the front-left corner, with the corner stack and both faces in frame, to count the depth",
+     "if_depth": null,
+     "front_row_counted": 71
+    },
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "rule_height": null,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR13 front x=1: 8 trays with the full stack behind showing above, scale 0.80",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total at every scale; if any fails, Phase 1b",
+   "residual": false,
+   "sweep": "FR13",
+   "worker-0.6.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "conflict",
+    "wrong_release": false
+   },
+   "worker-0.7.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "conflict",
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": null,
+    "assumed": null,
+    "rule_trays_range": null,
+    "estimated_range_by_rule": null,
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR13 front x=1: 8 trays with the full stack behind showing above, scale 0.83",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total at every scale; if any fails, Phase 1b",
+   "residual": false,
+   "sweep": "FR13",
+   "worker-0.6.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "conflict",
+    "wrong_release": false
+   },
+   "worker-0.7.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "conflict",
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": null,
+    "assumed": null,
+    "rule_trays_range": null,
+    "estimated_range_by_rule": null,
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR13 front x=1: 8 trays with the full stack behind showing above, scale 0.85",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total at every scale; if any fails, Phase 1b",
+   "residual": false,
+   "sweep": "FR13",
+   "worker-0.6.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "conflict",
+    "wrong_release": false
+   },
+   "worker-0.7.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "conflict",
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": null,
+    "assumed": null,
+    "rule_trays_range": null,
+    "estimated_range_by_rule": null,
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR13 front x=1: 8 trays with the full stack behind showing above, scale 0.87",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total at every scale; if any fails, Phase 1b",
+   "residual": false,
+   "sweep": "FR13",
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": 171,
+    "assumed": 120,
+    "rule_trays_range": [
+     114,
+     120
+    ],
+    "estimated_range_by_rule": [
+     285,
+     291
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": false,
+    "wrong_release": true
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "FR13 front x=1: 8 trays with the full stack behind showing above, scale 0.90",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total at every scale; if any fails, Phase 1b",
+   "residual": false,
+   "sweep": "FR13",
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": 171,
+    "assumed": 120,
+    "rule_trays_range": [
+     114,
+     120
+    ],
+    "estimated_range_by_rule": [
+     285,
+     291
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": false,
+    "wrong_release": true
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "FR13 front x=1: 8 trays with the full stack behind showing above, scale 0.93",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total at every scale; if any fails, Phase 1b",
+   "residual": false,
+   "sweep": "FR13",
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": 171,
+    "assumed": 120,
+    "rule_trays_range": [
+     114,
+     120
+    ],
+    "estimated_range_by_rule": [
+     285,
+     291
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": false,
+    "wrong_release": true
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "FR13 front x=1: 8 trays with the full stack behind showing above, scale 0.95",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total at every scale; if any fails, Phase 1b",
+   "residual": false,
+   "sweep": "FR13",
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": 171,
+    "assumed": 120,
+    "rule_trays_range": [
+     114,
+     120
+    ],
+    "estimated_range_by_rule": [
+     285,
+     291
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": false,
+    "wrong_release": true
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "FR13 front x=1: 8 trays with the full stack behind showing above, scale 0.97",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total at every scale; if any fails, Phase 1b",
+   "residual": false,
+   "sweep": "FR13",
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": 171,
+    "assumed": 120,
+    "rule_trays_range": [
+     114,
+     120
+    ],
+    "estimated_range_by_rule": [
+     285,
+     291
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": false,
+    "wrong_release": true
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "FR13-side LEFT y=1: 8 trays with the full stack behind, scale 0.80",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total",
+   "residual": false,
+   "sweep": "FR13-side",
+   "worker-0.6.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "conflict",
+    "wrong_release": false
+   },
+   "worker-0.7.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "conflict",
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": null,
+    "assumed": null,
+    "rule_trays_range": null,
+    "estimated_range_by_rule": null,
+    "doubted_low_up_to": null,
+    "rescan_view": "left",
+    "provisional": null,
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR13-side LEFT y=1: 8 trays with the full stack behind, scale 0.83",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total",
+   "residual": false,
+   "sweep": "FR13-side",
+   "worker-0.6.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "conflict",
+    "wrong_release": false
+   },
+   "worker-0.7.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "conflict",
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": null,
+    "assumed": null,
+    "rule_trays_range": null,
+    "estimated_range_by_rule": null,
+    "doubted_low_up_to": null,
+    "rescan_view": "left",
+    "provisional": null,
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR13-side LEFT y=1: 8 trays with the full stack behind, scale 0.85",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total",
+   "residual": false,
+   "sweep": "FR13-side",
+   "worker-0.6.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "conflict",
+    "wrong_release": false
+   },
+   "worker-0.7.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "conflict",
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": null,
+    "assumed": null,
+    "rule_trays_range": null,
+    "estimated_range_by_rule": null,
+    "doubted_low_up_to": null,
+    "rescan_view": "left",
+    "provisional": null,
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR13-side LEFT y=1: 8 trays with the full stack behind, scale 0.87",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total",
+   "residual": false,
+   "sweep": "FR13-side",
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": 171,
+    "assumed": 120,
+    "rule_trays_range": [
+     114,
+     120
+    ],
+    "estimated_range_by_rule": [
+     285,
+     291
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": false,
+    "wrong_release": true
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "FR13-side LEFT y=1: 8 trays with the full stack behind, scale 0.90",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total",
+   "residual": false,
+   "sweep": "FR13-side",
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": 171,
+    "assumed": 120,
+    "rule_trays_range": [
+     114,
+     120
+    ],
+    "estimated_range_by_rule": [
+     285,
+     291
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": false,
+    "wrong_release": true
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "FR13-side LEFT y=1: 8 trays with the full stack behind, scale 0.93",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total",
+   "residual": false,
+   "sweep": "FR13-side",
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": 171,
+    "assumed": 120,
+    "rule_trays_range": [
+     114,
+     120
+    ],
+    "estimated_range_by_rule": [
+     285,
+     291
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": false,
+    "wrong_release": true
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "FR13-side LEFT y=1: 8 trays with the full stack behind, scale 0.95",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total",
+   "residual": false,
+   "sweep": "FR13-side",
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": 171,
+    "assumed": 120,
+    "rule_trays_range": [
+     114,
+     120
+    ],
+    "estimated_range_by_rule": [
+     285,
+     291
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": false,
+    "wrong_release": true
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "FR13-side LEFT y=1: 8 trays with the full stack behind, scale 0.97",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total",
+   "residual": false,
+   "sweep": "FR13-side",
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": 171,
+    "assumed": 120,
+    "rule_trays_range": [
+     114,
+     120
+    ],
+    "estimated_range_by_rule": [
+     285,
+     291
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": false,
+    "wrong_release": true
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "FR13-corner front-left corner: 8 trays, misread the same way by STRAIGHT and LEFT, scale 0.80",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total; the corner is never \"read twice\" at the wrong value",
+   "residual": false,
+   "sweep": "FR13-corner",
+   "worker-0.6.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "conflict",
+    "wrong_release": false
+   },
+   "worker-0.7.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "conflict",
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": null,
+    "assumed": null,
+    "rule_trays_range": null,
+    "estimated_range_by_rule": null,
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR13-corner front-left corner: 8 trays, misread the same way by STRAIGHT and LEFT, scale 0.83",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total; the corner is never \"read twice\" at the wrong value",
+   "residual": false,
+   "sweep": "FR13-corner",
+   "worker-0.6.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "conflict",
+    "wrong_release": false
+   },
+   "worker-0.7.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "conflict",
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": null,
+    "assumed": null,
+    "rule_trays_range": null,
+    "estimated_range_by_rule": null,
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR13-corner front-left corner: 8 trays, misread the same way by STRAIGHT and LEFT, scale 0.85",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total; the corner is never \"read twice\" at the wrong value",
+   "residual": false,
+   "sweep": "FR13-corner",
+   "worker-0.6.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "conflict",
+    "wrong_release": false
+   },
+   "worker-0.7.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "conflict",
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": null,
+    "assumed": null,
+    "rule_trays_range": null,
+    "estimated_range_by_rule": null,
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "conflict",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR13-corner front-left corner: 8 trays, misread the same way by STRAIGHT and LEFT, scale 0.87",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total; the corner is never \"read twice\" at the wrong value",
+   "residual": false,
+   "sweep": "FR13-corner",
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": 171,
+    "assumed": 120,
+    "rule_trays_range": [
+     114,
+     120
+    ],
+    "estimated_range_by_rule": [
+     285,
+     291
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": false,
+    "wrong_release": true
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "FR13-corner front-left corner: 8 trays, misread the same way by STRAIGHT and LEFT, scale 0.90",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total; the corner is never \"read twice\" at the wrong value",
+   "residual": false,
+   "sweep": "FR13-corner",
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": 171,
+    "assumed": 120,
+    "rule_trays_range": [
+     114,
+     120
+    ],
+    "estimated_range_by_rule": [
+     285,
+     291
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": false,
+    "wrong_release": true
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "FR13-corner front-left corner: 8 trays, misread the same way by STRAIGHT and LEFT, scale 0.93",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total; the corner is never \"read twice\" at the wrong value",
+   "residual": false,
+   "sweep": "FR13-corner",
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": 171,
+    "assumed": 120,
+    "rule_trays_range": [
+     114,
+     120
+    ],
+    "estimated_range_by_rule": [
+     285,
+     291
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": false,
+    "wrong_release": true
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "FR13-corner front-left corner: 8 trays, misread the same way by STRAIGHT and LEFT, scale 0.95",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total; the corner is never \"read twice\" at the wrong value",
+   "residual": false,
+   "sweep": "FR13-corner",
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": 171,
+    "assumed": 120,
+    "rule_trays_range": [
+     114,
+     120
+    ],
+    "estimated_range_by_rule": [
+     285,
+     291
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": false,
+    "wrong_release": true
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "FR13-corner front-left corner: 8 trays, misread the same way by STRAIGHT and LEFT, scale 0.97",
+   "truth": 279,
+   "check": "no_wrong_total",
+   "expect": "no_wrong_total; the corner is never \"read twice\" at the wrong value",
+   "residual": false,
+   "sweep": "FR13-corner",
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": 171,
+    "assumed": 120,
+    "rule_trays_range": [
+     114,
+     120
+    ],
+    "estimated_range_by_rule": [
+     285,
+     291
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": false,
+    "wrong_release": true
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "FR13-outside a partial of 8 standing in front of front x=1, declared 5 x 3",
+   "truth": 299,
+   "check": "no_wrong_total",
+   "expect": "withheld or flagged (Decision 18: where partials stand)",
+   "residual": false,
+   "sweep": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": 171,
+    "assumed": 120,
+    "rule_trays_range": [
+     114,
+     120
+    ],
+    "estimated_range_by_rule": [
+     285,
+     291
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": false,
+    "wrong_release": true
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "FR14 FR01 with hidden (2,1) missing, no tap",
+   "truth": 271,
+   "check": "no_wrong_total",
+   "expect": "stretch: released 20 high (S29's twin)",
+   "residual": true,
+   "sweep": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": 171,
+    "assumed": 120,
+    "rule_trays_range": [
+     114,
+     120
+    ],
+    "estimated_range_by_rule": [
+     285,
+     291
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": false,
+    "wrong_release": true
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "FR15 every reading cut by the frame edge",
+   "truth": 291,
+   "check": "withheld:no_rule_height",
+   "expect": "no_rule_height",
+   "residual": false,
+   "sweep": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": false
+   },
+   "worker-0.7.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "no_rule_height",
+    "rule_height": null,
+    "rule_partner": null,
+    "counted": null,
+    "assumed": null,
+    "rule_trays_range": null,
+    "estimated_range_by_rule": null,
+    "doubted_low_up_to": null,
+    "rescan_view": "left",
+    "provisional": {
+     "kind": "no_rule_height",
+     "reason": "LEFT: no full height for the hidden stacks: the stacking rule needs two stacks read cleanly at one height on two different faces, one of them a back corner; retake this side closer, with the back corner stack whole in the frame",
+     "counted_on_faces": 171,
+     "rule_height": null,
+     "hidden_stacks_at_rule": 6,
+     "at_rule_height": null,
+     "at_rule_range": null,
+     "at_taller": null,
+     "at_typical_face_height": {
+      "height": 20,
+      "estimated_total": 291
+     }
+    },
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "no_rule_height",
+     "rule_height": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "no_rule_height",
+     "rule_height": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "no_rule_height",
+     "rule_height": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": false,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR16 FR01, measured reference height 21",
+   "truth": 291,
+   "check": "withheld:reference_height_differs",
+   "expect": "withheld",
+   "residual": false,
+   "sweep": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": false
+   },
+   "worker-0.7.0": {
+    "status": "conflict",
+    "total": null,
+    "withheld_reason": "reference_height_differs",
+    "rule_height": 20,
+    "rule_partner": 19,
+    "counted": null,
+    "assumed": null,
+    "rule_trays_range": null,
+    "estimated_range_by_rule": null,
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": {
+     "kind": "reference_height_differs",
+     "reason": "the declared measured reference height 21 differs from the block's full height 20 (19-20 with or without a cover tray) read on the faces; recount one full face stack by hand",
+     "counted_on_faces": 171,
+     "rule_height": 20,
+     "hidden_stacks_at_rule": 6,
+     "at_rule_height": 291,
+     "at_rule_range": [
+      285,
+      291
+     ],
+     "at_taller": null,
+     "at_typical_face_height": null
+    },
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "reference_height_differs",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "reference_height_differs",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "reference_height_differs",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "reference_height_differs",
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR17 cover trays on 3 of 8 full face stacks (front 21 20 21 20 12, LEFT 21 20 21); 2 of 6 hidden stacks covered",
+   "truth": 297,
+   "check": "in_range",
+   "expect": "released with the cover range: covered stacks are the partner height, never taller; the truth inside the printed range",
+   "residual": false,
+   "sweep": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 296,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 301,
+    "withheld_reason": null,
+    "rule_height": 21,
+    "rule_partner": 20,
+    "counted": 175,
+    "assumed": 126,
+    "rule_trays_range": [
+     120,
+     126
+    ],
+    "estimated_range_by_rule": [
+     295,
+     301
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 301,
+     "withheld_reason": null,
+     "rule_height": 21,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 301,
+     "withheld_reason": null,
+     "rule_height": 21,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 301,
+     "withheld_reason": null,
+     "rule_height": 21,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 301,
+     "withheld_reason": null,
+     "rule_height": 21,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR18 FR01 with front x=1 and the LEFT back corner over-read at 21",
+   "truth": 291,
+   "check": "in_range",
+   "expect": "H = 21, 20 its partner, hidden range 120-126; the true total inside the printed range",
+   "residual": false,
+   "sweep": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 294,
+    "withheld_reason": null,
+    "wrong_release": true
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 299,
+    "withheld_reason": null,
+    "rule_height": 21,
+    "rule_partner": 20,
+    "counted": 173,
+    "assumed": 126,
+    "rule_trays_range": [
+     120,
+     126
+    ],
+    "estimated_range_by_rule": [
+     293,
+     299
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": false,
+    "wrong_release": true
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 299,
+     "withheld_reason": null,
+     "rule_height": 21,
+     "pass": false,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 299,
+     "withheld_reason": null,
+     "rule_height": 21,
+     "pass": false,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 299,
+     "withheld_reason": null,
+     "rule_height": 21,
+     "pass": false,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 299,
+     "withheld_reason": null,
+     "rule_height": 21,
+     "pass": false,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "FR20 FR01 with front x=3 (19) gap-filled (doubted)",
+   "truth": 291,
+   "check": "total_ok",
+   "expect": "291, \"up to 292\"",
+   "residual": false,
+   "sweep": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "wrong_release": false
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 291,
+    "withheld_reason": null,
+    "rule_height": 20,
+    "rule_partner": null,
+    "counted": 171,
+    "assumed": 120,
+    "rule_trays_range": [
+     114,
+     126
+    ],
+    "estimated_range_by_rule": [
+     285,
+     297
+    ],
+    "doubted_low_up_to": 292,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 291,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "FR21 S21 with the sides framed differently: 3x3 of 20s, CORNER photo, declared 3 x 3",
+   "truth": 180,
+   "check": "total_ok",
+   "expect": "180: the sides repeat the front, settled by the CORNER photo and the declaration, and count for H (Decision 3 (a))",
+   "residual": false,
+   "sweep": null,
+   "worker-0.6.0": {
+    "status": "estimated",
+    "total": 180,
+    "withheld_reason": null,
+    "wrong_release": false
+   },
+   "worker-0.7.0": {
+    "status": "estimated",
+    "total": 180,
+    "withheld_reason": null,
+    "rule_height": 20,
+    "rule_partner": null,
+    "counted": 140,
+    "assumed": 40,
+    "rule_trays_range": [
+     38,
+     42
+    ],
+    "estimated_range_by_rule": [
+     178,
+     182
+    ],
+    "doubted_low_up_to": null,
+    "rescan_view": "straight",
+    "provisional": null,
+    "pass": true,
+    "wrong_release": false
+   },
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 180,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "no_rule_height",
+     "rule_height": null,
+     "pass": false,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 180,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 180,
+     "withheld_reason": null,
+     "rule_height": 20,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  }
+ ],
+ "library_cases": [
+  {
+   "id": "S01 genuine 4x1 one-deep, all 20",
+   "truth": 80,
+   "check": "no_wrong_total",
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 80,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 80,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 80,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 80,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S02 genuine 3x2, all 20 (one hidden stack computed)",
+   "truth": 120,
+   "check": "no_wrong_exact",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S03 top tray of a middle front stack missed (silent -1)",
+   "truth": 80,
+   "check": "no_wrong_exact",
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 79,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 79,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 79,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 79,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "S04 bottom tray of a middle front stack missed (silent -1)",
+   "truth": 80,
+   "check": "no_wrong_exact",
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 79,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 79,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 79,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 79,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "S05 layer inside a middle stack missed and gap-filled",
+   "truth": 80,
+   "check": "no_wrong_exact",
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 80,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 80,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 80,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 80,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S06 short end stack of 2 trays dropped from the front",
+   "truth": 62,
+   "check": "no_wrong_exact",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S07 two front stacks merged into one column",
+   "truth": 80,
+   "check": "no_wrong_exact",
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 60,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 60,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 60,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 60,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "S08 corner heights 1 apart",
+   "truth": 60,
+   "check": "no_wrong_exact",
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 60,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 60,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 60,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 60,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S09 missing interior stack in a 3x3 block (photos identical to a full block)",
+   "truth": 160,
+   "check": "no_wrong_exact",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S10 LEFT and RIGHT photos swapped (heights differ)",
+   "truth": 118,
+   "check": "no_wrong_total",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S11 back face (180 degrees) sent as LEFT of a 4x2 block",
+   "truth": 160,
+   "check": "no_wrong_total",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S11b back face (180 degrees) sent as LEFT of a square 3x3 block (counts cannot tell it from a side)",
+   "truth": 180,
+   "check": "withheld",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S12 front re-shot as LEFT, gallery (no heading), 4x2 block",
+   "truth": 160,
+   "check": "withheld",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S13 front re-shot as LEFT with the phone turned only 10 degrees",
+   "truth": 120,
+   "check": "withheld",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S14 side photos of another block, phone really turned (4x1 block, 3-deep neighbour)",
+   "truth": 80,
+   "check": "no_wrong_total",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S15 one photo sent as all three views from the camera (copies, not three captures)",
+   "truth": 20,
+   "check": "not_exact",
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 20,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 20,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 20,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 20,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S16 one photo sent as all three views from the gallery",
+   "truth": 20,
+   "check": "not_exact",
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 20,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 20,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 20,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 20,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S17 one-deep 2x1 block, gallery photos",
+   "truth": 40,
+   "check": "not_exact",
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 40,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 40,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 40,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 40,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S18 genuine 2x1 block, camera walk-around: every stack seen by two photos",
+   "truth": 40,
+   "check": "exact_ok",
+   "options": {
+    "a_two_faces": {
+     "status": "exact",
+     "total": 40,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "exact",
+     "total": 40,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "exact",
+     "total": 40,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "exact",
+     "total": 40,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S19 bottom tray cut by the frame on a corner stack, the side photo agreeing (img-30 class)",
+   "truth": 40,
+   "check": "not_exact",
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 40,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 40,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 40,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 40,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S14F S14 with the blind declaration (4 wide, 1 deep): the other block's sides contradict it",
+   "truth": 80,
+   "check": "withheld",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S20 3x2 block declared interior-full: front-middle seen once, so the declaration cannot confirm",
+   "truth": 120,
+   "check": "not_confirmed",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "R01 MUTAA L-100: three front photos, gallery",
+   "truth": 100,
+   "check": "no_wrong_total",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "R04 MUTAA L-80 front (stack 4 bottom cut by the frame, read 19) with side photos agreeing on 20 and 19",
+   "truth": 80,
+   "check": "no_wrong_exact",
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 79,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "estimated",
+     "total": 79,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": true
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 79,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 79,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": true
+    }
+   }
+  },
+  {
+   "id": "R02 MUTAA L-100 sides sent with camera headings of a real walk-around",
+   "truth": 100,
+   "check": "no_wrong_total",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "R02F R02 with the blind declaration (5 wide, 1 deep): the front photos sent as sides contradict it",
+   "truth": 100,
+   "check": "withheld",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "R03 MUTAA M16-FAR: neighbouring block in the front photo",
+   "truth": null,
+   "check": "withheld",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "needs_view",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S21 square 3x3 block, camera walk-around, CORNER photo agreeing (3 wide, 3 deep), declared 3 x 3",
+   "truth": 180,
+   "check": "no_wrong_total",
+   "options": {
+    "a_two_faces": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "no_rule_height",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "no_rule_height",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 180,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "no_rule_height",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S22 genuine 3x2 block, camera walk-around, ELEVATED taps only: taps are not a depth witness (sized from the declaration)",
+   "truth": 120,
+   "check": "withheld",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "R02C R02 with a CORNER photo of the real block (5 wide, 1 deep): the sides are the front again",
+   "truth": 100,
+   "check": "withheld",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S23 lone stack, side photos show it and one stack behind (0.5.0: exact 40)",
+   "truth": 20,
+   "check": "no_wrong_total",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S24 5x5 block, back rows 15, RIGHT is the front again, front-left CORNER photo (cannot vouch for RIGHT)",
+   "truth": 400,
+   "check": "no_wrong_total",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "side_repeats_front",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S25 5x1 row, real turn, side photos show the row end and two rows standing behind it (three 20s)",
+   "truth": 100,
+   "check": "no_wrong_total",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "depth_unproven",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "depth_unproven",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "depth_unproven",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "depth_unproven",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S25C S25 with a CORNER photo reading 5 x 3 (it sees the same touching rows): a CORNER photo cannot prove a depth",
+   "truth": 100,
+   "check": "withheld",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "depth_unproven",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "depth_unproven",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "depth_unproven",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "depth_unproven",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S26 4x3 block of 15s, sides repeat the front, CORNER photo (4 x 3) and declared 4 x 3: four hidden stacks assumed at 15",
+   "truth": 180,
+   "check": "total_ok",
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 180,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "no_rule_height",
+     "pass": false,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 180,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 180,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S27 S25 with the honest declaration (5 wide, 1 deep): the sides show touching rows, withheld",
+   "truth": 100,
+   "check": "withheld",
+   "options": {
+    "a_two_faces": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "depth_unproven",
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "depth_unproven",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "depth_unproven",
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "needs_view",
+     "total": null,
+     "withheld_reason": "depth_unproven",
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S28 3x2 block with the hidden stack absent: CORNER photo, declared 3 x 2, ELEVATED tap missing",
+   "truth": 100,
+   "check": "total_ok",
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 100,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "no_rule_height",
+     "pass": false,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 100,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 100,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": false
+    }
+   }
+  },
+  {
+   "id": "S29 S09 (3x3, interior stack missing) with a CORNER photo and declared 3 x 3, no top view",
+   "truth": 160,
+   "check": "not_exact",
+   "options": {
+    "a_two_faces": {
+     "status": "estimated",
+     "total": 180,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": true
+    },
+    "a_prime_strict_sides": {
+     "status": "conflict",
+     "total": null,
+     "withheld_reason": "no_rule_height",
+     "pass": true,
+     "wrong_release": false
+    },
+    "b_any_photo": {
+     "status": "estimated",
+     "total": 180,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": true
+    },
+    "c_doubted_allowed": {
+     "status": "estimated",
+     "total": 180,
+     "withheld_reason": null,
+     "pass": true,
+     "wrong_release": true
+    }
+   }
+  }
+ ]
+}
