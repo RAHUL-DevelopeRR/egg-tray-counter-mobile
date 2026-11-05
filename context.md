@@ -1,4 +1,19 @@
-> 2026-11-04 (latest): Worker 0.6.0 and app 4b merged into `rollout/0.4.12-staging` (local, not pushed, not
+> 2026-11-05 (latest): **Farm stacking rules, stated by the user** (requirements, not yet measured or audited):
+> - Half-filled (partial) stacks are placed only on the faces a scan photographs: STRAIGHT, LEFT or RIGHT. Workers are
+>   strictly instructed never to put them in the hidden interior. The back row is always full.
+> - No interior position is ever empty: the interior is always complete.
+> - Full stack height varies per block; the tallest normal stacks on the block's faces show it.
+> - The back side of a block is usually against a wall, so a BACK photo is rarely possible.
+> - Consequence for the model: every hidden stack is a full stack at the block's full height, "full by the stacking
+>   rule", not the median of its face neighbours (Worker 0.6.0, `index.ts:657-670`, would under-read hidden stacks
+>   behind a partial face stack). Not implemented yet. The rule is only as reliable as its enforcement; the farm day
+>   should open 2–3 blocks to check it.
+> - Direction asked by the user: a multi-photo backend (3 photos by default, more allowed: repeat and segment photos
+>   of a face, corners) so the outer ring of stacks is measured and verified; the interior follows the rule. A frontier
+>   VLM is not a source of exact counts (measured: AI counters disagreed on 21 of 29 photos; L-115 read 771 / 897 /
+>   1455); the Plan 3 "no VLM" rule stands unless the user lifts it.
+>
+> 2026-11-04: Worker 0.6.0 and app 4b merged into `rollout/0.4.12-staging` (local, not pushed, not
 > deployed); app 0.6.0+29 with the offline demo ("DEMO — SAVED RESULTS (NOT A LIVE SCAN)"). Staging still runs 0.5.0.
 > Block results are in tray layers only: the "Eggs if every tray is full" row is removed from the block panel.
 >
