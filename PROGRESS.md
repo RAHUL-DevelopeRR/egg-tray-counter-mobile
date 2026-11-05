@@ -1,6 +1,28 @@
 # Progress
 
-## 2026-11-04 (latest) - offline demo, real work merged, app 0.6.0+29 (Claude Code, `rollout/0.4.12-staging`)
+## 2026-11-05 (latest) - farm stacking rules and Plan 5 draft 2 (Claude Code, `rollout/0.4.12-staging`)
+
+Planning only: no code changed, nothing deployed. Staging still runs Worker 0.5.0; the Redmi runs app 0.6.0+29;
+app 0.6.1+30 is built (`egg-tray-counter-0.6.1-staging.apk`) and pushed as `aa6eab5`.
+- **Farm rules stated by the user** (context.md, 5 Nov): partial stacks only on the photographed faces (STRAIGHT,
+  LEFT, RIGHT), back row always full, no empty interior position, full height per block shown by the faces, back side
+  usually against a wall, photos from above or below impractical. Not audited; physical counts still zero.
+- **Answered:** a frontier VLM is not a source of exact counts (measured here: AI counters disagreed on 21 of 29
+  photos; L-115 read 771 / 897 / 1455). The Plan 3 "no VLM" rule stands unless the user lifts it.
+- **`docs/PLAN_5_MULTI_PHOTO.md` (draft 2, not approved):** hidden stacks = the block's full height H "by the stacking
+  rule" instead of the 0.6.0 neighbour median (`index.ts:656-681`, which under-reads hidden stacks behind a face
+  partial); H from clean readings of two distinct stacks on two different faces, a back corner among them; extra
+  photos (a repeat of a face, a long face in parts, a close photo of one stack on request) that never make a block
+  `exact`; two farm days (A audits the rules by opening blocks at random; B is a pre-registered blind pilot).
+  Phases: 1 server rule offline (Worker 0.7.0) → 2 app wording (0.7.0) → 3 farm day A → 4–6 multi-photo (0.7.1–0.7.3)
+  → 7 farm day B. Written by a 9-agent workflow (`wf_2f112f3e-f94`: 3 readers, 2 drafts, merge, 2 critics, editor);
+  key code citations spot-checked by hand.
+- **Measured cost of the default H rule** [R, offline replay on worker-0.6.0]: the only real deep block (field 4 × 3,
+  counterfactual inputs) has one clean face reading, so it is withheld until a close photo (Phase 5).
+- **Next:** the user's answers to the plan's open decisions, first Decision 1 (adopt the rule) and Decision 4 (cover
+  trays), before Phase 1 is built; the Redmi install of 0.6.1+30 when it is plugged in.
+
+## 2026-11-04 - offline demo, real work merged, app 0.6.0+29 (Claude Code, `rollout/0.4.12-staging`)
 
 For the faculty demo on the morning of 4 Nov. **Local only: nothing pushed or deployed. Staging still runs 0.5.0
 (52a1d5e8); production 4c1480e6 untouched.**
