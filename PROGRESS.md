@@ -1,6 +1,66 @@
 # Progress
 
-## 2026-11-05 (latest) - farm stacking rules and Plan 5 draft 2 (Claude Code, `rollout/0.4.12-staging`)
+## 2026-11-05 (latest) - HANDOVER: project state and where to start (Claude Code, `rollout/0.4.12-staging`)
+
+The project is handed to another coding agent (the Claude weekly limit was reached). Project path:
+`C:\Users\rahul\egg-tray-counter-mobile`. Branch `rollout/0.4.12-staging`, pushed to `origin` at the commit that
+follows this section. The working tree is clean after that push.
+
+**Read first:** `AGENTS.md`, this file, `context.md` (top entry: the farm's stacking rules), and
+`docs/PLAN_5_MULTI_PHOTO.md` (draft 3, not approved). Plan 4 (`docs/PLAN_4_EVIDENCE_GRID.md`) is older and not approved.
+
+**What is built and where it stands:**
+- App `mobile/` is version 0.6.1+30 (`aa6eab5`): gallery photos over 40 MP are shrunk, not refused; offline demo
+  screen; 0.6.0 evidence grid (ghost stacks, counted/assumed split).
+- Worker `cloudflare-worker/` is worker-0.6.0, merged locally and **not deployed**. Staging
+  (`egg-tray-counter-api-staging`) runs Worker 0.5.0 (version `52a1d5e8`). **Production `4c1480e6` is untouched; never
+  deploy it.**
+- Phones: Redmi Note 9 Pro (`f76d5e20`) runs 0.6.0+29. The 0.6.1+30 install is pending (phone must be plugged in,
+  with the user's OK). Emulator `emulator-5554` runs 0.6.1+30.
+- APK for the phone (git-ignored, repo root): `egg-tray-counter-0.6.1-staging.apk` (SHA-256 prefix `2e3651e5ddc991f6`,
+  signer `29013b98…`, versionCode 30).
+- Zero physical counts exist. Every count so far is an AI or label reading.
+
+**Decisions and approvals outstanding:**
+- Plan 5 Decision 1: adopt the stacking rule and build Phase 1 (Worker 0.7.0, offline). Not yet answered.
+- Plan 5 Decision 3: how strict "H" is (recommended: two stacks on two faces, a back corner among them).
+- Answered: cover trays are used "sometimes" (Plan 5 §4.6; `context.md`).
+- Every deploy, install, push and paid detector call needs the user's OK. Staging deploys use `--env staging` only.
+
+**Rules that stay in force:**
+- Never run a bare `wrangler deploy` or `npm run deploy`.
+- Never print the admin token (`work/secrets/staging-admin-token`) or the keystore password. Both are git-ignored.
+- No paid detector calls without approval. `accuracy-evaluation/*` is frozen. Do not open the personal phone gallery.
+- No new neural network, VLM, NeRF or photogrammetry (Plan 3 rule). Tray layers only, never eggs or rupees.
+- Never use "exact", "confirmed" or "physically verified" for a value that rests on a rule or a declaration.
+
+**Tools and checks:**
+- Flutter: `C:\Users\rahul\AppData\Local\Codex\flutter\bin\flutter.bat` (not on PATH). Run `flutter test` and
+  `dart analyze lib test` in `mobile/`. Last result: 255 of 255 tests pass; analyzer clean.
+- Worker: `npm test` in `cloudflare-worker/` (tsc, then node --test). Last result: 214 tests, 210 pass, 0 fail, 4 todo.
+- adb: `C:\Users\rahul\AppData\Local\Android\Sdk\platform-tools\adb.exe`. Use `-s f76d5e20` for the Redmi.
+
+**Worktrees** (`git worktree list`): `real-worker` and `real-app` hold branches already merged into this branch
+(`real/worker-0.6.0`, `real/app-evidence-grid`); they can be removed. `vigilant-napier-c0487d` and
+`affectionate-heyrovsky-9ff357` are older Plan 3 side sessions, not merged and not reviewed in this handover; leave
+them alone unless the user asks.
+
+**Known open issues (not fixed):**
+- One earlier full test run had a single failure in `test/pending_scan_test.dart` that did not repeat.
+- The old-format fallback split does not check that counted + assumed adds up to the total.
+- `traySplitLine` prints "Assumed 0" when the assumed part is unknown.
+- Taller and shorter badges of neighbouring hidden stacks can overlap on the block drawing.
+- The demo screen's header uses the raw status, not the display status.
+
+**Exact next steps, in order:**
+1. Ask the user for Plan 5 Decision 1 and Decision 3. If Decision 1 is "yes", build Phase 1: `ruleHeight()` in
+   `index.ts`, the checks of §4.2, the `test/rule.test.mjs` cases FR01–FR20, the replay under
+   `reports/stacking-rule-0.7.0-<date>/`. Nothing is deployed or pushed without a separate OK.
+2. When the Redmi is plugged in and the user agrees: `adb -s f76d5e20 install -r` the 0.6.1+30 APK, then check
+   the scan screens.
+3. Staging for Worker 0.7.0 only after app 0.7.0 is on the phones (Plan 5 Phase 2). Farm day A follows (Plan 5 §8.2).
+
+## 2026-11-05 - farm stacking rules and Plan 5 draft 2 (Claude Code, `rollout/0.4.12-staging`)
 
 Planning only: no code changed, nothing deployed. Staging still runs Worker 0.5.0; the Redmi runs app 0.6.0+29;
 app 0.6.1+30 is built (`egg-tray-counter-0.6.1-staging.apk`) and pushed as `aa6eab5`.
