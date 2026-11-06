@@ -487,8 +487,8 @@ The farm days can catch a common rule break. They cannot make the interior exact
 
 1. **Replace the 3 Nov default** (hidden = neighbours' face height) with H by the stacking rule. (a) Yes, build now, test on farm day A **(recommended)**; (b) no.
 2. **Staging timing.** (a) Deploy 0.7.0 to staging before farm day A, so its scans test the rule live **(recommended)**; (b) wait and replay farm-day photos offline. Also: skip the pending Worker 0.6.0 staging deploy (recommended if Phases 1–2 take about a week or less [E]), or deploy it now for depth-guard field data.
-3. **How H is found** (§4.1).
-   - (a) Two distinct clean stacks on two different faces, a back corner among them when Y ≥ 2, plurality guard; a side settled by CORNER and declaration counts as its face **(recommended)**. Cost [R readings; rule outcomes E]: the 4 × 3 replay is withheld (one clean stack); S21, S26 and S28 keep their right answers.
+3. **How H is found** (§4.1). **Answered 6 Nov: (a)** [U], as built in Worker 0.7.0 (`RULE_DEFAULTS.basis`).
+   - (a) Two distinct clean stacks on two different faces, a back corner among them when Y ≥ 2, plurality guard; a side settled by CORNER and declaration counts as its face **(chosen)**. Cost [R readings; rule outcomes E]: the 4 × 3 replay is withheld (one clean stack); S21, S26 and S28 keep their right answers.
    - (a′) As (a), but with the code's strict `trusted`: a side that repeats the front never counts. S21, S26, S28 and S29 and the 4 × 3 are withheld (right answers in the library 11 → 8), and so is every near-square block of near-equal heights until a close photo (Phase 5) adds a second face.
    - (b) Two distinct stacks, any photo: one photo can set H (ef823816: H = 10, but the 18 and 12 are taller, so only a provisional 120 inside, for about 240).
    - (c) As (a), doubted readings allowed: the 4 × 3 gives H = 15 (S, L, R), and the back-left 16 still withholds it as taller.

@@ -2,8 +2,11 @@
 > "full by the stacking rule, not seen", never counted, exact or verified; the residual line says the estimate is wrong
 > if the rule was broken; a withheld rule block shows its reason in plain words and figures that are never a total.
 > Built and tested locally, and pushed to `origin/rollout/0.4.12-staging` on 6 Nov at the user's request; not installed
-> (no phone attached; the Redmi still runs 0.6.0+29). Worker 0.7.0 still not deployed (staging 0.5.0); Decision 3 still
-> open (default (a)). Physical counts: still zero.
+> (no phone attached; the Redmi still runs 0.6.0+29). Worker 0.7.0 still not deployed (staging 0.5.0). Physical
+> counts: still zero.
+> - **Plan 5 Decision 3 answered by the user on 6 Nov: option (a).** H needs two distinct stacks read cleanly at the
+>   same height on two different faces, a back corner among them. This is what Worker 0.7.0 already has as
+>   `RULE_DEFAULTS.basis: "two_faces"`; no code change. The other options stay selectable as replay comparisons only.
 >
 > 2026-11-05 (evening): **Plan 5 Decision 1 answered by the user: yes.** Hidden stacks are the block's full
 > height H "by the stacking rule", replacing the 3 Nov default (neighbours' face height). Phase 1 is built offline as
