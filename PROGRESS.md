@@ -2,8 +2,21 @@
 
 ## 2026-11-06 (latest) - Plan 5 Phase 2: app 0.7.0+31 shows the stacking rule (Claude Code, `rollout/0.4.12-staging`)
 
-**Local only: not pushed, not deployed, not installed, 0 detector calls.** Phase 1 committed as `e6afb48` (the user said
-"do next steps"). No phone attached (`adb devices` empty), so no install. Staging still Worker 0.5.0; production untouched.
+**Pushed, not deployed, not installed, 0 detector calls.** Phase 1 committed as `e6afb48` (the user said "do next
+steps"), Phase 2 as `389f71e`; both, with this doc update, pushed to `origin/rollout/0.4.12-staging` on 6 Nov at the
+user's request ("Push to the context and progress.md"). No phone attached (`adb devices` empty), so no install.
+Staging still Worker 0.5.0; production untouched.
+
+**Current state, for whoever picks this up next** (supersedes the "Exact next steps" of the 5 Nov HANDOVER below,
+whose step 1, Decision 1 and Phase 1, is done):
+- Worker `cloudflare-worker/` = worker-0.7.0 (stacking rule, `docs/GRID_CONTRACT_0.7.0.md`), **not deployed**. Staging
+  runs 0.5.0 (`52a1d5e8`); production `4c1480e6` must never be deployed.
+- App `mobile/` = 0.7.0+31; APK `egg-tray-counter-0.7.0-staging.apk` built (git-ignored), **not installed**. The Redmi
+  (`f76d5e20`) still runs 0.6.0+29; 0.6.1+30 was never installed and is superseded by 0.7.0+31.
+- Open for the user: Decision 3 (default (a) built; options compared in
+  `reports/stacking-rule-0.7.0-20261105/README.md`); every install, staging deploy and paid call needs their OK.
+- Known gaps: FR18 (over-reads on two faces lift H), FR13 (Phase 1b, mixed columns), Decision 18 (partials outside the
+  block), the intermittent `pending_scan_test.dart` failure, the research capture mode (not built).
 - **App changes** (`mobile/lib`): `models/block_result.dart` reads the 0.7.0 inventory rule fields, `block.rule`
   (`RuleSummary`, `RuleProvisional`) and the split's rule fields (`TraySplit.byRule`); `features/scan_flow/block_view.dart`
   draws rule stacks as "=H" ghosts with the legend "= full by the stacking rule, not seen", the headline "ESTIMATE: N
@@ -30,7 +43,7 @@
 
 ## 2026-11-05 (evening) - Plan 5 Phase 1 built offline: Worker 0.7.0 stacking rule (Claude Code, `rollout/0.4.12-staging`)
 
-**Committed later as `e6afb48`; not pushed, not deployed, 0 detector calls.** Staging still runs Worker 0.5.0 (`52a1d5e8`);
+**Committed later as `e6afb48` and pushed on 6 Nov; not deployed, 0 detector calls.** Staging still runs Worker 0.5.0 (`52a1d5e8`);
 production `4c1480e6` untouched; the Redmi still runs app 0.6.0+29 (not plugged in, no install). App code unchanged
 (only a new test and fixtures).
 - **User decisions:** Decision 1 answered **yes** (hidden stacks = full height H by the stacking rule). Decision 3
