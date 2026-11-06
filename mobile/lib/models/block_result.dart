@@ -307,6 +307,9 @@ class CellEvidence {
 
   bool get singleReading => flags.contains('single_reading');
 
+  /// Set to the block's full height by the stacking rule (Worker 0.7.0).
+  bool get byRule => assumedFrom == 'stacking_rule';
+
   bool get stepDown =>
       evidenceClass == EvidenceClass.topStep &&
       (topTap == 'step_down' || flags.contains('step_down_count_unknown'));
@@ -545,7 +548,44 @@ class BlockInventory {
     this.missingStacks = const {},
     this.coverTrays,
     this.note,
+    this.ruleStacks,
+    this.ruleHeight,
+    this.ruleTrays,
+    this.ruleTraysRange,
+    this.ruleFullHeights = const [],
+    this.sensitivityPerLayer,
+    this.ruleExceptions,
+    this.doubtedLowStacks,
+    this.doubtedLowUpTo,
+    this.twoPhotoStacks,
   });
+
+  /// Worker 0.7.0 stacking rule: hidden stacks set to the block's full
+  /// height H "by the stacking rule" (never seen, never counted). Null from
+  /// older servers and for a block with no hidden stack.
+  final int? ruleStacks;
+  final int? ruleHeight;
+
+  /// ruleStacks × ruleHeight.
+  final int? ruleTrays;
+
+  /// What the rule stacks hold with or without cover trays (Decision 4:
+  /// covers are used "sometimes"), `[low, high]`.
+  final List<int?>? ruleTraysRange;
+
+  /// The full heights the faces show: H, or H and its cover partner.
+  final List<int> ruleFullHeights;
+
+  /// One layer wrong in H moves the estimate by this many trays.
+  final int? sensitivityPerLayer;
+  final int? ruleExceptions;
+  final int? doubtedLowStacks;
+
+  /// The estimate if every doubted low face reading were a full stack.
+  final int? doubtedLowUpTo;
+
+  /// Face stacks read the same by two photos (in stacks, not trays).
+  final int? twoPhotoStacks;
 
   final int? physicalLayersObserved;
   final int? physicalLayersComputed;
@@ -628,6 +668,127 @@ class BlockInventory {
           : const {},
       coverTrays: InventoryValue.fromJson(json['cover_trays']),
       note: json['note'] as String?,
+      ruleStacks: _int(json['rule_stacks']),
+      ruleHeight: _int(json['rule_height']),
+      ruleTrays: _int(json['rule_trays']),
+      ruleTraysRange: _range(json['rule_trays_range']),
+      ruleFullHeights: [
+        for (final h in (json['rule_full_heights'] as List<dynamic>? ?? const []))
+          ?_int(h),
+      ],
+      sensitivityPerLayer: _int(json['sensitivity_per_layer']),
+      ruleExceptions: _int(json['rule_exceptions']),
+      doubtedLowStacks: _int(json['doubted_low_stacks']),
+      doubtedLowUpTo: _int(json['doubted_low_up_to']),
+      twoPhotoStacks: _int(json['two_photo_stacks']),
+    );
+  }
+}
+
+/// What a block withheld by a stacking-rule check would hold (Worker 0.7.0
+/// `block.rule.provisional`). Never a total: never a headline, the history,
+/// an export or the manual count's app total.
+class RuleProvisional {
+  const RuleProvisional({
+    this.kind,
+    this.reason,
+    this.countedOnFaces,
+    this.ruleHeight,
+    this.hiddenStacksAtRule,
+    this.atRuleHeight,
+    this.atRuleRange,
+    this.tallerHeight,
+    this.atTaller,
+    this.typicalFaceHeight,
+    this.atTypicalFaceHeight,
+  });
+
+  final String? kind;
+  final String? reason;
+  final int? countedOnFaces;
+  final int? ruleHeight;
+  final int? hiddenStacksAtRule;
+  final int? atRuleHeight;
+  final List<int?>? atRuleRange;
+  final int? tallerHeight;
+  final int? atTaller;
+  final int? typicalFaceHeight;
+  final int? atTypicalFaceHeight;
+
+  static RuleProvisional? fromJson(Object? json) {
+    if (json is! Map<String, dynamic>) return null;
+    final taller = json['at_taller'];
+    final typical = json['at_typical_face_height'];
+    return RuleProvisional(
+      kind: json['kind'] as String?,
+      reason: json['reason'] as String?,
+      countedOnFaces: _int(json['counted_on_faces']),
+      ruleHeight: _int(json['rule_height']),
+      hiddenStacksAtRule: _int(json['hidden_stacks_at_rule']),
+      atRuleHeight: _int(json['at_rule_height']),
+      atRuleRange: _range(json['at_rule_range']),
+      tallerHeight: taller is Map<String, dynamic> ? _int(taller['height']) : null,
+      atTaller: taller is Map<String, dynamic>
+          ? _int(taller['estimated_total'])
+          : null,
+      typicalFaceHeight: typical is Map<String, dynamic>
+          ? _int(typical['height'])
+          : null,
+      atTypicalFaceHeight: typical is Map<String, dynamic>
+          ? _int(typical['estimated_total'])
+          : null,
+    );
+  }
+}
+
+/// The stacking rule as the server applied it (Worker 0.7.0 `block.rule`):
+/// the full height H, its cover-tray partner, why it withholds, and notes.
+/// Null from older servers and for a block with no hidden stack.
+class RuleSummary {
+  const RuleSummary({
+    this.applied = false,
+    this.height,
+    this.partner,
+    this.fullHeights = const [],
+    this.rangeHeights,
+    this.hiddenStacks,
+    this.withheldReason,
+    this.notes = const [],
+    this.affirmedByOperator = false,
+    this.provisional,
+  });
+
+  final bool applied;
+  final int? height;
+  final int? partner;
+  final List<int> fullHeights;
+  final List<int?>? rangeHeights;
+  final int? hiddenStacks;
+  final String? withheldReason;
+
+  /// A stack released though it breaks the rule (read the same by two
+  /// photos): "one stack taller than the block's full height", "rule broken
+  /// at back corner".
+  final List<String> notes;
+  final bool affirmedByOperator;
+  final RuleProvisional? provisional;
+
+  static RuleSummary? fromJson(Object? json) {
+    if (json is! Map<String, dynamic>) return null;
+    return RuleSummary(
+      applied: json['applied'] as bool? ?? false,
+      height: _int(json['height']),
+      partner: _int(json['partner']),
+      fullHeights: [
+        for (final h in (json['full_heights'] as List<dynamic>? ?? const []))
+          ?_int(h),
+      ],
+      rangeHeights: _range(json['range_heights']),
+      hiddenStacks: _int(json['hidden_stacks']),
+      withheldReason: json['withheld_reason'] as String?,
+      notes: _strings(json['notes']),
+      affirmedByOperator: json['affirmed_by_operator'] as bool? ?? false,
+      provisional: RuleProvisional.fromJson(json['provisional']),
     );
   }
 }
@@ -651,7 +812,32 @@ class TraySplit {
     this.estimatedRange,
     this.assumedFrom = const {},
     this.fromServer = false,
+    this.ruleHeight,
+    this.ruleStacks,
+    this.ruleTrays,
+    this.ruleTraysRange,
+    this.sensitivityPerLayer,
+    this.doubtedLowUpTo,
+    this.twoPhotoStacks,
   });
+
+  /// Worker 0.7.0: the hidden stacks are [ruleStacks] × [ruleHeight] "by the
+  /// stacking rule". Null from older servers and for blocks the rule does not
+  /// cover (nothing hidden).
+  final int? ruleHeight;
+  final int? ruleStacks;
+  final int? ruleTrays;
+  final List<int?>? ruleTraysRange;
+  final int? sensitivityPerLayer;
+  final int? doubtedLowUpTo;
+  final int? twoPhotoStacks;
+
+  /// The hidden stacks rest on the stacking rule, not on neighbours.
+  bool get byRule => ruleHeight != null;
+
+  /// Hidden stacks at an operator's declared height (rule exceptions).
+  int get declaredHidden =>
+      byRule ? (assumed ?? 0) - (ruleTrays ?? 0) : 0;
 
   final int counted;
 
@@ -794,7 +980,11 @@ class BlockResult {
     this.gridContract,
     this.suggestedInputs = const [],
     this.provisionalFigures,
+    this.rule,
   });
+
+  /// The stacking rule (Worker 0.7.0 `block.rule`); null from older servers.
+  final RuleSummary? rule;
 
   final String status;
   final int? width;
@@ -907,6 +1097,13 @@ class BlockResult {
         estimatedRange: inv.estimatedRange,
         assumedFrom: assumedFrom,
         fromServer: true,
+        ruleHeight: inv.ruleHeight,
+        ruleStacks: inv.ruleStacks,
+        ruleTrays: inv.ruleTrays,
+        ruleTraysRange: inv.ruleTraysRange,
+        sensitivityPerLayer: inv.sensitivityPerLayer,
+        doubtedLowUpTo: inv.doubtedLowUpTo,
+        twoPhotoStacks: inv.twoPhotoStacks,
       );
     }
     // A 0.6.0 server sends no counted figure for a block it withholds.
@@ -1041,6 +1238,7 @@ class BlockResult {
     gridContract: json['grid_contract'] as String?,
     suggestedInputs: _strings(json['suggested_inputs']),
     provisionalFigures: ProvisionalFigures.fromJson(json['provisional']),
+    rule: RuleSummary.fromJson(json['rule']),
   );
 
   static List<String> _describe(Object? entries, String fallback) =>

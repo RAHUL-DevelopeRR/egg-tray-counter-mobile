@@ -189,11 +189,20 @@ class _DeclarationPaneState extends State<DeclarationPane> {
           selected: _interior,
           onChanged: (v) => setState(() => _interior = v),
         ),
+        // Worker 0.7.0: hidden stacks are full by the farm's stacking rule, so a
+        // vague "partly empty" leaves no total; named stacks are honoured.
+        Text(
+          'The stacking rule counts every hidden stack as full. PARTIAL gives '
+          'no total: instead mark below which stacks are missing or short.',
+          key: const ValueKey('decl-rule-help'),
+          style: theme.textTheme.bodySmall,
+        ),
         const SizedBox(height: 12),
         _Heading('Known missing cells (tap to mark)'),
         Text(
           'Front row at the bottom, x from the left. Mark only cells you know '
-          'have no stack.',
+          'have no stack. Inside the block, each one is an exception to the '
+          'stacking rule.',
           style: theme.textTheme.bodySmall,
         ),
         const SizedBox(height: 6),
@@ -216,7 +225,7 @@ class _DeclarationPaneState extends State<DeclarationPane> {
           }),
         ),
         const SizedBox(height: 12),
-        _Heading('Known partial-height stacks'),
+        _Heading('Known partial-height stacks (rule exceptions inside)'),
         for (final p in _partials)
           ListTile(
             dense: true,

@@ -1,8 +1,36 @@
 # Progress
 
-## 2026-11-05 (latest, evening) - Plan 5 Phase 1 built offline: Worker 0.7.0 stacking rule (Claude Code, `rollout/0.4.12-staging`)
+## 2026-11-06 (latest) - Plan 5 Phase 2: app 0.7.0+31 shows the stacking rule (Claude Code, `rollout/0.4.12-staging`)
 
-**Local only: not committed, not pushed, not deployed, 0 detector calls.** Staging still runs Worker 0.5.0 (`52a1d5e8`);
+**Local only: not pushed, not deployed, not installed, 0 detector calls.** Phase 1 committed as `e6afb48` (the user said
+"do next steps"). No phone attached (`adb devices` empty), so no install. Staging still Worker 0.5.0; production untouched.
+- **App changes** (`mobile/lib`): `models/block_result.dart` reads the 0.7.0 inventory rule fields, `block.rule`
+  (`RuleSummary`, `RuleProvisional`) and the split's rule fields (`TraySplit.byRule`); `features/scan_flow/block_view.dart`
+  draws rule stacks as "=H" ghosts with the legend "= full by the stacking rule, not seen", the headline "ESTIMATE: N
+  COUNTED + K × H BY THE STACKING RULE", `ruleSplitLine` ("Counted 171 + 6 × 20 by the stacking rule = Estimated 291
+  tray layers"), `ruleLine` (stacks read the same in two photos, the cover-tray range, "up to" for doubted readings),
+  the residual line (Plan 5 §3), a sensitivity row in place of the neighbour range row, words for the 10 new withheld
+  reasons, a rule provisional panel (never a total), and released-rule notes; `scan_flow_screen.dart` shows a retake
+  view it does not know as text, never as RETAKE LEFT; `declaration_pane.dart` says PARTIAL gives no total and names
+  missing/partial stacks as rule exceptions. Version 0.7.0+31 (`pubspec.yaml`, `app_version.dart`). The manual-count
+  screen is unchanged (it never shows the app's heights). Older servers' answers render as before.
+- **Not built (Plan 5 Phase 2 "recommended"):** the research capture mode for farm day A.
+- **Verified (measured, local):** `flutter test` 262/262 (7 new: `worker_070_compat_test.dart` now checks the 0.7.0
+  screens on three real Worker 0.7.0 answers; 2 retake-view tests in `scan_screens_test.dart`); `dart analyze` clean.
+  Four full runs: three 262/262; one had the known intermittent failure, now named: `pending_scan_test.dart` "the
+  declaration and the optional extras survive a relaunch and are uploaded again on resume". That file passed alone
+  3/3; neither it nor the code it tests changed here. Plan 5 Phase 4 says to find it first.
+- **APK:** `egg-tray-counter-0.7.0-staging.apk` (repo root, git-ignored): `flutter build apk --release` in 184 s,
+  64,118,060 bytes, SHA-256 `9384a0728009cf69…`, versionName 0.7.0 / versionCode 31, v2 signer `29013b98…` (the
+  release key), 0 hits for the staging admin token or the keystore password in the APK or its 393 unpacked entries.
+  Not installed anywhere (the emulator was not started).
+- **Next:** (1) Decision 3 (the user's call; default (a) built); (2) with the user's OK and the Redmi plugged in, install
+  0.7.0+31 (it replaces the pending 0.6.1+30); (3) then, with the user's OK, deploy Worker 0.7.0 to staging only
+  (`--env staging`), smoke test about 7 paid calls; (4) farm day A planning (Plan 5 §8.2, Decisions 15, 18).
+
+## 2026-11-05 (evening) - Plan 5 Phase 1 built offline: Worker 0.7.0 stacking rule (Claude Code, `rollout/0.4.12-staging`)
+
+**Committed later as `e6afb48`; not pushed, not deployed, 0 detector calls.** Staging still runs Worker 0.5.0 (`52a1d5e8`);
 production `4c1480e6` untouched; the Redmi still runs app 0.6.0+29 (not plugged in, no install). App code unchanged
 (only a new test and fixtures).
 - **User decisions:** Decision 1 answered **yes** (hidden stacks = full height H by the stacking rule). Decision 3

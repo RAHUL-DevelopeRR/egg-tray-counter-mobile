@@ -97,13 +97,15 @@ CellLook _look(
 );
 
 /// The drawing of one stack by its evidence class. Only a measured stack is
-/// solid with ticks; a hidden one's height is written "~N" (assumed), a
+/// solid with ticks; a hidden one's height is written "~N" (assumed from
+/// neighbours, Worker 0.6) or "=N" (full by the stacking rule, Worker 0.7), a
 /// step up "▲ ≥N" (at least its lowest neighbour + 1, open above) and a step
 /// down "▼ ?" (height unknown).
 CellLook cellLook(CellEvidence e) {
   final range = e.range;
   // A ghost with no height is drawn at the top of its range, if any.
   final shown = e.layers ?? (range == null ? null : range[1]) ?? 0;
+  final mark = e.byRule ? '=' : '~';
   return switch (e.evidenceClass) {
     EvidenceClass.measured when shown > 0 => _look(
       CellShape.solid,
@@ -116,13 +118,13 @@ CellLook cellLook(CellEvidence e) {
       CellShape.ghost,
       kComputed,
       layers: shown,
-      label: e.layers == null ? '?' : '~${e.layers}',
+      label: e.layers == null ? '?' : '$mark${e.layers}',
     ),
     EvidenceClass.topPresent => _look(
       CellShape.ghost,
       kComputed,
       layers: shown,
-      label: e.layers == null ? '?' : '~${e.layers}',
+      label: e.layers == null ? '?' : '$mark${e.layers}',
       edge: kTopView,
     ),
     EvidenceClass.topStep when e.stepDown => _look(
@@ -169,9 +171,12 @@ CellLook cellLook(CellEvidence e) {
 String evidenceLegendLabel(CellEvidence e) => switch (e.evidenceClass) {
   EvidenceClass.measured =>
     e.singleReading ? 'counted, read once' : 'counted, two photos agree',
+  EvidenceClass.assumed when e.byRule => '= full by the stacking rule, not seen',
   EvidenceClass.assumed when e.flags.contains('line_of_sight_past_gap') =>
     'seen through a gap: assumed',
   EvidenceClass.assumed => '~ assumed, not counted',
+  EvidenceClass.topPresent when e.byRule =>
+    '= full by the stacking rule, there from the top',
   EvidenceClass.topPresent => '~ assumed, there from the top',
   EvidenceClass.topStep when e.stepDown => '▼ shorter from the top',
   EvidenceClass.topStep => '▲ taller from the top',
@@ -515,6 +520,73 @@ String traySplitLine(TraySplit split, {String status = kBlockEstimated}) {
       '$total ${split.estimated} tray layers';
 }
 
+/// The split line of a block whose hidden stacks follow the stacking rule
+/// (Worker 0.7.0): "Counted 171 + 6 × 20 by the stacking rule = Estimated
+/// 291 tray layers". Hidden stacks the operator declared at a height are
+/// added apart; a block with no rule stack reads "Counted N = ...".
+String ruleSplitLine(TraySplit split) {
+  final parts = <String>[
+    'Counted ${split.counted}',
+    if ((split.ruleStacks ?? 0) > 0)
+      '${split.ruleStacks} × ${split.ruleHeight} by the stacking rule',
+    if (split.declaredHidden > 0) '${split.declaredHidden} declared',
+  ];
+  return '${parts.join(' + ')} = Estimated ${split.estimated} tray layers';
+}
+
+/// The headline of a released rule block: "ESTIMATE: 171 COUNTED + 6 × 20 BY
+/// THE STACKING RULE".
+String ruleHeadline(TraySplit split) => (split.ruleStacks ?? 0) > 0
+    ? 'ESTIMATE: ${split.counted} COUNTED + ${split.ruleStacks} × '
+          '${split.ruleHeight} BY THE STACKING RULE'
+    : 'ESTIMATE: ${split.counted} COUNTED';
+
+/// What the rule part rests on, the cover-tray range, and how far doubted
+/// low face readings could raise the estimate. Never "counted", "exact" or
+/// "verified" for a rule value.
+String ruleLine(TraySplit split) {
+  final line = StringBuffer('Counted on faces: ${split.counted}');
+  if (split.twoPhotoStacks case final m? when m > 0) {
+    line.write(
+      ' (${_plural(m, 'stack', 'stacks')} read the same in two photos)',
+    );
+  }
+  line.write('.');
+  final k = split.ruleStacks ?? 0;
+  if (k > 0) {
+    line.write(
+      ' Hidden: ${_plural(k, 'stack', 'stacks')} × ${split.ruleHeight} = '
+      '${split.ruleTrays}, full by the stacking rule, not seen.',
+    );
+    final range = split.ruleTraysRange;
+    if (range != null && range[0] != range[1]) {
+      line.write(
+        ' Cover trays are sometimes used: the hidden stacks hold '
+        '${rangeWords(range)} tray layers.',
+      );
+    }
+  }
+  if (split.declaredHidden > 0) {
+    line.write(
+      ' ${split.declaredHidden} tray layers in hidden stacks at the '
+      'height you declared.',
+    );
+  }
+  if (split.doubtedLowUpTo case final upTo?) {
+    line.write(
+      ' Up to $upTo if the doubtful short readings on the faces are full '
+      'stacks.',
+    );
+  }
+  return line.toString();
+}
+
+/// The residual risk of a rule block, in place of "A hidden stack can be
+/// missing, shorter or taller" (Plan 5 §3).
+const kRuleResidualLine =
+    "Hidden stacks are not seen. The farm's stacking rule says they are "
+    'full. If the rule was broken in this block, the estimate is wrong.';
+
 String _basisWords(Set<String> from) {
   final words = <String>{
     for (final f in from)
@@ -584,6 +656,33 @@ String withheldWords(String? reason, {String? status}) =>
       'depth_unproven' => 'the depth is not proven; declare the block size',
       'side_repeats_front' =>
         'a side photo repeats the front; add a CORNER photo',
+      // Worker 0.7.0 stacking rule (docs/GRID_CONTRACT_0.7.0.md).
+      'no_rule_height' =>
+        "the block's full height is not clear on the photos; retake the "
+            'named side closer, with the back corner stack whole in the frame',
+      'one_side_only' =>
+        'only one side was photographed; photograph the other side',
+      'stack_taller_than_rule_height' =>
+        "a stack on a face reads taller than the block's full height; "
+            'retake the named face',
+      'back_corner_below_rule_height' =>
+        "a back corner reads shorter than the block's full height (the back "
+            'row should be full); retake the named side',
+      'inside_hint_below_rule' =>
+        'trays seen through a gap read short; retake the named face',
+      'rule_height_ambiguous' =>
+        "the block's full height is unclear; retake the named face",
+      'rule_height_out_of_range' =>
+        "the block's full height is outside the farm's normal range",
+      'inside_step_up' =>
+        'the top view shows a hidden stack taller than the rest, so the full '
+            'height may be too low',
+      'inside_declared_partial' =>
+        'the inside is declared partly empty; mark which stacks are missing '
+            'or short instead',
+      'reference_height_differs' =>
+        'your hand-counted stack differs from the full height on the photos; '
+            'count it again',
       _ => 'the photos do not settle the block',
     };
 
@@ -624,6 +723,11 @@ class BlockPanel extends StatelessWidget {
         'TOTAL WITHHELD: '
             '${withheldWords(block.withheldReason, status: 'height_unknown').toUpperCase()}',
         kRescan,
+      ),
+      // Worker 0.7.0: hidden stacks full by the stacking rule.
+      kBlockEstimated when split != null && split.byRule => (
+        ruleHeadline(split),
+        kComputed,
       ),
       // Counted and assumed always side by side; never "exact" or
       // "confirmed" for a total that includes assumed stacks.
@@ -691,6 +795,9 @@ class BlockPanel extends StatelessWidget {
             if (block.provisional case final provisional?) ...[
               const SizedBox(height: 10),
               _ProvisionalPanel(provisional),
+            ] else if (block.rule?.provisional case final provisional?) ...[
+              const SizedBox(height: 10),
+              _RuleProvisionalPanel(provisional),
             ],
             if (drawn) ...[
               const SizedBox(height: 8),
@@ -761,10 +868,13 @@ class BlockPanel extends StatelessWidget {
     final bold = theme.textTheme.titleSmall?.copyWith(
       fontWeight: FontWeight.w900,
     );
+    final byRule = split != null && split.byRule;
     return [
       if (split != null && split.released)
         Text(
-          traySplitLine(split, status: block.displayStatus),
+          byRule
+              ? ruleSplitLine(split)
+              : traySplitLine(split, status: block.displayStatus),
           key: const ValueKey('tray-split'),
           textAlign: TextAlign.center,
           style: bold,
@@ -781,7 +891,22 @@ class BlockPanel extends StatelessWidget {
           textAlign: TextAlign.center,
           style: bold,
         ),
-      if (split != null) ...[
+      if (split != null && byRule) ...[
+        const SizedBox(height: 4),
+        Text(
+          ruleLine(split),
+          key: const ValueKey('rule-line'),
+          textAlign: TextAlign.center,
+          style: small,
+        ),
+        const SizedBox(height: 2),
+        Text(
+          kRuleResidualLine,
+          key: const ValueKey('rule-residual'),
+          textAlign: TextAlign.center,
+          style: small,
+        ),
+      ] else if (split != null) ...[
         const SizedBox(height: 4),
         Text(
           assumptionLine(split),
@@ -790,6 +915,13 @@ class BlockPanel extends StatelessWidget {
           style: small,
         ),
       ],
+      for (final note in block.rule?.notes ?? const <String>[])
+        Text(
+          'Note: $note (read the same in two photos).',
+          key: ValueKey('rule-note-$note'),
+          textAlign: TextAlign.center,
+          style: small,
+        ),
       const SizedBox(height: 4),
       Text(
         eggFilledLine(block.inventory),
@@ -821,7 +953,9 @@ class BlockPanel extends StatelessWidget {
       ),
       if (hasAssumed)
         _Row(
-          stacks == null
+          split.byRule
+              ? 'Hidden, full by the stacking rule (not seen)'
+              : stacks == null
               ? 'Assumed in hidden stacks'
               : 'Assumed in ${_plural(stacks, 'hidden stack', 'hidden stacks')}',
           // The top-checked count also covers stacks tapped missing, so it is
@@ -835,8 +969,16 @@ class BlockPanel extends StatelessWidget {
           '${split.estimated}',
           key: const ValueKey('estimate-row'),
         ),
+      // Worker 0.7.0: what one layer of the full height is worth replaces the
+      // neighbour range (Plan 5 §3).
+      if (split.byRule && split.released && (split.sensitivityPerLayer ?? 0) > 0)
+        _Row(
+          'One layer off in the full height changes the estimate by',
+          '${split.sensitivityPerLayer}',
+          key: const ValueKey('sensitivity-row'),
+        ),
       // A withheld block shows no whole-block figure, the range included.
-      if (range != null && hasAssumed && split.released)
+      if (range != null && hasAssumed && split.released && !split.byRule)
         _Row(
           "If every hidden stack is there at its neighbours' heights",
           rangeWords(range),
@@ -948,6 +1090,69 @@ class _ProvisionalPanel extends StatelessWidget {
               '${ifDepth.assumedTrays ?? '?'} assumed ≈ '
               '${ifDepth.estimatedTotal ?? '?'}',
               key: const ValueKey('provisional-if-depth'),
+            ),
+          const SizedBox(height: 4),
+          Text(
+            'These figures are not a total.',
+            style: theme.textTheme.bodySmall,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Figures for a block a stacking-rule check withheld (Worker 0.7.0
+/// `block.rule.provisional`). They are not a total: never in the headline,
+/// the history, an export or the manual count.
+class _RuleProvisionalPanel extends StatelessWidget {
+  const _RuleProvisionalPanel(this.provisional);
+
+  final RuleProvisional provisional;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final p = provisional;
+    final range = p.atRuleRange;
+    return Container(
+      key: const ValueKey('rule-provisional-panel'),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            'NOT RELEASED: ${withheldWords(p.kind).toUpperCase()}',
+            style: theme.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          if (p.reason case final reason? when reason.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(top: 4),
+              child: Text(reason, style: theme.textTheme.bodySmall),
+            ),
+          const SizedBox(height: 6),
+          Text('Counted on faces: ${p.countedOnFaces ?? 'not readable'}'),
+          if (p.atRuleHeight case final t?)
+            Text(
+              'Only if the stacking rule holds at ${p.ruleHeight}: ≈ $t'
+              '${range != null && range[0] != range[1] ? ' (${rangeWords(range)} with or without cover trays)' : ''}',
+              key: const ValueKey('rule-provisional-at-h'),
+            ),
+          if (p.atTaller case final t?)
+            Text(
+              'If the taller reading (${p.tallerHeight}) is the full height: ≈ $t',
+              key: const ValueKey('rule-provisional-taller'),
+            ),
+          if (p.atTypicalFaceHeight case final t?)
+            Text(
+              'At the most common face height (${p.typicalFaceHeight}): ≈ $t',
+              key: const ValueKey('rule-provisional-typical'),
             ),
           const SizedBox(height: 4),
           Text(

@@ -815,12 +815,22 @@ class _ResultPane extends StatelessWidget {
               child: const Text('MANUAL RECOUNT'),
             ),
           TextButton(onPressed: onNewScan, child: const Text('NEW SCAN')),
-          FilledButton(
-            onPressed: onRetake,
-            child: Text(
-              'RETAKE ${(result.recommendedView ?? 'photo').toUpperCase()}',
+          // Only a face this app can photograph again gets a button; a view it
+          // does not know (a newer server) is shown as text, never as LEFT.
+          if (CaptureView.values.any((v) => v.name == result.recommendedView))
+            FilledButton(
+              onPressed: onRetake,
+              child: Text('RETAKE ${result.recommendedView!.toUpperCase()}'),
+            )
+          else
+            Text(
+              result.recommendedView == null
+                  ? 'No single photo to retake: start a new scan.'
+                  : 'The server asks for a ${result.recommendedView!.toUpperCase()} '
+                        'photo, which this app cannot take yet: start a new scan.',
+              key: const ValueKey('retake-unknown-view'),
+              textAlign: TextAlign.center,
             ),
-          ),
         ],
         TextButton(onPressed: onDone, child: const Text('DONE')),
       ],

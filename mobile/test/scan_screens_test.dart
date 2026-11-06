@@ -338,6 +338,41 @@ void main() {
       expect(pending.rows, isEmpty);
     });
 
+    testWidgets('a result naming a view this app cannot take shows text, '
+        'never a RETAKE LEFT button (app 0.7.0)', (tester) async {
+      final body = scanBody('f8')
+        ..['rescan'] = {'recommended_view': 'corner', 'reason': 'x'}
+        ..['block'] = {
+          ...(scanBody('f8')['block'] as Map<String, dynamic>),
+          'total_trays': null,
+          'status': 'conflict',
+        };
+      final server = FakeServer({
+        'GET /health': [reply(jobsHealth)],
+        'GET /v1/scans/f8/result': [reply(body)],
+      });
+      await resume(tester, server, 'f8', bodySent: true);
+      expect(find.byKey(const ValueKey('retake-unknown-view')), findsOneWidget);
+      expect(_buttons(tester).where((b) => b.startsWith('RETAKE')), isEmpty);
+    });
+
+    testWidgets('a result naming STRAIGHT keeps its RETAKE STRAIGHT button', (
+      tester,
+    ) async {
+      final straight = scanBody('f9')
+        ..['block'] = {
+          ...(scanBody('f9')['block'] as Map<String, dynamic>),
+          'total_trays': null,
+          'status': 'conflict',
+        };
+      final second = FakeServer({
+        'GET /health': [reply(jobsHealth)],
+        'GET /v1/scans/f9/result': [reply(straight)],
+      });
+      await resume(tester, second, 'f9', bodySent: true);
+      expect(_buttons(tester), contains('RETAKE STRAIGHT'));
+    });
+
     testWidgets(
       'a server that keeps no results offers only SEND PHOTOS AGAIN',
       (tester) async {
