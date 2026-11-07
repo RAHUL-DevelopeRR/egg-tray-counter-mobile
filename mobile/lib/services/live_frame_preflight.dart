@@ -42,6 +42,7 @@ class LiveFramePreflight extends ValueNotifier<PreflightReport> {
   PoseCalibration _calibration = PoseCalibration.none;
   FrameMetrics? _metrics;
   CaptureView _view = CaptureView.left;
+  CaptureAim _aim = CaptureAim.square;
   DateTime? _lastAnalysis;
   DateTime? _lastPose;
   Timer? _freshnessTimer;
@@ -125,6 +126,16 @@ class LiveFramePreflight extends ValueNotifier<PreflightReport> {
   void setView(CaptureView view) {
     if (_view == view) return;
     _view = view;
+    _publish();
+  }
+
+  /// What the photo is aimed at; the optional extras relax checks their aim
+  /// makes meaningless (see [CaptureAim]).
+  CaptureAim get aim => _aim;
+
+  void setAim(CaptureAim aim) {
+    if (_aim == aim) return;
+    _aim = aim;
     _publish();
   }
 
@@ -296,6 +307,7 @@ class LiveFramePreflight extends ValueNotifier<PreflightReport> {
       pose: pose,
       calibrationSet: _calibration.isSet,
       measuredAt: _lastAnalysis,
+      aim: _aim,
     );
   }
 
@@ -311,6 +323,7 @@ class LiveFramePreflight extends ValueNotifier<PreflightReport> {
     pose: capturePose ?? pose,
     calibrationSet: _calibration.isSet,
     measuredAt: DateTime.now(),
+    aim: _aim,
   );
 
   @override

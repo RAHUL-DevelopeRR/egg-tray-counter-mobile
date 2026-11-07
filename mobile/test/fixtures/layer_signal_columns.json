@@ -1,0 +1,5684 @@
+{
+ "made_by": "reports/layer-signal-20261101/make_columns.mjs",
+ "worker": "worker-0.4.15",
+ "registry": "registry-20261101",
+ "faces": [
+  {
+   "id": "img-01",
+   "source": "labelled",
+   "block_id": "G01",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-01.jpg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1280,
+    "height": 582
+   },
+   "truth": 99,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 99,
+   "columns": [
+    {
+     "pitch_px": 20,
+     "y_first": 66,
+     "y_last": 457.5,
+     "x_min": 293,
+     "x_max": 473,
+     "box_height_px": 20,
+     "span_count": 21,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 20,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 20.25,
+     "y_first": 61,
+     "y_last": 454.5,
+     "x_min": 435,
+     "x_max": 582,
+     "box_height_px": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 20.25,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 20.5,
+     "y_first": 57,
+     "y_last": 453,
+     "x_min": 569,
+     "x_max": 704,
+     "box_height_px": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 20.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 20.25,
+     "y_first": 52,
+     "y_last": 443.5,
+     "x_min": 696,
+     "x_max": 826,
+     "box_height_px": 21,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 20.25,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 20.5,
+     "y_first": 73.5,
+     "y_last": 443.5,
+     "x_min": 807,
+     "x_max": 952,
+     "box_height_px": 19.5,
+     "span_count": 19,
+     "walk_count": 19,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 20.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "img-02",
+   "source": "labelled",
+   "block_id": "G04",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-02.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1280,
+    "height": 1109
+   },
+   "truth": 80,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 80,
+   "columns": [
+    {
+     "pitch_px": 41.5,
+     "y_first": 171,
+     "y_last": 1002,
+     "x_min": 108,
+     "x_max": 399,
+     "box_height_px": 38,
+     "span_count": 21,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 41.5,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 43,
+     "y_first": 169,
+     "y_last": 988,
+     "x_min": 399,
+     "x_max": 654,
+     "box_height_px": 37.5,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 43,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 43,
+     "y_first": 167,
+     "y_last": 991,
+     "x_min": 670,
+     "x_max": 930,
+     "box_height_px": 38,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 43,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 42.5,
+     "y_first": 153.5,
+     "y_last": 979,
+     "x_min": 931,
+     "x_max": 1231,
+     "box_height_px": 37,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 42.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "img-04",
+   "source": "labelled",
+   "block_id": "G05",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-04.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": 115,
+   "usable": true,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "stacks are too small in the frame (too far away)"
+   ],
+   "total": 120,
+   "columns": [
+    {
+     "pitch_px": 26,
+     "y_first": 558,
+     "y_last": 985.5,
+     "x_min": 63,
+     "x_max": 206,
+     "box_height_px": 26,
+     "span_count": 17,
+     "walk_count": 19,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 26,
+     "doubts": [],
+     "reason": "layer counts disagree (span 17, walk 19); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 24.75,
+     "y_first": 560,
+     "y_last": 973,
+     "x_min": 203,
+     "x_max": 337,
+     "box_height_px": 25,
+     "span_count": 18,
+     "walk_count": 15,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 24.75,
+     "doubts": [
+      "bottom_above_floor"
+     ],
+     "reason": "layer counts disagree (span 18, walk 15); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 24,
+     "y_first": 542.5,
+     "y_last": 1024.5,
+     "x_min": 334,
+     "x_max": 488,
+     "box_height_px": 25.5,
+     "span_count": 21,
+     "walk_count": 21,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 24,
+     "doubts": [],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 27,
+     "y_first": 551.5,
+     "y_last": 1018,
+     "x_min": 462,
+     "x_max": 627,
+     "box_height_px": 25.5,
+     "span_count": 18,
+     "walk_count": 19,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 27,
+     "doubts": [],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 26.75,
+     "y_first": 541.5,
+     "y_last": 998.5,
+     "x_min": 616,
+     "x_max": 759,
+     "box_height_px": 25,
+     "span_count": 18,
+     "walk_count": 19,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 26.75,
+     "doubts": [],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 25.5,
+     "y_first": 535.5,
+     "y_last": 984,
+     "x_min": 756,
+     "x_max": 886,
+     "box_height_px": 24,
+     "span_count": 19,
+     "walk_count": 27,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 25.5,
+     "doubts": [],
+     "reason": "layer counts disagree (span 19, walk 27); retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-08",
+   "source": "labelled",
+   "block_id": "G06",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-08.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": 160,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 160,
+   "columns": [
+    {
+     "pitch_px": 24,
+     "y_first": 284.5,
+     "y_last": 749.5,
+     "x_min": 0,
+     "x_max": 162,
+     "box_height_px": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 24,
+     "doubts": [
+      "cut_at_frame_side"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 25,
+     "y_first": 281,
+     "y_last": 753,
+     "x_min": 102,
+     "x_max": 311,
+     "box_height_px": 21,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 25,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 24,
+     "y_first": 278,
+     "y_last": 731.5,
+     "x_min": 268,
+     "x_max": 451,
+     "box_height_px": 21,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 24,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 24.75,
+     "y_first": 276.5,
+     "y_last": 734.5,
+     "x_min": 419,
+     "x_max": 585,
+     "box_height_px": 21,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 24.75,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 25,
+     "y_first": 277,
+     "y_last": 743.5,
+     "x_min": 582,
+     "x_max": 728,
+     "box_height_px": 23,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 25,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 26,
+     "y_first": 275.5,
+     "y_last": 749,
+     "x_min": 733,
+     "x_max": 888,
+     "box_height_px": 22,
+     "span_count": 19,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 26,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 25.5,
+     "y_first": 277.5,
+     "y_last": 762.5,
+     "x_min": 879,
+     "x_max": 1067,
+     "box_height_px": 22,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 25.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 27.75,
+     "y_first": 276,
+     "y_last": 775.5,
+     "x_min": 1033,
+     "x_max": 1236,
+     "box_height_px": 22,
+     "span_count": 19,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 27.75,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "img-09",
+   "source": "labelled",
+   "block_id": "G08",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-09.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": 75,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 85,
+   "columns": [
+    {
+     "pitch_px": 51.75,
+     "y_first": 237.5,
+     "y_last": 1099.5,
+     "x_min": 0,
+     "x_max": 270,
+     "box_height_px": 54.5,
+     "span_count": 18,
+     "walk_count": 21,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 51.75,
+     "doubts": [
+      "box_over_two_trays",
+      "cut_at_frame_side"
+     ],
+     "reason": "layer counts disagree (span 18, walk 21); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 47.5,
+     "y_first": 233.5,
+     "y_last": 510,
+     "x_min": 226,
+     "x_max": 464,
+     "box_height_px": 46,
+     "span_count": 7,
+     "walk_count": 7,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 47.5,
+     "doubts": [
+      "bottom_above_floor"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 51,
+     "y_first": 332,
+     "y_last": 1138.5,
+     "x_min": 402,
+     "x_max": 706,
+     "box_height_px": 65,
+     "span_count": 17,
+     "walk_count": 17,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 51,
+     "doubts": [
+      "box_over_two_stacks"
+     ],
+     "reason": "boxes are missing over several layers of this stack; retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 49.5,
+     "y_first": 273,
+     "y_last": 1059.5,
+     "x_min": 486,
+     "x_max": 820,
+     "box_height_px": 60,
+     "span_count": 17,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 49.5,
+     "doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays"
+     ],
+     "reason": "layer counts disagree (span 17, walk 20); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 48.5,
+     "y_first": 266.5,
+     "y_last": 967,
+     "x_min": 795,
+     "x_max": 960,
+     "box_height_px": 49,
+     "span_count": 15,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 48.5,
+     "doubts": [
+      "box_over_two_trays",
+      "cut_at_frame_side"
+     ],
+     "reason": "layer counts disagree (span 15, walk 20); retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-19",
+   "source": "labelled",
+   "block_id": "G02",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-19.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1600,
+    "height": 1200
+   },
+   "truth": 100,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 100,
+   "columns": [
+    {
+     "pitch_px": 42.5,
+     "y_first": 240.5,
+     "y_last": 1043.5,
+     "x_min": 38,
+     "x_max": 373,
+     "box_height_px": 39,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 42.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 43,
+     "y_first": 227.5,
+     "y_last": 1033,
+     "x_min": 321,
+     "x_max": 618,
+     "box_height_px": 39,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 43,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 42,
+     "y_first": 219.5,
+     "y_last": 1012,
+     "x_min": 572,
+     "x_max": 858,
+     "box_height_px": 38,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 42,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 40.5,
+     "y_first": 211,
+     "y_last": 991,
+     "x_min": 834,
+     "x_max": 1083,
+     "box_height_px": 38,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 40.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 40.5,
+     "y_first": 203,
+     "y_last": 974.5,
+     "x_min": 1096,
+     "x_max": 1333,
+     "box_height_px": 37,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 40.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "img-20",
+   "source": "labelled",
+   "block_id": "G17",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-20.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1200,
+    "height": 1600
+   },
+   "truth": 60,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 60,
+   "columns": [
+    {
+     "pitch_px": 44.5,
+     "y_first": 614.5,
+     "y_last": 1443,
+     "x_min": 92,
+     "x_max": 360,
+     "box_height_px": 41,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 44.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 44,
+     "y_first": 638.5,
+     "y_last": 1466.5,
+     "x_min": 358,
+     "x_max": 646,
+     "box_height_px": 41,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 44,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 42,
+     "y_first": 656,
+     "y_last": 1485,
+     "x_min": 610,
+     "x_max": 916,
+     "box_height_px": 40,
+     "span_count": 21,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 42,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "img-21",
+   "source": "labelled",
+   "block_id": "G02",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-21.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1280,
+    "height": 582
+   },
+   "truth": 100,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 100,
+   "columns": [
+    {
+     "pitch_px": 19,
+     "y_first": 111.5,
+     "y_last": 465.5,
+     "x_min": 323,
+     "x_max": 454,
+     "box_height_px": 17,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 19,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 19,
+     "y_first": 106.5,
+     "y_last": 475,
+     "x_min": 439,
+     "x_max": 558,
+     "box_height_px": 18,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 19,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 20,
+     "y_first": 106.5,
+     "y_last": 481.5,
+     "x_min": 550,
+     "x_max": 670,
+     "box_height_px": 18.5,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 20,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 20,
+     "y_first": 104,
+     "y_last": 486.5,
+     "x_min": 672,
+     "x_max": 800,
+     "box_height_px": 19,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 20,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 21,
+     "y_first": 98.5,
+     "y_last": 494.5,
+     "x_min": 788,
+     "x_max": 945,
+     "box_height_px": 19,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 21,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "img-23",
+   "source": "labelled",
+   "block_id": "G06",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-23.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": 160,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 160,
+   "columns": [
+    {
+     "pitch_px": 24.5,
+     "y_first": 284.5,
+     "y_last": 750,
+     "x_min": 0,
+     "x_max": 162,
+     "box_height_px": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 24.5,
+     "doubts": [
+      "cut_at_frame_side"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 24.5,
+     "y_first": 281,
+     "y_last": 754,
+     "x_min": 103,
+     "x_max": 312,
+     "box_height_px": 21,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 24.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 24.25,
+     "y_first": 278,
+     "y_last": 730.5,
+     "x_min": 268,
+     "x_max": 451,
+     "box_height_px": 21,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 24.25,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 25,
+     "y_first": 277.5,
+     "y_last": 734,
+     "x_min": 420,
+     "x_max": 585,
+     "box_height_px": 21.5,
+     "span_count": 19,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 25,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 25,
+     "y_first": 277,
+     "y_last": 743.5,
+     "x_min": 582,
+     "x_max": 729,
+     "box_height_px": 23,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 25,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 26.25,
+     "y_first": 276,
+     "y_last": 748.5,
+     "x_min": 733,
+     "x_max": 888,
+     "box_height_px": 22,
+     "span_count": 19,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 26.25,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 25.5,
+     "y_first": 278.5,
+     "y_last": 762.5,
+     "x_min": 879,
+     "x_max": 1067,
+     "box_height_px": 22.5,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 25.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 26,
+     "y_first": 276,
+     "y_last": 775,
+     "x_min": 1033,
+     "x_max": 1236,
+     "box_height_px": 22,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 26,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "img-24",
+   "source": "labelled",
+   "block_id": "G02",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-24.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1280,
+    "height": 582
+   },
+   "truth": 100,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 100,
+   "columns": [
+    {
+     "pitch_px": 18,
+     "y_first": 102.5,
+     "y_last": 448.5,
+     "x_min": 328,
+     "x_max": 463,
+     "box_height_px": 17,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 18,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 19.5,
+     "y_first": 97,
+     "y_last": 458,
+     "x_min": 441,
+     "x_max": 562,
+     "box_height_px": 18,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 19.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 20,
+     "y_first": 97,
+     "y_last": 461.5,
+     "x_min": 552,
+     "x_max": 670,
+     "box_height_px": 18,
+     "span_count": 19,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 20,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 20,
+     "y_first": 92.5,
+     "y_last": 466.5,
+     "x_min": 673,
+     "x_max": 796,
+     "box_height_px": 18,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 20,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 19.5,
+     "y_first": 89,
+     "y_last": 474.5,
+     "x_min": 787,
+     "x_max": 941,
+     "box_height_px": 19,
+     "span_count": 21,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 19.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "img-30",
+   "source": "labelled",
+   "block_id": "G03",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-30.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1600,
+    "height": 900
+   },
+   "truth": 80,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 78,
+   "columns": [
+    {
+     "pitch_px": 40.5,
+     "y_first": 39,
+     "y_last": 819.5,
+     "x_min": 105,
+     "x_max": 596,
+     "box_height_px": 41.5,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 40.5,
+     "doubts": [
+      "box_over_two_stacks",
+      "end_at_frame_edge"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 41.5,
+     "y_first": 91,
+     "y_last": 849,
+     "x_min": 353,
+     "x_max": 635,
+     "box_height_px": 43,
+     "span_count": 19,
+     "walk_count": 19,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 41.5,
+     "doubts": [
+      "box_over_two_stacks",
+      "end_at_frame_edge"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 41.5,
+     "y_first": 39,
+     "y_last": 867,
+     "x_min": 611,
+     "x_max": 877,
+     "box_height_px": 46,
+     "span_count": 21,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 41.5,
+     "doubts": [
+      "end_at_frame_edge"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 46.75,
+     "y_first": 29,
+     "y_last": 889,
+     "x_min": 888,
+     "x_max": 1199,
+     "box_height_px": 47.5,
+     "span_count": 19,
+     "walk_count": 19,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 46.75,
+     "doubts": [
+      "end_box_cut_short",
+      "end_at_frame_edge"
+     ],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "img-31",
+   "source": "labelled",
+   "block_id": "G03",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-31.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 900,
+    "height": 1600
+   },
+   "truth": 80,
+   "usable": true,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "layer pitch changes across the face (angled or corner view)"
+   ],
+   "total": 63,
+   "columns": [
+    {
+     "pitch_px": 95,
+     "y_first": 266,
+     "y_last": 1425,
+     "x_min": 2,
+     "x_max": 368,
+     "box_height_px": 114.5,
+     "span_count": 13,
+     "walk_count": 16,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 95,
+     "doubts": [
+      "box_over_two_stacks",
+      "end_at_frame_edge",
+      "cut_at_frame_side"
+     ],
+     "reason": "layer counts disagree (span 13, walk 16); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 79.25,
+     "y_first": 277,
+     "y_last": 1218.5,
+     "x_min": 347,
+     "x_max": 591,
+     "box_height_px": 78,
+     "span_count": 13,
+     "walk_count": 19,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 79.25,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": "layer counts disagree (span 13, walk 19); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 70,
+     "y_first": 285,
+     "y_last": 1071,
+     "x_min": 528,
+     "x_max": 787,
+     "box_height_px": 65.5,
+     "span_count": 12,
+     "walk_count": 18,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 70,
+     "doubts": [],
+     "reason": "layer counts disagree (span 12, walk 18); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 73.5,
+     "y_first": 288.5,
+     "y_last": 709.5,
+     "x_min": 694,
+     "x_max": 887,
+     "box_height_px": 48,
+     "span_count": 7,
+     "walk_count": 10,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 73.5,
+     "doubts": [],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-32",
+   "source": "labelled",
+   "block_id": "G01",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-32.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 580,
+    "height": 1280
+   },
+   "truth": 19,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 19,
+   "columns": [
+    {
+     "pitch_px": 39.5,
+     "y_first": 295.5,
+     "y_last": 1000,
+     "x_min": 299,
+     "x_max": 553,
+     "box_height_px": 40.5,
+     "span_count": 19,
+     "walk_count": 19,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 39.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "img-33",
+   "source": "labelled",
+   "block_id": "G12",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-33.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1280,
+    "height": 580
+   },
+   "truth": 358,
+   "usable": true,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "no stacks detected"
+   ],
+   "total": 0,
+   "columns": []
+  },
+  {
+   "id": "img-34",
+   "source": "labelled",
+   "block_id": "G21",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-34.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1600,
+    "height": 1200
+   },
+   "truth": 120,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 120,
+   "columns": [
+    {
+     "pitch_px": 42,
+     "y_first": 210.5,
+     "y_last": 992,
+     "x_min": 52,
+     "x_max": 338,
+     "box_height_px": 40,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 42,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 41.5,
+     "y_first": 214,
+     "y_last": 997.5,
+     "x_min": 323,
+     "x_max": 565,
+     "box_height_px": 40.5,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 41.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 39.5,
+     "y_first": 227.5,
+     "y_last": 1000.5,
+     "x_min": 578,
+     "x_max": 811,
+     "box_height_px": 41.5,
+     "span_count": 21,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 39.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 39.5,
+     "y_first": 234,
+     "y_last": 1000,
+     "x_min": 802,
+     "x_max": 1059,
+     "box_height_px": 42,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 39.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 39,
+     "y_first": 242,
+     "y_last": 1000.5,
+     "x_min": 1022,
+     "x_max": 1298,
+     "box_height_px": 43,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 39,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 39.5,
+     "y_first": 251,
+     "y_last": 1008.5,
+     "x_min": 1235,
+     "x_max": 1540,
+     "box_height_px": 42,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 39.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "img-35",
+   "source": "labelled",
+   "block_id": "G22",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-35.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1280,
+    "height": 580
+   },
+   "truth": 1,
+   "usable": true,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "no stacks detected"
+   ],
+   "total": 0,
+   "columns": []
+  },
+  {
+   "id": "img-36",
+   "source": "labelled",
+   "block_id": "G15",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-36.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": 109,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 114,
+   "columns": [
+    {
+     "pitch_px": 26,
+     "y_first": 211,
+     "y_last": 695,
+     "x_min": 79,
+     "x_max": 255,
+     "box_height_px": 21,
+     "span_count": 20,
+     "walk_count": 16,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 26,
+     "doubts": [],
+     "reason": "boxes are missing over several layers of this stack; retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 27,
+     "y_first": 160.5,
+     "y_last": 700,
+     "x_min": 186,
+     "x_max": 402,
+     "box_height_px": 25,
+     "span_count": 21,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 27,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 27.5,
+     "y_first": 153,
+     "y_last": 702,
+     "x_min": 356,
+     "x_max": 552,
+     "box_height_px": 25,
+     "span_count": 21,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 27.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 28.5,
+     "y_first": 193.5,
+     "y_last": 677,
+     "x_min": 536,
+     "x_max": 710,
+     "box_height_px": 27,
+     "span_count": 18,
+     "walk_count": 18,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 28.5,
+     "doubts": [
+      "bottom_above_floor"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 29,
+     "y_first": 155,
+     "y_last": 705,
+     "x_min": 715,
+     "x_max": 896,
+     "box_height_px": 28,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 29,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 29.5,
+     "y_first": 155,
+     "y_last": 714,
+     "x_min": 864,
+     "x_max": 1096,
+     "box_height_px": 27.5,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 29.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "img-38",
+   "source": "labelled",
+   "block_id": "G23",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-38.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1280,
+    "height": 582
+   },
+   "truth": 118,
+   "usable": true,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "stacks cover too little of the frame width"
+   ],
+   "total": 102,
+   "columns": [
+    {
+     "pitch_px": 17.5,
+     "y_first": 69,
+     "y_last": 418,
+     "x_min": 359,
+     "x_max": 485,
+     "box_height_px": 16,
+     "span_count": 21,
+     "walk_count": 21,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 17.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 17,
+     "y_first": 93,
+     "y_last": 412,
+     "x_min": 482,
+     "x_max": 584,
+     "box_height_px": 15,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 17,
+     "doubts": [],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 16,
+     "y_first": 108.5,
+     "y_last": 402.5,
+     "x_min": 582,
+     "x_max": 700,
+     "box_height_px": 15,
+     "span_count": 19,
+     "walk_count": 29,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 16,
+     "doubts": [],
+     "reason": "layer counts disagree (span 19, walk 29); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 12.75,
+     "y_first": 106,
+     "y_last": 358.5,
+     "x_min": 643,
+     "x_max": 799,
+     "box_height_px": 11,
+     "span_count": 21,
+     "walk_count": 23,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 12.75,
+     "doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays"
+     ],
+     "reason": "layer counts disagree (span 21, walk 23); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 17.25,
+     "y_first": 139.5,
+     "y_last": 355.5,
+     "x_min": 774,
+     "x_max": 864,
+     "box_height_px": 11,
+     "span_count": 14,
+     "walk_count": 9,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 17.25,
+     "doubts": [],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-39",
+   "source": "labelled",
+   "block_id": "G24",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-39.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 582,
+    "height": 1280
+   },
+   "truth": 2,
+   "usable": true,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "stacks cover too little of the frame width"
+   ],
+   "total": 3,
+   "columns": [
+    {
+     "pitch_px": 296,
+     "y_first": 169.5,
+     "y_last": 761.5,
+     "x_min": 0,
+     "x_max": 43,
+     "box_height_px": 314,
+     "span_count": 3,
+     "walk_count": 3,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 296,
+     "doubts": [
+      "end_at_frame_edge",
+      "cut_at_frame_side"
+     ],
+     "reason": null,
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-40",
+   "source": "labelled",
+   "block_id": "G07",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-40.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": 10,
+   "usable": true,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "no stacks detected"
+   ],
+   "total": 0,
+   "columns": []
+  },
+  {
+   "id": "img-46",
+   "source": "labelled",
+   "block_id": "G29",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-46.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 391,
+    "height": 1280
+   },
+   "truth": 20,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 19,
+   "columns": [
+    {
+     "pitch_px": 66.5,
+     "y_first": 184,
+     "y_last": 1238,
+     "x_min": 28,
+     "x_max": 391,
+     "box_height_px": 68.5,
+     "span_count": 17,
+     "walk_count": 19,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 66.5,
+     "doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge",
+      "cut_at_frame_side"
+     ],
+     "reason": "layer counts disagree (span 17, walk 19); retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-47",
+   "source": "labelled",
+   "block_id": "G30",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-47.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": 7,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 7,
+   "columns": [
+    {
+     "pitch_px": 85.25,
+     "y_first": 252,
+     "y_last": 759.5,
+     "x_min": 550,
+     "x_max": 1064,
+     "box_height_px": 71,
+     "span_count": 7,
+     "walk_count": 7,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 85.25,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "img-49",
+   "source": "labelled",
+   "block_id": "G31",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-49.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1200,
+    "height": 1600
+   },
+   "truth": 1,
+   "usable": true,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "no stacks detected"
+   ],
+   "total": 0,
+   "columns": []
+  },
+  {
+   "id": "img-50",
+   "source": "labelled",
+   "block_id": "G32",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-50.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 900,
+    "height": 1600
+   },
+   "truth": 40,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 44,
+   "columns": [
+    {
+     "pitch_px": 72.75,
+     "y_first": 74,
+     "y_last": 1250.5,
+     "x_min": 87,
+     "x_max": 587,
+     "box_height_px": 69,
+     "span_count": 17,
+     "walk_count": 25,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 72.75,
+     "doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ],
+     "reason": "layer counts disagree (span 17, walk 25); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 69.25,
+     "y_first": 71,
+     "y_last": 1244.5,
+     "x_min": 538,
+     "x_max": 900,
+     "box_height_px": 59.5,
+     "span_count": 18,
+     "walk_count": 19,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 69.25,
+     "doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge",
+      "cut_at_frame_side"
+     ],
+     "reason": "camera looked down on the stack (spacing ratio 1.806); hold the phone level at mid-height",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-03",
+   "source": "labelled",
+   "block_id": "G04",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-03.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": 80,
+   "usable": false,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "layer pitch changes across the face (angled or corner view)"
+   ],
+   "total": 65,
+   "columns": [
+    {
+     "pitch_px": 29,
+     "y_first": 418,
+     "y_last": 902,
+     "x_min": 408,
+     "x_max": 586,
+     "box_height_px": 24.5,
+     "span_count": 18,
+     "walk_count": 19,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 29,
+     "doubts": [
+      "box_over_two_stacks"
+     ],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 25,
+     "y_first": 429.5,
+     "y_last": 875,
+     "x_min": 587,
+     "x_max": 787,
+     "box_height_px": 23,
+     "span_count": 19,
+     "walk_count": 18,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 25,
+     "doubts": [
+      "box_over_two_stacks"
+     ],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 26.5,
+     "y_first": 434.5,
+     "y_last": 853.5,
+     "x_min": 698,
+     "x_max": 886,
+     "box_height_px": 20.5,
+     "span_count": 17,
+     "walk_count": 19,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 26.5,
+     "doubts": [
+      "box_over_two_stacks"
+     ],
+     "reason": "layer counts disagree (span 17, walk 19); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 42.25,
+     "y_first": 482.5,
+     "y_last": 837,
+     "x_min": 795,
+     "x_max": 889,
+     "box_height_px": 21,
+     "span_count": 9,
+     "walk_count": 9,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 42.25,
+     "doubts": [
+      "box_over_two_stacks"
+     ],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-05",
+   "source": "labelled",
+   "block_id": "G05",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-05.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1278,
+    "height": 960
+   },
+   "truth": 235,
+   "usable": false,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "stacks cover too little of the frame width",
+    "stacks are too small in the frame (too far away)"
+   ],
+   "total": 17,
+   "columns": [
+    {
+     "pitch_px": 22.5,
+     "y_first": 442,
+     "y_last": 775,
+     "x_min": 699,
+     "x_max": 783,
+     "box_height_px": 23,
+     "span_count": 16,
+     "walk_count": 17,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 22.5,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": null,
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-06",
+   "source": "labelled",
+   "block_id": "G07",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-06.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": 4,
+   "usable": false,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "no stacks detected"
+   ],
+   "total": 0,
+   "columns": []
+  },
+  {
+   "id": "img-07",
+   "source": "labelled",
+   "block_id": "G07",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-07.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": 4,
+   "usable": false,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake"
+   ],
+   "total": 3,
+   "columns": [
+    {
+     "pitch_px": 310.75,
+     "y_first": 33.5,
+     "y_last": 734.5,
+     "x_min": 513,
+     "x_max": 861,
+     "box_height_px": 93,
+     "span_count": 3,
+     "walk_count": 3,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 310.75,
+     "doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-10",
+   "source": "labelled",
+   "block_id": "G09",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-10.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": 30,
+   "usable": false,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "layer pitch changes across the face (angled or corner view)",
+    "stacks are too small in the frame (too far away)"
+   ],
+   "total": 39,
+   "columns": [
+    {
+     "pitch_px": 53.5,
+     "y_first": 497.5,
+     "y_last": 868,
+     "x_min": 324,
+     "x_max": 571,
+     "box_height_px": 42.5,
+     "span_count": 8,
+     "walk_count": 8,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 53.5,
+     "doubts": [
+      "pitch_differs"
+     ],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 31.5,
+     "y_first": 347,
+     "y_last": 814.5,
+     "x_min": 550,
+     "x_max": 921,
+     "box_height_px": 34,
+     "span_count": 16,
+     "walk_count": 16,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 31.5,
+     "doubts": [
+      "box_over_two_stacks"
+     ],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 35.25,
+     "y_first": 345.5,
+     "y_last": 780.5,
+     "x_min": 730,
+     "x_max": 930,
+     "box_height_px": 30,
+     "span_count": 13,
+     "walk_count": 15,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 35.25,
+     "doubts": [
+      "box_over_two_stacks"
+     ],
+     "reason": "layer counts disagree (span 13, walk 15); retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-11",
+   "source": "labelled",
+   "block_id": "G07",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-11.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": 8,
+   "usable": false,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "no stacks detected"
+   ],
+   "total": 0,
+   "columns": []
+  },
+  {
+   "id": "img-12",
+   "source": "labelled",
+   "block_id": "G11",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-12.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": 205,
+   "usable": false,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "no stacks detected"
+   ],
+   "total": 0,
+   "columns": []
+  },
+  {
+   "id": "img-13",
+   "source": "labelled",
+   "block_id": "G12",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-13.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": 204,
+   "usable": false,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "no stacks detected"
+   ],
+   "total": 0,
+   "columns": []
+  },
+  {
+   "id": "img-14",
+   "source": "labelled",
+   "block_id": "G13",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-14.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": 132,
+   "usable": false,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "layer pitch changes across the face (angled or corner view)"
+   ],
+   "total": 80,
+   "columns": [
+    {
+     "pitch_px": 31.25,
+     "y_first": 725.5,
+     "y_last": 1257,
+     "x_min": 16,
+     "x_max": 205,
+     "box_height_px": 30,
+     "span_count": 18,
+     "walk_count": 18,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 31.25,
+     "doubts": [
+      "box_over_two_stacks",
+      "end_at_frame_edge"
+     ],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 25.5,
+     "y_first": 732.5,
+     "y_last": 1136,
+     "x_min": 250,
+     "x_max": 375,
+     "box_height_px": 22.5,
+     "span_count": 17,
+     "walk_count": 15,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 25.5,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": "boxes are missing over several layers of this stack; retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 41.5,
+     "y_first": 735,
+     "y_last": 1111.5,
+     "x_min": 354,
+     "x_max": 460,
+     "box_height_px": 20,
+     "span_count": 10,
+     "walk_count": 7,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 41.5,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 36.25,
+     "y_first": 740,
+     "y_last": 889.5,
+     "x_min": 458,
+     "x_max": 543,
+     "box_height_px": 21,
+     "span_count": 5,
+     "walk_count": 5,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 36.25,
+     "doubts": [
+      "bottom_above_floor"
+     ],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 37.75,
+     "y_first": 716,
+     "y_last": 1124.5,
+     "x_min": 632,
+     "x_max": 791,
+     "box_height_px": 28,
+     "span_count": 12,
+     "walk_count": 9,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 37.75,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 31,
+     "y_first": 729.5,
+     "y_last": 1154,
+     "x_min": 791,
+     "x_max": 923,
+     "box_height_px": 27,
+     "span_count": 15,
+     "walk_count": 26,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 31,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": "layer counts disagree (span 15, walk 26); retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-15",
+   "source": "labelled",
+   "block_id": "G13",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-15.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": 62,
+   "usable": false,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "layer pitch changes across the face (angled or corner view)",
+    "stacks cover too little of the frame width",
+    "stacks are too small in the frame (too far away)"
+   ],
+   "total": 16,
+   "columns": [
+    {
+     "pitch_px": 48,
+     "y_first": 888.5,
+     "y_last": 1226,
+     "x_min": 24,
+     "x_max": 167,
+     "box_height_px": 38,
+     "span_count": 8,
+     "walk_count": 8,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 48,
+     "doubts": [
+      "end_at_frame_edge"
+     ],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 70.5,
+     "y_first": 761,
+     "y_last": 1093.5,
+     "x_min": 644,
+     "x_max": 759,
+     "box_height_px": 29.5,
+     "span_count": 6,
+     "walk_count": 5,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 70.5,
+     "doubts": [],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 90,
+     "y_first": 953,
+     "y_last": 1133,
+     "x_min": 735,
+     "x_max": 836,
+     "box_height_px": 32,
+     "span_count": 3,
+     "walk_count": 3,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 90,
+     "doubts": [],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-16",
+   "source": "labelled",
+   "block_id": "G14",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-16.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": 119,
+   "usable": false,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 130,
+   "columns": [
+    {
+     "pitch_px": 34.25,
+     "y_first": 41.5,
+     "y_last": 647.5,
+     "x_min": 1,
+     "x_max": 127,
+     "box_height_px": 33,
+     "span_count": 19,
+     "walk_count": 19,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 34.25,
+     "doubts": [
+      "end_at_frame_edge",
+      "cut_at_frame_side"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 33.5,
+     "y_first": 13,
+     "y_last": 647,
+     "x_min": 114,
+     "x_max": 323,
+     "box_height_px": 31.5,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 33.5,
+     "doubts": [
+      "end_at_frame_edge"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 32.5,
+     "y_first": 27.5,
+     "y_last": 648,
+     "x_min": 320,
+     "x_max": 521,
+     "box_height_px": 32,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 32.5,
+     "doubts": [
+      "end_at_frame_edge"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 32.5,
+     "y_first": 38.5,
+     "y_last": 646.5,
+     "x_min": 523,
+     "x_max": 711,
+     "box_height_px": 31,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 32.5,
+     "doubts": [
+      "end_at_frame_edge"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 32,
+     "y_first": 43.5,
+     "y_last": 645,
+     "x_min": 722,
+     "x_max": 909,
+     "box_height_px": 30,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 32,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 31.5,
+     "y_first": 51,
+     "y_last": 643.5,
+     "x_min": 907,
+     "x_max": 1097,
+     "box_height_px": 28,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 31.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 50,
+     "y_first": 148,
+     "y_last": 638.5,
+     "x_min": 1113,
+     "x_max": 1277,
+     "box_height_px": 24,
+     "span_count": 11,
+     "walk_count": 11,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 50,
+     "doubts": [
+      "box_over_two_trays",
+      "cut_at_frame_side",
+      "pitch_differs"
+     ],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-17",
+   "source": "labelled",
+   "block_id": "G15",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-17.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": 109,
+   "usable": false,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "layer pitch changes across the face (angled or corner view)"
+   ],
+   "total": 63,
+   "columns": [
+    {
+     "pitch_px": 36,
+     "y_first": 161,
+     "y_last": 333,
+     "x_min": 125,
+     "x_max": 364,
+     "box_height_px": 36.5,
+     "span_count": 6,
+     "walk_count": 6,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 36,
+     "doubts": [
+      "box_over_two_stacks"
+     ],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 36.25,
+     "y_first": 162.5,
+     "y_last": 781,
+     "x_min": 304,
+     "x_max": 473,
+     "box_height_px": 46,
+     "span_count": 18,
+     "walk_count": 12,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 36.25,
+     "doubts": [
+      "box_over_two_stacks",
+      "end_box_cut_short"
+     ],
+     "reason": "boxes are missing over several layers of this stack; retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 32.5,
+     "y_first": 159,
+     "y_last": 711.5,
+     "x_min": 387,
+     "x_max": 609,
+     "box_height_px": 38,
+     "span_count": 18,
+     "walk_count": 19,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 32.5,
+     "doubts": [
+      "box_over_two_stacks"
+     ],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 35,
+     "y_first": 154,
+     "y_last": 661.5,
+     "x_min": 604,
+     "x_max": 728,
+     "box_height_px": 32,
+     "span_count": 15,
+     "walk_count": 19,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 35,
+     "doubts": [],
+     "reason": "layer counts disagree (span 15, walk 19); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 51.75,
+     "y_first": 180.5,
+     "y_last": 476.5,
+     "x_min": 734,
+     "x_max": 835,
+     "box_height_px": 29,
+     "span_count": 7,
+     "walk_count": 7,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 51.75,
+     "doubts": [
+      "pitch_differs"
+     ],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-18",
+   "source": "labelled",
+   "block_id": "G16",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-18.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": 129,
+   "usable": false,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 128,
+   "columns": [
+    {
+     "pitch_px": 24.5,
+     "y_first": 525.5,
+     "y_last": 752,
+     "x_min": 58,
+     "x_max": 217,
+     "box_height_px": 23,
+     "span_count": 10,
+     "walk_count": 10,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 24.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 25.75,
+     "y_first": 286,
+     "y_last": 747,
+     "x_min": 212,
+     "x_max": 372,
+     "box_height_px": 23,
+     "span_count": 19,
+     "walk_count": 19,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 25.75,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 25.5,
+     "y_first": 223.5,
+     "y_last": 743.5,
+     "x_min": 366,
+     "x_max": 528,
+     "box_height_px": 23,
+     "span_count": 21,
+     "walk_count": 22,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 25.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 25.25,
+     "y_first": 277.5,
+     "y_last": 746,
+     "x_min": 532,
+     "x_max": 681,
+     "box_height_px": 22,
+     "span_count": 20,
+     "walk_count": 19,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 25.25,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 24.75,
+     "y_first": 281.5,
+     "y_last": 740.5,
+     "x_min": 672,
+     "x_max": 828,
+     "box_height_px": 21,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 24.75,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 23.5,
+     "y_first": 286.5,
+     "y_last": 734.5,
+     "x_min": 823,
+     "x_max": 972,
+     "box_height_px": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 23.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 23.5,
+     "y_first": 283.5,
+     "y_last": 732.5,
+     "x_min": 962,
+     "x_max": 1125,
+     "box_height_px": 19,
+     "span_count": 20,
+     "walk_count": 18,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 23.5,
+     "doubts": [],
+     "reason": "layer counts disagree (span 20, walk 18); retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-22",
+   "source": "labelled",
+   "block_id": "G14",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-22.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": 119,
+   "usable": false,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 124,
+   "columns": [
+    {
+     "pitch_px": 34.5,
+     "y_first": 40.5,
+     "y_last": 647.5,
+     "x_min": 0,
+     "x_max": 126,
+     "box_height_px": 33,
+     "span_count": 19,
+     "walk_count": 19,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 34.5,
+     "doubts": [
+      "end_at_frame_edge",
+      "cut_at_frame_side"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 34,
+     "y_first": 12.5,
+     "y_last": 647.5,
+     "x_min": 114,
+     "x_max": 323,
+     "box_height_px": 31.5,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 34,
+     "doubts": [
+      "end_at_frame_edge"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 33,
+     "y_first": 27.5,
+     "y_last": 648.5,
+     "x_min": 320,
+     "x_max": 521,
+     "box_height_px": 31,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 33,
+     "doubts": [
+      "end_at_frame_edge"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 31.5,
+     "y_first": 39,
+     "y_last": 646.5,
+     "x_min": 523,
+     "x_max": 711,
+     "box_height_px": 30,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 31.5,
+     "doubts": [
+      "end_at_frame_edge"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 32,
+     "y_first": 43.5,
+     "y_last": 645.5,
+     "x_min": 723,
+     "x_max": 909,
+     "box_height_px": 29,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 32,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 32,
+     "y_first": 51,
+     "y_last": 644,
+     "x_min": 906,
+     "x_max": 1093,
+     "box_height_px": 28,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 32,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 100,
+     "y_first": 191.5,
+     "y_last": 637,
+     "x_min": 1111,
+     "x_max": 1276,
+     "box_height_px": 23.5,
+     "span_count": 5,
+     "walk_count": 5,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 100,
+     "doubts": [
+      "box_over_two_trays",
+      "cut_at_frame_side",
+      "pitch_differs"
+     ],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-25",
+   "source": "labelled",
+   "block_id": "G03",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-25.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 900,
+    "height": 1600
+   },
+   "truth": 80,
+   "usable": false,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 13,
+   "columns": [
+    {
+     "pitch_px": 89.5,
+     "y_first": 219.5,
+     "y_last": 1313,
+     "x_min": 387,
+     "x_max": 893,
+     "box_height_px": 132.5,
+     "span_count": 13,
+     "walk_count": 13,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 89.5,
+     "doubts": [
+      "end_box_cut_short"
+     ],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "img-26",
+   "source": "labelled",
+   "block_id": "G18",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-26.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": 125,
+   "usable": false,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 83,
+   "columns": [
+    {
+     "pitch_px": 26.5,
+     "y_first": 217.5,
+     "y_last": 795.5,
+     "x_min": 251,
+     "x_max": 500,
+     "box_height_px": 23,
+     "span_count": 23,
+     "walk_count": 22,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 26.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 26.5,
+     "y_first": 282,
+     "y_last": 791.5,
+     "x_min": 452,
+     "x_max": 623,
+     "box_height_px": 23,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 26.5,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 26.75,
+     "y_first": 262,
+     "y_last": 783,
+     "x_min": 624,
+     "x_max": 800,
+     "box_height_px": 21,
+     "span_count": 20,
+     "walk_count": 21,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 26.75,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 25.5,
+     "y_first": 281.5,
+     "y_last": 776.5,
+     "x_min": 772,
+     "x_max": 968,
+     "box_height_px": 20,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 25.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "img-27",
+   "source": "labelled",
+   "block_id": "G03",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-27.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 900,
+    "height": 1600
+   },
+   "truth": 80,
+   "usable": false,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "layer pitch changes across the face (angled or corner view)"
+   ],
+   "total": 21,
+   "columns": [
+    {
+     "pitch_px": 195.5,
+     "y_first": 146.5,
+     "y_last": 1299,
+     "x_min": 47,
+     "x_max": 516,
+     "box_height_px": 114,
+     "span_count": 7,
+     "walk_count": 4,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 195.5,
+     "doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 94.5,
+     "y_first": 183.5,
+     "y_last": 1295.5,
+     "x_min": 367,
+     "x_max": 894,
+     "box_height_px": 128,
+     "span_count": 13,
+     "walk_count": 17,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 94.5,
+     "doubts": [
+      "end_box_cut_short"
+     ],
+     "reason": "layer counts disagree (span 13, walk 17); retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-28",
+   "source": "labelled",
+   "block_id": "G19",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-28.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1600,
+    "height": 900
+   },
+   "truth": 143,
+   "usable": false,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 104,
+   "columns": [
+    {
+     "pitch_px": 35.5,
+     "y_first": 215,
+     "y_last": 593.5,
+     "x_min": 240,
+     "x_max": 496,
+     "box_height_px": 46,
+     "span_count": 12,
+     "walk_count": 14,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 35.5,
+     "doubts": [
+      "box_over_two_stacks"
+     ],
+     "reason": "layer counts disagree (span 12, walk 14); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 45.5,
+     "y_first": 232,
+     "y_last": 738,
+     "x_min": 423,
+     "x_max": 623,
+     "box_height_px": 32.5,
+     "span_count": 12,
+     "walk_count": 11,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 45.5,
+     "doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays"
+     ],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 30.75,
+     "y_first": 237.5,
+     "y_last": 729.5,
+     "x_min": 586,
+     "x_max": 741,
+     "box_height_px": 33,
+     "span_count": 17,
+     "walk_count": 19,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 30.75,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": "layer counts disagree (span 17, walk 19); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 31.5,
+     "y_first": 205.5,
+     "y_last": 765,
+     "x_min": 696,
+     "x_max": 876,
+     "box_height_px": 41,
+     "span_count": 19,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 31.5,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 36.5,
+     "y_first": 213.5,
+     "y_last": 819.5,
+     "x_min": 870,
+     "x_max": 1030,
+     "box_height_px": 46.5,
+     "span_count": 18,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 36.5,
+     "doubts": [
+      "end_at_frame_edge"
+     ],
+     "reason": "layer counts disagree (span 18, walk 20); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 55.75,
+     "y_first": 212.5,
+     "y_last": 874,
+     "x_min": 1043,
+     "x_max": 1364,
+     "box_height_px": 52,
+     "span_count": 13,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 55.75,
+     "doubts": [
+      "box_over_two_stacks",
+      "end_at_frame_edge",
+      "pitch_differs"
+     ],
+     "reason": "layer counts disagree (span 13, walk 20); retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-29",
+   "source": "labelled",
+   "block_id": "G20",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-29.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1600,
+    "height": 900
+   },
+   "truth": 130,
+   "usable": false,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "stacks cover too little of the frame width"
+   ],
+   "total": 48,
+   "columns": [
+    {
+     "pitch_px": 42.5,
+     "y_first": 299,
+     "y_last": 855.5,
+     "x_min": 190,
+     "x_max": 549,
+     "box_height_px": 51.5,
+     "span_count": 14,
+     "walk_count": 15,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 42.5,
+     "doubts": [
+      "box_over_two_stacks",
+      "end_at_frame_edge"
+     ],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 35,
+     "y_first": 202,
+     "y_last": 801,
+     "x_min": 386,
+     "x_max": 704,
+     "box_height_px": 42,
+     "span_count": 18,
+     "walk_count": 15,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 35,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": "boxes are missing over several layers of this stack; retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 40.5,
+     "y_first": 237.5,
+     "y_last": 759.5,
+     "x_min": 580,
+     "x_max": 855,
+     "box_height_px": 37,
+     "span_count": 14,
+     "walk_count": 18,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 40.5,
+     "doubts": [],
+     "reason": "layer counts disagree (span 14, walk 18); retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-37",
+   "source": "labelled",
+   "block_id": "G07",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-37.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1600,
+    "height": 720
+   },
+   "truth": 4,
+   "usable": false,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake"
+   ],
+   "total": 3,
+   "columns": [
+    {
+     "pitch_px": 230.75,
+     "y_first": 27.5,
+     "y_last": 517,
+     "x_min": 664,
+     "x_max": 1117,
+     "box_height_px": 91.5,
+     "span_count": 3,
+     "walk_count": 3,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 230.75,
+     "doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays",
+      "end_box_cut_short",
+      "end_at_frame_edge"
+     ],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-41",
+   "source": "labelled",
+   "block_id": "G18",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-41.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": 81,
+   "usable": false,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 48,
+   "columns": [
+    {
+     "pitch_px": 38,
+     "y_first": 175.5,
+     "y_last": 251.5,
+     "x_min": 156,
+     "x_max": 282,
+     "box_height_px": 21,
+     "span_count": 3,
+     "walk_count": 4,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 38,
+     "doubts": [],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 38.5,
+     "y_first": 180,
+     "y_last": 257,
+     "x_min": 292,
+     "x_max": 443,
+     "box_height_px": 23,
+     "span_count": 3,
+     "walk_count": 4,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 38.5,
+     "doubts": [],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 33,
+     "y_first": 209.5,
+     "y_last": 844,
+     "x_min": 489,
+     "x_max": 701,
+     "box_height_px": 30,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 33,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 33,
+     "y_first": 209.5,
+     "y_last": 853,
+     "x_min": 688,
+     "x_max": 928,
+     "box_height_px": 30.5,
+     "span_count": 21,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 33,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "img-42",
+   "source": "labelled",
+   "block_id": "G25",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-42.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": 180,
+   "usable": false,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "stacks are too small in the frame (too far away)"
+   ],
+   "total": 15,
+   "columns": [
+    {
+     "pitch_px": 48,
+     "y_first": 541,
+     "y_last": 922.5,
+     "x_min": 328,
+     "x_max": 553,
+     "box_height_px": 69,
+     "span_count": 9,
+     "walk_count": 13,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 48,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": "layer counts disagree (span 9, walk 13); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 36.5,
+     "y_first": 436,
+     "y_last": 486.5,
+     "x_min": 541,
+     "x_max": 770,
+     "box_height_px": 43,
+     "span_count": 2,
+     "walk_count": 2,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 36.5,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": null,
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-43",
+   "source": "labelled",
+   "block_id": "G26",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-43.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1200,
+    "height": 1600
+   },
+   "truth": 5,
+   "usable": false,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "stacks are too small in the frame (too far away)"
+   ],
+   "total": 5,
+   "columns": [
+    {
+     "pitch_px": 85.75,
+     "y_first": 76.5,
+     "y_last": 448.5,
+     "x_min": 0,
+     "x_max": 475,
+     "box_height_px": 118,
+     "span_count": 5,
+     "walk_count": 5,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 85.75,
+     "doubts": [
+      "end_at_frame_edge",
+      "cut_at_frame_side"
+     ],
+     "reason": null,
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-44",
+   "source": "labelled",
+   "block_id": "G27",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-44.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1020,
+    "height": 960
+   },
+   "truth": 185,
+   "usable": false,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "stacks are too small in the frame (too far away)"
+   ],
+   "total": 120,
+   "columns": [
+    {
+     "pitch_px": 19,
+     "y_first": 444.5,
+     "y_last": 723,
+     "x_min": 65,
+     "x_max": 171,
+     "box_height_px": 17,
+     "span_count": 16,
+     "walk_count": 16,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 19,
+     "doubts": [],
+     "reason": "camera looked down on the stack (spacing ratio 1.508); hold the phone level at mid-height",
+     "accepted": false
+    },
+    {
+     "pitch_px": 20.5,
+     "y_first": 407.5,
+     "y_last": 722.5,
+     "x_min": 168,
+     "x_max": 263,
+     "box_height_px": 18,
+     "span_count": 16,
+     "walk_count": 26,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 20.5,
+     "doubts": [],
+     "reason": "layer counts disagree (span 16, walk 26); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 20.25,
+     "y_first": 409,
+     "y_last": 721.5,
+     "x_min": 263,
+     "x_max": 361,
+     "box_height_px": 18,
+     "span_count": 16,
+     "walk_count": 24,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 20.25,
+     "doubts": [],
+     "reason": "layer counts disagree (span 16, walk 24); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 20,
+     "y_first": 427.5,
+     "y_last": 721,
+     "x_min": 364,
+     "x_max": 454,
+     "box_height_px": 18,
+     "span_count": 16,
+     "walk_count": 15,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 20,
+     "doubts": [],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 22.25,
+     "y_first": 429.5,
+     "y_last": 719,
+     "x_min": 459,
+     "x_max": 550,
+     "box_height_px": 19,
+     "span_count": 14,
+     "walk_count": 14,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 22.25,
+     "doubts": [],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 23.75,
+     "y_first": 445.5,
+     "y_last": 767,
+     "x_min": 563,
+     "x_max": 676,
+     "box_height_px": 19,
+     "span_count": 15,
+     "walk_count": 14,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 23.75,
+     "doubts": [],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 22.5,
+     "y_first": 446.5,
+     "y_last": 692,
+     "x_min": 680,
+     "x_max": 798,
+     "box_height_px": 19,
+     "span_count": 12,
+     "walk_count": 11,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 22.5,
+     "doubts": [],
+     "reason": "camera looked down on the stack (spacing ratio 2.161); hold the phone level at mid-height",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-45",
+   "source": "labelled",
+   "block_id": "G28",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-45.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 533,
+    "height": 1280
+   },
+   "truth": 107,
+   "usable": false,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 28,
+   "columns": [
+    {
+     "pitch_px": 30.5,
+     "y_first": 421,
+     "y_last": 1140,
+     "x_min": 50,
+     "x_max": 273,
+     "box_height_px": 36,
+     "span_count": 25,
+     "walk_count": 28,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 30.5,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": "boxes are missing over several layers of this stack; retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-48",
+   "source": "labelled",
+   "block_id": "G25",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-48.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": 180,
+   "usable": false,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "stacks are too small in the frame (too far away)"
+   ],
+   "total": 13,
+   "columns": [
+    {
+     "pitch_px": 44.5,
+     "y_first": 541,
+     "y_last": 923,
+     "x_min": 328,
+     "x_max": 553,
+     "box_height_px": 69.5,
+     "span_count": 10,
+     "walk_count": 11,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 44.5,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 36,
+     "y_first": 436.5,
+     "y_last": 487,
+     "x_min": 540,
+     "x_max": 769,
+     "box_height_px": 43,
+     "span_count": 2,
+     "walk_count": 2,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 36,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": null,
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-51",
+   "source": "labelled",
+   "block_id": "G19",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-51.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": 262,
+   "usable": false,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "layer pitch changes across the face (angled or corner view)"
+   ],
+   "total": 92,
+   "columns": [
+    {
+     "pitch_px": 37.25,
+     "y_first": 365.5,
+     "y_last": 739,
+     "x_min": 322,
+     "x_max": 470,
+     "box_height_px": 25.5,
+     "span_count": 11,
+     "walk_count": 12,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 37.25,
+     "doubts": [
+      "box_over_two_trays",
+      "pitch_differs"
+     ],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 20,
+     "y_first": 379,
+     "y_last": 712.5,
+     "x_min": 471,
+     "x_max": 562,
+     "box_height_px": 26,
+     "span_count": 18,
+     "walk_count": 19,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 20,
+     "doubts": [
+      "bottom_above_floor"
+     ],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 21,
+     "y_first": 318,
+     "y_last": 738,
+     "x_min": 540,
+     "x_max": 681,
+     "box_height_px": 27,
+     "span_count": 21,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 21,
+     "doubts": [],
+     "reason": "boxes are missing over several layers of this stack; retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 22,
+     "y_first": 387.5,
+     "y_last": 769.5,
+     "x_min": 677,
+     "x_max": 816,
+     "box_height_px": 29.5,
+     "span_count": 18,
+     "walk_count": 20,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 22,
+     "doubts": [],
+     "reason": "layer counts disagree (span 18, walk 20); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 22.5,
+     "y_first": 390,
+     "y_last": 808,
+     "x_min": 792,
+     "x_max": 981,
+     "box_height_px": 32,
+     "span_count": 20,
+     "walk_count": 21,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 22.5,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": null,
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "img-52",
+   "source": "labelled",
+   "block_id": "G33",
+   "same_photo_as": null,
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-52.jpeg",
+   "prepare": {
+    "mode": "raw"
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": 25,
+   "usable": false,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "layer pitch changes across the face (angled or corner view)"
+   ],
+   "total": 22,
+   "columns": [
+    {
+     "pitch_px": 34,
+     "y_first": 437.5,
+     "y_last": 561,
+     "x_min": 195,
+     "x_max": 409,
+     "box_height_px": 34.5,
+     "span_count": 5,
+     "walk_count": 5,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 34,
+     "doubts": [],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 34.75,
+     "y_first": 439.5,
+     "y_last": 603.5,
+     "x_min": 392,
+     "x_max": 581,
+     "box_height_px": 37,
+     "span_count": 6,
+     "walk_count": 6,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 34.75,
+     "doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays"
+     ],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 50,
+     "y_first": 231.5,
+     "y_last": 708,
+     "x_min": 475,
+     "x_max": 877,
+     "box_height_px": 47,
+     "span_count": 11,
+     "walk_count": 11,
+     "source": "rebuilt",
+     "rebuilt_pitch_px": 50,
+     "doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays"
+     ],
+     "reason": null,
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "mutaa:L-100:straight",
+   "source": "labelled_reencoded",
+   "block_id": "MUTAA-L-100",
+   "same_photo_as": "img-19",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-19.jpeg",
+   "prepare": {
+    "mode": "sent",
+    "width": 1600,
+    "height": 1200
+   },
+   "image": {
+    "width": 1600,
+    "height": 1200
+   },
+   "truth": 101,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 100,
+   "columns": [
+    {
+     "pitch_px": 42,
+     "y_first": 240,
+     "y_last": 1043.5,
+     "x_min": 38,
+     "x_max": 373,
+     "box_height_px": 39,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 42,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 42.5,
+     "y_first": 227,
+     "y_last": 1033.5,
+     "x_min": 321,
+     "x_max": 618,
+     "box_height_px": 39,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 42.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 41.5,
+     "y_first": 220,
+     "y_last": 1012,
+     "x_min": 571,
+     "x_max": 858,
+     "box_height_px": 38,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 41.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 41,
+     "y_first": 211.5,
+     "y_last": 991,
+     "x_min": 835,
+     "x_max": 1083,
+     "box_height_px": 38,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 41,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 40.5,
+     "y_first": 203,
+     "y_last": 974.5,
+     "x_min": 1095,
+     "x_max": 1333,
+     "box_height_px": 37,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 40.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "mutaa:L-100:left",
+   "source": "labelled_reencoded",
+   "block_id": "MUTAA-L-100",
+   "same_photo_as": "img-21",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-21.jpeg",
+   "prepare": {
+    "mode": "sent",
+    "width": 1280,
+    "height": 582
+   },
+   "image": {
+    "width": 1280,
+    "height": 582
+   },
+   "truth": null,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 100,
+   "columns": [
+    {
+     "pitch_px": 18,
+     "y_first": 112,
+     "y_last": 466,
+     "x_min": 323,
+     "x_max": 454,
+     "box_height_px": 17,
+     "span_count": 21,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 18,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 19,
+     "y_first": 106.5,
+     "y_last": 473.5,
+     "x_min": 439,
+     "x_max": 557,
+     "box_height_px": 18,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 19,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 20,
+     "y_first": 106.5,
+     "y_last": 481.5,
+     "x_min": 551,
+     "x_max": 670,
+     "box_height_px": 18,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 20,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 20,
+     "y_first": 103.5,
+     "y_last": 486.5,
+     "x_min": 673,
+     "x_max": 800,
+     "box_height_px": 19,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 20,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 20.5,
+     "y_first": 98,
+     "y_last": 494.5,
+     "x_min": 788,
+     "x_max": 945,
+     "box_height_px": 19,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 20.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "mutaa:L-100:right",
+   "source": "labelled_reencoded",
+   "block_id": "MUTAA-L-100",
+   "same_photo_as": "img-24",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-24.jpeg",
+   "prepare": {
+    "mode": "sent",
+    "width": 1280,
+    "height": 582
+   },
+   "image": {
+    "width": 1280,
+    "height": 582
+   },
+   "truth": null,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 100,
+   "columns": [
+    {
+     "pitch_px": 18,
+     "y_first": 102,
+     "y_last": 448.5,
+     "x_min": 328,
+     "x_max": 461,
+     "box_height_px": 17,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 18,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 19.5,
+     "y_first": 97.5,
+     "y_last": 458,
+     "x_min": 441,
+     "x_max": 562,
+     "box_height_px": 18,
+     "span_count": 19,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 19.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 19.5,
+     "y_first": 96.5,
+     "y_last": 461.5,
+     "x_min": 552,
+     "x_max": 670,
+     "box_height_px": 19,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 19.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 20,
+     "y_first": 92.5,
+     "y_last": 466.5,
+     "x_min": 673,
+     "x_max": 796,
+     "box_height_px": 18.5,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 20,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 19.5,
+     "y_first": 88.5,
+     "y_last": 474.5,
+     "x_min": 786,
+     "x_max": 942,
+     "box_height_px": 19,
+     "span_count": 21,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 19.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "mutaa:L-109-ORANGE:straight",
+   "source": "labelled_reencoded",
+   "block_id": "MUTAA-L-109-ORANGE",
+   "same_photo_as": "img-36",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-36.jpeg",
+   "prepare": {
+    "mode": "sent",
+    "width": 1280,
+    "height": 960
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": 164,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 115,
+   "columns": [
+    {
+     "pitch_px": 25.75,
+     "y_first": 182,
+     "y_last": 695.5,
+     "x_min": 79,
+     "x_max": 255,
+     "box_height_px": 21,
+     "span_count": 21,
+     "walk_count": 17,
+     "source": "saved",
+     "rebuilt_pitch_px": 25.75,
+     "doubts": [],
+     "reason": "boxes are missing over several layers of this stack; retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 27.5,
+     "y_first": 160.5,
+     "y_last": 700,
+     "x_min": 186,
+     "x_max": 401,
+     "box_height_px": 24,
+     "span_count": 21,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 27.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 27.5,
+     "y_first": 152.5,
+     "y_last": 701,
+     "x_min": 356,
+     "x_max": 552,
+     "box_height_px": 25,
+     "span_count": 21,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 27.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 27,
+     "y_first": 193,
+     "y_last": 677,
+     "x_min": 536,
+     "x_max": 710,
+     "box_height_px": 27,
+     "span_count": 19,
+     "walk_count": 18,
+     "source": "saved",
+     "rebuilt_pitch_px": 27,
+     "doubts": [
+      "bottom_above_floor"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 27.5,
+     "y_first": 154.5,
+     "y_last": 704.5,
+     "x_min": 715,
+     "x_max": 895,
+     "box_height_px": 29,
+     "span_count": 21,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 27.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 29,
+     "y_first": 155,
+     "y_last": 714.5,
+     "x_min": 864,
+     "x_max": 1096,
+     "box_height_px": 27,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 29,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "mutaa:L-109-ORANGE:left",
+   "source": "labelled_reencoded",
+   "block_id": "MUTAA-L-109-ORANGE",
+   "same_photo_as": "img-17",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-17.jpeg",
+   "prepare": {
+    "mode": "sent",
+    "width": 1280,
+    "height": 960
+   },
+   "image": {
+    "width": 1280,
+    "height": 960
+   },
+   "truth": null,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 56,
+   "columns": [
+    {
+     "pitch_px": 34.5,
+     "y_first": 161,
+     "y_last": 332,
+     "x_min": 132,
+     "x_max": 365,
+     "box_height_px": 37,
+     "span_count": 6,
+     "walk_count": 6,
+     "source": "saved",
+     "rebuilt_pitch_px": 34.5,
+     "doubts": [
+      "box_over_two_stacks"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 49,
+     "y_first": 197,
+     "y_last": 781,
+     "x_min": 306,
+     "x_max": 473,
+     "box_height_px": 49.5,
+     "span_count": 13,
+     "walk_count": 6,
+     "source": "saved",
+     "rebuilt_pitch_px": 49,
+     "doubts": [
+      "box_over_two_stacks"
+     ],
+     "reason": "boxes are missing over several layers of this stack; retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 32.5,
+     "y_first": 158.5,
+     "y_last": 711.5,
+     "x_min": 386,
+     "x_max": 609,
+     "box_height_px": 39,
+     "span_count": 18,
+     "walk_count": 19,
+     "source": "saved",
+     "rebuilt_pitch_px": 32.5,
+     "doubts": [
+      "box_over_two_stacks"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 33.5,
+     "y_first": 154,
+     "y_last": 661,
+     "x_min": 604,
+     "x_max": 727,
+     "box_height_px": 32,
+     "span_count": 16,
+     "walk_count": 19,
+     "source": "saved",
+     "rebuilt_pitch_px": 33.5,
+     "doubts": [],
+     "reason": "layer counts disagree (span 16, walk 19); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 52.5,
+     "y_first": 212.5,
+     "y_last": 476.5,
+     "x_min": 733,
+     "x_max": 827,
+     "box_height_px": 29.5,
+     "span_count": 6,
+     "walk_count": 6,
+     "source": "saved",
+     "rebuilt_pitch_px": 52.5,
+     "doubts": [],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "mutaa:L-115:straight",
+   "source": "labelled_reencoded",
+   "block_id": "MUTAA-L-115",
+   "same_photo_as": "img-04",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-04.jpeg",
+   "prepare": {
+    "mode": "sent",
+    "width": 960,
+    "height": 1280
+   },
+   "image": {
+    "width": 960,
+    "height": 1280
+   },
+   "truth": 141,
+   "usable": true,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "stacks are too small in the frame (too far away)"
+   ],
+   "total": 121,
+   "columns": [
+    {
+     "pitch_px": 26,
+     "y_first": 558,
+     "y_last": 985.5,
+     "x_min": 63,
+     "x_max": 206,
+     "box_height_px": 26,
+     "span_count": 17,
+     "walk_count": 19,
+     "source": "saved",
+     "rebuilt_pitch_px": 26,
+     "doubts": [],
+     "reason": "layer counts disagree (span 17, walk 19); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 27,
+     "y_first": 560,
+     "y_last": 973.5,
+     "x_min": 203,
+     "x_max": 337,
+     "box_height_px": 26,
+     "span_count": 16,
+     "walk_count": 23,
+     "source": "saved",
+     "rebuilt_pitch_px": 27,
+     "doubts": [],
+     "reason": "layer counts disagree (span 16, walk 23); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 23.5,
+     "y_first": 541.5,
+     "y_last": 1024,
+     "x_min": 334,
+     "x_max": 488,
+     "box_height_px": 25,
+     "span_count": 22,
+     "walk_count": 22,
+     "source": "saved",
+     "rebuilt_pitch_px": 23.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 27.75,
+     "y_first": 550.5,
+     "y_last": 1018,
+     "x_min": 462,
+     "x_max": 626,
+     "box_height_px": 26,
+     "span_count": 18,
+     "walk_count": 19,
+     "source": "saved",
+     "rebuilt_pitch_px": 27.75,
+     "doubts": [],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 26.25,
+     "y_first": 542,
+     "y_last": 999,
+     "x_min": 615,
+     "x_max": 759,
+     "box_height_px": 26,
+     "span_count": 18,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 26.25,
+     "doubts": [],
+     "reason": "layer counts disagree (span 18, walk 20); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 24,
+     "y_first": 535.5,
+     "y_last": 984,
+     "x_min": 756,
+     "x_max": 885,
+     "box_height_px": 24,
+     "span_count": 20,
+     "walk_count": 18,
+     "source": "saved",
+     "rebuilt_pitch_px": 24,
+     "doubts": [],
+     "reason": "layer counts disagree (span 20, walk 18); retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "mutaa:L-115:left",
+   "source": "labelled_reencoded",
+   "block_id": "MUTAA-L-115",
+   "same_photo_as": "img-05",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-05.jpeg",
+   "prepare": {
+    "mode": "sent",
+    "width": 1278,
+    "height": 960
+   },
+   "image": {
+    "width": 1278,
+    "height": 960
+   },
+   "truth": null,
+   "usable": true,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "stacks cover too little of the frame width",
+    "stacks are too small in the frame (too far away)"
+   ],
+   "total": 14,
+   "columns": [
+    {
+     "pitch_px": 21.5,
+     "y_first": 442,
+     "y_last": 776,
+     "x_min": 698,
+     "x_max": 784,
+     "box_height_px": 22.5,
+     "span_count": 17,
+     "walk_count": 14,
+     "source": "saved",
+     "rebuilt_pitch_px": 21.5,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": "boxes are missing over several layers of this stack; retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "mutaa:L-80:straight",
+   "source": "labelled_reencoded",
+   "block_id": "MUTAA-L-80",
+   "same_photo_as": "img-30",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-30.jpeg",
+   "prepare": {
+    "mode": "sent",
+    "width": 1600,
+    "height": 900
+   },
+   "image": {
+    "width": 1600,
+    "height": 900
+   },
+   "truth": 80,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 79,
+   "columns": [
+    {
+     "pitch_px": 40.5,
+     "y_first": 38.5,
+     "y_last": 819.5,
+     "x_min": 105,
+     "x_max": 595,
+     "box_height_px": 41,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 40.5,
+     "doubts": [
+      "box_over_two_stacks",
+      "end_at_frame_edge"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 42,
+     "y_first": 42,
+     "y_last": 849,
+     "x_min": 341,
+     "x_max": 635,
+     "box_height_px": 43.5,
+     "span_count": 20,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 42,
+     "doubts": [
+      "box_over_two_stacks",
+      "end_at_frame_edge"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 41.5,
+     "y_first": 38.5,
+     "y_last": 867,
+     "x_min": 611,
+     "x_max": 878,
+     "box_height_px": 46,
+     "span_count": 21,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 41.5,
+     "doubts": [
+      "end_at_frame_edge"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 47,
+     "y_first": 29,
+     "y_last": 888.5,
+     "x_min": 887,
+     "x_max": 1199,
+     "box_height_px": 47,
+     "span_count": 19,
+     "walk_count": 19,
+     "source": "saved",
+     "rebuilt_pitch_px": 47,
+     "doubts": [
+      "end_box_cut_short",
+      "end_at_frame_edge"
+     ],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "mutaa:L-80:left",
+   "source": "labelled_reencoded",
+   "block_id": "MUTAA-L-80",
+   "same_photo_as": "img-31",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-31.jpeg",
+   "prepare": {
+    "mode": "sent",
+    "width": 900,
+    "height": 1600
+   },
+   "image": {
+    "width": 900,
+    "height": 1600
+   },
+   "truth": null,
+   "usable": true,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "layer pitch changes across the face (angled or corner view)"
+   ],
+   "total": 59,
+   "columns": [
+    {
+     "pitch_px": 94,
+     "y_first": 267.5,
+     "y_last": 1424,
+     "x_min": 2,
+     "x_max": 368,
+     "box_height_px": 116,
+     "span_count": 13,
+     "walk_count": 16,
+     "source": "saved",
+     "rebuilt_pitch_px": 94,
+     "doubts": [
+      "box_over_two_stacks",
+      "end_at_frame_edge",
+      "cut_at_frame_side"
+     ],
+     "reason": "layer counts disagree (span 13, walk 16); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 79.5,
+     "y_first": 277,
+     "y_last": 1218.5,
+     "x_min": 347,
+     "x_max": 590,
+     "box_height_px": 79,
+     "span_count": 13,
+     "walk_count": 19,
+     "source": "saved",
+     "rebuilt_pitch_px": 79.5,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": "layer counts disagree (span 13, walk 19); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 70.5,
+     "y_first": 284,
+     "y_last": 994.5,
+     "x_min": 535,
+     "x_max": 788,
+     "box_height_px": 64,
+     "span_count": 11,
+     "walk_count": 16,
+     "source": "saved",
+     "rebuilt_pitch_px": 70.5,
+     "doubts": [],
+     "reason": "layer counts disagree (span 11, walk 16); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 63,
+     "y_first": 288.5,
+     "y_last": 620,
+     "x_min": 714,
+     "x_max": 888,
+     "box_height_px": 46.5,
+     "span_count": 6,
+     "walk_count": 8,
+     "source": "saved",
+     "rebuilt_pitch_px": 63,
+     "doubts": [],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "mutaa:L-80:right",
+   "source": "labelled_reencoded",
+   "block_id": "MUTAA-L-80",
+   "same_photo_as": "img-25",
+   "photo": "datasets/field-2026-10/labelled-20261007/originals/img-25.jpeg",
+   "prepare": {
+    "mode": "sent",
+    "width": 900,
+    "height": 1600
+   },
+   "image": {
+    "width": 900,
+    "height": 1600
+   },
+   "truth": null,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 12,
+   "columns": [
+    {
+     "pitch_px": 100.5,
+     "y_first": 218.5,
+     "y_last": 1313.5,
+     "x_min": 386,
+     "x_max": 893,
+     "box_height_px": 137,
+     "span_count": 12,
+     "walk_count": 12,
+     "source": "saved",
+     "rebuilt_pitch_px": 100.5,
+     "doubts": [
+      "end_box_cut_short"
+     ],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "mutaa:M16-CORNER-STACK:straight",
+   "source": "mutaa",
+   "block_id": "MUTAA-M16-CORNER-STACK",
+   "same_photo_as": null,
+   "photo": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151149500.jpg.jpeg",
+   "prepare": {
+    "mode": "sent",
+    "width": 725,
+    "height": 1600
+   },
+   "image": {
+    "width": 725,
+    "height": 1600
+   },
+   "truth": 14,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 14,
+   "columns": [
+    {
+     "pitch_px": 62,
+     "y_first": 497.5,
+     "y_last": 1289,
+     "x_min": 151,
+     "x_max": 541,
+     "box_height_px": 65.5,
+     "span_count": 14,
+     "walk_count": 14,
+     "source": "saved",
+     "rebuilt_pitch_px": 62,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "mutaa:M16-CORNER-STACK:left",
+   "source": "mutaa",
+   "block_id": "MUTAA-M16-CORNER-STACK",
+   "same_photo_as": null,
+   "photo": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151159267.jpg.jpeg",
+   "prepare": {
+    "mode": "sent",
+    "width": 725,
+    "height": 1600
+   },
+   "image": {
+    "width": 725,
+    "height": 1600
+   },
+   "truth": null,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 8,
+   "columns": [
+    {
+     "pitch_px": 86.25,
+     "y_first": 547,
+     "y_last": 1138.5,
+     "x_min": 161,
+     "x_max": 536,
+     "box_height_px": 87,
+     "span_count": 8,
+     "walk_count": 8,
+     "source": "saved",
+     "rebuilt_pitch_px": 86.25,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "mutaa:M16-FAR:straight",
+   "source": "mutaa",
+   "block_id": "MUTAA-M16-FAR",
+   "same_photo_as": null,
+   "photo": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151549592.jpg.jpeg",
+   "prepare": {
+    "mode": "sent",
+    "width": 1200,
+    "height": 1600
+   },
+   "image": {
+    "width": 1200,
+    "height": 1600
+   },
+   "truth": 45,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 79,
+   "columns": [
+    {
+     "pitch_px": 37,
+     "y_first": 762,
+     "y_last": 1558.5,
+     "x_min": 0,
+     "x_max": 238,
+     "box_height_px": 35,
+     "span_count": 23,
+     "walk_count": 17,
+     "source": "saved",
+     "rebuilt_pitch_px": 37,
+     "doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge",
+      "cut_at_frame_side"
+     ],
+     "reason": "boxes are missing over several layers of this stack; retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 45.75,
+     "y_first": 794.5,
+     "y_last": 1242,
+     "x_min": 224,
+     "x_max": 381,
+     "box_height_px": 36,
+     "span_count": 11,
+     "walk_count": 18,
+     "source": "saved",
+     "rebuilt_pitch_px": 45.75,
+     "doubts": [],
+     "reason": "layer counts disagree (span 11, walk 18); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 48.25,
+     "y_first": 703.5,
+     "y_last": 1238.5,
+     "x_min": 499,
+     "x_max": 755,
+     "box_height_px": 47.5,
+     "span_count": 12,
+     "walk_count": 17,
+     "source": "saved",
+     "rebuilt_pitch_px": 48.25,
+     "doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays"
+     ],
+     "reason": "layer counts disagree (span 12, walk 17); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 37,
+     "y_first": 744,
+     "y_last": 1368,
+     "x_min": 709,
+     "x_max": 957,
+     "box_height_px": 48,
+     "span_count": 18,
+     "walk_count": 19,
+     "source": "saved",
+     "rebuilt_pitch_px": 37,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": "boxes are missing over several layers of this stack; retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 53.5,
+     "y_first": 766,
+     "y_last": 1180,
+     "x_min": 915,
+     "x_max": 1190,
+     "box_height_px": 44,
+     "span_count": 9,
+     "walk_count": 8,
+     "source": "saved",
+     "rebuilt_pitch_px": 53.5,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": null,
+     "accepted": true
+    }
+   ]
+  },
+  {
+   "id": "mutaa:M16-FAR:left",
+   "source": "mutaa",
+   "block_id": "MUTAA-M16-FAR",
+   "same_photo_as": null,
+   "photo": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151409127.jpg.jpeg",
+   "prepare": {
+    "mode": "sent",
+    "width": 725,
+    "height": 1600
+   },
+   "image": {
+    "width": 725,
+    "height": 1600
+   },
+   "truth": null,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 41,
+   "columns": [
+    {
+     "pitch_px": 42.5,
+     "y_first": 777,
+     "y_last": 1221.5,
+     "x_min": 17,
+     "x_max": 166,
+     "box_height_px": 33,
+     "span_count": 11,
+     "walk_count": 15,
+     "source": "saved",
+     "rebuilt_pitch_px": 42.5,
+     "doubts": [],
+     "reason": "layer counts disagree (span 11, walk 15); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 45.5,
+     "y_first": 774.5,
+     "y_last": 1461,
+     "x_min": 161,
+     "x_max": 418,
+     "box_height_px": 32,
+     "span_count": 16,
+     "walk_count": 11,
+     "source": "saved",
+     "rebuilt_pitch_px": 45.5,
+     "doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays"
+     ],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 49,
+     "y_first": 755.5,
+     "y_last": 1059.5,
+     "x_min": 451,
+     "x_max": 601,
+     "box_height_px": 30.5,
+     "span_count": 7,
+     "walk_count": 7,
+     "source": "saved",
+     "rebuilt_pitch_px": 49,
+     "doubts": [],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 42.25,
+     "y_first": 773.5,
+     "y_last": 1068.5,
+     "x_min": 597,
+     "x_max": 708,
+     "box_height_px": 28,
+     "span_count": 8,
+     "walk_count": 8,
+     "source": "saved",
+     "rebuilt_pitch_px": 42.25,
+     "doubts": [],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "mutaa:M16-FAR:right",
+   "source": "mutaa",
+   "block_id": "MUTAA-M16-FAR",
+   "same_photo_as": null,
+   "photo": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151453724.jpg.jpeg",
+   "prepare": {
+    "mode": "sent",
+    "width": 1200,
+    "height": 1600
+   },
+   "image": {
+    "width": 1200,
+    "height": 1600
+   },
+   "truth": null,
+   "usable": true,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "stacks are too small in the frame (too far away)"
+   ],
+   "total": 19,
+   "columns": [
+    {
+     "pitch_px": 56.5,
+     "y_first": 646.5,
+     "y_last": 1225.5,
+     "x_min": 375,
+     "x_max": 732,
+     "box_height_px": 69,
+     "span_count": 11,
+     "walk_count": 12,
+     "source": "saved",
+     "rebuilt_pitch_px": 56.5,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 50.75,
+     "y_first": 763.5,
+     "y_last": 1168.5,
+     "x_min": 658,
+     "x_max": 935,
+     "box_height_px": 73,
+     "span_count": 9,
+     "walk_count": 7,
+     "source": "saved",
+     "rebuilt_pitch_px": 50.75,
+     "doubts": [
+      "box_over_two_stacks",
+      "box_over_two_trays"
+     ],
+     "reason": "layer counts disagree (span 9, walk 7); retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "mutaa:M16-NEAR:straight",
+   "source": "mutaa",
+   "block_id": "MUTAA-M16-NEAR",
+   "same_photo_as": null,
+   "photo": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151351983.jpg.jpeg",
+   "prepare": {
+    "mode": "sent",
+    "width": 725,
+    "height": 1600
+   },
+   "image": {
+    "width": 725,
+    "height": 1600
+   },
+   "truth": null,
+   "usable": true,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "stacks are too small in the frame (too far away)"
+   ],
+   "total": 51,
+   "columns": [
+    {
+     "pitch_px": 40,
+     "y_first": 824.5,
+     "y_last": 1102.5,
+     "x_min": 109,
+     "x_max": 219,
+     "box_height_px": 28,
+     "span_count": 8,
+     "walk_count": 8,
+     "source": "saved",
+     "rebuilt_pitch_px": 40,
+     "doubts": [],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 39.5,
+     "y_first": 768,
+     "y_last": 1151,
+     "x_min": 237,
+     "x_max": 346,
+     "box_height_px": 28.5,
+     "span_count": 11,
+     "walk_count": 10,
+     "source": "saved",
+     "rebuilt_pitch_px": 39.5,
+     "doubts": [],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 39,
+     "y_first": 703,
+     "y_last": 1144.5,
+     "x_min": 359,
+     "x_max": 465,
+     "box_height_px": 29,
+     "span_count": 12,
+     "walk_count": 11,
+     "source": "saved",
+     "rebuilt_pitch_px": 39,
+     "doubts": [],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 38.25,
+     "y_first": 690,
+     "y_last": 1129.5,
+     "x_min": 451,
+     "x_max": 579,
+     "box_height_px": 27.5,
+     "span_count": 12,
+     "walk_count": 12,
+     "source": "saved",
+     "rebuilt_pitch_px": 38.25,
+     "doubts": [],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 34,
+     "y_first": 791,
+     "y_last": 1119.5,
+     "x_min": 580,
+     "x_max": 685,
+     "box_height_px": 24.5,
+     "span_count": 11,
+     "walk_count": 10,
+     "source": "saved",
+     "rebuilt_pitch_px": 34,
+     "doubts": [
+      "box_over_two_trays"
+     ],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "mutaa:M16-NEAR:left",
+   "source": "mutaa",
+   "block_id": "MUTAA-M16-NEAR",
+   "same_photo_as": null,
+   "photo": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151430473.jpg.jpeg",
+   "prepare": {
+    "mode": "sent",
+    "width": 1200,
+    "height": 1600
+   },
+   "image": {
+    "width": 1200,
+    "height": 1600
+   },
+   "truth": null,
+   "usable": true,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "stacks cover too little of the frame width"
+   ],
+   "total": 13,
+   "columns": [
+    {
+     "pitch_px": 76.5,
+     "y_first": 706,
+     "y_last": 1363.5,
+     "x_min": 527,
+     "x_max": 862,
+     "box_height_px": 106,
+     "span_count": 10,
+     "walk_count": 9,
+     "source": "saved",
+     "rebuilt_pitch_px": 76.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 51.5,
+     "y_first": 997,
+     "y_last": 1146,
+     "x_min": 818,
+     "x_max": 933,
+     "box_height_px": 62.5,
+     "span_count": 4,
+     "walk_count": 4,
+     "source": "saved",
+     "rebuilt_pitch_px": 51.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "mutaa:M16-NEAR:right",
+   "source": "mutaa",
+   "block_id": "MUTAA-M16-NEAR",
+   "same_photo_as": null,
+   "photo": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151444583.jpg.jpeg",
+   "prepare": {
+    "mode": "sent",
+    "width": 1200,
+    "height": 1600
+   },
+   "image": {
+    "width": 1200,
+    "height": 1600
+   },
+   "truth": null,
+   "usable": true,
+   "capture_accepted": false,
+   "capture_reasons": [
+    "the trays look sideways or unclear in this photo; hold the phone level and retake",
+    "layer pitch changes across the face (angled or corner view)"
+   ],
+   "total": 45,
+   "columns": [
+    {
+     "pitch_px": 67,
+     "y_first": 703,
+     "y_last": 1030.5,
+     "x_min": 338,
+     "x_max": 442,
+     "box_height_px": 45,
+     "span_count": 6,
+     "walk_count": 6,
+     "source": "saved",
+     "rebuilt_pitch_px": 67,
+     "doubts": [],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 78,
+     "y_first": 726,
+     "y_last": 1027,
+     "x_min": 469,
+     "x_max": 588,
+     "box_height_px": 47,
+     "span_count": 5,
+     "walk_count": 5,
+     "source": "saved",
+     "rebuilt_pitch_px": 78,
+     "doubts": [],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 65.75,
+     "y_first": 682,
+     "y_last": 1319.5,
+     "x_min": 590,
+     "x_max": 725,
+     "box_height_px": 60,
+     "span_count": 11,
+     "walk_count": 10,
+     "source": "saved",
+     "rebuilt_pitch_px": 65.75,
+     "doubts": [],
+     "reason": null,
+     "accepted": false
+    },
+    {
+     "pitch_px": 48.25,
+     "y_first": 590,
+     "y_last": 1240.5,
+     "x_min": 739,
+     "x_max": 895,
+     "box_height_px": 48,
+     "span_count": 14,
+     "walk_count": 18,
+     "source": "saved",
+     "rebuilt_pitch_px": 48.25,
+     "doubts": [
+      "end_box_cut_short"
+     ],
+     "reason": "boxes are missing over several layers of this stack; retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 52,
+     "y_first": 686,
+     "y_last": 981,
+     "x_min": 899,
+     "x_max": 1123,
+     "box_height_px": 42.5,
+     "span_count": 7,
+     "walk_count": 6,
+     "source": "saved",
+     "rebuilt_pitch_px": 52,
+     "doubts": [
+      "box_over_two_stacks"
+     ],
+     "reason": null,
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "mutaa:W05-ORANGE:straight",
+   "source": "mutaa",
+   "block_id": "MUTAA-W05-ORANGE",
+   "same_photo_as": null,
+   "photo": "C:\\Users\\rahul\\MUTAA\\WhatsApp Image 2026-09-05 at 9.41.09 AM.jpeg",
+   "prepare": {
+    "mode": "sent",
+    "width": 1600,
+    "height": 1200
+   },
+   "image": {
+    "width": 1600,
+    "height": 1200
+   },
+   "truth": null,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 152,
+   "columns": [
+    {
+     "pitch_px": 49,
+     "y_first": 641,
+     "y_last": 1067,
+     "x_min": 14,
+     "x_max": 252,
+     "box_height_px": 22.5,
+     "span_count": 10,
+     "walk_count": 10,
+     "source": "saved",
+     "rebuilt_pitch_px": 49,
+     "doubts": [
+      "pitch_differs"
+     ],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 26.5,
+     "y_first": 611,
+     "y_last": 1067.5,
+     "x_min": 233,
+     "x_max": 411,
+     "box_height_px": 24,
+     "span_count": 18,
+     "walk_count": 19,
+     "source": "saved",
+     "rebuilt_pitch_px": 26.5,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 26,
+     "y_first": 620,
+     "y_last": 1074,
+     "x_min": 419,
+     "x_max": 578,
+     "box_height_px": 24,
+     "span_count": 18,
+     "walk_count": 19,
+     "source": "saved",
+     "rebuilt_pitch_px": 26,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 26,
+     "y_first": 643.5,
+     "y_last": 1105,
+     "x_min": 587,
+     "x_max": 753,
+     "box_height_px": 24,
+     "span_count": 19,
+     "walk_count": 20,
+     "source": "saved",
+     "rebuilt_pitch_px": 26,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 26.75,
+     "y_first": 645,
+     "y_last": 1115.5,
+     "x_min": 757,
+     "x_max": 925,
+     "box_height_px": 25,
+     "span_count": 19,
+     "walk_count": 19,
+     "source": "saved",
+     "rebuilt_pitch_px": 26.75,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 27,
+     "y_first": 660,
+     "y_last": 1113,
+     "x_min": 925,
+     "x_max": 1115,
+     "box_height_px": 24,
+     "span_count": 18,
+     "walk_count": 19,
+     "source": "saved",
+     "rebuilt_pitch_px": 27,
+     "doubts": [],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 30,
+     "y_first": 666.5,
+     "y_last": 1113,
+     "x_min": 1071,
+     "x_max": 1296,
+     "box_height_px": 24,
+     "span_count": 16,
+     "walk_count": 19,
+     "source": "saved",
+     "rebuilt_pitch_px": 30,
+     "doubts": [],
+     "reason": "layer counts disagree (span 16, walk 19); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 28,
+     "y_first": 662.5,
+     "y_last": 1107,
+     "x_min": 1233,
+     "x_max": 1462,
+     "box_height_px": 22,
+     "span_count": 17,
+     "walk_count": 19,
+     "source": "saved",
+     "rebuilt_pitch_px": 28,
+     "doubts": [],
+     "reason": "layer counts disagree (span 17, walk 19); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 52.5,
+     "y_first": 719,
+     "y_last": 1078,
+     "x_min": 1391,
+     "x_max": 1600,
+     "box_height_px": 22,
+     "span_count": 8,
+     "walk_count": 8,
+     "source": "saved",
+     "rebuilt_pitch_px": 52.5,
+     "doubts": [
+      "cut_at_frame_side",
+      "pitch_differs"
+     ],
+     "reason": "boxes found on only some layers (trays too small in the photo); step closer and retake this face",
+     "accepted": false
+    }
+   ]
+  },
+  {
+   "id": "mutaa:W05-ORANGE:left",
+   "source": "mutaa",
+   "block_id": "MUTAA-W05-ORANGE",
+   "same_photo_as": null,
+   "photo": "C:\\Users\\rahul\\MUTAA\\WhatsApp Image 2026-09-05 at 9.40.57 AM.jpeg",
+   "prepare": {
+    "mode": "sent",
+    "width": 1600,
+    "height": 1200
+   },
+   "image": {
+    "width": 1600,
+    "height": 1200
+   },
+   "truth": null,
+   "usable": true,
+   "capture_accepted": true,
+   "capture_reasons": [],
+   "total": 67,
+   "columns": [
+    {
+     "pitch_px": 46.5,
+     "y_first": 802,
+     "y_last": 1186,
+     "x_min": 55,
+     "x_max": 427,
+     "box_height_px": 46,
+     "span_count": 9,
+     "walk_count": 10,
+     "source": "saved",
+     "rebuilt_pitch_px": 46.5,
+     "doubts": [
+      "end_at_frame_edge"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 39.5,
+     "y_first": 762,
+     "y_last": 1182.5,
+     "x_min": 403,
+     "x_max": 709,
+     "box_height_px": 44,
+     "span_count": 12,
+     "walk_count": 12,
+     "source": "saved",
+     "rebuilt_pitch_px": 39.5,
+     "doubts": [
+      "end_at_frame_edge"
+     ],
+     "reason": null,
+     "accepted": true
+    },
+    {
+     "pitch_px": 41.25,
+     "y_first": 753,
+     "y_last": 1187,
+     "x_min": 695,
+     "x_max": 942,
+     "box_height_px": 43,
+     "span_count": 12,
+     "walk_count": 14,
+     "source": "saved",
+     "rebuilt_pitch_px": 41.25,
+     "doubts": [
+      "end_at_frame_edge"
+     ],
+     "reason": "layer counts disagree (span 12, walk 14); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 40.5,
+     "y_first": 710.5,
+     "y_last": 1158.5,
+     "x_min": 956,
+     "x_max": 1183,
+     "box_height_px": 40.5,
+     "span_count": 12,
+     "walk_count": 14,
+     "source": "saved",
+     "rebuilt_pitch_px": 40.5,
+     "doubts": [
+      "end_at_frame_edge",
+      "bottom_above_floor"
+     ],
+     "reason": "layer counts disagree (span 12, walk 14); retake this face",
+     "accepted": false
+    },
+    {
+     "pitch_px": 39,
+     "y_first": 647,
+     "y_last": 1180.5,
+     "x_min": 1170,
+     "x_max": 1439,
+     "box_height_px": 35,
+     "span_count": 15,
+     "walk_count": 17,
+     "source": "saved",
+     "rebuilt_pitch_px": 39,
+     "doubts": [
+      "box_over_two_trays",
+      "end_at_frame_edge"
+     ],
+     "reason": "layer counts disagree (span 15, walk 17); retake this face",
+     "accepted": false
+    }
+   ]
+  }
+ ]
+}

@@ -26,13 +26,17 @@ test('block from three faces keeps observed and computed trays separate', () => 
   assert.equal(block.total_trays, 400); assert.equal(block.faces_consistent, true); assert.equal(block.fully_observed, false);
 });
 
-test('recessed front column becomes missing and the stack behind is observed', () => {
+test('recessed front column becomes missing; the trays seen behind it are a hint, never a reading (0.6.0)', () => {
   const straight = spanColumns([...column(100, 20), ...column(200, 18, {pitch: 30, width: 60}), ...column(300, 20)]);
   const side = spanColumns([...column(100, 20), ...column(200, 20)]);
   const block = buildBlock(straight, side, []);
   const by = Object.fromEntries(block.cells.map(c => [`${c.x},${c.y}`, c]));
-  assert.equal(by['1,0'].status, 'missing'); assert.equal(by['1,1'].status, 'observed'); assert.equal(by['1,1'].layers, 18);
-  assert.equal(block.total_trays, 4 * 20 + 18);
+  assert.equal(by['1,0'].status, 'missing');
+  assert.deepEqual([by['1,1'].hidden, by['1,1'].past_gap_layers, by['1,1'].past_gap_scale, by['1,1'].flags], [true, 18, 0.75, ['line_of_sight_past_gap']]);
+  // 0.7.0 (0.6.0 released 100 with the stack behind the gap at 20, range open to 0): one side is photographed, and the
+  // 18 trays seen through the gap read below the full height 20, so the stacking rule withholds the total twice over.
+  assert.deepEqual([block.total_trays, block.rule.height, block.conflicts.map(c => c.check)], [null, 20, ['one_side_only', 'inside_hint_below_rule']]);
+  assert.equal(by['1,1'].status, 'conflict');
 });
 
 test('left/right depth disagreement and corner conflict withhold the total', () => {
@@ -43,17 +47,30 @@ test('left/right depth disagreement and corner conflict withhold the total', () 
   assert.equal(conflict.total_trays, null);
 });
 
-test('model path returns a block contract with a computed total for a one-stack scene', async t => {
+// Three different camera captures of one stack, each with its own framing (copies of one photo would be one capture).
+const oneStackScan = async (t, capture) => {
   t.mock.method(console, 'log', () => {});
-  t.mock.method(globalThis, 'fetch', async () => Response.json({predictions: trayShaped(column(100, 20))}));
+  let call = 0;
+  t.mock.method(globalThis, 'fetch', async () => {
+    const shift = 120 * call++;
+    return Response.json({predictions: trayShaped(column(250 + shift, 20, {pitch: 40})).map(b => ({...b, y: b.y + shift / 6})),
+      image: {width: 800, height: 1000}});
+  });
   const form = new FormData();
   form.set('scan_contract', 'model_spatial_v1');
   ['left', 'right', 'straight'].forEach((view, i) => form.set(view,
     new File([new Uint8Array([255, 216, 255, i])], `${view}.jpg`, {type: 'image/jpeg'})));
+  const yaw = {straight: 0, left: -90, right: 90};
+  if (capture) for (const view of ['left', 'right', 'straight']) form.set(`${view}_capture`,
+    JSON.stringify({source: capture, blocked: false, yaw_deg: yaw[view], yaw_session: 'walk1'}));
   const response = await worker.fetch(new Request('https://local/v1/scans/count', {method: 'POST', body: form}),
     {MODEL_ID: 'projec-mutta/2', CONFIDENCE: '35', OVERLAP: '50', EGGS_PER_TRAY: '30', ROBOFLOW_API_KEY: 'test-only'});
   assert.equal(response.status, 200);
-  const result = await response.json();
+  return response.json();
+};
+
+test('model path returns a block contract with a computed total for a one-stack scene', async t => {
+  const result = await oneStackScan(t, 'captured_still');
   assert.equal(result.block.contract, 'block_model_v1');
   assert.deepEqual([result.block.width, result.block.depth, result.block.total_trays, result.block.total_eggs], [1, 1, 20, 600]);
   assert.equal(result.block.fully_observed, true);
@@ -62,6 +79,17 @@ test('model path returns a block contract with a computed total for a one-stack 
   assert.equal(result.total_trays, null);   // legacy top-level field unchanged for the installed APK
   assert.equal(result.accepted, false);
   assert.equal(result.views.straight.stack_columns[0].span_count, 20);
+  assert.deepEqual(['straight', 'left', 'right'].map(v => [result.views[v].capture_source, result.views[v].trusted]),
+    [['captured_still', true], ['captured_still', true], ['captured_still', true]]);
+});
+
+test('only guided camera captures verify a stack: gallery photos or no provenance give an estimate, never exact', async t => {
+  for (const capture of ['uploaded_photo', null]) {
+    const result = await oneStackScan(t, capture);
+    assert.equal(result.block.total_trays, 20, String(capture));
+    assert.equal(result.block.status, 'estimated', String(capture));
+    assert.equal(result.views.straight.trusted, false);
+  }
 });
 
 test('one inflated-pitch column does not recess the rest; front-group median is the reference', () => {
@@ -71,11 +99,11 @@ test('one inflated-pitch column does not recess the rest; front-group median is 
   assert.equal(block.total_trays, 80);
 });
 
-test('recessed stack with no room behind is a conflict, not a silent loss', () => {
+test('trays seen behind a gap with no room for a stack are noted, never counted: an estimate (0.6.0)', () => {
   const straight = spanColumns([...column(100, 20), ...column(200, 18, {pitch: 30, width: 60}), ...column(300, 20)]);
   const block = buildBlock(straight, spanColumns(column(100, 20)), []);   // faces say depth 1
-  assert.equal(block.total_trays, null);
-  assert.ok(block.conflicts.some(c => String(c.reason).includes('no room')));
+  assert.deepEqual([block.total_trays, block.status], [40, 'estimated']);
+  assert.ok(block.ambiguities.some(c => String(c.reason).includes('no room')));
 });
 
 test('corner set back on one face only is a conflict', () => {
@@ -95,11 +123,16 @@ test('a stack one face sees but another calls missing is a conflict', () => {
   assert.ok(block.conflicts.some(c => /disagree|set back on one face only/.test(String(c.reason))));
 });
 
-test('two faces promoting the same height agree; different heights conflict', () => {
+test('two faces seeing the same trays through gaps agree on the hint; different heights conflict', () => {
   const straight = spanColumns([...column(100, 20), ...column(200, 18, {pitch: 30, width: 60}), ...column(300, 20)]);
   const agree = buildBlock(straight, spanColumns([...column(100, 18, {pitch: 30, width: 60}), ...column(200, 20)]), []);
   const byA = Object.fromEntries(agree.cells.map(c => [`${c.x},${c.y}`, c]));
-  assert.equal(byA['1,1'].status, 'observed'); assert.equal(byA['1,1'].layers, 18); assert.equal(agree.total_trays, 40 + 18 + 20);
+  // Both faces see 18 trays through their gaps: one hint, no conflict. 0.7.0 (0.6.0 released 80 at the typical face
+  // height): the back corner is a gap and one side is photographed, so no full height is found and the total is withheld.
+  assert.deepEqual([byA['1,1'].status, byA['1,1'].layers, byA['1,1'].past_gap_layers], ['computed', null, 18]);
+  assert.deepEqual([byA['1,1'].assumed_from, byA['1,1'].flags], ['stacking_rule', ['line_of_sight_past_gap']]);
+  assert.deepEqual([agree.total_trays, agree.rule.withheld_reason], [null, 'one_side_only']);
+  assert.ok(agree.conflicts.some(c => c.check === 'no_rule_height'));
   const differ = buildBlock(straight, spanColumns([...column(100, 16, {pitch: 30, width: 60}), ...column(200, 20)]), []);
   const byD = Object.fromEntries(differ.cells.map(c => [`${c.x},${c.y}`, c]));
   assert.equal(byD['1,1'].status, 'conflict'); assert.equal(differ.total_trays, null);
@@ -111,7 +144,7 @@ test('exact half spans round half-to-even like the Python reference', () => {
   boxes[18].y = 100 + 18.5 * 40;
   assert.equal(spanColumns(boxes)[0].span_count, 19);
   const typical = buildBlock(spanColumns([...column(100, 19), ...column(200, 20)]), spanColumns([...column(100, 20), ...column(200, 19)]), []).typical_layers;
-  assert.equal(typical, 20);   // median 19.5 -> 20
+  assert.equal(typical, 20);   // mode of 19, 20, 20
 });
 
 test('walk count fixes the perspective rounding and merges duplicates', () => {
@@ -154,7 +187,10 @@ test('opposite side faces of a one-wide block are merged, not overwritten', () =
   assert.equal(rear.status, 'conflict'); assert.equal(rear.source, 'left+right');
   const conflict = block.conflicts.find(c => c.cell && c.cell[0] === 0 && c.cell[1] === 1);
   assert.deepEqual([conflict.left_layers, conflict.right_layers], [18, 22]);
-  const agree = buildBlock(faceOf(20), faceOf(18, 20), faceOf(20, 18));
+  // Stacks stand on one floor: a shorter stack's bottom is level with its neighbours' (its top is lower).
+  const onFloor = (...stacks) => spanColumns(stacks.flatMap((layers, i) =>
+    tray(20, {x: 100 + i * 100, skip: Array.from({length: 20 - layers}, (_, k) => k)})));
+  const agree = buildBlock(faceOf(20), onFloor(18, 20), onFloor(20, 18));
   assert.equal(agree.total_trays, 38); assert.equal(agree.status, 'exact');
 });
 
@@ -173,9 +209,15 @@ test('gap filling stops at two missed layers; longer runs are reported, not inve
   assert.ok(block.conflicts.some(c => String(c.reason).includes('missing over several layers')));
 });
 
-test('filled layers stay in the count and are reported', () => {
-  const block = buildBlock(spanColumns([...tray(20), ...tray(20, {x: 200, skip: [9]})]), faceOf(20), []);
-  assert.equal(block.total_trays, 40); assert.equal(block.status, 'exact'); assert.equal(block.filled_trays, 1);
+test('filled layers stay in the count and are reported, but a gap-filled stack is never verified', () => {
+  const block = buildBlock(spanColumns([...tray(20), ...tray(20, {x: 200, skip: [9]})]), faceOf(20), faceOf(20));
+  // The right-hand stack is read 20 by both STRAIGHT and RIGHT, but STRAIGHT filled one of its layers: the cell keeps
+  // RIGHT's unfilled reading, and one clean reading does not verify it.
+  assert.equal(block.total_trays, 40); assert.equal(block.filled_trays, 0);
+  const cell = block.cells.find(c => c.x === 1 && c.y === 0);
+  assert.deepEqual(cell.readings.map(r => [r.face, r.layers, r.gap_filled]), [['straight', 20, 1], ['right', 20, 0]]);
+  assert.equal(block.status, 'estimated'); assert.deepEqual(block.single_reading_cells, [[1, 0]]);
+  assert.deepEqual([block.visible_verified_trays, block.visible_single_reading_trays], [20, 20]);
 });
 
 test('boxes on alternate layers only send the face for a retake', () => {
@@ -186,8 +228,103 @@ test('boxes on alternate layers only send the face for a retake', () => {
 });
 
 test('status separates exact, estimated, conflict and a missing face', () => {
-  assert.equal(buildBlock(faceOf(20, 20), faceOf(20), []).status, 'exact');
+  assert.equal(buildBlock(faceOf(20, 20), faceOf(20), faceOf(20)).status, 'exact');
+  // The right-hand stack is seen by STRAIGHT only: one photo's reading is an estimate.
+  assert.equal(buildBlock(faceOf(20, 20), faceOf(20), []).status, 'estimated');
   assert.equal(buildBlock(faceOf(20, 20, 20), faceOf(20, 20, 20), faceOf(20, 20, 20)).status, 'estimated');
   assert.equal(buildBlock(faceOf(20, 20), faceOf(20, 20), faceOf(20)).status, 'conflict');
   assert.equal(buildBlock(faceOf(20, 20), [], []).status, 'needs_view');
+});
+// ---- 2026-11-01 release contract (plan Phase C): exact needs two photos reading every stack the same.
+test('a stack read by one photo only keeps the total but is never exact; corners seen twice are verified', () => {
+  const block = buildBlock(faceOf(20, 20, 20, 20), faceOf(20), faceOf(20));
+  assert.equal(block.total_trays, 80); assert.equal(block.status, 'estimated');
+  assert.deepEqual(block.single_reading_cells, [[1, 0], [2, 0]]);
+  assert.deepEqual([block.visible_verified_trays, block.visible_single_reading_trays], [40, 40]);
+  const corner = block.cells.find(c => c.x === 0 && c.y === 0);
+  assert.equal(corner.verified, true);
+  assert.deepEqual(corner.readings.map(r => [r.face, r.layers]), [['straight', 20], ['left', 20]]);
+  assert.equal(buildBlock(faceOf(20), faceOf(20), faceOf(20)).status, 'exact');   // one stack, three photos
+});
+
+test('a box over two trays marks every stack it spans, and that reading cannot verify a corner (img-30)', () => {
+  // Stack 1's top box is as wide as two stacks: it covers stack 2's top tray, so stack 2 reads one short.
+  const wideTop = {class: 'egg_tray', confidence: .9, x: 125, y: 100, width: 180, height: 36};
+  const straight = spanColumns([wideTop, ...tray(20, {skip: [0]}), ...tray(20, {x: 200, skip: [0]})]);
+  assert.deepEqual(straight.map(c => [c.walk_count, c.doubts]), [[20, ['box_over_two_stacks']], [19, ['box_over_two_stacks']]]);
+  const block = buildBlock(straight, faceOf(20), faceOf(19));
+  assert.equal(block.status, 'estimated'); assert.deepEqual(block.single_reading_cells, [[0, 0], [1, 0]]);
+});
+
+test('a bottom tray cut by the frame edge gets a short box that is merged as a duplicate: a doubt (img-30 stack 4)', () => {
+  const boxes = tray(19);
+  boxes.push({class: 'egg_tray', confidence: .9, x: 100, y: 100 + 18 * 40 + 14, width: 80, height: 16});
+  const [column] = spanColumns(boxes);
+  assert.equal(column.walk_count, 19); assert.deepEqual(column.doubts, ['end_box_cut_short']);
+  const tall = tray(20, {skip: [18, 19]});
+  tall.push({class: 'egg_tray', confidence: .9, x: 100, y: 100 + 18.5 * 40, width: 80, height: 70});
+  assert.deepEqual(spanColumns(tall)[0].doubts, ['box_over_two_trays']);
+});
+
+test('a stack whose bottom box sits over half a pitch above its neighbours lost its bottom tray (L-109 stack 4)', () => {
+  const cols = spanColumns([...tray(20), ...tray(20, {x: 200, skip: [19]}), ...tray(20, {x: 300})]);
+  assert.deepEqual(cols.map(c => c.doubts), [[], ['bottom_above_floor'], []]);
+  // A shorter stack standing on the floor (its top lower, its bottom level) raises no doubt.
+  const short = spanColumns([...tray(20), ...tray(20, {x: 200, skip: [0, 1]}), ...tray(20, {x: 300})]);
+  assert.deepEqual(short.map(c => c.doubts), [[], [], []]);
+});
+
+test('groups of one or two boxes are reported, not counted, and keep a block from being exact', async () => {
+  const { strayGroups } = await import('../dist/index.js');
+  const loose = [...tray(20), ...tray(20, {x: 200}), ...tray(2, {x: 400})];
+  assert.deepEqual(strayGroups(loose).map(g => g.boxes), [2]);
+  const block = buildBlock(spanColumns(loose), faceOf(20), faceOf(20), {straight: 1});
+  assert.equal(block.total_trays, 40); assert.equal(block.status, 'estimated');
+  assert.ok(block.ambiguities[0].reason.startsWith('STRAIGHT: 1 group(s) of one or two boxes'), block.ambiguities[0].reason);
+});
+
+// ---- 2026-11-01 plan Phase K1: doubts that need the frame size.
+test('a stack ending within one box height of the frame edge, or touching its side, is not verified', () => {
+  const frame = {width: 500, height: 1000};
+  // Boxes 36 px tall from y 82 to 878: over a full box height of room at both ends.
+  const roomy = spanColumns([...tray(20, {x: 150}), ...tray(20, {x: 300})], frame);
+  assert.deepEqual(roomy.map(c => c.doubts), [[], []]);
+  // The same stacks in a frame that ends 12 px below the bottom box (img-30: 0.0 box heights).
+  const cut = spanColumns([...tray(20, {x: 150}), ...tray(20, {x: 300})], {width: 500, height: 890});
+  assert.deepEqual(cut.map(c => c.doubts), [['end_at_frame_edge'], ['end_at_frame_edge']]);
+  // A stack whose boxes reach the left edge may be part of a stack.
+  const side = spanColumns([...tray(20, {x: 40}), ...tray(20, {x: 300})], frame);
+  assert.deepEqual(side.map(c => c.doubts), [['cut_at_frame_side'], []]);
+  // Without a frame size (older callers) none of these is raised.
+  assert.deepEqual(spanColumns([...tray(20, {x: 150}), ...tray(20, {x: 300})]).map(c => c.doubts), [[], []]);
+});
+
+test('a column with a much larger layer pitch than the face is a nearer stack or another block (M16-FAR)', () => {
+  const cols = spanColumns([...tray(20), ...tray(20, {x: 200}), ...tray(14, {x: 300, pitch: 56, height: 50})]);
+  assert.deepEqual(cols.map(c => c.doubts), [[], [], ['pitch_differs']]);
+});
+
+test('the short capture field wins over oversized evidence, so a heading is never lost to the evidence limit', async t => {
+  t.mock.method(console, 'log', () => {});
+  let call = 0;
+  t.mock.method(globalThis, 'fetch', async () => {
+    const shift = 120 * call++;
+    return Response.json({predictions: trayShaped(column(250 + shift, 20, {pitch: 40})).map(b => ({...b, y: b.y + shift / 6})),
+      image: {width: 800, height: 1000}});
+  });
+  const form = new FormData();
+  form.set('scan_contract', 'model_spatial_v1');
+  const yaw = {straight: 0, left: -90, right: 90};
+  ['left', 'right', 'straight'].forEach((view, i) => {
+    form.set(view, new File([new Uint8Array([255, 216, 255, i])], `${view}.jpg`, {type: 'image/jpeg'}));
+    const evidence = {source: 'captured_still', blocked: false, yaw_deg: yaw[view], yaw_session: 'w', checks: 'x'.repeat(20000)};
+    form.set(`${view}_constraint_evidence`, JSON.stringify(evidence));
+    if (view !== 'right') form.set(`${view}_capture`, JSON.stringify({source: 'captured_still', blocked: false, yaw_deg: yaw[view], yaw_session: 'w'}));
+  });
+  const response = await worker.fetch(new Request('https://local/v1/scans/count', {method: 'POST', body: form}),
+    {MODEL_ID: 'projec-mutta/2', CONFIDENCE: '35', OVERLAP: '50', EGGS_PER_TRAY: '30', ROBOFLOW_API_KEY: 'test-only'});
+  const result = await response.json();
+  // LEFT has the short field; RIGHT has only the 20 kB evidence, which is past the limit, so it reads as unknown.
+  assert.equal(result.block.side_check.left.status, 'turned');
+  assert.deepEqual([result.views.left.trusted, result.views.right.trusted, result.views.right.capture_source], [true, false, null]);
 });

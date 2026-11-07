@@ -1,0 +1,149 @@
+{
+ "sets": [
+  {
+   "set_id": "M16-NEAR",
+   "keep": true,
+   "straight": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151351983.jpg.jpeg",
+   "left": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151430473.jpg.jpeg",
+   "right": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151444583.jpg.jpeg",
+   "genuine_trio": false,
+   "user_label_total": null,
+   "description": "16 Sep dark-green block on the lower floor, in front of the raised platform (the platform lies behind it and along its right/east side). Main body is 4 stacks wide on face A (the south face, toward the shed aisle, seen in #6) and 2 stacks deep. #13's top grid confirms this: 2 stacks across the east face and 4 along the receding face A. One extra, shorter stack stands against the rear (north) part of the west side, set back from face A. All tops are covered green trays. The far block on the platform is behind it.",
+   "view_quality": "STRAIGHT #6 is square-on to face A from about 4-5 m: 4 stacks plus the short extra stack at the left, set back. Layers are countable in a crop. LEFT #10 is an elevated view of the west side with the platform on the left. The short extra stack stands in front of the main body's west face, so that face is mostly hidden, and face A recedes to the right. RIGHT #12 looks west along the platform step. The east face (2 deep) is nearly frontal, face A recedes to the left, and the far block is at the back right. #9 and #13 are higher near-duplicates of #12 with a clear top grid. The back (north) face is never seen.",
+   "corrections": "No role changes. I checked the geometry with platform position and cage tags. #6 looks north at face A. #10 looks east at the west face, with the platform on its left. #12/#13 look west at the east face, with the platform on its right. So LEFT and RIGHT really are the two opposite side faces. genuine_trio stays false only because the short extra stack hides the west face in #10. The shots span 15:13:51-15:14:44, and nothing changes between them.",
+   "extra_views": [
+    "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151353868.jpg.jpeg",
+    "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151447066.jpg.jpeg",
+    "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151423979.jpg.jpeg",
+    "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151436402.jpg.jpeg",
+    "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151339474.jpg.jpeg"
+   ]
+  },
+  {
+   "set_id": "M16-FAR",
+   "keep": true,
+   "straight": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151549592.jpg.jpeg",
+   "left": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151409127.jpg.jpeg",
+   "right": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151453724.jpg.jpeg",
+   "genuine_trio": false,
+   "user_label_total": null,
+   "description": "16 Sep irregular green block on the raised platform, just north of the near block. Its east end (the 'white end') has a front row of shorter stacks with open white-egg top trays (4 white tops in all in #14), and a loose tray with about 11 eggs plus a broken egg lie on the platform in front of it. The rest has covered tops and is taller. The platform step runs along its south side, between it and the near block. It is about 3-4 stacks wide across the white end, and the number of stacks along its length is not established.",
+   "view_quality": "STRAIGHT #20 looks at the white east end from above: 3 white-top stacks in front, taller covered stacks behind, the loose tray in front, and the near block on the lower floor at the left. LEFT #8 is from the lower floor to the south-east. It shows the white end obliquely, with the south long side receding to the left behind the near block, so it is mostly hidden. RIGHT #14 is an elevated corner view of the white end. The north long side recedes steeply to the right, and the south side recedes to the left toward the step. No long side is ever photographed square-on, and the west end is never photographed reliably. Stack heights vary.",
+   "corrections": "Removed #15 (IMG_20260916_151506512) as STRAIGHT. Its background is a tall wall with a doorway and a grain silo outside, which appears in no other view of this block. It shows no platform step and no near block. From the far west end the near block should be visible beyond the step on the right, but cages are there instead. Only the left part of its far edge has white tops, while #20 shows white tops across the whole east end. So #15 is not shown to be this block and may be a different block. I rebuilt the set from photos that are certainly this block: #20 (white end) is STRAIGHT, #8 is LEFT (south side, oblique and occluded), and #14 is RIGHT (north side, oblique). The old RIGHT #20 and LEFT #8 both looked mainly at the same white end. genuine_trio is false. Confidence is low.",
+   "extra_views": [
+    "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151447066.jpg.jpeg",
+    "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151423979.jpg.jpeg"
+   ]
+  },
+  {
+   "set_id": "M16-ROW3",
+   "keep": false,
+   "straight": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151210436.jpg.jpeg",
+   "left": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151224648.jpg.jpeg",
+   "right": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151224648.jpg.jpeg",
+   "genuine_trio": false,
+   "user_label_total": null,
+   "description": "16 Sep row of 3 green stacks (about 10 egg trays plus a cover tray each, with tinted/cream eggs) in an open, well-lit cage aisle, in front of cages and a pillar, with a low wall and steps at the right. A lighter-green tray sticks out of the middle stack.",
+   "view_quality": "#3 alone is a good square-on front view and countable (left stack: 10 egg rows plus a cover tray). No second view of this row exists.",
+   "corrections": "Dropped. #4 is not shown to be an end view of this row. In #4 the stack stands in a dark covered area, with a pillar flush against its right side and a doorway to grass and trees behind it. In #3 the row stands in an open aisle with cages directly behind it and no pillar next to either end. Viewed end-on, the #3 row would have cages or the low wall and steps behind it, not a doorway to grass. #4's top looks about 2 trays deep, not 3, and its eggs look white while #3's are cream. Matching 10 layers is not enough (#2 also has 10 layers). Use #3 only as a single front-face image.",
+   "extra_views": []
+  },
+  {
+   "set_id": "M16-CORNER-STACK",
+   "keep": true,
+   "straight": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151149500.jpg.jpeg",
+   "left": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151159267.jpg.jpeg",
+   "right": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151149500.jpg.jpeg",
+   "genuine_trio": false,
+   "user_label_total": null,
+   "description": "16 Sep single green stack in a walled corner with a low brick curb along both walls and a pilaster at the corner. It has about 13 filled trays plus a top tray heaped with loose eggs. #2 is a different stack.",
+   "view_quality": "#0 is square-on to one face and countable (about 13 egg rows plus the heaped top). #1 is taken from the other side of the corner and shows two faces obliquely, with the same heaped top and curb. It is a single stack, so there is no third face. #0 is reused for RIGHT.",
+   "corrections": "None. Same corner, curb, pilaster and egg heap, taken 10 s apart. genuine_trio false is honest.",
+   "extra_views": []
+  },
+  {
+   "set_id": "W05-ORANGE",
+   "keep": true,
+   "straight": "C:\\Users\\rahul\\MUTAA\\WhatsApp Image 2026-09-05 at 9.41.09 AM.jpeg",
+   "left": "C:\\Users\\rahul\\MUTAA\\WhatsApp Image 2026-09-05 at 9.40.57 AM.jpeg",
+   "right": "C:\\Users\\rahul\\MUTAA\\WhatsApp Image 2026-09-05 at 9.41.09 AM.jpeg",
+   "genuine_trio": false,
+   "user_label_total": null,
+   "description": "5 Sep large orange block against the back (north) wall of a room. There is a large mesh/cage opening in the back wall at the left, and steel trolleys stand by the east wall. The front face is about 9-10 stacks wide, with a short stack at the front-left. The west end face is about 5+ stacks wide. Stacks are about 20 trays tall with uneven heights. A few loose eggs sit on the top at the front-left (south-west) corner.",
+   "view_quality": "STRAIGHT #28 is the most square-on view of the whole front face. Layers are small but countable in a crop. LEFT #25 (near-duplicate #27) looks east from the west end, from above. The west end face is nearly frontal across the bottom of the frame, and the front face recedes along the right edge toward the trolleys. #24 is a close, elevated front-left view, mostly of the top. #26 is a close top-down view. The east end and the back face are never photographed, so #28 is reused for RIGHT. The photos are WhatsApp-compressed.",
+   "corrections": "Fixed the roles. #24 is not a side view. It is an elevated front view: SIFT matches its mesh opening to #28's back wall. #25/#27 are not the front-right corner. SIFT matches #25's main wall to #28's right (east) wall, and #25's left wall, with its small window, to #28's back wall near the north-east corner. The loose eggs (front-left in #28 and #24) sit at #25's near-right corner, which is the south-west corner when looking east. So #25 shows the west end, which is the LEFT side. No view of the east end exists, so RIGHT reuses STRAIGHT and genuine_trio stays false.",
+   "extra_views": [
+    "C:\\Users\\rahul\\MUTAA\\WhatsApp Image 2026-09-05 at 9.41.07 AM.jpeg",
+    "C:\\Users\\rahul\\MUTAA\\WhatsApp Image 2026-09-05 at 9.40.56 AM.jpeg",
+    "C:\\Users\\rahul\\MUTAA\\WhatsApp Image 2026-09-05 at 9.41.00 AM.jpeg"
+   ]
+  },
+  {
+   "set_id": "L-80",
+   "keep": true,
+   "straight": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-30.jpeg",
+   "left": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-31.jpeg",
+   "right": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-25.jpeg",
+   "genuine_trio": false,
+   "user_label_total": 80,
+   "description": "Labelled bright-green row of 4 stacks, 1 tray deep, about 20 trays each, with open egg trays on top. The room has perforated block walls. Separate stacks stand further back at the left of img-30, outside the block.",
+   "view_quality": "img-30 is close and square-on to the 4-stack long face, and fully countable. img-25 (near-duplicate img-27) is taken from the front-right. The 1-tray-wide right end face is frontal, and the long face recedes to the left. img-31 is taken close from the left end, looking along a 4-stack long face that recedes to the right. Its left end face is out of frame, so it is an oblique long-face view, not an end view.",
+   "corrections": "Swapped LEFT and RIGHT and set genuine_trio to false. img-25 shows the RIGHT end, because the camera is at the front-right and the long face recedes to the left. img-31 does not show a frontal end face: the whole visible surface is one long face receding to the right, and its bottom edge rises steadily with no corner. So no left end view exists. The label 80 is written on all four photos and fits 4 x about 20 for this 1-deep row. Same-block evidence is the user's grouping plus matching trays, tops and walls. A red crate at img-25's right edge is not visible in img-30.",
+   "extra_views": [
+    "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-27.jpeg"
+   ]
+  },
+  {
+   "set_id": "L-109-ORANGE",
+   "keep": true,
+   "straight": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-36.jpeg",
+   "left": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-17.jpeg",
+   "right": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-36.jpeg",
+   "genuine_trio": false,
+   "user_label_total": 109,
+   "description": "Labelled orange block in a warehouse with teal crates behind it. The front face has 5 tall stacks, a lower step at the left topped with a pulp tray, a short stack at the right with a pulp tray on top, and a green tray on top of a right-hand tall stack.",
+   "view_quality": "Front-only set. img-36 is near square-on and countable. img-17 is an oblique view of the SAME front face from the front-left. The pulp step is at the near-left corner, the face recedes right toward the green-topped stack, and at most a sliver of the left end shows. The stacks further left in img-17 belong to another block. No side face is photographed. Use this set for front-face checks only.",
+   "corrections": "Corrected the view description. img-17 does not show the left side face, only the same front face at an angle. That makes this a front-only set, as genuine_trio=false already says. The same-block match holds: the pulp step at the left, the green top tray at the right, the teal crates behind, and the label 109 on both photos. A rough front count (5 x about 19-20, plus the step of about 9, plus the short stack of about 5) is consistent with 109, so the label appears to cover the visible front face.",
+   "extra_views": []
+  },
+  {
+   "set_id": "L-115",
+   "keep": true,
+   "straight": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-04.jpeg",
+   "left": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-05.jpeg",
+   "right": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-04.jpeg",
+   "genuine_trio": false,
+   "user_label_total": null,
+   "description": "Labelled bright-green block in a perforated-wall shed. The front face has 6 tall stacks (about 20-21 trays each) plus one shorter stack sticking out in front, third from the left. The right end is against the perforated wall. img-05 shows that the block also has a long left side face running back several stacks.",
+   "view_quality": "img-04 is square-on to the front face and countable. img-05 is taken from the front-left. The nearest corner is at the front's left end: the front face recedes to the right toward the wall, and a long left side face recedes to the left. So img-05 is a real oblique left-side view. The right side is against the wall and cannot be photographed, so img-04 is reused for RIGHT.",
+   "corrections": "Changed user_label_total from 115 to null. In img-05 the '120' bracket covers the left side face plus the leftmost front stacks, and the '115' bracket covers only the rest of the front face. The unbracketed '115' on img-04 appears to cover the whole front face. The user's 120 and 115 therefore split one physical block along a line through its front face, and the block also extends back beyond the 120 bracket. So 115 is not a total for this block. A rough count of the visible front in img-04 (6 x about 20 plus the short stack) is also well above 115. Kept img-05 as LEFT, because contrary to the proposal it does show a side face. Same block: the protruding short stack, the perforated wall at the right, and the same man in a checked shirt.",
+   "extra_views": []
+  },
+  {
+   "set_id": "L-80B",
+   "keep": false,
+   "straight": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-02.jpeg",
+   "left": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-03.jpeg",
+   "right": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-02.jpeg",
+   "genuine_trio": false,
+   "user_label_total": 80,
+   "description": "Two labelled photos, each of a 4-stack-wide bright-green block about 20 trays tall with egg tops, each labelled 80. img-02's top shows the block is at least 2 trays deep.",
+   "view_quality": "img-02 is a very close frontal view, and img-03 is a front-left view showing a short left side, about 2 deep. Each is usable on its own, but they are not shown to be the same block.",
+   "corrections": "Dropped. The backgrounds conflict. Behind the left of the block, img-02 shows an open area with hen cages and a standing man. At the same place img-03 shows a perforated-wall corner, with a separate stack and a crouching man in front of it. The wall right of the block is plain at mid-height in img-02, but has a column of arched holes in img-03. SIFT gives only 13 inliers. A shared label of 80 and similar tray type are not enough to call it one block.",
+   "extra_views": []
+  },
+  {
+   "set_id": "L-100",
+   "keep": true,
+   "straight": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-19.jpeg",
+   "left": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-21.jpeg",
+   "right": "C:\\Users\\rahul\\egg-tray-counter-mobile\\datasets\\field-2026-10\\labelled-20261007\\originals\\img-24.jpeg",
+   "genuine_trio": false,
+   "user_label_total": 100,
+   "description": "Labelled bright-green block: 5 stacks wide, about 20 trays tall (the rightmost stack is slightly taller), against a perforated wall with a brick curb at its left. Cages are on the right.",
+   "view_quality": "Front-only set. img-19 is square-on at good resolution. img-21 and img-24 are near-duplicate, more distant front-right views of the same front face. At most a sliver of the right side shows. Usable for checking the front face (5 x about 20 = 100), not for depth.",
+   "corrections": "None. The same 5-stack arrangement, taller right stack, wall and curb appear in all three. The people in the background differ between shots, but the block does not. Note that LEFT and RIGHT are both front views (genuine_trio=false).",
+   "extra_views": []
+  }
+ ]
+}

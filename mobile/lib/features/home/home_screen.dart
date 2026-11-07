@@ -7,6 +7,7 @@ import '../../services/device_auth.dart';
 import '../../services/history_database.dart';
 import '../../services/pending_scans.dart';
 import '../../services/settings_store.dart';
+import '../demo/demo_screen.dart';
 import '../scan_flow/result_look.dart';
 import '../scan_flow/scan_flow_screen.dart';
 import '../settings/settings_screen.dart';
@@ -38,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   DeviceState? _device;
   PendingScanRow? _pending;
   bool _startingScan = false;
+  bool _galleryUploads = false;
 
   @override
   void initState() {
@@ -48,7 +50,16 @@ class _HomeScreenState extends State<HomeScreen> {
   /// History, the unfinished scan and the server check run side by side: a
   /// slow database must not hold back the status card, nor the reverse.
   Future<void> _refresh() async {
-    await Future.wait([_loadHistory(), _loadPending(), _checkServer()]);
+    await Future.wait([_loadHistory(), _loadPending(), _checkServer(), _loadGallerySetting()]);
+  }
+
+  Future<void> _loadGallerySetting() async {
+    try {
+      final on = await widget.settings.getGalleryUploads();
+      if (mounted) setState(() => _galleryUploads = on);
+    } on Object {
+      // Unreadable settings: the camera path only.
+    }
   }
 
   Future<void> _loadHistory() async {
@@ -162,8 +173,9 @@ class _HomeScreenState extends State<HomeScreen> {
         }
         return;
       }
-      // A retake after a rejection needs the camera; without one the
-      // gallery screen still works.
+      // A retake after a rejection needs the camera. Without one, only a
+      // result already kept on the phone (or the developer gallery switch)
+      // lets the scan finish: gallery photos never verify a stack.
       var cameras = <CameraDescription>[];
       try {
         cameras = await availableCameras();
@@ -171,6 +183,16 @@ class _HomeScreenState extends State<HomeScreen> {
         cameras = const [];
       }
       if (!mounted) return;
+      if (cameras.isEmpty && !kept && !_galleryUploads) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'This scan needs the camera to finish, and no camera was found.',
+            ),
+          ),
+        );
+        return;
+      }
       await _openFlow(
         cameras: cameras,
         uploadPhotos: cameras.isEmpty,
@@ -326,13 +348,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 icon: const Icon(Icons.camera_alt_outlined),
                 label: const Text('SCAN A BLOCK — CAMERA'),
               ),
+              if (_galleryUploads) ...[
+                const SizedBox(height: 12),
+                OutlinedButton.icon(
+                  onPressed: _startingScan
+                      ? null
+                      : () => _startScan(uploadPhotos: true),
+                  icon: const Icon(Icons.photo_library_outlined),
+                  label: const Text('SCAN A BLOCK — GALLERY (TESTING)'),
+                ),
+              ],
               const SizedBox(height: 12),
               OutlinedButton.icon(
-                onPressed: _startingScan
-                    ? null
-                    : () => _startScan(uploadPhotos: true),
-                icon: const Icon(Icons.photo_library_outlined),
-                label: const Text('SCAN A BLOCK — GALLERY'),
+                key: const ValueKey('open-demo'),
+                onPressed: () => Navigator.of(context).push<void>(
+                  MaterialPageRoute(builder: (_) => const DemoScreen()),
+                ),
+                icon: const Icon(Icons.slideshow_outlined),
+                label: const Text('DEMO — SAVED RESULTS (NOT A LIVE SCAN)'),
               ),
               const SizedBox(height: 12),
               const Text(

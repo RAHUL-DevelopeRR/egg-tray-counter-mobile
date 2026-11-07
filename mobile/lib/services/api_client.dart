@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 
 import '../app/app_version.dart';
 import '../models/capture_view.dart';
+import '../models/extra_capture.dart';
 import '../models/manual_count.dart';
 import '../models/reconstruction_result.dart';
 import '../models/scan_session.dart';
@@ -518,6 +519,24 @@ class ApiClient {
   static Duration _backoffAfter(int posts) =>
       _backoff[min(posts - 1, _backoff.length - 1)];
 
+  /// The fields of a view's constraint evidence that decide whether the server
+  /// may trust its reading: how it was taken, whether a live check blocked it,
+  /// and the phone heading. Null when the evidence has none of them.
+  static String? captureField(String evidence) {
+    final Object? decoded;
+    try {
+      decoded = jsonDecode(evidence);
+    } on FormatException {
+      return null;
+    }
+    if (decoded is! Map<String, dynamic>) return null;
+    final capture = {
+      for (final key in const ['source', 'blocked', 'yaw_deg', 'yaw_session'])
+        if (decoded[key] != null) key: decoded[key],
+    };
+    return capture.isEmpty ? null : jsonEncode(capture);
+  }
+
   Future<FormData> _scanForm(ScanSession session) async => FormData.fromMap({
     'scan_id': session.scanId,
     'scan_contract': 'model_spatial_v1',
@@ -527,6 +546,10 @@ class ApiClient {
     // the extra fields, so uploads stay compatible either way.
     for (final entry in session.constraintEvidence.entries)
       '${entry.key}_constraint_evidence': entry.value,
+    // The short capture record (source, blocked, heading) the server needs to
+    // trust a reading, kept apart from the full evidence and its size limit.
+    for (final entry in session.constraintEvidence.entries)
+      '${entry.key}_capture': ?captureField(entry.value),
     'left': await MultipartFile.fromFile(
       session.pathFor(CaptureView.left)!,
       filename: 'left.jpg',
@@ -542,7 +565,44 @@ class ApiClient {
       filename: 'straight.jpg',
       contentType: DioMediaType.parse('image/jpeg'),
     ),
+    ...await _blockFields(session),
   });
+
+  /// The Worker 0.5.0 fields, all optional (older servers ignore them): the
+  /// declaration, entered blind before any count was shown, and the extra
+  /// photos with their capture record, corner side and elevated taps.
+  static Future<Map<String, Object>> _blockFields(ScanSession session) async {
+    final corner = session.extraFor(ExtraView.corner);
+    final elevated = session.extraFor(ExtraView.elevated);
+    final taps = elevated?.taps;
+    return {
+      'block_declaration': ?session.declaration?.encode(),
+      if (corner != null) ...{
+        'corner': await MultipartFile.fromFile(
+          corner.path,
+          filename: 'corner.jpg',
+          contentType: DioMediaType.parse('image/jpeg'),
+        ),
+        'corner_capture': ?_extraCapture(corner),
+        'corner_side': ?corner.side,
+      },
+      if (elevated != null) ...{
+        'elevated': await MultipartFile.fromFile(
+          elevated.path,
+          filename: 'elevated.jpg',
+          contentType: DioMediaType.parse('image/jpeg'),
+        ),
+        'elevated_capture': ?_extraCapture(elevated),
+        if (taps != null && taps.fitsUpload) 'elevated_taps': taps.encode(),
+      },
+    };
+  }
+
+  /// `<view>_capture` for an extra photo, from its constraint evidence.
+  static String? _extraCapture(ExtraCapture extra) {
+    final evidence = extra.evidence;
+    return evidence == null ? null : captureField(evidence);
+  }
 
   /// Asks for a stored result until it arrives (200), the server says it has
   /// none (404, or 409 for a failed job: returns null, upload again) or about

@@ -1,5 +1,1019 @@
 # Progress
 
+## 2026-11-06 (latest) - Plan 5 Phase 2: app 0.7.0+31 shows the stacking rule (Claude Code, `rollout/0.4.12-staging`)
+
+**Pushed, not deployed, not installed, 0 detector calls.** Phase 1 committed as `e6afb48` (the user said "do next
+steps"), Phase 2 as `389f71e`; both, with this doc update, pushed to `origin/rollout/0.4.12-staging` on 6 Nov at the
+user's request ("Push to the context and progress.md"). No phone attached (`adb devices` empty), so no install.
+Staging still Worker 0.5.0; production untouched.
+
+**Current state, for whoever picks this up next** (supersedes the "Exact next steps" of the 5 Nov HANDOVER below,
+whose step 1, Decision 1 and Phase 1, is done):
+- Worker `cloudflare-worker/` = worker-0.7.0 (stacking rule, `docs/GRID_CONTRACT_0.7.0.md`), **not deployed**. Staging
+  runs 0.5.0 (`52a1d5e8`); production `4c1480e6` must never be deployed.
+- App `mobile/` = 0.7.0+31; APK `egg-tray-counter-0.7.0-staging.apk` built (git-ignored), **not installed**. The Redmi
+  (`f76d5e20`) still runs 0.6.0+29; 0.6.1+30 was never installed and is superseded by 0.7.0+31.
+- Open for the user: Decision 3 (default (a) built; options compared in
+  `reports/stacking-rule-0.7.0-20261105/README.md`); every install, staging deploy and paid call needs their OK.
+- Known gaps: FR18 (over-reads on two faces lift H), FR13 (Phase 1b, mixed columns), Decision 18 (partials outside the
+  block), the intermittent `pending_scan_test.dart` failure, the research capture mode (not built).
+- **App changes** (`mobile/lib`): `models/block_result.dart` reads the 0.7.0 inventory rule fields, `block.rule`
+  (`RuleSummary`, `RuleProvisional`) and the split's rule fields (`TraySplit.byRule`); `features/scan_flow/block_view.dart`
+  draws rule stacks as "=H" ghosts with the legend "= full by the stacking rule, not seen", the headline "ESTIMATE: N
+  COUNTED + K × H BY THE STACKING RULE", `ruleSplitLine` ("Counted 171 + 6 × 20 by the stacking rule = Estimated 291
+  tray layers"), `ruleLine` (stacks read the same in two photos, the cover-tray range, "up to" for doubted readings),
+  the residual line (Plan 5 §3), a sensitivity row in place of the neighbour range row, words for the 10 new withheld
+  reasons, a rule provisional panel (never a total), and released-rule notes; `scan_flow_screen.dart` shows a retake
+  view it does not know as text, never as RETAKE LEFT; `declaration_pane.dart` says PARTIAL gives no total and names
+  missing/partial stacks as rule exceptions. Version 0.7.0+31 (`pubspec.yaml`, `app_version.dart`). The manual-count
+  screen is unchanged (it never shows the app's heights). Older servers' answers render as before.
+- **Not built (Plan 5 Phase 2 "recommended"):** the research capture mode for farm day A.
+- **Verified (measured, local):** `flutter test` 262/262 (7 new: `worker_070_compat_test.dart` now checks the 0.7.0
+  screens on three real Worker 0.7.0 answers; 2 retake-view tests in `scan_screens_test.dart`); `dart analyze` clean.
+  Four full runs: three 262/262; one had the known intermittent failure, now named: `pending_scan_test.dart` "the
+  declaration and the optional extras survive a relaunch and are uploaded again on resume". That file passed alone
+  3/3; neither it nor the code it tests changed here. Plan 5 Phase 4 says to find it first.
+- **APK:** `egg-tray-counter-0.7.0-staging.apk` (repo root, git-ignored): `flutter build apk --release` in 184 s,
+  64,118,060 bytes, SHA-256 `9384a0728009cf69…`, versionName 0.7.0 / versionCode 31, v2 signer `29013b98…` (the
+  release key), 0 hits for the staging admin token or the keystore password in the APK or its 393 unpacked entries.
+  Not installed anywhere (the emulator was not started).
+- **Decision 3 answered 6 Nov: option (a)**, the one already built (`RULE_DEFAULTS.basis: "two_faces"`); no code change.
+  Verified again on 6 Nov after the handover: Worker `npm test` 270 / 238 pass / 0 fail / 32 todo; app `flutter test`
+  262/262; `dart analyze` clean; APK SHA-256 prefix `9384a0728009cf69` matches.
+- **Redmi install done 7 Nov** (user's OK): `adb -s f76d5e20 install -r` upgraded 0.6.0 (29) to 0.7.0 (31) in place
+  (APK SHA-256 prefix `9384a0728009cf69`). The app opens: SERVER REACHABLE, DEVICE APPROVED, base URL still staging,
+  scan history kept. No scan was run (0 paid calls). The Redmi now shows the stacking-rule screens, but staging still
+  runs Worker 0.5.0, so a live scan gives 0.5.0 answers until the 0.7.0 staging deploy.
+- **Staging deploy done 7 Nov** (user's OK): `npx wrangler deploy --env staging` after `npm test` 270 / 0 fail and a
+  `--dry-run`. Staging `egg-tray-counter-api-staging` is now Cloudflare version `bafa21d1` (worker-0.7.0, source
+  `748c5ea`), replacing `52a1d5e8` (0.5.0). Production newest is still `4c1480e6` (23 Sep), untouched. `/health` is
+  unchanged (it carries no version); a free probe answers.
+- **Smoke test done 7 Nov** (user's OK, 6 paid calls; `reports/staging-smoke-0.7.0-20261107/`): from the Redmi through
+  staging 0.7.0, the 99-tray row gives BLOCK ESTIMATE 99 (rule unused, one deep) and L-100 is withheld with the new
+  `no_rule_height` reason beside "sides repeat the front". Both match the offline replay. Both results carry the 0.7.0
+  stacking-rule note, so the phone-to-staging path is confirmed. No deep block was scanned live yet.
+- **Next:** (1) done, Decision 3 = (a); (2) done, Redmi on 0.7.0+31; (3) done, staging on worker-0.7.0 and smoke-tested
+  (`--env staging`), smoke test about 7 paid calls; (4) farm day A planning (Plan 5 §8.2, Decisions 15, 18).
+
+## 2026-11-05 (evening) - Plan 5 Phase 1 built offline: Worker 0.7.0 stacking rule (Claude Code, `rollout/0.4.12-staging`)
+
+**Committed later as `e6afb48` and pushed on 6 Nov; not deployed, 0 detector calls.** Staging still runs Worker 0.5.0 (`52a1d5e8`);
+production `4c1480e6` untouched; the Redmi still runs app 0.6.0+29 (not plugged in, no install). App code unchanged
+(only a new test and fixtures).
+- **User decisions:** Decision 1 answered **yes** (hidden stacks = full height H by the stacking rule). Decision 3
+  (how strict H is) **still open**: the user said they were confused; it was explained in plain terms, and the build
+  uses the recommended default (a) behind one switch (`RULE_DEFAULTS.basis`).
+- **Worker 0.7.0** (`cloudflare-worker/src/index.ts`): `stackingRule()` (H: two clean stacks on two faces, a back
+  corner among them; the cover partner H ± 1; checks taller / back corner / inside hint / one side / plurality off /
+  range off), `assumeHidden()` sets H (`assumed_from: "stacking_rule"`, range [H, H], no neighbours), `assembleGrid()`
+  exceptions (`rule_exception`, `inside_step_up`, `inside_declared_partial`, `reference_height_differs`),
+  `ruleProvisional()` (in `block.rule.provisional`, never in the inventory), the inventory fields `rule_*`,
+  `two_photo_stacks`, `doubted_low_up_to`, the neighbour ranges null for rule blocks, no `elevated` suggestion,
+  `grid_contract` 0.7.0, `worker-0.7.0`. Rule-eligible photos: camera stills, not blocked, not copies; a side
+  `turned` or `depth_unproven`. Request and fingerprint v3 unchanged. Contract: `docs/GRID_CONTRACT_0.7.0.md`.
+- **Tests changed on purpose, each with its reason in a comment:** `hidden.test.mjs` H1–H6, H8 (plus new H3b);
+  `block.test.mjs` (2 gap tests: one side photographed is now withheld); `capture.test.mjs` 5 x 4 (sides framed apart
+  and sent as camera stills; 380 → 392, the under-read Plan 5 fixes); `grid.test.mjs` version; `side_check.test.mjs`
+  5 x 5 (sides framed apart), H11 (no `elevated`), H13 (step-up case withheld, as the plan says); library S21 check
+  `total_ok` → `no_wrong_total` (its sides are copies of the front). New: `test/rule_cases.mjs`, `test/rule.test.mjs`
+  (FR01–FR21, 43 cases with the FR13 sweeps), a `withheld:<reason>` judge in `replay_benchmark.mjs`.
+- **Verified (measured, local):** Worker `npm test` 270 tests, 238 pass, 0 fail, 32 todo (4 old stretch + 28 known rule
+  failures). App `flutter test` 258/258 on two full runs (new `worker_070_compat_test.dart`: the 0.6.1 parser and panel
+  read three real 0.7.0 answers; "(range not given)", no range row, no "depth not proven" panel); `dart analyze` clean.
+- **Replay** (`reports/stacking-rule-0.7.0-20261105/README.md`, offline, 0.6.0 dist from `c4b0360`): all 10 Phase 1
+  gates met except gate 3 on two new rule cases. Library 38/38, 15 released (0.6.0: 16), the same 5 known wrong
+  estimates; only S21 changed (withheld). 0 face verdicts and 0 of 22 trios changed. 99-block 99 and L-100 withheld in
+  every mode; field 4 x 3 (counterfactual) 165 → withheld `no_rule_height`, provisional 165. Two runs, identical hashes.
+- **Findings (the user should see these):** (1) FR18, one over-read on each of two faces: 0.7.0 releases 299 for 291
+  (0.6.0: 294); the printed range covers the hidden stacks, not the over-read faces. (2) FR13: a short partial with the
+  full stack behind showing above it reads as one full column from scale 0.87 (+12), as in 0.6.0: Plan 5 Phase 1b,
+  not attempted (its threshold needs farm-day photos). (3) A partial standing in front of a block is missed (Decision
+  18). (4) Option (c) on the 4 x 3 is withheld as taller, not released as §4.6 expected (RIGHT's 14 is a third height).
+  (5) Option (b) releases 299 for 291 when two over-reads sit in one photo; (a′) loses S26 and S28.
+- **Next steps, in order:** (1) the user's call on Decision 3, with the options table in the report; (2) commit this work
+  (asked, not done); (3) Phase 2 (app 0.7.0: "=H" ghosts, the rule split line, withheld-reason texts); (4) FR18 is the
+  case the plurality guard caught, and the guard is off because covers are "sometimes" (Decision 4). Turned on, it also
+  withholds FR17, a genuine block with covers on 3 of 8 face stacks. Farm day A's cover count should settle it;
+  (5) the Redmi install of 0.6.1+30 or straight to 0.7.0 when it is plugged in, with the
+  user's OK; (6) staging 0.7.0 only after app 0.7.0 is on the phones.
+
+## 2026-11-05 - HANDOVER: project state and where to start (Claude Code, `rollout/0.4.12-staging`)
+
+The project is handed to another coding agent (the Claude weekly limit was reached). Project path:
+`C:\Users\rahul\egg-tray-counter-mobile`. Branch `rollout/0.4.12-staging`, pushed to `origin` at the commit that
+follows this section. The working tree is clean after that push.
+
+**Read first:** `AGENTS.md`, this file, `context.md` (top entry: the farm's stacking rules), and
+`docs/PLAN_5_MULTI_PHOTO.md` (draft 3, not approved). Plan 4 (`docs/PLAN_4_EVIDENCE_GRID.md`) is older and not approved.
+
+**What is built and where it stands:**
+- App `mobile/` is version 0.6.1+30 (`aa6eab5`): gallery photos over 40 MP are shrunk, not refused; offline demo
+  screen; 0.6.0 evidence grid (ghost stacks, counted/assumed split).
+- Worker `cloudflare-worker/` is worker-0.6.0, merged locally and **not deployed**. Staging
+  (`egg-tray-counter-api-staging`) runs Worker 0.5.0 (version `52a1d5e8`). **Production `4c1480e6` is untouched; never
+  deploy it.**
+- Phones: Redmi Note 9 Pro (`f76d5e20`) runs 0.6.0+29. The 0.6.1+30 install is pending (phone must be plugged in,
+  with the user's OK). Emulator `emulator-5554` runs 0.6.1+30.
+- APK for the phone (git-ignored, repo root): `egg-tray-counter-0.6.1-staging.apk` (SHA-256 prefix `2e3651e5ddc991f6`,
+  signer `29013b98…`, versionCode 30).
+- Zero physical counts exist. Every count so far is an AI or label reading.
+
+**Decisions and approvals outstanding:**
+- Plan 5 Decision 1: adopt the stacking rule and build Phase 1 (Worker 0.7.0, offline). Not yet answered.
+- Plan 5 Decision 3: how strict "H" is (recommended: two stacks on two faces, a back corner among them).
+- Answered: cover trays are used "sometimes" (Plan 5 §4.6; `context.md`).
+- Every deploy, install, push and paid detector call needs the user's OK. Staging deploys use `--env staging` only.
+
+**Rules that stay in force:**
+- Never run a bare `wrangler deploy` or `npm run deploy`.
+- Never print the admin token (`work/secrets/staging-admin-token`) or the keystore password. Both are git-ignored.
+- No paid detector calls without approval. `accuracy-evaluation/*` is frozen. Do not open the personal phone gallery.
+- No new neural network, VLM, NeRF or photogrammetry (Plan 3 rule). Tray layers only, never eggs or rupees.
+- Never use "exact", "confirmed" or "physically verified" for a value that rests on a rule or a declaration.
+
+**Tools and checks:**
+- Flutter: `C:\Users\rahul\AppData\Local\Codex\flutter\bin\flutter.bat` (not on PATH). Run `flutter test` and
+  `dart analyze lib test` in `mobile/`. Last result: 255 of 255 tests pass; analyzer clean.
+- Worker: `npm test` in `cloudflare-worker/` (tsc, then node --test). Last result: 214 tests, 210 pass, 0 fail, 4 todo.
+- adb: `C:\Users\rahul\AppData\Local\Android\Sdk\platform-tools\adb.exe`. Use `-s f76d5e20` for the Redmi.
+
+**Worktrees** (`git worktree list`): `real-worker` and `real-app` hold branches already merged into this branch
+(`real/worker-0.6.0`, `real/app-evidence-grid`); they can be removed. `vigilant-napier-c0487d` and
+`affectionate-heyrovsky-9ff357` are older Plan 3 side sessions, not merged and not reviewed in this handover; leave
+them alone unless the user asks.
+
+**Known open issues (not fixed):**
+- One earlier full test run had a single failure in `test/pending_scan_test.dart` that did not repeat.
+- The old-format fallback split does not check that counted + assumed adds up to the total.
+- `traySplitLine` prints "Assumed 0" when the assumed part is unknown.
+- Taller and shorter badges of neighbouring hidden stacks can overlap on the block drawing.
+- The demo screen's header uses the raw status, not the display status.
+
+**Exact next steps, in order:**
+1. Ask the user for Plan 5 Decision 1 and Decision 3. If Decision 1 is "yes", build Phase 1: `ruleHeight()` in
+   `index.ts`, the checks of §4.2, the `test/rule.test.mjs` cases FR01–FR20, the replay under
+   `reports/stacking-rule-0.7.0-<date>/`. Nothing is deployed or pushed without a separate OK.
+2. When the Redmi is plugged in and the user agrees: `adb -s f76d5e20 install -r` the 0.6.1+30 APK, then check
+   the scan screens.
+3. Staging for Worker 0.7.0 only after app 0.7.0 is on the phones (Plan 5 Phase 2). Farm day A follows (Plan 5 §8.2).
+
+## 2026-11-05 - farm stacking rules and Plan 5 draft 2 (Claude Code, `rollout/0.4.12-staging`)
+
+Planning only: no code changed, nothing deployed. Staging still runs Worker 0.5.0; the Redmi runs app 0.6.0+29;
+app 0.6.1+30 is built (`egg-tray-counter-0.6.1-staging.apk`) and pushed as `aa6eab5`.
+- **Farm rules stated by the user** (context.md, 5 Nov): partial stacks only on the photographed faces (STRAIGHT,
+  LEFT, RIGHT), back row always full, no empty interior position, full height per block shown by the faces, back side
+  usually against a wall, photos from above or below impractical. Not audited; physical counts still zero.
+- **Answered:** a frontier VLM is not a source of exact counts (measured here: AI counters disagreed on 21 of 29
+  photos; L-115 read 771 / 897 / 1455). The Plan 3 "no VLM" rule stands unless the user lifts it.
+- **`docs/PLAN_5_MULTI_PHOTO.md` (draft 2, not approved):** hidden stacks = the block's full height H "by the stacking
+  rule" instead of the 0.6.0 neighbour median (`index.ts:656-681`, which under-reads hidden stacks behind a face
+  partial); H from clean readings of two distinct stacks on two different faces, a back corner among them; extra
+  photos (a repeat of a face, a long face in parts, a close photo of one stack on request) that never make a block
+  `exact`; two farm days (A audits the rules by opening blocks at random; B is a pre-registered blind pilot).
+  Phases: 1 server rule offline (Worker 0.7.0) → 2 app wording (0.7.0) → 3 farm day A → 4–6 multi-photo (0.7.1–0.7.3)
+  → 7 farm day B. Written by a 9-agent workflow (`wf_2f112f3e-f94`: 3 readers, 2 drafts, merge, 2 critics, editor);
+  key code citations spot-checked by hand.
+- **Measured cost of the default H rule** [R, offline replay on worker-0.6.0]: the only real deep block (field 4 × 3,
+  counterfactual inputs) has one clean face reading, so it is withheld until a close photo (Phase 5).
+- **Decision 4 answered (user, 5 Nov): cover trays are used "sometimes".** Plan 5 draft 3 adds §4.6: a full stack is F or
+  F + 1 layers; H and its neighbour are both "full"; the hidden stacks are reported as K × H with a range of up to K;
+  the plurality guard is off and the taller check fires only beyond the pair.
+- **Next:** the user's answer to Decision 1 (adopt the rule and build Phase 1 offline), then Decision 3 (how strict H
+  is); the Redmi install of 0.6.1+30 when it is plugged in.
+
+## 2026-11-04 - offline demo, real work merged, app 0.6.0+29 (Claude Code, `rollout/0.4.12-staging`)
+
+For the faculty demo on the morning of 4 Nov. **Local only: nothing pushed or deployed. Staging still runs 0.5.0
+(52a1d5e8); production 4c1480e6 untouched.**
+- **Offline demo** (`db66925`, app 0.5.1+28): home button "DEMO — SAVED RESULTS (NOT A LIVE SCAN)" opens
+  `mobile/lib/features/demo/demo_screen.dart`, three saved test-server answers bundled in `mobile/assets/demo/`
+  (99-tray row, 4 x 3 field block 105 counted + 60 assumed = 165, L-100 refused). Nothing is sent or saved.
+  Cheat sheet `docs/DEMO_CHEAT_SHEET_20261104.md`; screenshots `reports/demo-20261104/`.
+- **Merged** `real/worker-0.6.0` (`c63f497`) and `real/app-evidence-grid` (`8ad17f4`); conflicts only in PROGRESS.md
+  and context.md, both entries kept. Worker 0.6.0 stays undeployed (its deploy gate needs an app that reads
+  `suggested_inputs`: app 0.6.0+29 now does).
+- **Fixes after an independent review of the app branch** (no crash and no arithmetic error on the 12 saved 0.6.0
+  answers or the 3 demo answers): removed "Eggs if every tray is full" from the block panel (it showed 4950 on the
+  4 x 3 demo, capacity on 60 assumed trays); the "if every hidden stack is there" range is hidden on a withheld block;
+  the assumed row no longer says "(N checked from the top)" (that count includes stacks tapped missing); the
+  declaration pane no longer says "can never be CONFIRMED".
+- **Version** 0.6.0+29 (`pubspec.yaml`, `app_version.dart`).
+- **Verified (measured):** Worker `npm test` 214 tests, 210 pass, 0 fail, 4 todo; `dart analyze` no issues;
+  `flutter test` 252 of 252 (one earlier full run had one failure in `pending_scan_test.dart` that passed alone and on
+  the next full run: the intermittent failure the app branch also saw, still not identified).
+- **APK** `egg-tray-counter-0.6.0-demo-staging.apk` (repo root, git-ignored): 63,888,684 bytes, SHA-256 prefix
+  a8320338f21a54f9, versionName 0.6.0 / versionCode 29, signer SHA-256 29013b98…, 0 hits for the staging admin token
+  or the keystore password in the APK or its unpacked files. Installed on the emulator (emulator-5554); the demo's
+  three tabs render (screenshots in `reports/demo-20261104/`, replaced with the 0.6.0+29 view): the 4 x 3 block shows
+  4 see-through "~15" stacks, the eggs row is gone.
+- **Redmi (f76d5e20), 09:16 IST, with the user's OK:** `adb install -r` upgraded 0.4.12 (23) to 0.6.0 (29) in place
+  (data kept). The app opens with the demo button; Settings show the staging base URL and "DEVICE APPROVED" (nothing
+  changed or saved).
+- **Pushed** to `origin/rollout/0.4.12-staging` (`10f2c3d..59fb8d1`) with the user's OK.
+- **Phone test** (`reports/phone-test-20261104/`, measured, staging 0.5.0, 6 detector calls): laptop photos pushed
+  to the Redmi and scanned through the gallery path. L-100 (img-19/21/24): RETAKE NEEDED, no total (sides repeat the
+  front), per-photo detections 103/100/101. 99-tray row (img-01, warehouse image-4, img-32): BLOCK ESTIMATE 99 with the
+  3D grid 20/20/20/20/19. Both repeat earlier answers for the same photos; the 99 trio is a worked example. Gallery
+  scans switched back off; the test photos stay in `/sdcard/Pictures/EggTrayTest/`.
+- **Phone audit** (`reports/phone-audit-20261104/`, measured, staging 0.5.0, 6 detector calls): MUTAA photos never
+  used as a block set. A, a 3-stack row (front `151210436`, right end `151224648`, stand-in left `151204619`): 3D grid
+  3 × 1 at 10/10/11 against a blind manual 10 filled + 1 cover each, total withheld (stand-in LEFT refused as too far).
+  B, the M16 block from new angles (`151353868`/`151339474`/`151436402`): RETAKE NEEDED, no model (gallery sides cannot
+  prove depth; LEFT read 3 deep against manual 2). 0 wrong totals. **Finding:** the app's gallery path refuses photos
+  over 40 MP (`photo_upload_pane.dart:27`); 4 MUTAA photos are 50 MP. No complete new block set is left in MUTAA.
+- **App 0.6.1+30: gallery photos over 40 MP are shrunk, not refused** (`photo_upload_pane.dart`:
+  `encodedPixelSize`, `OversizedPhotoException`, `shrinkWithPlatformDecoder`, `prepareGalleryPhoto`). The size check
+  no longer runs the image package's `startDecode`, which allocated about 300 MB for a 50 MP JPEG. Verified: 3 new tests,
+  `flutter test` 255/255, `dart analyze` clean; on the emulator the 8192 x 6144 MUTAA photo is accepted in about 6 s.
+  APK `egg-tray-counter-0.6.1-staging.apk` (git-ignored): 64,019,756 bytes, SHA-256 prefix 2e3651e5ddc991f6, signer
+  29013b98…, 0 secret hits. **Redmi still on 0.6.0+29** (unplugged before the install).
+- **Next:** install 0.6.1+30 on the Redmi when it is plugged in (with the user's OK); the user's call on Decision 1 (corrected) and contract §6; staging deploy of Worker 0.6.0 with
+  approval; the farm day with physical counts.
+- **Open review notes (not fixed, not on the demo data):** the old-format fallback split does not check that counted
+  + assumed adds up to the total; `traySplitLine` prints "Assumed 0" when the assumed part is unknown; taller/shorter
+  badges of neighbouring hidden stacks can overlap; the demo header uses the raw status, not `displayStatus`.
+
+## 2026-11-03 - app 4b: evidence classes and the counted/assumed split (Claude Code, branch real/app-evidence-grid)
+
+Plan 4 app work 4b, built from the 0.6.0 final design in parallel with the offline demo. App code only: no Worker
+change, no APK, no version bump, nothing deployed or pushed.
+
+- **Parsing** (`mobile/lib/models/block_result.dart`): the 0.6.0 cell fields (`evidence_class`, `hidden`,
+  `assumed_layers`, `assumed_range`, `assumed_from`, `neighbours`, `top_tap`, `flags`, `past_gap_*`), the 0.6.0
+  inventory (counted/assumed/estimated, ranges, hidden and top-checked stacks, missing stacks, `released`,
+  `withheld_reason`, `provisional` with `if_depth`) and `depth_basis`, `grid_contract`, `suggested_inputs`.
+- **Older answers** get a derived class (`evidenceClassOf`, `evidenceClassOfBlockCell`) by the design's table. A stack
+  whose every reading looked through a gap (`*-recessed` source) is assumed, never counted. The split for older
+  answers comes from the stacks, not `computed_trays`; 0.4.x cells that do not cover the block fall back to
+  `observed_trays`/`computed_trays`. An older `exact` with such a stack is shown as an estimate (`displayStatus`).
+- **Drawing** (`block_view.dart`): counted stacks solid with layer ticks; assumed stacks see-through, hatched, "~N",
+  no ticks; top-view present with a blue top outline; step up "▲ ≥N" with a "taller" badge; step down "▼ ?";
+  seen-empty a dashed red footprint; top-missing and declared-missing a footprint plus a "0" outline on the block's
+  top; conflict orange. The legend lists the classes in the block.
+- **Panel** (also on the result screen): headline "ESTIMATE: N COUNTED + M ASSUMED IN K HIDDEN STACKS"; the split
+  line "Counted N + Assumed M (range lo–hi) = Estimated T tray layers" ("range not given" for older servers); an
+  assumption line; "Egg-filled trays: not checked" unless declared; "TOTAL WITHHELD" with the reason; a grey
+  "NOT RELEASED" panel for provisional figures (never a headline, history total or app total); "DECLARE THE BLOCK SIZE
+  AND SCAN AGAIN" when the server asks for it.
+- **Wording:** a 0.5 `confirmed` is shown as "BLOCK ESTIMATE" / "ESTIMATE (OLDER SERVER)"; the panel never says
+  exact, confirmed or verified for a total with assumed stacks. `BlockPanel` and the `BlockResult` API are
+  unchanged for the demo screen (checked locally against its three saved answers; the demo's own strings do not
+  collide).
+- **Verified (measured):** `flutter analyze` no issues; `flutter test` 247 of 247 in 4 of 5 full runs. One full run had
+  one failure that did not repeat in four reruns; not identified. New: `test/evidence_grid_test.dart` (25 tests),
+  `test/support/grid_06_fixtures.dart`, 2 result-screen tests.
+- **Not done:** the tap cycle with `step_up` (`elevated_tap_grid.dart`), the per-cell detail ("neighbours read
+  19–20"), export changes, the Worker 0.6.0 side. The app was not run on a device or emulator.
+
+## 2026-11-03 - Worker 0.6.0: review fixes (Claude Code, branch `real/worker-0.6.0`)
+
+A review of the two 0.6.0 commits below; fixes in one more commit on the same branch. **Local only: not deployed, not
+pushed, not merged.**
+- **Declaration:** a partial stack of 0 trays is a declared missing stack (it used to be a present stack of 0 that
+  blocked eligible trays); a cell listed twice as missing counts once; two different declared heights for one stack are
+  a conflict; a declared partial stack where a face shows a gap is a conflict with or without a height.
+- **`exact`** also needs Y = 1 in `assembleGrid`, whatever `depthBasis` a caller passes.
+- **`block.total_eggs`** is null whenever any tray is assumed (kept for app 0.5.0, which shows it only without a grid).
+- **Replay:** S09's stretch is a guard now (it passes: withheld without a declared size); the runner reports a stretch
+  with `fixed_by` null as a test, not a todo. `scripts/compare_replay_versions.mjs` and `scripts/replay_saved_scans.mjs`
+  write `comparison_with_worker_0_5_1` and `saved_scans` into `summary.json`, which now regenerates byte for byte.
+- **Texts:** the report folder is `reports/evidence-grid-0.6.0-20261103` (the work was done on 3 Nov, not 4 Nov); the
+  "depth differs ... names the retake" comment and contract text corrected (the rescan names no side, as in 0.5.1);
+  context.md marks Decision 1 (corrected) and "exact for one-deep only" as design defaults awaiting the user's call.
+- **Deploy gate** (contract, top): no deploy of 0.6.0 before an app that reads `suggested_inputs`. App 0.5.x shows
+  "RETAKE LEFT" for a `depth_unproven` side, and retaking can never release the block; only declaring the size can.
+- **Worktree:** the skip-worktree bits are cleared and the root APKs and `datasets/` restored in this worktree.
+- **Verified:** `npm test` 214 tests, 210 pass, 0 fail, 4 todo (S03, S04, S07 and S29 stretches). Replay re-run:
+  adversarial 38 of 38, 0 wrong `exact`/`confirmed`, trios and face verdicts unchanged.
+- **Open for the user** (contract §6): through-gap heights that disagree are still a conflict; an honest 5 x 1
+  declaration for a row with rows touching it (S27) is withheld for good; Decision 1 (corrected) and "exact for
+  one-deep only" await the user's call.
+- **Not done:** app 4b is on the parallel branch `real/app-evidence-grid` (worktree `.claude/worktrees/real-app`).
+
+## 2026-11-03 - Worker 0.6.0: evidence grid and hidden-tray calculation (Claude Code, branch `real/worker-0.6.0`)
+
+Plan 4 Phase 3, Worker side, run in parallel with the offline demo (main checkout). Built from `10f2c3d` in the
+worktree `.claude/worktrees/real-worker`. **Local only: not deployed, not pushed, not merged.**
+
+**Done.**
+- **Hidden stacks are assumed, never counted.** A stack no face photo sees gets the median of its line-of-sight
+  neighbours (the front stack in its column, the side end stacks in its row); with none, the block's most common
+  face height. The range is the neighbours' spread, not a bound. Each grid cell names its `evidence_class`.
+- **`block.inventory`** splits counted and assumed trays: `counted_trays`, `assumed_trays`, `estimated_total`,
+  `estimated_range` ("if every hidden stack is there at its neighbours' heights"), `hidden_stacks`,
+  `unchecked_hidden_stacks`, missing stacks by kind, `released`/`withheld_reason`, and `provisional`.
+- **Top view:** presence, holes and step-ups only (`step_up` tap added). A `missing` tap is the only way a top view
+  lowers a total; a step down makes the height unknown and withholds the total.
+- **Depth proof (Decision 1, corrected):** a CORNER photo cannot prove depth (it sees the same touching rows: S25C).
+  A depth over one stack needs the declared block size; a side that repeats the front also needs the CORNER photo.
+  Withheld blocks get provisional figures (front row counted, and the what-if total when only the depth is in doubt).
+- **Statuses:** `confirmed` is never returned; `exact` only for one-deep blocks. Trays seen through a gap are hints.
+- Contract `docs/GRID_CONTRACT_0.6.0.md` (includes the top view's purpose); `PIPELINE_VERSION` `worker-0.6.0`.
+- Scripts: `scripts/replay_saved_scans.mjs`, `scripts/compare_replay_versions.mjs`.
+
+**Verification (measured, offline).**
+- `npm test` (tsc, then node --test): 213 tests, 208 pass, 0 fail, 5 todo. New: `test/hidden.test.mjs` (H1–H9),
+  H10–H13 in `test/side_check.test.mjs`.
+- Replay `reports/evidence-grid-0.6.0-20261103`: adversarial 38 of 38; Worker 0.5.1 on the same library 36 of 38
+  (S25 and S25C: `estimated` 300 for 100). 0 wrong `exact`/`confirmed`. Trios (4 of 22 released, 0 wrong) and all
+  face verdicts unchanged. Right releases 11 in both; 0.6.0 drops the 2 wrong ones.
+- Saved scans: the 99-block stays `estimated` 99. The 4 x 3 field block (9b4c783e) is withheld as sent; with
+  counterfactual camera headings, a synthetic CORNER photo and the 4 x 3 declaration it is **165 = 105 counted + 60
+  assumed (range 163–167)**; the visual reading is 164 (tier V). L-100 stays withheld.
+- **Cost:** a square block with a CORNER photo but no declaration (S21 as in 0.5.1, right at 180) is now withheld.
+
+**Not done.** App 4b (`mobile/`, on 0.5.1+28) was not touched. No staging deploy (needs approval). No physical count.
+**Disk:** C: reached 0 MB free during this session. I removed only my worktree's copies of the root APKs and
+`datasets/` (marked skip-worktree in that worktree's index); the main checkout was not touched. (Restored and the
+bits cleared in the review pass above.)
+
+**Next.** App 4b (evidence-class colours, split rows, provisional panel, `step_up` tap, "declare the block size"
+prompt); the user's call on the open points in the contract §6; staging deploy of 0.6.0 with approval.
+
+## 2026-11-03 - pitch deck and October weekly/monthly reports (Claude Code)
+
+- **Pitch deck** (13 slides, plain language) for the user and the faculty guides: https://claude.ai/artifact/A5wetZ31tYgQLLdVgVkZLm
+  (private until shared). It covers what the app does, the statuses, what was measured, the hidden-stack limit, the
+  journey from August to November, Plan 4 and what is needed next.
+- **October reports** in `reports/monthly-review-2026/`, each as DOCX and PDF, in the August/September format:
+  - `October_2026_Monthly_Progress_Review` (5 pages);
+  - `October_2026_Week_1..5_Progress_Report` (4–5 pages each; weeks 1–7, 8–14, 15–21, 22–28 and 29–31 October).
+- **How they were built:**
+  - The facts come from `october-2026-weeks.json`: five agents read PROGRESS.md, git history and the linked reports,
+    and every number names its source.
+  - Built by `build_october.py`. `build_reviews.py` `base()` gained keyword arguments; the defaults keep August and
+    September unchanged.
+  - Rendered by `render_review_pdfs.py <files>`, with compact image sizes only for the files named.
+  - Verified: text with no lost characters; pages inspected in the browser.
+- **Committed and pushed** on 2026-11-03 to `rollout/0.4.12-staging`, with the Plan 4 draft.
+
+## 2026-11-02 (latest) - MUTAA validation of build 0.5.0 on staging: app vs blind manual counts (Claude Code, in progress)
+
+**Done (measured).**
+- All 94 MUTAA/labelled photos went through staging Worker 0.5.0 (52a1d5e8) exactly as the app prepares them
+  (`scripts/validate_build_staging.py`; 33 scans, answers in `reports/mutaa-validation-0.5.0-20261101/raw/`).
+  Every scan returned `needs_view` with no total, which is the 0.5.0 contract for gallery photos.
+- The photo check accepted 37 photos and refused 57. The app read 261 columns, 135 of them with doubts.
+- Offline what-if (`scripts/replay_mutaa_validation.mjs`, `replay-what-if.json`): L-100 replayed as guided-camera
+  captures with a 90-degree turn gives **`estimated` 500 for a block counted at 100** (with a declaration: `conflict`).
+  This false total is the main blocker found.
+- Blind visual counts by subagents (tier V, not physical): `manual-blind.json` assembled from three runs
+  (`scratchpad/validate/assemble_blind.py`); `scripts/compare_mutaa_validation.py` → `comparison.json`.
+  - Accepted photos, stacks with double-counted manual truth: 29 of 42 match (cover tray either way), 2 off by 1,
+    11 off by 2 or more. 10 of the 11 big misses carry a doubt or gap fill. Clean columns: 20 of 21 match.
+  - One clean wrong column on an accepted photo: IMG_20260916_151409127, back-block stack at x 0.66, app 7 vs 15.
+  - The two blind counters disagreed on 21 of 29 double-counted accepted photos, so the manual truth itself is noisy.
+
+**Not done.** 31 refused photos have no manual count; 21 accepted photos lack the third (recount) pass; 13 refused
+photos lack a second count. Report README written (partial).
+Usage limits stopped the counting runs four times (see memory notes on cost and resume). The validation files, the 0.5.1 fix and the 14 earlier commits are pushed with this entry (the user asked on 2 Nov).
+
+**Worker 0.5.1 (local, not deployed): the L-100 false 500 fixed.**
+- A turned side whose heights repeat the front gets its depth only from a guided-camera CORNER photo that reads the
+  same width and depth and sees that side. Otherwise the block is `needs_view` with `suggested_views: ["corner"]`.
+- Neither a declaration nor ELEVATED taps settle it. A settled side never verifies a stack.
+- A one-stack front with deeper sides is treated the same way.
+- Docs: `docs/SCAN_JOBS_AND_DEVICES.md` "Sides that repeat the front (0.5.1)", the addendum in `docs/RELEASE_0.5.0.md`,
+  and `context.md`.
+- **Independent review** (3 reviewers: correctness, bypass, field). Fixed after it:
+  - ELEVATED taps were effectively the declaration;
+  - a disagreeing CORNER photo leaked the false grid;
+  - a front-left CORNER photo vouched for RIGHT;
+  - a blocked CORNER photo counted;
+  - lone-stack sides gave `exact` 40 for 20;
+  - the retake order;
+  - leaked single-reading cells.
+- **Verification (measured):**
+  - Worker `npm test`: 189 pass, 0 fail, 5 todo; `tsc --noEmit` clean.
+  - Replay `reports/replay-0.5.1-20261102`: adversarial 32 of 33 (0.5.0: 25 of 27); 0 wrong releases and 0 wrong
+    `exact` on 22 trios; labelled faces unchanged.
+  - MUTAA what-if: every set and mode is `needs_view`, L-100 included.
+  - Cost: S02 and S20 (correct estimates, even 3x2 blocks) are withheld until a CORNER photo is added.
+
+**Open.**
+- **S25 (user decision asked):** rows standing behind a row, with a real turn, give 300 for 100.
+- **App:** needs an "add CORNER photo" action on the result screen; the copy still calls CORNER optional.
+- **CORNER photos are untested on real blocks.**
+- **Staging is still Worker 0.5.0.** Redeploying 0.5.1 needs approval.
+
+**Production readiness: no.** The L-100 blocker is fixed in code. Still blocking:
+- S25;
+- the app flow for the CORNER photo;
+- no guided-camera scan of a real block validated;
+- APK 0.5.0+27 never installed on the phone;
+- the physical pilot (`docs/PHYSICAL_VALIDATION.md`) not run.
+
+**Plan 4 drafted** (`docs/PLAN_4_EVIDENCE_GRID.md`, draft 2, not approved; committed 2026-11-03).
+- Draft 1 was critiqued by three independent reviewers. They found that a level top does not prove a count, that a
+  handheld top photo works only up to about 4x4, that the hidden-stack truth was circular, and that there was no
+  statement of what the farm needs.
+- Draft 2 starts with the user's Decision 0, then a field decision pilot (truth from lift, load-out or built blocks)
+  that picks product A (faces plus declared layout) or B (faces plus a trained top reader).
+
+**Next.** The user: Decision 0 and Decisions 1–2 of Plan 4, and a farm day. Me: the truth protocol, the scorer and the
+protocol card before the farm day. The remaining Claude visual counts are dropped (Plan 4 §7).
+
+## 2026-11-01 - Plan 3 executed: release 0.5.0, phone-only X/Y/Z grid counter (Claude Code)
+
+Plan: `C:/Users/rahul/.claude/plans/spicy-growing-flame.md` (Plan 3, execution; the user's specification).
+
+**Reconciliation (read-only first).**
+- Local `rollout/0.4.12-staging` contains `origin/codex/hybrid-cell-counting` (`7971117`, 0.4.12+23) as an ancestor.
+- Commits from this session and the last are **not pushed**.
+
+**Side sessions.**
+- **K2** (on-phone layer signal) finished and its kill rule fired. Pitch within 10% on 46.8% of columns (bar 90%);
+  half or double pitch on 28.1% of faces (bar 10%). Brought in as a negative result (`a69e748`, not wired).
+- **E** stopped mid-rewrite. It was continued here.
+
+**Step 1: hand-reviewed annotations** (`benchmarks/annotations-20261101`, tier V, 11 columns).
+- The 5/6 alternation holds on every reviewed stack.
+- The end-layer parity matches every known count and contradicts all three known misses (img-30 c2 and c4, L-109 c4).
+- Empty cover trays on 6 of 11 columns; the detector did not box them where checked.
+
+**Phase E: independent rim reader** (`backend/app/vision/rim_count.py`, `reports/rim-independent-20261101`).
+- It takes only the column x-range from the detector, and its thresholds were frozen before scoring.
+- **REJECTED:**
+  - half or double readings on 3 of 14 faces (bar 10%);
+  - exact on 18 of 52 readable stacks;
+  - it contradicts a correct detector count on 33 stacks.
+- **Cause:** cross-stacked layers alternate polarity, so the pair period dominates (the same failure as K2).
+- Not wired; `RIM_VERIFY` stays off.
+
+**Phase P: 5/6 parity and occupancy** (`backend/app/vision/cross_stack.py`, `reports/cross-stack-20261101`).
+- **DISABLED:**
+  - row typing right on 3 of 7 annotated end layers (bar 95%);
+  - false unboxed-layer flags on 10 correct faces (bar 1). The egg colour mask also catches white walls and
+    neighbouring stacks.
+- **Consequence:** occupancy is unknown unless declared.
+
+**Worker 0.5.0** (`f6c2111`, `0a2c99b`; contract `docs/GRID_CONTRACT_0.5.0.md`).
+- **Q, readings:** each carries capture_id, reader (rf-walk), physical_stack_id, view, count, evidence, quality and
+  pipeline_version. A stack is verified by two different captures; copies of one photo collapse.
+- **`block.grid[y][x]`:** one physical stack per cell (corners counted once), with z / filled / partial / cover /
+  unknown layers, views, sources, status and uncertainties.
+- **`block.inventory`:** observed, computed, declared and top-view layers kept apart. Eligible egg trays are given only
+  from declared occupancy.
+- **F, `block_declaration`:** a size, missing cell or partial stack that contradicts a face gives `conflict`. A
+  measured reference height only demotes. A declaration never gives `exact`.
+- **S, CORNER:** width and depth around the nearest stack.
+- **N, ELEVATED:** operator taps (present, missing, step down, unsure); the flush-top rule is conditional.
+- **`confirmed`:** visible stacks verified, the plan agrees, and the interior is declared or seen from above. The basis
+  is shown.
+- **Manual counts** store `counted_by` and `second_counter`.
+- **A refused photo keeps `needs_view`.**
+
+**App 0.5.0+27** (`3b5c868`, built by a subagent, verified here).
+- A blind declaration pane after the three photos and before upload, asked once per block.
+- Optional CORNER and ELEVATED extras, plus a tap grid.
+- The extruded grid result, labelled "not a point cloud or measured mesh".
+- The confirmed look names its basis and never says "exact".
+- Recount name fields.
+
+**Validation tooling:** `docs/PHYSICAL_VALIDATION.md` and `benchmarks/validation-schema/*.schema.json` (recount,
+planted error, declaration freeze, result hash).
+
+**Report:** `docs/RELEASE_0.5.0.md`.
+
+**Tests (measured).**
+- Worker: 182 tests, 176 pass, 0 fail, 6 todo.
+- Backend pytest: 155 pass. The 34 ruff errors predate this work and are in other files; the new files are clean.
+- Flutter: analyze clean, test 220/220.
+- **Replay** (`reports/replay-0.5.0-20261101`):
+  - 22 saved trios: 0 wrong releases, 0 wrong `exact`;
+  - adversarial: 25 of 27 pass. The 2 failures are another block's sides with **no** declaration; with a declaration
+    (S14F, R02F) they are withheld.
+
+**Offline checks of the extras.**
+- **CORNER is not validated:** img-12 finds no stacks; img-14 splits 3 | 4 where the labels suggest 4 | 3.
+- **ELEVATED cannot be scored:** the only blocks with top photos have refused faces.
+
+**Honest limits.**
+- `confirmed` is effectively unreachable with three photos: front-middle and side-middle stacks are read by one capture,
+  and E was rejected.
+- Occupancy is not measured.
+- There are 0 physical recounts.
+
+**Staging deploy (authorized by the user's specification after the offline gates).**
+- `npx wrangler deploy --env staging` gave version `52a1d5e8-f8fa-425d-a98d-64fdfbad78d6`, observe mode. Production is
+  untouched and its /health still shows the old contract.
+- **Smoke scan on staging** (L-100 photos, declared 5 × 1, admin token not printed):
+  - `worker-0.5.0`, `conflict`, total null, "declared 1 stacks deep, the side faces show 5";
+  - a 5 × 5 grid with Q reading fields;
+  - occupancy unknown.
+
+**APK:** `egg-tray-counter-0.5.0-block-staging.apk` (repo root, git-ignored).
+- 63,738,769 bytes, SHA-256 a641bc9196fefca5d12e16e0c522875dc767ade20dc6ddc1c0497e018bd351ec.
+- aapt: versionName 0.5.0, versionCode 27.
+- apksigner: release signer 29013b98..., the same as 0.4.12 and 0.4.13, so `adb install -r` upgrades in place.
+- No admin token or keystore password strings in libapp.so.
+
+**Not done.**
+- **Phone install and field test:** no device was connected (`adb devices` empty).
+- **The physical validation pilot.**
+- **The user's blind counts (D2).**
+- **Pushing the branch.**
+- **Archiving the E/K2 side sessions** (needs the user's OK).
+
+**Next.**
+1. Connect the Redmi, run `adb install -r egg-tray-counter-0.5.0-block-staging.apk`, and run the protocol in
+   `docs/PHYSICAL_VALIDATION.md`.
+2. A second reader, or a STRAIGHT-2 capture (Phase M), so that wide blocks can reach `exact` / `confirmed`.
+3. The user decides on pushing.
+
+## 2026-11-01 (later) - Plan 2: capture provenance and frame doubts (Worker 0.4.15, app 0.4.15+26) (Claude Code)
+
+**Plan 2** (`C:/Users/rahul/.claude/plans/spicy-growing-flame.md`, approved by the user) answers "more client-side
+constraints, and a real 3D counter". It came from a 10-agent workflow: 2 repo readers, 3 web researchers, 3 designs,
+a critic and a synthesis. Its key verdicts:
+- Every phone gate needs a server mirror.
+- A "3D counter" means an X x Y grid where every stack carries independent readings, plus an independent footprint
+  source.
+- ARCore on the Redmi Note 9 Pro: certified, but with no Depth API (official device list), so AR is optional.
+- No on-device detector: a 720G is too slow, YOLO is AGPL, and it would not be an independent reading.
+- No point-cloud or feed-forward 3D.
+
+Committed first: 5a71e85 (the 0.4.14 work).
+
+**J: provenance** (Worker `readCapture`, `duplicateViews` / `boxOverlapScore`, `buildBlock` `trusted`):
+- **Trust rule.** A reading verifies a stack only from a `captured_still` that was not blocked, with a `turned` side
+  for side views, and not a copy of an earlier view.
+- **Holes closed (measured).** Before this, one photo sent three times gave `exact`, from both the gallery and the
+  camera.
+- **Duplicate score on saved detections.** Re-encodes score 0.944-0.995; different captures of one block score
+  0.19-0.47. The threshold is 0.8.
+- **Capture field.** `<view>_capture` is read first, so the 8,000-character evidence limit can no longer drop the
+  heading. R2 stores `capture_source` / `capture_blocked` metadata and `evidence.json` beside each photo.
+  Fingerprint version 3 covers the capture.
+
+**K1: frame doubts** (`spanColumns(detections, frame)`), on the 82 accepted columns:
+- `end_at_frame_edge` (within one box height of the frame edge) fires only on img-30 and L-80.
+- `cut_at_frame_side` fires only on img-08's edge stack (correct count, now unverifiable).
+- `pitch_differs` (over 1.2x the face pitch) never fires.
+
+**No distance refusal yet.** Pixel pitch does not separate good faces (22.5-25 px) from W05 (26 px, wrong). The
+threshold waits for the distance ladder (plan G).
+
+**App 0.4.15+26:**
+- The gallery button is behind Settings > "Gallery scans (testing only)", off by default.
+- Resume without a camera refuses, unless a result is already kept on the phone or the switch is on.
+- The scan form adds `<view>_capture` (`ApiClient.captureField`).
+
+**Replay** (`reports/replay-phase-j-20261101`):
+- Adversarial: 22/24 pass. The 2 failures are S14 and R02 (another block's sides), which need Phase F.
+- New cases S15-S19 and R04 pass, including S18, a genuine 2x1 camera walk-around that is still `exact` 40.
+- Saved trios: 0 wrong releases.
+
+**Tests (measured).**
+- Worker: 167 tests, 161 pass, 0 fail, 6 todo (the planned E, F and H cases).
+- Flutter: 179/179 on the full run. Analyze is clean after a one-line style fix; the affected suites were re-run
+  (51/51).
+
+**Sessions proposed (cards, not started):**
+- E: a detector-independent pixel counter, offline.
+- K2: the on-phone layer signal, offline.
+
+**Not done.**
+- No deploy or install: staging is still ef7c1dd3 (0.4.12), and the phone has 0.4.12.
+- The user's blind counts (D2).
+- Phases F, G, L, M, N, H and O.
+
+**Next.**
+1. F, the blind declaration: Worker `block_declaration` reader and `confirmed` status, plus an app pane before
+   upload.
+2. With approval: deploy 0.4.15 to staging (`--env staging` only), install APK 0.4.15 on the Redmi, and check the turn
+   sign on a walk-around.
+
+## 2026-11-01 - plan to exact counting; Phases A, B, C, D1 built and tested locally (Claude Code)
+
+**The plan.** `C:/Users/rahul/.claude/plans/spicy-growing-flame.md`, approved by the user. It came from a 12-agent
+research workflow: 3 repo readers, 4 web researchers, 3 independent designs, an adversarial critic and a
+synthesizer.
+
+**Its core decision.** "100%" means zero wrong `exact` or `confirmed` totals, with coverage reported beside it.
+Hidden interior stacks cannot be measured from photos.
+
+**Phase A: replay harness and registry (measured, development data).**
+- `benchmarks/registry-20261101`: 72 faces and 22 three-view replays of 14 sets, each with truth tier and
+  provenance.
+  - Built by `scripts/registry_near_duplicates.py` and `scripts/build_replay_registry.mjs`.
+  - **dHash check.** The 18 audit-leaked labelled photos match a detector pool at distance 0-7, and the 6
+    leak-free ones at 10 or not at all. **None of the 42 MUTAA photos matches**, so they are out of sample for the
+    detector.
+  - The 8 MUTAA staging responses are now in `reports/mutaa-manual-vs-backend-20261031/raw/`.
+- `cloudflare-worker/test/replay_benchmark.mjs` and `.test.mjs` run the Worker's own functions offline.
+  - `scripts/replay_benchmark.mjs` writes the report.
+  - `scripts/test_all.ps1` now runs the Worker tests.
+- **Results:**
+  - Per-face verdicts equal the Python 0.4.11 evaluation on all 52 labelled photos (0 mismatches).
+  - Labelled clusters: 10/22 accepted, 9 correct, 1 wrong (img-30, 78 for 80).
+  - Saved trios: 0 wrong releases.
+  - The app's 1600 px re-encode changed the count in 7 of 10 views (img-30: 78 to 79).
+  - Report: `reports/replay-baseline-20261101/README.md`.
+
+**Phase B: miss taxonomy** (`reports/miss-taxonomy-20261101`, overlays from `scripts/overlay_columns.py`). Every
+silent miss on a close face is at a stack end:
+- img-30 stack 2: a box over the top trays of two stacks;
+- img-30 and L-80 stack 4: the bottom tray was cut by the frame edge, got a half-height box and was merged as a
+  duplicate;
+- L-109 stack 4: the bottom tray had no box.
+
+Far faces (W05, M16-FAR) lose layers inside the stack and are already refused.
+
+**Phase C: Worker `worker-0.4.14` release contract.**
+- A stack is `verified` only when two photos read it the same, with no gap-filled layer and no doubt.
+- `exact` needs every visible stack verified.
+- New fields:
+  - per column: `doubts` (box_over_two_stacks, box_over_two_trays, end_box_cut_short, bottom_above_floor);
+  - per cell: `verified` and `readings`;
+  - per block: `visible_verified_trays`, `visible_single_reading_trays`, `single_reading_cells`;
+  - per view: `stray_groups`, the 1-2 box groups, which make the block an estimate.
+- **Doubts on the 82 accepted columns:** all 4 known silent misses are flagged, plus 11 others (7 known correct).
+  The floor check is limited to interior stacks: on end stacks it fired on 4 correct faces.
+- **Adversarial library:**
+  - 0.4.13 failed 5 cases, including `exact` 79 for 80 (S03, S04) and `exact` 60 for 80 (two stacks merged).
+  - 0.4.14 fails 2: side photos of another block with a real turn (S14, R02). These need Phase F.
+- **Cost:** blocks wider than two stacks are `estimated` until Phase E adds a second reading for front-middle
+  stacks.
+
+**D1: side check and heading archive (Worker and app).**
+- A side turned more than 135 degrees is refused as `faces_back`, by the Worker and before the shutter.
+- The turn direction is recorded as `direction_ok` (LEFT is a right turn, negative yaw) but not enforced until a
+  phone confirms the sign.
+- Headings are archived in R2 custom metadata.
+- Job fingerprint version 3 includes the headings; version 2 jobs still replay (tested).
+
+**App 0.4.14+25.**
+- The result card shows "Seen by two photos" and "Seen by one photo only".
+- The manual count is blind: fields start empty, the app's counts and total are hidden, and every reachable stack
+  must be entered.
+- The heading check refuses back-face side photos.
+
+**Tests (measured).**
+- Worker `npm test`: 156 tests, 150 pass, 0 fail, 6 todo. The todos are the remaining planned gaps: S14 and R02
+  (Phase F), and the stretch checks S03 and S04 (E), S07 (F) and S09 (H).
+- Flutter: analyze clean, 177/177.
+
+**Not done.**
+- Python port of the new rules into `scripts/evaluate_labelled.py`. Skipped: the TypeScript harness now runs the
+  Worker's own code, and parity of the unchanged parts is asserted.
+- No deploy, no APK build, no install. Staging is still ef7c1dd3 (0.4.12); the phone has 0.4.12.
+- Phases D2 (the user's blind counts, sheet in `reports/blind-count-20261101`), E, F, G, H and I.
+
+**Next steps.**
+1. The user fills `reports/blind-count-20261101/sheet.csv`.
+2. Phase E: make `backend/app/vision/rim_count.py` independent (its own pitch and stack ends), score it against
+   the blind counts, then verify the Lambda route and `VISION_SERVICE_TOKEN` read-only.
+3. Phase F: the operator declaration (Worker `block_declaration` plus an app pane before upload).
+4. With approval: deploy 0.4.14 to staging (`--env staging` only), build and install APK 0.4.14 on the Redmi,
+   and check the turn sign on a walk-around.
+
+## 2026-10-31 (later still) - same-face guard: Worker 0.4.13 side check + app heading tracker (Claude Code)
+
+Built at the user's request after the MUTAA comparison (L-100: three front photos gave 500 "estimated" for a
+100-tray block). Contract and details: docs/SCAN_JOBS_AND_DEVICES.md "Side-face check".
+
+App 0.4.13+24:
+- lib/services/heading_tracker.dart: gyroscope yaw about the accelerometer's up.
+- One session per scan, owned by ScanFlowScreen and kept across retakes; a heading exists only while the
+  gyroscope reports.
+- The capture screen refuses a side photo taken without turning, before the shutter.
+- yaw_deg and yaw_session go into each view's evidence.
+
+Worker (PIPELINE_VERSION worker-0.4.13):
+- sideCheck() reads the headings. A side in the same session must be turned at least 45 degrees, and LEFT
+  and RIGHT must be at least 90 degrees apart.
+- Without a heading, a side repeating the front's stacks is `repeats_front`, and any other side of a block
+  more than one stack deep is `unconfirmed`.
+- A refused side gives needs_view with no total, and strips the false depth, cells and tray numbers.
+
+Review:
+- A three-lens review workflow raised 9 findings, and skeptics confirmed 8.
+- Fixed:
+  - Retakes broke the session; the scan-wide session fixes this.
+  - The false grid was still drawn; the side-derived structure is now stripped.
+  - The count rule leaked on re-shots framed one stack tighter or with one stack misread (400/496
+    "estimated" in a perturbation test); fixed by the depth rule.
+  - A silent gyroscope froze the heading; fixed with the sample and freshness checks.
+  - The tracker re-rated the accelerometer; it now requests the uiInterval rate.
+  - Tests were missing for the combined cases.
+- Recorded, not done: headings are not archived and not in the job fingerprint, so a replay from R2 has no
+  heading. Gyroscope drift weakens the test over long pauses.
+
+Tests (measured):
+- Worker npm test 122/122 (11 new side-check tests plus a capture-gate combination test). The two
+  capture-gate tests now send camera headings.
+- Flutter analyze clean; flutter test 176/176 (8 heading tests, 1 pane test showing that a scan's session
+  survives a capture screen and an inactive state).
+
+Replay of saved real responses (sideCheck on stored detections):
+- Withheld: L-100 500 (wrong); mechanics trio 399 (three different blocks, also wrong); 9b4c783e 165 (a
+  genuine trio from app 0.4.9 with no headings, so it is withheld until a 0.4.13 camera scan).
+- Kept: the 99-block (one deep), in all 5 saved scans.
+
+APK built: egg-tray-counter-0.4.13-block-staging.apk (repo root, git-ignored), 62,558,741 bytes, SHA-256
+c3b50b8d07407dde7fc772399866315ba4608eeb653e262fcf960986ca1b2e63. Checks:
+- apksigner: the release key (29013b98...), the same signer as 0.4.12, so `adb install -r` upgrades the
+  Redmi in place and keeps its device key and approval.
+- aapt: 0.4.13 / 24.
+- No admin token or keystore password in any entry.
+
+Not done:
+- Worker 0.4.13 is not deployed (staging is still ef7c1dd3, 0.4.12).
+- APK 0.4.13 is not installed.
+- On-device check of the heading guard on the Redmi: walk around a block, and confirm a front re-shot is
+  refused.
+
+## 2026-10-31 (later) - MUTAA field photos: manual 3D count vs backend (Claude Code)
+
+At the user's request: cloned github.com/RAHUL-DevelopeRR/MUTAA (a27877b) to C:\Users\rahul\MUTAA, outside
+this repo. Full write-up: reports/mutaa-manual-vs-backend-20261031/README.md.
+
+Method:
+- Two agents grouped the photos into block sets (propose, then refute) and kept 8. NONE is a genuine trio.
+- The backend run went through staging ef7c1dd3 in the app's upload format (21 detector calls). The
+  Worker refuses a repeated photo (422 duplicate_view), so the 4 two-photo sets used an unrelated filler as
+  RIGHT, and only their real faces' counts are used.
+- The manual count used 3 blind counters per set plus a reconciler. These are visual counts, not physical.
+
+Results:
+- Close square-on faces: backend per-stack equals manual on 9/10 stacks, with 1 off by 1 (CORNER 14, L-80,
+  L-100). The manual totals equal the user's written totals: L-80 80 and L-100 100.
+- Far face (M16-NEAR): the backend reads -8 to -10 per stack, but the capture check refused it.
+- L-100: LEFT and RIGHT are front photos. The block model returned 500 "estimated" for a 100-tray block.
+  Nothing checks that a side photo shows a side face.
+- Every other set: needs_view (no total).
+- Big blocks are mostly hidden interior (W05: 196 visible of about 1366; L-115: 232 of about 734).
+  Counters disagree on depth.
+
+Next:
+1. Same-face guard (Worker and app): no total when a side view repeats the front. Downgrade to
+   needs_view. In the camera path, require a heading change between captures.
+2. A genuine close trio with physical counts.
+3. A detector retrain on far faces, held out by block.
+4. An interior policy for big blocks: operator-confirmed, or estimated with the visible share shown.
+
+## 2026-10-31 - 0.4.12 on the Redmi, approved; NETWORK TEST on Jio LTE (Claude Code)
+
+PR #2 (rollout/0.4.12-staging -> main) is open, mergeable, and has no CI checks configured.
+
+Phone install:
+- Redmi Note 9 Pro, serial f76d5e20, Android 12. It was unlocked and had 0.4.11 build 22 (installed
+  14 Oct).
+- The user chose "uninstall and install". No counts CSV export was found in Downloads. The 0.4.11
+  history and any counts saved only on the phone are gone. Server-side counts (WH-99, MECH-DONE) are in
+  the 26 Oct snapshot.
+- `adb uninstall` then `adb install egg-tray-counter-0.4.12-block-staging.apk` (4da7db0a...): versionName
+  0.4.12, versionCode 23, first install 2026-10-31 10:53.
+- The fresh install pointed at production. The URL was set to staging in Settings.
+- The phone registered as F39D-8C65 (pending, 0.4.12+23). After `scripts/devices.py approve
+  f39d8c65-7e75-4222-aaee-29d9632db834` the home card read DEVICE APPROVED.
+
+NETWORK TEST, measured on Jio LTE (jionet), colo SIN. Means over successful requests:
+
+| test | OK | TCP | TLS | total |
+|---|---:|---:|---:|---:|
+| health ipv4 | 20/20 | 167 ms | 198 ms | 1574 ms |
+| health ipv6 | 20/20 | 272 ms | 300 ms | 868 ms |
+| trace ipv4 | 10/10 | 113 ms | 131 ms | 388 ms |
+| trace ipv6 | 10/10 | 107 ms | 131 ms | 395 ms |
+| upload auto (3 x 500 KB, IPv4) | 3/3 | 176 ms | 208 ms | 4624 ms |
+
+- Today there was no loss on either family. On 12-14 Oct IPv6 lost 40-66%. That is one sample, so keep
+  the IPv4-first connector and leave the custom-domain decision open.
+- The log lines are in reports/rollout-20261031/network-test-logcat.txt, with the phone's public IPs
+  redacted.
+
+Devices active on staging: F39D-8C65 (the Redmi) and 1179-C06A (the laptop emulator).
+
+Phone gallery scan, same day:
+- The 99-block trio (STRAIGHT img-01, LEFT warehouse image-4, RIGHT img-32) was pushed to
+  /sdcard/Pictures/EggTest and picked by timestamp. The user's own photos were not opened, and a picker
+  screenshot showing them was deleted.
+- Result: "BLOCK ESTIMATE / faces differ by one layer", 5 x 1, 20/20/20/20/19, total 99. Identical to the
+  emulator.
+- Scan 30d9a59c-1a8a-4946-85d7-f36b1d7b80f8. Admin result: job done, attempt 1, replayed true, worker-0.4.12,
+  result_status estimated. Detector boxes: straight 101, left 22, right 24 (identical after the app's
+  1600 px re-encode).
+- Test manual count PHONE-TEST-20261031, note "phone test only, not ground truth": storage state,
+  tamper_proof, count_id 3433c645..., app_total 99, recorded_by f39d8c65.... EXCLUDE PHONE-TEST-* and
+  EMU-TEST-* from every score.
+- The test photos were deleted from the phone afterwards.
+
+Not done yet:
+- A hand test of portrait and sideways capture.
+- Switching staging to enforce (wrangler.jsonc AUTH_MODE "enforce", deploy --env staging, verify 401s).
+- The field round with independent physical counts.
+
+## 2026-10-29 - APK 0.4.12 end to end on the emulator against staging (Claude Code)
+
+Branch rollout/0.4.12-staging. Commit 3989f95 holds the signing change and the 26 Oct entries; it is not
+pushed.
+
+Emulator setup: the existing AVD abi_test (Android 16, x86_64, google_apis_playstore) on this laptop, started
+with -no-snapshot-save.
+
+Steps:
+- Installed egg-tray-counter-0.4.12-block-staging.apk (SHA-256 4da7db0a...): versionName 0.4.12,
+  versionCode 23.
+- On launch the app pointed at production (SERVER REACHABLE). The URL was changed to staging in Settings.
+- The app then registered itself: "WAITING FOR APPROVAL - device 1179-C06A".
+  `scripts/devices.py list` showed it as pending with app 0.4.12+23.
+  `approve 1179c06a-9631-4c27-8d8d-432fcab1c718` made it active, and the home card then read DEVICE APPROVED.
+  It is still active on staging; revoke it if it is no longer wanted.
+- Gallery scan of the 99-block trio:
+  - STRAIGHT img-01 (label 99).
+  - LEFT warehouse image-4 and RIGHT img-32, both photos of the same 19-tray end stack. No genuine LEFT
+    photo exists.
+  - Connection: EGGCONN ipv4, tcp 21 ms, tls 36 ms.
+  - Result screen: "BLOCK ESTIMATE / faces differ by one layer", 5 wide x 1 deep, 20/20/20/20/19, seen
+    99, computed 0, one gap-filled layer, total 99.
+  - The ambiguity is cell [0,0]: straight 20, left 19, chosen 20. This is the same outcome as the phone on
+    12 Oct and the staging replay on 14 Oct.
+- Admin GET /v1/scans/91fbaf6f-a4a2-471f-bb9f-73f62a14df8f/result returned 200 with job done, attempt 1,
+  replayed true and pipeline worker-0.4.12 (stored result, no new inference). Raw detector boxes: straight
+  101, left 22, right 24. The walk counter turns those into the per-stack layers.
+- RECORD MANUAL COUNT: the form opened pre-filled with the app's layers (the anchoring risk).
+  - Sent with block id EMU-TEST-20261029 and the note "emulator test only, not ground truth".
+  - The app showed "Sent to server: filled 99, empty 0".
+  - export_manual_counts lists it with storage state, tamper_proof true, count_id 310c503d...,
+    app_total 99, app_version 0.4.12+23 and recorded_by the emulator device.
+  - EXCLUDE EMU-TEST-* from every score.
+
+What this shows:
+- Registration, approval, upload, scan job, stored result and the manual-count path all work in 0.4.12
+  against staging.
+- It does NOT show counting accuracy: the trio is constructed, these photos are in the set the walk
+  counter was tuned on, and the app itself calls the result an estimate.
+- There are still 0 physical counts.
+- Not tested here: NETWORK TEST on the phone's Jio link, camera capture, resume after the app is killed,
+  enforce mode.
+
+Next: the phone (CSV export, uninstall 0.4.11, install, staging URL, approve), then enforce, then the
+field round with independent physical counts.
+
+## 2026-10-26 - new machine: state re-measured, next plan (Claude Code, analysis only)
+
+No code change, deploy, build, secret or commit. This is a fresh clone of main at 1800db9 (PR #1 merge,
+2026-10-17; tree identical to codex/hybrid-cell-counting) on a new laptop (C:\Users\rahul).
+Git-ignored assets did not come across: work/secrets (staging admin token), work/toolchains, work/vision-deps,
+node_modules, .venv and the 0.4.x APKs.
+
+Measured today:
+- Cloudflare: staging is 47cb2378 (0.4.11, 2026-10-14) and production is 4c1480e6 (2026-09-23), both 100%
+  (`wrangler deployments list`). Staging has no ADMIN_TOKEN secret (`wrangler secret list --env staging`).
+- Wrangler on this machine is already logged in to the owning account (Rahultech72216, also used for
+  kadan-kanakku-api), with workers write scope. Drop the `wrangler login` step below.
+- Worker: a fresh clone fails `npm test`/`build`/`deploy` with TS2688 because tsconfig.json:9 needs the
+  git-ignored worker-configuration.d.ts. After `npx wrangler types`: 111/111, dry runs OK.
+  `npm run deploy` (package.json:7) has no --env and so targets PRODUCTION.
+- Python (scratch venv from backend/requirements-dev.txt): backend 148 passed (4/4 runs, no OpenCV flake),
+  ml 3, scripts 75. Ruff gate: 34 findings in research modules. System Python fails backend collection
+  because a stray site-packages `tests` package shadows backend/tests, so use a venv.
+- The committed eval-20261015, walk-fill and stack-faces results all reproduce byte-identically. The walk-fill
+  results.json hash is 77f4b6d0..., not 3aa1b07c (the 3aa1b07c value in the entry below is from the
+  first revision).
+- App toolchain: Flutter 3.47.0 is at C:\Users\rahul\AppData\Local\Codex\flutter and an Android SDK (adb
+  36, build-tools 35-37) is at %LOCALAPPDATA%\Android\Sdk. Neither is on PATH. cmdline-tools are missing
+  and the licences have not been accepted. One reader ran Flutter on a scratch copy: analyze clean, tests
+  166 passed + 1 skipped.
+- Signing: this machine's ~/.android/debug.keystore is not the 27a05295 key that signed 0.2.2-0.4.11
+  (build.gradle.kts signs release with the debug key). So an APK built here cannot upgrade the phone in
+  place; uninstalling loses on-phone history, unsent counts and the staging URL. After a fresh install the
+  app defaults to the PRODUCTION URL (settings_store.dart:11).
+- Disk: C: had 0.7 to 8.5 GB free during the analysis. That is not enough for an APK build; aim for 10 GB or more.
+- Roboflow projec-mutta is public (MCP projects_get). No October photo is in any training run.
+
+Corrections to earlier wording (no data changed):
+- ef823816 "393 vs 233 (-41%)" compares assumed interiors (assistant 240 vs app 144). Only 153 trays were
+  seen, so it is not a measured detector undercount.
+- 9b4c783e "164" is a visual reading with 60 assumed.
+- The far-face undercount (n = 3 blocks) is a hypothesis.
+- Both existing manual counts are unusable as truth: MECH-DONE's total equals the app's 399 (form
+  pre-filled, manual_count.dart:25-32) and WH-99 was entered by the assistant.
+- The live exposure is staging. Its open routes let anyone list and overwrite manual counts and spend
+  inference. Production 4c1480e6 returns 404 on those routes. Promoting HEAD to production without
+  STATE_PREFIX + ADMIN_TOKEN + AUTH_MODE would open them there.
+- ADMIN_TOKEN must be set before the observe deploy. Without it adminTokenMatches (index.ts:1080) fails
+  closed and a 0.4.12 phone can never be approved.
+
+Next plan:
+- A. Agent-only, now:
+  - Make deploys explicit (deploy:staging, guarded deploy:production; pretest/prebuild `wrangler types`).
+  - Fix the field scorers (reachable-cell totals, filled-only metric, rescan/missing buckets, block_id
+    grouping).
+  - Add a hold-out registry and leak check (include the G31 twins wh074/075/077).
+  - Add an offline shadow scorer (V0/V4/C + gate) and a same-face check.
+  - Commit the Python-TS parity test.
+  - Write the field protocol and scoring spec, frozen before data.
+- B. 0.4.12 staging rollout. It needs the user's approval and runs in this order:
+  1. Confirm the existing wrangler session.
+  2. Generate ADMIN_TOKEN and set it on staging.
+  3. Deploy staging in observe mode and verify.
+  4. Free disk space and choose the signing route (recover the 27a05295 keystore, or uninstall after a CSV
+     export and use a new backed-up release key).
+  5. Build, install and approve the phone.
+  6. Run NETWORK TEST, one scan and one manual count.
+  7. Switch to enforce through wrangler.jsonc.
+  Decide 0.4.12 as-is vs 0.4.13 safeguards (staging default URL, host on the home card, count_id resend,
+  form not pre-filled).
+- C. Field round: at least 3 new blocks, STRAIGHT/LEFT/RIGHT at about 1.5/3/5 m, with independent
+  per-stack filled/empty counts, ideally two counters. Then the first held-out number, with n.
+- D. Then one detector retrain on far and cross-stacked faces, held out by block, in a private Roboflow
+  project.
+- Production promotion, custom domain, the Lambda and the heatmap/3D tracks stay parked.
+
+Track B started (same day, at the user's request):
+- Pre-flight: `npx wrangler types`, then Worker `npm test` 111/111. The staging dry run binds
+  AUTH_MODE observe, STATE_PREFIX state/staging/ and MODEL_ID projec-mutta/2 (PIPELINE_VERSION worker-0.4.12).
+- Flutter 3.47.0 (process-local PATH): `pub get --enforce-lockfile` OK, analyze clean, tests 167/167.
+- Free disk is now 42 GB.
+- Snapshot of the staging manual counts before any change: work/snapshots/staging-20261026/ (git-ignored).
+  It holds the 2 records (WH-99, MECH-DONE), 25 stack rows and the raw JSON.
+- Admin token generated into work/secrets/staging-admin-token (git-ignored; 43 chars, no newline, never
+  printed).
+- NOT set on staging yet: Claude Code's auto-mode permission check refused `wrangler secret put`. So the
+  observe deploy is held too, because without the secret no device can be approved. Staging is still
+  47cb2378.
+- Signing: the only keystore on this machine is the new debug key (SHA-256 76:39:A3:30...). The 27a05295
+  key is only on the DELL machine (probably <old checkout>\mobile\.android-home\debug.keystore or
+  C:\Users\DELL\.android\debug.keystore).
+- The SDK has a licences file but no cmdline-tools. No phone was attached (`adb devices` empty).
+- Next:
+  1. Set the secret: from cloudflare-worker, `wrangler secret put ADMIN_TOKEN --env staging` with the file
+     as stdin.
+  2. `npm run build && npx wrangler deploy --env staging` (never `npm run deploy`).
+  3. Verify: /health shows auth device_v1, auth_mode observe and scan_jobs_v1; unauthenticated GET
+     /v1/devices/me and /v1/manual-counts return 401; `scripts/devices.py list` with EGG_ADMIN_TOKEN
+     returns 200.
+  4. Then decide the signing route, attach the phone and build the APK.
+
+Staging 0.4.12 in observe mode is DEPLOYED (same day, after the user explicitly approved it):
+- `wrangler secret put ADMIN_TOKEN --env staging` from the file. Staging secrets are now ADMIN_TOKEN,
+  ROBOFLOW_API_KEY and VISION_SERVICE_TOKEN.
+- `npm run build && npx wrangler deploy --env staging`: staging version ef7c1dd3-2fd2-464b-8a99-0f27cb6deb6e
+  (100%, 2026-10-26T15:57Z). Production is still 4c1480e6 (`wrangler deployments list`).
+- Verified with no inference spent:
+  - /health returns scan_contracts [cell_identity_v1, model_spatial_v1, reconstruct_v1, scan_jobs_v1],
+    auth device_v1 and auth_mode observe.
+  - With no credentials, GET /v1/devices/me and /v1/scans/<id>/result return 401
+    device_credentials_required.
+  - GET /v1/manual-counts and /v1/admin/devices return 401 admin_auth_failed with no token or a wrong one.
+  - POST /v1/scans/count with no headers reaches the old open path (415 invalid_content_type), so 0.4.11
+    keeps working.
+  - With the admin token: /v1/admin/devices returns 200 {devices: []}; `scripts/devices.py list` says
+    "no devices"; an unknown scan's result returns 404 scan_not_found and its manual-count returns 200
+    (empty); export_manual_counts returns the same 2 records as the snapshot.
+- Note: plain Python urllib with its default User-Agent gets Cloudflare 403 "error code: 1010" (bot
+  signature) before reaching the Worker. The repo scripts are unaffected (they worked).
+- Next:
+  1. Choose the signing route (the 27a05295 keystore from the DELL machine, or a CSV export and uninstall).
+  2. Decide 0.4.12 vs 0.4.13.
+  3. Attach the Redmi, build, install, set the staging URL and approve the device by full id
+     (`scripts/devices.py approve`).
+  4. Run NETWORK TEST, then one scan with a manual count.
+  5. Set AUTH_MODE enforce in wrangler.jsonc, deploy staging and verify.
+
+New release key, and APK 0.4.12 built (same day). The user chose a new key: they export the phone's
+counts as CSV and uninstall 0.4.11 themselves.
+- Keystore: C:\Users\rahul\.egg-tray-signing\ (outside the repo and outside OneDrive). It holds:
+  - egg-tray-release.jks: PKCS12, alias egg-tray-release, RSA 4096, valid to 2054-03-13. Certificate
+    SHA-256 29013b980c183cabe7d93a0befb59cc06c0a4edd0b3baee06fb04657b4cba76f.
+  - storepass.txt (random, never printed).
+  - key.properties, plus README.txt with restore steps.
+  mobile/android/key.properties (git-ignored) is a copy of key.properties.
+- Backup: the only copy is on this laptop, which has a single drive. The user must copy the whole folder
+  offline (USB or password manager). Every later APK must be signed with this key.
+- mobile/android/app/build.gradle.kts (uncommitted): release builds sign with key.properties. A release
+  task without that file fails ("refusing to sign a release with the debug key"); debug and IDE sync still
+  use the debug key.
+- Build environment (process-local only):
+  - PATH gets the Codex Flutter bin and SDK platform-tools; ANDROID_HOME/ANDROID_SDK_ROOT point at
+    %LOCALAPPDATA%\Android\Sdk; JAVA_TOOL_OPTIONS=-Djava.net.preferIPv4Stack=true.
+  - The Gradle wrapper's own download timed out twice (Java connect timeout). Gradle 9.3.1-all was fetched
+    with `curl -4` into ~/.gradle/wrapper/dists/gradle-9.3.1-all/9ot9r568e8zfvvd4mn8rbu1j0/ and matched
+    the published SHA-256 17f27786...6e43.
+  - AGP installed Android SDK Platform 35 by itself. `flutter build apk --release` took 824 s.
+- APK: egg-tray-counter-0.4.12-block-staging.apk (repo root, git-ignored), 62,542,361 bytes, SHA-256
+  4da7db0a1c10f1e64769d84579f318053b66ce40a01c347e98e6e4509c8e596c.
+  - apksigner: verifies (v2), 1 signer, CN=Egg Tray Counter Release, digest 29013b98... (the new key).
+  - aapt: package com.dharani.eggtray.egg_tray_counter, versionName 0.4.12, versionCode 23, minSdk 24,
+    targetSdk 36.
+  - Neither the admin token nor the keystore password appears in any APK entry.
+  - The default server URL is still production (settings_store.dart:11), so set the staging URL after
+    install.
+- Not done: install. No phone is attached.
+- Next:
+  1. The user runs COPY ALL COUNTS AS CSV in 0.4.11, then uninstalls it.
+  2. Attach the phone with USB debugging and accept this laptop's RSA key.
+  3. `adb install egg-tray-counter-0.4.12-block-staging.apk`.
+  4. Settings: staging URL.
+  5. `scripts/devices.py approve <full id>`.
+  6. Run NETWORK TEST with `adb logcat | findstr EGGNET`.
+  7. One scan with RECORD MANUAL COUNT.
+  8. Enforce.
+
 ## 2026-10-15 (later) - walk-overfill experiment: label-free walk variants (Claude Code subagent)
 
 Offline only (no deploy, no inference, no commit; backend/ untouched, deployed counting unchanged in 0.4.12).

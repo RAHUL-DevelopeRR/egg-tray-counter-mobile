@@ -1,4 +1,156 @@
-> 2026-10-15: release 0.4.12 (staging only; production 4c1480e6 stays open and unchanged).
+> 2026-11-06 (latest): **App 0.7.0+31 (Plan 5 Phase 2) shows the stacking rule:** hidden stacks drawn "=H" and called
+> "full by the stacking rule, not seen", never counted, exact or verified; the residual line says the estimate is wrong
+> if the rule was broken; a withheld rule block shows its reason in plain words and figures that are never a total.
+> Built and tested locally, and pushed to `origin/rollout/0.4.12-staging` on 6 Nov at the user's request; not installed
+> **7 Nov:** the Redmi runs app 0.7.0+31, and staging runs Worker 0.7.0 (Cloudflare version `bafa21d1`); production
+> `4c1480e6` untouched. Smoke-tested from the Redmi the same day (6 paid calls): the 99 row releases 99, L-100 is
+> withheld with `no_rule_height`; both match the replay (`reports/staging-smoke-0.7.0-20261107`). No deep block
+> scanned live yet. Physical counts: still zero.
+> - **Plan 5 Decision 3 answered by the user on 6 Nov: option (a).** H needs two distinct stacks read cleanly at the
+>   same height on two different faces, a back corner among them. This is what Worker 0.7.0 already has as
+>   `RULE_DEFAULTS.basis: "two_faces"`; no code change. The other options stay selectable as replay comparisons only.
+>
+> 2026-11-05 (evening): **Plan 5 Decision 1 answered by the user: yes.** Hidden stacks are the block's full
+> height H "by the stacking rule", replacing the 3 Nov default (neighbours' face height). Phase 1 is built offline as
+> Worker 0.7.0 (local, not pushed, not deployed; staging still 0.5.0): docs/GRID_CONTRACT_0.7.0.md,
+> reports/stacking-rule-0.7.0-20261105.
+> - **Decision 3 (how strict H is) is still open.** The user was unsure what it meant; it was explained, and the build
+>   uses the recommended default (a) (two stacks read cleanly at one height on two faces, a back corner among them), one
+>   switch in `RULE_DEFAULTS`. The replay compares all four options so the user can choose with numbers.
+> - Measured offline [S, R]: library 38/38, the same 5 known wrong estimates as 0.6.0; S21 now withheld (its sides are
+>   copies of the front). New wrong totals the rule cannot catch: a short partial with the full stack behind it reads as
+>   one full column (FR13, Phase 1b), a partial standing in front of a block (Decision 18), and over-reads on two faces
+>   (FR18: 299 for 291, worse than 0.6.0's 294). Physical counts: still zero.
+>
+> 2026-11-05: **Farm stacking rules, stated by the user** (requirements, not yet measured or audited):
+> - Half-filled (partial) stacks are placed only on the faces a scan photographs: STRAIGHT, LEFT or RIGHT. Workers are
+>   strictly instructed never to put them in the hidden interior. The back row is always full.
+> - No interior position is ever empty: the interior is always complete.
+> - Full stack height varies per block; the tallest normal stacks on the block's faces show it.
+> - The back side of a block is usually against a wall, so a BACK photo is rarely possible.
+> - Photos from above or below are impractical for operators; the top view is not part of the default scan.
+> - Cover trays (user answer to Plan 5 Decision 4): **sometimes**. A full stack may or may not carry an empty cover
+>   tray on top, inside the block too. So a full stack is F or F + 1 layers, and the hidden interior is uncertain by
+>   up to one layer per hidden stack (K layers in all).
+> - Consequence for the model: every hidden stack is a full stack at the block's full height, "full by the stacking
+>   rule", not the median of its face neighbours (Worker 0.6.0, `index.ts:657-670`, would under-read hidden stacks
+>   behind a partial face stack). Not implemented yet. The rule is only as reliable as its enforcement; the farm day
+>   should open 2–3 blocks to check it.
+> - Direction asked by the user: a multi-photo backend (3 photos by default, more allowed: repeat and segment photos
+>   of a face, corners) so the outer ring of stacks is measured and verified; the interior follows the rule. A frontier
+>   VLM is not a source of exact counts (measured: AI counters disagreed on 21 of 29 photos; L-115 read 771 / 897 /
+>   1455); the Plan 3 "no VLM" rule stands unless the user lifts it.
+>
+> 2026-11-04: Worker 0.6.0 and app 4b merged into `rollout/0.4.12-staging` (local, not pushed, not
+> deployed); app 0.6.0+29 with the offline demo ("DEMO — SAVED RESULTS (NOT A LIVE SCAN)"). Staging still runs 0.5.0.
+> Block results are in tray layers only: the "Eggs if every tray is full" row is removed from the block panel.
+>
+> 2026-11-03: Worker 0.6.0 evidence grid (branch `real/worker-0.6.0`, local, not deployed);
+> contract docs/GRID_CONTRACT_0.6.0.md. Do not deploy it before an app that reads `suggested_inputs` (app 4b).
+> - **Decisions (user defaults of 3 Nov):** deep-block totals are estimates, never `confirmed`; hidden stacks are shown
+>   as assumed at their neighbours' face height, kept apart from counted ones; tray layers, never eggs or rupees.
+> - **Design defaults awaiting the user's call (not user decisions; contract §6):** Decision 1, corrected: a CORNER
+>   photo cannot prove a depth (it sees the same touching rows), so any depth over one stack needs the declared block
+>   size, and a side that repeats the front also needs the CORNER photo. `exact` is for one-deep blocks only. Also
+>   open: an honest 5 x 1 declaration for a row with rows touching it is withheld for good (S27); through-gap heights
+>   that disagree are a conflict.
+> - **Top view:** presence, holes and step-ups only; never a count, never a depth witness.
+> - **Measured (offline replay, synthetic library, reports/evidence-grid-0.6.0-20261103):** 38 of 38 adversarial
+>   cases pass, 0 wrong exact; S25 (300 for 100 in 0.5.1) is withheld. The 4 x 3 field block reads 105 counted + 60
+>   assumed = 165 in a counterfactual replay (tier V reading 164). No physical count exists.
+>
+> 2026-11-03: app 4b (branch real/app-evidence-grid). The result shows counted
+> (read on faces) and assumed (hidden stacks at their neighbours' height) trays apart, in tray layers; an older
+> server's `confirmed` is shown as an estimate. Follows the user's 3 Nov defaults: deep-block totals are estimates,
+> never confirmed.
+
+> 2026-11-02: MUTAA validation of 0.5.0 and Worker 0.5.1 (local, not deployed).
+> - **Validation** (reports/mutaa-validation-0.5.0-20261101, partial): staging released no wrong total on 33 scans.
+>   On accepted photos, the app matches double-counted manual stacks 29 of 42; undoubted columns match 20 of 21.
+>   The manual counts are tier V (Claude visual counts) and incomplete.
+> - **Decision (0.5.1):** a turned side that repeats the front gets its depth only from a guided-camera CORNER photo
+>   that reads the same width and depth. Not from the heading alone, a declaration, or ELEVATED taps. Fixes the L-100
+>   false 500. Cost: even near-square blocks need a CORNER photo for a total.
+> - **Open, the user's call:** S25 (rows behind a row, real turn) still gives 300 for 100. The option is a CORNER photo
+>   or an agreeing declaration for any depth over one stack.
+> - **App follow-up needed:** an "add CORNER photo" action on the result screen, and copy that stops calling CORNER
+>   optional.
+> - **Not production ready:** no field pilot and no real CORNER photo yet; the staging Worker is still 0.5.0.
+> - **Plan 4 draft 2** (docs/PLAN_4_EVIDENCE_GRID.md) awaits Decision 0: what the count is for, acceptable error,
+>   coverage floor, minutes per block. Physics (critique): a level top proves presence and steps, never a count, so deep
+>   blocks top out at a labelled estimate unless Phase 0 shows otherwise.
+
+> 2026-11-01 (latest): release 0.5.0 built; Worker on **staging** (`52a1d5e8`); production untouched; not pushed.
+> - **Frozen product:** a phone-only physical egg-tray counter with an X/Y/Z grid model.
+>   - Eligible tray = a tray holding eggs (a partly filled tray counts); empty cover trays are layers, not eligible.
+>   - Unknown occupancy stays unknown; no inference from a habitual height.
+> - **Readers.** Only the detector walk is validated. The pixel rim reader (E) was rejected and the 5/6 parity checker
+>   (P) disabled, both measured (reports/rim-independent-20261101, reports/cross-stack-20261101).
+> - **Statuses** exact / confirmed / estimated / conflict / needs_view (docs/GRID_CONTRACT_0.5.0.md). A declaration never
+>   gives exact. confirmed is effectively unreachable with three photos.
+> - **Next:** phone install and the physical pilot (docs/PHYSICAL_VALIDATION.md); then a second front capture or
+>   reader.
+
+> 2026-11-01 (latest): Plan 2 approved (C:/Users/rahul/.claude/plans/spicy-growing-flame.md): stricter client
+> constraints and a "3D counter".
+> - "3D counter" here means an X x Y grid where every stack carries independent readings, plus an independent footprint
+>   source (declaration, elevated view or AR). It does not mean point clouds: those failed on these photos.
+> - Every phone gate gets a server mirror. The server is the trust boundary.
+> - ARCore: the Redmi Note 9 Pro is ARCore-certified **without the Depth API** (official list). AR is optional, never
+>   required for `exact`.
+> - Done (local, not deployed): J (camera-only verified readings, copies count once, short capture field, evidence
+>   archived) and K1 (frame-edge, frame-side and pitch doubts); Worker 0.4.15, app 0.4.15+26 (gallery button behind a
+>   developer switch).
+> - Proposed as separate sessions: E (detector-independent pixel counter, offline) and K2 (on-phone layer signal,
+>   offline).
+> - Next here: F (blind operator declaration).
+
+> 2026-11-01 (latest): plan for "100% counting on the 3D backend" from the existing photos only
+> (C:/Users/rahul/.claude/plans/spicy-growing-flame.md, approved by the user).
+> - Decision: "100%" is a contract about what the backend releases, not a promise for every photo.
+>   - `exact`: every visible stack read the same by two photos.
+>   - `confirmed` (Phase F, not built): an operator-declared interior.
+>   - `estimated`: the parts are shown separately.
+>   - Otherwise the total is withheld.
+>   - Hidden interior stacks can never be measured from photos.
+> - Proof of 99% needs 299 of 299 blindly recounted released blocks in the field. The existing photos can prove
+>   at most about 22% (2 untouched blocks); their job is regression testing and abstention safety.
+> - Done 2026-11-01 (local, not deployed): Phases A (replay harness and registry), B (miss taxonomy), C (Worker
+>   0.4.14 release contract, app 0.4.14 blind manual count) and the D1 Worker/app part.
+> - Waiting on the user: D2, a blind per-stack count of the existing photos (reports/blind-count-20261101).
+> - Next: E (independent pixel counter), F (operator declaration), G (distance ladder, about 40 Roboflow calls,
+>   needs approval).
+
+> 2026-10-31 (latest): same-face guard built (Worker worker-0.4.13 sideCheck, app 0.4.13 heading tracker).
+> - Decision: a block more than one stack deep gets a total only when the camera heading confirms both side
+>   faces. Gallery and older-app scans count one-deep blocks only. A refusal beats a false total.
+> - Not yet deployed or installed. Docs: docs/SCAN_JOBS_AND_DEVICES.md "Side-face check".
+
+> 2026-10-31 (later): MUTAA photos compared (reports/mutaa-manual-vs-backend-20261031).
+> - On close, square-on faces the backend per-stack equals the visual count (9/10 stacks). Manual equals
+>   the user totals for L-80 and L-100.
+> - Far faces read about half and are refused.
+> - Wrong view roles (LEFT/RIGHT = front) gave 500 "estimated" for a 100-tray block. A same-face guard is
+>   the top fix.
+> - No genuine trio exists in the field photos.
+
+> 2026-10-31: the Redmi runs APK 0.4.12+23 (new release key), pointed at staging and approved as F39D-8C65.
+> The 0.4.11 data on the phone was removed with the uninstall, at the user's choice. NETWORK TEST on Jio LTE:
+> all OK over both IPv4 and IPv6. Staging is still in observe mode. Still 0 physical counts.
+
+> 2026-10-26 (later): the staging Worker is 0.4.12 in observe mode, version ef7c1dd3. ADMIN_TOKEN is set
+> from work/secrets/staging-admin-token (a new token; the old file was lost with the old machine).
+> Production is still 4c1480e6 and open. APK 0.4.12+23 is built (SHA-256 4da7db0a...) and signed with a NEW
+> release key (cert 29013b98..., kept in C:\Users\rahul\.egg-tray-signing, back it up). The key cannot upgrade
+> 0.4.11, so the phone needs a CSV export and uninstall first. Not installed yet.
+
+> 2026-10-26: new machine (C:\Users\rahul, fresh clone of main 1800db9). 0.4.12 is code-complete but NOT
+> deployed, built or installed: staging is still 47cb2378 (0.4.11), production 4c1480e6, and the phone runs 0.4.11.
+> Wrangler is already logged in here. Staging has no ADMIN_TOKEN, and the old token file did not come across.
+> The local debug key differs from the phone's 27a05295 signer, so there is no in-place upgrade without the old key.
+> There are still 0 physical counts. Plan and corrections: the 2026-10-26 PROGRESS.md entry.
+
+> 2026-10-15: release 0.4.12 code (staging only; production 4c1480e6 stays open and unchanged).
 > Contract docs/SCAN_JOBS_AND_DEVICES.md (read its "As built" section). Decisions: phones get their own
 > device id + secret (secure storage, never in the APK), approved by the admin with scripts/devices.py
 > (EGG_ADMIN_TOKEN, local file work/secrets/staging-admin-token, git-ignored); staging rolls out in

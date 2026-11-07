@@ -1,0 +1,25 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "Blind two-person recount of one block",
+ "type": "object",
+ "required": ["block_id", "scan_id", "counted_at", "counter_a", "counter_b", "stacks"],
+ "properties": {
+  "block_id": {"type": "string", "maxLength": 64},
+  "scan_id": {"type": "string", "format": "uuid"},
+  "counted_at": {"type": "string", "format": "date-time"},
+  "counter_a": {"type": "string", "maxLength": 80},
+  "counter_b": {"type": "string", "maxLength": 80},
+  "saw_app_result_before_counting": {"const": false},
+  "stacks": {"type": "array", "items": {
+   "type": "object", "required": ["x", "y", "a", "b", "reconciled"],
+   "properties": {
+    "x": {"type": "integer", "minimum": 0}, "y": {"type": "integer", "minimum": 0},
+    "a": {"$ref": "#/$defs/count"}, "b": {"$ref": "#/$defs/count"}, "reconciled": {"$ref": "#/$defs/count"},
+    "method": {"enum": ["face", "dismantled", "from_above"]}
+   }}},
+  "notes": {"type": "string", "maxLength": 2000}
+ },
+ "$defs": {"count": {"type": "object", "required": ["filled", "partial", "empty"],
+  "properties": {"filled": {"type": "integer", "minimum": 0}, "partial": {"type": "integer", "minimum": 0},
+   "empty": {"type": "integer", "minimum": 0}, "present": {"type": "boolean"}}}}
+}

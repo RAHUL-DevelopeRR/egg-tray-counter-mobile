@@ -5,11 +5,14 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../models/block_declaration.dart';
 import '../../models/capture_view.dart';
+import '../../models/extra_capture.dart';
 import '../../models/scan_result.dart';
 import '../../models/scan_session.dart';
 import '../../services/api_client.dart';
 import '../../services/device_auth.dart';
+import '../../services/heading_tracker.dart';
 import '../../services/history_database.dart';
 import '../../services/pending_scans.dart';
 import '../../services/scan_failure.dart';
@@ -19,10 +22,24 @@ import '../capture/guided_capture_pane.dart';
 import '../capture/photo_upload_pane.dart';
 import '../../services/manual_count_store.dart';
 import 'block_view.dart';
+import 'declaration_pane.dart';
+import 'elevated_tap_grid.dart';
+import 'extra_views_pane.dart';
 import 'result_look.dart';
 import 'manual_count_screen.dart';
 
-enum _FlowPhase { capture, processing, result }
+/// capture (the three faces), then once per block the blind declaration,
+/// then (guided camera only) the optional extras: each extra photo is an
+/// extraCapture, an elevated one followed by its top reading.
+enum _FlowPhase {
+  capture,
+  declaration,
+  extras,
+  extraCapture,
+  elevatedTaps,
+  processing,
+  result,
+}
 
 class ScanFlowScreen extends StatefulWidget {
   const ScanFlowScreen({
@@ -58,6 +75,8 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
   _FlowPhase _phase = _FlowPhase.capture;
   late ScanSession _session;
   CaptureView? _captureView;
+  ExtraView? _extraView;
+  String? _cornerSide;
   ScanResult? _result;
   ApiClient? _client;
   double? _uploadProgress;
@@ -67,11 +86,16 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
   bool _running = false;
   final ManualCountRepository _manualCounts = SqliteManualCountRepository();
 
+  /// One heading session per scan, kept across retakes: a retaken side is
+  /// compared with the STRAIGHT photo it will be uploaded with.
+  final HeadingTracker _heading = HeadingTracker();
+
   @override
   void initState() {
     super.initState();
     final resumed = widget.resume;
     _session = resumed ?? ScanSession(scanId: const Uuid().v4());
+    if (!widget.uploadPhotos) _heading.start();
     if (resumed != null) {
       _phase = _FlowPhase.processing;
       _stage = ScanStage.connecting;
@@ -140,6 +164,46 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
     }
   }
 
+  /// The three photos are in. The declaration is asked once per block,
+  /// blind, before anything is uploaded; a retake (asked already, and a
+  /// result may have been seen since) goes straight to the upload.
+  void _photosTaken(ScanSession session) {
+    if (session.declarationAsked) {
+      _process(session);
+      return;
+    }
+    setState(() => _phase = _FlowPhase.declaration);
+  }
+
+  /// Declared, or skipped (null): the result then can never be confirmed.
+  void _declared(BlockDeclaration? declaration) {
+    _session.declare(declaration);
+    if (widget.uploadPhotos) {
+      _process(_session);
+      return;
+    }
+    setState(() => _phase = _FlowPhase.extras);
+  }
+
+  void _takeExtra(ExtraView view, {String? side}) => setState(() {
+    _extraView = view;
+    _cornerSide = side;
+    _phase = _FlowPhase.extraCapture;
+  });
+
+  /// An extra photo was kept: an elevated one is read next.
+  void _extraTaken() => setState(
+    () => _phase = _extraView == ExtraView.elevated
+        ? _FlowPhase.elevatedTaps
+        : _FlowPhase.extras,
+  );
+
+  void _removeExtra(ExtraView view) {
+    final path = _session.extraFor(view)?.path;
+    if (path != null) unawaited(_deleteFile(path));
+    setState(() => _session.clearExtra(view));
+  }
+
   ApiClient _api(String baseUrl) =>
       widget.clientFor?.call(baseUrl) ?? ApiClient(baseUrl);
 
@@ -185,6 +249,11 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
   void _newScan() {
     final previous = _session.scanId;
     unawaited(_deleteSessionPhotos());
+    // A new block: its photos are not compared with the last one's.
+    if (!widget.uploadPhotos) {
+      unawaited(_heading.stop());
+      _heading.start();
+    }
     setState(() {
       _session = ScanSession(scanId: const Uuid().v4());
       _captureView = null;
@@ -211,11 +280,12 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
     // RESUME. Only this screen's own photo files are removed.
     _client?.cancel();
     unawaited(_deleteSessionPhotos());
+    unawaited(_heading.stop());
     super.dispose();
   }
 
   Future<void> _deleteSessionPhotos() async {
-    final paths = _session.paths.values.toList(growable: false);
+    final paths = _session.allPaths;
     await Future.wait(paths.map(_deleteFile));
   }
 
@@ -235,7 +305,9 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final cameraUp = _phase == _FlowPhase.capture && !widget.uploadPhotos;
+    final cameraUp =
+        (_phase == _FlowPhase.capture || _phase == _FlowPhase.extraCapture) &&
+        !widget.uploadPhotos;
     return Scaffold(
       backgroundColor: cameraUp ? Colors.black : null,
       appBar: cameraUp
@@ -244,6 +316,10 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
               title: Text(switch (_phase) {
                 _FlowPhase.capture =>
                   widget.uploadPhotos ? 'Upload photos' : 'Guided capture',
+                _FlowPhase.declaration => 'Block declaration',
+                _FlowPhase.extras => 'Optional photos',
+                _FlowPhase.extraCapture => 'Optional photo',
+                _FlowPhase.elevatedTaps => 'Block top',
                 _FlowPhase.processing => 'Verifying count',
                 _FlowPhase.result => 'Scan result',
               }),
@@ -261,7 +337,7 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
               ? PhotoUploadPane(
                   key: ValueKey(_session.scanId),
                   session: _session,
-                  onComplete: _process,
+                  onComplete: _photosTaken,
                 )
               : GuidedCapturePane(
                   key: ValueKey(
@@ -271,12 +347,55 @@ class _ScanFlowScreenState extends State<ScanFlowScreen> {
                   session: _session,
                   initialView: _captureView,
                   settings: widget.settings,
-                  onComplete: _process,
+                  heading: _heading,
+                  onComplete: _photosTaken,
                   onClose: () {
                     _client?.cancel();
                     Navigator.pop(context);
                   },
                 ),
+        _FlowPhase.declaration => DeclarationPane(
+          key: ValueKey('${_session.scanId}-declaration'),
+          settings: widget.settings,
+          onDeclare: _declared,
+          onSkip: () => _declared(null),
+        ),
+        _FlowPhase.extras => ExtraViewsPane(
+          key: ValueKey('${_session.scanId}-extras'),
+          session: _session,
+          onCorner: (side) => _takeExtra(ExtraView.corner, side: side),
+          onElevated: () => _takeExtra(ExtraView.elevated),
+          onEditTaps: () => setState(() {
+            _extraView = ExtraView.elevated;
+            _phase = _FlowPhase.elevatedTaps;
+          }),
+          onRemove: _removeExtra,
+          onUpload: () => _process(_session),
+        ),
+        _FlowPhase.extraCapture => GuidedCapturePane(
+          key: ValueKey('${_session.scanId}-extra-${_extraView!.name}'),
+          cameras: widget.cameras,
+          session: _session,
+          settings: widget.settings,
+          heading: _heading,
+          extra: _extraView,
+          extraSide: _cornerSide,
+          onComplete: (_) => _extraTaken(),
+          // Closing an optional photo returns to the extras, not home.
+          onClose: () => setState(() => _phase = _FlowPhase.extras),
+        ),
+        _FlowPhase.elevatedTaps => ElevatedTapGrid(
+          key: ValueKey('${_session.scanId}-taps'),
+          x: _session.declaration?.x,
+          y: _session.declaration?.y,
+          initial: _session.extraFor(ExtraView.elevated)?.taps,
+          photoPath: _session.extraFor(ExtraView.elevated)?.path,
+          onDone: (taps) => setState(() {
+            _session.setElevatedTaps(taps);
+            _phase = _FlowPhase.extras;
+          }),
+          onSkip: () => setState(() => _phase = _FlowPhase.extras),
+        ),
         _FlowPhase.processing =>
           _failure != null
               ? ScanFailurePane(
@@ -563,7 +682,10 @@ class _ResultPane extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // One result state drives the icon, the headline and the saved history.
-    final look = resultLook(result.resultStatus);
+    final look = resultLook(
+      result.resultStatus,
+      basis: result.block?.confirmedBasis ?? const [],
+    );
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 22, 20, 32),
       children: [
@@ -693,12 +815,22 @@ class _ResultPane extends StatelessWidget {
               child: const Text('MANUAL RECOUNT'),
             ),
           TextButton(onPressed: onNewScan, child: const Text('NEW SCAN')),
-          FilledButton(
-            onPressed: onRetake,
-            child: Text(
-              'RETAKE ${(result.recommendedView ?? 'photo').toUpperCase()}',
+          // Only a face this app can photograph again gets a button; a view it
+          // does not know (a newer server) is shown as text, never as LEFT.
+          if (CaptureView.values.any((v) => v.name == result.recommendedView))
+            FilledButton(
+              onPressed: onRetake,
+              child: Text('RETAKE ${result.recommendedView!.toUpperCase()}'),
+            )
+          else
+            Text(
+              result.recommendedView == null
+                  ? 'No single photo to retake: start a new scan.'
+                  : 'The server asks for a ${result.recommendedView!.toUpperCase()} '
+                        'photo, which this app cannot take yet: start a new scan.',
+              key: const ValueKey('retake-unknown-view'),
+              textAlign: TextAlign.center,
             ),
-          ),
         ],
         TextButton(onPressed: onDone, child: const Text('DONE')),
       ],

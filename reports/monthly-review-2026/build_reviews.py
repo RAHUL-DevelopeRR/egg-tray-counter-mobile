@@ -53,7 +53,7 @@ def photo_pair(doc, left, right, captions):
         t.cell(1, i).text = captions[i]
 
 
-def base(month):
+def base(month, title="MONTHLY PROGRESS REVIEW", period=None, prepared="1 October 2026", footer_text=None):
     d = Document()
     sec = d.sections[0]
     sec.page_height, sec.page_width = Inches(11.69), Inches(8.27)
@@ -74,15 +74,15 @@ def base(month):
     header.alignment = WD_ALIGN_PARAGRAPH.CENTER
     header.runs[0].font.size = Pt(9)
     footer = sec.footer.paragraphs[0]
-    footer.text = f"EG-Counter  •  {month} 2026  •  Evidence-based progress review"
+    footer.text = footer_text or f"EG-Counter  •  {month} 2026  •  Evidence-based progress review"
     footer.alignment = WD_ALIGN_PARAGRAPH.CENTER
     footer.runs[0].font.size = Pt(9)
 
     for _ in range(3):
         add_text(d, "")
-    p = add_text(d, "MONTHLY PROGRESS REVIEW", "Title")
+    p = add_text(d, title, "Title")
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p = add_text(d, f"{month.upper()} 2026", bold=True)
+    p = add_text(d, period or f"{month.upper()} 2026", bold=True)
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p = add_text(d, "Project ID: MKCE/R&I/Consultancy/2026/001")
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -108,7 +108,7 @@ def base(month):
         p = add_text(d, line)
         p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     add_text(d, "")
-    p = add_text(d, "Department of Computer Science and Business Systems\nM. Kumarasamy College of Engineering\nThalavapalayam, Karur\nReport prepared 1 October 2026")
+    p = add_text(d, f"Department of Computer Science and Business Systems\nM. Kumarasamy College of Engineering\nThalavapalayam, Karur\nReport prepared {prepared}")
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     d.add_page_break()
     return d

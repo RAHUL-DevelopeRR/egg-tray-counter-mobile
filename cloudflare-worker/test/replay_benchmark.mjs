@@ -1,0 +1,328 @@
+// Offline replay benchmark: the Worker's own counting functions (dist build) on saved detections, scored against
+// the truth tiers in benchmarks/registry-20261101/manifest.json, plus a synthetic adversarial library (tier S).
+// No network, no inference: every input is a file already in the repo, so a rule change can be scored before it
+// ships (a done scan job replays its stored answer forever, so a wrong rule cannot be fixed after the fact).
+//
+// Used by test/replay_benchmark.test.mjs and scripts/replay_benchmark.mjs.
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+export const VIEWS = ['left', 'right', 'straight'];
+export const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+export const REGISTRY = 'benchmarks/registry-20261101/manifest.json';
+const ENV = { MODEL_ID: 'replay', EGGS_PER_TRAY: '30' };
+
+export const loadJson = rel => JSON.parse(fs.readFileSync(path.join(REPO, rel), 'utf8'));
+// Saved files are either a Worker response ({views}) or a batch record wrapping one ({response: {views}}).
+export const responseViews = saved => saved.views ?? saved.response?.views;
+
+/** One photo on its own, the way scripts/evaluate_labelled.py scores it: capture gate, then per-column retake reasons. */
+export function faceVerdict(w, detections, image) {
+  const columns = w.spanColumns(detections, image ?? null);
+  const capture = w.captureQuality(columns, image?.width ?? null, image?.height ?? null, w.medianBoxAspect(detections));
+  const face = w.faceColumns(columns, 'face');
+  const flagged = face.filter(c => c.reason);
+  const outcome = !capture.accepted ? 'withheld_gate' : flagged.length ? 'withheld_flagged' : 'accepted';
+  return {
+    outcome, accepted: outcome === 'accepted', total: face.reduce((s, c) => s + c.layers, 0),
+    walk_by_column: face.map(c => c.layers), filled_layers: face.reduce((s, c) => s + c.filled, 0),
+    gate_reasons: capture.reasons, flag_reasons: flagged.map(c => c.reason),
+  };
+}
+
+/** Three views through modelDiagnostics, exactly as the live Worker does after inference. */
+// captures: per view {source, blocked, heading} as the Worker reads it; saved responses carry none, so their readings
+// can never verify a stack (they replay as uploads of unknown provenance).
+export function replayViews(w, views, headings = {}, captures = {}, extras = {}) {
+  const results = Object.fromEntries(VIEWS.map(v => [v, {
+    count: views[v].detections.length, confidence: 0, detections: views[v].detections, image: views[v].image ?? null,
+  }]));
+  return w.modelDiagnostics('replay', results, {}, ENV, 0, undefined, undefined, headings, captures, extras);
+}
+
+/** A blind operator declaration for a synthetic case (docs/GRID_CONTRACT_0.5.0.md). */
+export const declared = (x, y, over = {}) => ({ declaration: { x, y, interior: 'full', missing_cells: [], partial_stacks: [],
+  cover_trays: 'unknown', occupancy: 'unknown', reference_height: null, operator: 'replay', declared_at: null, ...over } });
+
+/** Captures for a synthetic case: guided camera stills (with the case's headings) or gallery uploads. */
+export function capturesFor(source, headings = {}) {
+  return Object.fromEntries(VIEWS.map(v => [v, { source, blocked: source === 'captured_still' ? false : null, heading: headings[v] ?? null }]));
+}
+
+export function blockSummary(result) {
+  const b = result.block;
+  return {
+    status: b.status, total: b.total_trays, width: b.width, depth: b.depth, observed: b.observed_trays,
+    computed: b.computed_trays, filled: b.filled_trays, conflicts: b.conflicts.length,
+    side: Object.fromEntries(['left', 'right'].map(s => [s, b.side_check[s].status])),
+    refused: VIEWS.filter(v => !b.capture[v].accepted), rescan_view: result.rescan.recommended_view,
+    withheld_reason: b.inventory?.withheld_reason ?? null,
+  };
+}
+
+// ---- Synthetic faces (tier S). Columns 100 px wide and 100 px apart, layers at pitch 40 with 36 px boxes, in a frame
+// sized so every intact face passes the capture gate; only the counting rules decide.
+const PITCH = 40;
+// shift: moves the face inside the frame (another capture of the same face). cutBottom: the frame ends inside the
+// bottom row, which then has no full box (the img-30 class).
+export function syntheticFace(heights, { drop = [], short = [], merge = null, shift = 0, cutBottom = false } = {}) {
+  const detections = [];
+  const dx = 37 * shift, dy = 11 * shift;
+  heights.forEach((layers, i) => {
+    const x = (merge !== null && i === merge + 1 ? 100 + merge * 100 + 30 : 100 + i * 100) + dx;
+    for (let k = 0; k < layers; k++) {
+      if (drop.some(([col, layer]) => col === i && layer === k)) continue;
+      detections.push({ class: 'egg_tray', confidence: 0.9, x, y: 100 + (20 - layers + k) * PITCH + dy, width: 100, height: 36 });
+    }
+  });
+  if (cutBottom) {
+    // The last box of every column sits on the frame edge and the image ends there.
+    const height = Math.max(...detections.map(b => b.y + b.height / 2));
+    return { detections, image: { width: 100 * (heights.length + short.length) + 100 + dx, height } };
+  }
+  // Short stacks (fewer than 3 trays) to the right of the face, standing on the same floor.
+  short.forEach((layers, j) => {
+    for (let k = 0; k < layers; k++) detections.push({ class: 'egg_tray', confidence: 0.9,
+      x: 100 + (heights.length + j) * 100, y: 100 + (20 - layers + k) * PITCH, width: 100, height: 36 });
+  });
+  return { detections, image: { width: 100 * (heights.length + short.length) + 100 + dx, height: 1000 + dy } };
+}
+
+/** A guided-camera CORNER photo of a width x depth block seen from the front-left: width + depth - 1 columns, the
+ * nearest (corner) stack drawn with the largest layer pitch, `depth` columns from the left (Worker cornerReading). */
+export function syntheticCorner(width, depth) {
+  const n = width + depth - 1, detections = [];
+  for (let i = 0; i < n; i++) {
+    const pitch = i === depth - 1 ? 52 : PITCH;
+    for (let k = 0; k < 20; k++) detections.push({ class: 'egg_tray', confidence: 0.9, x: 100 + i * 100, y: 100 + k * pitch, width: 100, height: Math.round(pitch * 0.9) });
+  }
+  return { corner: { detections, image: { width: 100 * n + 200, height: 1200 } }, cornerSide: 'front_left',
+    cornerCapture: { source: 'captured_still', blocked: false, heading: null } };
+}
+
+// Camera headings for a genuine walk-around in one session. Sign: positive yaw is a left (counter-clockwise) turn
+// seen from above; to face the block's left side face the operator turns right (-90). Only the magnitude matters to
+// the 0.4.13 side check; the direction is used by the Phase D1 rule.
+export const CAMERA = { straight: { yaw_deg: 0, yaw_session: 'syn' }, left: { yaw_deg: -90, yaw_session: 'syn' },
+  right: { yaw_deg: 90, yaw_session: 'syn' } };
+const swap = { ...CAMERA, left: { yaw_deg: 90, yaw_session: 'syn' }, right: { yaw_deg: -90, yaw_session: 'syn' } };
+const backAsLeft = { ...CAMERA, left: { yaw_deg: 180, yaw_session: 'syn' } };
+
+/**
+ * Adversarial library. Cases are camera scans unless they say `source: 'uploaded_photo'`. check:
+ *   no_wrong_exact  a released `exact` total must equal the truth
+ *   no_wrong_total  any released total must equal the truth
+ *   withheld        no total at all
+ *   not_exact       anything but `exact` (the evidence cannot support it, whatever the total)
+ *   exact_ok        `exact` and equal to the truth (exact must stay reachable)
+ *   not_confirmed   anything but `confirmed` (a declaration cannot stand in for missing photo evidence)
+ *   total_ok        a total is released and equals the truth (coverage the witness views must restore)
+ * fixed_by names the plan phase expected to make a case pass when it fails today (null = must pass now). stretch is a
+ * stricter check the release contract does not require yet (an estimate may be wrong), with the phase meant to meet it
+ * (fixed_by null: a stretch that passes now and must keep passing).
+ */
+export function adversarialCases(registry) {
+  const S = syntheticFace;
+  const trioFromRaw = id => {
+    const t = registry.trios.find(r => r.id === id);
+    return responseViews(loadJson(t.response));
+  };
+  return [
+    { id: 'S01 genuine 4x1 one-deep, all 20', views: { straight: S([20, 20, 20, 20]), left: S([20]), right: S([20]) },
+      headings: CAMERA, truth: 80, check: 'no_wrong_total', fixed_by: null },
+    { id: 'S02 genuine 3x2, all 20 (one hidden stack computed)', views: { straight: S([20, 20, 20]), left: S([20, 20]), right: S([20, 20]) },
+      headings: CAMERA, truth: 120, check: 'no_wrong_exact', fixed_by: null },
+    { id: 'S03 top tray of a middle front stack missed (silent -1)', views: { straight: S([20, 20, 20, 20], { drop: [[1, 0]] }),
+      left: S([20]), right: S([20]) }, headings: CAMERA, truth: 80, check: 'no_wrong_exact', fixed_by: null,
+      stretch: { check: 'no_wrong_total', fixed_by: 'E' } },
+    { id: 'S04 bottom tray of a middle front stack missed (silent -1)', views: { straight: S([20, 20, 20, 20], { drop: [[2, 19]] }),
+      left: S([20]), right: S([20]) }, headings: CAMERA, truth: 80, check: 'no_wrong_exact', fixed_by: null,
+      stretch: { check: 'no_wrong_total', fixed_by: 'E' } },
+    { id: 'S05 layer inside a middle stack missed and gap-filled', views: { straight: S([20, 20, 20, 20], { drop: [[1, 10]] }),
+      left: S([20]), right: S([20]) }, headings: CAMERA, truth: 80, check: 'no_wrong_exact', fixed_by: null },
+    { id: 'S06 short end stack of 2 trays dropped from the front', views: { straight: S([20, 20, 20], { short: [2] }),
+      left: S([20]), right: S([], { short: [2] }) }, headings: CAMERA, truth: 62, check: 'no_wrong_exact', fixed_by: null },
+    { id: 'S07 two front stacks merged into one column', views: { straight: S([20, 20, 20, 20], { merge: 1 }),
+      left: S([20]), right: S([20]) }, headings: CAMERA, truth: 80, check: 'no_wrong_exact', fixed_by: null,
+      stretch: { check: 'no_wrong_total', fixed_by: 'F' } },
+    { id: 'S08 corner heights 1 apart', views: { straight: S([20, 20, 20]), left: S([19]), right: S([20]) },
+      headings: CAMERA, truth: 60, check: 'no_wrong_exact', fixed_by: null },
+    { id: 'S09 missing interior stack in a 3x3 block (photos identical to a full block)',
+      views: { straight: S([20, 20, 20]), left: S([20, 20, 20]), right: S([20, 20, 20]) },
+      // 0.6.0: withheld until the block size is declared, so it releases no wrong total (a guard); declared, it is S29.
+      headings: CAMERA, truth: 160, check: 'no_wrong_exact', fixed_by: null, stretch: { check: 'no_wrong_total', fixed_by: null } },
+    { id: 'S10 LEFT and RIGHT photos swapped (heights differ)', views: { straight: S([20, 20, 20]), left: S([20, 18]), right: S([20, 20]) },
+      headings: swap, truth: 118, check: 'no_wrong_total', fixed_by: null },
+    { id: 'S11 back face (180 degrees) sent as LEFT of a 4x2 block', views: { straight: S([20, 20, 20, 20]), left: S([20, 20, 20, 20]), right: S([20, 20]) },
+      headings: backAsLeft, truth: 160, check: 'no_wrong_total', fixed_by: null },
+    { id: 'S11b back face (180 degrees) sent as LEFT of a square 3x3 block (counts cannot tell it from a side)',
+      views: { straight: S([20, 20, 20]), left: S([20, 20, 20]), right: S([20, 20, 20]) },
+      headings: backAsLeft, truth: 180, check: 'withheld', fixed_by: null },
+    { id: 'S12 front re-shot as LEFT, gallery (no heading), 4x2 block', views: { straight: S([20, 20, 20, 20]), left: S([20, 20, 20, 20]), right: S([20, 20]) },
+      headings: {}, source: 'uploaded_photo', truth: 160, check: 'withheld', fixed_by: null },
+    { id: 'S13 front re-shot as LEFT with the phone turned only 10 degrees', views: { straight: S([20, 20, 20]), left: S([20, 20, 20]), right: S([20, 20]) },
+      headings: { ...CAMERA, left: { yaw_deg: -10, yaw_session: 'syn' } }, truth: 120, check: 'withheld', fixed_by: null },
+    { id: 'S14 side photos of another block, phone really turned (4x1 block, 3-deep neighbour)',
+      views: { straight: S([20, 20, 20, 20]), left: S([20, 20, 20]), right: S([20, 20, 20]) },
+      headings: CAMERA, truth: 80, check: 'no_wrong_total', fixed_by: null },   // 0.5.1: sides repeat the front, withheld
+    { id: 'S15 one photo sent as all three views from the camera (copies, not three captures)',
+      views: { straight: S([20]), left: S([20]), right: S([20]) }, headings: CAMERA, truth: 20, check: 'not_exact', fixed_by: null },
+    { id: 'S16 one photo sent as all three views from the gallery', views: { straight: S([20]), left: S([20]), right: S([20]) },
+      headings: {}, source: 'uploaded_photo', truth: 20, check: 'not_exact', fixed_by: null },
+    { id: 'S17 one-deep 2x1 block, gallery photos', views: { straight: S([20, 20]), left: S([20], { shift: 1 }), right: S([20], { shift: 2 }) },
+      headings: {}, source: 'uploaded_photo', truth: 40, check: 'not_exact', fixed_by: null },
+    { id: 'S18 genuine 2x1 block, camera walk-around: every stack seen by two photos',
+      views: { straight: S([20, 20]), left: S([20], { shift: 1 }), right: S([20], { shift: 2 }) },
+      headings: CAMERA, truth: 40, check: 'exact_ok', fixed_by: null },
+    { id: 'S19 bottom tray cut by the frame on a corner stack, the side photo agreeing (img-30 class)',
+      views: { straight: S([20, 20], { cutBottom: true }), left: S([20], { shift: 1 }), right: S([20], { shift: 2 }) },
+      headings: CAMERA, truth: 40, check: 'not_exact', fixed_by: null },
+    { id: 'S14F S14 with the blind declaration (4 wide, 1 deep): the other block\'s sides contradict it',
+      views: { straight: S([20, 20, 20, 20]), left: S([20, 20, 20]), right: S([20, 20, 20]) },
+      headings: CAMERA, extras: declared(4, 1), truth: 80, check: 'withheld', fixed_by: null },
+    { id: 'S20 3x2 block declared interior-full: front-middle seen once, so the declaration cannot confirm',
+      views: { straight: S([20, 20, 20]), left: S([20, 20]), right: S([20, 20]) },
+      headings: CAMERA, extras: declared(3, 2), truth: 120, check: 'not_confirmed', fixed_by: null },
+    { id: 'R01 MUTAA L-100: three front photos, gallery', views: trioFromRaw('mutaa:L-100'), headings: {}, source: 'uploaded_photo',
+      truth: 100, check: 'no_wrong_total', fixed_by: null },
+    { id: 'R04 MUTAA L-80 front (stack 4 bottom cut by the frame, read 19) with side photos agreeing on 20 and 19',
+      views: { ...trioFromRaw('mutaa:L-80'), left: S([20], { shift: 1 }), right: S([19], { shift: 2 }) },
+      headings: CAMERA, truth: 80, check: 'no_wrong_exact', fixed_by: null },
+    { id: 'R02 MUTAA L-100 sides sent with camera headings of a real walk-around', views: trioFromRaw('mutaa:L-100'), headings: CAMERA,
+      truth: 100, check: 'no_wrong_total', fixed_by: null },   // 0.5.1: was estimated 500; sides repeat the front, withheld
+    { id: 'R02F R02 with the blind declaration (5 wide, 1 deep): the front photos sent as sides contradict it',
+      views: trioFromRaw('mutaa:L-100'), headings: CAMERA, extras: declared(5, 1), truth: 100, check: 'withheld', fixed_by: null },
+    { id: 'R03 MUTAA M16-FAR: neighbouring block in the front photo', views: trioFromRaw('mutaa:M16-FAR'), headings: CAMERA,
+      truth: null, check: 'withheld', fixed_by: null },
+    // 0.5.1: sides that repeat the front need a guided-camera CORNER photo that sees the depth directly.
+    // 0.6.0: a depth over one stack also needs the declared block size (rows standing against a block look the same in
+    // every photo, the CORNER photo included).
+    { id: 'S21 square 3x3 block, camera walk-around, CORNER photo agreeing (3 wide, 3 deep), declared 3 x 3',
+      views: { straight: S([20, 20, 20]), left: S([20, 20, 20]), right: S([20, 20, 20]) },
+      // 0.7.0: its LEFT and RIGHT detections are identical to STRAIGHT's, so the Worker takes them as copies of the front
+      // photo, and a copy never sets the stacking rule's full height: withheld (no_rule_height), not released (0.6.0: 180).
+      // The same block with the sides framed differently (separate captures) is FR21 in test/rule_cases.mjs: 180.
+      headings: CAMERA, extras: { ...syntheticCorner(3, 3), ...declared(3, 3, { interior: 'unknown' }) }, truth: 180, check: 'no_wrong_total', fixed_by: null },
+    { id: 'S22 genuine 3x2 block, camera walk-around, ELEVATED taps only: taps are not a depth witness (sized from the declaration)',
+      views: { straight: S([20, 20, 20]), left: S([20, 20]), right: S([20, 20]) },
+      headings: CAMERA, extras: { topView: { x: 3, y: 2, cells: [] }, elevated: true }, truth: 120, check: 'withheld', fixed_by: null },
+    { id: 'R02C R02 with a CORNER photo of the real block (5 wide, 1 deep): the sides are the front again',
+      views: trioFromRaw('mutaa:L-100'), headings: CAMERA, extras: syntheticCorner(5, 1), truth: 100, check: 'withheld', fixed_by: null },
+    { id: 'S23 lone stack, side photos show it and one stack behind (0.5.0: exact 40)',
+      views: { straight: S([20]), left: S([20, 20], { shift: 1 }), right: S([20, 20], { shift: 2 }) },
+      headings: CAMERA, truth: 20, check: 'no_wrong_total', fixed_by: null },
+    { id: 'S24 5x5 block, back rows 15, RIGHT is the front again, front-left CORNER photo (cannot vouch for RIGHT)',
+      views: { straight: S([20, 20, 20, 20, 20]), left: S([15, 15, 15, 15, 20], { shift: 1 }), right: S([20, 20, 20, 20, 20], { shift: 2 }) },
+      headings: CAMERA, extras: syntheticCorner(5, 5), truth: 400, check: 'no_wrong_total', fixed_by: null },
+    { id: 'S25 5x1 row, real turn, side photos show the row end and two rows standing behind it (three 20s)',
+      views: { straight: S([20, 20, 20, 20, 20]), left: S([20, 20, 20], { shift: 1 }), right: S([20, 20, 20], { shift: 2 }) },
+      headings: CAMERA, truth: 100, check: 'no_wrong_total', fixed_by: null },   // 0.6.0: depth_unproven without a declaration, withheld
+    { id: 'S25C S25 with a CORNER photo reading 5 x 3 (it sees the same touching rows): a CORNER photo cannot prove a depth',
+      views: { straight: S([20, 20, 20, 20, 20]), left: S([20, 20, 20], { shift: 1 }), right: S([20, 20, 20], { shift: 2 }) },
+      headings: CAMERA, extras: syntheticCorner(5, 3), truth: 100, check: 'withheld', fixed_by: null },
+    { id: 'S26 4x3 block of 15s, sides repeat the front, CORNER photo (4 x 3) and declared 4 x 3: four hidden stacks assumed at 15',
+      views: { straight: S([15, 15, 15, 15]), left: S([15, 15, 15], { shift: 1 }), right: S([15, 15, 15], { shift: 2 }) },
+      headings: CAMERA, extras: { ...syntheticCorner(4, 3), ...declared(4, 3, { interior: 'unknown' }) }, truth: 180, check: 'total_ok', fixed_by: null },
+    { id: 'S27 S25 with the honest declaration (5 wide, 1 deep): the sides show touching rows, withheld',
+      views: { straight: S([20, 20, 20, 20, 20]), left: S([20, 20, 20], { shift: 1 }), right: S([20, 20, 20], { shift: 2 }) },
+      headings: CAMERA, extras: declared(5, 1), truth: 100, check: 'withheld', fixed_by: null },
+    { id: 'S28 3x2 block with the hidden stack absent: CORNER photo, declared 3 x 2, ELEVATED tap missing',
+      views: { straight: S([20, 20, 20]), left: S([20, 20], { shift: 1 }), right: S([20, 20], { shift: 2 }) },
+      headings: CAMERA, extras: { ...syntheticCorner(3, 2), ...declared(3, 2, { interior: 'unknown' }),
+        topView: { x: 3, y: 2, cells: [{ x: 1, y: 1, state: 'missing' }] }, elevated: true }, truth: 100, check: 'total_ok', fixed_by: null },
+    { id: 'S29 S09 (3x3, interior stack missing) with a CORNER photo and declared 3 x 3, no top view',
+      views: { straight: S([20, 20, 20]), left: S([20, 20, 20], { shift: 1 }), right: S([20, 20, 20], { shift: 2 }) },
+      headings: CAMERA, extras: { ...syntheticCorner(3, 3), ...declared(3, 3, { interior: 'unknown' }) }, truth: 160, check: 'not_exact',
+      fixed_by: null, stretch: { check: 'no_wrong_total', fixed_by: 'top view: an unchecked hole overcounts 20' } },
+  ];
+}
+
+export function judge(check, summary, truth) {
+  const released = summary.total !== null;
+  if (check === 'withheld') return !released;
+  // 0.7.0 (Plan 5 Phase 1): withheld for the named reason (inventory.withheld_reason).
+  if (check.startsWith('withheld:')) return !released && summary.withheld_reason === check.slice('withheld:'.length);
+  if (check === 'not_exact') return summary.status !== 'exact';
+  if (check === 'exact_ok') return summary.status === 'exact' && summary.total === truth;
+  if (check === 'not_confirmed') return summary.status !== 'confirmed';
+  if (check === 'total_ok') return summary.total === truth;
+  if (check === 'no_wrong_total') return !released || summary.total === truth;
+  return summary.status !== 'exact' || summary.total === truth;
+}
+
+/** Everything in one pass; deterministic for a given dist build and registry. */
+export function runBenchmark(w) {
+  const registry = loadJson(REGISTRY);
+  const cache = new Map();
+  const saved = rel => { if (!cache.has(rel)) cache.set(rel, loadJson(rel)); return cache.get(rel); };
+
+  const faces = registry.faces.map(f => {
+    const view = responseViews(saved(f.detections.file))[f.detections.view];
+    const v = faceVerdict(w, view.detections, f.image);
+    const truth = f.truth.trays;
+    return { id: f.id, source: f.source, role: f.role, split: f.split, tier: f.truth.tier, usable: f.truth.usable !== false,
+      cluster: f.cluster, same_photo_as: f.same_photo_as ?? null, truth, ...v,
+      correct: truth === null || truth === undefined ? null : v.total === truth, python_0411: f.python_0411 ?? null };
+  });
+
+  const trios = registry.trios.map(t => {
+    const s = blockSummary(replayViews(w, responseViews(saved(t.response))));
+    const truth = t.truth.user_total ?? null;
+    const released = s.total !== null;
+    // A total from a set that is not one block's three faces is wrong unless the block's own total is known and equal
+    // (the 99 block: its sides are substituted, but a one-deep block's sides only confirm the corner heights).
+    const wrong = released && (truth !== null ? s.total !== truth : !t.genuine);
+    return { id: t.id, group: t.group, genuine: t.genuine, truth, recorded: t.recorded, ...s, released, wrong_release: wrong,
+      wrong_exact: wrong && s.status === 'exact' };
+  });
+
+  const adversarial = adversarialCases(registry).map(c => {
+    const s = blockSummary(replayViews(w, c.views, c.headings, capturesFor(c.source ?? 'captured_still', c.headings), c.extras ?? {}));
+    return { id: c.id, check: c.check, fixed_by: c.fixed_by, truth: c.truth, ...s, pass: judge(c.check, s, c.truth),
+      stretch: c.stretch ? { ...c.stretch, pass: judge(c.stretch.check, s, c.truth) } : null };
+  });
+
+  // Re-encode stability: a labelled photo sent again through the app's 1600 px re-encode (MUTAA L-* sets).
+  const byId = Object.fromEntries(faces.map(f => [f.id, f]));
+  const reencode = faces.filter(f => f.same_photo_as).map(f => ({ id: f.id, original: f.same_photo_as,
+    original_total: byId[f.same_photo_as].total, original_outcome: byId[f.same_photo_as].outcome,
+    reencoded_total: f.total, reencoded_outcome: f.outcome, flipped: f.total !== byId[f.same_photo_as].total }));
+
+  return { registry: registry.registry, faces, trios, adversarial, reencode, summary: summarize(faces, trios, adversarial, reencode) };
+}
+
+function faceStats(rows) {
+  const accepted = rows.filter(r => r.accepted);
+  return { n: rows.length, accepted: accepted.length, accepted_correct: accepted.filter(r => r.correct).length,
+    accepted_wrong: accepted.filter(r => r.correct === false).map(r => `${r.id} ${r.total}/${r.truth}`),
+    withheld: rows.length - accepted.length, withheld_would_be_exact: rows.filter(r => !r.accepted && r.correct).length,
+    coverage: rows.length ? Math.round(1000 * accepted.length / rows.length) / 1000 : null };
+}
+
+function summarize(faces, trios, adversarial, reencode) {
+  const scored = faces.filter(f => f.role === 'face' && f.truth !== null && f.truth !== undefined && f.tier);
+  // A re-encoded labelled photo is also scored against the user's label when that label is usable for the face.
+  const byId = Object.fromEntries(faces.map(f => [f.id, f]));
+  for (const f of faces.filter(f => f.same_photo_as && byId[f.same_photo_as].usable)) {
+    const truth = byId[f.same_photo_as].truth;
+    scored.push({ ...f, tier: 'U', truth, correct: f.total === truth });
+  }
+  const groups = {};
+  for (const f of scored) (groups[`${f.split}/${f.tier}/${f.source}`] ??= []).push(f);
+  // Primary unit for the labelled photos: one face per near-duplicate cluster (lowest id), as in eval-20261015.
+  const firstPerCluster = Object.values(Object.fromEntries([...scored].filter(f => f.source === 'labelled').reverse()
+    .map(f => [f.cluster, f])));
+  return {
+    faces: Object.fromEntries(Object.entries(groups).sort().map(([k, rows]) => [k, faceStats(rows)])),
+    labelled_clusters: faceStats(firstPerCluster),
+    trios: { records: trios.length, groups: new Set(trios.map(t => t.group)).size,
+      released: trios.filter(t => t.released).map(t => `${t.id}: ${t.status} ${t.total}`),
+      wrong_releases: trios.filter(t => t.wrong_release).map(t => t.id), wrong_exact: trios.filter(t => t.wrong_exact).map(t => t.id) },
+    adversarial: { n: adversarial.length, pass: adversarial.filter(a => a.pass).length,
+      failing: adversarial.filter(a => !a.pass).map(a => `${a.id} [${a.status} ${a.total}, truth ${a.truth}; fixed by ${a.fixed_by ?? 'NOTHING PLANNED'}]`),
+      stretch_failing: adversarial.filter(a => a.stretch && !a.stretch.pass)
+        .map(a => `${a.id} [${a.stretch.check}: ${a.status} ${a.total}, truth ${a.truth}; phase ${a.stretch.fixed_by}]`) },
+    reencode: { n: reencode.length, flipped: reencode.filter(r => r.flipped).map(r => `${r.id} ${r.original_total}->${r.reencoded_total}`) },
+  };
+}

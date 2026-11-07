@@ -1,4 +1,6 @@
+import 'block_declaration.dart';
 import 'capture_view.dart';
+import 'extra_capture.dart';
 
 enum CaptureState { left, right, straight, processing, complete }
 
@@ -9,8 +11,56 @@ class ScanSession {
   final Map<CaptureView, String> _paths = {};
   final Map<CaptureView, String> _cellIds = {};
   final Map<CaptureView, String> _evidence = {};
+  final Map<ExtraView, ExtraCapture> _extras = {};
+  BlockDeclaration? _declaration;
+  bool _declarationAsked = false;
 
   Map<CaptureView, String> get paths => Map.unmodifiable(_paths);
+
+  /// Every photo file the session owns: the three faces and the extras.
+  List<String> get allPaths => [
+    ..._paths.values,
+    for (final extra in _extras.values) extra.path,
+  ];
+
+  /// The operator's blind declaration; null when it was skipped (or not yet
+  /// asked, see [declarationAsked]). A skipped declaration means the result
+  /// can never be `confirmed`.
+  BlockDeclaration? get declaration => _declaration;
+
+  /// True once the operator declared or skipped. The declaration is asked
+  /// once per block, before any count is shown, and never after a result.
+  bool get declarationAsked => _declarationAsked;
+
+  void declare(BlockDeclaration? declaration) {
+    _declaration = declaration;
+    _declarationAsked = true;
+  }
+
+  /// The optional CORNER and ELEVATED photos. They never decide whether the
+  /// scan is complete.
+  Map<ExtraView, ExtraCapture> get extras => Map.unmodifiable(_extras);
+
+  ExtraCapture? extraFor(ExtraView view) => _extras[view];
+
+  /// A new photo for [view]; elevated taps belonged to the old photo and are
+  /// dropped with it.
+  void setExtra(
+    ExtraView view,
+    String path, {
+    String? evidence,
+    String? side,
+  }) {
+    _extras[view] = ExtraCapture(path: path, evidence: evidence, side: side);
+  }
+
+  void setElevatedTaps(ElevatedTaps? taps) {
+    final elevated = _extras[ExtraView.elevated];
+    if (elevated == null) return;
+    _extras[ExtraView.elevated] = elevated.withTaps(taps);
+  }
+
+  void clearExtra(ExtraView view) => _extras.remove(view);
 
   /// Per-view constraint evidence (angle, lighting, sharpness, framing) as it
   /// stood at the moment of capture, keyed by view name. Uploaded with the
@@ -65,9 +115,14 @@ class ScanSession {
 
   /// The session for a retake of [view]: the other photos, their cell IDs and
   /// evidence carried over under a new [scanId]. One scan id is one ordered
-  /// triplet; the server refuses an id reused with other photos.
+  /// triplet; the server refuses an id reused with other photos. The extras
+  /// and the declaration are the same block's and carry over unchanged: the
+  /// declaration was made blind and is not asked again after a result.
   ScanSession retake(CaptureView view, {required String scanId}) {
     final next = ScanSession(scanId: scanId);
+    next._extras.addAll(_extras);
+    next._declaration = _declaration;
+    next._declarationAsked = _declarationAsked;
     for (final kept in CaptureView.values) {
       if (kept == view) continue;
       final path = _paths[kept];

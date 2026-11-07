@@ -5,15 +5,18 @@ import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
 import '../app/app_version.dart';
+import '../models/block_declaration.dart';
 import '../models/capture_view.dart';
+import '../models/extra_capture.dart';
 import '../models/scan_session.dart';
 import 'history_database.dart';
 
 /// Unfinished scans kept on the phone until their result is in history:
 /// a `pending_scans` row plus `pending/<scan_id>/` in the app documents
-/// directory with the three upload files, session.json (cell IDs and each
-/// view's evidence JSON) and, once a 200 arrives, result.json. Android may
-/// kill the app mid-upload; with this the scan can be resumed.
+/// directory with the three upload files and any optional extra photos,
+/// session.json (cell IDs, each view's evidence JSON, the block declaration
+/// and the extras' side and taps) and, once a 200 arrives, result.json.
+/// Android may kill the app mid-upload; with this the scan can be resumed.
 abstract class PendingScanStore {
   Future<PendingScanRow?> find(String scanId);
 
@@ -95,6 +98,18 @@ class DiskPendingScanStore implements PendingScanStore {
           'evidence': session.constraintEvidence[view.name],
         };
       }
+      final extras = <String, Object?>{};
+      for (final entry in session.extras.entries) {
+        final name = entry.key.wireName;
+        final extra = entry.value;
+        await File(extra.path).copy('${dir.path}/$name.jpg');
+        extras[name] = {
+          'file': '$name.jpg',
+          'evidence': extra.evidence,
+          'side': extra.side,
+          'taps': extra.taps?.toJson(),
+        };
+      }
       final row = PendingScanRow(
         scanId: session.scanId,
         createdAt: DateTime.now().toUtc(),
@@ -105,6 +120,8 @@ class DiskPendingScanStore implements PendingScanStore {
         'created_at': row.createdAt.toIso8601String(),
         'app_version': kAppVersion,
         'views': views,
+        'declaration': session.declaration?.toJson(),
+        'extras': extras,
       });
       await database.insertPending(row);
       return row;
@@ -173,6 +190,26 @@ class DiskPendingScanStore implements PendingScanStore {
         evidence: entry['evidence'] as String?,
       );
     }
+    final extras = manifest['extras'] as Map<String, dynamic>? ?? const {};
+    for (final view in ExtraView.values) {
+      final entry = extras[view.wireName];
+      if (entry is! Map<String, dynamic>) continue;
+      final copy = await File(
+        '${dir.path}/${entry['file']}',
+      ).copy('${scratch.path}/${const Uuid().v4()}.jpg');
+      session.setExtra(
+        view,
+        copy.path,
+        evidence: entry['evidence'] as String?,
+        side: entry['side'] as String?,
+      );
+      if (view == ExtraView.elevated) {
+        session.setElevatedTaps(ElevatedTaps.fromJson(entry['taps']));
+      }
+    }
+    // A kept scan is past its blind declaration step whatever it held (a
+    // scan from an app before 0.5.0 has none): it is never asked again.
+    session.declare(BlockDeclaration.fromJson(manifest['declaration']));
     return session;
   }
 

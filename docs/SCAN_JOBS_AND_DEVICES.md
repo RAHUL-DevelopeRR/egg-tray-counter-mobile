@@ -184,7 +184,8 @@ Jobs:
 - Fingerprint v2 = SHA-256 of the three photo hashes, `scan_contract` as sent and `[view, cell_id]` pairs
   sorted by view; jobs store `fingerprint_version: 2`, `scan_contract`, `cell_ids`. Older jobs without these
   fields replay for the same photos whatever metadata is sent.
-- `PIPELINE_VERSION = worker-0.4.12`. A failure after a lost lease returns the other attempt's stored
+- `PIPELINE_VERSION = worker-0.4.12` (`worker-0.4.13` from the side-face check below, `worker-0.4.14` from the release
+  contract, `worker-0.4.15` from capture provenance, `worker-0.5.0` from the grid, all at the end). A failure after a lost lease returns the other attempt's stored
   result (200) or 202 if it is still running; `job.status` says `failed` only when the failure was stored.
 - A missing `scan_id` is still minted by the server (no idempotency for such a request).
 
@@ -230,3 +231,235 @@ App (0.4.12+23):
 Open risks (staging): with no credential, observe still lets anyone spend inference, add photos under any
 scan id and write legacy `scans/` manual counts, as production does today; state records and job photo
 lists stay protected. Manual counts saved by earlier 0.4.12 test builds under `scans/` show as legacy.
+
+## Side-face check (0.4.13, 2026-10-31)
+
+Reason: MUTAA set L-100 (three FRONT photos of a 5 x 1 block uploaded as STRAIGHT/LEFT/RIGHT) gave 5 x 5,
+500 "estimated" for a 100-tray block (reports/mutaa-manual-vs-backend-20261031).
+
+- App (camera path): `HeadingTracker` integrates the gyroscope about the vertical for the whole scan, retakes
+  included, and the session restarts only for a new scan. Each view's `<view>_constraint_evidence` gains
+  `yaw_deg` and `yaw_session`.
+  - A heading exists only while gyroscope samples are arriving (at least 5, the last within 0.5 s) and with
+    no more than 2 s of lost time. Android stops the sensors in the background, so the gap marks the
+    heading untrusted.
+  - The capture screen refuses, before the shutter, a LEFT/RIGHT that turned less than 45 degrees from
+    STRAIGHT, or that is within 90 degrees of the other side.
+- Worker (`sideCheck`, `block.side_check`):
+  - Same `yaw_session` as STRAIGHT: `turned` (at least 45 degrees) or refused (`same_way_as_straight`).
+    LEFT and RIGHT in one session less than 90 degrees apart: RIGHT is refused (`same_way_as_other_side`).
+  - No usable heading: a side whose x-ordered layers match STRAIGHT's (same count, at least 2 columns,
+    each within 1) is `repeats_front`. Any other side of a block more than one stack deep is `unconfirmed`
+    and refused. A one-deep block's sides stay `unverified` and keep the total.
+  - A refused side sets status `needs_view` with the total withheld. It also removes the side-derived
+    depth, cells, observed/computed/filled trays and rescan cells, so the app draws no false grid. The
+    side's reason comes first in `conflicts`. `rescan` names that side unless the capture gate refused a
+    view, which is named first.
+  - Consequence: gallery uploads and apps before 0.4.13 get totals only for one-deep blocks.
+- Malformed or oversized evidence (over 8,000 characters) is ignored, never a refusal.
+- Known gaps:
+  - Headings are not archived with the photos and are not part of the job fingerprint. A replay from the
+    R2 originals has no heading, so a deep block counted live is withheld on replay. **Closed in 0.4.14** (below).
+  - A heading gets about 0.1-0.5 degrees of gyroscope drift per second, so a long pause before a retake
+    weakens the 45-degree test.
+  - A block against a wall (one side cannot be photographed) cannot be scanned with the camera.
+
+## Release contract (0.4.14, 2026-11-01)
+
+Plan: `C:/Users/rahul/.claude/plans/spicy-growing-flame.md`, Phases C and D1. Measurements:
+`reports/replay-baseline-20261101` and `reports/miss-taxonomy-20261101`.
+
+**Reason.** One photo's reading of a stack can be wrong with every rule satisfied. img-30 read 78 for 80: one box
+covered the top trays of two stacks, and the bottom tray, cut by the frame edge, was merged as a duplicate.
+0.4.13 still called such a block `exact`.
+
+- **Verified stack** (`cells[].verified`, `cells[].readings`). Two different photos read it the same, neither
+  reading has a gap-filled layer, and neither has a doubt.
+  - Span = walk is *not* a second reading: both come from the same boxes.
+  - A recessed (missing) front cell is verified only when two photos see the gap.
+  - A stack seen behind a missing one is never verified.
+- **Doubts per column** (`stack_columns[].doubts`). A doubt never refuses a count:
+  - `box_over_two_stacks`: a box 1.5 x the face's median width, marked on every column whose centre it spans;
+  - `box_over_two_trays`: a box 1.5 x its column's median height;
+  - `end_box_cut_short`: the top or bottom box below 0.6 x the median height;
+  - `bottom_above_floor`: the bottom box over half a pitch above both neighbours' bottoms. Interior,
+    non-recessed stacks only.
+- **`exact`** requires no computed cells, no ambiguity, no conflict, and every observed or missing cell verified.
+  Otherwise the result is `estimated` with a total.
+  - New block fields: `visible_verified_trays`, `visible_single_reading_trays` and `single_reading_cells`.
+- **Stray groups** (`views.<view>.stray_groups`) are box groups of 1 or 2: a short stack, a loose tray or a stray
+  box. They are never counted. Any stray group adds an ambiguity, so the block is an estimate.
+- **Side check.** A side in STRAIGHT's session turned more than 135 degrees is refused as `faces_back`; the app
+  refuses it before the shutter too.
+  - `direction_ok` records whether LEFT turned right (negative yaw) and RIGHT turned left.
+  - It is **not enforced** until a phone walk-around confirms the sign.
+- **Headings archived.** Each photo's R2 object carries `yaw_deg` and `yaw_session` in its custom metadata.
+- **Job fingerprint version 3** adds the headings, so other headings on the same photos are a 409. Version 2 jobs are
+  matched on their own fields and still replay.
+- **App 0.4.14.**
+  - The result card splits seen trays into "Seen by two photos" and "Seen by one photo only".
+  - The manual count is blind. Fields start empty, the app's counts and total are hidden, and every reachable
+    stack must be entered.
+- **Consequence.** Until a second reading exists for front-middle stacks (plan Phase E), blocks wider than two
+  stacks are `estimated`, never `exact`.
+
+## Capture provenance and frame doubts (0.4.15, 2026-11-01)
+
+Plan: `C:/Users/rahul/.claude/plans/spicy-growing-flame.md` (Plan 2, phases J and K1). Measurements are in
+`reports/replay-phase-j-20261101`.
+
+**Reason.** Two holes in 0.4.14:
+- **One photo counted three times gave `exact`.** A copy or re-encode has a new sha256, so the duplicate-photo
+  check let it through.
+- **Gallery photos skip every live check but could still verify a stack.**
+
+Separately, every frame-cut stack end (img-30, L-80) was accepted.
+
+**Trusted readings.** A reading may verify a stack only when all of these hold (`views.<view>.trusted`):
+- its capture source is `captured_still`;
+- the phone did not block it (`blocked: false`);
+- for a side, `side_check` is `turned`;
+- it is not a copy of an earlier view.
+
+Readings carry `trusted`. Untrusted readings still count trays, but they cannot verify, so the block is an estimate.
+Responses replayed from storage carry no provenance and are never `exact`.
+
+**Capture field.** `<view>_capture` is a short JSON object (`source`, `blocked`, `yaw_deg`, `yaw_session`, at most
+1,000 characters).
+- Apps from 0.4.15 send it.
+- The Worker reads it first, then falls back to `<view>_constraint_evidence`, which is limited to 8,000 characters.
+- The provenance is self-reported. It stops honest mistakes, not a modified app.
+
+**Archive.**
+- Each photo's R2 metadata adds `capture_source` and `capture_blocked`.
+- The full constraint evidence, up to 64,000 characters, is stored as `scans/<id>/<view>/evidence.json`.
+
+**Job fingerprint version 3** now covers each view's `[source, blocked, yaw, session]`. 0.4.14 never deployed, so no
+stored version 3 job uses the earlier definition.
+
+**Copies count once** (`views.<view>.duplicate_of`, plus an ambiguity entry). Two views are one capture when their
+boxes overlap almost exactly in frame-relative coordinates (score at least 0.8: the median best IoU, taken both ways,
+the lower one). Measured on saved detections:
+- re-encodes of one photo: 0.944-0.995;
+- the same photo or a near-identical burst: 0.952-0.976;
+- genuinely different captures of one block: 0-0.52.
+
+**Frame doubts** (`stack_columns[].doubts`, which need the image size):
+- **`end_at_frame_edge`:** a column's top or bottom box lies within one box height of the frame edge. img-30 and L-80
+  have 0.07 / 0.00 box heights; every correct accepted face has at least 2.0. On the 82 accepted columns it fires
+  only on img-30 and L-80.
+- **`cut_at_frame_side`:** a column touches the left or right edge. It fires only on the edge stack of img-08 (the same
+  photo as img-23), whose count is correct.
+- **`pitch_differs`:** a column's pitch is over 1.2x the face's. It never fires on an accepted face.
+
+A doubt only stops a reading from verifying a stack; it never refuses the count.
+
+**App 0.4.15.**
+- The gallery scan button is shown only when Settings > "Gallery scans (testing only)" is on.
+- Resume no longer falls back to the gallery without a camera, unless a result is already kept on the phone or the
+  switch is on.
+- The scan form adds `<view>_capture`.
+
+**Distance.** There is no distance refusal yet.
+- Pitch in pixels alone does not separate good faces from bad ones: correct faces read at 22.5-25 px, while W05 read
+  wrong at 26 px.
+- The threshold waits for the distance ladder (plan G).
+- W05 is not `exact` anyway, because its cells are gap-filled.
+
+## Grid, declaration and extra views (0.5.0, 2026-11-01)
+
+**Contract:** `docs/GRID_CONTRACT_0.5.0.md`. **Report:** `docs/RELEASE_0.5.0.md`. **Field protocol:**
+`docs/PHYSICAL_VALIDATION.md`.
+
+**New optional upload fields:**
+- `block_declaration`: JSON, at most 4,000 characters;
+- `corner` with `corner_capture` and `corner_side` (`front_left` or `front_right`);
+- `elevated` with `elevated_capture` and `elevated_taps` (JSON, at most 8,000 characters).
+
+**How they are handled:**
+- Malformed declarations or taps are ignored, never refused.
+- An extra photo identical to a face is `422 duplicate_view`.
+- Extras are archived under `scans/<id>/corner/<sha>` and `scans/<id>/elevated/<sha>`, with
+  `scans/<id>/declaration.json`.
+- The job fingerprint (version 3) appends `[cornerHash, cornerSide, elevatedHash, declaration, taps]` only when one of
+  them is present, so earlier version 3 fingerprints are unchanged.
+- The CORNER photo costs one more detector call.
+
+**Response additions:**
+- `block.grid[y][x]`: physical stacks with z / filled / partial / cover / unknown layers, observed views, measurement
+  sources, status, uncertainties, readings and `pair_type`;
+- `block.inventory`;
+- `block.declaration` with `agrees_with_faces`;
+- `block.corner` and `block.top_view`;
+- `block.confirmed_basis` and `block.suggested_views`;
+- `block.grid_note`.
+
+**Readings (plan Phase Q):** `capture_id` (the photo's sha256 prefix; a copy carries the original's id), `reader`
+(`rf-walk`), `physical_stack_id`, `view`, `count`, `evidence`, `quality` and `pipeline_version`. A stack is
+verified by two different captures.
+
+**Statuses:**
+- `confirmed` is new (see the contract).
+- A declaration, top view or corner that contradicts the faces gives `conflict` with no total.
+- A refused photo stays `needs_view`.
+- A declaration never gives `exact`, and a measured reference height only demotes.
+
+**Manual counts:** they also store `counted_by` and `second_counter`, both part of the replay comparison.
+
+**Readers that were built but not used:**
+- The pixel rim reader (Phase E, rejected);
+- the 5/6 parity checker (Phase P, disabled).
+
+Their reports are in `reports/rim-independent-20261101` and `reports/cross-stack-20261101`.
+
+## Sides that repeat the front (0.5.1, 2026-11-02)
+
+**Reason.** The MUTAA validation (`reports/mutaa-validation-0.5.0-20261101`) replayed the L-100 front photos as guided-camera
+captures with a quarter turn each way. 0.5.0 gave **`estimated` 500 for a 100-tray block**, because a heading from
+STRAIGHT's session made a side trusted whatever it showed. With a declaration the result was `conflict`, but the
+declaration can be skipped. A heading proves the phone turned, not that the photo shows another face: an oblique
+re-shot of the front, the stacks behind a lone stack, or a sensor glitch all pass it.
+
+**Rule (`sideCheck`, `mirrorsFront`).**
+- **When a side repeats the front.** A side in STRAIGHT's session, turned 45-135 degrees, *repeats the front* when its
+  x-ordered heights match STRAIGHT's within one layer:
+  - in the same or reversed order;
+  - with one stack more or fewer at an edge;
+  - from four stacks up, with one misread height.
+  - Behind a one-stack front, any side of two or more stacks repeats it.
+- **No CORNER photo that settles it.** The side becomes `turned_repeats_front` with a reason, and the block is withheld
+  as for any refused side: `needs_view`, no total, no depth, cells, grid or single-reading cells.
+  `suggested_views: ["corner"]`, and `rescan` names the side.
+- **What settles it.** A guided-camera CORNER photo (`captured_still`, `blocked: false`, `corner_side` given) whose
+  reading equals STRAIGHT's width and that side's depth. It must see that side (`front_left` sees LEFT), or see the
+  other side while that side also repeats the front at the same depth (an even block). The side is then `turned`, with
+  `repeats_front: true` and `depth_witness: "corner"`.
+- **A settled side still verifies nothing** (`trusted: false`). It may yet be the front again, with only the depth right.
+- **When the CORNER photo cannot settle it**, the reason says why, and `retake` says which photo to retake:
+  - it is unreadable, from the gallery, blocked, or has no side (`retake: "corner"`);
+  - its width and depth are the other way round, probably the other corner (`retake: "corner"`);
+  - it sees only the other side (`retake: "corner"`);
+  - it disagrees with the side's stack count, so the side is not the side face (`retake: "side"`). In that case no
+    CORNER photo is suggested.
+- **Not witnesses:**
+  - a declaration: a habitual "5 x 5" would turn the same 500 into a confirmed total;
+  - ELEVATED taps: the app sizes the tap grid from the declaration, and an empty grid reads nothing.
+- **Retake order:** wrong-way sides (`same_way_as_straight`, `faces_back`, `same_way_as_other_side`), then
+  `repeats_front` and `unconfirmed`, and last a side that only needs a CORNER photo.
+
+**Cost.** Even-height blocks whose depth is within one stack of their width (2x2, 3x2, 3x3, 4x3, 4x4, 5x4, 5x5, 6x5)
+get no total from three faces alone; they need the CORNER photo. One-deep rows and clearly different sides are
+unaffected. Replay: `reports/replay-0.5.1-20261102`. The adversarial cases go from 25 of 27 to 32 of 33, with 0 wrong
+releases and 0 wrong `exact`. Two correct synthetic estimates (S02, S20) are withheld until a CORNER photo is added.
+
+**Open.**
+- **S25, a product decision.** With a real turn, a side photo of a row end plus rows standing behind it (three stacks
+  behind a five-wide row that does not repeat the front) still gives `estimated` 300 for 100. Photos alone cannot
+  tell rows behind a block from the block. Options: require a CORNER photo or an agreeing declaration for any depth
+  over one stack.
+- **CORNER photos count stacks, not block membership.** A CORNER photo that also sees rows behind can agree with a
+  false depth.
+- **No CORNER photo has been tested on a real block**, and `cornerReading` relies on the corner stack having the
+  largest layer pitch.
+- **App 0.5.0+27 cannot add the CORNER photo from the result screen.** RETAKE re-shoots the side, and only NEW SCAN
+  reaches the extras pane, which still calls the CORNER photo optional.

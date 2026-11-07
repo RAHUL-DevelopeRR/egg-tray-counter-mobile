@@ -205,4 +205,43 @@ void main() {
       isTrue,
     );
   });
+
+  test('only the ELEVATED photo may look down; a CORNER photo gets no '
+      'square-on hint; every other check still applies', () {
+    PreflightReport aimed(
+      CaptureAim aim, {
+      double pitch = 6,
+      FrameMetrics? metrics,
+    }) => preflight.evaluate(
+      view: CaptureView.straight,
+      metrics: metrics ?? goodMetrics(),
+      pose: DevicePose(rollDeg: 0, pitchDownDeg: pitch),
+      calibrationSet: true,
+      aim: aim,
+    );
+
+    // Looking 60 degrees down: refused for a face, allowed for the top.
+    expect(aimed(CaptureAim.square, pitch: 60).blocked, isTrue);
+    expect(aimed(CaptureAim.corner, pitch: 60).blocked, isTrue);
+    final elevated = aimed(CaptureAim.elevated, pitch: 60);
+    expect(elevated.blocked, isFalse);
+    expect(severityOf(elevated, PreflightCheckId.tilt), PreflightSeverity.pass);
+    // Aiming up is still wrong for the elevated photo.
+    expect(aimed(CaptureAim.elevated, pitch: -10).firstBlocker?.headline,
+        'CAMERA ANGLED UP');
+    // Lighting still blocks it.
+    expect(
+      aimed(CaptureAim.elevated, pitch: 60, metrics: goodMetrics(meanLuma: 18))
+          .blocked,
+      isTrue,
+    );
+
+    // A corner shows two faces: keystone is expected, not a hint.
+    final skewed = goodMetrics(keystoneRatio: 2.0);
+    bool hinted(PreflightReport r) =>
+        r.checks.any((c) => c.id == PreflightCheckId.direction);
+    expect(hinted(aimed(CaptureAim.square, metrics: skewed)), isTrue);
+    expect(hinted(aimed(CaptureAim.corner, metrics: skewed)), isFalse);
+    expect(hinted(aimed(CaptureAim.elevated, metrics: skewed)), isFalse);
+  });
 }

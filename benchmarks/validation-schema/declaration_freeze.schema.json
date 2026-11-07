@@ -1,0 +1,20 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "Blind block declaration as frozen with the scan (block_declaration in docs/GRID_CONTRACT_0.5.0.md)",
+ "type": "object",
+ "required": ["scan_id", "declaration", "declared_before_result"],
+ "properties": {
+  "scan_id": {"type": "string", "format": "uuid"},
+  "declared_before_result": {"const": true},
+  "declaration": {"type": "object", "required": ["x", "y", "interior"],
+   "properties": {
+    "x": {"type": "integer", "minimum": 1, "maximum": 40}, "y": {"type": "integer", "minimum": 1, "maximum": 40},
+    "interior": {"enum": ["full", "partial", "unknown"]},
+    "missing_cells": {"type": "array", "items": {"type": "array", "items": {"type": "integer"}, "minItems": 2, "maxItems": 2}},
+    "partial_stacks": {"type": "array", "items": {"type": "object", "required": ["x", "y"],
+     "properties": {"x": {"type": "integer"}, "y": {"type": "integer"}, "layers": {"type": ["integer", "null"]}}}},
+    "cover_trays": {"enum": ["yes", "no", "unknown"]}, "occupancy": {"enum": ["egg_filled", "unknown"]},
+    "reference_height": {"type": ["integer", "null"]}, "reference_height_measured": {"type": "boolean"},
+    "operator": {"type": "string", "maxLength": 80}, "declared_at": {"type": "string", "format": "date-time"}}}
+ }
+}

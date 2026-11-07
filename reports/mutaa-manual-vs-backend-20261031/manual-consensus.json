@@ -1,0 +1,5544 @@
+[
+ {
+  "set_id": "M16-NEAR",
+  "consensus": {
+   "set_id": "M16-NEAR",
+   "x_stacks": 4,
+   "y_stacks": 2,
+   "per_face": [
+    {
+     "role": "straight (front face)",
+     "photo": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151351983.jpg.jpeg",
+     "stacks": [
+      {
+       "index": 1,
+       "filled": 17,
+       "empty": 1,
+       "counters": [
+        18,
+        18,
+        18
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 2,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        21,
+        21,
+        21
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 3,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        21,
+        21,
+        21
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 4,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        21,
+        21,
+        21
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 5,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        21,
+        21,
+        21
+       ],
+       "agreement": "all_equal"
+      }
+     ]
+    },
+    {
+     "role": "left side (151430473; layer detail from 151339474)",
+     "photo": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151430473.jpg.jpeg",
+     "stacks": [
+      {
+       "index": 1,
+       "filled": 17,
+       "empty": 1,
+       "counters": [
+        18,
+        18,
+        18
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 2,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        21,
+        21,
+        21
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 3,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        21,
+        21,
+        21
+       ],
+       "agreement": "all_equal"
+      }
+     ]
+    },
+    {
+     "role": "right side",
+     "photo": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151444583.jpg.jpeg",
+     "stacks": [
+      {
+       "index": 1,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        21,
+        21,
+        21
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 2,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        21,
+        21,
+        21
+       ],
+       "agreement": "all_equal"
+      }
+     ]
+    }
+   ],
+   "visible_trays": 127,
+   "inferred_hidden_trays": 59,
+   "total_filled": 177,
+   "total_empty": 9,
+   "total_low": 180,
+   "total_high": 190,
+   "counter_totals": [
+    186,
+    186,
+    186
+   ],
+   "rechecked": "No stack needed a re-count under the rule. All three counters agree on every stack (each of the 4 front stacks is 20 filled + 1 cover; the short stack outside the grid is 17 + 1; back-left and back-right are 20 + 1). They also agree on the 4x2 footprint and on the 186 total. I opened the straight photo upright (IMG_20260916_151351983) to check the layout. It shows 4 stacks across the front, all the same height and flush on top. The shorter extra stack stands at the left, set back. No step or gap shows on the top surface, which supports inferring 20+1 for the hidden back-middle cells. The counters split only on what counts as visible: 144, 127 or 123. I used 127: 4 front stacks x 21, back-right 21, short stack 18, and the 4 visible top trays of back-left. That leaves 59 inferred: 2 back-middle stacks x 21, plus the 17 hidden lower trays of back-left.",
+   "reliability": "medium",
+   "caveats": [
+    "Block cells, with x = 1..4 left to right in the front photo and y = 1 front, y = 2 back. Every cell is 20 filled + 1 empty cover. Seen: (1,1), (2,1), (3,1), (4,1), (4,2) and the top of (1,2). Inferred: (2,2) and (3,2), plus the lower part of (1,2).",
+    "Outside the rectangle: a short stack of 17 filled + 1 cover against the left side, next to back-left cell (1,2), set back from the front plane.",
+    "Two back-middle cells, (2,2) and (3,2), are never seen from the side. Their heights come only from a flat, continuous top surface. Their contents cannot be checked, so hidden empty trays inside them would lower the filled count.",
+    "Only the top 3 egg rows and the cover of back-left (1,2) show above the short stack. Its height of 20+1 rests on a shared floor and a level top.",
+    "Back-right (4,2) is a cross-stacked oblique rim count, which gives about 19-21 layers. It was set to 20+1 because its cover and floor line up with the front-right stack.",
+    "Each stack is assumed to have exactly one empty cover tray. Nested double covers cannot be fully ruled out.",
+    "The total range of 180-190 covers all physical trays. Filled trays alone are about 173-180, with 177 as the point estimate.",
+    "Not counted: a loose pile of nested empty trays on the floor near the wall/hose behind the right side, which is not part of the block, and the separate block on the raised platform behind."
+   ]
+  },
+  "counters": [
+   {
+    "method": "rim",
+    "block": {
+     "x_stacks": 4,
+     "y_stacks": 2,
+     "cells": [
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 3,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 4,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      }
+     ],
+     "outside_grid": [
+      {
+       "where": "Against the left side of the block, beside the back-left stack (back row), on the lower floor next to the step",
+       "filled": 17,
+       "empty": 1
+      }
+     ],
+     "visible_trays": 144,
+     "inferred_hidden_trays": 42,
+     "total_filled": 177,
+     "total_empty": 9,
+     "total_low": 180,
+     "total_high": 190
+    },
+    "confidence": "medium"
+   },
+   {
+    "method": "pitch",
+    "block": {
+     "x_stacks": 4,
+     "y_stacks": 2,
+     "cells": [
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 3,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 4,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      }
+     ],
+     "outside_grid": [
+      {
+       "where": "Extra short stack against the left side of back-left cell (1,2), set back one stack from the front plane",
+       "filled": 17,
+       "empty": 1
+      },
+      {
+       "where": "Loose pile of tightly nested empty trays on the floor by the wall/hose, behind the right side of the block (151430473, 151436402). Not part of the block; nested count not resolvable (roughly 8-12)",
+       "filled": 0,
+       "empty": null
+      }
+     ],
+     "visible_trays": 127,
+     "inferred_hidden_trays": 59,
+     "total_filled": 177,
+     "total_empty": 9,
+     "total_low": 172,
+     "total_high": 179
+    },
+    "confidence": "medium"
+   },
+   {
+    "method": "grid",
+    "block": {
+     "x_stacks": 4,
+     "y_stacks": 2,
+     "cells": [
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 3,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 4,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      }
+     ],
+     "outside_grid": [
+      {
+       "where": "Against the left side of the block, next to the back-left cell (x=1,y=2), set back from the front plane",
+       "filled": 17,
+       "empty": 1
+      }
+     ],
+     "visible_trays": 123,
+     "inferred_hidden_trays": 63,
+     "total_filled": 177,
+     "total_empty": 9,
+     "total_low": 181,
+     "total_high": 190
+    },
+    "confidence": "medium"
+   }
+  ]
+ },
+ {
+  "set_id": "M16-FAR",
+  "consensus": {
+   "set_id": "M16-FAR",
+   "x_stacks": 3,
+   "y_stacks": 5,
+   "per_face": [
+    {
+     "role": "STRAIGHT (front)",
+     "photo": "IMG_20260916_151549592",
+     "stacks": [
+      {
+       "index": 1,
+       "filled": 15,
+       "empty": 0,
+       "counters": [
+        15,
+        15,
+        15
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 2,
+       "filled": 15,
+       "empty": 0,
+       "counters": [
+        15,
+        15,
+        16
+       ],
+       "agreement": "within_1"
+      },
+      {
+       "index": 3,
+       "filled": 15,
+       "empty": 0,
+       "counters": [
+        15,
+        15,
+        15
+       ],
+       "agreement": "all_equal"
+      }
+     ]
+    },
+    {
+     "role": "LEFT (long left side of column 0, back to front)",
+     "photo": "IMG_20260916_151409127",
+     "stacks": [
+      {
+       "index": 1,
+       "filled": 15,
+       "empty": 1,
+       "counters": [
+        null,
+        null,
+        null
+       ],
+       "agreement": "not_countable"
+      },
+      {
+       "index": 2,
+       "filled": 15,
+       "empty": 1,
+       "counters": [
+        null,
+        null,
+        null
+       ],
+       "agreement": "not_countable"
+      },
+      {
+       "index": 3,
+       "filled": 15,
+       "empty": 1,
+       "counters": [
+        null,
+        null,
+        null
+       ],
+       "agreement": "not_countable"
+      },
+      {
+       "index": 4,
+       "filled": 15,
+       "empty": 1,
+       "counters": [
+        null,
+        null,
+        null
+       ],
+       "agreement": "not_countable"
+      },
+      {
+       "index": 5,
+       "filled": 15,
+       "empty": 0,
+       "counters": [
+        null,
+        15,
+        null
+       ],
+       "agreement": "not_countable"
+      },
+      {
+       "index": 6,
+       "filled": 15,
+       "empty": 0,
+       "counters": [
+        null,
+        15,
+        15
+       ],
+       "agreement": "all_equal"
+      }
+     ]
+    },
+    {
+     "role": "RIGHT (front-right corner and long right side of column 2)",
+     "photo": "IMG_20260916_151453724",
+     "stacks": [
+      {
+       "index": 1,
+       "filled": 15,
+       "empty": 0,
+       "counters": [
+        null,
+        15,
+        null
+       ],
+       "agreement": "not_countable"
+      },
+      {
+       "index": 2,
+       "filled": 15,
+       "empty": 0,
+       "counters": [
+        15,
+        15,
+        15
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 3,
+       "filled": 15,
+       "empty": 0,
+       "counters": [
+        15,
+        15,
+        null
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 4,
+       "filled": 15,
+       "empty": 1,
+       "counters": [
+        null,
+        null,
+        15
+       ],
+       "agreement": "not_countable"
+      }
+     ]
+    }
+   ],
+   "visible_trays": 188,
+   "inferred_hidden_trays": 64,
+   "total_filled": 240,
+   "total_empty": 12,
+   "total_low": 236,
+   "total_high": 268,
+   "counter_totals": [
+    252,
+    252,
+    240
+   ],
+   "rechecked": "The footprint was disputed. Grid had 3 egg-topped stacks (A, B, C) forming the front row of a 3x5 grid, so 15 stacks. Rim and pitch had 4 egg-topped stacks: A sticks out one tray in front of B, and the grid is B, C, D plus 4 capped rows, so 16 stacks. I re-checked this in the right photo (R_top crop) and the O2 photo (O2_far crop). Both show 4 separate open egg tops in an L shape: A at the front left, B directly behind A and level with C, then C and D across. So A is outside a 3x5 grid, and grid's count leaves out one 15-tray stack.\n\nI also re-checked the depth. In O2, the top edge of the long left side has 4 cover-topped tray segments with visible joints (image widths about 150, 175, 215 and 230 px, growing toward the camera), then egg-topped B and A, then floor beyond the back segment. That gives Y = 5, matching all three counters. In the right photo the right side runs back the same distance from D, and the straight photo shows 3 cover columns.\n\nCap height: in the right photo, the cover behind D rests one tray above D's open egg tray, and eggs show in the windows under it. That fits 15 filled + 1 cover. The capped stacks were not counted layer by layer by anyone, including me: the side faces are oblique, and the near block hides the lower layers.\n\nThe front-middle stack (C in rim/pitch, B in grid) differs by only 1 (15, 15, 16). I did not re-count it. Consensus is 15, backed by pitch's rim-by-rim alignment with D.",
+   "reliability": "medium",
+   "caveats": [
+    "Block layout: 3 columns x 5 rows. Row y=0 is egg-topped B (x=0), C (x=1) and D (x=2), 15 filled each, no cover. Rows y=1..4 are capped stacks, each 15 filled + 1 empty cover = 16. Stack A (15 filled, egg-topped) stands outside the grid, one tray in front of B. The totals include A and leave out the loose 2-tray pile on the floor in front of C (about 9-12 eggs in the top tray, the bottom tray filled).",
+    "Cells seen: A, C and D, plus B (its egg top and left side are visible, but its layers were never counted; it is set to 15 because its top is level with A and C). Also seen: the capped stacks in column 0 (left side) and column 2 (right side), y=1..4, which is 8 stacks. Inferred: the 4 interior capped stacks in column 1, y=1..4.",
+    "visible_trays=188 means trays in stacks with a visible face: A+B+C+D (60) plus 8 side capped stacks x 16 (128). Only A, C and D (45 trays) were actually counted layer by layer. inferred_hidden_trays=64 is the 4 interior capped stacks x 16.",
+    "The 192 trays in the 12 capped stacks are inferred from the cover sitting one tray above the egg tops, not counted. The range 236-268 allows 14-16 filled per capped stack, with or without a cover.",
+    "Grid's lower total (240, which included the loose pile) comes from missing stack B behind A. I treated that as a counting error, not a real disagreement.",
+    "In the right photo, the stacks at the far left are the near block on the lower floor, not part of this block."
+   ]
+  },
+  "counters": [
+   {
+    "method": "rim",
+    "block": {
+     "x_stacks": 3,
+     "y_stacks": 5,
+     "cells": [
+      {
+       "x": 0,
+       "y": 0,
+       "filled": 15,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 0,
+       "filled": 15,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 0,
+       "filled": 15,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 0,
+       "y": 1,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 15,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 1,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 0,
+       "y": 2,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 2,
+       "filled": 15,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 2,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 0,
+       "y": 3,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 3,
+       "filled": 15,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 3,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 0,
+       "y": 4,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 4,
+       "filled": 15,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 4,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      }
+     ],
+     "visible_trays": 45,
+     "inferred_hidden_trays": 207,
+     "total_filled": 240,
+     "total_empty": 12,
+     "total_low": 236,
+     "total_high": 268,
+     "outside_grid": [
+      {
+       "where": "Stack A, one tray in front of the grid's front row at column 0 (in front of B). Egg-topped and rim-counted in the straight photo.",
+       "filled": 15,
+       "empty": 0
+      },
+      {
+       "where": "Loose trays on the platform floor in front of C, not part of a stack: top tray partly filled (about 9 eggs) with at least one tray under it holding eggs. Not included in the block totals.",
+       "filled": 2,
+       "empty": null
+      }
+     ]
+    },
+    "confidence": "medium"
+   },
+   {
+    "method": "pitch",
+    "block": {
+     "x_stacks": 3,
+     "y_stacks": 5,
+     "cells": [
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 15,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 1,
+       "filled": 15,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 3,
+       "y": 1,
+       "filled": 15,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 2,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 2,
+       "filled": 15,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 2,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 3,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 3,
+       "filled": 15,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 3,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 4,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 4,
+       "filled": 15,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 4,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 5,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 5,
+       "filled": 15,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 5,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      }
+     ],
+     "visible_trays": 188,
+     "inferred_hidden_trays": 64,
+     "outside_grid": [
+      {
+       "where": "Stack 1 (front-left), sticking out one row ahead of column x=1, in front of cell (1,1). Counted 15 rows in two photos.",
+       "filled": 15,
+       "empty": 0
+      },
+      {
+       "where": "Loose pile on the floor in front of S2/S3: 2 trays, a full-looking bottom tray plus a top tray holding about 9-12 eggs. Not included in the block totals.",
+       "filled": 2,
+       "empty": 0
+      }
+     ],
+     "total_filled": 240,
+     "total_empty": 12,
+     "total_low": 210,
+     "total_high": 270
+    },
+    "confidence": "medium"
+   },
+   {
+    "method": "grid",
+    "block": {
+     "x_stacks": 3,
+     "y_stacks": 5,
+     "cells": [
+      {
+       "x": 0,
+       "y": 0,
+       "filled": 15,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 0,
+       "filled": 16,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 0,
+       "filled": 15,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 0,
+       "y": 1,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 15,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 1,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 0,
+       "y": 2,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 2,
+       "filled": 15,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 2,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 0,
+       "y": 3,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 3,
+       "filled": 15,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 3,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 0,
+       "y": 4,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 4,
+       "filled": 15,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 4,
+       "filled": 15,
+       "empty": 1,
+       "seen": true
+      }
+     ],
+     "visible_trays": 176,
+     "inferred_hidden_trays": 64,
+     "total_filled": 228,
+     "total_empty": 12,
+     "total_high": 260,
+     "total_low": 190,
+     "outside_grid": [
+      {
+       "where": "Loose pile on the floor in front of the B/C junction of the egg end. Two trays: the top one is partly filled (about 11 eggs) and the bottom one is filled.",
+       "filled": 2,
+       "empty": 0
+      }
+     ]
+    },
+    "confidence": "low"
+   }
+  ]
+ },
+ {
+  "set_id": "M16-CORNER-STACK",
+  "consensus": {
+   "set_id": "M16-CORNER-STACK",
+   "x_stacks": 1,
+   "y_stacks": 1,
+   "per_face": [
+    {
+     "role": "STRAIGHT",
+     "photo": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151149500.jpg.jpeg",
+     "stacks": [
+      {
+       "index": 1,
+       "filled": 14,
+       "empty": 0,
+       "counters": [
+        14,
+        14,
+        14
+       ],
+       "agreement": "all_equal"
+      }
+     ]
+    },
+    {
+     "role": "LEFT",
+     "photo": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151159267.jpg.jpeg",
+     "stacks": [
+      {
+       "index": 1,
+       "filled": 14,
+       "empty": 0,
+       "counters": [
+        14,
+        14,
+        14
+       ],
+       "agreement": "all_equal"
+      }
+     ]
+    },
+    {
+     "role": "RIGHT",
+     "photo": "C:\\Users\\rahul\\MUTAA\\IMG_20260916_151149500.jpg.jpeg",
+     "stacks": [
+      {
+       "index": 1,
+       "filled": null,
+       "empty": null,
+       "counters": [
+        null,
+        null,
+        null
+       ],
+       "agreement": "not_countable"
+      }
+     ]
+    }
+   ],
+   "visible_trays": 14,
+   "inferred_hidden_trays": 0,
+   "total_filled": 14,
+   "total_empty": 0,
+   "total_low": 14,
+   "total_high": 14,
+   "counter_totals": [
+    14,
+    14,
+    14
+   ],
+   "rechecked": "No stack needed a recount: all three counters agreed exactly (14 filled, 0 empty, 1x1 footprint) and none differed by 2 or more. I still checked it myself on an upright copy of the front photo (C:\\Users\\rahul\\AppData\\Local\\Temp\\claude\\C--Users-rahul-egg-tray-counter-mobile\\706af622-49a5-4aba-8b17-1ef9eed6e34c\\scratchpad\\mutaa\\count\\M16-CORNER-STACK\\reconcile\\front.jpg). I counted 13 cross-stacked egg rows, alternating 6/5 and starting with 6 at both the top and the bottom. Above them is 1 top tray with loose eggs heaped in its centre. There is no empty cover tray and no empty base tray. That gives 14, matching the counters.",
+   "reliability": "high",
+   "caveats": [
+    "The top tray is only partly loaded: loose eggs are heaped in its centre and its outer front cups are empty. It is counted as filled. If partial trays are counted separately, the result is 13 full trays plus 1 partial tray.",
+    "There is no separate photo of the right side. The RIGHT role reuses the STRAIGHT photo and adds no independent count; the right side stands against the wall.",
+    "It is a single stack (1x1 block) with no hidden cells. The green trays in the lower-left foreground of the LEFT photo are a separate pile and are excluded.",
+    "The cell is SEEN (front and left faces visible); 0 trays are inferred."
+   ]
+  },
+  "counters": [
+   {
+    "method": "rim",
+    "block": {
+     "x_stacks": 1,
+     "y_stacks": 1,
+     "cells": [
+      {
+       "x": 0,
+       "y": 0,
+       "filled": 14,
+       "empty": 0,
+       "seen": true
+      }
+     ],
+     "outside_grid": [],
+     "visible_trays": 14,
+     "inferred_hidden_trays": 0,
+     "total_filled": 14,
+     "total_empty": 0,
+     "total_high": 14,
+     "total_low": 14
+    },
+    "confidence": "high"
+   },
+   {
+    "method": "pitch",
+    "block": {
+     "x_stacks": 1,
+     "y_stacks": 1,
+     "cells": [
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 14,
+       "empty": 0,
+       "seen": true
+      }
+     ],
+     "visible_trays": 14,
+     "inferred_hidden_trays": 0,
+     "total_filled": 14,
+     "total_empty": 0,
+     "total_low": 14,
+     "total_high": 14,
+     "outside_grid": []
+    },
+    "confidence": "high"
+   },
+   {
+    "method": "grid",
+    "block": {
+     "x_stacks": 1,
+     "y_stacks": 1,
+     "cells": [
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 14,
+       "empty": 0,
+       "seen": true
+      }
+     ],
+     "visible_trays": 14,
+     "inferred_hidden_trays": 0,
+     "total_filled": 14,
+     "total_empty": 0,
+     "total_low": 14,
+     "total_high": 14,
+     "outside_grid": []
+    },
+    "confidence": "high"
+   }
+  ]
+ },
+ {
+  "set_id": "W05-ORANGE",
+  "consensus": {
+   "set_id": "W05-ORANGE",
+   "x_stacks": 10,
+   "y_stacks": 7,
+   "per_face": [
+    {
+     "role": "STRAIGHT (front face; also the RIGHT role, no separate right view)",
+     "photo": "WhatsApp Image 2026-09-05 at 9.41.09 AM.jpeg",
+     "stacks": [
+      {
+       "index": 1,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 2,
+       "filled": null,
+       "empty": 1,
+       "counters": [
+        null,
+        null,
+        null
+       ],
+       "agreement": "not_countable"
+      },
+      {
+       "index": 3,
+       "filled": 6,
+       "empty": 1,
+       "counters": [
+        6,
+        6,
+        6
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 4,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 5,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 6,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 7,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 8,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 9,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 10,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 11,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      }
+     ]
+    },
+    {
+     "role": "LEFT side (column 1, back on the left of the frame, front on the right)",
+     "photo": "WhatsApp Image 2026-09-05 at 9.40.57 AM.jpeg",
+     "stacks": [
+      {
+       "index": 1,
+       "filled": null,
+       "empty": 1,
+       "counters": [
+        null,
+        null,
+        null
+       ],
+       "agreement": "not_countable"
+      },
+      {
+       "index": 2,
+       "filled": null,
+       "empty": 1,
+       "counters": [
+        null,
+        null,
+        null
+       ],
+       "agreement": "not_countable"
+      },
+      {
+       "index": 3,
+       "filled": null,
+       "empty": 1,
+       "counters": [
+        null,
+        null,
+        null
+       ],
+       "agreement": "not_countable"
+      },
+      {
+       "index": 4,
+       "filled": null,
+       "empty": 1,
+       "counters": [
+        null,
+        null,
+        null
+       ],
+       "agreement": "not_countable"
+      },
+      {
+       "index": 5,
+       "filled": null,
+       "empty": 1,
+       "counters": [
+        null,
+        null,
+        null
+       ],
+       "agreement": "not_countable"
+      },
+      {
+       "index": 6,
+       "filled": null,
+       "empty": 1,
+       "counters": [
+        null,
+        null,
+        null
+       ],
+       "agreement": "not_countable"
+      }
+     ]
+    }
+   ],
+   "visible_trays": 196,
+   "inferred_hidden_trays": 1239,
+   "total_filled": 1366,
+   "total_empty": 69,
+   "total_low": 1200,
+   "total_high": 1660,
+   "counter_totals": [
+    1435,
+    1366,
+    1435
+   ],
+   "rechecked": "No stack has filled counts that differ by 2 or more. All three counters give 20 filled for each of the 9 countable full front stacks and 6 for the short stack, and all three give a 10 x 7 footprint. I re-checked the two points where they disagreed.\n(1) Empty top tray: rim and grid count one cover per stack; pitch counts none. In the 9.41.00 close-up enlarged 2.2x, the top tray's cups between the cones are empty. The white eggs show only through the cone windows, which means they belong to the tray below. The 3x crop of the front photo (stacks D/E) shows a cone-only layer above the first egg row on every stack. The consensus is 1 empty cover per stack, so each full stack is 20F+1E.\n(2) Left-face segmentation (9.40.57): rim found 4 full stacks plus a partial one; pitch and grid found 5. I see 5 full stacks, at x 30-400, 400-690, 690-950, 950-1180 and 1180-1440, plus a sliver at x 0-30 on the frame edge. They are column 1, rows 2 to 6, with row 7 partly in frame. The bottoms of all of them are cut off, so none is countable. The left-face stacks are numbered 1 = the edge sliver through 6 = the corner stack L1. Grid has no entry for the sliver, and rim's boundaries are off by one stack.\n(3) Depth: in top view 9.40.56 I traced the column behind front stack C back to the wall and got about 7 tray depths. That is consistent with Y=7. The sliver at the frame edge in 9.40.57 does not rule out an 8th row.\nThe block is 70 cells: cell (1,1) is empty floor, cell (2,1) is the short stack (6F+1E), and the other 68 cells are taken as 20F+1E. That gives 1366 filled + 69 empty = 1435.\nPitch's total of 1366 differs from the others only because it leaves out the 69 cover trays.",
+   "reliability": "low",
+   "caveats": [
+    "About 86% of the total (1239 of 1435) is inferred. Only the front row, the short stack and L1 have countable heights. The left-face photos cut off every stack bottom, and no right or back view exists.",
+    "Depth Y=7 is inferred from perspective and top views, not counted directly. Y=8 is plausible, because the row-7 stack sits at the frame edge in 9.40.57 and the rim/pitch focal-length estimates reach 7.9-8.7. Each extra row adds about 210 trays.",
+    "Top view 9.40.56 shows some interior top trays sitting one layer lower with eggs exposed, for example at mid-right. Some hidden stacks may therefore be 19F, or may lack a cover, so the 20F+1E assumption per hidden cell may be slightly high.",
+    "The empty-tray count depends on reading the top cone-only layer as a separate empty cover tray. Pitch disagreed. If it is wrong, the total drops by 69 to 1366.",
+    "Stack A (col 2, row 2) is only partly visible, with about 14 rows above the short stack. It is inferred as 20F+1E from its level top.",
+    "Bottom rows of the two rightmost front stacks sit under the timestamp overlay and were interpolated. All three counters agree on 20 for them.",
+    "Not counted: the loose eggs on stack B's cover, the trays on the trolleys at the right of 9.40.57, and the loose tray in the bottom-right foreground of the front photo."
+   ]
+  },
+  "counters": [
+   {
+    "method": "rim",
+    "block": {
+     "x_stacks": 10,
+     "y_stacks": 7,
+     "cells": [
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 0,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 1,
+       "filled": 6,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 3,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 4,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 5,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 6,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 7,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 8,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 9,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 10,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 3,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 7,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 8,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 9,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 10,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 7,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 8,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 9,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 10,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 7,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 8,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 9,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 10,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 7,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 8,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 9,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 10,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 7,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 8,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 9,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 10,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 7,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 7,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 7,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 7,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 7,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 7,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 7,
+       "y": 7,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 8,
+       "y": 7,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 9,
+       "y": 7,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 10,
+       "y": 7,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      }
+     ],
+     "outside_grid": [],
+     "visible_trays": 196,
+     "inferred_hidden_trays": 1239,
+     "total_filled": 1366,
+     "total_empty": 69,
+     "total_low": 1200,
+     "total_high": 1680
+    },
+    "confidence": "low"
+   },
+   {
+    "method": "pitch",
+    "block": {
+     "x_stacks": 10,
+     "y_stacks": 7,
+     "cells": [
+      {
+       "x": 0,
+       "y": 0,
+       "filled": 0,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 0,
+       "filled": 6,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 0,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 3,
+       "y": 0,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 4,
+       "y": 0,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 5,
+       "y": 0,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 6,
+       "y": 0,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 7,
+       "y": 0,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 8,
+       "y": 0,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 9,
+       "y": 0,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 0,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 7,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 8,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 9,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 0,
+       "y": 2,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 2,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 2,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 2,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 2,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 2,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 2,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 7,
+       "y": 2,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 8,
+       "y": 2,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 9,
+       "y": 2,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 0,
+       "y": 3,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 3,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 3,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 3,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 3,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 3,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 3,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 7,
+       "y": 3,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 8,
+       "y": 3,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 9,
+       "y": 3,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 0,
+       "y": 4,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 4,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 4,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 4,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 4,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 4,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 4,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 7,
+       "y": 4,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 8,
+       "y": 4,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 9,
+       "y": 4,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 0,
+       "y": 5,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 5,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 5,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 5,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 5,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 5,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 5,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 7,
+       "y": 5,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 8,
+       "y": 5,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 9,
+       "y": 5,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 0,
+       "y": 6,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 6,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 6,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 6,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 6,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 6,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 6,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 7,
+       "y": 6,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 8,
+       "y": 6,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 9,
+       "y": 6,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      }
+     ],
+     "visible_trays": 220,
+     "inferred_hidden_trays": 1146,
+     "total_filled": 1366,
+     "total_empty": 0,
+     "total_low": 1250,
+     "total_high": 1570,
+     "outside_grid": [
+      {
+       "where": "Orange trays on the steel trolleys at the right (photos 9.40.57 and 9.41.07) and one loose tray in the bottom-right foreground of the front photo. Not part of the block, not countable, not included.",
+       "filled": null,
+       "empty": null
+      }
+     ]
+    },
+    "confidence": "medium"
+   },
+   {
+    "method": "grid",
+    "block": {
+     "x_stacks": 10,
+     "y_stacks": 7,
+     "cells": [
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 0,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 1,
+       "filled": 6,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 3,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 4,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 5,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 6,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 7,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 8,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 9,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 10,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 3,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 7,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 8,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 9,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 10,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 7,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 8,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 9,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 10,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 7,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 8,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 9,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 10,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 7,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 8,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 9,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 10,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 7,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 8,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 9,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 10,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 7,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 7,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 7,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 7,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 7,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 7,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 7,
+       "y": 7,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 8,
+       "y": 7,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 9,
+       "y": 7,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 10,
+       "y": 7,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      }
+     ],
+     "visible_trays": 196,
+     "inferred_hidden_trays": 1239,
+     "total_filled": 1366,
+     "total_empty": 69,
+     "total_low": 1200,
+     "total_high": 1660,
+     "outside_grid": []
+    },
+    "confidence": "low"
+   }
+  ]
+ },
+ {
+  "set_id": "L-80",
+  "consensus": {
+   "set_id": "L-80",
+   "x_stacks": 4,
+   "y_stacks": 1,
+   "per_face": [
+    {
+     "role": "STRAIGHT",
+     "photo": "img-30.jpeg",
+     "stacks": [
+      {
+       "index": 1,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 2,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 3,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 4,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      }
+     ]
+    },
+    {
+     "role": "LEFT",
+     "photo": "img-31.jpeg",
+     "stacks": [
+      {
+       "index": 1,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        20,
+        null,
+        20
+       ],
+       "agreement": "all_equal"
+      }
+     ]
+    },
+    {
+     "role": "RIGHT",
+     "photo": "img-25.jpeg",
+     "stacks": [
+      {
+       "index": 4,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      }
+     ]
+    },
+    {
+     "role": "OTHER (right, second shot)",
+     "photo": "img-27.jpeg",
+     "stacks": [
+      {
+       "index": 4,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        null,
+        null,
+        20
+       ],
+       "agreement": "all_equal"
+      }
+     ]
+    }
+   ],
+   "visible_trays": 80,
+   "inferred_hidden_trays": 0,
+   "total_filled": 80,
+   "total_empty": 0,
+   "total_low": 79,
+   "total_high": 81,
+   "counter_totals": [
+    80,
+    80,
+    80
+   ],
+   "rechecked": "No stack differed by 2 or more, and all three counters gave a 4 x 1 footprint, so no re-count was required. I spot-checked anyway. Upright full views of img-30 and img-25 show 4 green plastic stacks in one row. In img-25 the right end face of stack 4 is one tray wide, with a separate block behind and apart from it, which confirms Y=1. In img-30 all four tops are level. I also re-counted front stack 2 on a 2x enlarged strip of img-30 (x 380-560) and found 20 egg-row layers from the loaded top tray down to the base on the floor, with no empty cover. That matches the consensus. Stack 4's base is cut off by the bottom edge of img-30, but img-25 and img-27 show it complete with 20 layers (counted by rim and grid).",
+   "reliability": "high",
+   "caveats": [
+    "Counter order in the 'counters' arrays is rim, pitch, grid. Pitch did not count stack 1 in img-31 (it gave a rough 19-20), and only grid counted img-27.",
+    "The originals are only 1600x900 / 900x1600 after EXIF transpose, so the bottom layers are low-resolution. A range of +/-1 allows for one missed or doubled rim.",
+    "Stack 4's height comes from the side views (img-25, img-27), because its base is outside the front frame in img-30. Stacks 2 and 3 are counted from the front view only. Their tops are level with stacks 1 and 4.",
+    "No empty cover trays were found: every top tray holds eggs. The dim rows that alternate between layers are recessed rows of filled trays, not empty trays.",
+    "The trays in the background (the separate block behind in img-25/img-27, and the empty trays at top-left in img-31) are excluded as not part of this block.",
+    "The ink numbers written on the photos were ignored."
+   ]
+  },
+  "counters": [
+   {
+    "method": "rim",
+    "block": {
+     "x_stacks": 4,
+     "y_stacks": 1,
+     "cells": [
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 3,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 4,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      }
+     ],
+     "outside_grid": [],
+     "visible_trays": 80,
+     "inferred_hidden_trays": 0,
+     "total_filled": 80,
+     "total_empty": 0,
+     "total_low": 79,
+     "total_high": 81
+    },
+    "confidence": "high"
+   },
+   {
+    "method": "pitch",
+    "block": {
+     "x_stacks": 4,
+     "y_stacks": 1,
+     "cells": [
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 3,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 4,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      }
+     ],
+     "outside_grid": [],
+     "visible_trays": 80,
+     "inferred_hidden_trays": 0,
+     "total_filled": 80,
+     "total_empty": 0,
+     "total_low": 79,
+     "total_high": 81
+    },
+    "confidence": "medium"
+   },
+   {
+    "method": "grid",
+    "block": {
+     "x_stacks": 4,
+     "y_stacks": 1,
+     "cells": [
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 3,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 4,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      }
+     ],
+     "visible_trays": 80,
+     "inferred_hidden_trays": 0,
+     "total_filled": 80,
+     "total_empty": 0,
+     "total_low": 79,
+     "total_high": 81,
+     "outside_grid": []
+    },
+    "confidence": "high"
+   }
+  ]
+ },
+ {
+  "set_id": "L-109-ORANGE",
+  "consensus": {
+   "set_id": "L-109-ORANGE",
+   "x_stacks": 6,
+   "y_stacks": 3,
+   "per_face": [
+    {
+     "photo": "img-36.jpeg",
+     "role": "STRAIGHT (front face). Stacks left to right: 1 = pulp-covered step (front row, column 1); 2 = S0/A2 behind the step (row 2, column 1, only about 9-10 top layers visible); 3-7 = the five tall front-row stacks (columns 2-6, stack 7 has the green tray on top); 8 = F/G, the short stack right of the last tall stack, set back to row 2 in a 7th column; 9 = R0/H/G3, the tall stack behind F in about row 3 of the 7th column. Counter arrays are [rim, pitch, grid].",
+     "stacks": [
+      {
+       "index": 1,
+       "filled": 10,
+       "empty": 1,
+       "counters": [
+        10,
+        10,
+        10
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 2,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        20,
+        20,
+        null
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 3,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 4,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 5,
+       "filled": 19,
+       "empty": 3,
+       "counters": [
+        19,
+        19,
+        19
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 6,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 7,
+       "filled": 21,
+       "empty": 1,
+       "counters": [
+        21,
+        21,
+        21
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 8,
+       "filled": 5,
+       "empty": 1,
+       "counters": [
+        5,
+        5,
+        5
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 9,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        null
+       ],
+       "agreement": "within_1"
+      }
+     ]
+    },
+    {
+     "photo": "img-17.jpeg",
+     "role": "LEFT side. This is really a front-left oblique view of the same front face, not a true left face. Stacks left to right: 1 = S0 face above the step; 2 = step; 3-7 = tall stacks 1-5 (stack 7 has the green tray). It is used only as a cross-check; the tall stacks recede and are too narrow to recount from here. Counter arrays are [rim, pitch, grid].",
+     "stacks": [
+      {
+       "index": 1,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        null,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 2,
+       "filled": 10,
+       "empty": 1,
+       "counters": [
+        10,
+        10,
+        10
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 3,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        null,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 4,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        20,
+        20,
+        null
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 5,
+       "filled": 19,
+       "empty": 3,
+       "counters": [
+        null,
+        19,
+        null
+       ],
+       "agreement": "not_countable"
+      },
+      {
+       "index": 6,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        null,
+        20,
+        null
+       ],
+       "agreement": "not_countable"
+      },
+      {
+       "index": 7,
+       "filled": 21,
+       "empty": 1,
+       "counters": [
+        null,
+        21,
+        null
+       ],
+       "agreement": "not_countable"
+      }
+     ]
+    },
+    {
+     "photo": "img-36.jpeg",
+     "role": "RIGHT side (same photo as STRAIGHT; no separate right view exists). The right face cannot be counted. Only F and R0 show at the right edge, and they are recorded under STRAIGHT stacks 8 and 9.",
+     "stacks": []
+    }
+   ],
+   "visible_trays": 148,
+   "inferred_hidden_trays": 236,
+   "total_filled": 375,
+   "total_empty": 9,
+   "total_low": 250,
+   "total_high": 400,
+   "counter_totals": [
+    375,
+    255,
+    375
+   ],
+   "rechecked": "I re-checked the footprint because the counters disagreed: rim and grid gave 6x3 plus 2 outside, pitch gave 7x2. I made upright crops of img-36 and img-17 (1280x960, enlarged 1.6-5x).\n\n(a) Right side. F's base is at y about 650, against about 715 for the front row. F and R0 both reach past the right edge of the last tall front stack (x about 1085 to 1140), even though perspective would pull a stack in the same column inward and hide it. So they stand in a 7th column, set back. Pitch ratios (F about 0.89x, R0 about 0.77x the front row) put F in row 2 and R0 in about row 3. F is not in the front row, so pitch's 7x2 is rejected. I kept the majority 6x3 rectangle with F and R0 outside the grid in column 7, rows 2-3.\n\n(b) Depth. Above the front-row tops in img-36 (x 370-720) and in img-17, pulp covers show at two further-back levels, about 20-25 px apart (about one tray depth each). The left flank in img-17 recedes about 130-180 px and shows 2-3 stack side segments, with its far end hidden by the neighbouring block. This supports Y=3, but Y=2 cannot be excluded.\n\n(c) The nested pulp pile on tall stack 3 (empties: rim 4, pitch 2, grid 2). At 5x zoom in both photos I see about 3 nested pulp rims above the cone bottoms, so I set empty = 3 (range 2-4) instead of the majority 2.\n\n(d) S0's top shows exposed eggs in both photos. The pulp above it lies on back stacks, so empty = 0.\n\nFilled counts agreed on every front-row and outside stack (10, 20, 20, 19, 20, 21, 5), so they were not recounted layer by layer.",
+   "reliability": "low",
+   "caveats": [
+    "Consensus 3D block (X=6, Y=3) plus 2 stacks outside it. Front row y=1, columns 1-6, all SEEN: 10, 20, 20, 19, 20, 21 filled = 110. Row 2: column 1 is S0 (partly SEEN, height 20 estimated); columns 2-6 are INFERRED at 20 each. Row 3: columns 1-6 are INFERRED at 20 each. Outside the grid in column 7: F at row 2 (SEEN, 5 filled + 1 cover) and R0 at about row 3 (about 15 layers SEEN, height 20 estimated, 1 cover).",
+    "total_filled 375 = 110 front row + 20 S0 + 5 F + 20 R0 + 220 for 11 inferred interior cells. All three counters agree on the seen stacks. Pitch's 255 differs only because it assumed Y=2.",
+    "visible_trays (148) counts layers physically seen: 110 filled + 7 covers in the front row, about 9 of S0, 6 of F (5 filled + cover), and about 16 of R0 (about 15 filled + cover). inferred_hidden_trays (236) is S0's hidden 11 + R0's hidden 5 + 220 interior.",
+    "The block's depth was never directly observed. No true side or back photo exists: img-17 is a front-left oblique view and RIGHT is the same photo as STRAIGHT. Hidden cells are assumed at the front-row height of 20. Back stacks may each lose a slot to pulp covers, as tall stack 3 does.",
+    "Range: low 250 assumes Y=2 (row 2 only, plus R0) with a few stacks at 19. High 400 assumes Y=3 with some stacks at 21. A 4th row cannot be ruled out from these photos and would add about 120.",
+    "total_empty 9 counts only the covers seen: front row 1+1+0+3+1+1 = 7, plus F 1 and R0 1. Covers on hidden back-row tops are not counted. Tall stack 3's nested pulp is 3 (2-4).",
+    "The green plastic tray on tall stack 5 is only partly full of eggs and is counted as filled. A thin pulp tray between it and the orange trays is counted as 1 empty.",
+    "The hand-written ink ('109' and a blue bracket) on both photos was ignored. A vertical column of empty pulp trays at the back left in img-17, and the neighbouring orange blocks at the left edges of both photos, were not counted.",
+    "Crops and scripts are in C:\\Users\\rahul\\AppData\\Local\\Temp\\claude\\C--Users-rahul-egg-tray-counter-mobile\\706af622-49a5-4aba-8b17-1ef9eed6e34c\\scratchpad\\mutaa\\count\\L-109-ORANGE\\reconcile\\"
+   ]
+  },
+  "counters": [
+   {
+    "method": "rim",
+    "block": {
+     "x_stacks": 6,
+     "y_stacks": 3,
+     "cells": [
+      {
+       "x": 0,
+       "y": 0,
+       "filled": 10,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 0,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 0,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 3,
+       "y": 0,
+       "filled": 19,
+       "empty": 4,
+       "seen": true
+      },
+      {
+       "x": 4,
+       "y": 0,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 5,
+       "y": 0,
+       "filled": 21,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 0,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 1,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 1,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 1,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 1,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 0,
+       "y": 2,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 2,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 2,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 2,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 2,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 2,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      }
+     ],
+     "outside_grid": [
+      {
+       "where": "F: column 6 (right of E), row 2. Short stack with a pulp cover, seen in img-36.",
+       "filled": 5,
+       "empty": 1
+      },
+      {
+       "where": "R0: column 6, row 3, behind F. Tall stack, about 15 layers seen and the rest estimated.",
+       "filled": 20,
+       "empty": 1
+      }
+     ],
+     "visible_trays": 149,
+     "inferred_hidden_trays": 236,
+     "total_filled": 375,
+     "total_empty": 15,
+     "total_low": 250,
+     "total_high": 400
+    },
+    "confidence": "low"
+   },
+   {
+    "method": "pitch",
+    "block": {
+     "x_stacks": 7,
+     "y_stacks": 2,
+     "cells": [
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 10,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 3,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 4,
+       "y": 1,
+       "filled": 19,
+       "empty": 2,
+       "seen": true
+      },
+      {
+       "x": 5,
+       "y": 1,
+       "filled": 20,
+       "empty": 2,
+       "seen": true
+      },
+      {
+       "x": 6,
+       "y": 1,
+       "filled": 21,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 7,
+       "y": 1,
+       "filled": 5,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 2,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 2,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 2,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 2,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 2,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 7,
+       "y": 2,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      }
+     ],
+     "visible_trays": 139,
+     "inferred_hidden_trays": 116,
+     "total_filled": 255,
+     "total_empty": 9,
+     "total_low": 154,
+     "total_high": 262,
+     "outside_grid": []
+    },
+    "confidence": "low"
+   },
+   {
+    "method": "grid",
+    "block": {
+     "x_stacks": 6,
+     "y_stacks": 3,
+     "cells": [
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 10,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 3,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 4,
+       "y": 1,
+       "filled": 19,
+       "empty": 2,
+       "seen": true
+      },
+      {
+       "x": 5,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 6,
+       "y": 1,
+       "filled": 21,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 2,
+       "filled": 20,
+       "empty": null,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 2,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 2,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 2,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 2,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 2,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 3,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 3,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 3,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 3,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 3,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 3,
+       "filled": 20,
+       "empty": null,
+       "seen": false
+      }
+     ],
+     "outside_grid": [
+      {
+       "where": "G: column 7 (right of F), row 2; short stack seen in img-36",
+       "filled": 5,
+       "empty": 1
+      },
+      {
+       "where": "G3: column 7, row ~3, tall stack behind G; ~14 layers seen, height estimated",
+       "filled": 20,
+       "empty": 1
+      }
+     ],
+     "visible_trays": 146,
+     "inferred_hidden_trays": 237,
+     "total_filled": 375,
+     "total_empty": 8,
+     "total_low": 228,
+     "total_high": 400
+    },
+    "confidence": "low"
+   }
+  ]
+ },
+ {
+  "set_id": "L-115",
+  "consensus": {
+   "set_id": "L-115",
+   "x_stacks": 6,
+   "y_stacks": 6,
+   "per_face": [
+    {
+     "role": "STRAIGHT (front face; also the listed RIGHT photo, but the right side is against the perforated wall and cannot be seen)",
+     "photo": "img-04.jpeg",
+     "stacks": [
+      {
+       "index": 1,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 2,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 3,
+       "filled": 14,
+       "empty": 1,
+       "counters": [
+        14,
+        14,
+        15
+       ],
+       "agreement": "within_1"
+      },
+      {
+       "index": 4,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 5,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 6,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 7,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      }
+     ]
+    },
+    {
+     "role": "LEFT side (oblique front-left corner view; the corner is at x~600, not 705)",
+     "photo": "img-05.jpeg",
+     "stacks": [
+      {
+       "index": 1,
+       "filled": null,
+       "empty": null,
+       "counters": [
+        null,
+        20,
+        null
+       ],
+       "agreement": "not_countable"
+      },
+      {
+       "index": 2,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 3,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 4,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 5,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 6,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 7,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      }
+     ]
+    }
+   ],
+   "visible_trays": 232,
+   "inferred_hidden_trays": 539,
+   "total_filled": 734,
+   "total_empty": 37,
+   "total_low": 645,
+   "total_high": 897,
+   "counter_totals": [
+    897,
+    1455,
+    771
+   ],
+   "rechecked": "FOOTPRINT Y (rim 7, pitch 12, grid 6). I re-checked it on img-05 by measuring the slope of the tray rows in 40 px column windows (y 450-700). Slopes are positive (+0.12 to +0.22, a face receding left) for x<=580 and negative (-0.02 to -0.26, a face receding right) for x>=600. A positive band at x 800-860 is the protruding short stack's own left side. So the block's front-left corner is at x~595-610, as grid found. It is not at the ink line at 703 that rim used. The face at x 610-694 is the front face of front stack 1, and the face at 706-787 is front stack 2. Rim's 7th 'depth' stack (613-703) is therefore a front-face stack. With that corrected, rim's seams (613/538/478/432/388/350/318) and grid's seams (610/535/472/427/381/340/313) both give 6 stacks of depth between the corner and x~315. A projective fit to the seams has residuals of 2 px or less, so the spacing is consistent with equal-width stacks. The side/front width ratio at the corner (70/94) also matches full 30 cm stacks, not half-stack clusters. Beyond x~315 there is a further green segment (x~150-305). At its near end (x~290-310) a column of egg ends is visible, which means its side face is stepped slightly outward. Its egg clusters are about 25-30 px wide, wider than the 18-25 px that continuing the near plane predicts. Dark trays sit on top of it. In img-04 those dark trays appear at the block's top line at x 232-288. From their apparent size they are roughly 3 m behind the front face, and slightly left of the block's left plane. So the far segment is a real, adjoining, offset group about 5-8 stacks long. Pitch counted it as part of the block. Rim and grid excluded it, and I exclude it too (2 of 3). Y = 6. TOP COVER (rim and grid: 1 empty per tall stack; pitch: 0). On 4x crops of img-04, the band above the top egg row of stacks 1-2 (y~525-546) is about 21 px tall, one full tray pitch. It shows the tray rim and cones with no eggs, and it looks like the short stack's empty top tray seen from the front. I confirm 20 filled + 1 empty cover per tall stack (21 trays). SHORT STACK (rim 14+1, pitch 14+1, grid 15+0): all three give 15 trays. A 4x crop of its top, which the camera looks down on, shows empty green cups and no egg tops, so I confirm 14 filled + 1 empty. REAR STACK BEHIND THE SHORT STACK: I counted 6 egg rows above the short stack (y~550, 572, 595, 615, 640, 662) plus the cover band. That is 7 trays visible; the remaining 14 filled are hidden. I did not re-count the 5 full front stacks (all three counters agree at 20 filled) or the side-face heights (all agree; the top and bottom edges are continuous).",
+   "reliability": "medium",
+   "caveats": [
+    "Block grid: x=0..5 runs left to right along the img-04 front face, and y=0..5 runs front to back. Cells SEEN: all of y=0 (x=2 only partly, above the short stack) and x=0 at y=1..5 (left face in img-05). The other 25 cells (interior, back, and the right column against the wall) are INFERRED at 20 filled + 1 empty each. Outside the grid: the short stack in front of cell (2,0), 14 filled + 1 empty.",
+    "Visible trays = 5 full front stacks x 21 (105) + the rear stack's 7 visible trays + the short stack's 15 + 5 further left-face stacks x 21 (105) = 232. Hidden = 25 x 21 (525) + 14 hidden lower trays of the rear stack = 539. Point total = 771 (734 filled, 37 empty).",
+    "The far green segment along the left side in img-05 (x~150-305, dark trays on top, about 5-8 stacks long, stepped slightly outward) is excluded as a separate abutting group. If it is counted as part of this block (as the pitch counter did), it would add roughly 6 x 5-8 x 21 = 630-1008 trays, for a total of about 1400-1780. This is a question of where the block ends, not of count precision, and it is the largest open risk.",
+    "Range: low 645 allows for unseen interior voids or short stacks, equivalent to about one missing row of depth (6x5x21+15). High 897 allows Y=7 (6x7x21+15). Y=6 is supported by two independent seam sets and a projective fit.",
+    "The pitch counter's 20-tray stacks (no cover) and its corner at x~605 with 12 depth stacks were not adopted. Its Y=12 includes the far segment.",
+    "Images are low resolution (960x1280 and 1278x960). The heights of left-face stacks at depths 2-6 are inferred from a continuous top line and bottom edge, not counted layer by layer.",
+    "Hand-drawn ink brackets and numbers on both photos were ignored when counting."
+   ]
+  },
+  "counters": [
+   {
+    "method": "rim",
+    "block": {
+     "x_stacks": 6,
+     "y_stacks": 7,
+     "cells": [
+      {
+       "x": 0,
+       "y": 0,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 0,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 0,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 3,
+       "y": 0,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 4,
+       "y": 0,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 5,
+       "y": 0,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 0,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 0,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 0,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 0,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 0,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 0,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      }
+     ],
+     "visible_trays": 252,
+     "inferred_hidden_trays": 645,
+     "total_filled": 854,
+     "total_empty": 43,
+     "total_low": 771,
+     "total_high": 1023,
+     "outside_grid": [
+      {
+       "where": "Short stack standing one full stack depth in front of front-row column x=2 (seen in both photos)",
+       "filled": 14,
+       "empty": 1
+      }
+     ]
+    },
+    "confidence": "medium"
+   },
+   {
+    "method": "pitch",
+    "block": {
+     "x_stacks": 6,
+     "y_stacks": 12,
+     "cells": [
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 3,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 4,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 5,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 6,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 2,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 2,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 2,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 2,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 2,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 2,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 3,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 3,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 3,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 3,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 3,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 3,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 4,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 4,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 4,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 4,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 4,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 4,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 5,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 5,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 5,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 5,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 5,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 5,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 6,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 6,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 6,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 6,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 6,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 6,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 7,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 7,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 7,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 7,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 7,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 7,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 8,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 8,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 8,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 8,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 8,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 8,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 9,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 9,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 9,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 9,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 9,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 9,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 10,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 10,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 10,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 10,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 10,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 10,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 11,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 11,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 11,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 11,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 11,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 11,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 1,
+       "y": 12,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 12,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 12,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 12,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 12,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 12,
+       "filled": 20,
+       "empty": 0,
+       "seen": false
+      }
+     ],
+     "outside_grid": [
+      {
+       "where": "Protruding short stack in front of front-row column 3 (x=3, y=0)",
+       "filled": 14,
+       "empty": 1
+      }
+     ],
+     "visible_trays": 355,
+     "inferred_hidden_trays": 1100,
+     "total_filled": 1454,
+     "total_empty": 1,
+     "total_low": 1300,
+     "total_high": 1600
+    },
+    "confidence": "medium"
+   },
+   {
+    "method": "grid",
+    "block": {
+     "x_stacks": 6,
+     "y_stacks": 6,
+     "cells": [
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 3,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 4,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 5,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 6,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 1,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 2,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 3,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 4,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 5,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 2,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 3,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 4,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 5,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      },
+      {
+       "x": 6,
+       "y": 6,
+       "filled": 20,
+       "empty": 1,
+       "seen": false
+      }
+     ],
+     "outside_grid": [
+      {
+       "where": "short stack standing in front of front-row stack x=3 (img-04 stack 3, img-05 x~790-950)",
+       "filled": 15,
+       "empty": 0
+      },
+      {
+       "where": "far segment beyond depth 6 along the left side (img-05 x~150-305, dark trays on top). Possibly ~4 more rows of depth or a separate abutting block; not resolvable, so not in the totals",
+       "filled": null,
+       "empty": null
+      }
+     ],
+     "visible_trays": 246,
+     "inferred_hidden_trays": 525,
+     "total_filled": 735,
+     "total_empty": 36,
+     "total_low": 640,
+     "total_high": 905
+    },
+    "confidence": "low"
+   }
+  ]
+ },
+ {
+  "set_id": "L-100",
+  "consensus": {
+   "set_id": "L-100",
+   "x_stacks": 5,
+   "y_stacks": 1,
+   "per_face": [
+    {
+     "role": "STRAIGHT (front face)",
+     "photo": "img-19.jpeg",
+     "stacks": [
+      {
+       "index": 1,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 2,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 3,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 4,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 5,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      }
+     ]
+    },
+    {
+     "role": "LEFT side (actually a lower, front-left re-shot of the same front face)",
+     "photo": "img-21.jpeg",
+     "stacks": [
+      {
+       "index": 1,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        20,
+        null,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 2,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        20,
+        null,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 3,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        20,
+        null,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 4,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 5,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        20,
+        20
+       ],
+       "agreement": "all_equal"
+      }
+     ]
+    },
+    {
+     "role": "RIGHT side (actually another front re-shot of the same face)",
+     "photo": "img-24.jpeg",
+     "stacks": [
+      {
+       "index": 1,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        20,
+        null,
+        null
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 2,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        20,
+        null,
+        null
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 3,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        20,
+        null,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 4,
+       "filled": 20,
+       "empty": 0,
+       "counters": [
+        20,
+        null,
+        20
+       ],
+       "agreement": "all_equal"
+      },
+      {
+       "index": 5,
+       "filled": 20,
+       "empty": 1,
+       "counters": [
+        20,
+        null,
+        20
+       ],
+       "agreement": "all_equal"
+      }
+     ]
+    }
+   ],
+   "visible_trays": 102,
+   "inferred_hidden_trays": 0,
+   "total_filled": 100,
+   "total_empty": 2,
+   "total_low": 101,
+   "total_high": 122,
+   "counter_totals": [
+    122,
+    102,
+    102
+   ],
+   "rechecked": "No front stack had a spread of 2 or more. All three counters gave 20 filled for stacks 1-4 and 20 filled plus 1 empty cover for stack 5. All three also gave X=5, Y=1. The only disagreement is about the tray behind and above the stack 1/2 seam: rim treats it as the empty top of a hidden 21-tray rear stack (+20 filled inferred), while pitch and grid treat it as one loose empty tray. I re-checked this in all three photos (top strips at 2-3x). It is a green tray with posts and background showing between them and no egg domes, so it is empty. It sits behind the front tops, smaller in scale, and pokes up about one tray height in the low-angle img-21 and img-24. None of its sides and nothing beneath it is visible in any photo, so a hidden rear stack can be neither confirmed nor ruled out. No other tray tops show behind stacks 3-5. I also spot-recounted stack 5 at 1.6x in two overlapping crops of img-19 (10 rows + 11 rows, 1 shared row = 20 egg rows). Its top tray has no eggs above its cups, which confirms 20 filled + 1 empty cover. Consensus (2 of 3): the rear tray is a loose empty tray outside the grid, with no hidden filled trays inferred.",
+   "reliability": "medium",
+   "caveats": [
+    "The photos labelled LEFT and RIGHT (img-21, img-24) are not side views. They are low-angle front re-shots of the same face, so no side or back face is visible and depth (Y) is judged only from the top surface.",
+    "Front row: 5 stacks x 20 filled = 100 filled, plus 1 empty cover on stack 5. All three counters agree and my stack-5 recount matches. Per-stack error is probably within +/-1 at this resolution (1600x1200).",
+    "Outside the grid: 1 empty tray behind and above the stack 1/2 seam, counted as a loose empty tray (consensus of pitch and grid). If it is instead the empty top of a hidden rear stack behind stack 1, add about 20 filled. total_high 122 covers that case (rim's reading, 120 filled + 2 empty).",
+    "total_low/total_high count physical trays (filled + empty). total_low 101 allows for the rear tray not being a separate counted tray. A filled-only range would be 100 to 120.",
+    "A back row of 20 trays or fewer behind stacks 2-5 would be fully hidden by the front tops. No evidence for one exists apart from dark slots between front stacks, which may just be shadow.",
+    "Hand-written '100' ink marks on the photos were ignored."
+   ]
+  },
+  "counters": [
+   {
+    "method": "rim",
+    "block": {
+     "x_stacks": 5,
+     "y_stacks": 1,
+     "cells": [
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 3,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 4,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 5,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      }
+     ],
+     "outside_grid": [
+      {
+       "where": "Rear stack directly behind front stack 1, at second-row depth. Only its top tray is visible, and that tray is empty. It is seen in all 3 photos, above the stack 1/2 seam. In img-19 its posts are at 0.85-0.87x the pitch of the front trays (about 35 vs 40.5 px) and its span is 149-372 px, which matches stack 1 projected about 17% farther away. Its top sits where a 21-tray stack (20 + empty cover) one tray-depth behind would project. What lies under it is hidden; the 20 filled is inferred, not seen.",
+       "filled": 20,
+       "empty": 1
+      }
+     ],
+     "visible_trays": 102,
+     "inferred_hidden_trays": 20,
+     "total_filled": 120,
+     "total_empty": 2,
+     "total_low": 100,
+     "total_high": 200
+    },
+    "confidence": "medium"
+   },
+   {
+    "method": "pitch",
+    "block": {
+     "x_stacks": 5,
+     "y_stacks": 1,
+     "cells": [
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 3,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 4,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 5,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      }
+     ],
+     "outside_grid": [
+      {
+       "where": "A single tray lying behind and above the top of stacks 1-2, straddling their boundary at the back. It is seen in all 3 photos and appears to have empty cups. It may be a loose tray on top, or the top of a hidden back stack.",
+       "filled": 0,
+       "empty": 1
+      }
+     ],
+     "visible_trays": 102,
+     "inferred_hidden_trays": 0,
+     "total_filled": 100,
+     "total_empty": 2,
+     "total_low": 101,
+     "total_high": 122
+    },
+    "confidence": "medium"
+   },
+   {
+    "method": "grid",
+    "block": {
+     "x_stacks": 5,
+     "y_stacks": 1,
+     "cells": [
+      {
+       "x": 1,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 2,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 3,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 4,
+       "y": 1,
+       "filled": 20,
+       "empty": 0,
+       "seen": true
+      },
+      {
+       "x": 5,
+       "y": 1,
+       "filled": 20,
+       "empty": 1,
+       "seen": true
+      }
+     ],
+     "outside_grid": [
+      {
+       "where": "Behind and above the tops of stacks 1-2 in both img-19 and img-21: one green tray showing no eggs, straddling stacks 1-2, about half a tray-pitch above their top rims. It could be an empty tray lying loose at the back of the tops, or the empty top tray of a hidden back-row stack behind stack 1. Its height cannot be counted from any photo.",
+       "filled": null,
+       "empty": 1
+      }
+     ],
+     "visible_trays": 102,
+     "inferred_hidden_trays": 0,
+     "total_filled": 100,
+     "total_empty": 2,
+     "total_low": 101,
+     "total_high": 122
+    },
+    "confidence": "medium"
+   }
+  ]
+ }
+]

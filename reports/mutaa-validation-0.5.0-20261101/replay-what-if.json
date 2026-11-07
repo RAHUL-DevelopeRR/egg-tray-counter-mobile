@@ -1,0 +1,570 @@
+[
+ {
+  "set_id": "L-100",
+  "filler": null,
+  "manual": {
+   "x": 5,
+   "y": 1,
+   "total_filled": 100
+  },
+  "staging": {
+   "status": "needs_view",
+   "total": null
+  },
+  "as_sent": {
+   "status": "needs_view",
+   "total": null,
+   "width": 5,
+   "depth": null,
+   "conflicts": 2,
+   "refused": [],
+   "side": {
+    "left": "repeats_front",
+    "right": "repeats_front"
+   }
+  },
+  "declared": {
+   "status": "needs_view",
+   "total": null,
+   "width": 5,
+   "depth": null,
+   "conflicts": 2,
+   "refused": [],
+   "side": {
+    "left": "repeats_front",
+    "right": "repeats_front"
+   }
+  },
+  "camera": {
+   "status": "needs_view",
+   "total": null,
+   "width": 5,
+   "depth": null,
+   "conflicts": 2,
+   "refused": [],
+   "side": {
+    "left": "turned_repeats_front",
+    "right": "turned_repeats_front"
+   }
+  },
+  "camera_decl": {
+   "status": "needs_view",
+   "total": null,
+   "width": 5,
+   "depth": null,
+   "conflicts": 2,
+   "refused": [],
+   "side": {
+    "left": "turned_repeats_front",
+    "right": "turned_repeats_front"
+   }
+  },
+  "as_sent_matches_staging": true
+ },
+ {
+  "set_id": "L-109-ORANGE",
+  "filler": "right",
+  "manual": {
+   "x": 6,
+   "y": 3,
+   "total_filled": 375
+  },
+  "staging": {
+   "status": "needs_view",
+   "total": null
+  },
+  "as_sent": {
+   "status": "needs_view",
+   "total": null,
+   "width": 6,
+   "depth": null,
+   "conflicts": 5,
+   "refused": [
+    "right"
+   ],
+   "side": {
+    "left": "unconfirmed",
+    "right": "unverified"
+   }
+  },
+  "declared": {
+   "status": "needs_view",
+   "total": null,
+   "width": 6,
+   "depth": null,
+   "conflicts": 5,
+   "refused": [
+    "right"
+   ],
+   "side": {
+    "left": "unconfirmed",
+    "right": "unverified"
+   }
+  },
+  "camera": {
+   "status": "needs_view",
+   "total": null,
+   "width": 6,
+   "depth": 5,
+   "conflicts": 4,
+   "refused": [
+    "right"
+   ],
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   }
+  },
+  "camera_decl": {
+   "status": "needs_view",
+   "total": null,
+   "width": 6,
+   "depth": 5,
+   "conflicts": 5,
+   "refused": [
+    "right"
+   ],
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   }
+  },
+  "as_sent_matches_staging": true
+ },
+ {
+  "set_id": "L-115",
+  "filler": "right",
+  "manual": {
+   "x": 6,
+   "y": 6,
+   "total_filled": 734
+  },
+  "staging": {
+   "status": "needs_view",
+   "total": null
+  },
+  "as_sent": {
+   "status": "needs_view",
+   "total": null,
+   "width": 6,
+   "depth": 1,
+   "conflicts": 5,
+   "refused": [
+    "left",
+    "right",
+    "straight"
+   ],
+   "side": {
+    "left": "unverified",
+    "right": "unverified"
+   }
+  },
+  "declared": {
+   "status": "needs_view",
+   "total": null,
+   "width": 6,
+   "depth": 1,
+   "conflicts": 6,
+   "refused": [
+    "left",
+    "right",
+    "straight"
+   ],
+   "side": {
+    "left": "unverified",
+    "right": "unverified"
+   }
+  },
+  "camera": {
+   "status": "needs_view",
+   "total": null,
+   "width": 6,
+   "depth": 1,
+   "conflicts": 5,
+   "refused": [
+    "left",
+    "right",
+    "straight"
+   ],
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   }
+  },
+  "camera_decl": {
+   "status": "needs_view",
+   "total": null,
+   "width": 6,
+   "depth": 1,
+   "conflicts": 6,
+   "refused": [
+    "left",
+    "right",
+    "straight"
+   ],
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   }
+  },
+  "as_sent_matches_staging": true
+ },
+ {
+  "set_id": "L-80",
+  "filler": null,
+  "manual": {
+   "x": 4,
+   "y": 1,
+   "total_filled": 80
+  },
+  "staging": {
+   "status": "needs_view",
+   "total": null
+  },
+  "as_sent": {
+   "status": "needs_view",
+   "total": null,
+   "width": 4,
+   "depth": null,
+   "conflicts": 8,
+   "refused": [
+    "left"
+   ],
+   "side": {
+    "left": "unconfirmed",
+    "right": "unconfirmed"
+   }
+  },
+  "declared": {
+   "status": "needs_view",
+   "total": null,
+   "width": 4,
+   "depth": null,
+   "conflicts": 8,
+   "refused": [
+    "left"
+   ],
+   "side": {
+    "left": "unconfirmed",
+    "right": "unconfirmed"
+   }
+  },
+  "camera": {
+   "status": "needs_view",
+   "total": null,
+   "width": 4,
+   "depth": 4,
+   "conflicts": 6,
+   "refused": [
+    "left"
+   ],
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   }
+  },
+  "camera_decl": {
+   "status": "needs_view",
+   "total": null,
+   "width": 4,
+   "depth": 4,
+   "conflicts": 7,
+   "refused": [
+    "left"
+   ],
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   }
+  },
+  "as_sent_matches_staging": true
+ },
+ {
+  "set_id": "M16-CORNER-STACK",
+  "filler": "right",
+  "manual": {
+   "x": 1,
+   "y": 1,
+   "total_filled": 14
+  },
+  "staging": {
+   "status": "needs_view",
+   "total": null
+  },
+  "as_sent": {
+   "status": "needs_view",
+   "total": null,
+   "width": 1,
+   "depth": 1,
+   "conflicts": 1,
+   "refused": [
+    "right"
+   ],
+   "side": {
+    "left": "unverified",
+    "right": "unverified"
+   }
+  },
+  "declared": {
+   "status": "needs_view",
+   "total": null,
+   "width": 1,
+   "depth": 1,
+   "conflicts": 1,
+   "refused": [
+    "right"
+   ],
+   "side": {
+    "left": "unverified",
+    "right": "unverified"
+   }
+  },
+  "camera": {
+   "status": "needs_view",
+   "total": null,
+   "width": 1,
+   "depth": 1,
+   "conflicts": 1,
+   "refused": [
+    "right"
+   ],
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   }
+  },
+  "camera_decl": {
+   "status": "needs_view",
+   "total": null,
+   "width": 1,
+   "depth": 1,
+   "conflicts": 1,
+   "refused": [
+    "right"
+   ],
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   }
+  },
+  "as_sent_matches_staging": true
+ },
+ {
+  "set_id": "M16-FAR",
+  "filler": null,
+  "manual": {
+   "x": 3,
+   "y": 5,
+   "total_filled": 240
+  },
+  "staging": {
+   "status": "needs_view",
+   "total": null
+  },
+  "as_sent": {
+   "status": "needs_view",
+   "total": null,
+   "width": 5,
+   "depth": null,
+   "conflicts": 13,
+   "refused": [
+    "right"
+   ],
+   "side": {
+    "left": "unconfirmed",
+    "right": "unconfirmed"
+   }
+  },
+  "declared": {
+   "status": "needs_view",
+   "total": null,
+   "width": 5,
+   "depth": null,
+   "conflicts": 13,
+   "refused": [
+    "right"
+   ],
+   "side": {
+    "left": "unconfirmed",
+    "right": "unconfirmed"
+   }
+  },
+  "camera": {
+   "status": "needs_view",
+   "total": null,
+   "width": 5,
+   "depth": 4,
+   "conflicts": 11,
+   "refused": [
+    "right"
+   ],
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   }
+  },
+  "camera_decl": {
+   "status": "needs_view",
+   "total": null,
+   "width": 5,
+   "depth": 4,
+   "conflicts": 13,
+   "refused": [
+    "right"
+   ],
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   }
+  },
+  "as_sent_matches_staging": true
+ },
+ {
+  "set_id": "M16-NEAR",
+  "filler": null,
+  "manual": {
+   "x": 4,
+   "y": 2,
+   "total_filled": 177
+  },
+  "staging": {
+   "status": "needs_view",
+   "total": null
+  },
+  "as_sent": {
+   "status": "needs_view",
+   "total": null,
+   "width": 5,
+   "depth": null,
+   "conflicts": 11,
+   "refused": [
+    "left",
+    "right",
+    "straight"
+   ],
+   "side": {
+    "left": "unconfirmed",
+    "right": "unconfirmed"
+   }
+  },
+  "declared": {
+   "status": "needs_view",
+   "total": null,
+   "width": 5,
+   "depth": null,
+   "conflicts": 11,
+   "refused": [
+    "left",
+    "right",
+    "straight"
+   ],
+   "side": {
+    "left": "unconfirmed",
+    "right": "unconfirmed"
+   }
+  },
+  "camera": {
+   "status": "needs_view",
+   "total": null,
+   "width": 5,
+   "depth": 5,
+   "conflicts": 9,
+   "refused": [
+    "left",
+    "right",
+    "straight"
+   ],
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   }
+  },
+  "camera_decl": {
+   "status": "needs_view",
+   "total": null,
+   "width": 5,
+   "depth": 5,
+   "conflicts": 11,
+   "refused": [
+    "left",
+    "right",
+    "straight"
+   ],
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   }
+  },
+  "as_sent_matches_staging": true
+ },
+ {
+  "set_id": "W05-ORANGE",
+  "filler": "right",
+  "manual": {
+   "x": 10,
+   "y": 7,
+   "total_filled": 1366
+  },
+  "staging": {
+   "status": "needs_view",
+   "total": null
+  },
+  "as_sent": {
+   "status": "needs_view",
+   "total": null,
+   "width": 9,
+   "depth": null,
+   "conflicts": 8,
+   "refused": [
+    "right"
+   ],
+   "side": {
+    "left": "unconfirmed",
+    "right": "unverified"
+   }
+  },
+  "declared": {
+   "status": "needs_view",
+   "total": null,
+   "width": 9,
+   "depth": null,
+   "conflicts": 8,
+   "refused": [
+    "right"
+   ],
+   "side": {
+    "left": "unconfirmed",
+    "right": "unverified"
+   }
+  },
+  "camera": {
+   "status": "needs_view",
+   "total": null,
+   "width": 9,
+   "depth": 5,
+   "conflicts": 7,
+   "refused": [
+    "right"
+   ],
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   }
+  },
+  "camera_decl": {
+   "status": "needs_view",
+   "total": null,
+   "width": 9,
+   "depth": 5,
+   "conflicts": 9,
+   "refused": [
+    "right"
+   ],
+   "side": {
+    "left": "turned",
+    "right": "turned"
+   }
+  },
+  "as_sent_matches_staging": true
+ }
+]

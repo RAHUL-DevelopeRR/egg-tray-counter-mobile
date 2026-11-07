@@ -17,6 +17,14 @@ class _MemoryStore implements SettingsStore {
   @override
   Future<void> clearPoseCalibration() async {}
   @override
+  Future<bool> getGalleryUploads() async => false;
+  @override
+  Future<void> setGalleryUploads(bool value) async {}
+  @override
+  Future<String?> getOperatorName() async => null;
+  @override
+  Future<void> setOperatorName(String value) async {}
+  @override
   Future<String> getBaseUrl() async => SettingsStore.defaultBaseUrl;
   @override
   Future<void> setBaseUrl(String value) async => throw UnimplementedError();

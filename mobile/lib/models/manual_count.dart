@@ -22,12 +22,14 @@ class ManualCountCell {
   final int empty;
   final bool unreachable;
 
+  /// Starts at 0, never at the app's count: a count pre-filled with the
+  /// app's answer is not an independent check of it.
   factory ManualCountCell.fromBlockCell(BlockCell cell) => ManualCountCell(
     x: cell.x,
     y: cell.y,
     appLayers: cell.layers,
     appStatus: cell.status,
-    filled: cell.status == 'missing' ? 0 : (cell.layers ?? 0),
+    filled: 0,
     empty: 0,
   );
 
@@ -74,6 +76,8 @@ class ManualCount {
     this.appTotal,
     this.submitted = false,
     this.countId,
+    this.countedBy = '',
+    this.secondCounter = '',
   });
 
   final String scanId;
@@ -91,6 +95,11 @@ class ManualCount {
   /// correction is a new id. The server stores each id once.
   final String? countId;
 
+  /// Who counted, and who recounted blind for a two-person count; empty
+  /// when not given.
+  final String countedBy;
+  final String secondCounter;
+
   int get filledTotal => cells.fold(0, (s, c) => s + c.filled);
   int get emptyTotal => cells.fold(0, (s, c) => s + c.empty);
   int get unreachableCount => cells.where((c) => c.unreachable).length;
@@ -102,6 +111,8 @@ class ManualCount {
     bool? submitted,
     String? countId,
     DateTime? createdAt,
+    String? countedBy,
+    String? secondCounter,
   }) => ManualCount(
     scanId: scanId,
     blockId: blockId ?? this.blockId,
@@ -111,12 +122,16 @@ class ManualCount {
     appTotal: appTotal,
     submitted: submitted ?? this.submitted,
     countId: countId ?? this.countId,
+    countedBy: countedBy ?? this.countedBy,
+    secondCounter: secondCounter ?? this.secondCounter,
   );
 
   /// Whether [other] records the same counts (a resend of the same save).
   bool sameCountsAs(ManualCount other) =>
       blockId == other.blockId &&
       notes == other.notes &&
+      countedBy == other.countedBy &&
+      secondCounter == other.secondCounter &&
       jsonEncode(cells.map((c) => c.toJson()).toList()) ==
           jsonEncode(other.cells.map((c) => c.toJson()).toList());
 
@@ -132,10 +147,12 @@ class ManualCount {
     'notes': notes,
     'app_total': appTotal,
     'app_version': ?appVersion,
+    'counted_by': ?(countedBy.isEmpty ? null : countedBy),
+    'second_counter': ?(secondCounter.isEmpty ? null : secondCounter),
   };
 
   static const csvHeader =
-      'scan_id,block_id,x,y,app_layers,app_status,filled_trays,empty_trays,unreachable,recorded_at,submitted';
+      'scan_id,block_id,x,y,app_layers,app_status,filled_trays,empty_trays,unreachable,recorded_at,submitted,counted_by,second_counter';
 
   List<String> csvRows() => [
     for (final c in cells)
@@ -151,6 +168,8 @@ class ManualCount {
         c.unreachable ? 'yes' : 'no',
         createdAt.toUtc().toIso8601String(),
         submitted ? 'yes' : 'no',
+        _csv(countedBy),
+        _csv(secondCounter),
       ].join(','),
   ];
 

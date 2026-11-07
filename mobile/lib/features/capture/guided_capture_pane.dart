@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../models/capture_view.dart';
+import '../../models/extra_capture.dart';
 import '../../models/scan_session.dart';
 import '../../services/captured_still.dart';
 import '../../services/frame_evidence.dart';
 import '../../services/frame_preflight.dart';
+import '../../services/heading_tracker.dart';
 import '../../services/live_frame_preflight.dart';
 import '../../services/settings_store.dart';
 import 'camera_guide_overlay.dart';
@@ -25,6 +27,9 @@ class GuidedCapturePane extends StatefulWidget {
     this.views = CaptureView.values,
     this.mainCameraOnly = false,
     this.onClose,
+    this.heading,
+    this.extra,
+    this.extraSide,
     super.key,
   });
 
@@ -39,6 +44,20 @@ class GuidedCapturePane extends StatefulWidget {
   /// Shown as a close control over the viewfinder (the screen has no app bar).
   final VoidCallback? onClose;
 
+  /// The scan's heading tracker, kept by the scan flow so a retake shares the
+  /// session of the photos it is compared with. Without one the pane runs its
+  /// own for as long as it is open.
+  final HeadingTracker? heading;
+
+  /// An optional extra photo (CORNER or ELEVATED) instead of the three faces:
+  /// one capture, kept with [ScanSession.setExtra], then [onComplete]. The
+  /// three required views and what makes a scan complete are untouched.
+  final ExtraView? extra;
+
+  /// The corner the operator stands at for a CORNER photo (`front_left` or
+  /// `front_right`).
+  final String? extraSide;
+
   @override
   State<GuidedCapturePane> createState() => _GuidedCapturePaneState();
 }
@@ -46,6 +65,10 @@ class GuidedCapturePane extends StatefulWidget {
 class _GuidedCapturePaneState extends State<GuidedCapturePane>
     with WidgetsBindingObserver {
   final _live = LiveFramePreflight();
+
+  /// How far the phone has turned during the scan: tells a side face from
+  /// the front photographed again.
+  late final HeadingTracker _heading = widget.heading ?? HeadingTracker();
   CameraController? _controller;
   late CaptureView _view;
   bool _capturing = false;
@@ -72,14 +95,28 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
     super.initState();
     SystemChrome.setPreferredOrientations(const [DeviceOrientation.portraitUp]);
     WidgetsBinding.instance.addObserver(this);
-    _view = widget.initialView ?? _nextMissing ?? widget.views.first;
+    // An extra uses the STRAIGHT guide (one whole block in frame); its aim
+    // relaxes only the checks that aim makes meaningless.
+    _view = widget.extra != null
+        ? CaptureView.straight
+        : widget.initialView ?? _nextMissing ?? widget.views.first;
     _live
       ..addListener(_onLiveReport)
       ..setView(_view)
+      ..setAim(switch (widget.extra) {
+        ExtraView.corner => CaptureAim.corner,
+        ExtraView.elevated => CaptureAim.elevated,
+        null => CaptureAim.square,
+      })
       ..startSensors();
+    _heading.start();
     _loadLevelReference();
     _initializeCamera();
   }
+
+  /// The view's name on buttons and messages.
+  String get _label =>
+      widget.extra?.wireName.toUpperCase() ?? _view.name.toUpperCase();
 
   CaptureView? get _nextMissing {
     for (final view in widget.views) {
@@ -290,6 +327,26 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
       final capturePose = _live.pose;
       // How the phone is held at the tap: the photo is turned to match.
       final rotation = _captureRotation;
+      // A side photo must face a different way from the front (and LEFT from
+      // RIGHT); refused before the shutter, so no photo is taken in vain.
+      final heading = _heading.current;
+      // An extra is not a side face; it is never compared with them.
+      final headingProblem = widget.extra != null
+          ? null
+          : sideHeadingProblem(_view, heading, {
+              for (final view in CaptureView.values)
+                if (view != _view)
+                  view: CaptureHeading.fromEvidence(
+                    widget.session.constraintEvidence[view.name],
+                  ),
+            });
+      if (headingProblem != null) {
+        await _showRejection(
+          'This is not the ${_view.name.toUpperCase()} side',
+          headingProblem,
+        );
+        return;
+      }
       // Android refuses a still capture while an image stream is active.
       await _live.stopCamera();
       XFile photo;
@@ -331,34 +388,49 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
       }
       if (!prepared.quality.accepted) {
         await _showRejection(
-          'Retake ${_view.name.toUpperCase()}',
+          'Retake $_label',
           prepared.quality.reason ?? 'Image quality is not sufficient.',
         );
         return;
       }
-      final previousPath = widget.session.pathFor(_view);
-      widget.session.setPath(
-        _view,
-        prepared.path,
-        cellId: cellId,
-        evidence: jsonEncode({
-          ...still.toJson(),
-          'source': 'captured_still',
-          'capture_orientation': switch (rotation) {
-            90 => 'landscape_left',
-            270 => 'landscape_right',
-            _ => 'portrait',
-          },
-          'upright_pixels': true,
-          'width': prepared.width,
-          'height': prepared.height,
-        }),
-      );
+      final extra = widget.extra;
+      final evidence = jsonEncode({
+        ...still.toJson(),
+        'source': 'captured_still',
+        'capture_orientation': switch (rotation) {
+          90 => 'landscape_left',
+          270 => 'landscape_right',
+          _ => 'portrait',
+        },
+        'upright_pixels': true,
+        'width': prepared.width,
+        'height': prepared.height,
+        if (extra != null) 'extra_view': extra.wireName,
+        ...?heading?.toJson(),
+      });
+      final previousPath = extra != null
+          ? widget.session.extraFor(extra)?.path
+          : widget.session.pathFor(_view);
+      if (extra != null) {
+        widget.session.setExtra(
+          extra,
+          prepared.path,
+          evidence: evidence,
+          side: widget.extraSide,
+        );
+      } else {
+        widget.session.setPath(
+          _view,
+          prepared.path,
+          cellId: cellId,
+          evidence: evidence,
+        );
+      }
       pendingPhoto = null; // The session now owns this file.
       if (previousPath != null && previousPath != prepared.path) {
         await _deleteCapture(previousPath);
       }
-      if (_nextMissing == null) {
+      if (extra != null || _nextMissing == null) {
         widget.onComplete(widget.session);
         return;
       }
@@ -420,6 +492,7 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
       pose: capturePose,
       calibrationSet: _live.calibration.isSet,
       measuredAt: DateTime.now(),
+      aim: _live.aim,
     );
     final mismatch = (previewAspect / stillAspect - 1).abs() > 0.05;
     if (!mismatch) return report;
@@ -471,6 +544,7 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
     ++_cameraGeneration;
     _live.removeListener(_onLiveReport);
     _live.dispose();
+    if (widget.heading == null) _heading.stop();
     _cameraTask = _cameraTask.then((_) async {
       await _live.stopCamera();
       await _live.stopSensors();
@@ -521,7 +595,7 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
               child: CircularProgressIndicator(strokeWidth: 2),
             )
           : const Icon(Icons.camera_alt),
-      label: Text('CAPTURE ${_view.name.toUpperCase()}'),
+      label: Text('CAPTURE $_label'),
     );
     final banner = _ConstraintBanner(
       report: _report,
@@ -554,11 +628,21 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 9),
-            child: _StepRow(
-              view: _view,
-              session: widget.session,
-              views: widget.views,
-            ),
+            child: widget.extra == null
+                ? _StepRow(
+                    view: _view,
+                    session: widget.session,
+                    views: widget.views,
+                  )
+                : _StepChip(
+                    label: [
+                      '${widget.extra!.title} (OPTIONAL)',
+                      if (widget.extraSide != null)
+                        widget.extraSide!.replaceAll('_', ' ').toUpperCase(),
+                    ].join(' - '),
+                    complete: false,
+                    current: true,
+                  ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(12, 2, 12, 0),
@@ -570,7 +654,7 @@ class _GuidedCapturePaneState extends State<GuidedCapturePane>
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 child: Text(
-                  _view.instruction,
+                  widget.extra?.instruction ?? _view.instruction,
                   maxLines: sideways ? 1 : 2,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(color: Colors.white, fontSize: 12),

@@ -1,0 +1,104 @@
+{
+ "pipeline_version": "worker-0.5.1",
+ "faces": {
+  "development/U/labelled": {
+   "n": 22,
+   "accepted": 11,
+   "accepted_correct": 10,
+   "accepted_wrong": [
+    "img-30 78/80"
+   ],
+   "withheld": 11,
+   "withheld_would_be_exact": 0,
+   "coverage": 0.5
+  },
+  "development/U/labelled_reencoded": {
+   "n": 7,
+   "accepted": 4,
+   "accepted_correct": 3,
+   "accepted_wrong": [
+    "mutaa:L-80:straight 79/80"
+   ],
+   "withheld": 3,
+   "withheld_would_be_exact": 0,
+   "coverage": 0.571
+  },
+  "development/V/labelled_reencoded": {
+   "n": 4,
+   "accepted": 2,
+   "accepted_correct": 0,
+   "accepted_wrong": [
+    "mutaa:L-100:straight 100/101",
+    "mutaa:L-80:straight 79/80"
+   ],
+   "withheld": 2,
+   "withheld_would_be_exact": 0,
+   "coverage": 0.5
+  },
+  "development/V/mutaa": {
+   "n": 2,
+   "accepted": 1,
+   "accepted_correct": 1,
+   "accepted_wrong": [],
+   "withheld": 1,
+   "withheld_would_be_exact": 0,
+   "coverage": 0.5
+  },
+  "untouched/U/labelled": {
+   "n": 2,
+   "accepted": 1,
+   "accepted_correct": 1,
+   "accepted_wrong": [],
+   "withheld": 1,
+   "withheld_would_be_exact": 0,
+   "coverage": 0.5
+  }
+ },
+ "labelled_clusters": {
+  "n": 22,
+  "accepted": 10,
+  "accepted_correct": 9,
+  "accepted_wrong": [
+   "img-30 78/80"
+  ],
+  "withheld": 12,
+  "withheld_would_be_exact": 0,
+  "coverage": 0.455
+ },
+ "trios": {
+  "records": 22,
+  "groups": 14,
+  "released": [
+   "99-block substituted trio @ reports/staging-block-20261008/scan-99block-a.json: estimated 99",
+   "99-block substituted trio @ reports/staging-block-20261008/scan-99block-walk.json: estimated 99",
+   "99-block substituted trio @ reports/staging-block-20261008/scan-99block-walk2.json: estimated 99",
+   "99-block substituted trio @ reports/eval-20261015/staging47-replay/6fe33b1d-4605-4b53-84f4-86bff313c1f3.json: estimated 99"
+  ],
+  "wrong_releases": [],
+  "wrong_exact": []
+ },
+ "adversarial": {
+  "n": 33,
+  "pass": 32,
+  "failing": [
+   "S25 5x1 row, real turn, side photos show the row end and two rows standing behind it (three 20s) [estimated 300, truth 100; fixed by decision asked 2 Nov: a depth over one stack needs a CORNER photo or an agreeing declaration; photos alone cannot tell rows behind from the block]"
+  ],
+  "stretch_failing": [
+   "S03 top tray of a middle front stack missed (silent -1) [no_wrong_total: estimated 79, truth 80; phase E]",
+   "S04 bottom tray of a middle front stack missed (silent -1) [no_wrong_total: estimated 79, truth 80; phase E]",
+   "S07 two front stacks merged into one column [no_wrong_total: estimated 60, truth 80; phase F]"
+  ]
+ },
+ "reencode": {
+  "n": 10,
+  "flipped": [
+   "mutaa:L-109-ORANGE:straight 114->115",
+   "mutaa:L-109-ORANGE:left 63->56",
+   "mutaa:L-115:straight 120->121",
+   "mutaa:L-115:left 17->14",
+   "mutaa:L-80:straight 78->79",
+   "mutaa:L-80:left 63->59",
+   "mutaa:L-80:right 13->12"
+  ]
+ }
+}

@@ -1,4 +1,6 @@
+import 'package:egg_tray_counter/models/block_declaration.dart';
 import 'package:egg_tray_counter/models/capture_view.dart';
+import 'package:egg_tray_counter/models/extra_capture.dart';
 import 'package:egg_tray_counter/models/scan_session.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -82,5 +84,56 @@ void main() {
     // The original triplet is untouched.
     expect(first.isComplete, isTrue);
     expect(first.constraintEvidence['right'], '{"r":1}');
+  });
+
+  test('extras never decide completeness; the declaration is asked once and '
+      'a retake keeps it and the extras', () {
+    final declaration = BlockDeclaration(
+      x: 5,
+      y: 3,
+      declaredAt: DateTime.utc(2026, 11, 1, 10),
+    );
+    final first = ScanSession(scanId: 'scan-a')
+      ..setExtra(
+        ExtraView.corner,
+        'corner.jpg',
+        evidence: '{"c":1}',
+        side: kCornerFrontRight,
+      );
+    expect(first.isComplete, isFalse);
+    expect(first.nextMissing, CaptureView.straight);
+    for (final view in CaptureView.values) {
+      first.setPath(view, '${view.name}.jpg');
+    }
+    expect(first.isComplete, isTrue);
+    expect(first.constraintEvidence, isEmpty, reason: 'extras keep their own');
+    expect(first.declarationAsked, isFalse);
+    first.declare(declaration);
+    expect(first.declarationAsked, isTrue);
+
+    first.setExtra(ExtraView.elevated, 'top.jpg', evidence: '{"e":1}');
+    first.setElevatedTaps(const ElevatedTaps(x: 5, y: 3).tap(0, 0));
+    expect(first.extraFor(ExtraView.elevated)!.taps!.cells, {
+      (0, 0): kTapPresent,
+    });
+    expect(first.allPaths, containsAll(['corner.jpg', 'top.jpg', 'left.jpg']));
+
+    final retake = first.retake(CaptureView.left, scanId: 'scan-b');
+    expect(retake.declarationAsked, isTrue);
+    expect(retake.declaration, same(declaration));
+    expect(retake.extraFor(ExtraView.corner)!.side, kCornerFrontRight);
+    expect(retake.extraFor(ExtraView.elevated)!.taps, isNotNull);
+
+    // A new elevated photo drops the reading of the old one.
+    retake.setExtra(ExtraView.elevated, 'top2.jpg');
+    expect(retake.extraFor(ExtraView.elevated)!.taps, isNull);
+    retake.clearExtra(ExtraView.corner);
+    expect(retake.extraFor(ExtraView.corner), isNull);
+    expect(first.extraFor(ExtraView.corner), isNotNull);
+
+    // Skipped: asked, nothing declared.
+    final skipped = ScanSession(scanId: 'scan-c')..declare(null);
+    expect(skipped.declarationAsked, isTrue);
+    expect(skipped.declaration, isNull);
   });
 }

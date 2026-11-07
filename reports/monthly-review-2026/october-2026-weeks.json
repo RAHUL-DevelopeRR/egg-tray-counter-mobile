@@ -1,0 +1,512 @@
+{
+ "weeks": [
+  {
+   "week": 1,
+   "dates": "1-7 October 2026",
+   "headline": "For the first time, the counting model was run on 52 real farm photos that had handwritten counts. It came close on straight-on photos of one block but badly undercounted angled and distant photos.",
+   "summary": "The user sent 52 farm photos with the tray totals written on them by hand. The team ran the existing tray-counting model on every photo without changing it. The count was usually close when one block filled the photo, straight on. It failed on angled, corner and distant photos. The team also put an experimental \"3D\" photo-matching service on Amazon's cloud and built a test version of the app that can display it. Its dots are matched picture points, not trays, so it gives no tray count. The monthly progress reviews for August and September were also finished and made easier to read in print.",
+   "phase": "Field-photo baseline testing and an experimental cloud 3D check",
+   "work": [
+    {
+     "title": "First test on 52 hand-labelled farm photos (7 Oct)",
+     "detail": "The 52 photos were copied unchanged into the project, with a fingerprint (checksum) file that proves they were not altered. The handwritten totals were typed into labels.csv. The unchanged production counter, Roboflow model projec-mutta/2, was then run on every photo. The model was not shown the labels. 5 of 52 photos were exact, the average miss (mean absolute error, MAE) was 45.1 trays, and the model's total was 2839 against a label total of 5041."
+    },
+    {
+     "title": "Cloud 3D diagnostic service on AWS (5-7 Oct)",
+     "detail": "On 5 Oct the first attempt stopped part-way because the AWS connection lost its authorisation. On 6 Oct a diagnostic service was deployed to AWS Lambda (Amazon's pay-per-use cloud functions) in the ap-south-1 region. Run on saved warehouse photos, it found 16 candidate regions, accepted zero matches and returned no tray total. On 7 Oct a route that matches two photos was added. It found 175 matches, 125 of which passed a consistency check (called 'inliers'), and 76/94/100 3D points under three focal-length assumptions. The run took 10.703 seconds."
+    },
+    {
+     "title": "Test app 0.3.4+10 with a 3D evidence viewer (7 Oct)",
+     "detail": "A test build of the app was made. It can send two photos through the test (staging) copy of the cloud server, a Cloudflare Worker, to AWS. It then shows the matched points in a view you can rotate. Before release, the automated tests passed: 82 backend, 20 Worker and 66 Flutter. The app was installed on the BlueStacks Android emulator, where it displayed 76 points / 125 inliers / 0.376 px. The production app and the production server were not changed."
+    },
+    {
+     "title": "August and September monthly reviews (1 Oct)",
+     "detail": "Formal August and September 2026 reviews were made as editable DOCX and print-ready PDF files. They were then rebuilt for A4 print: 12 pt body text and table text of at least 10.5 pt. The August PDF has three pages and the September PDF has five. The September review adds a phone screenshot of a scene the user reported as 90 trays. The model counted 89 on the left photo, 92 on the right and 92 straight on, and the app showed COUNT NOT VERIFIED."
+    },
+    {
+     "title": "App and server checks on the emulator (5 Oct)",
+     "detail": "The live production server reported the model projec-mutta/2. The existing app 0.3.3+9 was installed on the BlueStacks emulator. It launched, showed SERVER REACHABLE and opened the three-photo upload screen. This only checked the connection and screens. No count was tested."
+    }
+   ],
+   "results": [
+    {
+     "item": "All 52 labelled photos: exact matches, average miss, and total counted vs total labelled",
+     "value": "5/52 exact, MAE 45.1, V2 sum 2839 vs label sum 5041",
+     "meaning": "The model was compared with totals the user wrote by hand on WhatsApp copies of the photos. These were not physical recounts done by the team. Some handwritten readings and what they cover still await the user's confirmation. Several photos are near-duplicates or the same block from different angles, so the 52 photos are not independent samples. Overall, the model counted far fewer trays than the labels.",
+     "source": "PROGRESS.md 2026-10-07 'labelled field photos' entry; reports/field-labelled-20261007/README.md, Results table; summary.json"
+    },
+    {
+     "item": "Block-face photos only (photos of a whole block of stacks)",
+     "value": "1/39 exact, 6/39 within 2, MAE 59.1",
+     "meaning": "On the photos that matter most for a store-room count, only one total matched the handwritten label exactly. These are scene totals only. There is no count for each separate stack yet, and no split between full and empty trays.",
+     "source": "PROGRESS.md 2026-10-07 entry; reports/field-labelled-20261007/README.md, Results table"
+    },
+    {
+     "item": "Results by how the photo was taken (block faces)",
+     "value": "frontal fill-frame 12/18 within 5% (median 4.2%); angled/corner/multi-block 0/16 (median 70.2%); distant/wide 0/5 (median 94.5%)",
+     "meaning": "Straight-on photos where one face fills the frame were usually close. Angled and distant photos all failed. The assistant tagged photos by type after it had seen the errors, so this split may be biased by hindsight.",
+     "source": "PROGRESS.md 2026-10-07 entry; reports/field-labelled-20261007/README.md, 'By capture condition' table; capture_tags.csv"
+    },
+    {
+     "item": "Same block photographed from different angles",
+     "value": "block 80 gives 81 frontal, 52 oblique, 18/20 steep side; block 109 gives 117 frontal, 60 corner; wide scenes collapse (358 -> 1; 205/204 -> 0)",
+     "meaning": "Each block was compared only with itself, so the photo-type tags do not affect this check. It shows that camera angle and distance, not the block, cause the large errors. The reference numbers are still the user's handwritten totals.",
+     "source": "PROGRESS.md 2026-10-07 entry; reports/field-labelled-20261007/README.md, 'Same-block comparisons'; results.csv"
+    },
+    {
+     "item": "AWS two-photo 3D matching on the overlapping wide warehouse pair",
+     "value": "175 matches, 125 fundamental inliers, 76/94/100 sparse points under focal factors 0.7/1.0/1.4, 10.703 seconds",
+     "meaning": "The cloud service runs and gives the same answer each time (a second run returned identical output in 10.568 seconds). The points are matched picture details such as tray and egg texture or background. They are not trays. There is no real-world scale and no tray count.",
+     "source": "PROGRESS.md 2026-10-07 'AWS reconstruction route deployed and photo-tested'; reports/aws-reconstruction-deploy-20261007/README.md, Verification"
+    },
+    {
+     "item": "Hosted stack diagnostic on saved warehouse photos (6 Oct)",
+     "value": "16 proposed regions, zero accepted matches, null tray/egg-filled totals, verified=false, recapture_required",
+     "meaning": "This shows the cloud service can be reached and runs correctly. It could not match any stack between photos, so it gave no count. It is not a 3D or counting success.",
+     "source": "PROGRESS.md 2026-10-06 entry; reports/aws-vision-check-20261006/README.md"
+    }
+   ],
+   "challenges": [
+    "Angled, corner and distant photos fail badly. None of the 16 angled or 5 distant block photos came within 5%, and one wide scene labelled 358 was counted as 1. The project notes say each tray layer may become too small after the model shrinks the image to 640 px.",
+    "The user expected a recognisable 3D model of the trays. The current method only matches scattered picture points between two photos. It has no surface model, no real-world scale, does not identify trays, and gives no count.",
+    "The labelled photos are WhatsApp copies (0.2-1.9 megapixels, no camera data) with ink drawn on them. Some handwritten readings and what they cover still need the user's confirmation. There is still no physical count for each stack and no split between full and empty trays.",
+    "Tooling problems slowed the cloud work: the AWS connector lost authorisation and then reported 'Unknown tool'. The AWS build service quota was zero, so a temporary build machine was needed. A connection limit caused an HTTP 503 error on first start-up. The BlueStacks emulator first showed a white screen (EGL_BAD_MATCH). Work from 5-7 October was left uncommitted at the end of the week."
+   ],
+   "next_week": [
+    "User confirms the transcribed handwritten labels and sends the original photos without ink, if available.",
+    "Add a capture check (gate) to the app that accepts only straight-on photos where one face fills the frame.",
+    "Test cutting wide or angled photos into tiles or single faces before counting the failed ones (needs Roboflow calls).",
+    "Label per-stack counts that agree with the user's totals for the planned three-check per-stack counter, and keep a held-out subset untouched for later testing.",
+    "Finish the outstanding app screen checks for the 3D viewer, and check tray/stack matches with overlay images.",
+    "Test calibrated overlapping photos for a denser 3D model, separately from counting, against physically counted held-out scenes. Do not redeploy production, commit or push unless the user asks."
+   ],
+   "figures": [
+    {
+     "path": "datasets/field-2026-10/labelled-20261007/originals/img-30.jpeg",
+     "caption": "Photo 30 of the user's 52 labelled farm photos: a block of green trays, with the handwritten total 80 drawn in blue. On this straight-on view the unchanged model counted 81. An angled photo of the same block (photo 31) gave only 52."
+    },
+    {
+     "path": "reports/reconstruct-integration-20261007/wide-positive/rotation-1.jpg",
+     "caption": "Test app 0.3.4+10 on the BlueStacks emulator, showing the diagnostic '3D evidence' screen: 76 feature points, 125 inliers, 0.376 px error. The dots are matched picture points, not trays. The screen itself says 'no count'."
+    }
+   ],
+   "versions_end_of_week": "Production app 0.3.3+9 is unchanged, and so is the production Cloudflare Worker: Roboflow projec-mutta/2, with no production deployment this week. Test app 0.3.4+10 was built, its signature verified with the debug certificate, and installed on the BlueStacks emulator only (SHA256 B42252BF5910EDC9A5E017A8EE08B4A23652CA62104564AA3724E87156ED150B). It points at the staging Worker, version bae12d3c-5069-4c88-97e2-8b2e5e89f452, which advertises reconstruct_v1. AWS Lambda egg-tray-vision-pilot (ap-south-1) runs image pilot-20261007-integration, digest sha256:8511bd3af2afb02a8d7c8107bc83f2032c14299eefbd504cf6105e0d30218dba, and is marked diagnostic only. The 5-7 October work was left uncommitted. The only commit dated this week is 58aeac1 (5 Oct, the monthly reviews).",
+   "evidence": [
+    "PROGRESS.md (entries 2026-10-01 to 2026-10-07, lines 1273-1567)",
+    "reports/field-labelled-20261007/README.md",
+    "reports/field-labelled-20261007/results.csv",
+    "reports/field-labelled-20261007/summary.json",
+    "reports/field-labelled-20261007/capture_tags.csv",
+    "datasets/field-2026-10/labelled-20261007/labels.csv",
+    "datasets/field-2026-10/labelled-20261007/manifest.json",
+    "reports/reconstruct-integration-20261007/README.md",
+    "reports/aws-reconstruction-deploy-20261007/README.md",
+    "reports/aws-user-test-20261007/README.md",
+    "reports/aws-vision-check-20261006/README.md",
+    "reports/aws-vision-check-20261005/README.md",
+    "reports/monthly-review-2026/August_2026_Monthly_Progress_Review.pdf",
+    "reports/monthly-review-2026/September_2026_Monthly_Progress_Review.pdf",
+    "docs/CLAUDE_CODE_HANDOFF.md",
+    "git commit 58aeac1 (2026-10-05): the only commit dated 1-7 Oct. The 5-7 Oct report folders were committed later in badf693 (2026-10-09)"
+   ]
+  },
+  {
+   "week": 2,
+   "dates": "8-14 October 2026",
+   "headline": "The app moved from counting one photo at a time to counting a whole block of tray stacks from a front photo and two side photos, counted a real 99-tray block correctly on the phone, and the first real warehouse scans showed where it still fails.",
+   "summary": "This week the team built a \"block model\". The app combines a front photo and the side photos of a block of tray stacks into a grid, and calculates the stacks hidden inside the block. The phone then draws the block in 3D and gives a total. The model went to the test copy of the cloud server (Cloudflare Worker, \"staging\") and onto the Redmi test phone. On the phone it counted a known 99-tray block exactly. Other work made the camera screen behave like a normal camera app, made uploads survive a weak mobile connection, and fixed counting rules after the first real warehouse scans of 13 October. Those scans had no on-site counts recorded with them. They were checked only against counts made by eye from the photos.",
+   "phase": "Building the block (3D grid) counting model and first field trial on the test server",
+   "work": [
+    {
+     "title": "Block model: front face x side face x height",
+     "detail": "On 8 October the counting of a whole block was built three times, with the same rules each time: in Python, in the cloud server (Cloudflare Worker) and in the app (version 0.4.0). Stacks seen on a photo are drawn green, and hidden interior stacks are computed and drawn grey. That evening it went to the staging server (version a012c14e). A three-photo test returned a 5 x 4 block of 400 trays in 11.5 s. This was a mechanics check only, because the three photos came from three different blocks."
+    },
+    {
+     "title": "In-app manual count and the first phone run",
+     "detail": "On 9 October a RECORD MANUAL COUNT screen was added. The operator types the true count of each stack, and it is stored on the server next to the scan. It is never used for counting. The full path worked on the Redmi Note 9 Pro: pick photos, upload, block result, manual count, then save on the server. Two manual counts were stored (WH-99 and MECH-DONE). The phone's own Files picker listed no files, so the app switched to the Android Photo Picker."
+    },
+    {
+     "title": "Better layer counting: the 'walk' counter, and a second counter left switched off",
+     "detail": "The new walk counter steps up a stack one tray at a time and adjusts to the changing spacing. It was exact on 51 of 53 reference stacks, where the older span method was exact on 40 of 53. A second counter based on tray rim edges was tried as a cross-check. It was exact on 38/53 and within 1 on 47/53, but it also disagreed on 9 of 40 stacks that were already right. So it stays off (RIM_VERIFY off)."
+    },
+    {
+     "title": "Camera screen rebuilt like a normal camera app (0.4.3 to 0.4.8)",
+     "detail": "The viewfinder now fills the screen, and the screen never rotates. The tilt sensor decides whether a photo is upright or sideways, and the app straightens the photo before upload. On synthetic sideways phone photos made from labelled photos 01, 02 and 19, every stack was counted exactly once a 20:9 screen trim was removed (0.4.8). A new server check refused all 6 sideways frames and none of the 39 tagged photos."
+    },
+    {
+     "title": "Surviving a weak mobile connection (0.4.9) and a looser tilt limit",
+     "detail": "The 'backend offline' complaints were traced to the network path to the server's *.workers.dev web address, not to the server code. App 0.4.9 retries the health check 3 times and the upload 4 times, and waits longer (send 150 s, receive 90 s; was 45 s). Photos are capped at 1600 px, which makes them 138-290 KB instead of 437-669 KB with the same per-stack counts. The tilt warning limit went from 4 to 8 degrees. On the phone, the 99-tray block was counted in 25 s."
+    },
+    {
+     "title": "First real field scans reviewed, then the counting fixes (0.4.11)",
+     "detail": "7 scans arrived on 13 October. 3 repeated the 99-block photos and 4 were new, but none had a manual count. They were replayed on staging and counted by eye from the photos. The fixes that followed: (1) all face readings are now merged; (2) a one-layer disagreement gives an 'estimated' result; (3) at most 2 missed layers are filled per gap; (4) a face photographed from too far away asks the operator to step closer; (5) each result shows one status: exact, estimated, conflict or needs a new photo. Afterwards 51/53 reference stacks were still exact, and the Python and cloud versions gave identical results on 27 real scenes. These fixes went to staging Worker 47cb2378, and app 0.4.11 was installed on the Redmi."
+    }
+   ],
+   "results": [
+    {
+     "item": "Walk counter on the reference stacks",
+     "value": "walk exact 51/53; span exact 40/53; both 53/53 within 1",
+     "meaning": "Tray layers counted correctly per stack on 13 straight-on labelled WhatsApp photos. The reference per-stack numbers were worked out from the user's handwritten totals plus visual inspection, not a physical recount. The same photos were used to develop the rule, so this is not a test on new photos. The two misses have the bottom layer cut off in the photo.",
+     "source": "PROGRESS.md, entry 2026-10-09 (midday); reference definition in entry 2026-10-08 per-stack manual verification"
+    },
+    {
+     "item": "Phone gallery scan of the real 99-tray block (app 0.4.9, staging)",
+     "value": "5 wide x 1 deep, 20/20/20/20/19, 99 trays, in 25 s",
+     "meaning": "This matches the verified count entered by hand for this block (20/20/20/20/19). It is one block, using archived photos picked from the phone gallery, not a fresh capture. The LEFT photo was a second side photo standing in, because no genuine left photo exists.",
+     "source": "PROGRESS.md entry 2026-10-12; reports/staging-block-20261008/phone-e2e/README.md (section 0.4.9)"
+    },
+    {
+     "item": "Field scan 9b4c783e (4 x 3 block, close photos), app vs hand count",
+     "value": "app 165 (105 observed + 60 computed) vs hand 164; observed stacks 6/7 exact, 7/7 within 1",
+     "meaning": "The hand count was made by eye from enlarged photos, not a physical recount, and the hidden stacks are assumed. The extra 1 tray is an empty cover tray counted as full.",
+     "source": "reports/field-scans-20261013/README.md (Hand count of the photos versus the app's 3D block)"
+    },
+    {
+     "item": "Field scan ef823816 (5 x 4 block in a room corner, far photos), app vs hand count",
+     "value": "app 233 (withheld) vs hand 393 filled; -160 (-41%)",
+     "meaning": "The app held back this total, so no wrong number was shown as final. The hand count was made by eye from the photos, not physically, and the hidden stacks are assumed at 20. From far away the detector boxes only every other row of the cross-stacked trays, so it reads about half the layers.",
+     "source": "reports/field-scans-20261013/README.md (Hand count table); PROGRESS.md entry 2026-10-14"
+    },
+    {
+     "item": "Server photo-quality check (capture gate) on the 13 Oct field scans",
+     "value": "refused 6 of 12 faces",
+     "meaning": "Every refused face was really too far away or too narrow when the photos were checked by eye. This shows the check rejects bad photos. It says nothing about counting accuracy.",
+     "source": "PROGRESS.md entry 2026-10-14; reports/field-scans-20261013/README.md"
+    },
+    {
+     "item": "Phone network loss to the staging server host (Jio LTE)",
+     "value": "IPv6 40% and 66% packet loss (12 Oct, two runs) vs Google 0%; 14 Oct: IPv6 50% loss, IPv4 0% loss",
+     "meaning": "This shows the dropped scans came from the network path to the *.workers.dev address, not from the app or server code. It was measured from this one phone and one laptop only.",
+     "source": "reports/network-20261012/README.md; reports/field-scans-20261013/README.md (Phone section)"
+    }
+   ],
+   "challenges": [
+    "Weak mobile connection to the cloud server. On the phone's Jio connection, IPv6 lost 40-66% of packets to the server's *.workers.dev address. From the laptop, about a third of IPv4 connection set-ups were dropped. App retries reduce the failures, but the real fix (a custom web address on the owner's own Cloudflare domain) was proposed and not done.",
+    "No on-site counts were recorded with the 13 October field scans. So counting accuracy on real blocks could not be scored, and the only checks were counts made by eye from the photos. The server still held only two manual counts (WH-99 and MECH-DONE).",
+    "Real store-room conditions break the counting. Photos of cross-stacked trays taken from far away read about half the layers (ef823816: -41%). Blocks stand against walls and in corners, with little room to step back. In one scan the same side face was uploaded as both LEFT and RIGHT. Empty cover trays on top are counted as full trays.",
+    "Phone-specific problems on the Redmi test phone. A locked camera orientation sent sideways photos to the server turned the wrong way, and the detector then found only 0-11 boxes (fixed in 0.4.6-0.4.8). The phone's Files picker listed no files (the app switched to the Android Photo Picker). A reboot on 13 Oct meant no app log covered the field scans."
+   ],
+   "next_week": [
+    "Field scans with RECORD MANUAL COUNT filled in on every block: at least 10 blocks, including a corner block and a cross-stacked block (the 14 Oct analysis set a minimum of 20 blocks)",
+    "App 0.4.12: prefer IPv4 for the server connection, add a device key on the manual-count and listing routes, and fix the replay_field_scans.py crash on empty files",
+    "Retrain the detector for far cross-stacked rows and add a class for empty cover trays",
+    "Capture options: a 'side against a wall' option, a same-face-twice check, and a raised top photo",
+    "Move the block model to the production server only after the field score"
+   ],
+   "figures": [
+    {
+     "path": "reports/staging-block-20261008/phone-e2e/13-0.4.9-gallery-99-block.png",
+     "caption": "App 0.4.9 on the Redmi phone, 12 October: three saved photos of a real block counted as 5 stacks of 20/20/20/20/19 = 99 trays in 25 s, matching the hand-entered count. The orange triangle is an old warning flag; 0.4.10 shows the verified icon instead."
+    },
+    {
+     "path": "reports/field-scans-20261013/app-vs-hand-3d.png",
+     "caption": "First real warehouse scans of 13 October: the app's 3D block (left) next to a count made by eye from the same photos (right). Close block 9b4c783e: app 165 vs 164. Far corner block ef823816: app 233, total withheld, vs 393."
+    }
+   ],
+   "versions_end_of_week": "App 0.4.11 (versionCode 22, egg-tray-counter-0.4.11-block-staging.apk) installed on the Redmi test phone and pointed at the staging server. Staging Cloudflare Worker version 47cb2378-6e3e-483e-b709-b99da9960470 (block model plus the 14 Oct counting fixes). Production Worker 4c1480e6 (deployed 2026-09-23, no block model) was not touched. The 12 Oct entry named production as 0482e52c; the 14 Oct entry corrected this to 4c1480e6, as listed by wrangler.",
+   "evidence": [
+    "PROGRESS.md (entries 2026-10-08 to 2026-10-14, lines 777-1272)",
+    "reports/staging-block-20261008/README.md",
+    "reports/staging-block-20261008/phone-e2e/README.md",
+    "reports/rim-count-20261009/README.md",
+    "reports/orientation-20261009/README.md",
+    "reports/network-20261012/README.md",
+    "reports/field-scans-20261013/README.md",
+    "docs/FIELD_TEST_BLOCK_20261009.md",
+    "git commits badf693, e995ea0, 97cb9cd, 266c58a, a931cd6, c6a80e7, 0eefd44, 1e8591e, fdeac4f, a3e1f89, 318eb04 (2026-10-09 to 2026-10-14)"
+   ]
+  },
+  {
+   "week": 3,
+   "dates": "15-21 October 2026",
+   "headline": "Version 0.4.12 was finished, tested and merged on 17 October. It gives each phone its own approved key and lets an interrupted scan resume. It was not deployed or installed yet, because the cloud login had expired and the phone was not connected.",
+   "summary": "This week the team finished version 0.4.12 of the app and of the cloud server (Cloudflare Worker). In this version each phone gets its own secret key, which an administrator must approve, and a scan that is cut off can be resumed instead of lost. All automated tests passed on the laptop and the code was merged on 17 October, but the new version was not put on the server or the phone. Offline checks on saved photos found a counting bug that adds layers that are not there. A fix for it was tested as an experiment only. The checks also showed that the main missing piece is trays counted by hand on real stacks.",
+   "phase": "Release 0.4.12 code complete; offline evaluation on existing photos",
+   "work": [
+    {
+     "title": "Each phone gets its own key, approved by the administrator",
+     "detail": "Before this, every route on the cloud server (Cloudflare Worker) was open, so anyone could use the paid detector or overwrite a manual count. In 0.4.12 the phone creates its own ID and secret on first launch and keeps them in Android secure storage, never in the APK. The administrator approves or revokes a phone with scripts/devices.py. An 'observe' mode keeps the installed 0.4.11 app working during the switch-over. Worker tests: 111/111."
+    },
+    {
+     "title": "Scans that survive a bad connection",
+     "detail": "Each scan is now stored once on the server as a 'job'. A retried upload gets the stored result back instead of being counted again. In 0.4.11, 3 attempts meant 9 detector calls. App 0.4.12+23 makes a new scan ID for each retake and keeps unfinished scans on the phone with RESUME/DISCARD. It tells five kinds of failure apart and has a NETWORK TEST screen. flutter test: 167/167."
+    },
+    {
+     "title": "Current counting rules scored on the labelled photos",
+     "detail": "The counting logic running on staging was scored offline on saved detections of the count-labelled WhatsApp photos. Result: 22 label clusters gave 10 accepted, 9 exact, 1 wrong (img-30, 78 vs 80) and 12 withheld. 9 of the 10 accepted clusters are photos the rules were tuned on; only img-47 is out of sample. An errata note also showed that img02 and img06 are the same photograph (1,075 matching points), yet they carry two different labels (60 and 21)."
+    },
+    {
+     "title": "Found and tested a fix for an overcounting bug (experiment only)",
+     "detail": "The deployed 'walk' counter adds layers to fill gaps between detected trays. After one fill it lowers its idea of a layer's height, so ordinary gaps start counting as 2 layers. Example: img-04 stack f has 17 boxes and a span of 19, but the walk reads 27. A fix, V4, was chosen by a rule fixed before any label was looked at. With V4, pairs of equal stacks that differ by more than 1 fell from 15 to 11 of 29, and filled layers fell from 92 to 58. 0 of the 19 accepted totals changed. V4 is not in 0.4.12."
+    },
+    {
+     "title": "Stack-face experiment: where do errors come from?",
+     "detail": "Stack outlines were drawn by hand on 20 photos (99 reviewed polygons). Counting inside these perfect outlines removed only 2 of 18 error trays, so most errors come from counting layers, not from finding stacks. A new automatic stack separation ('arm C') found 58 of 71 target stacks correctly, against 48 of 71 for the current logic."
+    }
+   ],
+   "results": [
+    {
+     "item": "Automated tests on the final 0.4.12 code (cloud server / app / scripts)",
+     "value": "Worker npm test 111/111; flutter test 167/167; scripts/tests 75/75",
+     "meaning": "All automated checks passed on the laptop. This is not a test on the phone or on the live server; 0.4.12 was not deployed or installed this week. The backend suite also passed in one run; its OpenCV tests are recorded as intermittently flaky.",
+     "source": "PROGRESS.md, entry 2026-10-15/17 (STATUS 2026-10-17)"
+    },
+    {
+     "title_placeholder": null,
+     "item": "Current counting rules on the labelled photos (offline, saved detections)",
+     "value": "22 label clusters -> 10 accepted, 9 exact, 1 wrong (img-30, 78 vs 80), 12 withheld",
+     "meaning": "The reference numbers are counts the user wrote on WhatsApp photos, not physical recounts. 9 of the 10 accepted clusters are photos the rules were tuned on (only img-47 is out of sample), so this is a development-set figure, not a held-out accuracy.",
+     "source": "PROGRESS.md, entry 2026-10-15/17 (Evaluation); reports/eval-20261015/README.md, 'In brief'"
+    },
+    {
+     "item": "Overcounting fix V4: equal-extent stack pairs that differ by more than 1 layer",
+     "value": "15 → 11 of 29 (25 physical pairs); sum of differences 97 → 47; filled layers 92 → 58",
+     "meaning": "A consistency check made without labels: two stacks of the same height should give the same count. It shows the fix makes readings more consistent. It does not measure correctness against a counted truth. 0 of 53 reference columns and 0 of 19 accepted totals changed.",
+     "source": "PROGRESS.md, entry 2026-10-15 (later), walk-overfill experiment; reports/experiment-walk-fill-20261015/README.md, 'In brief'"
+    },
+    {
+     "item": "The 'user-100' far face (five stacks reported as 20 each) under the old walk and under V4",
+     "value": "16/26/24/15/14 (deployed walk V0); 16/16/18/15/14 (V4), against 20",
+     "meaning": "With the overcount removed, far-away stacks read too low. The 20-per-stack figure is the user's report, not a physical recount. This points to the detector missing small, distant trays, or to photos taken too far away.",
+     "source": "reports/experiment-walk-fill-20261015/README.md, 'In brief'; PROGRESS.md, entry 2026-10-15 (later)"
+    },
+    {
+     "item": "Automatic stack separation (arm C) vs current logic",
+     "value": "58/71 target stacks vs 48/71",
+     "meaning": "Measured against stack outlines drawn by hand on the photos, which is a visual reference and not a tray count. C's extra exact results on the labels are development results, because its designer had already seen those labels.",
+     "source": "PROGRESS.md, entry 2026-10-15/17 (Experiment); reports/experiment-stack-faces-20261015/README.md, 'In brief'"
+    },
+    {
+     "item": "Error left with perfect stack outlines",
+     "value": "manual polygons remove 2 of 18 error trays",
+     "meaning": "Even when the stacks are outlined perfectly by hand, 16 of the 18 wrong trays remain. Finding the stack is not the main problem; counting its layers is. 14 of the 16 come from two photos whose label scope is unconfirmed.",
+     "source": "PROGRESS.md, entry 2026-10-15/17 (Experiment); reports/experiment-stack-faces-20261015/README.md, 'In brief'"
+    }
+   ],
+   "challenges": [
+    "The new version could not be put live. The cloud login (wrangler OAuth) had expired on 14 Oct 16:52 UTC, and the Redmi phone had not been connected since the evening of 14 Oct. So staging stayed on 0.4.11 and the phone kept 0.4.11.",
+    "No physical truth to test against. There were 0 physical per-stack counts and 0 counted genuine three-view sets. The only references are numbers the user wrote on photos, and 9 of the 10 accepted results are on photos the rules were tuned on.",
+    "Far-away stacks are undercounted. This happens where one tray layer is under about 3% of the photo height (3 blocks). With these data it is impossible to tell whether the detector misses small trays or the photos are simply taken too far away.",
+    "Some labels and data are unreliable. img02 and img06 are the same photo with two different labels (60 and 21). Two scans stored in the cloud could not be downloaded, because the expired token gave HTTP 403."
+   ],
+   "next_week": [
+    "Log in to Cloudflare again (npx wrangler login) and set the admin token on staging. Deploy 0.4.12 to staging in 'observe' mode.",
+    "Build APK 0.4.12+23, install it on the Redmi and approve the phone with scripts/devices.py. Then run Settings > Diagnostics > NETWORK TEST and collect the EGGNET log lines.",
+    "Do one complete gallery scan with a manual count. Then switch staging to 'enforce' and check that requests without a key are refused (401/403).",
+    "Next milestone: count trays by hand, stack by stack, on 3 or more new blocks, photographed as STRAIGHT/LEFT/RIGHT sets at about 1.5/3/5 m. Then retrain the detector on far and cross-stacked faces, holding photos out by block.",
+    "Meanwhile, run V4 and stack separation C in 'shadow mode' (computed and logged, not shown), and add a check for a side photo that repeats the same face."
+   ],
+   "figures": [
+    {
+     "path": "reports/field-labelled-20261007/per-stack/full-img04.jpg",
+     "caption": "Field photo img-04 (resized copy), with the count 115 the user wrote on it, which is not a physical recount. On one stack in this photo (stack f), the old counting rule read 27 layers from 17 detected boxes spanning 19. The V4 fix tested this week reads 16."
+    },
+    {
+     "path": "reports/user-100-tray-case-20260915/scene-annotated.jpg",
+     "caption": "The 'user-100' face: five stacks the user reported as 20 trays each. This week's offline check read them 16/26/24/15/14 with the old rule and 16/16/18/15/14 with the V4 fix, so far-away stacks are still undercounted."
+    }
+   ],
+   "versions_end_of_week": "Code: app 0.4.12+23 and Worker 0.4.12 committed (7971117) and merged to main (PR #1, 1800db9) on 17 Oct. Not deployed, not built and not installed. Staging was still 47cb2378 (0.4.11), production 4c1480e6 was unchanged, and the Redmi phone still ran 0.4.11 build 22.",
+   "evidence": [
+    "PROGRESS.md (lines 669-776: entries 2026-10-15 (later) and 2026-10-15/17)",
+    "git commit 7971117 (2026-10-17) and merge 1800db9 (PR #1, 2026-10-17)",
+    "docs/SCAN_JOBS_AND_DEVICES.md",
+    "reports/eval-20261015/README.md",
+    "reports/experiment-walk-fill-20261015/README.md",
+    "reports/experiment-stack-faces-20261015/README.md",
+    "accuracy-evaluation/ERRATA-20261015.md"
+   ]
+  },
+  {
+   "week": 4,
+   "dates": "22-28 October 2026",
+   "headline": "On a new laptop, the team re-checked the whole project, put version 0.4.12 of the cloud server on the test (staging) server with its new phone-approval lock in a watch-only mode, and built a newly signed app file (APK 0.4.12) that is not yet on the phone.",
+   "summary": "All recorded work this week happened on 26 October, when the project moved to a new laptop. The team re-measured where everything stood, corrected some earlier claims that had been too strong, and wrote a step-by-step plan. With the user's approval they then put the new cloud server version (0.4.12) on the test server, with a lock so that only approved phones can send counts, and built the matching Android app with a new signing key. The new app was not installed on the phone this week, and no count has yet been checked against a physical recount of trays, so accuracy is still unknown.",
+   "phase": "Rolling out version 0.4.12 to the test (staging) server",
+   "work": [
+    {
+     "title": "Project re-checked on a new laptop",
+     "detail": "The code was freshly copied (main at 1800db9) onto a new laptop. The test server was found still on 47cb2378 (0.4.11) and the live (production) server on 4c1480e6. Files that git does not store did not come across, among them the test server's admin token, tool folders and the old APKs. Every automated test passed, and the saved results of earlier experiments came out byte-identical when re-run."
+    },
+    {
+     "title": "Earlier claims corrected",
+     "detail": "The earlier figure \"393 vs 233 (-41%)\" compared trays that were assumed, not seen (assistant 240 vs app 144). Only 153 trays were seen, so it does not measure how many layers the detector misses. A \"164\" reading was visual, with 60 trays assumed. Neither stored manual count can serve as the true count: MECH-DONE equals the app's own 399 because the form was pre-filled, and WH-99 was typed in by the assistant."
+    },
+    {
+     "title": "New cloud server version on the test server",
+     "detail": "With the user's explicit approval, an admin secret was set and version 0.4.12 of the cloud server (Cloudflare Worker) went onto the test server as version ef7c1dd3 (100%, 2026-10-26T15:57Z). It runs in \"observe\" mode: it checks phone identity, but phones still on the old app keep working. Before the change, the 2 stored manual-count records (25 stack rows) were saved. Checks used no paid image analysis, and requests without credentials were refused (401)."
+    },
+    {
+     "title": "New signing key and signed app file built",
+     "detail": "The old app signing key exists only on the old (DELL) machine, so the user chose a new release key (RSA 4096, valid to 2054-03-13), kept outside the repository. APK 0.4.12 (versionCode 23, 62,542,361 bytes) was built in 824 s and its signature was verified. Neither the admin token nor the key password is inside the APK. It was not installed because no phone was connected."
+    },
+    {
+     "title": "Next plan written (tracks A-D)",
+     "detail": "A: engineering clean-ups the assistant can do alone (explicit deploy commands, scorer fixes, a register of held-back test photos, a field-test protocol fixed before any data). B: the 0.4.12 rollout in 7 steps. C: a field round on at least 3 new blocks of stacks, with independent per-stack counts. D: one retraining of the detector on far and cross-stacked faces."
+    }
+   ],
+   "results": [
+    {
+     "item": "Automated software tests on the new laptop",
+     "value": "Worker 111/111; app analyze clean, tests 167/167; Python backend 148 passed (4/4 runs, no OpenCV flake), ml 3, scripts 75",
+     "meaning": "The server, app and analysis code pass their built-in automated checks on the new machine. These are software tests only. They do not measure how accurately the app counts trays.",
+     "source": "PROGRESS.md, 2026-10-26 entry, \"Measured today\" and \"Track B started\" pre-flight"
+    },
+    {
+     "title_placeholder": "",
+     "item": "Re-run of earlier experiment results",
+     "value": "eval-20261015, walk-fill and stack-faces results all reproduce byte-identically; walk-fill results.json hash 77f4b6d0...",
+     "meaning": "Re-running the earlier experiments on the new laptop gave exactly the same output files, so the old results can be repeated. (The hash was also re-checked for this report.) It adds no new accuracy evidence.",
+     "source": "PROGRESS.md, 2026-10-26 entry, \"Measured today\"; reports/experiment-walk-fill-20261015/results.json"
+    },
+    {
+     "item": "Access checks on the test server after the 0.4.12 deploy",
+     "value": "No credentials: GET /v1/devices/me and /v1/scans/<id>/result return 401 device_credentials_required; GET /v1/manual-counts and /v1/admin/devices return 401 admin_auth_failed; with the admin token /v1/admin/devices returns 200 {devices: []}",
+     "meaning": "The test server now refuses requests that lack a phone or admin credential, and the admin token works. The checks used no paid image analysis. The live (production) server was not changed.",
+     "source": "PROGRESS.md, 2026-10-26 entry, \"Staging 0.4.12 in observe mode is DEPLOYED\""
+    },
+    {
+     "item": "Signed app file (APK 0.4.12)",
+     "value": "62,542,361 bytes; versionName 0.4.12, versionCode 23; apksigner verifies (v2), 1 signer; `flutter build apk --release` took 824 s",
+     "meaning": "The app file was built and its signature checks out with the new key. It was not installed on any phone this week, so it has not been tested on the phone.",
+     "source": "PROGRESS.md, 2026-10-26 entry, \"New release key, and APK 0.4.12 built\""
+    },
+    {
+     "item": "Physical (hand) recounts available as a true reference",
+     "value": "0 physical counts",
+     "meaning": "No app count has yet been compared with a real physical recount of the trays. The two stored manual counts were judged unusable as truth, so the app's accuracy is still not measured.",
+     "source": "context.md, 2026-10-26 note (\"There are still 0 physical counts\"); PROGRESS.md, 2026-10-26 entry, \"Corrections to earlier wording\""
+    }
+   ],
+   "challenges": [
+    "Moving to a new laptop lost files that git does not keep, including the test server's admin token, tool folders and the old APKs. A fresh copy of the server code would not build until a setup step (`npx wrangler types`) was run. The default deploy command (`npm run deploy`) was found to point at the live production server.",
+    "The old app signing key is only on the old DELL machine, so a new key was made. An app signed with the new key cannot update the installed 0.4.11, so the user has to export counts as CSV and uninstall, which deletes the on-phone history. Until the user backs it up, the only copy of the new key is on this single-drive laptop.",
+    "There is still no reliable reference count. Both stored manual counts are unusable as truth (one came from a pre-filled form, the other was entered by the assistant), and there are 0 physical counts. Accuracy therefore cannot be stated yet.",
+    "The build setup was slow and needed manual steps. At first only 0.7 to 8.5 GB of disk was free (later 42 GB). The Gradle tool download timed out twice. The automatic permission check refused to set the server secret until the user approved it. No phone was connected, so the install had to wait."
+   ],
+   "next_week": [
+    "The user copies all counts as CSV in the old app (0.4.11), then uninstalls it.",
+    "Connect the Redmi phone with USB debugging and install APK 0.4.12 (`adb install egg-tray-counter-0.4.12-block-staging.apk`).",
+    "In the app's Settings, set the test (staging) server address, then approve the phone by its full id (`scripts/devices.py approve`).",
+    "Run NETWORK TEST (watching `adb logcat | findstr EGGNET`), then one scan with RECORD MANUAL COUNT.",
+    "Switch the test server from observe to enforce mode, so only approved phones are accepted.",
+    "After that: a field round on at least 3 new blocks, photographed STRAIGHT/LEFT/RIGHT at about 1.5/3/5 m, with independent per-stack filled/empty counts (ideally two counters), to get the first held-out accuracy number. Then one detector retraining on far and cross-stacked faces."
+   ],
+   "figures": [],
+   "versions_end_of_week": "App: APK 0.4.12 (versionCode 23), built and signed with the new release key but not installed; the phone still runs 0.4.11. Cloud server (Worker): test server (staging) runs 0.4.12 in observe mode as version ef7c1dd3 (deployed 2026-10-26T15:57Z); the live server (production) is unchanged at 4c1480e6 (2026-09-23).",
+   "evidence": [
+    "PROGRESS.md (entry \"2026-10-26 - new machine: state re-measured, next plan\", lines 508-668)",
+    "context.md (2026-10-26 notes at the top, committed in 3989f95)",
+    "git commit 3989f95 (2026-10-29: records this week's 26 Oct work; no commits are dated 22-28 Oct)",
+    "mobile/android/app/build.gradle.kts (release builds sign with key.properties, changed in 3989f95)",
+    "docs/SCAN_JOBS_AND_DEVICES.md (meaning of observe vs enforce mode)",
+    "reports/experiment-walk-fill-20261015/results.json (SHA-256 77f4b6d0..., re-checked)",
+    "reports/eval-20261015/ and reports/experiment-stack-faces-20261015/ (results said to reproduce; these folders contain no images)"
+   ]
+  },
+  {
+   "week": 5,
+   "dates": "29-31 October 2026",
+   "headline": "The app (version 0.4.12) ran end to end on the real Redmi phone against the test server, and a check on old field photos found that three front photos could make it report 500 trays for a 100-tray block, so a \"same-face guard\" was built to block that kind of wrong total.",
+   "summary": "This week the app was tested from start to finish, first on a laptop phone emulator and then on the real Redmi phone over a Jio mobile connection. Registering the phone, sending photos, getting the result and saving a manual count all worked. A comparison on the team's older field photos showed that the tray counts are right for close, straight-on photos, but also that wrong photo roles could produce a confident wrong total (500 for a 100-tray block). A guard that uses the phone's motion sensor to check that the side photos really show the sides was built and tested, but it is not yet on the server or the phone.",
+   "phase": "Test-server rollout on the phone, and checks on field photos",
+   "work": [
+    {
+     "title": "Same-face guard: side photos must really show the sides (Worker 0.4.13, app 0.4.13+24)",
+     "detail": "The app now uses the phone's gyroscope (a turn sensor) to record which way the camera faces. It refuses a side photo taken without turning at least 45 degrees, and LEFT and RIGHT must be at least 90 degrees apart. The cloud server (Cloudflare Worker) gives no total (needs_view) when a side repeats the front. A review raised 9 issues and 8 were confirmed and fixed. Automated tests passed: Worker 122/122, app 176/176."
+    },
+    {
+     "title": "Field photos (MUTAA): hand count compared with the server's count",
+     "detail": "8 photo sets of real blocks were sent to the test server (21 detector calls) and also counted by eye by 3 independent counting agents plus a reconciler. On close, straight-on faces the server matched the eye count on 9 of 10 stacks, and the 10th was off by 1. On block L-100 the LEFT and RIGHT photos were really front photos, and the server returned 500 \"estimated\" for a 100-tray block. None of the 8 sets was a real front/left/right trio."
+    },
+    {
+     "title": "App 0.4.12 installed on the Redmi phone and approved on the test server",
+     "detail": "The Redmi Note 9 Pro (Android 12) got APK 0.4.12 (build 23), was pointed at the test (staging) server and approved as device F39D-8C65. A network test on Jio LTE had no failures: 20/20 health checks over each of IPv4 and IPv6, and 3/3 photo uploads. A gallery scan of the 99-tray test block gave 5 x 1 stacks, 20/20/20/20/19, total 99, the same as the emulator."
+    },
+    {
+     "title": "Full app test on the laptop emulator against the test server (29 Oct)",
+     "detail": "On an Android emulator the app registered itself, was approved, uploaded the 99-tray photo set, got a stored result (total 99, labelled \"BLOCK ESTIMATE\") and sent a test manual count. This showed every step works. It did not show counting accuracy, because the photo set was put together for the test and was already used to tune the counter. The release-signing change (a new signing key for the APK) was committed the same day."
+    },
+    {
+     "title": "APK 0.4.13 built and signed",
+     "detail": "egg-tray-counter-0.4.13-block-staging.apk is 62,558,741 bytes and is signed with the same release key as 0.4.12 (29013b98...), so it can update the phone without uninstalling. No admin token or keystore password is in the APK."
+    }
+   ],
+   "results": [
+    {
+     "item": "Automated tests after the same-face guard",
+     "value": "Worker npm test 122/122; Flutter analyze clean, flutter test 176/176",
+     "meaning": "All code checks pass, including 11 new side-check tests and 8 heading tests. This checks the program logic. It does not measure counting accuracy on real blocks.",
+     "source": "PROGRESS.md, 2026-10-31 (later still), \"Tests (measured)\""
+    },
+    {
+     "item": "99-tray test block scan, emulator (29 Oct) and Redmi phone (31 Oct)",
+     "value": "5 x 1, 20/20/20/20/19, total 99 (\"BLOCK ESTIMATE / faces differ by one layer\")",
+     "meaning": "Shows the whole chain works: phone, upload, server, result. It is NOT an accuracy result. The photo set was put together for the test (LEFT and RIGHT both show the same 19-tray end stack), the photos were used to tune the counter, and the app itself calls the result an estimate.",
+     "source": "PROGRESS.md, 2026-10-29 entry and 2026-10-31 \"Phone gallery scan\""
+    },
+    {
+     "item": "Network test on Jio LTE (Redmi phone)",
+     "value": "health ipv4 20/20 (mean total 1574 ms); health ipv6 20/20 (868 ms); upload 3 x 500 KB 3/3 (4624 ms)",
+     "meaning": "No failed requests on that day over either IPv4 or IPv6. This is one day's sample: on 12-14 Oct IPv6 lost 40-66% of requests, so the IPv4-first setting stays.",
+     "source": "PROGRESS.md, 2026-10-31 \"NETWORK TEST\"; reports/rollout-20261031/network-test-logcat.txt"
+    },
+    {
+     "item": "Close, straight-on faces: server per-stack count vs eye count",
+     "value": "9/10 stacks equal, 1 off by 1 (CORNER 14, L-80, L-100)",
+     "meaning": "The reference is a visual count from photos by 3 counting agents, NOT a physical recount. For L-80 and L-100 the eye count also equals the user's handwritten totals (80 and 100), but that is only 2 blocks.",
+     "source": "PROGRESS.md, 2026-10-31 (later); reports/mutaa-manual-vs-backend-20261031/README.md \"Results\""
+    },
+    {
+     "item": "Wrong total from wrong photo roles (block L-100)",
+     "value": "500 \"estimated\" for a 100-tray block",
+     "meaning": "The LEFT and RIGHT photos were front photos, so the server thought the block was 5 x 5. This was the most dangerous error found: a wrong total that looked confident. It led to the same-face guard.",
+     "source": "reports/mutaa-manual-vs-backend-20261031/README.md, Findings 3"
+    },
+    {
+     "item": "Replay of saved results with the new side check",
+     "value": "Withheld: L-100 500, mechanics trio 399, 9b4c783e 165; kept: the 99-block in all 5 saved scans",
+     "meaning": "On stored server responses the guard removes the known wrong totals and keeps the correct one-stack-deep 99 block. 165 was also withheld because it had no camera heading. Not yet tested on the phone with a real walk around a block.",
+     "source": "PROGRESS.md, 2026-10-31 (later still), \"Replay of saved real responses\""
+    }
+   ],
+   "challenges": [
+    "Wrong photo roles gave a confident wrong total: three front photos of L-100 produced 500 \"estimated\" for a 100-tray block, because nothing checked that a side photo showed a side. The guard is built but not yet deployed or installed.",
+    "There is still no real ground truth. The field photos contain no genuine front/left/right trio, the hand counts are visual counts from photos, and there are still 0 physical counts.",
+    "Far and large blocks are hard. On far faces (M16-NEAR) the server read 8 to 10 trays too few per stack, though the capture check refused those photos. In big blocks most trays are hidden inside (W05: 196 visible of about 1366), and the eye counters disagreed widely on depth (L-115: 771 / 897 / 1455).",
+    "Moving to a new signing key meant uninstalling 0.4.11 from the phone. No counts CSV export was found, so the phone's 0.4.11 history and any counts saved only on the phone were lost. After a fresh install the app also defaults to the production server URL."
+   ],
+   "next_week": [
+    "Deploy Worker 0.4.13 to the test server (staging is still ef7c1dd3, 0.4.12) and install APK 0.4.13 on the Redmi.",
+    "Check the heading guard on the phone: walk around a block and confirm that a second front photo is refused.",
+    "Take a genuine close front/left/right photo set of real blocks, with independent physical (hand) counts, as the field round.",
+    "Retrain the tray detector on far faces, keeping some blocks aside to test it.",
+    "Set a rule for the hidden inside of big blocks: confirmed by the operator, or marked as estimated with the visible share shown.",
+    "Switch the test server to enforce mode (AUTH_MODE enforce, check that unauthorised requests get 401), and test portrait and sideways capture by hand."
+   ],
+   "figures": [
+    {
+     "path": "datasets/field-2026-10/labelled-20261007/originals/img-01.jpg",
+     "caption": "Front photo of the 99-tray test block (5 stacks; \"99\" is the user's handwritten total). It was the front photo in this week's test scans on the emulator (29 Oct) and the Redmi phone (31 Oct). Both read 20/20/20/20/19 = 99. The photo was used to tune the counter, so this shows the system works, not how accurate it is."
+    }
+   ],
+   "versions_end_of_week": "App 0.4.12+23 installed on the Redmi Note 9 Pro (approved on staging as F39D-8C65) and on the laptop emulator (1179-C06A). APK 0.4.13+24 built (62,558,741 bytes, release key 29013b98...) but not installed. Test server (staging) ef7c1dd3 running worker-0.4.12 in observe mode; Worker 0.4.13 built and tested (122/122) but not deployed. Production was last recorded as 4c1480e6 (2026-09-23) in the 26 Oct entry.",
+   "evidence": [
+    "PROGRESS.md (entries 2026-10-29, 2026-10-31, 2026-10-31 (later), 2026-10-31 (later still); lines 324-507)",
+    "reports/mutaa-manual-vs-backend-20261031/README.md",
+    "reports/mutaa-manual-vs-backend-20261031/comparison.json",
+    "reports/mutaa-manual-vs-backend-20261031/manual-consensus.json",
+    "reports/mutaa-manual-vs-backend-20261031/backend-summary.json",
+    "reports/rollout-20261031/network-test-logcat.txt",
+    "docs/SCAN_JOBS_AND_DEVICES.md (\"Side-face check\")",
+    "context.md (2026-10-31 notes)",
+    "cloudflare-worker/src/index.ts",
+    "cloudflare-worker/test/side_check.test.mjs",
+    "mobile/lib/services/heading_tracker.dart",
+    "mobile/test/heading_tracker_test.dart",
+    "mobile/android/app/build.gradle.kts (commit 3989f95, 29 Oct)",
+    "git commits 3989f95, ac2666c, 614c886, 855d5b6, e651191, d124006"
+   ]
+  }
+ ]
+}

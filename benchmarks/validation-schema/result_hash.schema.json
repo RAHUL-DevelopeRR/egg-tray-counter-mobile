@@ -1,0 +1,16 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "App result recorded for scoring, with its hash",
+ "type": "object",
+ "required": ["scan_id", "pipeline_version", "status", "result_sha256", "recorded_at"],
+ "properties": {
+  "scan_id": {"type": "string", "format": "uuid"},
+  "pipeline_version": {"type": "string"},
+  "status": {"enum": ["exact", "confirmed", "estimated", "conflict", "needs_view"]},
+  "total_trays": {"type": ["integer", "null"]},
+  "eligible_egg_trays": {"type": ["integer", "null"]},
+  "eligible_basis": {"enum": ["measured", "declared", "unknown"]},
+  "result_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$", "description": "SHA-256 of the stored job result JSON"},
+  "recorded_at": {"type": "string", "format": "date-time"}
+ }
+}

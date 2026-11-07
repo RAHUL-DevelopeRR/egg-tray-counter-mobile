@@ -1,0 +1,1086 @@
+{
+ "method": "dHash 64-bit of the EXIF-upright image, four rotations of the field photo",
+ "max_distance": 8,
+ "pools": {
+  "canonical_clean": "datasets/canonical_clean",
+  "review": "datasets/review",
+  "roboflow_auto_original": "datasets/roboflow_auto_original"
+ },
+ "pool_images": {
+  "canonical_clean": 137,
+  "review": 299,
+  "roboflow_auto_original": 371
+ },
+ "photos": [
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151149500.jpg.jpeg",
+   "dhash": "153dedcccc8c9c02",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151159267.jpg.jpeg",
+   "dhash": "72d6c0d0d0c08100",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151204619.jpg.jpeg",
+   "dhash": "d3f3f7c74f430140",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151210436.jpg.jpeg",
+   "dhash": "94c1c9cbd3dad0ca",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151224648.jpg.jpeg",
+   "dhash": "f2737b343434385d",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151339474.jpg.jpeg",
+   "dhash": "7575cc9292918323",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151351983.jpg.jpeg",
+   "dhash": "322101c1d65cac15",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151353868.jpg.jpeg",
+   "dhash": "322101819054a837",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151409127.jpg.jpeg",
+   "dhash": "5833b67272f2e1f1",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151423979.jpg.jpeg",
+   "dhash": "af02f371ccccc88c",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151430473.jpg.jpeg",
+   "dhash": "294b08a0a4d4d4e6",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151436402.jpg.jpeg",
+   "dhash": "535280d2caf00006",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151444583.jpg.jpeg",
+   "dhash": "96bdf1c404e0e493",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151447066.jpg.jpeg",
+   "dhash": "bca7f27384ccc80c",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151453724.jpg.jpeg",
+   "dhash": "98298c2e6664f4ec",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151506512.jpg.jpeg",
+   "dhash": "e3d3b3f0dcecf97f",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151519165.jpg.jpeg",
+   "dhash": "b6677cb1b059b6be",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151529426.jpg.jpeg",
+   "dhash": "6dcd68e8e3467e7c",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151535069.jpg.jpeg",
+   "dhash": "7938fac8f8fffffb",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151539277.jpg.jpeg",
+   "dhash": "b0d8ccf464644ccc",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151549592.jpg.jpeg",
+   "dhash": "2de5c8e66868daa6",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151607006.jpg.jpeg",
+   "dhash": "4112c0d0f8806040",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151611188.jpg.jpeg",
+   "dhash": "828498e0e5000800",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "IMG_20260916_151614863.jpg.jpeg",
+   "dhash": "8387c4d4d4cce0d9",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "WhatsApp Image 2026-09-05 at 9.40.56 AM.jpeg",
+   "dhash": "60e0c081f1505c75",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "WhatsApp Image 2026-09-05 at 9.40.57 AM.jpeg",
+   "dhash": "0171e2fbf3d5575f",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "WhatsApp Image 2026-09-05 at 9.41.00 AM.jpeg",
+   "dhash": "fcd1b2e6696de9fe",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "WhatsApp Image 2026-09-05 at 9.41.07 AM.jpeg",
+   "dhash": "23e0e0f3f95557d7",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "WhatsApp Image 2026-09-05 at 9.41.09 AM.jpeg",
+   "dhash": "b4b0b1f0a2ada7cd",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "WhatsApp Image 2026-09-05 at 9.46.20 AM.jpeg",
+   "dhash": "47832c24900a30e2",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "WhatsApp Image 2026-09-05 at 9.46.21 AM (1).jpeg",
+   "dhash": "fa31959199939398",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "WhatsApp Image 2026-09-05 at 9.46.21 AM (2).jpeg",
+   "dhash": "c1c1e9edfdb2ade5",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "WhatsApp Image 2026-09-05 at 9.46.21 AM.jpeg",
+   "dhash": "bdf9fbcbf9fe1fbc",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "WhatsApp Image 2026-09-05 at 9.52.45 AM.jpeg",
+   "dhash": "b38e93f4963737f3",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "WhatsApp Image 2026-09-05 at 9.52.46 AM.jpeg",
+   "dhash": "96144692e9c1c8c8",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "WhatsApp Image 2026-09-15 at 3.10.04 PM.jpeg",
+   "dhash": "38dd733ee6797f3f",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "WhatsApp Image 2026-09-15 at 3.12.58 PM.jpeg",
+   "dhash": "2dadc8cc12fafabe",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "WhatsApp Image 2026-09-15 at 3.12.59 PM (1).jpeg",
+   "dhash": "3bbbf34fcfcf676f",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "WhatsApp Image 2026-09-15 at 3.12.59 PM.jpeg",
+   "dhash": "7b77f79e9e8fef5f",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "WhatsApp Image 2026-09-15 at 3.13.00 PM.jpeg",
+   "dhash": "1f1b3333ff9b3b7b",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "WhatsApp Image 2026-09-15 at 3.13.37 PM.jpeg",
+   "dhash": "1e57277ffe905773",
+   "pool_matches": []
+  },
+  {
+   "source": "mutaa",
+   "file": "WhatsApp Image 2026-09-15 at 3.13.41 PM.jpeg",
+   "dhash": "38dd733ee6797f3f",
+   "pool_matches": []
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-01.jpg",
+   "dhash": "f0c8c8c9e9e8e9d0",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-d8f316f0489e.jpg",
+     "distance": 1
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Image-2026-07-03-at-12-00-36-PM-5-_jpeg.rf.e350ad45cf9a728c1417a83bf5207372.jpg",
+     "distance": 1
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-02.jpeg",
+   "dhash": "d0d5d5d5555555ec",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-ace931de7930.jpg",
+     "distance": 2
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/valid/images/WhatsApp-Image-2026-07-03-at-12-00-42-PM-1-_jpeg.rf.93143935d67cb3ebeeee9f1797d7d19d.jpg",
+     "distance": 2
+    },
+    {
+     "pool": "canonical_clean",
+     "file": "datasets/canonical_clean/train/images/c8718432472b3d5059ed.jpg",
+     "distance": 5
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Video-2026-07-03-at-12_02_14-PM_mp4-0000_jpg.rf.c024a34e8cda352ef9751a7c99807f6b.jpg",
+     "distance": 5
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Video-2026-07-03-at-12_02_29-PM_mp4-0000_jpg.rf.8dc267d1ffede72ded82f341f743cba4.jpg",
+     "distance": 5
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Video-2026-07-03-at-12_04_04-PM_mp4-0000_jpg.rf.c396240ea1117b8760dd9d84b90a6246.jpg",
+     "distance": 5
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-03.jpeg",
+   "dhash": "9885dc5a5fdeb9a5",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-54fd102fce64.jpg",
+     "distance": 1
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Image-2026-07-03-at-12-00-37-PM_jpeg.rf.7c44e19a0500a8cbf6987e88dc2de407.jpg",
+     "distance": 1
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-04.jpeg",
+   "dhash": "d24c494a664ec5c7",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-cce0742b0dd5.jpg",
+     "distance": 1
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Image-2026-07-03-at-12-02-49-PM_jpeg.rf.5698d32d75efd405bfe5710e386291c2.jpg",
+     "distance": 1
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-05.jpeg",
+   "dhash": "a5f5b5e48cc8e8da",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-0c8508beb342.jpg",
+     "distance": 0
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Image-2026-07-03-at-12-02-50-PM-1-_jpeg.rf.68c94ada35f1e753e7b35a6f42677d9c.jpg",
+     "distance": 0
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-06.jpeg",
+   "dhash": "d9e7a77ee08665c7",
+   "pool_matches": [
+    {
+     "pool": "canonical_clean",
+     "file": "datasets/canonical_clean/test/images/d3b9c36c583b721a058b.jpg",
+     "distance": 6
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/test/images/WhatsApp-Image-2026-07-03-at-12-02-52-PM_jpeg.rf.02fa0f80934dc62c3969c3a202b4c817.jpg",
+     "distance": 6
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-07.jpeg",
+   "dhash": "f9d993f293d06f6b",
+   "pool_matches": [
+    {
+     "pool": "canonical_clean",
+     "file": "datasets/canonical_clean/train/images/a0bab6bc320585fa213a.jpg",
+     "distance": 4
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Image-2026-07-03-at-12-02-53-PM-1-_jpeg.rf.e7a8607611d17d6ffd7e8c81e7fbc372.jpg",
+     "distance": 4
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-08.jpeg",
+   "dhash": "4b8bb28646461c00",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-c36e42eee588.jpg",
+     "distance": 0
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/test/images/WhatsApp-Image-2026-07-03-at-12-02-49-PM-1-_jpeg.rf.9e6c6d5991e31b6693fbb1e25f75b053.jpg",
+     "distance": 0
+    },
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-47483627dbdb.jpg",
+     "distance": 7
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Image-2026-07-03-at-11-58-59-AM-4-_jpeg.rf.63e2cf6dd7a22a50bb4cad80ecdc5d3e.jpg",
+     "distance": 7
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-09.jpeg",
+   "dhash": "e4d6d252484a6860",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-b61948724ad8.jpg",
+     "distance": 0
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Image-2026-07-03-at-12-02-53-PM_jpeg.rf.65185185bc98a84d2f6f4e760666e2d3.jpg",
+     "distance": 0
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-10.jpeg",
+   "dhash": "8e32b23e3ef0a3d1",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-3c54f4acbec2.jpg",
+     "distance": 2
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/valid/images/WhatsApp-Image-2026-07-03-at-12-03-19-PM_jpeg.rf.c135c8d3c8f38f1dbf0c9080af1e52f1.jpg",
+     "distance": 2
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-11.jpeg",
+   "dhash": "0d3f7cecb696cdaf",
+   "pool_matches": [
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Image-2026-07-03-at-12-02-55-PM_jpeg.rf.6954299b42f08e144fcdc86b03d1300d.jpg",
+     "distance": 2
+    },
+    {
+     "pool": "canonical_clean",
+     "file": "datasets/canonical_clean/train/images/4762141635d7aa03268c.jpeg",
+     "distance": 3
+    },
+    {
+     "pool": "review",
+     "file": "datasets/review/images/manual_original-4762141635d7.jpeg",
+     "distance": 3
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-12.jpeg",
+   "dhash": "67ffd3d0d0f4f0f8",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-5cd19d37d57e.jpg",
+     "distance": 1
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/valid/images/WhatsApp-Image-2026-07-03-at-12-03-06-PM_jpeg.rf.ebf462ca13c5e98ce01203b91ad32cd3.jpg",
+     "distance": 1
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-13.jpeg",
+   "dhash": "5c19090f99910e26",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-1f054be3430b.jpg",
+     "distance": 1
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/valid/images/WhatsApp-Image-2026-07-03-at-12-03-10-PM_jpeg.rf.3267148503477d150eb7fef51e7a93ac.jpg",
+     "distance": 1
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-14.jpeg",
+   "dhash": "e8e04b13c1c1c1e0",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-a32a1d86c621.jpg",
+     "distance": 1
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Image-2026-07-03-at-12-03-14-PM_jpeg.rf.4c3a74c7435e7f1245c7bd75721e15f8.jpg",
+     "distance": 1
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-15.jpeg",
+   "dhash": "a0c33c464787c3c9",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-c1938380524a.jpg",
+     "distance": 1
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/valid/images/WhatsApp-Image-2026-07-03-at-12-03-12-PM_jpeg.rf.d37c581b12a85243cf2a7d7be322f184.jpg",
+     "distance": 1
+    },
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-022f0b0b4dea.jpg",
+     "distance": 3
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/valid/images/WhatsApp-Image-2026-07-03-at-12-03-08-PM-1-_jpeg.rf.f5ae9bc099ef779f213119f696a23512.jpg",
+     "distance": 3
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-16.jpeg",
+   "dhash": "a6bebbfbfbfbefdf",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-1d9d169a7e53.jpg",
+     "distance": 1
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/valid/images/WhatsApp-Image-2026-07-03-at-12-03-15-PM_jpeg.rf.e84cc41b0a030c93430484eb7c1b51d6.jpg",
+     "distance": 1
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-17.jpeg",
+   "dhash": "2ab8d0d9797820f8",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-493e253ccf80.jpg",
+     "distance": 4
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/valid/images/WhatsApp-Image-2026-07-03-at-12-03-11-PM_jpeg.rf.9e28e7e88ddced105b13fab2d4c08562.jpg",
+     "distance": 4
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-18.jpeg",
+   "dhash": "60f4373f7f7fffff",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-33ac1af62efd.jpg",
+     "distance": 2
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Image-2026-07-03-at-12-03-09-PM_jpeg.rf.d2740a72268a703be4675cd7efb17833.jpg",
+     "distance": 2
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-19.jpeg",
+   "dhash": "21a51101414a45a4",
+   "pool_matches": [
+    {
+     "pool": "canonical_clean",
+     "file": "datasets/canonical_clean/train/images/32766c4e23b881d53bb7.jpeg",
+     "distance": 5
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-20.jpeg",
+   "dhash": "ecec445617171616",
+   "pool_matches": [
+    {
+     "pool": "canonical_clean",
+     "file": "datasets/canonical_clean/train/images/6230e5bfdf3c5cd5e6ec.jpeg",
+     "distance": 2
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-21.jpeg",
+   "dhash": "1ae6c6d5c2c6c6b2",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-14d0761160e9.jpg",
+     "distance": 1
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Image-2026-07-03-at-12-01-17-PM_jpeg.rf.3e7c61ca88a1a7e2a2bc22a4b65e97ce.jpg",
+     "distance": 1
+    },
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-b0b099a2ec8a.jpg",
+     "distance": 8
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/test/images/WhatsApp-Image-2026-07-03-at-12-01-16-PM_jpeg.rf.7624ecf31ae2a7e7e6cead1ac0c1c0d8.jpg",
+     "distance": 8
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-22.jpeg",
+   "dhash": "a6bebbfbfbfbf7df",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-1d9d169a7e53.jpg",
+     "distance": 1
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/valid/images/WhatsApp-Image-2026-07-03-at-12-03-15-PM_jpeg.rf.e84cc41b0a030c93430484eb7c1b51d6.jpg",
+     "distance": 1
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-23.jpeg",
+   "dhash": "4b8bf28646461c20",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-c36e42eee588.jpg",
+     "distance": 2
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/test/images/WhatsApp-Image-2026-07-03-at-12-02-49-PM-1-_jpeg.rf.9e6c6d5991e31b6693fbb1e25f75b053.jpg",
+     "distance": 2
+    },
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-47483627dbdb.jpg",
+     "distance": 8
+    },
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-8357af4dfa91.jpg",
+     "distance": 8
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Image-2026-07-03-at-11-58-59-AM-4-_jpeg.rf.63e2cf6dd7a22a50bb4cad80ecdc5d3e.jpg",
+     "distance": 8
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Image-2026-07-03-at-12-00-36-PM-1-_jpeg.rf.46fa60718025b074ae18fbb1d8e6bc6f.jpg",
+     "distance": 8
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-24.jpeg",
+   "dhash": "9ae2c3c1c2c4c4b2",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-b0b099a2ec8a.jpg",
+     "distance": 2
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/test/images/WhatsApp-Image-2026-07-03-at-12-01-16-PM_jpeg.rf.7624ecf31ae2a7e7e6cead1ac0c1c0d8.jpg",
+     "distance": 2
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-25.jpeg",
+   "dhash": "d200a0a1a1c0e070",
+   "pool_matches": []
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-26.jpeg",
+   "dhash": "2eae0c29292969fc",
+   "pool_matches": []
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-27.jpeg",
+   "dhash": "5200a0a1a1c0e0e0",
+   "pool_matches": []
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-28.jpeg",
+   "dhash": "6b7acacb6be3a373",
+   "pool_matches": [
+    {
+     "pool": "canonical_clean",
+     "file": "datasets/canonical_clean/train/images/c8718432472b3d5059ed.jpg",
+     "distance": 7
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Video-2026-07-03-at-12_02_14-PM_mp4-0000_jpg.rf.c024a34e8cda352ef9751a7c99807f6b.jpg",
+     "distance": 7
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Video-2026-07-03-at-12_02_29-PM_mp4-0000_jpg.rf.8dc267d1ffede72ded82f341f743cba4.jpg",
+     "distance": 7
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Video-2026-07-03-at-12_04_04-PM_mp4-0000_jpg.rf.c396240ea1117b8760dd9d84b90a6246.jpg",
+     "distance": 7
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-29.jpeg",
+   "dhash": "adc3e1f8f8f8f9f9",
+   "pool_matches": [
+    {
+     "pool": "canonical_clean",
+     "file": "datasets/canonical_clean/train/images/c8718432472b3d5059ed.jpg",
+     "distance": 4
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Video-2026-07-03-at-12_02_14-PM_mp4-0000_jpg.rf.c024a34e8cda352ef9751a7c99807f6b.jpg",
+     "distance": 4
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Video-2026-07-03-at-12_02_29-PM_mp4-0000_jpg.rf.8dc267d1ffede72ded82f341f743cba4.jpg",
+     "distance": 4
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Video-2026-07-03-at-12_04_04-PM_mp4-0000_jpg.rf.c396240ea1117b8760dd9d84b90a6246.jpg",
+     "distance": 4
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-30.jpeg",
+   "dhash": "090949496979f1e1",
+   "pool_matches": []
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-31.jpeg",
+   "dhash": "2c7c7e7f7c7c7b7e",
+   "pool_matches": []
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-32.jpeg",
+   "dhash": "46ce91f1f1737942",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-5e1a1208cadd.jpg",
+     "distance": 4
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Image-2026-07-03-at-12-00-36-PM-4-_jpeg.rf.9e867b9c749cd40aac609d8cb7704e7c.jpg",
+     "distance": 4
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-33.jpeg",
+   "dhash": "d8b1358dfdf1e1cc",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-e40801124067.jpg",
+     "distance": 6
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Image-2026-07-03-at-12-00-26-PM_jpeg.rf.ab398f4dea9626be3fd089a2d90c6f28.jpg",
+     "distance": 6
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-34.jpeg",
+   "dhash": "b488a88880808400",
+   "pool_matches": [
+    {
+     "pool": "canonical_clean",
+     "file": "datasets/canonical_clean/test/images/43409f4aee1d3653f129.jpeg",
+     "distance": 3
+    },
+    {
+     "pool": "review",
+     "file": "datasets/review/images/manual_original-43409f4aee1d.jpeg",
+     "distance": 3
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Image-2026-07-03-at-11-58-59-AM-3-_jpeg.rf.0fde6d2a0323ae9f350ae499e375dadb.jpg",
+     "distance": 3
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-35.jpeg",
+   "dhash": "63131d2c6173581a",
+   "pool_matches": [
+    {
+     "pool": "canonical_clean",
+     "file": "datasets/canonical_clean/train/images/97c3279e2d30b6f42ce1.jpeg",
+     "distance": 3
+    },
+    {
+     "pool": "review",
+     "file": "datasets/review/images/manual_original-97c3279e2d30.jpeg",
+     "distance": 3
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/valid/images/WhatsApp-Image-2026-07-03-at-12-01-08-PM-1-_jpeg.rf.c208fc9f6990acb8c542efbc053f0072.jpg",
+     "distance": 3
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-36.jpeg",
+   "dhash": "d9d9c878eafaf0e2",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-e1c5c2e94f6d.jpg",
+     "distance": 5
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/test/images/WhatsApp-Image-2026-07-03-at-12-03-08-PM_jpeg.rf.0ace1d62b9a737069389877db8fd5a7f.jpg",
+     "distance": 5
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-37.jpeg",
+   "dhash": "7676ffefe3dffb65",
+   "pool_matches": [
+    {
+     "pool": "canonical_clean",
+     "file": "datasets/canonical_clean/train/images/325eea7a97150b496d15.jpeg",
+     "distance": 1
+    },
+    {
+     "pool": "review",
+     "file": "datasets/review/images/manual_original-325eea7a9715.jpeg",
+     "distance": 1
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/valid/images/WhatsApp-Image-2026-07-03-at-12-00-54-PM_jpeg.rf.e8c448f5cea8381edfb09cee3465a6e6.jpg",
+     "distance": 1
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-38.jpeg",
+   "dhash": "44603d1d9d3271da",
+   "pool_matches": [
+    {
+     "pool": "canonical_clean",
+     "file": "datasets/canonical_clean/train/images/41538e48f52c0a7d126e.jpeg",
+     "distance": 3
+    },
+    {
+     "pool": "review",
+     "file": "datasets/review/images/manual_original-41538e48f52c.jpeg",
+     "distance": 3
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/valid/images/WhatsApp-Image-2026-07-03-at-12-01-15-PM-1-_jpeg.rf.d99a9dbf9c3ad70f5244686816f9961d.jpg",
+     "distance": 3
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-39.jpeg",
+   "dhash": "733b316575fd34e1",
+   "pool_matches": [
+    {
+     "pool": "canonical_clean",
+     "file": "datasets/canonical_clean/train/images/2721453227aa78d464f0.jpg",
+     "distance": 7
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Image-2026-07-03-at-12-01-15-PM_jpeg.rf.52ba0c34ffacd7ce475972dda0b66e6e.jpg",
+     "distance": 7
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-40.jpeg",
+   "dhash": "0dcfdc6cb696cebf",
+   "pool_matches": [
+    {
+     "pool": "canonical_clean",
+     "file": "datasets/canonical_clean/train/images/4762141635d7aa03268c.jpeg",
+     "distance": 7
+    },
+    {
+     "pool": "review",
+     "file": "datasets/review/images/manual_original-4762141635d7.jpeg",
+     "distance": 7
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Image-2026-07-03-at-12-02-55-PM_jpeg.rf.6954299b42f08e144fcdc86b03d1300d.jpg",
+     "distance": 8
+    }
+   ]
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-41.jpeg",
+   "dhash": "4e8e989090133179",
+   "pool_matches": []
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-42.jpeg",
+   "dhash": "ddc9dddcfcf2fccf",
+   "pool_matches": []
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-43.jpeg",
+   "dhash": "98040bf860a120c0",
+   "pool_matches": []
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-44.jpeg",
+   "dhash": "8587cbcab0b0b87c",
+   "pool_matches": []
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-45.jpeg",
+   "dhash": "958c9cd8d8d0d0e3",
+   "pool_matches": []
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-46.jpeg",
+   "dhash": "e2d6d4e4cccc8484",
+   "pool_matches": []
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-47.jpeg",
+   "dhash": "6c65848484141859",
+   "pool_matches": []
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-48.jpeg",
+   "dhash": "ddc9dddcfcf2fcdf",
+   "pool_matches": []
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-49.jpeg",
+   "dhash": "70200006c4f0a1e5",
+   "pool_matches": []
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-50.jpeg",
+   "dhash": "f4dcc8687878f0a2",
+   "pool_matches": []
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-51.jpeg",
+   "dhash": "565654c0c4c4b478",
+   "pool_matches": []
+  },
+  {
+   "source": "labelled",
+   "file": "datasets/field-2026-10/labelled-20261007/originals/img-52.jpeg",
+   "dhash": "e42c5cdcdcbc9ebd",
+   "pool_matches": [
+    {
+     "pool": "review",
+     "file": "datasets/review/images/roboflow_auto-7262ddbf2c58.jpg",
+     "distance": 3
+    },
+    {
+     "pool": "roboflow_auto_original",
+     "file": "datasets/roboflow_auto_original/train/images/WhatsApp-Image-2026-07-03-at-12-03-12-PM-1-_jpeg.rf.baea41fe2815adc84d886b1ef962eb79.jpg",
+     "distance": 3
+    }
+   ]
+  }
+ ]
+}

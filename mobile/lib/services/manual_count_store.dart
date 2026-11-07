@@ -36,7 +36,18 @@ class SqliteManualCountRepository extends ManualCountRepository {
     final root = await getDatabasesPath();
     _database = await openDatabase(
       '$root/manual_counts.db',
-      version: 1,
+      version: 2,
+      // Version 2 (app 0.5.0): who counted and the blind second counter.
+      onUpgrade: (database, from, _) async {
+        if (from < 2) {
+          await database.execute(
+            "ALTER TABLE manual_count_cells ADD COLUMN counted_by TEXT NOT NULL DEFAULT ''",
+          );
+          await database.execute(
+            "ALTER TABLE manual_count_cells ADD COLUMN second_counter TEXT NOT NULL DEFAULT ''",
+          );
+        }
+      },
       onCreate: (database, _) async {
         await database.execute('''
           CREATE TABLE manual_count_cells (
@@ -53,6 +64,8 @@ class SqliteManualCountRepository extends ManualCountRepository {
             app_total INTEGER,
             created_at TEXT NOT NULL,
             submitted INTEGER NOT NULL,
+            counted_by TEXT NOT NULL DEFAULT '',
+            second_counter TEXT NOT NULL DEFAULT '',
             PRIMARY KEY (scan_id, x, y)
           )
         ''');
@@ -85,6 +98,8 @@ class SqliteManualCountRepository extends ManualCountRepository {
           'app_total': count.appTotal,
           'created_at': count.createdAt.toUtc().toIso8601String(),
           'submitted': count.submitted ? 1 : 0,
+          'counted_by': count.countedBy,
+          'second_counter': count.secondCounter,
         });
       }
     });
@@ -110,6 +125,8 @@ class SqliteManualCountRepository extends ManualCountRepository {
           appTotal: entry.value.first['app_total'] as int?,
           createdAt: DateTime.parse(entry.value.first['created_at']! as String),
           submitted: (entry.value.first['submitted']! as int) == 1,
+          countedBy: entry.value.first['counted_by'] as String? ?? '',
+          secondCounter: entry.value.first['second_counter'] as String? ?? '',
           cells: [
             for (final r in entry.value)
               ManualCountCell(

@@ -269,3 +269,16 @@ test('the admin archive listing names the photos the scan job counted; the open 
   assert.equal(old.job, null);
   assert.equal(old.keys.length, 1);
 });
+
+test('a blind two-person recount stores both counters; a replay with another second counter is a conflict', async t => {
+  const {bucket, env, headers} = await setup(t);
+  const scanId = crypto.randomUUID();
+  assert.equal((await postScan(env, scanId, headers)).status, 200);
+  const body = manual({counted_by: ' Anu ', second_counter: 'Ravi\u0000'});
+  const saved = await saveManual(env, scanId, body, headers);
+  assert.equal(saved.status, 200);
+  const record = bucket.readJson(manualKey(scanId, body.count_id));
+  assert.deepEqual([record.counted_by, record.second_counter], ['Anu', 'Ravi']);
+  assert.equal((await saveManual(env, scanId, body, headers)).status, 200);
+  assert.equal((await saveManual(env, scanId, {...body, second_counter: 'Someone else'}, headers)).status, 409);
+});

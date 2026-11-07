@@ -2,9 +2,14 @@ import 'package:egg_tray_counter/features/scan_flow/manual_count_screen.dart';
 import 'package:egg_tray_counter/models/block_result.dart';
 import 'package:egg_tray_counter/models/manual_count.dart';
 import 'package:egg_tray_counter/models/scan_result.dart';
+import 'package:egg_tray_counter/services/api_client.dart';
+import 'package:egg_tray_counter/services/device_auth.dart';
 import 'package:egg_tray_counter/services/manual_count_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import 'support/fake_server.dart';
+import 'support/manual_count_helpers.dart';
 
 ScanResult _result() => ScanResult.fromJson({
   'scan_id': '8a1b2c3d-1111-4222-8333-444455556666',
@@ -51,10 +56,11 @@ ScanResult _result() => ScanResult.fromJson({
 });
 
 void main() {
-  test('cells are pre-filled from the block and missing stacks start at 0', () {
+  test('cells start at 0, never at the app count (a blind count)', () {
     final block = BlockResult.fromJson(_result().block!.toJsonForTest());
     final cells = block.cells.map(ManualCountCell.fromBlockCell).toList();
-    expect(cells.map((c) => c.filled), [20, 0, 19, 20]);
+    expect(cells.map((c) => c.filled), [0, 0, 0, 0]);
+    expect(cells.map((c) => c.appLayers), [20, 0, 19, 20]);
     expect(cells.every((c) => c.empty == 0), isTrue);
   });
 
@@ -139,7 +145,10 @@ void main() {
     );
     expect(find.byKey(const ValueKey('row-0,0')), findsOneWidget);
     expect(find.byKey(const ValueKey('row-1,1')), findsOneWidget);
-    expect(find.text('59'), findsNWidgets(2)); // app total and manual filled (pre-filled)
+    // Blind: neither the app's total nor its per-stack counts are on screen.
+    expect(find.text('App total'), findsNothing);
+    expect(find.textContaining('app '), findsNothing);
+    expect(find.text('59'), findsNothing);
     await tester.tap(find.text('SAVE ON PHONE ONLY'));
     await tester.pump();
     expect(find.text('Enter the block ID first.'), findsOneWidget);
@@ -147,6 +156,12 @@ void main() {
     await tester.enterText(find.byKey(const ValueKey('filled-0,1')), '18');
     await tester.tap(find.byKey(const ValueKey('unreachable-1,1')));
     await tester.pump();
+    await tester.tap(find.text('SAVE ON PHONE ONLY'));
+    await tester.pump();
+    expect(find.text('Count every stack you can reach, or tick it as unreachable: (0,0) (1,0).'), findsOneWidget);
+    expect(await repo.all(), isEmpty);
+    await tester.enterText(find.byKey(const ValueKey('filled-0,0')), '20');
+    await tester.enterText(find.byKey(const ValueKey('filled-1,0')), '0');
     await tester.tap(find.text('SAVE ON PHONE ONLY'));
     await tester.pumpAndSettle();
     final saved = await repo.all();
@@ -177,11 +192,139 @@ void main() {
       ),
     );
     await tester.enterText(find.byType(TextField).first, 'B08');
+    await countEveryStack(tester);
     await tester.tap(find.text('SAVE AND SEND TO SERVER'));
     await tester.pumpAndSettle(const Duration(seconds: 2));
     expect((await repo.all()).single.submitted, isFalse);
     expect(find.textContaining('sending failed'), findsOneWidget);
     expect(find.byKey(const ValueKey('manual-count-done')), findsNothing);
+  });
+
+  test('who counted and the blind second counter are optional fields of the '
+      'payload and the CSV', () {
+    final count = ManualCount(
+      scanId: 's2',
+      blockId: 'B02',
+      cells: const [
+        ManualCountCell(
+          x: 0,
+          y: 0,
+          appLayers: 20,
+          appStatus: 'observed',
+          filled: 20,
+          empty: 0,
+        ),
+      ],
+      notes: '',
+      createdAt: DateTime.utc(2026, 11, 1, 9),
+    );
+    final bare = count.toJson();
+    expect(bare.containsKey('counted_by'), isFalse);
+    expect(bare.containsKey('second_counter'), isFalse);
+    final named = count.copyWith(countedBy: 'Ravi', secondCounter: 'Meena, K');
+    expect(named.toJson()['counted_by'], 'Ravi');
+    expect(named.toJson()['second_counter'], 'Meena, K');
+    expect(named.sameCountsAs(count), isFalse);
+    expect(ManualCount.csvHeader, endsWith(',counted_by,second_counter'));
+    expect(named.csvRows().single, endsWith(',Ravi,"Meena, K"'));
+    expect(count.csvRows().single, endsWith(',no,,'));
+  });
+
+  testWidgets('a two-person recount records both names, and the screen '
+      'stays blind', (tester) async {
+    tester.view.physicalSize = const Size(1200, 3200);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    const route = 'POST /v1/scans/8a1b2c3d-1111-4222-8333-444455556666/manual-count';
+    final server = FakeServer({
+      'GET /health': [reply(jobsHealth)],
+      route: [
+        reply({
+          'stored': true,
+          'replayed': false,
+          'totals': {'filled': 80, 'empty': 0},
+        }),
+      ],
+    });
+    final repo = InMemoryManualCountRepository();
+    await tester.pumpWidget(
+      MaterialApp(
+        home: ManualCountScreen(
+          result: _result(),
+          repository: repo,
+          baseUrl: 'https://staging.example.test',
+          client: ApiClient(
+            'https://staging.example.test',
+            adapter: server,
+            deviceAuth: DeviceAuth(store: InMemorySecretStore()),
+            delay: NoWait().call,
+          ),
+        ),
+      ),
+    );
+    // Blind as before: no app total or per-stack count on screen.
+    expect(find.text('59'), findsNothing);
+    expect(find.textContaining('app '), findsNothing);
+    await tester.enterText(find.byType(TextField).first, 'B10');
+    await tester.enterText(find.byKey(const ValueKey('counted-by')), ' Ravi ');
+    await tester.enterText(
+      find.byKey(const ValueKey('second-counter')),
+      'Meena',
+    );
+    await countEveryStack(tester);
+    await tester.tap(find.text('SAVE AND SEND TO SERVER'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('Sent to server'), findsOneWidget);
+    final body = server.calls(route).single.json;
+    expect(body['counted_by'], 'Ravi');
+    expect(body['second_counter'], 'Meena');
+    final saved = (await repo.all()).single;
+    expect(saved.countedBy, 'Ravi');
+    expect(saved.secondCounter, 'Meena');
+  });
+
+  testWidgets('a grid-only server still lists one row per stack', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1200, 3200);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    final json = _result().block!.toJsonForTest()
+      ..['cells'] = <Object>[]
+      ..['grid'] = [
+        [
+          {'x': 0, 'y': 0, 'status': 'verified', 'z_layers': 20},
+          {'x': 1, 'y': 0, 'status': 'declared', 'z_layers': 20},
+        ],
+      ];
+    final result = ScanResult(
+      scanId: 'grid-only',
+      accepted: false,
+      status: 'rescan_required',
+      physicalStackCount: null,
+      totalTrays: null,
+      eggsPerTray: 30,
+      totalEggs: null,
+      modelVersion: 'm',
+      latencyMs: 1,
+      views: const {},
+      stacks: const [],
+      block: BlockResult.fromJson(json),
+    );
+    await tester.pumpWidget(
+      MaterialApp(
+        home: ManualCountScreen(
+          result: result,
+          repository: InMemoryManualCountRepository(),
+          baseUrl: 'http://127.0.0.1:9',
+        ),
+      ),
+    );
+    expect(find.byKey(const ValueKey('row-0,0')), findsOneWidget);
+    expect(find.byKey(const ValueKey('row-1,0')), findsOneWidget);
+    expect(find.text('20'), findsNothing);
   });
 }
 

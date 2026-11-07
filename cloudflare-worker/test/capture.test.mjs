@@ -72,7 +72,12 @@ test('zero detections never throw and are rejected as no stacks detected', () =>
   assert.deepEqual(captureQuality([], null, null).reasons, ['no stacks detected']);
 });
 
-async function scan(t, perView) {
+// Camera headings turned around the block (0.4.13 evidence), so these tests see the capture gate alone; without
+// them a block more than one stack deep is withheld by the side check (side_check.test.mjs).
+const TURNED = Object.fromEntries([['straight', 0], ['left', 90], ['right', -90]].map(([view, yaw]) =>
+  [view, JSON.stringify({yaw_deg: yaw, yaw_session: 'walk1'})]));
+
+async function scan(t, perView, evidence = TURNED, declaration = null) {
   t.mock.method(console, 'log', () => {});
   const calls = [];
   t.mock.method(globalThis, 'fetch', async () => {
@@ -84,22 +89,33 @@ async function scan(t, perView) {
   form.set('scan_contract', 'model_spatial_v1');
   ['left', 'right', 'straight'].forEach((view, i) => form.set(view,
     new File([new Uint8Array([255, 216, 255, i])], `${view}.jpg`, {type: 'image/jpeg'})));
+  for (const [view, value] of Object.entries(evidence)) form.set(`${view}_constraint_evidence`, value);
+  if (declaration) form.set('block_declaration', JSON.stringify(declaration));
   const response = await worker.fetch(new Request('https://local/v1/scans/count', {method: 'POST', body: form}), env);
   assert.equal(response.status, 200);
   assert.deepEqual(calls, ['left', 'right', 'straight']);
   return response.json();
 }
 
+// Side faces of the 5 x 4 test block: corner stacks of 20 like the front, two middle stacks of 18 standing on the same
+// floor. Since 0.5.1 sides that repeat the front (an even-height block) wait for a CORNER or ELEVATED view, so these
+// gate tests use sides that cannot be the front again. Since 0.6.0 a depth over one stack rests on the declared block
+// size, so they also send the 5 x 4 declaration.
+const DECLARED_5x4 = {x: 5, y: 4, interior: 'unknown', cover_trays: 'unknown', occupancy: 'unknown'};
+// x0: each side framed a little differently, so the two sides are separate captures, not copies of one photo (a copy
+// never sets the full height of the stacking rule).
+const sideFace = (x0 = 100) => ({image: FRAME, predictions: [20, 18, 18, 20].map((h, i) => column(x0 + i * 100, h, {y0: 100 + (20 - h) * 40})).flat()});
+
 test('a view that fails the capture gate withholds the block total and names that view for rescan', async t => {
   const good = n => ({image: FRAME, predictions: Array.from({length: n}, (_, i) => column(100 + i * 100, 20)).flat()});
-  const result = await scan(t, {left: good(4), right: {image: FRAME, predictions: []}, straight: good(5)});
+  const result = await scan(t, {left: sideFace(), right: {image: FRAME, predictions: []}, straight: good(5)}, TURNED, DECLARED_5x4);
   assert.equal(result.block.contract, 'block_model_v1');
   assert.equal(result.block.total_trays, null);
   assert.equal(result.block.total_eggs, null);
   assert.equal(result.block.status, 'needs_view'); assert.equal(result.result_status, 'needs_view');
   assert.equal(result.block.faces_consistent, false);
   assert.equal(result.block.fully_observed, false);
-  assert.equal(result.block.observed_trays, 160);           // 5 front + 3 LEFT-side cells x 20: geometry is still reported, only the total is withheld
+  assert.equal(result.block.observed_trays, 156);           // 5 front x 20 + 3 LEFT-side cells (20 + 18 + 18): geometry is still reported, only the total is withheld
   assert.equal(result.block.capture.right.accepted, false);
   assert.deepEqual(result.block.capture.right.reasons, ['no stacks detected']);
   assert.equal(result.block.capture.left.accepted, true);
@@ -115,13 +131,32 @@ test('a view that fails the capture gate withholds the block total and names tha
 
 test('when every view passes the gate the block total and the generic rescan advice are unchanged', async t => {
   const good = n => ({image: FRAME, predictions: Array.from({length: n}, (_, i) => column(100 + i * 100, 20)).flat()});
-  const result = await scan(t, {left: good(4), right: good(4), straight: good(5)});
-  assert.equal(result.block.total_trays, 400);
+  // 0.7.0: guided-camera stills (source and blocked flag sent), since a photo of unknown origin never sets the stacking
+  // rule's full height (it only ever lost the right to verify a stack before).
+  const stills = Object.fromEntries(Object.entries(TURNED).map(([v, e]) => [v, JSON.stringify({...JSON.parse(e), source: 'captured_still', blocked: false})]));
+  const result = await scan(t, {left: sideFace(130), right: sideFace(160), straight: good(5)}, stills, DECLARED_5x4);
+  // 212 counted (100 front + 56 per side) + 9 hidden stacks full by the stacking rule at 20 (the back corners and the
+  // front read 20; the 18s are partial stacks on the side faces). 0.6.0 gave 380: it put rows 1 and 2 at 18, the median
+  // of their 18-high row ends and the 20-high front, the under-read Plan 5 corrects.
+  assert.equal(result.block.total_trays, 392);
+  assert.deepEqual([result.block.inventory.counted_trays, result.block.inventory.assumed_trays, result.block.rule.height], [212, 180, 20]);
   assert.equal(result.block.faces_consistent, true);
   assert.ok(['left', 'right', 'straight'].every(v => result.block.capture[v].accepted));
   assert.equal(result.rescan.recommended_view, 'straight');
   assert.ok(!result.rescan.reason.startsWith('Step closer'));
   assert.equal(result.total_trays, null);
+});
+
+test('a refused photo and an unconfirmed side: the refused photo is retaken first, both reasons are listed', async t => {
+  const good = n => ({image: FRAME, predictions: Array.from({length: n}, (_, i) => column(100 + i * 100, 20)).flat()});
+  const result = await scan(t, {left: good(4), right: {image: FRAME, predictions: []}, straight: good(5)}, {});
+  assert.equal(result.block.status, 'needs_view');
+  assert.equal(result.block.total_trays, null);
+  assert.equal(result.rescan.recommended_view, 'right');
+  assert.match(result.rescan.reason, /^Step closer/);
+  assert.equal(result.block.side_check.left.status, 'unconfirmed');
+  assert.match(result.block.conflicts[0].reason, /^LEFT: not confirmed as a side face/);
+  assert.equal(result.block.depth, null);
 });
 
 test('a single stack filling the frame height is accepted although it cannot fill the width', () => {

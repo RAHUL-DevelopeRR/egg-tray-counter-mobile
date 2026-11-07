@@ -21,6 +21,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   final _controller = TextEditingController();
   bool _loading = true;
+  bool _galleryUploads = false;
   String _deviceLine = 'This phone: reading device code...';
 
   DeviceAuth get _auth => widget.deviceAuth ?? DeviceAuth.shared;
@@ -33,6 +34,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _controller.text = value;
       setState(() => _loading = false);
       _loadDevice(value);
+    });
+    widget.store.getGalleryUploads().then((on) {
+      if (mounted) setState(() => _galleryUploads = on);
     });
   }
 
@@ -106,6 +110,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Text(
                   'Diagnostics (not part of block counting)',
                   style: Theme.of(context).textTheme.titleMedium,
+                ),
+                const SizedBox(height: 8),
+                SwitchListTile(
+                  key: const ValueKey('gallery-uploads'),
+                  contentPadding: EdgeInsets.zero,
+                  title: const Text('Gallery scans (testing only)'),
+                  subtitle: const Text(
+                    'Photos from the gallery skip the live checks, so their '
+                    'counts are never marked exact.',
+                  ),
+                  value: _galleryUploads,
+                  onChanged: (on) async {
+                    await widget.store.setGalleryUploads(on);
+                    if (mounted) setState(() => _galleryUploads = on);
+                  },
                 ),
                 const SizedBox(height: 8),
                 OutlinedButton.icon(
