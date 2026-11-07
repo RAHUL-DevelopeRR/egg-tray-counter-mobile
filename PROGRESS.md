@@ -47,9 +47,12 @@ whose step 1, Decision 1 and Phase 1, is done):
 - **Staging deploy done 7 Nov** (user's OK): `npx wrangler deploy --env staging` after `npm test` 270 / 0 fail and a
   `--dry-run`. Staging `egg-tray-counter-api-staging` is now Cloudflare version `bafa21d1` (worker-0.7.0, source
   `748c5ea`), replacing `52a1d5e8` (0.5.0). Production newest is still `4c1480e6` (23 Sep), untouched. `/health` is
-  unchanged (it carries no version); a free probe answers. **Smoke test with real photos not yet run** (about 7 paid
-  calls, needs the user's OK).
-- **Next:** (1) done, Decision 3 = (a); (2) done, Redmi on 0.7.0+31; (3) done, staging on worker-0.7.0; (3b) smoke test from the Redmi with the user's OK
+  unchanged (it carries no version); a free probe answers.
+- **Smoke test done 7 Nov** (user's OK, 6 paid calls; `reports/staging-smoke-0.7.0-20261107/`): from the Redmi through
+  staging 0.7.0, the 99-tray row gives BLOCK ESTIMATE 99 (rule unused, one deep) and L-100 is withheld with the new
+  `no_rule_height` reason beside "sides repeat the front". Both match the offline replay. Both results carry the 0.7.0
+  stacking-rule note, so the phone-to-staging path is confirmed. No deep block was scanned live yet.
+- **Next:** (1) done, Decision 3 = (a); (2) done, Redmi on 0.7.0+31; (3) done, staging on worker-0.7.0 and smoke-tested
   (`--env staging`), smoke test about 7 paid calls; (4) farm day A planning (Plan 5 §8.2, Decisions 15, 18).
 
 ## 2026-11-05 (evening) - Plan 5 Phase 1 built offline: Worker 0.7.0 stacking rule (Claude Code, `rollout/0.4.12-staging`)

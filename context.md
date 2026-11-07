@@ -3,8 +3,9 @@
 > if the rule was broken; a withheld rule block shows its reason in plain words and figures that are never a total.
 > Built and tested locally, and pushed to `origin/rollout/0.4.12-staging` on 6 Nov at the user's request; not installed
 > **7 Nov:** the Redmi runs app 0.7.0+31, and staging runs Worker 0.7.0 (Cloudflare version `bafa21d1`); production
-> `4c1480e6` untouched. The staging smoke test with real photos is still to run (paid calls, user's OK). Physical
-> counts: still zero.
+> `4c1480e6` untouched. Smoke-tested from the Redmi the same day (6 paid calls): the 99 row releases 99, L-100 is
+> withheld with `no_rule_height`; both match the replay (`reports/staging-smoke-0.7.0-20261107`). No deep block
+> scanned live yet. Physical counts: still zero.
 > - **Plan 5 Decision 3 answered by the user on 6 Nov: option (a).** H needs two distinct stacks read cleanly at the
 >   same height on two different faces, a back corner among them. This is what Worker 0.7.0 already has as
 >   `RULE_DEFAULTS.basis: "two_faces"`; no code change. The other options stay selectable as replay comparisons only.
