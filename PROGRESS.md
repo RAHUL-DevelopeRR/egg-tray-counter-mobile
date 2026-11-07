@@ -40,8 +40,11 @@ whose step 1, Decision 1 and Phase 1, is done):
 - **Decision 3 answered 6 Nov: option (a)**, the one already built (`RULE_DEFAULTS.basis: "two_faces"`); no code change.
   Verified again on 6 Nov after the handover: Worker `npm test` 270 / 238 pass / 0 fail / 32 todo; app `flutter test`
   262/262; `dart analyze` clean; APK SHA-256 prefix `9384a0728009cf69` matches.
-- **Next:** (1) done, Decision 3 = (a); (2) with the user's OK and the Redmi plugged in, install
-  0.7.0+31 (it replaces the pending 0.6.1+30); (3) then, with the user's OK, deploy Worker 0.7.0 to staging only
+- **Redmi install done 7 Nov** (user's OK): `adb -s f76d5e20 install -r` upgraded 0.6.0 (29) to 0.7.0 (31) in place
+  (APK SHA-256 prefix `9384a0728009cf69`). The app opens: SERVER REACHABLE, DEVICE APPROVED, base URL still staging,
+  scan history kept. No scan was run (0 paid calls). The Redmi now shows the stacking-rule screens, but staging still
+  runs Worker 0.5.0, so a live scan gives 0.5.0 answers until the 0.7.0 staging deploy.
+- **Next:** (1) done, Decision 3 = (a); (2) done, Redmi on 0.7.0+31; (3) with the user's OK, deploy Worker 0.7.0 to staging only
   (`--env staging`), smoke test about 7 paid calls; (4) farm day A planning (Plan 5 §8.2, Decisions 15, 18).
 
 ## 2026-11-05 (evening) - Plan 5 Phase 1 built offline: Worker 0.7.0 stacking rule (Claude Code, `rollout/0.4.12-staging`)
