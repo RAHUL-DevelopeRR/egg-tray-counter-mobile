@@ -2,7 +2,8 @@
 > "full by the stacking rule, not seen", never counted, exact or verified; the residual line says the estimate is wrong
 > if the rule was broken; a withheld rule block shows its reason in plain words and figures that are never a total.
 > Built and tested locally, and pushed to `origin/rollout/0.4.12-staging` on 6 Nov at the user's request; not installed
-> (no phone attached; the Redmi still runs 0.6.0+29). Worker 0.7.0 still not deployed (staging 0.5.0). Physical
+> **7 Nov:** the Redmi runs app 0.7.0+31, and staging runs Worker 0.7.0 (Cloudflare version `bafa21d1`); production
+> `4c1480e6` untouched. The staging smoke test with real photos is still to run (paid calls, user's OK). Physical
 > counts: still zero.
 > - **Plan 5 Decision 3 answered by the user on 6 Nov: option (a).** H needs two distinct stacks read cleanly at the
 >   same height on two different faces, a back corner among them. This is what Worker 0.7.0 already has as

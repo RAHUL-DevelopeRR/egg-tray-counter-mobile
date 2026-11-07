@@ -44,7 +44,12 @@ whose step 1, Decision 1 and Phase 1, is done):
   (APK SHA-256 prefix `9384a0728009cf69`). The app opens: SERVER REACHABLE, DEVICE APPROVED, base URL still staging,
   scan history kept. No scan was run (0 paid calls). The Redmi now shows the stacking-rule screens, but staging still
   runs Worker 0.5.0, so a live scan gives 0.5.0 answers until the 0.7.0 staging deploy.
-- **Next:** (1) done, Decision 3 = (a); (2) done, Redmi on 0.7.0+31; (3) with the user's OK, deploy Worker 0.7.0 to staging only
+- **Staging deploy done 7 Nov** (user's OK): `npx wrangler deploy --env staging` after `npm test` 270 / 0 fail and a
+  `--dry-run`. Staging `egg-tray-counter-api-staging` is now Cloudflare version `bafa21d1` (worker-0.7.0, source
+  `748c5ea`), replacing `52a1d5e8` (0.5.0). Production newest is still `4c1480e6` (23 Sep), untouched. `/health` is
+  unchanged (it carries no version); a free probe answers. **Smoke test with real photos not yet run** (about 7 paid
+  calls, needs the user's OK).
+- **Next:** (1) done, Decision 3 = (a); (2) done, Redmi on 0.7.0+31; (3) done, staging on worker-0.7.0; (3b) smoke test from the Redmi with the user's OK
   (`--env staging`), smoke test about 7 paid calls; (4) farm day A planning (Plan 5 §8.2, Decisions 15, 18).
 
 ## 2026-11-05 (evening) - Plan 5 Phase 1 built offline: Worker 0.7.0 stacking rule (Claude Code, `rollout/0.4.12-staging`)
